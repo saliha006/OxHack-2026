@@ -48,6 +48,18 @@ fi
 
 cd "$(git rev-parse --show-toplevel 2>/dev/null)" 2>/dev/null || exit 0
 
+# Two Claude sessions (another account, another window) in one folder can overwrite each other's files. Every prompt leaves
+# a heartbeat in .git so the next session can say who else was here; it can't stop the clash, only make it visible.
+input=$([ -t 0 ] || timeout 1 cat 2>/dev/null)
+sid=$(printf '%s' "$input" | sed -n 's/.*"session_id" *: *"\([^"]*\)".*/\1/p')
+if [ -n "$sid" ]; then
+  beats="$(git rev-parse --git-dir)/claude-active"
+  mkdir -p "$beats" && : > "$beats/$sid"
+  others=$(find "$beats" -type f -mmin -10 ! -name "$sid" | wc -l)
+  [ "$others" -gt 0 ] && echo "active-sessions: $others other Claude session(s) used this folder in the last 10 min. Don't edit the same files; for parallel work make a worktree: git worktree add ../OxHack-2026-<name> <branch>"
+  find "$beats" -type f -mmin +120 -delete
+fi
+
 [ -f scripts/sync-context.sh ] && { bash scripts/sync-context.sh 2>&1; }
 
 main=$(git symbolic-ref -q --short refs/remotes/origin/HEAD 2>/dev/null | sed 's#^origin/##')

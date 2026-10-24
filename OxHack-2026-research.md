@@ -2,6 +2,12 @@
 
 One file for all research (CLAUDE.md §10). Each pass is a section: its recommendation first, then the source ledger (KEEP, WEAK, DO NOT USE last). Raw inputs and the original notes stay local in `Research-Context/`. Built 2026-10-24 by merging the notes below; headings inside each pass were demoted one level.
 
+## READ THIS FIRST (the whole doc is ~200KB; Grep it by pass number, never read it all)
+**Build, in order (agents' estimates, not benchmarks):** (1) calibrated gradient-boosted win-probability model replacing the HP heuristic, 5-6 h; (2) per-turn maximin LP over the payoff matrix instead of argmax-EV, 3-4 h; (3) Bayesian belief over opponent sets + quantal-response opponent, 7-9 h (cut first if short). Not worth it in 25 h: offline RL from scratch, an LLM in the loop, full-game CFR/ReBeL.
+**Data:** `HolidayOugi/pokemon-showdown-replays` (HF; 34.3M replays, 2.5M gen9ou, raw usernames, no licence stated) main; Metamon raw as cross-check (pseudonymised, parsed set is CC BY-NC 4.0). Per-player Elo comes from the `|player|` line, not the `rating` column. You do not need Metamon's 28.5 GB parsed set. No endpoint gives ladder ranks 501-1000.
+**Evaluation (what judges can trust):** split by battle id, time and player; test on Showdown API games after 2026-05-19; baselines (base rate, Glicko-only, HP logistic, GBT); log loss, Brier, reliability diagrams per turn and rating band; game-level bootstrap intervals. Public-only features from raw logs (Metamon's parsed replays back-fill hidden info = look-ahead). Tag crits/misses; call a blunder only when the interval clears the threshold. Coach text templated from computed numbers only.
+**Cut order:** voice, LLM paraphrase, ClickHouse, Elo-from-decisions, belief layer.
+
 ## CATEGORY INDEX
 1. Prediction and decision maths (win-probability model, per-turn LP, opponent belief) — start here for what to build
 2. Elo datasets and skill estimation (datasets, rating labels, top-500 players, skill method)

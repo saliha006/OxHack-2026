@@ -8,7 +8,7 @@
 
 | Slot | Value |
 |---|---|
-| Project | **OxHack-2026** (OxHack 26, Oxford Mathematical Institute, 24–25 Oct 2026; tracks: PRD §0 Pending). Team **{{team name}}**; {{who submits}}. Other Claude Code accounts share this folder: never edit a shared doc another session is mid-way through |
+| Project | **OxHack-2026** (OxHack 26, Oxford Mathematical Institute, 24–25 Oct 2026; tracks: PRD §0 Pending). Team **{{team name}}**; {{who submits}}. Other Claude Code accounts share this folder: never edit a shared doc another session is mid-way through. The prompt hook prints `active-sessions:` when another session was here in the last 10 min; then use your own worktree (`git worktree add ../OxHack-2026-<name> <branch>`) for anything that edits files |
 | Repo | `https://github.com/saliha006/OxHack-2026` · `main`. Builder branches: `progress.md` → 👥 Team |
 | Where docs live | **`context` branch** (docs only): `CLAUDE.md`, PRD, event doc, research doc, `builder-files/`, `skills/`, `scripts/`. `.claude/` is never pushed: sync unpacks `skills/` into `.claude/skills/`, publish sends them back. Git-ignored on `main`. **Never pushed:** `Research-Context/` (sponsor PDFs, raw inputs, agent notes), `.env*`, secrets. {{Public repo? delete `context` before submission}}. Fresh clone: `git fetch origin context && git archive origin/context scripts \| tar -x`, then sync. Sync: `bash scripts/sync-context.sh` (the prompt hook runs it) · publish: `bash scripts/publish-context.sh "what changed"` |
 | Vault | `{{path to the Obsidian vault}}` (**{{owner}} only**: `OxHack-2026 — Hub` = status + ▶ START HERE, `— Log` = ADRs, Unconfirmed, ▶ RESUME HERE). No vault → save notes to your memory; send decisions to the doc owner as a `decision` entry + 📨 row |
