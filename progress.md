@@ -38,6 +38,7 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
+| 2026-10-24 19:26 | @derrick | @saliha | 📨 waiting on | Publish from `origin/derrick` @ `a50936e`: `design/decision/11-special-requests.md` + the §7 tick in `design/decision-layer.md`; my brief's Done log line for feature 11; mirror the two feature 11 decisions in PRD → NOW. Also: since the trim, `publish-context.sh` lists every local `.claude/skills/` file as a new doc, so any non-owner publish is refused (even your own brief) | 2026-10-24 19:26 |
 | 2026-10-24 19:16 | @saliha | @all | ⚠️ conflict | `scripts/` and every skill except `debug` and `no-slop` are gone from `context`. Keep your local copies (they stay git-ignored); `sync`/`publish` won't update from `context` any more | 2026-10-24 19:16 |
 | 2026-10-24 18:14 | @derrick | @nate | ⚠️ conflict | `contracts/set-candidates.md` (on `derrick`) defines the set file your data layer would build for belief: 30 weighted sets per species + trimmed usage, chaos 1825 / 2026-09. Next: yes/no on the shape and on `data/set_candidates.json` as its path | 2026-10-24 18:14 |
 
@@ -52,7 +53,7 @@ whenever you log an entry.
 |---|---|---|---|---|---|
 | Saliha | `saliha006` | Bot layer; doc owner | `sali` | `bot/` {{paths tbd}} | brief task 1: decide the bot skeleton (poke-env / local server / format) |
 | Nate | `aldrichbanas07` | Data layer | {{nate's branch}} | `data/` {{paths tbd}} | brief task 1: start the ladder snapshotter |
-| Derrick | `RandomGeeb` | Decision layer | `derrick` | `decision/`, `tests/`, `contracts/battle_state.py` | brief task 2: merge `derrick` to `main` (code only) |
+| Derrick | `RandomGeeb` | Decision layer | `derrick` | `decision/`, `tests/`, `contracts/battle_state.py` | feature 11 built on `derrick`; tasks 3–4 wait on the parser and set candidates |
 
 **Shared** (anyone may edit; flag it in ⚠️ Conflicts): {{e.g. `contracts/*`, `fixtures/*`, compose files}}
 
@@ -66,11 +67,21 @@ whenever you log an entry.
 
 ## 📊 Latest (volatile facts live only here)
 - **As of 2026-10-24 19:00:** `main` @ `5e203fc` · tests: 140 green, 100% coverage (`uv run pytest --cov=decision`) · deploy: none yet
-- **On branches, not merged yet:** none from @derrick (`derrick` keeps the per-feature history and the shared docs; `derrick-main` was the clean merge branch)
+- **On branches, not merged yet:** @derrick `derrick` @ `a50936e`: feature 11 (type-matchup lead), 144 tests green, 100% coverage
 
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 19:26 — feat — Decision layer: lead picked by type matchup at team preview — @derrick
+- **Where:** `derrick` @ `a50936e` · merged to `main`: not yet
+- **Did:** Feature 11. At preview each of our six is scored on STAB type matchups against the opponent's six (log₂ of our best multiplier minus theirs, immunity floored at ×0.25); best leads, back five keep order. Forced switches keep the main-loop scoring. Type chart snapshot at `decision/data/typechart.json`. 144 tests, 100% coverage.
+- **Decided:** lead = type-matchup rule (C), forced switch = reuse the main loop (A), both by @derrick. Revisit the lead if it loses turn 1 often in real games; the switch if the value model upgrade is cut.
+- **Touched:** `decision/lead.py`, `decision/agent.py`, `decision/actions.py` (comment), `decision/data/typechart.json`, `tests/test_lead.py`, `tests/test_agent.py`
+- **Brief task:** none listed (feature 11 is in the brief's scope contract); Done log line written locally, not published
+- **⚠️ Conflicts:** none: preview still answers `team ……` through `Agent.choose`, so the bot's interface is unchanged
+- **📨 Needs:** @saliha: publish the feature 11 docs + brief line, mirror the decisions in PRD → NOW, and look at the publish script refusing non-owners since the trim (Open board row)
+- **Status:** open (the row to @saliha)
 
 ### 2026-10-24 19:16 — docs — Context branch trimmed; Derrick's feature 12 docs published — @saliha
 - **Where:** `context` @ `54086aa` · merged to `main`: n/a (docs branch); `.gitignore` on `main`
