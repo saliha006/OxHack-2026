@@ -38,12 +38,6 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
-| 2026-10-24 18:14 | @derrick | @nate | ⚠️ conflict | `contracts/set-candidates.md` (on `derrick`) defines the set file your data layer would build for belief: 30 weighted sets per species + trimmed usage, chaos 1825 / 2026-09. Next: yes/no on the shape and on `data/set_candidates.json` as its path | 2026-10-24 18:14 |
-| 2026-10-24 18:14 | @derrick | @saliha | 📨 waiting on | Publish `design/decision/02-set-priors.md`, `03-…`, `04-…`, `05-…` from `origin/derrick` @ `e4cef23` (the 02-05 decisions; the sync overwrote them locally) | 2026-10-24 18:14 |
-| 2026-10-24 17:51 | @derrick | @saliha | 📨 waiting on | Publish to `context` from `origin/derrick` @ `9c98381` (the script only lets you): `design/decision/*.md` (12 feature docs), `design/decision-layer.md` (§7 checklist), and `OxHack-2026-research.md` section 7 (Showdown protocol + poke-engine, appended after yours). E.g. `git show origin/derrick:<path> > <path>`, then publish | 2026-10-24 17:51 |
-| 2026-10-24 17:41 | @derrick | @saliha | ⚠️ conflict | The decision layer's opponent model reads `BattleState.sides[*].last_move` as the **current active Pokémon's** last move: the parser must reset it to null when that side switches. Next: confirm, or say if the contract should spell it out | 2026-10-24 17:41 |
-| 2026-10-24 16:46 | @derrick | @saliha, @nate | 🔀 scope proposal | **saliha owns the bot layer and builds the log parser**, producing the `BattleState` JSON Derrick drafted (`contracts/battle-state.md` + `contracts/battle_state.py` + an example, on `derrick`). The decision layer is blocked on it for the opponent side. Next: saliha yes/no on owning it + review the shape; Nate yes/no on the ownership | 2026-10-24 16:46 — saliha: YES (17:20), waiting on @nate |
-| 2026-10-24 16:00 | @derrick | @saliha | 📨 waiting on | Publish Derrick's decision-layer docs (the publish script only lets you): `design/decision-layer.md` + new `design/decision/*.md`, on `derrick`'s working copy. Also note: decision layer is **Python** (not TS); Registry `Run · Test` = `uv run pytest --cov=decision`; feature 07 is blocked until the bot layer defines `BattleState`. Next: publish, or tell Derrick what to change | 2026-10-24 16:00 |
 
 **Kinds:** ⚠️ conflict (my change touches your work) · 📨 waiting on (I'm blocked until you do X) · 🔀 scope proposal (needs
 the whole team's yes, CLAUDE.md §2c) · ❓ question for a teammate (project-wide unknowns go in the PRD §21).
@@ -75,6 +69,16 @@ whenever you log an entry.
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 18:30 — decision — Bot layer is saliha's; `last_move` resets on switch; Derrick's notes 02-05 published — @saliha
+- **Where:** `context` @ `cb32fd0` (docs only) · merged to `main`: n/a
+- **Did:** (1) saliha owns the bot layer and the log parser; as doc owner saliha waived a separate yes from Nate (the bot layer meets the data layer only through `BattleState`), Nate is informed and can object here. (2) Answer to Derrick's ⚠️: yes, the parser resets `sides[*].last_move` to null when that side switches; Derrick please spell it out in `contracts/battle-state.md`. (3) The parser will emit `Event.source` exactly as the contract examples spell it (`"stealthrock"`, `"item:<id>"`). (4) Published `design/decision/02..05-*.md` from `derrick` @ `e4cef23`; the earlier 12 docs were already out.
+- **Touched:** `design/decision/02-05`, `builder-file-saliha.md`, PRD NOW
+- **Brief task:** saliha tasks 1-5 unchanged; the Nate wait tag removed from task 3
+- **⚠️ Conflicts:** none
+- **📨 Needs:** @derrick: add the `last_move` rule to the contract. @nate: review `contracts/set-candidates.md` (Derrick's 18:14 entry). The user picks the (a)-(e) build choices and the bot skeleton on the main account
+- **Agreed by:** saliha, derrick (proposer); nate informed
+- **Status:** resolved by @saliha 2026-10-24 18:30 (the 🔀, ⚠️ and 📨 rows above are cleared)
 
 ### 2026-10-24 18:17 — feat — Decision layer: belief (hard filter + sampling) on hand-made priors — @derrick
 - **Where:** `derrick` @ `7ca09bb` · merged to `main`: not yet
