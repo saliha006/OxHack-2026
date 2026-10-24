@@ -111,3 +111,23 @@ budget (§6).
 > **🟠 DECISION: turn-time budget**
 > What's the per-turn budget, and so how many sets × opp actions fit? Needs a benchmark of one `simulate` call first.
 > {{budget: not decided}}
+
+## 7. Feature checklist
+
+> **DRAFT list, not team-agreed.** One file per feature in [decision/](decision/). Each one has its job, input/output,
+> build stage, open decisions and a "done when" check. Tick a box here when its file's "done when" passes.
+
+Stages are the build order in [DESIGN.md §4](DESIGN.md#4-build-order-by-layer).
+
+- [x] **[State intake](decision/01-state-intake.md)**: Stage 3 (built against the `BattleState` contract; needs a real parser)
+- [ ] **[Set priors (load)](decision/02-set-priors.md)**: Stage 4
+- [ ] **[Belief: hard filter](decision/03-belief-hard-filter.md)**: Stage 4
+- [ ] **[Belief: soft reweight](decision/04-belief-soft-reweight.md)**: Stage 4, after the hard filter
+- [ ] **[Sample opponent sets](decision/05-sample-sets.md)**: Stage 4
+- [x] **[Our actions](decision/06-our-actions.md)**: Stage 3 (built on `derrick`, not merged)
+- [x] **[Opponent actions + policy](decision/07-opp-actions.md)**: Stage 3 uniform → Stage 5 trained (uniform built on `derrick`, not merged)
+- [x] **[Simulate one turn](decision/08-simulate.md)**: Stage 2 (built on `derrick`, not merged)
+- [x] **[Value function](decision/09-value.md)**: Stage 3 heuristic → Stage 5 trained (heuristic built on `derrick`, not merged)
+- [x] **[Action selector](decision/10-selector.md)**: Stage 3 (built on `derrick`, not merged)
+- [ ] **[Special requests](decision/11-special-requests.md)** (team preview, forced switch): Stage 3
+- [ ] **[Turn budget + fallback](decision/12-budget-fallback.md)**: Stage 3

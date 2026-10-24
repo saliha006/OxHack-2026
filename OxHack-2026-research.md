@@ -15,6 +15,7 @@ One file for all research (CLAUDE.md §10). Each pass is a section: its recommen
 4. Event rules, schedule, judging and prizes
 5. Handmade element, coach-style replay review, ElevenLabs and Gemini
 6. Showdown bot setup (poke-env, server, policy)
+7. Decision layer: Showdown protocol and one-turn simulation (derrick: R1 protocol, R2 poke-engine choice, its test result, engine gaps)
 
 **Corrections to team-supplied claims (from passes 2 and 3):** PokéChamp's HF id is `milkkarten/pokechamp` (not `sethkarten/`) and the arXiv page says over 3M games, no venue confirmed; COIL is in `/users/<id>.json`, not the ladder row; Lichess blunder thresholds are 5/10/15 win-percentage points, not 10/20/30; Metamon's raw `rating` column is the lower player's post-game rating, not a per-player Elo (use the pre-game Elo in the `|player|` line).
 
@@ -1449,3 +1450,41 @@ Showdown, so the data and decision layers can plug in later?
 ### DO NOT USE
 - ~~"Node.js v10+ is enough for the local server"~~ (poke-env getting-started page). Refuted by Showdown's own
   `package.json` (`node >=22.18.0`). Outdated docs; use the package.json number.
+
+---
+
+## Decision layer: Showdown protocol and one-turn simulation (derrick, 2026-10-24)
+
+### R1. Showdown protocol (2026-10-24, derrick)
+Ledger kept in `design/bot-layer.md §5` for now. The sim source files are all KEEP (the source of truth); the
+`@pkmn/protocol` and `@pkmn/client` READMEs are WEAK (no field lists). No community pass yet.
+
+### R2. One-turn simulation from Python (2026-10-24, derrick)
+**Question:** how does a Python decision layer get "state + both actions + a set → next state"?
+
+| Source | Verdict | Supports |
+|---|---|---|
+| [`poke-engine` `Cargo.toml`](https://github.com/pmariglia/poke-engine/blob/main/Cargo.toml) | KEEP | `gen9` and `terastallization` build features exist; none are on by default |
+| [`poke-engine` README](https://github.com/pmariglia/poke-engine) | KEEP (tool), WEAK (gen9 claim) | Rust engine, singles only; `generate-instructions` gives a turn's outcomes **with probabilities**; also expectiminimax, MCTS, damage calc; MIT; state is parsed from a string. README still says "Generations 4 through 8", which contradicts `Cargo.toml` |
+| [`poke-engine` on PyPI](https://pypi.org/project/poke-engine/) | KEEP | Python bindings v0.0.48 (2026-07-19), sdist only (needs Rust to build), "still a work in progress" |
+| [`foul-play`](https://github.com/pmariglia/foul-play) | KEEP | A Python Showdown bot that uses poke-engine for search and plays all singles generations (gen9 random battles in its examples). Corroborates poke-engine working in gen9 |
+| [poke-env `damage_calc_gen9.py`](https://github.com/hsahovic/poke-env/blob/master/src/poke_env/calc/damage_calc_gen9.py) | KEEP (as a damage calc) | `calculate_damage(attacker_id, defender_id, move, battle)` → (min, max). Needs a poke-env `Battle`; damage only, no next state; its docstring says edge cases deviate from the official calc |
+| [Showdown `sim/state.ts`](https://github.com/smogon/pokemon-showdown/blob/master/sim/state.ts) | KEEP | `serializeBattle` / `deserializeBattle` restore a battle so it can resume. Hand-edited state isn't validated ("readability over robustness"), so building a hypothetical mid-game state is fragile |
+
+**Not found:** a Python library with a full turn-forward model other than poke-engine. No community pass yet.
+
+### R2 spike result (2026-10-24, derrick): poke-engine works for gen9
+- Built `poke-engine==0.0.48` from source with `--features poke-engine/terastallization --no-default-features`
+  (Rust 1.95, ~25 s). The default build is **gen4**, so the feature flag is required.
+- Replayed turn 1 of replay `gen9ou-2703852247` (Kingambit switches in; Gholdengo Tera Steel Make It Rain), with
+  assumed common spreads (Kingambit 252 HP Adamant, Gholdengo 252 SpA Timid, Scarf):
+  damage 165/404 = 40.8% → Showdown shows 60/100 ✅; Leftovers +25 → 66/100 ✅; Tera, Choice lock and −1 SpA all
+  applied; a crit branch at 4.2% (1/24).
+- **Damage rolls are not branched:** one value (165; a hand calc of the same spreads gives 152–179, so it sits mid-range) per outcome. Only crits and
+  other chance events branch.
+- Speed: **0.038 ms per `generate_instructions` call** (2,000-call average, on Derrick's Mac) → ~850 calls ≈ 32 ms.
+- Move names: `"<move>"`, `"<move>-tera"` for Tera, `"<species>"` for a switch.
+- **Engine gaps found while building (2026-10-24):** gen9 Struggle is 50 BP **Normal** type with **no recoil** (real:
+  typeless, ¼ max-HP recoil) — `src/choices.rs`. Encore needs `Side.last_used_move` set, or `generate_instructions`
+  panics (`generate_instructions.rs:2093`). `Side` always pads teams to 6 with fainted placeholders. Pokémon, Move and
+  Side attributes are read-only from Python; build them with constructor arguments.
