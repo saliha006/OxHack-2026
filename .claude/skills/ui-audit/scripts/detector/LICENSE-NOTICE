@@ -1,0 +1,27 @@
+NOTICE: vendored third-party code
+==================================
+
+The files in this `detector/` directory are the anti-pattern detector from the
+"Impeccable" design skill:
+
+    Anti-Pattern Detector for Impeccable
+    Copyright (c) 2026 Paul Bakaus
+    SPDX-License-Identifier: Apache-2.0
+    Source skill version: impeccable 3.9.1
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+these files except in compliance with the License. A copy of the License is in
+`LICENSE` next to this file, and at https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software distributed
+under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+CONDITIONS OF ANY KIND, either express or implied.
+
+Modifications made when vendoring (Apache-2.0 section 4(b)):
+- `lib/impeccable-config.mjs` copied from impeccable `scripts/lib/` into
+  `detector/lib/`; the import in `cli/main.mjs` changed from
+  `../../lib/impeccable-config.mjs` to `../lib/impeccable-config.mjs`.
+- Removed `browser/injected/index.mjs` (build source of the generated
+  `detect-antipatterns-browser.js`; not imported at runtime).
+- Not vendored: impeccable's live-editing server, editor hooks, critique
+  storage, palette seeder, pin/context scripts.
+No rule logic was changed.
