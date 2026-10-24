@@ -65,15 +65,15 @@ whenever you log an entry.
 4. {{Access to the deploy target, data and secrets: where each lives. Never in git or chat}}
 
 ## 📊 Latest (volatile facts live only here)
-- **As of {{YYYY-MM-DD HH:MM}}:** `main` @ `{{sha}}` · tests: {{n}} green, {{x}}% coverage · deploy: {{status, URL}}
-- **On branches, not merged yet:** `derrick`: decision layer `our_actions`, `select`, `simulate`, `our_side`, `value`, `build_state`, `opp_actions`, `Belief` with reweight, `Agent` turn loop with budget + fallback (140 tests, 100% coverage)
+- **As of 2026-10-24 19:00:** `main` @ `5e203fc` · tests: 140 green, 100% coverage (`uv run pytest --cov=decision`) · deploy: none yet
+- **On branches, not merged yet:** none from @derrick (`derrick` keeps the per-feature history and the shared docs; `derrick-main` was the clean merge branch)
 
 ---
 
 ## Log (newest first)
 
 ### 2026-10-24 18:50 — feat — Decision layer: 3 s turn budget and a fallback that never stalls — @derrick
-- **Where:** `derrick` @ `a57313e` · merged to `main`: not yet
+- **Where:** `derrick` @ `a57313e` · merged to `main`: yes, as one clean commit `5e203fc` (2026-10-24 19:00; agreed by saliha, nate)
 - **Did:** `Agent.choose()` always answers: a 3 s budget (most likely scenarios first, best-so-far when time's up), and any error is logged with the turn and replaced by the first legal option, or `default` if even that fails. 140 tests, 100% coverage.
 - **Touched:** `decision/agent.py`, `tests/test_agent.py`
 - **Brief task:** none new
@@ -82,7 +82,7 @@ whenever you log an entry.
 - **Status:** open (the note to @saliha)
 
 ### 2026-10-24 18:40 — feat — Decision layer: the turn loop runs end to end — @derrick
-- **Where:** `derrick` @ `640216c` · merged to `main`: not yet
+- **Where:** `derrick` @ `640216c` · merged to `main`: yes, as one clean commit `5e203fc` (2026-10-24 19:00; agreed by saliha, nate)
 - **Did:** `Agent(priors).choose(request, battle)` turns a Showdown request + BattleState into a choice string, running belief → 5 scenarios → build_state → both sides' actions → simulate → value → select. Selector now takes the opponent's odds per set. Team preview and forced switches have stand-ins until feature 11. A full move decision takes well under a second in tests. 135 tests, 100% coverage.
 - **Touched:** `decision/agent.py`, `decision/selector.py`, `tests/test_agent.py`, `tests/test_selector.py`
 - **Brief task:** none new (the core loop is task 1, already ✅; belief task 4 still 🟡)
@@ -91,7 +91,7 @@ whenever you log an entry.
 - **Status:** open (the note to @saliha)
 
 ### 2026-10-24 18:32 — docs — BattleState contract: last_move reset and Event.source spellings written in — @derrick
-- **Where:** `derrick` @ `eb56c61` · merged to `main`: not yet
+- **Where:** `derrick` @ `eb56c61` · merged to `main`: yes, as one clean commit `5e203fc` (2026-10-24 19:00; agreed by saliha, nate)
 - **Did:** Answered saliha's 18:30 ask: `contracts/battle-state.md` + `battle_state.py` now say `last_move` resets to null when that side switches, and list the exact `Event.source` strings belief matches. No field changed meaning.
 - **Touched:** `contracts/battle-state.md`, `contracts/battle_state.py`
 - **Brief task:** none
@@ -100,7 +100,7 @@ whenever you log an entry.
 - **Status:** open
 
 ### 2026-10-24 18:29 — feat — Decision layer: soft reweight by replaying each turn in poke-engine — @derrick
-- **Where:** `derrick` @ `7fb50c3` · merged to `main`: not yet
+- **Where:** `derrick` @ `7fb50c3` · merged to `main`: yes, as one clean commit `5e203fc` (2026-10-24 19:00; agreed by saliha, nate)
 - **Did:** Belief now replays last turn per candidate set (the loop calls `belief.chose(request, action)` after choosing) and drops sets the engine can't square with the observed move order or damage (both ways, crits included, ±1 for rounding). Speed ties, flinches, U-turn pivots and KOs handled; switches, one-sided turns and multi-hit moves give no evidence. 126 tests, 100% coverage.
 - **Touched:** `decision/belief.py`, `decision/simulate.py` (`engine_move` now public), `tests/test_reweight.py`
 - **Brief task:** 4 → 🟡 part (all belief logic built on hand-made priors; the real set file and the "beats uniform log loss" check wait on @nate's data)
@@ -119,7 +119,7 @@ whenever you log an entry.
 - **Status:** resolved by @saliha 2026-10-24 18:30 (the 🔀, ⚠️ and 📨 rows above are cleared)
 
 ### 2026-10-24 18:17 — feat — Decision layer: belief (hard filter + sampling) on hand-made priors — @derrick
-- **Where:** `derrick` @ `7ca09bb` · merged to `main`: not yet
+- **Where:** `derrick` @ `7ca09bb` · merged to `main`: yes, as one clean commit `5e203fc` (2026-10-24 19:00; agreed by saliha, nate)
 - **Did:** `Belief(priors, battle)` keeps each opponent slot's set weights for the battle. `update()` filters on revealed moves/item/ability/Tera and four implied-item rules (Choice, Assault Vest, Leftovers, Boots), rebuilding from usage when nothing fits. `scenarios(k=5)` gives the active's top 5 with the bench at its best guess. Soft reweight (04) is next. 113 tests, 100% coverage.
 - **Touched:** `decision/belief.py`, `tests/test_belief.py`
 - **Brief task:** 4 → 🟡 part (logic on hand-made priors; real set file waits on @nate)
@@ -128,7 +128,7 @@ whenever you log an entry.
 - **Status:** open (the note to @saliha)
 
 ### 2026-10-24 18:14 — decision — Derrick drafts the SetCandidates contract; belief logic starts ahead of the merge — @derrick
-- **Where:** `derrick` @ `f9744ee` · merged to `main`: not yet
+- **Where:** `derrick` @ `f9744ee` · merged to `main`: yes, as one clean commit `5e203fc` (2026-10-24 19:00; agreed by saliha, nate)
 - **Did:** Drafted the per-species set file the data layer builds and the decision layer's belief loads (`contracts/set-candidates.md`, `contracts/set_candidates.py`, example with real 2026-09 1825 usage). Derrick's contents decisions: chaos 1825 / 2026-09, sets combined from usage shares, 30 per species, no teammate data, no "other" set. Starting brief task 4's belief logic (hard filter, reweight, sampling) on hand-made sets before task 2 (the merge).
 - **Touched:** `contracts/set-candidates.md`, `contracts/set_candidates.py`, `contracts/examples/set_candidates_example.json`, `tests/test_set_candidates_contract.py`
 - **Brief task:** 4 in builder-file-derrick.md → 🟡 part (logic only; the set file is @nate's)
@@ -146,7 +146,7 @@ whenever you log an entry.
 - **Status:** open
 
 ### 2026-10-24 17:51 — feat — Decision layer: Struggle, and Encore no longer crashes the engine — @derrick
-- **Where:** `derrick` @ `bd84938` (code) · docs handed off at `9c98381` · merged to `main`: not yet
+- **Where:** `derrick` @ `bd84938` (code) · docs handed off at `9c98381` · merged to `main`: yes, as one clean commit `5e203fc` (2026-10-24 19:00; agreed by saliha, nate)
 - **Did:** When Choice lock / Encore / Taunt leave the opponent no usable move, `build_state` gives it Struggle (poke-engine only runs it from the move list). Fixed a crash: poke-engine panics on any Encored side unless `last_used_move` is set, which the adapter now does. Found: poke-engine's gen9 Struggle is a Normal-type move with no recoil (real one is typeless, ¼ recoil). 96 tests, 100% coverage.
 - **Touched:** `decision/adapter.py`, `decision/opponent.py`, `tests/test_opponent.py`
 - **Brief task:** none (no brief for derrick yet)
@@ -155,7 +155,7 @@ whenever you log an entry.
 - **Status:** open
 
 ### 2026-10-24 17:41 — feat — Decision layer: opponent options + uniform policy — @derrick
-- **Where:** `derrick` @ `82e0eb6` · merged to `main`: not yet
+- **Where:** `derrick` @ `82e0eb6` · merged to `main`: yes, as one clean commit `5e203fc` (2026-10-24 19:00; agreed by saliha, nate)
 - **Did:** `opp_actions(state, battle)` lists the opponent's moves, Tera moves (while unused) and switches; Choice lock, Encore and Taunt limit them. `uniform_policy()` gives each move/switch an equal share, split with its Tera copy. Adds a `moves.json` snapshot for move categories. 92 tests, 100% coverage.
 - **Touched:** `decision/opponent.py`, `decision/data/moves.json`, `tests/test_opponent.py`, `tests/turn2.py`
 - **Brief task:** none (no brief for derrick yet)
@@ -174,7 +174,7 @@ whenever you log an entry.
 - **Status:** open
 
 ### 2026-10-24 17:05 — feat — Decision layer: full poke-engine state from a request + BattleState — @derrick
-- **Where:** `derrick` @ `a104fb4` · merged to `main`: not yet
+- **Where:** `derrick` @ `a104fb4` · merged to `main`: yes, as one clean commit `5e203fc` (2026-10-24 19:00; agreed by saliha, nate)
 - **Did:** `build_state(request, battle_state, sets)` builds the whole turn state: our team from the request, the opponent + field from `BattleState`, hidden opponent details from one guessed set per slot (nature + EVs → stats). Revealed info beats the guess. Tested on the contract's turn-2 example. 81 tests, 100% coverage.
 - **Touched:** `decision/adapter.py`, `decision/sets.py`, `tests/test_adapter.py`, `tests/test_sets.py`
 - **Brief task:** none (no brief for derrick yet)
@@ -182,7 +182,7 @@ whenever you log an entry.
 - **📨 Needs:** none new
 
 ### 2026-10-24 16:46 — scope — Proposal: saliha owns the bot layer and builds the log parser to Derrick's BattleState contract — @derrick
-- **Where:** `derrick` @ `e98b302` · merged to `main`: not yet
+- **Where:** `derrick` @ `e98b302` · merged to `main`: yes, as one clean commit `5e203fc` (2026-10-24 19:00; agreed by saliha, nate)
 - **Did:** Drafted the `BattleState` contract (what the parser hands the decision layer each turn, as JSON): both sides in the same shape, field, and last turn's events; Showdown IDs and 0–100 HP. Real example from turn 2 of replay `gen9ou-2703852247`, plus a test that keeps example and types in step.
 - **Touched:** `contracts/battle-state.md`, `contracts/battle_state.py`, `contracts/examples/battle_state_turn2.json`, `tests/test_battle_state_contract.py`
 - **Brief task:** none (no brief for derrick yet)
@@ -192,7 +192,7 @@ whenever you log an entry.
 - **Status:** open
 
 ### 2026-10-24 16:31 — feat — Decision layer: heuristic value + looser selector ties — @derrick
-- **Where:** `derrick` @ `0ca12e4` · merged to `main`: not yet
+- **Where:** `derrick` @ `0ca12e4` · merged to `main`: yes, as one clean commit `5e203fc` (2026-10-24 19:00; agreed by saliha, nate)
 - **Did:** `value(state)` scores a position 0–1 (0.5 = even): each Pokémon = alive + HP fraction, ours vs theirs. Same scale as the planned win-probability model. The selector's tie tolerance is now 1e-6, matching poke-engine's 32-bit probabilities. 59 tests, 100% coverage.
 - **Touched:** `decision/value.py`, `decision/selector.py`, `tests/test_value.py`, `tests/test_selector.py`
 - **Brief task:** none (no brief for derrick yet)
@@ -200,7 +200,7 @@ whenever you log an entry.
 - **📨 Needs:** none
 
 ### 2026-10-24 16:23 — feat — Decision layer: our poke-engine side from a Showdown request — @derrick
-- **Where:** `derrick` @ `e6cc855` · merged to `main`: not yet
+- **Where:** `derrick` @ `e6cc855` · merged to `main`: yes, as one clean commit `5e203fc` (2026-10-24 19:00; agreed by saliha, nate)
 - **Did:** `our_side(request)` builds our team as a poke-engine `Side` (HP, status, stats, moves + PP, item, ability, Tera) in request order. Types and weight come from a committed snapshot of Showdown's `pokedex.json`. State is rebuilt every turn (no memory). 47 tests, 100% coverage.
 - **Touched:** `decision/state.py`, `decision/data/pokedex.json` (524 KB), `tests/test_state.py`
 - **Brief task:** none (no brief for derrick yet)
@@ -209,7 +209,7 @@ whenever you log an entry.
 - **Status:** open (the bot layer note above)
 
 ### 2026-10-24 16:13 — feat — Decision layer: one-turn simulation via poke-engine — @derrick
-- **Where:** `derrick` @ `50b9a77` · merged to `main`: not yet
+- **Where:** `derrick` @ `50b9a77` · merged to `main`: yes, as one clean commit `5e203fc` (2026-10-24 19:00; agreed by saliha, nate)
 - **Did:** `simulate(state, ours, theirs)` returns every outcome of a turn as (probability, next state), using poke-engine (Rust, built from source with its gen9 Tera feature). Replaying turn 1 of a real gen9ou game matches the log (Kingambit 66%). 0.038 ms per call. 31 tests, 100% coverage.
 - **Touched:** `decision/simulate.py`, `tests/test_simulate.py`, `pyproject.toml` (new dependency `poke-engine==0.0.48`; building it needs Rust)
 - **Brief task:** none (no brief for derrick yet)
@@ -218,7 +218,7 @@ whenever you log an entry.
 - **Status:** open (the bot layer note above)
 
 ### 2026-10-24 16:00 — feat — Decision layer: legal actions from a request, and the action selector — @derrick
-- **Where:** `derrick` @ `b27a235` · merged to `main`: not yet (`derrick` was branched from `context`, so its shared docs must come off before a merge)
+- **Where:** `derrick` @ `b27a235` · merged to `main`: yes, as one clean commit `5e203fc` (2026-10-24 19:00; agreed by saliha, nate) (`derrick` was branched from `context`, so its shared docs must come off before a merge)
 - **Did:** `our_actions(request)` lists our legal moves / Tera moves / switches / leads from Showdown's raw `|request|` JSON. `select()` picks the highest expected value over opponent actions × sets, tie-break on worst case. Python + uv + pytest; 25 tests, 100% coverage.
 - **Touched:** `decision/actions.py`, `decision/selector.py`, `tests/`, `pyproject.toml`, `uv.lock`, `.gitignore`
 - **Brief task:** none (no brief for derrick yet)
