@@ -9,6 +9,7 @@ from contracts.set_candidates import SetCandidates
 from decision.actions import Action, our_actions
 from decision.adapter import build_state
 from decision.belief import Belief
+from decision.lead import pick_lead
 from decision.opponent import opp_actions, uniform_policy
 from decision.selector import expected_value, select
 from decision.simulate import simulate
@@ -53,8 +54,7 @@ class Agent:
             self.belief = Belief(self.priors, battle)
         self.belief.update(battle)
         if request.get("teamPreview"):
-            # Feature 11 will pick the lead; until then the team goes in as built.
-            return Action("lead", 1).to_choice()
+            return pick_lead(request, battle).to_choice()
         if request.get("forceSwitch"):
             action = self._best_switch_in(request, battle)
         else:

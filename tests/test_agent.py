@@ -19,7 +19,7 @@ def test_wait_sends_nothing():
     assert Agent(PRIORS).choose(load("wait_request"), copy.deepcopy(EXAMPLE)) is None
 
 
-def test_team_preview_keeps_the_team_order():
+def test_team_preview_sends_the_picked_lead():
     assert Agent(PRIORS).choose(load("team_preview_request"), copy.deepcopy(EXAMPLE)) == "team 123456"
 
 
