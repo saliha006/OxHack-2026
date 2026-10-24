@@ -64,11 +64,19 @@ whenever you log an entry.
 
 ## 📊 Latest (volatile facts live only here)
 - **As of {{YYYY-MM-DD HH:MM}}:** `main` @ `{{sha}}` · tests: {{n}} green, {{x}}% coverage · deploy: {{status, URL}}
-- **On branches, not merged yet:** `derrick`: decision layer `our_actions`, `select`, `simulate`, `our_side`, `value` (59 tests, 100% coverage)
+- **On branches, not merged yet:** `derrick`: decision layer `our_actions`, `select`, `simulate`, `our_side`, `value`, `build_state` (81 tests, 100% coverage)
 
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 17:05 — feat — Decision layer: full poke-engine state from a request + BattleState — @derrick
+- **Where:** `derrick` @ `a104fb4` · merged to `main`: not yet
+- **Did:** `build_state(request, battle_state, sets)` builds the whole turn state: our team from the request, the opponent + field from `BattleState`, hidden opponent details from one guessed set per slot (nature + EVs → stats). Revealed info beats the guess. Tested on the contract's turn-2 example. 81 tests, 100% coverage.
+- **Touched:** `decision/adapter.py`, `decision/sets.py`, `tests/test_adapter.py`, `tests/test_sets.py`
+- **Brief task:** none (no brief for derrick yet)
+- **⚠️ Conflicts:** none (reads `contracts/battle_state.py`; the parser that fills it is the open 🔀 proposal to @saliha)
+- **📨 Needs:** none new
 
 ### 2026-10-24 16:46 — scope — Proposal: saliha owns the bot layer and builds the log parser to Derrick's BattleState contract — @derrick
 - **Where:** `derrick` @ `e98b302` · merged to `main`: not yet
