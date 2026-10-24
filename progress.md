@@ -38,6 +38,7 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
+| 2026-10-24 17:41 | @derrick | @saliha | ⚠️ conflict | The decision layer's opponent model reads `BattleState.sides[*].last_move` as the **current active Pokémon's** last move: the parser must reset it to null when that side switches. Next: confirm, or say if the contract should spell it out | 2026-10-24 17:41 |
 | 2026-10-24 16:46 | @derrick | @saliha, @nate | 🔀 scope proposal | **saliha owns the bot layer and builds the log parser**, producing the `BattleState` JSON Derrick drafted (`contracts/battle-state.md` + `contracts/battle_state.py` + an example, on `derrick`). The decision layer is blocked on it for the opponent side. Next: saliha yes/no on owning it + review the shape; Nate yes/no on the ownership | 2026-10-24 16:46 — saliha: YES (17:20), waiting on @nate |
 | 2026-10-24 16:00 | @derrick | @saliha | 📨 waiting on | Publish Derrick's decision-layer docs (the publish script only lets you): `design/decision-layer.md` + new `design/decision/*.md`, on `derrick`'s working copy. Also note: decision layer is **Python** (not TS); Registry `Run · Test` = `uv run pytest --cov=decision`; feature 07 is blocked until the bot layer defines `BattleState`. Next: publish, or tell Derrick what to change | 2026-10-24 16:00 |
 
@@ -64,11 +65,20 @@ whenever you log an entry.
 
 ## 📊 Latest (volatile facts live only here)
 - **As of {{YYYY-MM-DD HH:MM}}:** `main` @ `{{sha}}` · tests: {{n}} green, {{x}}% coverage · deploy: {{status, URL}}
-- **On branches, not merged yet:** `derrick`: decision layer `our_actions`, `select`, `simulate`, `our_side`, `value`, `build_state` (81 tests, 100% coverage)
+- **On branches, not merged yet:** `derrick`: decision layer `our_actions`, `select`, `simulate`, `our_side`, `value`, `build_state`, `opp_actions` (92 tests, 100% coverage)
 
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 17:41 — feat — Decision layer: opponent options + uniform policy — @derrick
+- **Where:** `derrick` @ `82e0eb6` · merged to `main`: not yet
+- **Did:** `opp_actions(state, battle)` lists the opponent's moves, Tera moves (while unused) and switches; Choice lock, Encore and Taunt limit them. `uniform_policy()` gives each move/switch an equal share, split with its Tera copy. Adds a `moves.json` snapshot for move categories. 92 tests, 100% coverage.
+- **Touched:** `decision/opponent.py`, `decision/data/moves.json`, `tests/test_opponent.py`, `tests/turn2.py`
+- **Brief task:** none (no brief for derrick yet)
+- **⚠️ Conflicts:** @saliha: relies on `BattleState.sides[*].last_move` being reset when the active Pokémon switches out (Choice lock / Encore)
+- **📨 Needs:** none new
+- **Status:** open (the note to @saliha)
 
 ### 2026-10-24 17:20 — decision — saliha accepts the bot layer + log parser; waiting on Nate — @saliha
 - **Where:** PRD §0 NOW (published to `context`) · merged to `main`: n/a (docs only)
