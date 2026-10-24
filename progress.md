@@ -52,7 +52,9 @@ whenever you log an entry.
 
 | Who | GitHub | Role | Branch | Owns (paths) | Now |
 |---|---|---|---|---|---|
-| {{Name}} | `{{handle}}` | {{area; extra role, e.g. doc owner, deploy owner}} | `{{branch}}` | `{{paths}}` | {{brief task n: one line}} |
+| Saliha | `saliha006` | Bot layer; doc owner | `sali` | `bot/` {{paths tbd}} | brief task 1: decide the bot skeleton (poke-env / local server / format) |
+| Nate | `aldrichbanas07` | Data layer | {{nate's branch}} | `data/` {{paths tbd}} | brief task 1: start the ladder snapshotter |
+| Derrick | `RandomGeeb` | Decision layer | `derrick` | `decision/`, `tests/`, `contracts/battle_state.py` | brief task 2: merge `derrick` to `main` (code only) |
 
 **Shared** (anyone may edit; flag it in ⚠️ Conflicts): {{e.g. `contracts/*`, `fixtures/*`, compose files}}
 
@@ -71,6 +73,15 @@ whenever you log an entry.
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 18:00 — docs — Research merged, builder briefs filled, Derrick's docs published — @saliha
+- **Where:** `context` @ `1163870` (docs only) · merged to `main`: n/a
+- **Did:** Merged six research passes into `OxHack-2026-research.md` (READ THIS FIRST at the top). Published Derrick's 12 decision-layer feature docs and his research section 7. Filled `builder-file-saliha/nate/derrick.md` from the template and 👥 Team below. CLAUDE.md halved; research protocol is now the `research-protocol` skill; Read guard + active-session warning added to the prompt hook.
+- **Touched:** `OxHack-2026-research.md`, `design/decision*`, `builder-files/*`, `CLAUDE.md`, `scripts/prompt-check.sh`
+- **Brief task:** briefs created for all three builders
+- **⚠️ Conflicts:** none. Each builder should read their brief once and fix the "Open blanks" list in it
+- **📨 Needs:** @nate: yes/no on saliha owning the bot layer, your branch name and `data/` paths; run `bash scripts/prompt-check.sh --install-guard` once. @derrick: same install
+- **Status:** open
 
 ### 2026-10-24 17:51 — feat — Decision layer: Struggle, and Encore no longer crashes the engine — @derrick
 - **Where:** `derrick` @ `bd84938` (code) · docs handed off at `9c98381` · merged to `main`: not yet
