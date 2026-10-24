@@ -1,21 +1,22 @@
-# Nate: Data layer (ingestion, ratings, set candidates + priors, training sets)
-**GitHub:** `aldrichbanas07` · **Branch:** `{{nate's branch}}` · **Tool:** Claude Code · **Brief last updated:** 2026-10-24 by saliha
+# Nate: Data layer (set candidates + priors, team pool, training sets, charts, data card)
+**GitHub:** `aldrichbanas07` · **Branch:** `Data-stuff-(Nate)` (on origin) · **Tool:** Claude Code · **Brief last updated:** 2026-10-24 21:10 UTC by saliha
 **Spec:** the PRD (`OxHack-2026-PRD.md`) and `design-decision/*.md`. A bare § means the PRD; CLAUDE.md and this brief's own sections are always named.
 
 ## 0. How the agent reads this brief (every task)
 1. `CLAUDE.md` is already loaded (don't re-read it); read this brief once. Follow both.
-2. **Only action `▶ Current tasks`**, top to bottom.
-3. Before starting, read `progress.md`'s 📌 Open board (CLAUDE.md §2b). Rows To @nate come first: tell the user, then resolve or schedule them.
-4. Ship each task with the CLAUDE.md §7 sequence, then log it (CLAUDE.md §2b). Use the `debug` skill on every issue.
-5. Token budget (CLAUDE.md): read only the `design-decision/` doc for your layer. The research doc is saliha's and local only: ask her for a pass instead of searching for it.
+2. **Work `▶ Current tasks` top to bottom.** The order is the pass 9 build plan: two research agents plus an adversarial critic, using peer-reviewed papers, official docs and source, practitioner consensus, the current code and the PRD. Each task names the recommended design and the main alternative; data-layer choices are Nate's to accept or change.
+3. **Want a different route, more features or another decision in your area? Go ahead.** Your Claude always asks first: "Have you told the team? Who agreed?" (CLAUDE.md §2c). Changes to another builder's path or a shared contract wait for that owner's yes.
+4. Before starting, read `progress.md`'s 📌 Open board (CLAUDE.md §2b). Rows To @nate come first: tell the user, then resolve or schedule them.
+5. Ship each task with the CLAUDE.md §7 sequence, then log it (CLAUDE.md §2b). Use the `debug` skill on every issue.
+6. Times are **UTC** (UK clocks go back at 02:00 BST on Sunday). The research doc is saliha's and local only: ask her for a pass instead of searching for it.
 
-**Task tags:** `[⚠ touches @name: what]` = changes someone else's area or a shared contract; get that owner's yes before merging (§2c). `[⏸ waits on @name: what]` = blocked until they deliver (a 📨 row on the Open board).
+**Task tags:** `[⚠ touches @name: what]` = changes someone else's area or a shared contract; get that owner's yes before merging (§2c). `[⏸ waits on @name: what]` = blocked until they deliver (a 📨 row on the Open board). `[🟠 your call]` = a design decision for the user (CLAUDE.md §1).
 
 ---
 
 ## 1. Ownership
 **Owns:**
-- `data/`: ingestion, storage, ladder snapshotter, offline outputs {{exact paths: not decided}}
+- `data/`: set candidates, team pool, training extract, charts, data card {{exact paths: confirm}}
 - `design-decision/data-layer.md`: its design (DRAFT, not team-agreed)
 
 **Does NOT touch:**
@@ -28,60 +29,60 @@
 **Shared** (flag in `progress.md` ⚠️ Conflicts): `contracts/*`, `fixtures/*`.
 
 ## 2. Contract & Guardrails
-**Scope contract.** Nate builds what the decision layer consumes offline: **set candidates + priors per species** and **training sets** (`design-decision/data-layer.md` §5), from replays and ratings.
-- Research verdict (research doc, pass 2): main data = `HolidayOugi/pokemon-showdown-replays` (gen9ou ≈ 2.5M replays, raw usernames, no licence stated); Metamon raw (pseudonymised) as cross-check. Metamon's 28.5 GB parsed set is not needed.
-- Per-player Elo comes from the log's `|player|` line, NOT the dataset `rating` column (that is the lower player's post-game rating). Elo is floored at 1000 (left-censored).
+**Scope contract.** Nate builds what the other two layers consume offline: **set candidates + priors per species**, the **team pool**, and the **training pairs**, plus the charts and data card that prove them.
+- Per-player Elo comes from the log's `|player|` line, NOT the dataset `rating` column. Elo is offline-only (the local server has none), so it's for baselines and filtering, never a serving feature.
 
-**Out of scope:** the decision loop, the Showdown bot, coaching text, voice.
+**Out of scope:** the decision loop, the Showdown bot, coaching text, voice; ClickHouse; scraping Showdown's API (the test set comes from HolidayOugi).
 
 **Guardrails:**
-- ⛔ **Off-plan → CLAUDE.md §2c.** Ask *"Has the whole team agreed? Who?"* first.
-- Split every evaluation by battle id, time and player. The test set is Showdown API games after 2026-05-19; Smogtours is a separate eval split (research doc, pass 3).
-- Use public-only features parsed from raw logs: Metamon's parsed replays back-fill hidden info from the end of the battle (look-ahead).
-- Rate-limit and cache every Showdown request. Showdown's terms say nothing about crawling (neither permission nor ban found), so stay polite.
-- Storage is a 🟠 decision (ClickHouse vs lighter). Filtering to gen9ou columns should keep it well under 30 GB. Never commit secrets or data files.
+- ⛔ **Off-plan → CLAUDE.md §2c.**
+- Split every evaluation by battle id, time and player. The test set is games after 2026-05-19.
+- Public-only features parsed from raw logs: Metamon's parsed replays back-fill hidden info from the end of the battle (look-ahead).
+- Never commit secrets or data files.
 
 ---
 
-## 3. ▶ Current tasks (2026-10-24), in order
-*Status: ⬜ not started · 🟡 in progress · ⏸ blocked · ✅ done*
+## 3. ▶ Current tasks (2026-10-24 21:10 UTC, pass 9 build plan), in order
+*Status: ⬜ not started · 🟡 in progress · ⏸ blocked · ✅ done · Hours = focused work*
 
-**Added 2026-10-24 19:45 by saliha (demo plan; pending the team's yes)**
-6. ⬜ **Team pool** (`data/teams/`, packed format): ~60 seeded gen9ou teams from poke-env's `generate_team("gen9ou", ..., rng=Random(seed))` or `SmogonStatsTeambuilder.from_format("gen9ou", month="2026-09", cutoff=1825)`, validated against the local server (`/vtm gen9ou` or Showdown's `TeamValidator`); drop failures (a test run passed 39 of 40). One becomes our fixed team (saliha and derrick pick); the rest are the evaluation opponents.
-   - *Done when:* every kept team validates, and the seed reproduces the pool.
-7. ⬜ **Eval and demo charts**, from saliha's `runs/*.jsonl` and `runs/eval-*.json`: win-rate bars with 95% intervals per baseline; one game's per-turn win-probability curve; a reliability diagram for the win-probability model.
-   - *Done when:* one command regenerates all three charts, and they go into the demo.
-8. ⬜ **Data card**: one table for the demo and Devpost (datasets, sizes, date ranges, splits, licence notes).
-   - *Done when:* every number in it traces to a query or a file.
+1. ⬜ **Set candidates + priors per species** (old task 3; **first: no priors, no agent**) `[⚠ touches @derrick: the format he consumes]`
+   - Build `data/set_candidates.json` from Smogon chaos stats `gen9ou-1825`, 2026-09, in the shape of `contracts/set-candidates.md` (drafted by Derrick; `tests/test_set_candidates_contract.py` checks a file against it).
+   - *Done when:* the file passes the contract test and is on `main` by 01:00 UTC.
+2. ⬜ **Ladder snapshot: one `curl`** (0.1 h; old task 1). **Recommended [P9 B6]:** cut the scheduler. Save `pokemonshowdown.com/ladder/gen9ou.json` once with a timestamp, then move on (Elo-from-decisions is parked).
+3. ⬜ **Team pool + our team** (1.5 h; old task 6) `[🟠 your call]`
+   - **Recommended [P9 B2 + critique]:** sample 60 seeded teams from `jakegrigsby/metamon-teams` `hl_05_26/gen9ou` with `random.Random(seed)`. Validate each with Showdown's `validate-team`, then drop any that Derrick's adapter / poke-engine can't represent (log which). Write a manifest. Our fixed team is one of the `competitive/gen9ou` expert sample teams, picked with saliha and derrick after ~20 games.
+   - **Rejected:** poke-env's `generate_team` / `SmogonStatsTeambuilder`, which don't enforce legality. Showdown's `generate-team gen9ou` throws locally.
+   - *Done when:* every kept team validates and runs through `build_state`, and the seed reproduces the pool.
+4. ⬜ **Training extract: (state, winner) pairs** (3 h; old tasks 2 + 4) `[⏸ waits on @saliha: states_from_log is on main]` `[🟠 your call: storage]`
+   - **Recommended [P9 B4 + critique]:** Metamon raw replays, 5–8 shards, for train and validation; HolidayOugi part 13 for the test set (games after 2026-05-19). Cap at about 100k games. Store as plain Parquet + DuckDB. Build per-turn states with saliha's `states_from_log` (one parser, so features match the live bot). Split by battle, time and player, with a leakage check (no battle, player or team in two splits). Plot a learning curve to show the size is enough.
+   - **Rejected:** ClickHouse (a server to run, overkill at this size); 300k games (no time); scraping the replay API.
+   - Bot filtering (old task 5): a simple, stated rule is enough (e.g. drop accounts with a bot-like name or games under N turns); write the rule on the data card.
+   - **First 20k-game extract to derrick by 01:00 UTC**; full extract by 04:00 UTC.
+   - *Done when:* train/val/test Parquet files exist with the leakage check passing.
+5. ⬜ **Eval and demo charts** (old task 7), from saliha's `runs/*.jsonl` and `runs/eval-*.jsonl`: win-rate bars with 95% intervals per leg; one game's per-turn win-probability curve; the reliability diagram for derrick's model. Pre-rendered PNGs with matplotlib (pending derrick's OK).
+   - *Done when:* one command regenerates all three, and they run on the smoke-eval results tonight.
+6. ⬜ **Data card** (old task 8): datasets, sizes, date ranges, splits, licence notes, bot-filter rule, eval think budget.
+   - *Done when:* every number traces to a query or a file.
+7. ⬜ *(proposed hand-over from @derrick, needs his yes)* **Score the belief + the model's evaluation figures** (1.5 h): next-reveal log loss of derrick's belief vs the prior on held-out reveals and our eval games (not on pool teams: circular), plus the log loss / Brier / reliability figures for his model.
 
-**Seams** (same note in the other two briefs): saliha's parser (her task 3) is the one way logs become `BattleState`s, so training features match the live bot. Derrick consumes the set file and the (state, winner) pairs.
-
-1. ⬜ **Start the ladder snapshotter now** (top 500 from `pokemonshowdown.com/ladder/gen9ou.json`, scheduled, timestamped): it can't be backfilled.
-   - *Done when:* snapshots accumulate with a timestamp per row and one run's output exists.
-2. ⬜ **Ingest gen9ou replays** (HolidayOugi main, Metamon raw cross-check; dedupe on replay id; Elo from `|player|` lines) `[🟠 storage decision first]`
-   - *Done when:* a gen9ou table keyed on replay id with both players' start Elo, queryable.
-3. ⬜ **Set candidates + priors per species** (top 20-50 per species plus an "other" bucket; design §5a) `[⚠ touches @derrick: the output format he consumes]`
-   - *Done when:* one format is agreed with Derrick, and a held-out game's revealed sets are covered at a stated rate.
-   - *Note 2026-10-24 (saliha):* the format is now drafted as `contracts/set-candidates.md` / `set_candidates.py` on `main`; `tests/test_set_candidates_contract.py` checks a file against it.
-4. ⬜ **Training sets + splits** (opponent-policy pairs from high-Elo replays, (state, winner) pairs, split by battle/time/player, Smogtours eval split) `[🟠 Elo cut-off, bot filtering]`
-   - *Done when:* train/val/test files exist with a leakage check (no battle, player or team in two splits).
-   - *Note 2026-10-24 (saliha):* build the per-turn states with saliha's parser (her task 3), not a second parser `[⏸ waits on @saliha]`. Derrick's calibrated win-probability model trains on these pairs.
-5. ⬜ **Bot filtering rule** (🟠 decision): how bot accounts are detected and dropped.
+**Seams** (same note in the other two briefs): saliha's `states_from_log` is the one way logs become `BattleState`s, so training features match the live bot. Derrick consumes the set file (task 1) and the pairs (task 4); saliha's eval consumes the team pool (task 3).
 
 ## 6a. Reference
-- Research doc passes 1-3; `design-decision/data-layer.md`; replay API `search.json?format=gen9ou&before=<uploadtime>`; no endpoint gives ladder ranks 501-1000.
+- Research doc passes 2, 3 and 9 (`research_notes/pass9-bot-data-eval.md`, `pass9-critique.md`); `design-decision/data-layer.md`; `contracts/set-candidates.md`.
 
 ## 4. Done log (newest first)
 - (empty)
 
 ## 5. Working-style notes for the agent
 - Verbosity Level 0: options + a recommendation, no teaching notes. Flag scope creep at once.
-- Hackathon pace (25 h): the smallest thing that passes its *Done when*; the cut order is in the research doc's READ THIS FIRST.
+- Hackathon pace: the smallest thing that passes its *Done when*; cut order is PRD §19.
 
 ## 6. Open blanks (fill when the chat or repo answers them, CLAUDE.md 🔁)
-- Nate's branch name and exact owned paths.
-- 🟠 storage, Elo cut-off, bot detection (`design-decision/data-layer.md` §6).
+- Exact `data/` paths; confirm `Data-stuff-(Nate)` is your branch.
+- 🟠 storage (Parquet + DuckDB recommended), bot-filter rule.
 
 ---
-── Archived (superseded <date> — do NOT action) ──
-(none)
+── Archived (superseded 2026-10-24 21:10 UTC by the pass 9 build plan — do NOT action) ──
+- Old task 1 (ladder snapshotter, scheduled) → one `curl` (task 2); Elo-from-decisions is parked.
+- Old task 2 (ingest gen9ou replays, HolidayOugi main) → task 4 (Metamon raw shards for train/val, HolidayOugi part 13 for test, ~100k games).
+- Old tasks 3, 6, 7, 8 → tasks 1, 3, 5, 6. Old task 5 (bot filtering) → folded into task 4. Old task 4 (training sets) → task 4.
