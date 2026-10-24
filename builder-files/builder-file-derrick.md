@@ -58,6 +58,7 @@
 - Research doc passes 1 (maths) and 7 (Showdown protocol + poke-engine); `design/DESIGN.md` is the map.
 
 ## 4. Done log (newest first)
+- ✅ **Feature 11, special requests** (decided by derrick 2026-10-24): type-matchup lead at preview (C), forced switch scored by the main loop (A). `decision/lead.py`, 144 tests, 100% coverage on `derrick` @ `a50936e`. Full-game *Done when* waits on @saliha's parser (task 3). `progress.md` 2026-10-24 19:26.
 - ✅ **Merge `derrick` into `main`**: one clean commit `5e203fc` with the code and contracts only (no shared docs in main's history); 140 tests pass on `main`. Agreed by saliha, nate. `progress.md` 2026-10-24 entries' Where lines updated.
 
 ## 5. Working-style notes for the agent
