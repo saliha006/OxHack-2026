@@ -9,6 +9,7 @@
 ## 0. NOW ★ *(the part every agent reads at session start)*
 
 **Decisions in force** (newest first; one line each, full ADR in the vault Log):
+- 2026-10-24: Elo ladder = option B: our bots + random-move mixes at uneven rates + Foul Play at three uneven search-time bands on top; blind (shuffled schedule, anonymous names, random opponent think time, random team per game); Bradley-Terry Elo (Random = 1000) with ±1–3 neighbour report. Internal ladder Elo only, never a Showdown Elo. (saliha)
 - 2026-10-24: eval mix = B+ (same-team matches with alternating sides; headline vs SimpleHeuristics; data-ladder and uncertainty ablations), built in `bot/eval.py`. (saliha)
 - 2026-10-24: dependencies are added by whoever needs them, with a ⚠️ row to derrick (`pyproject.toml` is his): saliha adds `poke-env==0.16.1` now; `scikit-learn` and `matplotlib` arrive with the tasks that need them. (saliha)
 - 2026-10-24: saliha is happy to build in Rust: she installs the Rust toolchain so `poke-engine` builds on her machine (blocks every `Agent.choose` call there). No Rust hot path of our own for now [P9 D2]. (saliha)
@@ -27,7 +28,6 @@
 - Data storage: plain Parquet + DuckDB recommended over ClickHouse [P9 B4]: nate's call, with saliha and derrick.
 - Learned value model replacing the HP heuristic: derrick's call (logistic first, §7.3).
 - Demo story: whether the coach replay review (§7.6) is added. It's first to cut.
-- Elo ladder eval (saliha, 2026-10-24): opponents from weakest to strong with overlapping sub-levels, an internal Bradley–Terry rating (Random = 1000), and the agent tested 1–3 rungs above and below its rating. Open: where the strong rungs come from (A: our bots only; B: + Foul Play; C: + Metamon).
 - Backtesting frontend: derrick mentioned it; not decided (owner: derrick).
 - Handmade piece: no plan; ask the organisers what counts (event doc §6). Elo-from-decisions: parked.
 

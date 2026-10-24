@@ -63,6 +63,7 @@
 5. 🟡 **Eval harness** (`bot/eval.py`, built 22:33 UTC; final run waits on @nate's team pool + real priors and @derrick's belief fixes)
    - **Built (B+, saliha's pick):** six matches, same team on both sides, sides alternating. Headline full vs SimpleHeuristics 300; data ladder full vs frozen prior 200 and frozen prior vs flat prior 200; 5 scenarios vs 1 200; MaxBasePower 100; Random 30. Add learned vs HP value (200) when derrick's model ships.
    - Shard processes (cores − 2), one line per game in `runs/eval-<match>-<machine>-<shard>.jsonl`, reruns skip finished games, `report` merges all machines' files: Wilson 95% + team bootstrap, fallback rate, worst p99. Eval budget 1.0 s.
+   - **Added 23:10 UTC (saliha's pick B):** blind shuffled schedule, anonymous names, random opponent think time, random team per game; Elo ladder (uneven random-move mixes, our variants, Foul Play at 3 uneven search bands); Bradley-Terry ratings + ±1–3 neighbour report; turn-0 games void. 27 pairings, 1,750 games; first full run started 23:10 UTC on stand-in priors.
    - *Done when:* the merged table is in `progress.md` → 📊 Latest, and the headline interval's lower bound is above 50%.
 6. ⬜ **Record a full live battle** (client + terminal, with Wi-Fi up; 0.5 h, by 04:00 UTC). The local client redirects to `psim.us`, so the live view needs internet [P9 B5].
    - *Done when:* a video of one whole game plus its `runs/*.jsonl` is saved.
