@@ -63,11 +63,19 @@ whenever you log an entry.
 
 ## 📊 Latest (volatile facts live only here)
 - **As of {{YYYY-MM-DD HH:MM}}:** `main` @ `{{sha}}` · tests: {{n}} green, {{x}}% coverage · deploy: {{status, URL}}
-- **On branches, not merged yet:** `derrick`: decision layer `our_actions`, `select`, `simulate`, `our_side` (47 tests, 100% coverage)
+- **On branches, not merged yet:** `derrick`: decision layer `our_actions`, `select`, `simulate`, `our_side`, `value` (59 tests, 100% coverage)
 
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 16:31 — feat — Decision layer: heuristic value + looser selector ties — @derrick
+- **Where:** `derrick` @ `0ca12e4` · merged to `main`: not yet
+- **Did:** `value(state)` scores a position 0–1 (0.5 = even): each Pokémon = alive + HP fraction, ours vs theirs. Same scale as the planned win-probability model. The selector's tie tolerance is now 1e-6, matching poke-engine's 32-bit probabilities. 59 tests, 100% coverage.
+- **Touched:** `decision/value.py`, `decision/selector.py`, `tests/test_value.py`, `tests/test_selector.py`
+- **Brief task:** none (no brief for derrick yet)
+- **⚠️ Conflicts:** none
+- **📨 Needs:** none
 
 ### 2026-10-24 16:23 — feat — Decision layer: our poke-engine side from a Showdown request — @derrick
 - **Where:** `derrick` @ `e6cc855` · merged to `main`: not yet
