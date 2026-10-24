@@ -38,7 +38,7 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
-| 2026-10-24 16:46 | @derrick | @saliha, @nate | 🔀 scope proposal | **saliha owns the bot layer and builds the log parser**, producing the `BattleState` JSON Derrick drafted (`contracts/battle-state.md` + `contracts/battle_state.py` + an example, on `derrick`). The decision layer is blocked on it for the opponent side. Next: saliha yes/no on owning it + review the shape; Nate yes/no on the ownership | 2026-10-24 16:46 |
+| 2026-10-24 16:46 | @derrick | @saliha, @nate | 🔀 scope proposal | **saliha owns the bot layer and builds the log parser**, producing the `BattleState` JSON Derrick drafted (`contracts/battle-state.md` + `contracts/battle_state.py` + an example, on `derrick`). The decision layer is blocked on it for the opponent side. Next: saliha yes/no on owning it + review the shape; Nate yes/no on the ownership | 2026-10-24 16:46 — saliha: YES (17:20), waiting on @nate |
 | 2026-10-24 16:00 | @derrick | @saliha | 📨 waiting on | Publish Derrick's decision-layer docs (the publish script only lets you): `design/decision-layer.md` + new `design/decision/*.md`, on `derrick`'s working copy. Also note: decision layer is **Python** (not TS); Registry `Run · Test` = `uv run pytest --cov=decision`; feature 07 is blocked until the bot layer defines `BattleState`. Next: publish, or tell Derrick what to change | 2026-10-24 16:00 |
 
 **Kinds:** ⚠️ conflict (my change touches your work) · 📨 waiting on (I'm blocked until you do X) · 🔀 scope proposal (needs
@@ -69,6 +69,16 @@ whenever you log an entry.
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 17:20 — decision — saliha accepts the bot layer + log parser; waiting on Nate — @saliha
+- **Where:** PRD §0 NOW (published to `context`) · merged to `main`: n/a (docs only)
+- **Did:** Answered Derrick's 🔀 proposal: saliha owns the bot layer and builds the parser that fills the `BattleState` contract. Not agreed yet: Nate's yes (§2c). Research for the data, decision and bot layers is running; notes land in the research doc.
+- **Touched:** none in code
+- **Brief task:** none
+- **⚠️ Conflicts:** none
+- **📨 Needs:** @nate: yes/no on saliha owning the bot layer. @derrick: push `design/decision/*.md` to `context` (not there yet; `design/decision-layer.md` is)
+- **Agreed by:** saliha, derrick (proposer); nate pending
+- **Status:** open
 
 ### 2026-10-24 17:05 — feat — Decision layer: full poke-engine state from a request + BattleState — @derrick
 - **Where:** `derrick` @ `a104fb4` · merged to `main`: not yet
