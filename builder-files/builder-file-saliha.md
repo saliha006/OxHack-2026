@@ -60,12 +60,9 @@
 4. 🟡 **Decision trace** (`runs/<battle-id>.jsonl`, one line per request; 0.5 h) `[⏸ waits on @derrick: agent.last_trace]`
    - Turn, request kind, `BattleState`, choice, top 3 options with scores, win probability, top sets per opponent Pokémon, think time in ms, fallback flag.
    - *Done when:* every request of a game has a line, and the file reloads into the same `BattleState`s.
-5. ⬜ **Eval harness** (`bot/eval.py`, 3 h; smoke eval vs Random / MaxBasePower by 04:00 UTC) `[⏸ waits on @nate: team pool]`
-   - **Recommended [P9 B3 + critique]:** N shard processes per laptop (cores − 2), each its own `Player` with its own account name, writing `runs/eval-<arm>-<machine>.jsonl` one line per game. Resume from the file after a crash; no reconnect logic. A merge step joins the three laptops' files.
-   - **Headline leg:** team-neutral head-to-head vs `SimpleHeuristicsPlayer`. Both sides get the same pool team, 5 games per team over 60 teams = 300 games. `update_team` between batches.
-   - Other legs: MaxBasePower 150, Random 60, fixed-team vs SimpleHeuristics on pool teams + a mirror leg (a baseline on our team) 200, and an ablation of heuristic vs learned value on the same seeds (300).
-   - Report win rate with a Wilson 95% interval plus a cluster bootstrap by team, p50/p99 think time, fallbacks, crashes. Eval think budget 1.0 s unless derrick's profile says p50 is well under (`[🟠 your call]` with derrick; state it on the data card).
-   - **Rejected:** 100 games per baseline (a true 60% shows only about half the time), and one laptop alone (~7.5 core-hours per 300-game leg at 3 s).
+5. 🟡 **Eval harness** (`bot/eval.py`, built 22:33 UTC; final run waits on @nate's team pool + real priors and @derrick's belief fixes)
+   - **Built (B+, saliha's pick):** six matches, same team on both sides, sides alternating. Headline full vs SimpleHeuristics 300; data ladder full vs frozen prior 200 and frozen prior vs flat prior 200; 5 scenarios vs 1 200; MaxBasePower 100; Random 30. Add learned vs HP value (200) when derrick's model ships.
+   - Shard processes (cores − 2), one line per game in `runs/eval-<match>-<machine>-<shard>.jsonl`, reruns skip finished games, `report` merges all machines' files: Wilson 95% + team bootstrap, fallback rate, worst p99. Eval budget 1.0 s.
    - *Done when:* the merged table is in `progress.md` → 📊 Latest, and the headline interval's lower bound is above 50%.
 6. ⬜ **Record a full live battle** (client + terminal, with Wi-Fi up; 0.5 h, by 04:00 UTC). The local client redirects to `psim.us`, so the live view needs internet [P9 B5].
    - *Done when:* a video of one whole game plus its `runs/*.jsonl` is saved.

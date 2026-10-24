@@ -9,6 +9,7 @@
 ## 0. NOW ★ *(the part every agent reads at session start)*
 
 **Decisions in force** (newest first; one line each, full ADR in the vault Log):
+- 2026-10-24: eval mix = B+ (same-team matches with alternating sides; headline vs SimpleHeuristics; data-ladder and uncertainty ablations), built in `bot/eval.py`. (saliha)
 - 2026-10-24: dependencies are added by whoever needs them, with a ⚠️ row to derrick (`pyproject.toml` is his): saliha adds `poke-env==0.16.1` now; `scikit-learn` and `matplotlib` arrive with the tasks that need them. (saliha)
 - 2026-10-24: saliha is happy to build in Rust: she installs the Rust toolchain so `poke-engine` builds on her machine (blocks every `Agent.choose` call there). No Rust hot path of our own for now [P9 D2]. (saliha)
 - 2026-10-24: one project folder. `context` holds `CLAUDE.md`, this PRD, `builder-files/` and `design-decision/`; `main` holds code, `README.md` and `progress.md`. Research and the event doc stay local and are deleted per feature once it ships. (saliha)
@@ -136,7 +137,7 @@
 - **Why:** against fixed poke-env baselines the LP can't beat argmax-EV; its value is bounded exploitability, shown offline [P9 critique].
 
 ### 7.5 Evaluation statistics
-- **Rule:** headline = team-neutral head-to-head vs `SimpleHeuristicsPlayer` (both sides get the same pool team, 5 games per team over 60 teams = 300 games); Wilson 95% interval plus a cluster bootstrap by team. At 100 games a true 60% win rate is detected only about half the time, so the headline leg gets 300 [P9 B3].
+- **Rule (saliha's B+ design, `bot/eval.py`):** every match puts the same team on both sides and alternates sides, so it measures play, not teams. Headline: full agent vs `SimpleHeuristicsPlayer`, 300 games. Data ladder: full vs frozen-prior belief (200), frozen prior vs flat prior (200), which tests the value of in-battle updating and of usage data. Uncertainty: 5 scenarios vs 1 (200). Sanity: MaxBasePower 100, Random 30. Learned vs HP value (200) if the model ships. Wilson 95% plus a team bootstrap. At 100 games a true 60% shows only about half the time [P9 B3]; a 200-game match detects roughly 10-point differences.
 
 ### 7.6 Coach review (stretch, first to cut)
 - **Rule:** regret per turn = value of the best action minus value of the played action, on the expected next state, in win-probability points. Reviews the **baseline's** turns in our eval games (our own bot's regret is zero by construction) [P9 critique].
@@ -231,7 +232,7 @@ eval: N shard processes per laptop (cores − 2), one blocking Agent per battle,
 | Live turn latency | ≤3 s per decision, never a timeout loss | trace think time; eval p50 / p99 |
 | Eval turn latency | 1.0 s think budget (proposed; stated on the data card) | eval p99 |
 | Reliability | 0 stalls; fallback rate ≤ a few percent of turns | fallback counter per game (FR-4) |
-| Eval size | ≥300 games on the headline leg; ~1,200 planned in total | merged eval file |
+| Eval size | 300 games on the headline match; ~1,030 in total (~1,230 with the learned-value match) | merged eval file |
 | Resource limits | one laptop: cores − 2 shards; eval sharded across 3 laptops | `nproc`, run logs |
 | Restart | a killed eval loses only the battles in flight | kill test on the harness |
 | Privacy / retention | public pseudonymised replays only; nothing personal stored | data card |
@@ -275,10 +276,11 @@ eval: N shard processes per laptop (cores − 2), one blocking Agent per battle,
 
 | Question | Evidence | Target |
 |---|---|---|
-| Does the agent beat the baseline? | Team-neutral head-to-head vs `SimpleHeuristicsPlayer`, 300 games (60 pool teams × 5), Wilson 95% + cluster bootstrap by team; plus MaxBasePower 150, Random 60, fixed-team + mirror 200 | lower bound above 50% vs SimpleHeuristics |
+| Does the agent beat the baseline? | Same-team head-to-head vs `SimpleHeuristicsPlayer`, 300 games, Wilson 95% + team bootstrap; plus MaxBasePower 100, Random 30 | lower bound above 50% vs SimpleHeuristics |
+| Do the predictions improve decisions? | Data ladder, 200 games each: full vs frozen-prior belief; frozen prior vs flat prior. Uncertainty: 5 scenarios vs 1 | reported either way, with intervals |
 | Are its win probabilities honest? | Log loss, Brier and a reliability diagram on games after 2026-05-19, split by battle, time and player; bootstrap by battle | better than the HP heuristic and the constant |
 | Is the belief better than the prior? | Next-reveal log loss vs the prior and vs hard-filter-only, on held-out reveals and on our eval games (true sets known) | below the prior |
-| Does the learned value change decisions? | Ablation: heuristic vs learned value, same seeds, 300 games | reported either way, with its interval |
+| Does the learned value change decisions? | Learned vs HP value, head-to-head, 200 games (if the model ships) | reported either way, with its interval |
 | Is the agent safe to run? | Fallback rate, p50 / p99 think time, stalls | §13 targets |
 
 | Judging criterion | Where we prove it (§ / demo beat) |
@@ -312,7 +314,7 @@ eval: N shard processes per laptop (cores − 2), one blocking Agent per battle,
 | Sun 10:00 | Feature freeze; charts and data card final |
 | Sun before 12:00 | **Submit** on Devpost with the GitHub link |
 
-**Cut order (first → last):** 1. coach review · 2. MCTS arm · 3. LP A/B (keep offline exploitability) · 4. mirror leg · 5. MaxBasePower leg size · 6. gradient boosting (ship logistic) · 7. the second chart
+**Cut order (first → last):** 1. coach review · 2. MCTS arm · 3. LP A/B (keep offline exploitability) · 4. uncertainty match · 5. MaxBasePower size · 6. gradient boosting (ship logistic) · 7. the second chart
 **Never cut:** bot working with fallback and logging; head-to-head vs SimpleHeuristics with Wilson; a calibrated, held-out, baselined prediction (logistic at least); the belief floor; the recorded demo video; the honest-limits close.
 
 ## 20. Risks ★
