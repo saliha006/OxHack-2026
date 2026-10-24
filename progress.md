@@ -66,11 +66,20 @@ whenever you log an entry.
 
 ## 📊 Latest (volatile facts live only here)
 - **As of {{YYYY-MM-DD HH:MM}}:** `main` @ `{{sha}}` · tests: {{n}} green, {{x}}% coverage · deploy: {{status, URL}}
-- **On branches, not merged yet:** `derrick`: decision layer `our_actions`, `select`, `simulate`, `our_side`, `value`, `build_state`, `opp_actions`, `Belief` with reweight (126 tests, 100% coverage)
+- **On branches, not merged yet:** `derrick`: decision layer `our_actions`, `select`, `simulate`, `our_side`, `value`, `build_state`, `opp_actions`, `Belief` with reweight, `Agent` turn loop (135 tests, 100% coverage)
 
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 18:40 — feat — Decision layer: the turn loop runs end to end — @derrick
+- **Where:** `derrick` @ `640216c` · merged to `main`: not yet
+- **Did:** `Agent(priors).choose(request, battle)` turns a Showdown request + BattleState into a choice string, running belief → 5 scenarios → build_state → both sides' actions → simulate → value → select. Selector now takes the opponent's odds per set. Team preview and forced switches have stand-ins until feature 11. A full move decision takes well under a second in tests. 135 tests, 100% coverage.
+- **Touched:** `decision/agent.py`, `decision/selector.py`, `tests/test_agent.py`, `tests/test_selector.py`
+- **Brief task:** none new (the core loop is task 1, already ✅; belief task 4 still 🟡)
+- **⚠️ Conflicts:** @saliha: the bot's whole hook into the decision layer is one call per request: `agent.choose(request_dict, battle_state) -> "move 2" | "switch 4" | "team 123456" | None` (None on a wait), with one `Agent(priors)` per battle
+- **📨 Needs:** none new
+- **Status:** open (the note to @saliha)
 
 ### 2026-10-24 18:32 — docs — BattleState contract: last_move reset and Event.source spellings written in — @derrick
 - **Where:** `derrick` @ `eb56c61` · merged to `main`: not yet
