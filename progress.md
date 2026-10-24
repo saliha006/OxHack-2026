@@ -38,6 +38,8 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
+| 2026-10-24 20:36 | @saliha | @derrick | ⚠️ conflict | The parser is on `main`: `from bot.parser import Parser, states_from_log`. `Parser(us).feed(line)` per protocol line, `.snapshot()` per request. Unblocks your task 3 (build_state on a parser-made BattleState) | 2026-10-24 20:36 |
+| 2026-10-24 20:36 | @saliha | @nate | ⚠️ conflict | The parser is on `main`: `states_from_log(log_lines, us)` gives one `BattleState` per turn of a saved replay, for your (state, winner) pairs | 2026-10-24 20:36 |
 | 2026-10-24 20:15 | @saliha | @derrick | 📨 waiting on | New tasks 6–9 in your brief (trace, turn-time profile, win-probability model, maximin LP); the model and LP are your calls. The bot will need `poke-env==0.16.1` in your `pyproject.toml`: OK to add? | 2026-10-24 20:15 |
 | 2026-10-24 20:15 | @saliha | @nate | 📨 waiting on | New tasks 6–8 in your brief: seeded gen9ou team pool (~60 validated teams), eval and demo charts, data card. Training states should come from saliha's parser | 2026-10-24 20:15 |
 | 2026-10-24 19:26 | @derrick | @saliha | 📨 waiting on | Publish from `origin/derrick` @ `a50936e`: `design/decision/11-special-requests.md` + the §7 tick in `design/decision-layer.md`; mirror the two feature 11 decisions in PRD → NOW. (Brief line and publish-script issue resolved by @derrick 2026-10-24 19:40: published with the plain-git steps, `context` @ `79d6713`) | 2026-10-24 19:26 |
@@ -68,12 +70,21 @@ whenever you log an entry.
 4. {{Access to the deploy target, data and secrets: where each lives. Never in git or chat}}
 
 ## 📊 Latest (volatile facts live only here)
-- **As of 2026-10-24 19:00:** `main` @ `5e203fc` · tests: 140 green, 100% coverage (`uv run pytest --cov=decision`) · deploy: none yet
+- **As of 2026-10-24 20:36:** `main` @ `c25be7e` · tests: decision 140 green, 100% coverage (`uv run pytest --cov=decision`); bot 25 green, 100% coverage (`uv run pytest bot/tests --cov=bot`) · deploy: none yet
 - **On branches, not merged yet:** @derrick `derrick` @ `a50936e`: feature 11 (type-matchup lead), 144 tests green, 100% coverage
 
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 20:36 — feat — Bot layer: log parser to BattleState — @saliha
+- **Where:** `sali` @ `c25be7e` · merged to `main`: yes (fast-forward)
+- **Did:** `bot/parser.py` turns Showdown protocol lines into the contract's `BattleState`. It's pure, so live battles and saved replays use the same code. Replay `gen9ou-2703852247` turn 2 equals `contracts/examples/battle_state_turn2.json`; 20 recent public gen9ou games (383–457 turns) parse with no skipped line. 25 tests, 100% coverage on `bot/`.
+- **Touched:** `bot/__init__.py`, `bot/parser.py`, `bot/tests/test_parser.py`, `bot/tests/fixtures/gen9ou-2703852247.log`
+- **Brief task:** saliha task 3 ✅
+- **⚠️ Conflicts:** @derrick, @nate: new shared entry point (Open board rows). No contract field changed meaning
+- **📨 Needs:** none
+- **Status:** open (the notes to @derrick, @nate)
 
 ### 2026-10-24 20:15 — decision — Bot runs on poke-env, gen9ou, local server; all three briefs get the demo plan — @saliha
 - **Where:** `context` @ `538549d` · merged to `main`: n/a (docs branch)
