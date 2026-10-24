@@ -18,20 +18,35 @@ from bot.player import AgentPlayer
 from decision.agent import Agent
 
 
-def priors_from_team(team: str) -> dict:
-    """One exact set per species of a team. In a mirror match it tells belief the truth, so it tests plumbing, not play."""
+def priors_from_teams(teams: list[str]) -> dict:
+    """Stand-in priors: every set a species runs across the teams, weighted by how often it appears.
+
+    In a mirror match on one team it tells belief the truth, so a single team tests plumbing, not play.
+    """
+    counts: dict[str, dict[str, tuple[dict, int]]] = {}
+    for team in teams:
+        for mon in Teambuilder.parse_showdown_team(team):
+            moves = [to_id(m) for m in mon.moves]
+            candidate = {"moves": moves, "item": to_id(mon.item), "ability": to_id(mon.ability),
+                         "tera_type": mon.tera_type.lower(), "spread": {"nature": to_id(mon.nature), "evs": list(mon.evs)}}
+            sets = counts.setdefault(to_id(mon.species or mon.nickname), {})
+            key = json.dumps(candidate, sort_keys=True)
+            sets[key] = (candidate, sets.get(key, (candidate, 0))[1] + 1)
     species = {}
-    for mon in Teambuilder.parse_showdown_team(team):
-        moves = [to_id(m) for m in mon.moves]
-        spread = {"nature": to_id(mon.nature), "evs": list(mon.evs)}
-        species[to_id(mon.species or mon.nickname)] = {
-            "sets": [{"weight": 1.0, "moves": moves, "item": to_id(mon.item), "ability": to_id(mon.ability),
-                      "tera_type": mon.tera_type.lower(), "spread": spread}],
-            "usage": {"moves": dict.fromkeys(moves, 1.0), "items": {to_id(mon.item): 1.0},
-                      "abilities": {to_id(mon.ability): 1.0}, "tera_types": {mon.tera_type.lower(): 1.0},
-                      "spreads": [(spread, 1.0)]},
+    for name, sets in counts.items():
+        total = sum(n for _, n in sets.values())
+        ranked = sorted(sets.values(), key=lambda cn: -cn[1])
+        share = lambda pick: {k: round(sum(n for c, n in ranked if pick(c) == k) / total, 3) for k in {pick(c) for c, _ in ranked}}
+        moves: dict[str, float] = {}
+        for c, n in ranked:
+            for m in c["moves"]:
+                moves[m] = moves.get(m, 0) + n / total
+        species[name] = {
+            "sets": [{"weight": n / total, **c} for c, n in ranked],
+            "usage": {"moves": moves, "items": share(lambda c: c["item"]), "abilities": share(lambda c: c["ability"]),
+                      "tera_types": share(lambda c: c["tera_type"]), "spreads": [(c["spread"], n / total) for c, n in ranked]},
         }
-    return {"source": {"format": "gen9ou", "month": "team", "cutoff": 0, "battles": 0}, "species": species}
+    return {"source": {"format": "gen9ou", "month": "teams", "cutoff": 0, "battles": 0}, "species": species}
 
 
 def run(games: int, team: str, priors: dict, budget: float, runs_dir: str) -> list[dict]:
@@ -63,8 +78,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.WARNING, format="%(levelname)s %(name)s: %(message)s")
 
-    team = Path(args.team).read_text(encoding="utf-8")
-    priors = priors_from_team(team) if args.priors_from_team else json.loads(Path(args.priors).read_text(encoding="utf-8"))
+    team = Path(args.team).read_text(encoding="utf-8").strip()
+    priors = priors_from_teams([team]) if args.priors_from_team else json.loads(Path(args.priors).read_text(encoding="utf-8"))
     summaries = run(args.games, team, priors, args.budget, args.runs)
 
     for s in summaries:

@@ -1,7 +1,7 @@
-"""Evaluation harness: our agent and its ablations against baselines and each other, sharded and resumable.
+"""Evaluation harness: our agent and its ablations against baselines and each other, blind, sharded and resumable.
 
-    uv run python -m bot.eval run --shards 6            # every match, skipping games already in runs/
-    uv run python -m bot.eval run --matches headline --games 20
+    uv run python -m bot.eval run --shards 6            # every pairing, skipping games already in runs/eval/
+    uv run python -m bot.eval run --pairings headline --games 20
     uv run python -m bot.eval report                    # merge every machine's files into one table
 """
 import argparse
@@ -21,7 +21,7 @@ from poke_env import AccountConfiguration
 from poke_env.player import MaxBasePowerPlayer, RandomPlayer, SimpleHeuristicsPlayer
 
 from bot.player import AgentPlayer
-from bot.smoke import priors_from_team
+from bot.smoke import priors_from_teams
 from decision.agent import Agent
 from decision.belief import Belief
 
@@ -63,6 +63,17 @@ class AblatedAgent(Agent):
         return super().choose(request, battle)
 
 
+class Jitter:
+    """Mixin: waits a random, right-skewed time before each move, so opponents don't all answer instantly."""
+
+    jitter_rng: random.Random
+
+    async def choose_move(self, battle):
+        # Median 0.25 s with a long tail, capped well inside Showdown's per-turn timer.
+        await asyncio.sleep(min(self.jitter_rng.lognormvariate(math.log(0.25), 1.0), 3.0))
+        return super().choose_move(battle)
+
+
 ARMS = {
     "full": lambda priors, budget: Agent(priors, budget=budget),
     "prior": lambda priors, budget: AblatedAgent(priors, FrozenBelief, budget=budget),
@@ -71,8 +82,8 @@ ARMS = {
 }
 BASELINES = {"simpleheuristics": SimpleHeuristicsPlayer, "maxbasepower": MaxBasePowerPlayer, "random": RandomPlayer}
 
-# match -> (our arm, opponent arm or baseline, games). Same team on both sides, so the result measures play, not teams.
-MATCHES = {
+# pairing -> (side a, side b, games); results are from a's point of view, and b is the jittered opponent.
+PAIRINGS = {
     "headline": ("full", "simpleheuristics", 300),
     "updating": ("full", "prior", 200),
     "usage": ("prior", "flat", 200),
@@ -82,47 +93,75 @@ MATCHES = {
 }
 
 
-def done_games(runs: Path, match: str) -> set[int]:
-    done = set()
-    for path in runs.glob(f"eval-{match}-*.jsonl"):
-        for line in path.read_text(encoding="utf-8").splitlines():
-            done.add(json.loads(line)["game"])
-    return done
+def make_player(name: str, jittered: bool, priors: dict, budget: float, runs: str, team: str, rng: random.Random):
+    # A random account name, so nothing in the battle tells either side what it's playing.
+    config = dict(account_configuration=AccountConfiguration(f"ox{rng.getrandbits(32):08x}", None),
+                  battle_format="gen9ou", team=team)
+    if name in ARMS:
+        cls, extra = AgentPlayer, {"make_agent": lambda: ARMS[name](priors, budget), "runs_dir": runs,
+                                   "start_timer_on_battle_start": True}
+    else:
+        cls, extra = BASELINES[name], {}
+    if jittered:
+        cls = type(f"Jittered{cls.__name__}", (Jitter, cls), {})
+    player = cls(**extra, **config)
+    if jittered:
+        player.jitter_rng = random.Random(rng.random())
+    return player
 
 
-def shard_games(games: int, shards: int, done: set[int]) -> list[list[int]]:
-    todo = [g for g in range(games) if g not in done]
+def done_games(runs: Path) -> set[tuple[str, int]]:
+    return {(r["pairing"], r["game"]) for r in read_results(runs)}
+
+
+def read_results(runs: Path) -> list[dict]:
+    return [json.loads(line) for path in sorted((runs / "eval").glob("*.jsonl"))
+            for line in path.read_text(encoding="utf-8").splitlines()]
+
+
+def schedule(pairings: dict[str, int], shards: int, done: set[tuple[str, int]], seed: int) -> list[list[tuple[str, int]]]:
+    """Every unplayed (pairing, game), shuffled together, so no shard plays one opponent in a predictable run."""
+    todo = [(p, g) for p, games in pairings.items() for g in range(games) if (p, g) not in done]
+    random.Random(seed).shuffle(todo)
     return [todo[s::shards] for s in range(shards) if todo[s::shards]]
 
 
-def play_shard(match: str, game_ids: list[int], teams: list[str], priors: dict, budget: float,
-               runs: str, machine: str, shard: int) -> None:
+def game_rng(seed: int, pairing: str, game: int) -> random.Random:
+    # Seeded per game, so a resumed or re-sharded run gives each game the same team and side.
+    return random.Random(f"{seed}:{pairing}:{game}")
+
+
+def play_shard(games: list[tuple[str, int]], teams: list[str], priors: dict, budget: float, runs: str,
+               machine: str, shard: int, seed: int) -> None:
     """One process: plays its games one at a time and appends a result line per game, so a crash loses one game."""
     logging.basicConfig(level=logging.WARNING, format="%(levelname)s %(name)s: %(message)s")
-    ours_arm, theirs_name, _ = MATCHES[match]
-    tag = f"{match[:6]}{shard}"
-    ours = AgentPlayer(make_agent=lambda: ARMS[ours_arm](priors, budget), runs_dir=runs,
-                       account_configuration=AccountConfiguration(f"ox {tag} a", None), battle_format="gen9ou",
-                       team=teams[0], start_timer_on_battle_start=True)
-    opponent_config = dict(account_configuration=AccountConfiguration(f"ox {tag} b", None), battle_format="gen9ou",
-                           team=teams[0])
-    if theirs_name in ARMS:
-        theirs = AgentPlayer(make_agent=lambda: ARMS[theirs_name](priors, budget), runs_dir=runs, **opponent_config)
-    else:
-        theirs = BASELINES[theirs_name](**opponent_config)
-
-    out = Path(runs) / f"eval-{match}-{machine}-{shard}.jsonl"
+    rng = random.Random(f"{seed}:{machine}:{shard}")
+    players = {}
+    out = Path(runs) / "eval" / f"{machine}-{shard}.jsonl"
+    out.parent.mkdir(parents=True, exist_ok=True)
     with open(out, "a", encoding="utf-8", buffering=1) as results:
-        for g in game_ids:
-            team = g % len(teams)
-            ours.update_team(teams[team])
-            theirs.update_team(teams[team])
-            # Alternating who challenges alternates p1 and p2.
-            first, second = (ours, theirs) if g % 2 == 0 else (theirs, ours)
+        for pairing, g in games:
+            a_name, b_name, _ = PAIRINGS[pairing]
+            for role, name in (("a", a_name), ("b", b_name)):
+                if (role, name) not in players:
+                    players[role, name] = make_player(name, role == "b", priors, budget, runs, teams[0], rng)
+            a, b = players["a", a_name], players["b", b_name]
+            pick = game_rng(seed, pairing, g)
+            team = pick.randrange(len(teams))
+            a.update_team(teams[team])
+            b.update_team(teams[team])
+            # Whoever challenges gets p1; a coin flip keeps sides balanced without a pattern.
+            first, second = (a, b) if pick.random() < 0.5 else (b, a)
             asyncio.run(first.battle_against(second, n_battles=1))
-            s = ours.summaries[-1]
-            winner = "tie" if s["won"] is None else ("ours" if s["won"] else "theirs")
-            results.write(json.dumps({"match": match, "game": g, "team": team, "winner": winner, **s}) + "\n")
+            battle = list(a.battles.values())[-1]
+            winner = "tie" if battle.won is None else ("a" if battle.won else "b")
+            line = {"pairing": pairing, "game": g, "a": a_name, "b": b_name, "team": team, "side": battle.player_role,
+                    "winner": winner, "turns": battle.turn, "battle": battle.battle_tag}
+            if isinstance(a, AgentPlayer):
+                s = a.summaries[-1]
+                line.update(decisions=s["decisions"], fallbacks=s["fallbacks"],
+                            think_p50_ms=s["think_p50_ms"], think_p99_ms=s["think_p99_ms"])
+            results.write(json.dumps(line) + "\n")
 
 
 def wilson(wins: float, n: int, z: float = 1.96) -> tuple[float, float]:
@@ -132,6 +171,10 @@ def wilson(wins: float, n: int, z: float = 1.96) -> tuple[float, float]:
     centre = (p + z * z / (2 * n)) / (1 + z * z / n)
     half = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / (1 + z * z / n)
     return (centre - half, centre + half)
+
+
+def score(row: dict) -> float:
+    return {"a": 1.0, "tie": 0.5, "b": 0.0}[row["winner"]]
 
 
 def team_bootstrap(rows: list[dict], draws: int = 2000, seed: int = 0) -> tuple[float, float]:
@@ -149,26 +192,21 @@ def team_bootstrap(rows: list[dict], draws: int = 2000, seed: int = 0) -> tuple[
     return (rates[int(0.025 * draws)], rates[int(0.975 * draws) - 1])
 
 
-def score(row: dict) -> float:
-    return {"ours": 1.0, "tie": 0.5, "theirs": 0.0}[row["winner"]]
-
-
-def report(runs: Path) -> dict:
+def report(rows: list[dict]) -> dict:
     table = {}
-    for match, (ours, theirs, planned) in MATCHES.items():
-        rows = [json.loads(line) for path in sorted(runs.glob(f"eval-{match}-*.jsonl"))
-                for line in path.read_text(encoding="utf-8").splitlines()]
-        if not rows:
+    for pairing, (a, b, planned) in PAIRINGS.items():
+        mine = [r for r in rows if r["pairing"] == pairing]
+        if not mine:
             continue
-        n = len(rows)
-        wins = sum(map(score, rows))
-        decisions = sum(r["decisions"] for r in rows)
-        p99s = sorted(r["think_p99_ms"] for r in rows if r["think_p99_ms"] is not None)
-        table[match] = {
-            "ours": ours, "theirs": theirs, "games": n, "planned": planned, "win_rate": wins / n,
-            "wilson_95": wilson(wins, n), "team_bootstrap_95": team_bootstrap(rows),
-            "teams": len({r["team"] for r in rows}),
-            "fallback_rate": sum(r["fallbacks"] for r in rows) / decisions if decisions else None,
+        n = len(mine)
+        wins = sum(map(score, mine))
+        decisions = sum(r.get("decisions", 0) for r in mine)
+        p99s = sorted(r["think_p99_ms"] for r in mine if r.get("think_p99_ms") is not None)
+        table[pairing] = {
+            "a": a, "b": b, "games": n, "planned": planned, "win_rate": wins / n,
+            "wilson_95": wilson(wins, n), "team_bootstrap_95": team_bootstrap(mine),
+            "teams": len({r["team"] for r in mine}),
+            "fallback_rate": sum(r.get("fallbacks", 0) for r in mine) / decisions if decisions else None,
             "worst_game_p99_ms": p99s[-1] if p99s else None,
         }
     return table
@@ -176,23 +214,26 @@ def report(runs: Path) -> dict:
 
 def load_teams(path: Path) -> list[str]:
     files = sorted(path.iterdir()) if path.is_dir() else [path]
-    return [f.read_text(encoding="utf-8") for f in files if f.is_file()]
+    # Trailing blank lines make poke-env parse an empty seventh Pokémon, which breaks priors and team packing.
+    return [f.read_text(encoding="utf-8").strip() for f in files if f.is_file()]
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = parser.add_subparsers(dest="command", required=True)
     run = sub.add_parser("run")
-    run.add_argument("--matches", nargs="+", default=list(MATCHES), choices=list(MATCHES))
-    run.add_argument("--games", type=int, help="override every match's planned game count")
-    # Until the data layer's pool exists, every game uses the one stand-in team.
-    run.add_argument("--teams", default="bot/teams/standin-gen9ou.txt", help="a team file or a folder of them")
+    run.add_argument("--pairings", nargs="+", default=list(PAIRINGS), choices=list(PAIRINGS))
+    run.add_argument("--games", type=int, help="override every pairing's planned game count")
+    # Until the data layer's pool exists, games draw from the 11 validated stand-in teams.
+    run.add_argument("--teams", default="bot/teams/standin", help="a team file or a folder of them")
     run.add_argument("--priors", default="data/set_candidates.json")
-    run.add_argument("--priors-from-team", action="store_true", help="test only: priors = the first team's exact sets")
+    run.add_argument("--priors-from-teams", action="store_true",
+                     help="stand-in: priors = every set across the teams, weighted by how often it appears")
     # Measured think time is ~65 ms at p50, so 1 s rarely binds and lets six shards share a laptop.
     run.add_argument("--budget", type=float, default=1.0)
     run.add_argument("--shards", type=int, default=max(1, (os.cpu_count() or 4) - 2))
     run.add_argument("--machine", default=platform.node().lower() or "local")
+    run.add_argument("--seed", type=int, default=2026)
     sub.add_parser("report")
     parser.add_argument("--runs", default="runs")
     args = parser.parse_args(argv)
@@ -200,24 +241,23 @@ def main(argv: list[str] | None = None) -> int:
     runs.mkdir(parents=True, exist_ok=True)
 
     if args.command == "report":
-        table = report(runs)
+        table = report(read_results(runs))
         (runs / "eval-summary.json").write_text(json.dumps(table, indent=2), encoding="utf-8")
-        for match, r in table.items():
+        for pairing, r in table.items():
             lo, hi = r["wilson_95"]
             blo, bhi = r["team_bootstrap_95"]
-            print(f"{match:13} {r['ours']} vs {r['theirs']}: {r['win_rate']:.1%} over {r['games']}/{r['planned']} games "
-                  f"(Wilson {lo:.1%}-{hi:.1%}, team bootstrap {blo:.1%}-{bhi:.1%}, {r['teams']} teams), "
-                  f"fallbacks {r['fallback_rate']:.1%}")
+            fallbacks = "n/a" if r["fallback_rate"] is None else f"{r['fallback_rate']:.1%}"
+            print(f"{pairing:13} {r['a']} vs {r['b']}: {r['win_rate']:.1%} over {r['games']}/{r['planned']} games "
+                  f"(Wilson {lo:.1%}-{hi:.1%}, team bootstrap {blo:.1%}-{bhi:.1%}, {r['teams']} teams), fallbacks {fallbacks}")
         return 0
 
     teams = load_teams(Path(args.teams))
-    priors = priors_from_team(teams[0]) if args.priors_from_team else json.loads(Path(args.priors).read_text(encoding="utf-8"))
-    with ProcessPoolExecutor(max_workers=args.shards) as pool:
-        jobs = []
-        for match in args.matches:
-            games = args.games or MATCHES[match][2]
-            for shard, ids in enumerate(shard_games(games, args.shards, done_games(runs, match))):
-                jobs.append(pool.submit(play_shard, match, ids, teams, priors, args.budget, str(runs), args.machine, shard))
+    priors = priors_from_teams(teams) if args.priors_from_teams else json.loads(Path(args.priors).read_text(encoding="utf-8"))
+    planned = {p: args.games or PAIRINGS[p][2] for p in args.pairings}
+    shards = schedule(planned, args.shards, done_games(runs), args.seed)
+    with ProcessPoolExecutor(max_workers=max(1, len(shards))) as pool:
+        jobs = [pool.submit(play_shard, games, teams, priors, args.budget, str(runs), args.machine, s, args.seed)
+                for s, games in enumerate(shards)]
         for job in jobs:
             job.result()
     return 0

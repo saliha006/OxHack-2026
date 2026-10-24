@@ -8,8 +8,8 @@ from contracts.set_candidates import SetCandidates
 TEAM = (Path(__file__).parent.parent / "teams" / "standin-gen9ou.txt").read_text(encoding="utf-8")
 
 
-def test_priors_from_team_give_each_species_its_exact_set():
-    priors: SetCandidates = smoke.priors_from_team(TEAM)
+def test_priors_from_one_team_give_each_species_its_exact_set():
+    priors: SetCandidates = smoke.priors_from_teams([TEAM])
     assert list(priors["species"]) == ["zapdos", "hydrapple", "zamazenta", "slowkinggalar", "tinkaton", "tinglu"]
     zapdos = priors["species"]["zapdos"]
     assert zapdos["sets"] == [{"weight": 1.0, "moves": ["hurricane", "weatherball", "voltswitch", "roost"],
@@ -42,3 +42,13 @@ def test_main_can_build_priors_from_the_team(monkeypatch):
     monkeypatch.setattr(smoke, "run", lambda *args: calls.append(args) or [game()])
     assert smoke.main(["--games", "1", "--priors-from-team", "--budget", "1.0"]) == 0
     assert "zapdos" in calls[0][2]["species"] and calls[0][3] == 1.0
+
+
+def test_priors_from_several_teams_weigh_each_set_by_how_often_it_appears():
+    other_zapdos = TEAM.replace("- Roost", "- Discharge", 1)
+    priors = smoke.priors_from_teams([TEAM, TEAM, other_zapdos])
+    zapdos = priors["species"]["zapdos"]
+    assert [round(s["weight"], 3) for s in zapdos["sets"]] == [0.667, 0.333]
+    assert zapdos["sets"][1]["moves"] == ["hurricane", "weatherball", "voltswitch", "discharge"]
+    assert round(zapdos["usage"]["moves"]["roost"], 3) == 0.667 and zapdos["usage"]["moves"]["hurricane"] == 1.0
+    assert priors["species"]["tinglu"]["sets"][0]["weight"] == 1.0
