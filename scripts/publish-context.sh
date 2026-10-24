@@ -25,15 +25,17 @@ builder=$(printf '%s' "$builder" | tr '[:upper:]' '[:lower:]')
 owner=$(sed -n 's/^| Doc owner | *\**\([A-Za-z0-9_.-]*\).*/\1/p' CLAUDE.md 2>/dev/null | head -n1 | tr '[:upper:]' '[:lower:]')
 research=$(sed -n 's/^| Research doc | *`\([^`{]*\)`.*/\1/p' CLAUDE.md 2>/dev/null | head -n1)
 
+# Candidates are context paths. .claude/ never leaves this machine, so the local .claude/skills/ is published as skills/
+local_of() { case "$1" in skills/*) printf '.claude/%s\n' "$1" ;; *) printf '%s\n' "$1" ;; esac; }
 list_candidates() {
   { git ls-tree -r --name-only origin/context 2>/dev/null
-    ls CLAUDE.md AGENTS.md ./*-PRD.md builder-file-*.md ./*-CONTEXT.md 2>/dev/null | sed 's#^\./##'
+    ls CLAUDE.md AGENTS.md ./*-PRD.md builder-files/builder-file-*.md ./*-CONTEXT.md 2>/dev/null | sed 's#^\./##'
     [ -n "$research" ] && printf '%s\n' "$research"
-    find .claude/skills -type f 2>/dev/null
-    [ $# -gt 0 ] && printf '%s\n' "$@"; } | grep -v -x -e progress.md -e README.md | sort -u || true
+    find .claude/skills -type f -not -path '*/__pycache__/*' 2>/dev/null | sed 's#^\.claude/##'
+    [ $# -gt 0 ] && printf '%s\n' "$@"; } | grep -v -x -e progress.md -e README.md | grep -v '^\.claude/' | sort -u || true
 }
 may_publish() {
-  [ -z "$owner" ] || [ "$builder" = "$owner" ] || [ "$1" = "builder-file-$builder.md" ] || [ "$1" = "$research" ]
+  [ -z "$owner" ] || [ "$builder" = "$owner" ] || [ "$1" = "builder-files/builder-file-$builder.md" ] || [ "$1" = "$research" ]
 }
 # matches the shape of a secret, never a fragment of a real one: this script is public
 looks_secret() {
@@ -48,12 +50,13 @@ if ! git fetch -q origin context 2>/dev/null; then
   fi
   [ -z "$owner" ] || [ "$builder" = "$owner" ] || { echo "publish refused: only the doc owner (@$owner) creates the context branch" >&2; exit 1; }
   docs=()
-  while IFS= read -r f; do [ -f "$f" ] && docs+=("$f"); done <<< "$(list_candidates "$@")"
+  while IFS= read -r f; do [ -f "$(local_of "$f")" ] && docs+=("$f"); done <<< "$(list_candidates "$@")"
   [ ${#docs[@]} -gt 0 ] || { echo "publish refused: no shared docs on disk to start the context branch with" >&2; exit 1; }
-  if looks_secret "${docs[@]}"; then echo "publish refused: a file above looks like it contains a credential" >&2; exit 1; fi
+  mapfile -t paths < <(for f in "${docs[@]}"; do local_of "$f"; done)
+  if looks_secret "${paths[@]}"; then echo "publish refused: a file above looks like it contains a credential" >&2; exit 1; fi
   export GIT_INDEX_FILE="$gitdir/context-index"
   rm -f "$GIT_INDEX_FILE"
-  for f in "${docs[@]}"; do git update-index --add --cacheinfo "100644,$(git hash-object -w "$f"),$f"; done
+  for f in "${docs[@]}"; do git update-index --add --cacheinfo "100644,$(git hash-object -w "$(local_of "$f")"),$f"; done
   commit=$(git commit-tree "$(git write-tree)" -m "$msg")
   rm -f "$GIT_INDEX_FILE"
   unset GIT_INDEX_FILE
@@ -75,8 +78,9 @@ blob() { git rev-parse -q --verify "$1:$2" 2>/dev/null || echo none; }
 changed=()
 conflicts=()
 while IFS= read -r f; do
-  [ -f "$f" ] || continue
-  mine=$(git hash-object "$f"); base=$(blob "$synced" "$f"); remote=$(blob "$parent" "$f")
+  lf=$(local_of "$f")
+  [ -f "$lf" ] || continue
+  mine=$(git hash-object "$lf"); base=$(blob "$synced" "$f"); remote=$(blob "$parent" "$f")
   if [ "$mine" = "$base" ] || [ "$mine" = "$remote" ]; then continue; fi
   if [ "$remote" != "$base" ]; then conflicts+=("$f"); else changed+=("$f"); fi
 done <<< "$(list_candidates "$@")"
@@ -97,7 +101,8 @@ for f in "${changed[@]}"; do
     exit 1
   fi
 done
-if looks_secret "${changed[@]}"; then
+mapfile -t paths < <(for f in "${changed[@]}"; do local_of "$f"; done)
+if looks_secret "${paths[@]}"; then
   echo "publish refused: a file above looks like it contains a credential" >&2
   exit 1
 fi
@@ -106,7 +111,7 @@ export GIT_INDEX_FILE="$gitdir/context-index"
 rm -f "$GIT_INDEX_FILE"
 git read-tree "$parent"
 for f in "${changed[@]}"; do
-  git update-index --add --cacheinfo "100644,$(git hash-object -w "$f"),$f"
+  git update-index --add --cacheinfo "100644,$(git hash-object -w "$(local_of "$f")"),$f"
 done
 tree=$(git write-tree)
 rm -f "$GIT_INDEX_FILE"
@@ -117,9 +122,10 @@ git push -q origin "$commit:refs/heads/context"
 # teammates' newer copies replace yours, so the stamp below matches the disk and the next publish sees only real edits
 while IFS= read -r f; do
   latest=$(git rev-parse "$commit:$f")
-  if [ ! -f "$f" ] || [ "$(git hash-object "$f")" != "$latest" ]; then
-    mkdir -p "$(dirname "$f")"
-    git cat-file blob "$latest" > "$f"
+  lf=$(local_of "$f")
+  if [ ! -f "$lf" ] || [ "$(git hash-object "$lf")" != "$latest" ]; then
+    mkdir -p "$(dirname "$lf")"
+    git cat-file blob "$latest" > "$lf"
   fi
 done < <(git diff --name-only --diff-filter=d "$synced" "$commit")
 echo "$commit" > "$gitdir/context-synced"

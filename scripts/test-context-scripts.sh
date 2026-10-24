@@ -26,7 +26,7 @@ git config user.name seed
 mkdir scripts
 cp "$here/sync-context.sh" "$here/publish-context.sh" "$here/prompt-check.sh" scripts/
 printf '* text=auto eol=lf\n' > .gitattributes
-printf '*.md\n!progress.md\n.claude/skills/\n' > .gitignore
+printf '*.md\n!progress.md\n.claude/\n' > .gitignore
 cat > progress.md <<'EOF'
 # Demo: progress log and conflict board
 
@@ -52,41 +52,53 @@ git push -q origin main
 # the doc owner writes the shared docs and creates the context branch with the first publish
 clone_as alex
 cd "$tmp/alex"
-mkdir -p docs .claude/skills/demo
+mkdir -p docs builder-files .claude/skills/demo/__pycache__
+echo "bytecode" > .claude/skills/demo/__pycache__/x.pyc
 cat > CLAUDE.md <<'EOF'
 | Doc owner | **Alex** (doc owner) |
 | Research doc | `docs/research.md` (on `context`) |
 EOF
-for f in AGENTS.md demo-PRD.md builder-file-alex.md builder-file-sam.md builder-file-kim.md docs/research.md \
-         .claude/skills/demo/SKILL.md; do
+for f in AGENTS.md demo-PRD.md builder-files/builder-file-alex.md builder-files/builder-file-sam.md \
+         builder-files/builder-file-kim.md docs/research.md .claude/skills/demo/SKILL.md; do
   echo "$f v1" > "$f"
 done
 quiet bash scripts/publish-context.sh "start" || fail "the doc owner could not create the context branch"
 on_context alex docs/research.md | grep -q v1 || fail "the research doc didn't reach the new context branch"
-on_context alex .claude/skills/demo/SKILL.md | grep -q v1 || fail "skills didn't reach the new context branch"
+on_context alex skills/demo/SKILL.md | grep -q v1 || fail "skills didn't reach the new context branch as skills/"
+(cd "$tmp/alex" && git ls-tree -r --name-only origin/context) | grep -q -e '^\.claude/' -e __pycache__ \
+  && fail ".claude/ or __pycache__ reached the context branch"
 on_context alex progress.md >/dev/null 2>&1 && fail "progress.md was published to context"
 
 for who in sam kim; do
   clone_as "$who"
   (cd "$tmp/$who" && quiet bash scripts/sync-context.sh)
   [ -f "$tmp/$who/CLAUDE.md" ] || fail "$who's first sync didn't unpack CLAUDE.md"
+  [ -f "$tmp/$who/.claude/skills/demo/SKILL.md" ] || fail "$who's first sync didn't unpack skills into .claude/skills/"
+  [ -e "$tmp/$who/skills" ] && fail "$who's sync left a stray skills/ folder"
 done
+
+# a skill edited in .claude/skills/ goes up as skills/ and lands in a teammate's .claude/skills/
+cd "$tmp/alex"
+echo "skill v2" >> .claude/skills/demo/SKILL.md
+quiet bash scripts/publish-context.sh "skill v2" || fail "the doc owner could not publish a skill edit"
+(cd "$tmp/kim" && quiet bash scripts/sync-context.sh)
+grep -q "skill v2" "$tmp/kim/.claude/skills/demo/SKILL.md" || fail "a skill edit didn't reach kim's .claude/skills/"
 
 # a builder whose sync is older than a teammate's publish must not undo that teammate's edit
 cd "$tmp/sam"
-echo "sam: task 3 done" >> builder-file-sam.md
+echo "sam: task 3 done" >> builder-files/builder-file-sam.md
 quiet bash scripts/publish-context.sh "sam done" || fail "sam could not publish his own brief"
 cd "$tmp/kim"
-echo "kim: task 6 done" >> builder-file-kim.md
+echo "kim: task 6 done" >> builder-files/builder-file-kim.md
 quiet bash scripts/publish-context.sh "kim done" || fail "kim could not publish her own brief"
-on_context kim builder-file-sam.md | grep -q "task 3 done" || fail "kim's stale copy undid sam's edit"
-grep -q "task 3 done" "$tmp/kim/builder-file-sam.md" || fail "publish left kim's stale copy in place"
+on_context kim builder-files/builder-file-sam.md | grep -q "task 3 done" || fail "kim's stale copy undid sam's edit"
+grep -q "task 3 done" "$tmp/kim/builder-files/builder-file-sam.md" || fail "publish left kim's stale copy in place"
 
 # builders may publish the research doc, but not someone else's brief, the PRD or CLAUDE.md
 cd "$tmp/kim"
 echo "kim: new research section" >> docs/research.md
 quiet bash scripts/publish-context.sh "kim research" || fail "kim could not publish the research doc"
-for f in builder-file-sam.md demo-PRD.md CLAUDE.md; do
+for f in builder-files/builder-file-sam.md demo-PRD.md CLAUDE.md; do
   quiet bash scripts/sync-context.sh
   echo "kim edits $f" >> "$f"
   quiet bash scripts/publish-context.sh "x" && fail "kim published $f"
@@ -96,7 +108,7 @@ done
 # the doc owner publishes several docs at once, plus a brand-new doc named on the command line
 cd "$tmp/alex"
 quiet bash scripts/sync-context.sh
-echo "alex tidies" >> builder-file-sam.md
+echo "alex tidies" >> builder-files/builder-file-sam.md
 echo "alex tidies" >> demo-PRD.md
 mkdir -p extra && echo "glossary v1" > extra/glossary.md
 quiet bash scripts/publish-context.sh "alex tidies" extra/glossary.md || fail "the doc owner could not publish several docs"
@@ -108,23 +120,24 @@ quiet bash scripts/publish-context.sh "rules"
 (cd "$tmp/kim" && bash scripts/sync-context.sh) | grep -q "CLAUDE.md changed" || fail "sync didn't flag the CLAUDE.md change"
 
 # credentials and an unknown builder are refused
-echo "password: hunter2hunter2" >> demo-PRD.md
+# built at runtime so this script itself never matches the secret scan and can still be published
+printf 'pass%s: %s\n' word hunter2hunter2 >> demo-PRD.md
 quiet bash scripts/publish-context.sh "oops" && fail "a credential was published"
 on_context alex demo-PRD.md > demo-PRD.md
 cd "$tmp/kim"
 git config --unset team.builder
-echo "x" >> builder-file-kim.md
+echo "x" >> builder-files/builder-file-kim.md
 quiet bash scripts/publish-context.sh "x" && fail "publish ran without team.builder"
 git config team.builder kim
-on_context kim builder-file-kim.md > builder-file-kim.md
+on_context kim builder-files/builder-file-kim.md > builder-files/builder-file-kim.md
 
 # sam's last sync predates alex's tidy of his brief: publish is refused, and sync keeps his edit as a backup
 cd "$tmp/sam"
-echo "sam: unpublished note" >> builder-file-sam.md
+echo "sam: unpublished note" >> builder-files/builder-file-sam.md
 quiet bash scripts/publish-context.sh "conflict" && fail "publish ignored a change made on both sides"
 quiet bash scripts/sync-context.sh
 grep -rq "unpublished note" .git/context-backup || fail "sync lost sam's unpublished edit"
-grep -q "alex tidies" builder-file-sam.md || fail "sync didn't bring in alex's tidy"
+grep -q "alex tidies" builder-files/builder-file-sam.md || fail "sync didn't bring in alex's tidy"
 
 # the prompt hook: sam sees his row and the @all row, never kim's or the template row; new entries show once
 out=$(bash scripts/prompt-check.sh)

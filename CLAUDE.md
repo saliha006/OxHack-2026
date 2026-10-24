@@ -12,15 +12,15 @@
 
 | Slot | Value |
 |---|---|
-| Project | **OxHack-2026** ({{event / hackathon, track}}). Team **{{team name}}**; {{who submits}} |
+| Project | **OxHack-2026** (OxHack 26 hackathon, Oxford Mathematical Institute, 24–25 Oct 2026; tracks: the PRD §0 Pending). Team **{{team name}}**; {{who submits}}. Other Claude Code accounts share this folder on the owner's machine: each session reads `context` first and never edits a shared doc another session is mid-way through |
 | Repo · main branch | `https://github.com/saliha006/OxHack-2026` · `main`. Builder branches: `progress.md` → 👥 Team |
-| Where docs live | **The `context` branch** (docs only, no code). {{Public repo? → delete it before submission}}. Local copies are git-ignored on `main`. Sync: `bash scripts/sync-context.sh` (the prompt hook runs it) · publish: `bash scripts/publish-context.sh "what changed"` |
+| Where docs live | **The `context` branch** (docs only, no code): `CLAUDE.md`, the PRD, the event doc and the research doc at the top level, briefs in `builder-files/`, skills in `skills/`, plus `scripts/`. **`.claude/` is never pushed:** sync unpacks context's `skills/` into the local `.claude/skills/` (where Claude Code loads them) and publish sends them back as `skills/`; `.claude/settings.json` stays local. {{Public repo? → delete it before submission}}. Local copies are git-ignored on `main`. **Never pushed anywhere:** `Resreach-Context/` (sponsor PDFs, raw research inputs and agent notes), `.env*`, any secret. Fresh clone: `git fetch origin context && git archive origin/context scripts \| tar -x` once, then sync. Sync: `bash scripts/sync-context.sh` (the prompt hook runs it) · publish: `bash scripts/publish-context.sh "what changed"` |
 | Vault | `{{path to the Obsidian vault folder}}` (**{{owner}} only**: `OxHack-2026 — Hub` + `OxHack-2026 — Log`). Hub = status + ▶ START HERE; Log = ADRs, Unconfirmed / yet-to-confirm, ▶ RESUME HERE. **Teammates without it:** save sign-off notes to your own memory; send decisions to the doc owner as a `decision` entry + 📨 row |
-| Doc owner | {{their `team.builder` name first, e.g. `alex`; the publish script reads it}} |
+| Doc owner | **saliha** (Saliha Shoaib, GitHub `saliha006`). Teammates: `nate` (Nate Banas, `aldrichbanas07`), `derrick` (Derrick Lim Yong Hao, `RandomGeeb`, repo collaborator) |
 | PRD | `OxHack-2026-PRD.md` on `context` (made from `x-PRD.md`): NOW at the top, then the spec |
-| Briefs | `builder-file-<name>.md` on `context` (made from `builder-file-x.md`). Who may edit them: 📤 |
-| Event doc | {{`<EVENT>-CONTEXT.md`: rules, judging, deadlines. Hackathons only; else "none"}} |
-| Research doc | `{{path, e.g. docs/research-and-codebase.md}}` (on `context`, git-ignored on `main`) |
+| Briefs | `builder-files/builder-file-<name>.md` on `context` (made from `builder-files/builder-file-x.md`). Who may edit them: 📤 |
+| Event doc | `OxHack-2026-CONTEXT.md` (on `context`): rules, judging, prizes, schedule, organiser announcements |
+| Research doc | `OxHack-2026-research.md` (on `context`, git-ignored on `main`). Raw inputs and per-agent notes stay local in `Resreach-Context/` |
 | Progress doc | `progress.md` (repo root, **the only shared doc on `main`**; made from the starter's `progress.md`): the history, the 📌 Open board, 👥 Team and 📊 Latest |
 | Decisions doc | Full ADRs: the vault Log (local). **Team-facing mirror:** the PRD → NOW → Decisions in force / Pending |
 | Mirror docs | The PRD (§0 NOW, §1 pitch ↔ the top of this file), `builder-file-*.md` (header + §1 ↔ `progress.md` 👥 Team), vault Hub + Log, `progress.md` (👥 Team, 📊 Latest). Update all of them whenever a decision, ownership or status changes |
@@ -39,11 +39,11 @@ The `context` branch holds **only the team's shared docs**, no code. Code lives 
 | `CLAUDE.md` | These working rules. Claude Code loads it automatically | Every prompt |
 | `AGENTS.md` | One-line pointer so Codex and other agents follow this file too | Never (it points here) |
 | The PRD | **The project doc.** NOW (decisions in force, pending, current direction) at the top, then the vision, problem, scope, users and flows, stack, system architecture, data and contracts, risks, demo. The *what* and *why* | NOW at session start; the rest before any design decision it touches |
-| `builder-file-<name>.md` | **One per builder.** What they own, their contract and guardrails, their `▶ Current tasks` with acceptance criteria. The *who does what* | Your own only |
+| `builder-files/builder-file-<name>.md` | **One per builder.** What they own, their contract and guardrails, their `▶ Current tasks` with acceptance criteria. The *who does what* | Your own only |
 | The event doc | Event rules, judging criteria, tracks, deadlines, what wins | Before scoping, cutting or pitching |
 | The research doc | The evidence ledger: every source graded KEEP / WEAK / DO NOT USE (§10) | When a choice needs evidence |
 | `progress.md` *(on `main`)* | **The team's history**, newest first: who shipped what, when, on which branch, whose work it touches. Its 📌 Open board holds every unresolved conflict, wait and scope proposal (§2b) | Open board + new entries, every prompt |
-| `.claude/skills/` | The skills below | When their trigger fires |
+| `skills/` *(on `context`; your local copy is `.claude/skills/`)* | The skills below | When their trigger fires |
 
 **Skills and when they fire:**
 - **`no-slop`**: on every code generation pass, **before testing**, and before every commit, push or merge.
@@ -58,7 +58,7 @@ The `context` branch holds **only the team's shared docs**, no code. Code lives 
   Skills cite `Claude instructions/research-ledger.md`; that's their own evidence base, not shipped, so treat those as footnotes.
 
 ### 🔄 Context sync (run FIRST on EVERY prompt, before anything else)
-Every shared doc above, **including `CLAUDE.md`, the PRD, the briefs and `.claude/skills/`**, lives on the `context`
+Every shared doc above, **including `CLAUDE.md`, the PRD, the briefs and the skills** (`skills/` there, `.claude/skills/` here), lives on the `context`
 branch and changes during the build. **Never work from a stale vision:** pull the latest `context` before you read any of them.
 1. **The prompt hook does it for you** (`.claude/settings.json` → `scripts/prompt-check.sh`): it runs the sync and the
    `progress.md` check, and its output arrives with the prompt. No hook output → run `bash scripts/sync-context.sh` yourself.
@@ -103,9 +103,11 @@ branch and changes during the build. **Never work from a stale vision:** pull th
 The kit: `CLAUDE.md`, `AGENTS.md`, `x-PRD.md`, `builder-file-x.md`, `progress.md`, `scripts/`, `.claude/settings.json`,
 `.claude/skills/`. In a new project (the doc owner):
 1. Ask first: the doc owner's name, the team's names and the timezone. Then the other Registry slots they know.
-2. Copy everything into the repo root. Rename `x-PRD.md` to `OxHack-2026-PRD.md`; copy `builder-file-x.md` per builder.
-3. On `main`, commit `progress.md`, `scripts/` and `.claude/settings.json`, with a `.gitignore` of `*.md`, `!progress.md`,
-   `!README.md`, `!contracts/*.md`, `.claude/skills/`, `.claude/settings.local.json`.
+2. Copy everything into the repo root. Rename `x-PRD.md` to `OxHack-2026-PRD.md`; copy `builder-file-x.md` per builder
+   into `builder-files/`.
+3. On `main`, commit only `progress.md` (plus `README.md` for the submission) and a `.gitignore` of `*.md`, `!progress.md`,
+   `!README.md`, `!contracts/*.md`, `.claude/`, `skills/`, `builder-files/`, the four context scripts, `Resreach-Context/`
+   and `.env*` (`!.env.example`). Everything else lives on `context`.
 4. `git config team.builder <name>`, then `bash scripts/publish-context.sh "Start the shared docs"` creates `context`.
 5. Create the research doc, and the vault Hub + Log if the user has a vault. `bash scripts/test-context-scripts.sh` checks the scripts.
 
