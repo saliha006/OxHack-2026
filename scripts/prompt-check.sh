@@ -10,15 +10,15 @@ export MSYS_NO_PATHCONV=1
 if [ "${1:-}" = "--guard" ]; then
   input=$(cat)
   path=$(printf '%s' "$input" | sed -n 's/.*"file_path" *: *"\([^"]*\)".*/\1/p' | sed 's#\\\{1,2\}#/#g')
-  has_limit=false; printf '%s' "$input" | grep -q '"limit"' && has_limit=true
+  has() { grep -q "\"$1\"" <<< "$input"; }
   deny() { echo "read-guard: $1" >&2; exit 2; }
   case "$path" in
     *.jsonl) deny "session transcripts are huge; Grep them for a keyword instead." ;;
-    */CLAUDE.md|CLAUDE.md) $has_limit || deny "CLAUDE.md is already in your context; Grep it or Read with limit." ;;
-    *.pdf) printf '%s' "$input" | grep -q '"pages"' || deny "give a pages range (max 3); slide PDFs are images and cost thousands of tokens per page." ;;
+    */CLAUDE.md|CLAUDE.md) has limit || deny "CLAUDE.md is already in your context; Grep it or Read with limit." ;;
+    *.pdf) has pages && exit 0; deny "give a pages range (max 3); slide PDFs are images and cost thousands of tokens per page." ;;
     *.png|*.jpg|*.jpeg|*.gif|*.webp) exit 0 ;;
   esac
-  if ! $has_limit && [ -f "$path" ]; then
+  if ! has limit && [ -f "$path" ]; then
     size=$(wc -c < "$path" 2>/dev/null || echo 0)
     [ "$size" -le 40000 ] || deny "$((size / 1000))KB (~$((size / 4000))k tokens) re-sent on every later request. Grep it, or Read with offset and limit."
   fi
@@ -48,7 +48,7 @@ fi
 
 cd "$(git rev-parse --show-toplevel 2>/dev/null)" 2>/dev/null || exit 0
 
-[ -f scripts/sync-context.sh ] && { bash scripts/sync-context.sh 2>&1 | head -n 40; }
+[ -f scripts/sync-context.sh ] && { bash scripts/sync-context.sh 2>&1; }
 
 main=$(git symbolic-ref -q --short refs/remotes/origin/HEAD 2>/dev/null | sed 's#^origin/##')
 main=${main:-main}
@@ -82,9 +82,9 @@ head=$(git rev-parse "origin/$main")
 seen=$(git config --get team.progressseen || true)
 if [ -n "$seen" ] && git cat-file -e "$seen^{commit}" 2>/dev/null; then
   # by push, not by stamp: an entry stamped earlier but pushed later still shows up here
-  new=$(git diff "$seen" "$head" -- progress.md | sed -n 's/^+\([^+].*\)$/\1/p' | cut -c1-220 | head -n 40)
+  new=$(git diff "$seen" "$head" -- progress.md | sed -n 's/^+\([^+|].*\)$/\1/p')
   if [ -n "$new" ]; then
-    echo "progress: new lines since your last prompt (don't read the whole file); check Touched lines against your own area:"
+    echo "progress: new lines since your last prompt (all of them; don't read the whole file); check Touched lines against your own area:"
     printf '%s\n' "$new"
   fi
 else

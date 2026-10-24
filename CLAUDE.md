@@ -10,13 +10,13 @@
 |---|---|
 | Project | **OxHack-2026** (OxHack 26, Oxford Mathematical Institute, 24–25 Oct 2026; tracks: PRD §0 Pending). Team **{{team name}}**; {{who submits}}. Other Claude Code accounts share this folder: never edit a shared doc another session is mid-way through |
 | Repo | `https://github.com/saliha006/OxHack-2026` · `main`. Builder branches: `progress.md` → 👥 Team |
-| Where docs live | **`context` branch** (docs only): `CLAUDE.md`, PRD, event doc, research doc, `builder-files/`, `skills/`, `scripts/`. `.claude/` is never pushed: sync unpacks `skills/` into `.claude/skills/`, publish sends them back. Git-ignored on `main`. **Never pushed:** `Resreach-Context/` (sponsor PDFs, raw inputs, agent notes), `.env*`, secrets. {{Public repo? delete `context` before submission}}. Fresh clone: `git fetch origin context && git archive origin/context scripts \| tar -x`, then sync. Sync: `bash scripts/sync-context.sh` (the prompt hook runs it) · publish: `bash scripts/publish-context.sh "what changed"` |
+| Where docs live | **`context` branch** (docs only): `CLAUDE.md`, PRD, event doc, research doc, `builder-files/`, `skills/`, `scripts/`. `.claude/` is never pushed: sync unpacks `skills/` into `.claude/skills/`, publish sends them back. Git-ignored on `main`. **Never pushed:** `Research-Context/` (sponsor PDFs, raw inputs, agent notes), `.env*`, secrets. {{Public repo? delete `context` before submission}}. Fresh clone: `git fetch origin context && git archive origin/context scripts \| tar -x`, then sync. Sync: `bash scripts/sync-context.sh` (the prompt hook runs it) · publish: `bash scripts/publish-context.sh "what changed"` |
 | Vault | `{{path to the Obsidian vault}}` (**{{owner}} only**: `OxHack-2026 — Hub` = status + ▶ START HERE, `— Log` = ADRs, Unconfirmed, ▶ RESUME HERE). No vault → save notes to your memory; send decisions to the doc owner as a `decision` entry + 📨 row |
 | Doc owner | **saliha** (Saliha Shoaib, `saliha006`). Teammates: `nate` (Nate Banas, `aldrichbanas07`), `derrick` (Derrick Lim Yong Hao, `RandomGeeb`, collaborator) |
 | PRD | `OxHack-2026-PRD.md`: NOW (decisions in force, pending, active tasks) at the top, then the spec |
 | Briefs | `builder-files/builder-file-<name>.md` (from `builder-file-x.md`) |
 | Event doc | `OxHack-2026-CONTEXT.md`: rules, judging, prizes, schedule |
-| Research doc | `OxHack-2026-research.md` (git-ignored on `main`). Raw inputs and agent notes stay in `Resreach-Context/` |
+| Research doc | `OxHack-2026-research.md` (git-ignored on `main`). Raw inputs and agent notes stay in `Research-Context/` |
 | Progress doc | `progress.md` (repo root, **the only shared doc on `main`**): history, 📌 Open board, 👥 Team, 📊 Latest |
 | Decisions | Full ADRs: vault Log. Team mirror: PRD → NOW |
 | Mirror docs | PRD §0/§1 ↔ top of this file; `builder-file-*` ↔ `progress.md` 👥 Team; vault Hub + Log; `progress.md` 👥 Team + 📊 Latest. Update every mirror when a decision, owner or status changes |
@@ -25,16 +25,16 @@
 | Deploy | {{where it runs, how code gets there}}. Platform rules: {{doc or "none"}} |
 | Verbosity | **Level 0** (§3) |
 
-**Skills** (`.claude/skills/`, load when the trigger fires): `no-slop` on every code pass, before testing, and before every commit/push/merge · `debug` on every error, failing test or stuck moment (no guess-and-retry outside it) · front-end: `design-direction` (build/restyle), `motion` then `motion-review`, `reverse-engineer-ui`, `ui-audit` (before a UI change is done), `frontend-performance`. `ui-audit` and `motion-review` propose, the user approves. This file wins over a skill; never edit a skill. `no-slop` fixes only your own diff in your owned paths and reports the rest.
+**Skills** (`.claude/skills/`, load when the trigger fires): `no-slop` on every code pass, before testing, and before every commit/push/merge · `debug` on every error, failing test or stuck moment (no guess-and-retry outside it) · front-end: `design-direction` (build/restyle), `motion` then `motion-review`, `reverse-engineer-ui`, `ui-audit` (before a UI change is done), `frontend-performance` · `research-protocol` before any research (§10). `ui-audit` and `motion-review` propose, the user approves. This file wins over a skill; never edit a skill. `no-slop` fixes only your own diff in your owned paths and reports the rest.
 
 ### 🔄 Context sync (every prompt)
 The prompt hook (`.claude/settings.json` → `scripts/prompt-check.sh`) syncs `context` and checks `progress.md`; its output arrives with the prompt. No output → run `bash scripts/sync-context.sh`. Never `git checkout origin/context -- <file>` (it stages docs into `main`).
 - If something changed, tell the user in 1–2 lines **first**; read at least the PRD → NOW and your own brief. A changed `CLAUDE.md` arrives as changed lines: act on them, don't re-read the file. Sync fails → say so in one line, use local copies.
 
 ### 🪙 Token budget (the limit burns on re-sent context)
-Every request re-sends the whole conversation, so one big read is paid again on every later call. Sessions hit their limit in 3 prompts because of big reads (100k-token agent output files), model switches, and re-reading docs.
+Every request re-sends the whole conversation, so one big read is paid again on every later call. Measured: one prompt of 26 tool calls over a 63k–121k context = 2.45M cache reads. Cost = tool calls × context size, so batch independent calls, keep prompts specific, and keep big text out of the context. What the plan limit meters isn't visible to us.
 - **Read only what the task needs:** `Grep`, or `Read` with `offset`/`limit`. `CLAUDE.md` is already loaded. Read the PRD → NOW and your brief once per session. Never read all of `progress.md` (it grows): the hook prints new entries; read the Log top only.
-- **Never `Read`:** a research agent's raw output file, a session transcript (`.jsonl`), PDF page images, a whole `Resreach-Context/` note. `scripts/prompt-check.sh --guard` (a `Read` hook) blocks these. Hook missing → the prompt output says so: run `bash scripts/prompt-check.sh --install-guard` (once, local).
+- **Never `Read`:** a research agent's raw output file, a session transcript (`.jsonl`), PDF page images, a whole `Research-Context/` note. `scripts/prompt-check.sh --guard` (a `Read` hook) blocks these. Hook missing → the prompt output says so: run `bash scripts/prompt-check.sh --install-guard` (once, local).
 - **Research agents write to files and report ≤300 words.** At most 4 agents unless the user asks for more.
 - **One model and effort per session** (switching re-writes the whole cache). New task → `/clear`; `/compact` past ~100k tokens; don't resume a large session idle over an hour.
 
@@ -125,12 +125,8 @@ Clear, breezy, skimmable: short sentences, plain words. Write like a senior engi
 ## 9. Sign-off ("signing off", "wrapping up", "closing the terminal")
 Save everything important to the vault (or memory); de-stale every mirror (vault status, PRD → NOW + touched briefs then publish, `progress.md` entry / board rows / 👥 Team **Now** / 📊 Latest, README if user-facing); move superseded items to Parked, never delete; leave a `START HERE` pointer to the exact next step (name the half-done function and file) in the vault Hub and Log ▶ RESUME HERE (memory if no vault); confirm briefly what you saved and where.
 
-## 10. Research protocol (asked or self-initiated)
-In one pass: gather sources, grade every one `KEEP` / `WEAK` / `DO NOT USE`, and save the ledger to the research doc. Never hand back findings without it.
-- **Sources:** peer-reviewed papers, reputable journals, official engineering sources; no blogs or SEO pages. Prefer the last 1–2 years (3–4 if scarce, say so). UK/EU/US first, but quality wins. Open every source before citing; never cite from memory.
-- **Consensus:** each load-bearing claim needs ≥2 independent sources; hunt for refutations. Multiple credible refutations → `DO NOT USE`, move to the bottom with the refuting sources and a short tombstone, strip its metrics. `KEEP` = corroborated, `WEAK` = thin support.
-- **Community view** (Reddit, HN, StackExchange): weight by agreement and repetition across threads; state professional and community consensus, then the aggregate call.
-- **Structure:** one research file, a labelled section per pass with a CATEGORY INDEX; `KEEP` first, `DO NOT USE` last. Agents follow the Token budget (write the ledger straight to the file, report ≤300 words).
+## 10. Research protocol
+**Any** research, asked or self-initiated (including before you spawn a research agent): load the `research-protocol` skill first and follow it exactly. In short: every source graded `KEEP` / `WEAK` / `DO NOT USE`, ledger saved into the research doc in the same pass, ≥2 sources per load-bearing claim, professional + community consensus, one research file. The skill holds the full wording.
 
 ## 11. Depth vs tokens
 Never drop context that matters now, later, or records how the software evolved; depth wins when forced. Otherwise tight prose, no filler. Test: could a future instance reconstruct the decision from this note alone, fast?

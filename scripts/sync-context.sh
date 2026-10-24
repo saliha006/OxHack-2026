@@ -61,11 +61,11 @@ if [ "$old" = none ]; then
 else
   echo "context: UPDATED ${old:0:7} -> ${new:0:7}"
   git log --format='  %h %s (%an, %ar)' "$old..$new"
-  git diff --stat "$old" "$new" | head -n 12
+  git diff --stat "$old" "$new"
   # Re-reading the whole file would put ~9k tokens into every open session on every edit, so only the changed lines are shown
   if grep -qx 'CLAUDE.md' <<< "$incoming"; then
-    echo "context: CLAUDE.md changed (the session still holds the old copy). Changed lines only; do not re-read the file:"
-    git diff -U0 "$old" "$new" -- CLAUDE.md | grep -E '^[-+][^-+]' | cut -c1-240 | head -n 60
+    echo "context: CLAUDE.md changed (the session still holds the old copy). Changed lines only (all of them); do not re-read the file:"
+    git diff -U0 "$old" "$new" -- CLAUDE.md | grep -E '^[-+][^-+]'
   fi
 fi
 if [ ${#saved[@]} -gt 0 ]; then
