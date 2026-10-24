@@ -7,6 +7,8 @@ target is stages 3–4** (strategy with dumb models, then the belief layer).
 
 **Design goal:** every model (belief, opponent policy, value) can be swapped without touching the loop.
 
+**Every prediction** the layer makes, how it's made and whether it's built: [predictions.md](predictions.md).
+
 ---
 
 ## 1. The loop
