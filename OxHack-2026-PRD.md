@@ -173,7 +173,7 @@ CLAUDE.md §2 treats anything in this list as a 🟠 decision.
 | Layer | Choice | Why (vs alternative) | Gotcha |
 |---|---|---|---|
 | {{frontend / API / DB / ML / infra}} | {{…}} | {{…}} | {{…}} |
-| Design direction | {{palette, type, motion feel from `design-direction` / `motion`; tokens file}} | {{…}} | {{…}} |
+| Design direction | {{palette, type, motion feel; tokens file}} | {{…}} | {{…}} |
 
 ## 13. Non-functional requirements ★ *(≤8 rows, each one a number)*
 > Fill: targets you could test. "Fast" isn't a requirement; "p95 < 300 ms at 1k events/s" is.
@@ -184,7 +184,7 @@ CLAUDE.md §2 treats anything in this list as a 🟠 decision.
 | Latency | {{…}} | {{…}} |
 | Availability / restart | {{…}} | {{…}} |
 | Resource limits | {{…}} | {{…}} |
-| Accessibility | {{e.g. WCAG 2.2 AA on the main screens}} | `ui-audit` |
+| Accessibility | {{e.g. WCAG 2.2 AA on the main screens}} | checked by hand |
 | Privacy / retention | {{…}} | {{…}} |
 
 ## 14. Security and trust ★ *(≤2 tables + hard rules)*
