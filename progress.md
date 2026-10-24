@@ -41,9 +41,10 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 | 2026-10-24 20:52 | @saliha | @all | ⚠️ conflict | `context` now holds only `CLAUDE.md`, the PRD, `builder-files/` and `design-decision/` (was `design/`). Skills, the event doc and the research doc are local now. Sync with `git archive origin/context | tar -x`, then delete your old `design/` copy. Publish steps are in `CLAUDE.md` | 2026-10-24 20:52 |
 | 2026-10-24 20:36 | @saliha | @derrick | ⚠️ conflict | The parser is on `main`: `from bot.parser import Parser, states_from_log`. `Parser(us).feed(line)` per protocol line, `.snapshot()` per request. Unblocks your task 3 (build_state on a parser-made BattleState) | 2026-10-24 20:36 |
 | 2026-10-24 20:36 | @saliha | @nate | ⚠️ conflict | The parser is on `main`: `states_from_log(log_lines, us)` gives one `BattleState` per turn of a saved replay, for your (state, winner) pairs | 2026-10-24 20:36 |
+| 2026-10-24 21:58 | @saliha | @derrick | ⚠️ conflict | Two bugs in `decision/belief.py` seen in live games (all fallbacks in the smoke run): (1) line 119 unpacks `calculate_damage` as two values, but fixed-damage moves (Ruination) return one: `calculate_damage(st, "ruination", "makeitrain", True)` → `([168], [100, 223])`; treat one value as max = crit. (2) line 133 `scenarios()` hits `max()` on an empty slot when the usage rebuild also fails `_fits`; your belief floor (task 2) covers it. Also: `state.py:9` / `opponent.py:11` need `encoding="utf-8"` for Windows | 2026-10-24 21:58 |
+| 2026-10-24 21:58 | @saliha | @derrick | ⚠️ conflict | I added `poke-env==0.16.1` to your `pyproject.toml` (and `uv.lock`). `scikit-learn` and `matplotlib` come with the tasks that need them. The bot is live: `uv run python -m bot.smoke --games 10` | 2026-10-24 21:58 |
 | 2026-10-24 21:15 | @saliha | @derrick | 🔀 scope proposal | Your brief is reordered by the pass 9 build plan (two research passes + a critique: peer-reviewed papers, official source, practitioner consensus, our code and the PRD). Every "Recommended" line is advice: accept it or pick your own route (decision-layer calls are yours). Key finding: poke-engine's built-in MCTS hard-wires its Rust eval, so the learned value + LP stay in our Python loop. Also yes/no on handing task 8 (belief scoring) to nate and the coach to saliha: you're at ~13 h | 2026-10-24 21:15 |
-| 2026-10-24 21:15 | @saliha | @derrick | 📨 waiting on | One OK for three deps in your `pyproject.toml`: `poke-env==0.16.1` (blocks saliha task 3), `scikit-learn` (brings scipy; your tasks 7 and 9), `matplotlib` (nate's charts) | 2026-10-24 21:15 |
-| 2026-10-24 21:15 | @saliha | @nate | 🔀 scope proposal | Your brief is reordered by the pass 9 build plan (research-backed; accept each item or pick your own route). Order: set candidates first (no priors, no agent; on `main` by 01:00 UTC), ladder = one `curl`, team pool from `jakegrigsby/metamon-teams`, then a ~100k-game Parquet + DuckDB extract with the first 20k to derrick by 01:00 UTC. Is `Data-stuff-(Nate)` your branch? | 2026-10-24 21:15 |
+| 2026-10-24 21:15 | @saliha | @nate | 🔀 scope proposal | Your brief is reordered by the pass 9 build plan (research-backed; accept each item or pick your own route). Order: set candidates first (no priors, no agent; on `main` by 01:00 UTC), ladder = one `curl`, team pool from `jakegrigsby/metamon-teams`, then a ~100k-game Parquet + DuckDB extract with the first 20k to derrick by 01:00 UTC. Your branch is any branch with `nate` in its name | 2026-10-24 21:15 |
 | 2026-10-24 19:16 | @saliha | @all | ⚠️ conflict | `scripts/` and every skill except `debug` and `no-slop` are gone from `context`. Keep your local copies (they stay git-ignored); `sync`/`publish` won't update from `context` any more | 2026-10-24 19:16 |
 | 2026-10-24 18:14 | @derrick | @nate | ⚠️ conflict | `contracts/set-candidates.md` (on `derrick`) defines the set file your data layer would build for belief: 30 weighted sets per species + trimmed usage, chaos 1825 / 2026-09. Next: yes/no on the shape and on `data/set_candidates.json` as its path | 2026-10-24 18:14 |
 
@@ -56,8 +57,8 @@ whenever you log an entry.
 
 | Who | GitHub | Role | Branch | Owns (paths) | Now |
 |---|---|---|---|---|---|
-| Saliha | `saliha006` | Bot layer; doc owner | `sali` | `bot/`, `runs/` (git-ignored) | brief task 1: Rust toolchain + `poke_engine` build, then task 3 smoke battle |
-| Nate | `aldrichbanas07` | Data layer | `Data-stuff-(Nate)` (to confirm) | `data/` {{paths tbd}} | brief task 1: set candidates (pass 9 order) |
+| Saliha | `saliha006` | Bot layer; doc owner | `sali` | `bot/`, `runs/` (git-ignored) | bot plays live games through `Agent.choose`; next: task 5 eval harness |
+| Nate | `aldrichbanas07` | Data layer | any branch with `nate` in it (now `Data-stuff-(Nate)`) | `data/` {{paths tbd}} | brief task 1: set candidates (pass 9 order) |
 | Derrick | `RandomGeeb` | Decision layer | `derrick` | `decision/`, `tests/`, `contracts/battle_state.py` | feature 11 built on `derrick`; tasks 3–4 wait on the parser and set candidates |
 
 **Shared** (anyone may edit; flag it in ⚠️ Conflicts): {{e.g. `contracts/*`, `fixtures/*`, compose files}}
@@ -71,12 +72,21 @@ whenever you log an entry.
 4. {{Access to the deploy target, data and secrets: where each lives. Never in git or chat}}
 
 ## 📊 Latest (volatile facts live only here)
-- **As of 2026-10-24 20:36:** `main` @ `c25be7e` · tests: decision 140 green, 100% coverage (`uv run pytest --cov=decision`); bot 25 green, 100% coverage (`uv run pytest bot/tests --cov=bot`) · deploy: none yet
+- **As of 2026-10-24 21:58 UTC:** `main` @ `d8bf19f` · tests: decision 140 green, 100% coverage (`uv run pytest --cov=decision`; on Windows set `PYTHONUTF8=1`); bot 51 green, 100% on `bot/player.py` and `bot/parser.py` (`uv run pytest bot/tests --cov=bot`) · smoke: 10/10 games vs RandomPlayer finished unattended, 10 won, think p50 ~65 ms / p99 ~300–700 ms, fallback rate 12.7% (all from the two `belief.py` bugs, Open board) · deploy: none yet
 - **On branches, not merged yet:** @derrick `derrick` @ `a50936e`: feature 11 (type-matchup lead), 144 tests green, 100% coverage
 
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 21:58 — feat — Bot plays live Showdown games through the decision layer — @saliha
+- **Where:** `sali` @ `d8bf19f` · merged to `main`: yes (fast-forward)
+- **Did:** Rust + uv installed so `poke-engine` builds on saliha's machine. `bot/player.py`: a poke-env player feeds each whole message to our parser before poke-env answers (measured on the local server: the log always lands before the request, incl. forced switches), calls `Agent.choose`, and writes `runs/<battle>.log`, `.jsonl` trace and `.decision.log`. Rejected choices retry with the first legal option, then `default`; Showdown's timer ends any hung battle. `bot/smoke.py` runs N games vs RandomPlayer: 10/10 finished, 10 won. Stand-in team `bot/teams/standin-gen9ou.txt` (Metamon `competitive/gen9ou` team 5; 5 of those 16 teams fail validation now that Tera Blast is banned).
+- **Touched:** `bot/player.py`, `bot/smoke.py`, `bot/teams/`, `bot/tests/test_player.py`, `bot/tests/test_smoke.py`, `pyproject.toml`, `uv.lock`
+- **Brief task:** saliha tasks 1, 2, 3 ✅; task 4 (trace) 🟡: written every turn, waits on `agent.last_trace` for top options and win probability
+- **⚠️ Conflicts:** @derrick: `poke-env` added to your `pyproject.toml`; two `belief.py` bugs found live (Open board). @nate: the example priors cover 2 species, so the agent falls back on every turn until `data/set_candidates.json` exists; smoke uses `--priors-from-team` to test the plumbing meanwhile
+- **📨 Needs:** @nate: set candidates (your task 1) unblock real play
+- **Status:** open
 
 ### 2026-10-24 21:15 — scope — Pass 9 build plan: every brief reordered, PRD filled — @saliha
 - **Where:** `context` @ `9de3c7f` (PRD v3, all three briefs, `CLAUDE.md` @ `d57de97`) · merged to `main`: n/a (docs branch)
