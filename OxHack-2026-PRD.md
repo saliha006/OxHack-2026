@@ -28,12 +28,16 @@
 > Fill: what's true today. Update it the moment a decision, the direction or the headline changes (CLAUDE.md §8 mirrors).
 
 **Decisions in force** (newest first; one line each, full ADR in the vault Log):
-- {{date}} — {{decision}} ({{who}})
+- 2026-10-24: target tracks are **HRT "Best Use of Data for Predictions & Decision Making"** (main) and **Best Handmade** (also); TIME is optional but applies to Handmade (event doc §3). (saliha)
+- 2026-10-24: the doc owner is saliha; the working branch is `sali`; `.claude/`, `Resreach-Context/` and `.env*` never go to GitHub. (saliha)
 
-**Pending** (design choices not made yet):
-- {{choice}}: owner {{name}}, needed by {{time}}
+**Pending** (design choices not made yet; leanings, not decided):
+- Idea: Momentum (Pokémon win probability + coach-style replay review, optional ElevenLabs voice) is the lead; Honest Clock is the fallback. Owner saliha, lock in the first hours.
+- Elo angle: estimate a player's Elo from their decisions, using a dataset with ratings at all levels, plus top-500 ladder players' replays. Dataset choice waits on the research notes. Owner saliha.
+- Layered design (data layer, decision layer, bot layer) and the four bot-skeleton choices (framework, server, format, bot↔decision contract): owner saliha; needs Nate and Derrick to agree (CLAUDE.md §2c).
+- Handmade piece: physical or not, and what "from scratch" means: ask the organisers (event doc §6).
 
-**Focus right now:** {{what the team is building and the next checkpoint in §19}}
+**Focus right now:** finish the research pass (notes in the local `Resreach-Context/`), fold the verified findings into this PRD and the research doc, then lock the idea and the evaluation plan.
 
 ---
 
