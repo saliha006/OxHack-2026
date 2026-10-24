@@ -46,14 +46,26 @@
 ## 3. ▶ Current tasks (2026-10-24), in order
 *Status: ⬜ not started · 🟡 in progress · ⏸ blocked · ✅ done*
 
+**Added 2026-10-24 19:45 by saliha (demo plan; pending the team's yes)**
+6. ⬜ **Team pool** (`data/teams/`, packed format): ~60 seeded gen9ou teams from poke-env's `generate_team("gen9ou", ..., rng=Random(seed))` or `SmogonStatsTeambuilder.from_format("gen9ou", month="2026-09", cutoff=1825)`, validated against the local server (`/vtm gen9ou` or Showdown's `TeamValidator`); drop failures (a test run passed 39 of 40). One becomes our fixed team (saliha and derrick pick); the rest are the evaluation opponents.
+   - *Done when:* every kept team validates, and the seed reproduces the pool.
+7. ⬜ **Eval and demo charts**, from saliha's `runs/*.jsonl` and `runs/eval-*.json`: win-rate bars with 95% intervals per baseline; one game's per-turn win-probability curve; a reliability diagram for the win-probability model.
+   - *Done when:* one command regenerates all three charts, and they go into the demo.
+8. ⬜ **Data card**: one table for the demo and Devpost (datasets, sizes, date ranges, splits, licence notes).
+   - *Done when:* every number in it traces to a query or a file.
+
+**Seams** (same note in the other two briefs): saliha's parser (her task 3) is the one way logs become `BattleState`s, so training features match the live bot. Derrick consumes the set file and the (state, winner) pairs.
+
 1. ⬜ **Start the ladder snapshotter now** (top 500 from `pokemonshowdown.com/ladder/gen9ou.json`, scheduled, timestamped): it can't be backfilled.
    - *Done when:* snapshots accumulate with a timestamp per row and one run's output exists.
 2. ⬜ **Ingest gen9ou replays** (HolidayOugi main, Metamon raw cross-check; dedupe on replay id; Elo from `|player|` lines) `[🟠 storage decision first]`
    - *Done when:* a gen9ou table keyed on replay id with both players' start Elo, queryable.
 3. ⬜ **Set candidates + priors per species** (top 20-50 per species plus an "other" bucket; design §5a) `[⚠ touches @derrick: the output format he consumes]`
    - *Done when:* one format is agreed with Derrick, and a held-out game's revealed sets are covered at a stated rate.
+   - *Note 2026-10-24 (saliha):* the format is now drafted as `contracts/set-candidates.md` / `set_candidates.py` on `main`; `tests/test_set_candidates_contract.py` checks a file against it.
 4. ⬜ **Training sets + splits** (opponent-policy pairs from high-Elo replays, (state, winner) pairs, split by battle/time/player, Smogtours eval split) `[🟠 Elo cut-off, bot filtering]`
    - *Done when:* train/val/test files exist with a leakage check (no battle, player or team in two splits).
+   - *Note 2026-10-24 (saliha):* build the per-turn states with saliha's parser (her task 3), not a second parser `[⏸ waits on @saliha]`. Derrick's calibrated win-probability model trains on these pairs.
 5. ⬜ **Bot filtering rule** (🟠 decision): how bot accounts are detected and dropped.
 
 ## 6a. Reference

@@ -217,12 +217,12 @@ HP is a **percentage** in v1 (the opponent's exact HP is hidden anyway).
 ## 4. Open decisions
 
 These match the "four bot-skeleton choices" pending in PRD → §0 NOW:
-- 🟠 **Framework:** write our own client and parser, or build on `@pkmn/protocol` / `@pkmn/client` (§1a)?
+- ✅ **Framework (2026-10-24):** poke-env 0.16.1 with our own parser over its raw lines; own websocket client is the fallback (research pass 8).
 - 🟠 **What the bot passes on:** the merged state only, or the state plus this turn's raw events? (Decision layer Q7.)
-- 🟠 **Server:** a local Showdown server only, or also the public ladder? (The ladder brings rate limits and rules.)
-- 🟠 **Format:** gen9ou only, or a simpler format first (e.g. random battles, no team building)?
+- ✅ **Server:** local first; the public ladder is a stretch that needs bot registration.
+- ✅ **Format:** gen9ou. Random battles use role-based sets that don't match our gen9ou priors.
 - 🟠 **Bot ↔ decision contract:** the `BattleState` / `Choice` shapes ([DESIGN.md §2](DESIGN.md#2-seams-the-contracts-between-layers)).
-- 🟠 **Our team:** a fixed team, or picked per game? Not covered in the pasted design yet.
+- ✅ **Our team:** one fixed validated team; opponents from a seeded pool (Nate's task 6).
 
 ## 5. Sources (ledger)
 

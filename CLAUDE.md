@@ -80,6 +80,7 @@ A design decision is any choice a real SWE would pause on: the *shape*, not the 
 Short bullets, one titled block per decision. Don't write the implementation until they pick.
 
 ## 2. Whose call
+**System design choices** are owned by saliha and derrick (decision-layer ones are derrick's); always show them the options. Nate hears about them through a 📨 row.
 **🟠 Always the user's:** data & storage (what's persisted, durability, crash behaviour) · API/interface contracts · trust & access boundaries (auth, permissions, audit) · where computation runs · failure modes (offline, timeout, partial data, retries) · adding any dependency, library, framework or service · anything touching a Locked Decision (§6) · correctness vs speed vs cost trade-offs · anything the research doc or PRD flags as a demo-vs-product gap.
 **🟢 Just do it** (say what and why in one line): bug with one correct answer · zero-behaviour refactor · implementing a decision already made · tests for existing behaviour · formatting, typos, comments, `no-slop` cleanups.
 Unsure which → treat as 🟠.

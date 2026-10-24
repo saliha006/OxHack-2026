@@ -46,6 +46,18 @@
 ## 3. ▶ Current tasks (2026-10-24), in order
 *Status: ⬜ not started · 🟡 in progress · ⏸ blocked · ✅ done*
 
+**Added 2026-10-24 19:45 by saliha (demo plan; pending the team's yes)**
+6. ⬜ **Expose a decision trace** `[⚠ touches @saliha: trace fields]`: after `choose()`, make available the top 3 options with scores, the chosen line's value / win-probability estimate, and the top sets per opponent Pokémon (e.g. `agent.last_trace`).
+   - *Done when:* saliha's bot writes it every turn (her task 5), at under 5% extra think time.
+7. ⬜ **Turn-time profile** (PRD recommends enumerating everything first; Derrick's call): read p50 / p99 from saliha's eval runs; turn on the Tera / status-move pruning only if p99 > 2.5 s.
+   - *Done when:* the numbers are in `progress.md` → 📊 Latest.
+8. ⬜ **Calibrated win probability** `[🟠 Derrick's call: whether and how; ⏸ waits on @nate: (state, winner) pairs]`: the "prediction" half of the HRT pitch.
+   - *Done when:* log loss, Brier score and a reliability check beat the HP heuristic on the test split, and the bot can switch to it with a flag.
+9. ⬜ **Maximin LP behind a flag** (PRD lists it as the next selector upgrade; Derrick's call, incl. the solver dependency).
+   - *Done when:* an A/B over 100+ games in saliha's harness, with intervals, says keep or drop.
+
+**Seams** (same note in the other two briefs): the bot calls `agent.choose(request, battle_state)` in-process, one `Agent` per battle. Training states come from saliha's parser, so features match the live bot.
+
 1. ✅ **Core decision loop on dumb models** (`our_actions`, `opp_actions`, `simulate`, `value`, `build_state`, selector): 96 tests, 100% coverage on branch `derrick`; progress entry 2026-10-24 17:51.
 3. ⏸ **Opponent side from real parsed logs** `[⏸ waits on @saliha: the parser filling BattleState, incl. the last_move reset on switch]`
    - *Done when:* `build_state` runs on a parser-produced `BattleState` from a real game, no hand-made fixture.
@@ -53,6 +65,7 @@
    - *Done when:* next-reveal log loss beats the uniform-prior baseline on held-out games.
 5. ⬜ **Pick and build the upgrade path** (calibrated value model, maximin LP): a 🟠 handoff to the user first.
    - *Done when:* the user picked, and exploitability / log loss is reported against the current baseline.
+   - *Note 2026-10-24 (saliha):* split by the 2026-10-24 decisions into tasks 8 (value model) and 9 (maximin LP) above.
 
 ## 6a. Reference
 - Research doc passes 1 (maths) and 7 (Showdown protocol + poke-engine); `design/DESIGN.md` is the map.
@@ -66,7 +79,8 @@
 - Hackathon pace (25 h): the smallest thing that passes its *Done when*; the cut order is in the research doc's READ THIS FIRST.
 
 ## 6. Open blanks (fill when the chat or repo answers them, CLAUDE.md 🔁)
-- Whether the HP/alive heuristic gets replaced by a learned value model (the user's call).
+- Whether the HP/alive heuristic gets replaced by a learned value model: Derrick's call (task 8).
+- Decision-layer design choices are Derrick's; the 2026-10-24 PRD decisions on selector, pruning, lead and forced switch are recommendations he can override.
 
 ---
 ── Archived (superseded <date> — do NOT action) ──

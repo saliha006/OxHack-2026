@@ -45,19 +45,19 @@ Exact shapes go in `contracts/` once agreed. For now these are just their names 
 
 | Seam | Producer → consumer | What crosses | Status |
 |---|---|---|---|
-| `BattleState` | Bot → Decision | Actives, HP %, status, boosts, field, hazards, revealed info, request type | 🟠 shape not decided |
-| `Choice` | Decision → Bot | `move N`, `move N terastallize`, `switch N`, team order | 🟠 not decided |
-| Set candidates + priors | Data → Decision | Per species: top 20–50 sets with weights, plus an "other" bucket from marginals | 🟠 format not decided |
-| Model artifacts | Python training → Decision (TS) | Opponent policy, value model | 🟠 export format not decided |
+| `BattleState` | Bot → Decision | Actives, HP %, status, boosts, field, hazards, revealed info, request type | Drafted: `contracts/battle-state.md` |
+| `Choice` | Decision → Bot | `move N`, `move N terastallize`, `switch N`, team order | `agent.choose()` returns it as a string |
+| Set candidates + priors | Data → Decision | Per species: top 20–50 sets with weights, plus an "other" bucket from marginals | Drafted: `contracts/set-candidates.md` |
+| Model artifacts | Python training → Decision | Opponent policy, value model | 🟠 export format not decided |
 | Battle rows | Ingestion → ClickHouse | `battles` keyed on replay id; `players` from ladder snapshots | 🟠 schema not decided |
 
 ## 3. Stack (as proposed)
 
-- **TypeScript** for the runtime: `@pkmn/sim` (simulator), `@smogon/calc` (damage calc).
-- **Python** only for training, with models exported for inference from TS.
-- **ClickHouse** for storage.
+- **Python** throughout. The decision layer runs on `poke-engine` 0.0.48 (built, on `main`); it replaced the earlier TypeScript `@pkmn/sim` idea.
+- **Bot framework:** poke-env 0.16.1 on gen9ou, local server (decided 2026-10-24, research pass 8).
+- **Storage:** 🟠 pending (ClickHouse vs lighter files).
 
-Each one adds a dependency, so each is a 🟠 decision (CLAUDE.md §2). Once agreed, they move to PRD §12.
+The stack's home is PRD §12.
 
 ## 4. Build order (by layer)
 

@@ -1515,3 +1515,21 @@ Selector, pruning, team-preview lead and forced switch. Notes in `Research-Conte
 | Showdown SIM-PROTOCOL.md | WEAK | Fetch did not surface the forceSwitch text; battle.ts used instead |
 
 Gaps: no published blend weight, prune threshold or lead win-rate effect for Pokemon. The blend objective, the forced-switch scoring rule and "a fixed lead is enough" rest on our own reasoning, so each shipped the lowest-risk option.
+
+# Pass 8, bot framework and format (2026-10-24)
+
+Raw notes: `Research-Context/research_notes/Showdown bot framework and format/`; report: `Research-Context/reports/Showdown bot framework and format.md`.
+
+| Claim | Verdict | Sources |
+|---|---|---|
+| poke-env 0.16.1 ships `RandomPlayer`, `MaxBasePowerPlayer`, `SimpleHeuristicsPlayer`, `max_concurrent_battles`, `battle_against` | KEEP | poke-env source (tag 0.16.1), PyPI |
+| Raw lines are reachable by overriding `Player._handle_battle_message`; `battle.last_request` holds the request dict | KEEP | poke-env source; foul-play source (same pattern, own client) |
+| poke-env swallows parse exceptions and can hang (#973); its invalid-choice fallback fires 1 in 1,000 | KEEP | poke-env issues + source |
+| `--no-security` lets `/trn name,0,` log in with an empty assertion | KEEP | Showdown `config-loader.ts`, `users.ts` |
+| Battle streams give no live view and no baselines | KEEP | Showdown SIMULATOR.md; poke-env issue #907 |
+| gen9ou is the live main ladder (574,541 battles in Sept 2026), so the 1825 priors apply | KEEP | Smogon stats |
+| gen9randombattle sets are role-based (`sets.json` + `teams.ts`), not usage-based | KEEP | Showdown source; pkmn randbats data |
+| PokéChamp evaluates on Gen 9 OU; foul-play's standard mode uses chaos stats + replay sets | KEEP | PokéChamp paper; foul-play source |
+| poke-env `generate_team` / `SmogonStatsTeambuilder` make valid gen9ou teams (39 of 40 in one run) | WEAK | one local run, not repeated |
+| foulplay.cc replay-derived teams | WEAK | third-party data |
+| Mirror summaries (mintlify, context7) | DO NOT USE | not primary |

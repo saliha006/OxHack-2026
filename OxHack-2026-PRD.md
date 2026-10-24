@@ -28,6 +28,8 @@
 > Fill: what's true today. Update it the moment a decision, the direction or the headline changes (CLAUDE.md §8 mirrors).
 
 **Decisions in force** (newest first; one line each, full ADR in the vault Log):
+- 2026-10-24: bot = poke-env 0.16.1 (`Player` subclass tapping raw lines, calling `Agent.choose`), format gen9ou with one fixed team + a seeded validated opponent pool, local Showdown server. Own websocket client is the fallback. Research pass 8. (saliha)
+- 2026-10-24: system design choices are owned by saliha and derrick, and decision-layer choices are derrick's. The four decision-layer lines below are recommendations he can override; he already built a type-matchup lead (feature 11). (saliha)
 - 2026-10-24: forced switch reuses the main loop with the opponent's only option `None` (double faint = normal switch-vs-switch matrix). Score stays Derrick's next-turn evaluation until the trained value model lands, then post-switch value only. (saliha, delegated to a reviewing agent)
 - 2026-10-24: team preview sends a fixed hand-picked lead order for v1; a type-matchup lead score is a later upgrade if time remains. (saliha, delegated to a reviewing agent)
 - 2026-10-24: action pruning: v1 enumerates everything and measures p50/p99 turn time; over budget, Tera only on the top few moves by damage, always keeping switches and one or two status moves. Opponent top-n only once the policy is trained, and never dropping the columns that hurt us most. (saliha, delegated to a reviewing agent)
@@ -154,14 +156,21 @@ CLAUDE.md §2 treats anything in this list as a 🟠 decision.
 > Fill: the boxes, the arrows, where each one runs, and the resource budget. Freeze the contracts early so nobody blocks.
 
 ```
-{{inputs → components → stores → outputs, with process/container boundaries and the host}}
+OFFLINE (data layer)                         ONLINE, per request (one laptop)
+replays + chaos stats ─► set candidates ─────────────────────┐
+                     └─► (state, winner) pairs ─► value model (later)
+Showdown server ─log lines─► bot parser ─► BattleState ─► Agent.choose() ─► choice ─► server
+                                  └─► runs/*.jsonl trace ─► eval harness · demo · charts
 ```
 
 | Component | Job | Runs on | Talks to | Budget (CPU / RAM) | Area |
 |---|---|---|---|---|---|
-| {{…}} | {{…}} | {{…}} | {{…}} | {{…}} | {{frontend / backend / ML / platform}} |
+| Showdown server | Runs battles; judges watch in the web client | Local, Node ≥ 22.18 | Bot | {{…}} | platform |
+| Bot layer | Connection, parser, trace, eval harness | Local, Python | Server, decision layer | {{…}} | backend |
+| Decision layer | Belief → simulate → value → select, 3 s budget | In-process with the bot | Bot, set candidates | {{…}} | ML |
+| Data layer | Ingestion, set candidates, training pairs, charts | Offline | Files for the other two | {{…}} | ML / data |
 
-**Contracts, frozen by {{time}}:** {{e.g. `contracts/openapi.yaml`, event schemas, the model interface signature, fixtures}}
+**Contracts, frozen by {{time}}:** `contracts/battle-state.md` and `contracts/set-candidates.md` (drafts on `main`), and `agent.choose(request, battle_state) -> str | None`
 
 ## 11. Interfaces ★ *(one row per endpoint or event; the full spec lives in `contracts/`)*
 > Fill: every API endpoint, event or function boundary that another builder depends on.
@@ -176,7 +185,10 @@ CLAUDE.md §2 treats anything in this list as a 🟠 decision.
 
 | Layer | Choice | Why (vs alternative) | Gotcha |
 |---|---|---|---|
-| {{frontend / API / DB / ML / infra}} | {{…}} | {{…}} | {{…}} |
+| Decision layer | Python, `poke-engine` 0.0.48, `uv`, `pytest --cov` | Built and merged on `main` | Legality comes from the request, not the engine |
+| Bot layer | Python, poke-env 0.16.1 | Only option with baseline bots + concurrent battles; raw lines via `_handle_battle_message`, request via `battle.last_request` | Parse errors can hang a run (#973); add `/choose ` ourselves; search off the event loop |
+| Game server | Pokémon Showdown, local, `--no-security` | No account, no rate limits, watchable | The public server needs bot registration (`/ht`) |
+| Data storage | 🟠 pending: ClickHouse vs lighter files | {{…}} | {{…}} |
 | Design direction | {{palette, type, motion feel; tokens file}} | {{…}} | {{…}} |
 
 ## 13. Non-functional requirements ★ *(≤8 rows, each one a number)*
