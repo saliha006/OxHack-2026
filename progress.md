@@ -38,6 +38,7 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
+| 2026-10-24 20:52 | @saliha | @all | ⚠️ conflict | `context` now holds only `CLAUDE.md`, the PRD, `builder-files/` and `design-decision/` (was `design/`). Skills, the event doc and the research doc are local now. Sync with `git archive origin/context | tar -x`, then delete your old `design/` copy. Publish steps are in `CLAUDE.md` | 2026-10-24 20:52 |
 | 2026-10-24 20:36 | @saliha | @derrick | ⚠️ conflict | The parser is on `main`: `from bot.parser import Parser, states_from_log`. `Parser(us).feed(line)` per protocol line, `.snapshot()` per request. Unblocks your task 3 (build_state on a parser-made BattleState) | 2026-10-24 20:36 |
 | 2026-10-24 20:36 | @saliha | @nate | ⚠️ conflict | The parser is on `main`: `states_from_log(log_lines, us)` gives one `BattleState` per turn of a saved replay, for your (state, winner) pairs | 2026-10-24 20:36 |
 | 2026-10-24 20:15 | @saliha | @derrick | 📨 waiting on | New tasks 6–9 in your brief (trace, turn-time profile, win-probability model, maximin LP); the model and LP are your calls. The bot will need `poke-env==0.16.1` in your `pyproject.toml`: OK to add? | 2026-10-24 20:15 |
@@ -75,6 +76,15 @@ whenever you log an entry.
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 20:52 — docs — One project folder; context trimmed to the plan docs — @saliha
+- **Where:** `context` @ `1a96e99` · `main` @ `ab7b121` (`.gitignore`) · merged to `main`: yes
+- **Did:** Rebuilt saliha's checkout as one folder (no sibling worktrees; the Showdown server sits in a git-ignored `pokemon-showdown/`). `context` keeps `CLAUDE.md`, the PRD, the three briefs and `design-decision/`; skills, the event doc and the research doc stay local, and research is deleted per feature once it ships. `CLAUDE.md` publishes through a temporary git index instead of a second checkout. The PRD's NOW, scope, data, failure modes, evaluation, milestones and open questions are filled from what's built.
+- **Touched:** `context` (all files), `.gitignore`
+- **Brief task:** none
+- **⚠️ Conflicts:** @all: `design/` became `design-decision/`; the skills and the research and event docs left `context` (Open board row)
+- **📨 Needs:** none
+- **Status:** open (the note to @all)
 
 ### 2026-10-24 20:36 — feat — Bot layer: log parser to BattleState — @saliha
 - **Where:** `sali` @ `c25be7e` · merged to `main`: yes (fast-forward)
