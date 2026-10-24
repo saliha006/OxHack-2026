@@ -80,6 +80,14 @@ whenever you log an entry.
 
 ## Log (newest first)
 
+### 2026-10-25 23:10 — feat — Foul Play tops the eval ladder; full eval run started — @saliha
+- **Where:** `eval-foulplay` → `main` @ `61b10cc` · merged to `main`: yes
+- **Did:** Foul Play (pmariglia, same `poke-engine` 0.0.48 build) runs as three uneven search-time levels (40–80, 150–260, 450–700 ms) in its own venv inside a git-ignored `foul-play/`. Each shard feeds it a team list in its own game order so games stay same-team; it downloads real Smogon stats, so it needs internet once. Measured: Foul Play at 200 ms beat our agent in 50 turns. Turn-0 games are now void (Foul Play crashes on Keldeo-Resolute too, so team 7 left the pool). `*.env` is ignored now: `saliha-tiger.env` was not covered by `.env*`. Full run: 27 pairings, 1,750 games, 5 shards, stand-in priors from the 10 pool teams.
+- **Touched:** `bot/eval.py`, `bot/tests/test_eval.py`, `.gitignore`, `bot/teams/standin/`
+- **Brief task:** saliha task 5 🟡 (full run in progress)
+- **⚠️ Conflicts:** @nate: your `.env` file must end in `.env` or start with `.env` to stay ignored
+- **📨 Needs:** none new
+
 ### 2026-10-24 22:53 — feat — Elo ladder in the eval — @saliha
 - **Where:** `eval-ladder` → `main` @ `f36a4c7` · merged to `main`: yes
 - **Did:** saliha picked option B (our bots + Foul Play on top). This part adds the levels we already have: SimpleHeuristics mixed with random moves at uneven rates (83/58/31/12%) and MaxBasePower at 46%, so steps aren't even and levels overlap; our agent variants are levels too. The agent plays every level (40 games), neighbouring levels play each other (30), 1,540 games in all. `report` fits Bradley-Terry ratings on the Elo scale (Random = 1000) with bootstrap intervals and lists the levels ±1–3 places around the agent. This is an internal ladder Elo, not a Showdown ladder Elo. Foul Play levels come next.
