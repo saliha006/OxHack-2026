@@ -38,6 +38,7 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
+| 2026-10-24 19:01 | @derrick | @saliha | 📨 waiting on | Publish from `origin/derrick` @ `bf02d6a`: `design/decision/12-budget-fallback.md` (built: 3 s budget, fallback) and `design/decision-layer.md` (§7 tick for 12). FYI the decision layer is on `main` @ `5e203fc` (code + contracts only) | 2026-10-24 19:01 |
 | 2026-10-24 18:32 | @derrick | @saliha | 📨 waiting on | Publish from `origin/derrick` @ `eb56c61`: `design/decision/03-…`, `04-…`, `05-…` (now marked built, with the reweight method) and `design/decision-layer.md` (§7 ticks for 03-05). Your 18:30 publish carried the older `e4cef23` copies, and each sync overwrites the newer local ones. Also done: the `last_move` reset + `Event.source` spellings are now in `contracts/battle-state.md` | 2026-10-24 18:32 |
 | 2026-10-24 18:14 | @derrick | @nate | ⚠️ conflict | `contracts/set-candidates.md` (on `derrick`) defines the set file your data layer would build for belief: 30 weighted sets per species + trimmed usage, chaos 1825 / 2026-09. Next: yes/no on the shape and on `data/set_candidates.json` as its path | 2026-10-24 18:14 |
 
