@@ -32,7 +32,7 @@ Decisions in force and open choices are in the project's shared docs (kept off `
 
 ## Repo layout
 
-- `main`: this README and [`progress.md`](progress.md) only, plus code once it exists.
+- `main`: this README, [`progress.md`](progress.md), `contracts/` and the code.
 - `sali`: Saliha's working branch.
 - `context`: the team's shared planning docs (no code).
 

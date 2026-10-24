@@ -1,0 +1,308 @@
+{
+ "source": {
+  "format": "gen9ou",
+  "month": "2026-09",
+  "cutoff": 1825,
+  "battles": 574541
+ },
+ "species": {
+  "gholdengo": {
+   "sets": [
+    {
+     "weight": 0.6,
+     "moves": [
+      "makeitrain",
+      "shadowball",
+      "trick",
+      "focusblast"
+     ],
+     "item": "choicescarf",
+     "ability": "goodasgold",
+     "tera_type": "steel",
+     "spread": {
+      "nature": "timid",
+      "evs": [
+       0,
+       0,
+       0,
+       252,
+       4,
+       252
+      ]
+     }
+    },
+    {
+     "weight": 0.4,
+     "moves": [
+      "nastyplot",
+      "shadowball",
+      "makeitrain",
+      "recover"
+     ],
+     "item": "airballoon",
+     "ability": "goodasgold",
+     "tera_type": "fairy",
+     "spread": {
+      "nature": "timid",
+      "evs": [
+       0,
+       0,
+       0,
+       252,
+       4,
+       252
+      ]
+     }
+    }
+   ],
+   "usage": {
+    "moves": {
+     "shadowball": 0.905,
+     "makeitrain": 0.826,
+     "recover": 0.64,
+     "nastyplot": 0.528,
+     "trick": 0.419
+    },
+    "items": {
+     "choicescarf": 0.393,
+     "airballoon": 0.224,
+     "leftovers": 0.09,
+     "shucaberry": 0.047,
+     "custapberry": 0.043
+    },
+    "abilities": {
+     "goodasgold": 1.0
+    },
+    "tera_types": {
+     "fairy": 0.357,
+     "steel": 0.215,
+     "ghost": 0.167,
+     "flying": 0.078,
+     "fighting": 0.076
+    },
+    "spreads": [
+     [
+      {
+       "nature": "timid",
+       "evs": [
+        0,
+        0,
+        0,
+        252,
+        4,
+        252
+       ]
+      },
+      0.352
+     ],
+     [
+      {
+       "nature": "bold",
+       "evs": [
+        252,
+        0,
+        188,
+        0,
+        0,
+        68
+       ]
+      },
+      0.082
+     ],
+     [
+      {
+       "nature": "timid",
+       "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+       ]
+      },
+      0.06
+     ],
+     [
+      {
+       "nature": "timid",
+       "evs": [
+        0,
+        0,
+        4,
+        252,
+        0,
+        252
+       ]
+      },
+      0.057
+     ],
+     [
+      {
+       "nature": "bold",
+       "evs": [
+        248,
+        0,
+        196,
+        0,
+        0,
+        64
+       ]
+      },
+      0.055
+     ]
+    ]
+   }
+  },
+  "kingambit": {
+   "sets": [
+    {
+     "weight": 0.7,
+     "moves": [
+      "swordsdance",
+      "suckerpunch",
+      "kowtowcleave",
+      "ironhead"
+     ],
+     "item": "leftovers",
+     "ability": "supremeoverlord",
+     "tera_type": "bug",
+     "spread": {
+      "nature": "adamant",
+      "evs": [
+       248,
+       252,
+       8,
+       0,
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "weight": 0.3,
+     "moves": [
+      "swordsdance",
+      "suckerpunch",
+      "lowkick",
+      "ironhead"
+     ],
+     "item": "blackglasses",
+     "ability": "supremeoverlord",
+     "tera_type": "ghost",
+     "spread": {
+      "nature": "jolly",
+      "evs": [
+       0,
+       252,
+       0,
+       0,
+       4,
+       252
+      ]
+     }
+    }
+   ],
+   "usage": {
+    "moves": {
+     "suckerpunch": 1.0,
+     "swordsdance": 0.979,
+     "ironhead": 0.897,
+     "lowkick": 0.595,
+     "kowtowcleave": 0.524
+    },
+    "items": {
+     "leftovers": 0.671,
+     "blackglasses": 0.104,
+     "airballoon": 0.088,
+     "lifeorb": 0.036,
+     "lumberry": 0.031
+    },
+    "abilities": {
+     "supremeoverlord": 0.968,
+     "defiant": 0.032,
+     "pressure": 0.0
+    },
+    "tera_types": {
+     "bug": 0.408,
+     "ghost": 0.228,
+     "dark": 0.119,
+     "fighting": 0.08,
+     "fire": 0.078
+    },
+    "spreads": [
+     [
+      {
+       "nature": "adamant",
+       "evs": [
+        248,
+        252,
+        8,
+        0,
+        0,
+        0
+       ]
+      },
+      0.273
+     ],
+     [
+      {
+       "nature": "jolly",
+       "evs": [
+        0,
+        252,
+        0,
+        0,
+        4,
+        252
+       ]
+      },
+      0.104
+     ],
+     [
+      {
+       "nature": "adamant",
+       "evs": [
+        232,
+        252,
+        0,
+        0,
+        0,
+        24
+       ]
+      },
+      0.094
+     ],
+     [
+      {
+       "nature": "adamant",
+       "evs": [
+        192,
+        216,
+        0,
+        0,
+        0,
+        100
+       ]
+      },
+      0.062
+     ],
+     [
+      {
+       "nature": "jolly",
+       "evs": [
+        0,
+        252,
+        4,
+        0,
+        0,
+        252
+       ]
+      },
+      0.061
+     ]
+    ]
+   }
+  }
+ }
+}

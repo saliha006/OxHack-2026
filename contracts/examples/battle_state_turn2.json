@@ -1,0 +1,285 @@
+{
+ "us": "p1",
+ "turn": 2,
+ "sides": {
+  "p1": {
+   "player": "Alice",
+   "rating": 1654,
+   "pokemon": [
+    {
+     "species": "meowscarada",
+     "forme_known": true,
+     "level": 100,
+     "hp_percent": 100,
+     "status": "",
+     "status_turns": 0,
+     "revealed_moves": [],
+     "item": null,
+     "ability": null,
+     "tera_type": null,
+     "terastallized": false
+    },
+    {
+     "species": "ragingbolt",
+     "forme_known": true,
+     "level": 100,
+     "hp_percent": 100,
+     "status": "",
+     "status_turns": 0,
+     "revealed_moves": [],
+     "item": null,
+     "ability": null,
+     "tera_type": null,
+     "terastallized": false
+    },
+    {
+     "species": "hatterene",
+     "forme_known": true,
+     "level": 100,
+     "hp_percent": 100,
+     "status": "",
+     "status_turns": 0,
+     "revealed_moves": [],
+     "item": null,
+     "ability": null,
+     "tera_type": null,
+     "terastallized": false
+    },
+    {
+     "species": "cinderace",
+     "forme_known": true,
+     "level": 100,
+     "hp_percent": 100,
+     "status": "",
+     "status_turns": 0,
+     "revealed_moves": [],
+     "item": null,
+     "ability": null,
+     "tera_type": null,
+     "terastallized": false
+    },
+    {
+     "species": "landorustherian",
+     "forme_known": true,
+     "level": 100,
+     "hp_percent": 100,
+     "status": "",
+     "status_turns": 0,
+     "revealed_moves": [],
+     "item": null,
+     "ability": null,
+     "tera_type": null,
+     "terastallized": false
+    },
+    {
+     "species": "kingambit",
+     "forme_known": true,
+     "level": 100,
+     "hp_percent": 66,
+     "status": "",
+     "status_turns": 0,
+     "revealed_moves": [],
+     "item": "leftovers",
+     "ability": null,
+     "tera_type": null,
+     "terastallized": false
+    }
+   ],
+   "active": 5,
+   "tera_used": false,
+   "boosts": {
+    "atk": 0,
+    "def": 0,
+    "spa": 0,
+    "spd": 0,
+    "spe": 0,
+    "accuracy": 0,
+    "evasion": 0
+   },
+   "volatiles": [],
+   "last_move": null,
+   "hazards": {
+    "stealthrock": 0,
+    "spikes": 0,
+    "toxicspikes": 0,
+    "stickyweb": 0
+   },
+   "side_effects": {}
+  },
+  "p2": {
+   "player": "Bob",
+   "rating": 1625,
+   "pokemon": [
+    {
+     "species": "dragonite",
+     "forme_known": true,
+     "level": 100,
+     "hp_percent": 100,
+     "status": "",
+     "status_turns": 0,
+     "revealed_moves": [],
+     "item": null,
+     "ability": null,
+     "tera_type": null,
+     "terastallized": false
+    },
+    {
+     "species": "samurotthisui",
+     "forme_known": true,
+     "level": 100,
+     "hp_percent": 100,
+     "status": "",
+     "status_turns": 0,
+     "revealed_moves": [],
+     "item": null,
+     "ability": null,
+     "tera_type": null,
+     "terastallized": false
+    },
+    {
+     "species": "gholdengo",
+     "forme_known": true,
+     "level": 100,
+     "hp_percent": 100,
+     "status": "",
+     "status_turns": 0,
+     "revealed_moves": [
+      "makeitrain"
+     ],
+     "item": null,
+     "ability": null,
+     "tera_type": "steel",
+     "terastallized": true
+    },
+    {
+     "species": "pecharunt",
+     "forme_known": true,
+     "level": 100,
+     "hp_percent": 100,
+     "status": "",
+     "status_turns": 0,
+     "revealed_moves": [],
+     "item": null,
+     "ability": null,
+     "tera_type": null,
+     "terastallized": false
+    },
+    {
+     "species": "walkingwake",
+     "forme_known": true,
+     "level": 100,
+     "hp_percent": 100,
+     "status": "",
+     "status_turns": 0,
+     "revealed_moves": [],
+     "item": null,
+     "ability": null,
+     "tera_type": null,
+     "terastallized": false
+    },
+    {
+     "species": "tinglu",
+     "forme_known": true,
+     "level": 100,
+     "hp_percent": 100,
+     "status": "",
+     "status_turns": 0,
+     "revealed_moves": [],
+     "item": null,
+     "ability": null,
+     "tera_type": null,
+     "terastallized": false
+    }
+   ],
+   "active": 2,
+   "tera_used": true,
+   "boosts": {
+    "atk": 0,
+    "def": 0,
+    "spa": -1,
+    "spd": 0,
+    "spe": 0,
+    "accuracy": 0,
+    "evasion": 0
+   },
+   "volatiles": [],
+   "last_move": "makeitrain",
+   "hazards": {
+    "stealthrock": 0,
+    "spikes": 0,
+    "toxicspikes": 0,
+    "stickyweb": 0
+   },
+   "side_effects": {}
+  }
+ },
+ "field": {
+  "weather": "",
+  "weather_turns": 0,
+  "terrain": "",
+  "terrain_turns": 0,
+  "effects": {}
+ },
+ "last_turn": [
+  {
+   "move": null,
+   "target": null,
+   "hp_percent": null,
+   "source": null,
+   "crit": false,
+   "effectiveness": null,
+   "reason": null,
+   "type": "switch",
+   "side": "p1",
+   "pokemon": 5
+  },
+  {
+   "move": null,
+   "target": null,
+   "hp_percent": null,
+   "source": "tera:steel",
+   "crit": false,
+   "effectiveness": null,
+   "reason": null,
+   "type": "reveal",
+   "side": "p2",
+   "pokemon": 2
+  },
+  {
+   "move": "makeitrain",
+   "target": "p1",
+   "hp_percent": null,
+   "source": null,
+   "crit": false,
+   "effectiveness": null,
+   "reason": null,
+   "type": "move",
+   "side": "p2",
+   "pokemon": 2
+  },
+  {
+   "move": null,
+   "target": null,
+   "hp_percent": 60,
+   "source": "move",
+   "crit": false,
+   "effectiveness": "resisted",
+   "reason": null,
+   "type": "damage",
+   "side": "p1",
+   "pokemon": 5
+  },
+  {
+   "move": null,
+   "target": null,
+   "hp_percent": 66,
+   "source": "item:leftovers",
+   "crit": false,
+   "effectiveness": null,
+   "reason": null,
+   "type": "heal",
+   "side": "p1",
+   "pokemon": 5
+  }
+ ]
+}
