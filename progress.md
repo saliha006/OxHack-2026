@@ -38,6 +38,8 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
+| 2026-10-24 20:15 | @saliha | @derrick | 📨 waiting on | New tasks 6–9 in your brief (trace, turn-time profile, win-probability model, maximin LP); the model and LP are your calls. The bot will need `poke-env==0.16.1` in your `pyproject.toml`: OK to add? | 2026-10-24 20:15 |
+| 2026-10-24 20:15 | @saliha | @nate | 📨 waiting on | New tasks 6–8 in your brief: seeded gen9ou team pool (~60 validated teams), eval and demo charts, data card. Training states should come from saliha's parser | 2026-10-24 20:15 |
 | 2026-10-24 19:26 | @derrick | @saliha | 📨 waiting on | Publish from `origin/derrick` @ `a50936e`: `design/decision/11-special-requests.md` + the §7 tick in `design/decision-layer.md`; mirror the two feature 11 decisions in PRD → NOW. (Brief line and publish-script issue resolved by @derrick 2026-10-24 19:40: published with the plain-git steps, `context` @ `79d6713`) | 2026-10-24 19:26 |
 | 2026-10-24 19:16 | @saliha | @all | ⚠️ conflict | `scripts/` and every skill except `debug` and `no-slop` are gone from `context`. Keep your local copies (they stay git-ignored); `sync`/`publish` won't update from `context` any more | 2026-10-24 19:16 |
 | 2026-10-24 18:14 | @derrick | @nate | ⚠️ conflict | `contracts/set-candidates.md` (on `derrick`) defines the set file your data layer would build for belief: 30 weighted sets per species + trimmed usage, chaos 1825 / 2026-09. Next: yes/no on the shape and on `data/set_candidates.json` as its path | 2026-10-24 18:14 |
@@ -72,6 +74,15 @@ whenever you log an entry.
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 20:15 — decision — Bot runs on poke-env, gen9ou, local server; all three briefs get the demo plan — @saliha
+- **Where:** `context` @ `538549d` · merged to `main`: n/a (docs branch)
+- **Did:** Picked poke-env 0.16.1 (a `Player` subclass tapping raw lines and calling `Agent.choose`) on gen9ou with one fixed team and a seeded opponent pool, on a local Showdown server (research pass 8). Briefs now cover a working demo: parser, wiring, decision trace, eval harness vs poke-env's three baselines, demo mode. The PRD's architecture and stack are filled from what's built. saliha and derrick own design choices; decision-layer ones are derrick's.
+- **Touched:** `context`: PRD, `CLAUDE.md`, research doc, all three briefs, `design/DESIGN.md`, `design/bot-layer.md`
+- **Brief task:** saliha task 1 ✅
+- **⚠️ Conflicts:** @derrick: the bot adds `poke-env` to `pyproject.toml` (yours). @nate: new tasks in your brief
+- **📨 Needs:** @derrick: OK on the dependency, and your calls on tasks 8–9. @nate: read tasks 6–8
+- **Status:** open
 
 ### 2026-10-24 19:26 — feat — Decision layer: lead picked by type matchup at team preview — @derrick
 - **Where:** `derrick` @ `a50936e` · merged to `main`: not yet
