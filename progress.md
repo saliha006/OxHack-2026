@@ -81,6 +81,14 @@ whenever you log an entry.
 
 ## Log (newest first)
 
+### 2026-10-24 23:49 — feat — Demo mode: live battle streamed turn by turn, or replayed offline — @saliha
+- **Where:** `demo-mode` → `main` @ `ecbb278` · merged to `main`: yes
+- **Did:** `uv run python -m bot.demo live --priors-from-teams` starts a battle vs SimpleHeuristics, prints the URL to watch it and streams each turn: the choice in words ("Icicle Crash + Tera", "switch to Zapdos"), both actives with HP and Pokémon left, think time, and any field the agent adds (shown generically, so a new prediction field needs no demo change). `--pace` slows our side so judges can follow. `bot.demo replay runs/<battle>.jsonl` replays a saved game offline. Two live test games ran: one won in 44 turns.
+- **Touched:** `bot/demo.py`, `bot/player.py` (trace label + per-decision callback), `bot/tests/test_demo.py`, `bot/tests/test_player.py`
+- **Brief task:** saliha task 7 ✅
+- **⚠️ Conflicts:** @derrick: anything you put in `agent.last_trace` shows up in the demo stream as `key: value`; no shape is assumed
+- **📨 Needs:** none
+
 ### 2026-10-24 23:10 — feat — Foul Play tops the eval ladder; full eval run started — @saliha
 - **Where:** `eval-foulplay` → `main` @ `61b10cc` · merged to `main`: yes
 - **Did:** Foul Play (pmariglia, same `poke-engine` 0.0.48 build) runs as three uneven search-time levels (40–80, 150–260, 450–700 ms) in its own venv inside a git-ignored `foul-play/`. Each shard feeds it a team list in its own game order so games stay same-team; it downloads real Smogon stats, so it needs internet once. Measured: Foul Play at 200 ms beat our agent in 50 turns. Turn-0 games are now void (Foul Play crashes on Keldeo-Resolute too, so team 7 left the pool). `*.env` is ignored now: `saliha-tiger.env` was not covered by `.env*`. Full run: 27 pairings, 1,750 games, 5 shards, stand-in priors from the 10 pool teams.
