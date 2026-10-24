@@ -1,0 +1,17 @@
+[project]
+name = "oxhack-decision"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = ["poke-engine==0.0.48"]
+
+[dependency-groups]
+dev = ["pytest", "pytest-cov"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.uv]
+# poke-engine ships as source only and builds gen4 by default; this flag builds gen9 with Tera.
+no-binary-package = ["poke-engine"]
+config-settings-package = { poke-engine = { build-args = "--features poke-engine/terastallization --no-default-features" } }

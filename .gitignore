@@ -1,0 +1,13 @@
+# Shared docs live on the context branch; only these markdown files belong on main.
+*.md
+!progress.md
+!README.md
+!contracts/*.md
+.claude/skills/
+.claude/settings.local.json
+.env*
+
+.venv/
+__pycache__/
+.coverage
+.pytest_cache/

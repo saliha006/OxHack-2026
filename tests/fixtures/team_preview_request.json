@@ -1,0 +1,173 @@
+{
+ "teamPreview": true,
+ "maxChosenTeamSize": 6,
+ "side": {
+  "name": "Alice",
+  "id": "p1",
+  "pokemon": [
+   {
+    "ident": "p1: Kingambit",
+    "details": "Kingambit, L100, F",
+    "condition": "300/400",
+    "active": false,
+    "stats": {
+     "atk": 300,
+     "def": 250,
+     "spa": 150,
+     "spd": 220,
+     "spe": 200
+    },
+    "moves": [
+     "swordsdance",
+     "kowtowcleave",
+     "suckerpunch",
+     "ironhead"
+    ],
+    "baseAbility": "supremeoverlord",
+    "item": "leftovers",
+    "pokeball": "pokeball",
+    "ability": "supremeoverlord",
+    "commanding": false,
+    "reviving": false,
+    "teraType": "Dark",
+    "terastallized": ""
+   },
+   {
+    "ident": "p1: Great Tusk",
+    "details": "Great Tusk, L100",
+    "condition": "380/380",
+    "active": false,
+    "stats": {
+     "atk": 300,
+     "def": 250,
+     "spa": 150,
+     "spd": 220,
+     "spe": 200
+    },
+    "moves": [
+     "headlongrush",
+     "icespinner",
+     "rapidspin",
+     "knockoff"
+    ],
+    "baseAbility": "protosynthesis",
+    "item": "boosterenergy",
+    "pokeball": "pokeball",
+    "ability": "protosynthesis",
+    "commanding": false,
+    "reviving": false,
+    "teraType": "Steel",
+    "terastallized": ""
+   },
+   {
+    "ident": "p1: Gholdengo",
+    "details": "Gholdengo, L100",
+    "condition": "320/320",
+    "active": false,
+    "stats": {
+     "atk": 300,
+     "def": 250,
+     "spa": 150,
+     "spd": 220,
+     "spe": 200
+    },
+    "moves": [
+     "makeitrain",
+     "shadowball",
+     "nastyplot",
+     "recover"
+    ],
+    "baseAbility": "goodasgold",
+    "item": "airballoon",
+    "pokeball": "pokeball",
+    "ability": "goodasgold",
+    "commanding": false,
+    "reviving": false,
+    "teraType": "Fairy",
+    "terastallized": ""
+   },
+   {
+    "ident": "p1: Dragapult",
+    "details": "Dragapult, L100, M",
+    "condition": "290/290",
+    "active": false,
+    "stats": {
+     "atk": 300,
+     "def": 250,
+     "spa": 150,
+     "spd": 220,
+     "spe": 200
+    },
+    "moves": [
+     "dracometeor",
+     "shadowball",
+     "uturn",
+     "flamethrower"
+    ],
+    "baseAbility": "infiltrator",
+    "item": "choicespecs",
+    "pokeball": "pokeball",
+    "ability": "infiltrator",
+    "commanding": false,
+    "reviving": false,
+    "teraType": "Ghost",
+    "terastallized": ""
+   },
+   {
+    "ident": "p1: Corviknight",
+    "details": "Corviknight, L100, F",
+    "condition": "400/400",
+    "active": false,
+    "stats": {
+     "atk": 300,
+     "def": 250,
+     "spa": 150,
+     "spd": 220,
+     "spe": 200
+    },
+    "moves": [
+     "bravebird",
+     "defog",
+     "roost",
+     "uturn"
+    ],
+    "baseAbility": "pressure",
+    "item": "rockyhelmet",
+    "pokeball": "pokeball",
+    "ability": "pressure",
+    "commanding": false,
+    "reviving": false,
+    "teraType": "Dragon",
+    "terastallized": ""
+   },
+   {
+    "ident": "p1: Iron Valiant",
+    "details": "Iron Valiant, L100",
+    "condition": "290/290",
+    "active": false,
+    "stats": {
+     "atk": 300,
+     "def": 250,
+     "spa": 150,
+     "spd": 220,
+     "spe": 200
+    },
+    "moves": [
+     "moonblast",
+     "closecombat",
+     "knockoff",
+     "encore"
+    ],
+    "baseAbility": "quarkdrive",
+    "item": "boosterenergy",
+    "pokeball": "pokeball",
+    "ability": "quarkdrive",
+    "commanding": false,
+    "reviving": false,
+    "teraType": "Fairy",
+    "terastallized": ""
+   }
+  ]
+ },
+ "rqid": 1
+}
