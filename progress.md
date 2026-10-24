@@ -65,11 +65,20 @@ whenever you log an entry.
 
 ## 📊 Latest (volatile facts live only here)
 - **As of {{YYYY-MM-DD HH:MM}}:** `main` @ `{{sha}}` · tests: {{n}} green, {{x}}% coverage · deploy: {{status, URL}}
-- **On branches, not merged yet:** `derrick`: decision layer `our_actions`, `select`, `simulate`, `our_side`, `value`, `build_state`, `opp_actions`, `Belief` (113 tests, 100% coverage)
+- **On branches, not merged yet:** `derrick`: decision layer `our_actions`, `select`, `simulate`, `our_side`, `value`, `build_state`, `opp_actions`, `Belief` with reweight (126 tests, 100% coverage)
 
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 18:29 — feat — Decision layer: soft reweight by replaying each turn in poke-engine — @derrick
+- **Where:** `derrick` @ `7fb50c3` · merged to `main`: not yet
+- **Did:** Belief now replays last turn per candidate set (the loop calls `belief.chose(request, action)` after choosing) and drops sets the engine can't square with the observed move order or damage (both ways, crits included, ±1 for rounding). Speed ties, flinches, U-turn pivots and KOs handled; switches, one-sided turns and multi-hit moves give no evidence. 126 tests, 100% coverage.
+- **Touched:** `decision/belief.py`, `decision/simulate.py` (`engine_move` now public), `tests/test_reweight.py`
+- **Brief task:** 4 → 🟡 part (all belief logic built on hand-made priors; the real set file and the "beats uniform log loss" check wait on @nate's data)
+- **⚠️ Conflicts:** @saliha: belief reads event order within `last_turn` (move → damage) and each damage event's `crit`; `hit_count` is parked in the contract for multi-hit moves
+- **📨 Needs:** none new
+- **Status:** open (the note to @saliha)
 
 ### 2026-10-24 18:30 — decision — Bot layer is saliha's; `last_move` resets on switch; Derrick's notes 02-05 published — @saliha
 - **Where:** `context` @ `cb32fd0` (docs only) · merged to `main`: n/a
