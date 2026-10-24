@@ -42,6 +42,8 @@
 
 **Focus right now:** pick (a)-(e), lock the idea and the evaluation plan, then build. Bot layer + log parser is saliha's once Nate agrees.
 
+**▶ RESUME HERE (2026-10-24 ~18:00, saliha signing off; any account/session):** run `fetch the context`. Layers: Nate = data (`builder-file-nate.md`), Derrick = decision (`builder-file-derrick.md`), saliha = bot (`builder-file-saliha.md`); the three briefs were filled from the template today, each ends with an "Open blanks" list. Waiting on the user: (1) confirm the parser resets `BattleState.sides[*].last_move` to null on switch (Derrick's ⚠️ row), (2) Nate's yes on saliha owning the bot layer, (3) the (a)-(e) build choices above, (4) the bot skeleton choices (poke-env / local server / format). Next code step for saliha: local Showdown server + a random-move bot end to end (brief task 2).
+
 ---
 
 ## 1. One page ★ *(≤15 lines)*

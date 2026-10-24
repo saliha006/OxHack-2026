@@ -20,7 +20,7 @@
 | Progress doc | `progress.md` (repo root, **the only shared doc on `main`**): history, 📌 Open board, 👥 Team, 📊 Latest |
 | Decisions | Full ADRs: vault Log. Team mirror: PRD → NOW |
 | Mirror docs | PRD §0/§1 ↔ top of this file; `builder-file-*` ↔ `progress.md` 👥 Team; vault Hub + Log; `progress.md` 👥 Team + 📊 Latest. Update every mirror when a decision, owner or status changes |
-| Run · Test | {{run command}} · {{test command with coverage}} |
+| Run · Test | Decision layer (Python): `uv run pytest --cov=decision`. Bot and data layers: {{run command}} · {{test command with coverage}} |
 | Scale | {{demo load / target scale and the box}} |
 | Deploy | {{where it runs, how code gets there}}. Platform rules: {{doc or "none"}} |
 | Verbosity | **Level 0** (§3) |
