@@ -27,6 +27,8 @@
 - Data storage: plain Parquet + DuckDB recommended over ClickHouse [P9 B4]: nate's call, with saliha and derrick.
 - Learned value model replacing the HP heuristic: derrick's call (logistic first, §7.3).
 - Demo story: whether the coach replay review (§7.6) is added. It's first to cut.
+- Elo ladder eval (saliha, 2026-10-24): opponents from weakest to strong with overlapping sub-levels, an internal Bradley–Terry rating (Random = 1000), and the agent tested 1–3 rungs above and below its rating. Open: where the strong rungs come from (A: our bots only; B: + Foul Play; C: + Metamon).
+- Backtesting frontend: derrick mentioned it; not decided (owner: derrick).
 - Handmade piece: no plan; ask the organisers what counts (event doc §6). Elo-from-decisions: parked.
 
 **Focus right now:** Rust toolchain + smoke battle (saliha); set candidates, then the team pool (nate); turn-time profile, belief floor, build_state on parser output (derrick).
