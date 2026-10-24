@@ -14,8 +14,12 @@
 ## Interface
 🟠 Not decided. Goes in `contracts/` once agreed.
 
+## Decisions (Derrick, 2026-10-24)
+1. **Evidence in v1:** speed order, damage they took, damage they dealt.
+2. **Hard zero:** a candidate that can't explain the evidence is removed (weight 0), not down-weighted.
+   ⚠️ A modelling slip (unseen speed boost, missed crit, rounding) can remove the true set; 03's rebuild is the safety net.
+
 ## Open decisions
-- 🟠 Which evidence is in v1: speed order, damage ranges, behaviour hints?
 - 🟠 How to handle speed ties, Scarf, priority and Trick Room in the speed check
 
 ## Done when

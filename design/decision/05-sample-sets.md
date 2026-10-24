@@ -14,9 +14,12 @@
 ## Interface
 🟠 Not decided. Goes in `contracts/` once agreed.
 
+## Decisions (Derrick, 2026-10-24)
+1. **k = 5** for the opponent's active Pokémon; weights renormalised to sum to 1.
+2. **Top-k**, not a random draw: deterministic.
+3. **Vary the active only:** each benched Pokémon uses its single most likely set. 5 states per turn.
+
 ## Open decisions
-- 🟠 k per Pokémon (3–5 proposed), or set by the turn budget?
-- 🟠 Top-k vs random sampling; how the "other" bucket is represented
 
 ## Done when
 - [ ] Returns at most k sets with probabilities that sum to 1

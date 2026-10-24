@@ -35,14 +35,14 @@
 - Idea: Momentum (Pokémon win probability + coach-style replay review, optional ElevenLabs voice) is the lead; Honest Clock is the fallback. Owner saliha, lock in the first hours.
 - Elo angle: estimate a player's Elo from their decisions, using a dataset with ratings at all levels, plus top-500 ladder players' replays. Dataset choice waits on the research notes. Owner saliha.
 - Layered design (data layer, decision layer, bot layer) and the four bot-skeleton choices (framework, server, format, bot↔decision contract): owner saliha; needs Nate and Derrick to agree (CLAUDE.md §2c).
-- Bot layer + log parser (fills Derrick's `BattleState` contract): saliha said yes on 2026-10-24 to owning it (proposed by Derrick); **waiting on Nate's yes**. Decision layer is Python (`uv run pytest --cov=decision`).
+- Bot layer + log parser (fills Derrick's `BattleState` contract): saliha (doc owner) said yes on 2026-10-24 to owning it (proposed by Derrick) and waived a separate yes from Nate; Nate informed. Parser resets `last_move` to null on a switch (confirmed). Decision layer is Python (`uv run pytest --cov=decision`).
 - Handmade piece: physical or not, and what "from scratch" means: ask the organisers (event doc §6).
 
 **Research pass done (2026-10-24):** merged into `OxHack-2026-research.md` (Grep it, ~200KB; passes 1-3 are the new ones). Not decided, the user's call: (a) value model = calibrated gradient-boosted win-probability (replaces the HP heuristic); (b) per-turn maximin LP over the payoff matrix instead of argmax-EV; (c) Bayesian opponent-set belief (biggest, 7-9 h); (d) data = `HolidayOugi/pokemon-showdown-replays` main + Metamon raw cross-check, Elo from the `|player|` line, split by battle/time/player; (e) coach text templated from computed numbers only. Suggested cut order: voice, LLM paraphrase, ClickHouse, Elo-from-decisions, belief layer.
 
 **Focus right now:** pick (a)-(e), lock the idea and the evaluation plan, then build. Bot layer + log parser is saliha's once Nate agrees.
 
-**▶ RESUME HERE (2026-10-24 ~18:00, saliha signing off; any account/session):** run `fetch the context`. Layers: Nate = data (`builder-file-nate.md`), Derrick = decision (`builder-file-derrick.md`), saliha = bot (`builder-file-saliha.md`); the three briefs were filled from the template today, each ends with an "Open blanks" list. Waiting on the user: (1) confirm the parser resets `BattleState.sides[*].last_move` to null on switch (Derrick's ⚠️ row), (2) Nate's yes on saliha owning the bot layer, (3) the (a)-(e) build choices above, (4) the bot skeleton choices (poke-env / local server / format). Next code step for saliha: local Showdown server + a random-move bot end to end (brief task 2).
+**▶ RESUME HERE (2026-10-24 ~18:00, saliha signing off; any account/session):** run `fetch the context`. Layers: Nate = data (`builder-file-nate.md`), Derrick = decision (`builder-file-derrick.md`), saliha = bot (`builder-file-saliha.md`); the three briefs were filled from the template today, each ends with an "Open blanks" list. Waiting on the user (main account): (1) the (a)-(e) build choices above, (2) the bot skeleton choices (poke-env / local server / format). Settled: `last_move` reset on switch, bot-layer ownership. Next code step for saliha: local Showdown server + a random-move bot end to end (brief task 2).
 
 ---
 

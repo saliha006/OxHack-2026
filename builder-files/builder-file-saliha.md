@@ -30,7 +30,7 @@
 ## 2. Contract & Guardrails
 **Scope contract.** Saliha builds the layer between Showdown and the decision layer (`design/bot-layer.md`):
 - Connect to a Showdown server (local first), receive `|request|` JSON + log lines, track state, fill Derrick's `BattleState` each turn, call the decision layer, send the `Choice` back.
-- Agreement status: Derrick proposed and saliha said yes (2026-10-24 17:20); **Nate's yes is pending** (§2c), so the parser is provisional until it lands.
+- Agreement: Derrick proposed, saliha (doc owner) said yes (17:20) and waived a separate yes from Nate on 2026-10-24 (the bot layer touches the data layer only through `BattleState`). Nate is informed and can object on the Open board.
 - Notes (`Research-Context/notes-bot-setup.md`, research doc pass 6): poke-env 0.16.1 works on this Python; Showdown needs Node >= 22.18; the public server requires bot registration (`/ht`) and has a bot policy; a local server needs no account.
 
 **Out of scope:** decision logic, data ingestion, training; voice.
@@ -38,7 +38,8 @@
 **Guardrails:**
 - ⛔ **Off-plan → CLAUDE.md §2c.**
 - The four bot-skeleton choices (framework, server, format, bot↔decision contract) are 🟠 decisions for the user; none made yet except that the contract is `BattleState`.
-- 🟠 Open from Derrick's board row: the parser must reset `sides[*].last_move` to null when that side switches (the decision layer reads it for Choice lock / Encore). Not confirmed yet; if yes, spell it out in `contracts/battle-state.md`.
+- Confirmed 2026-10-24: the parser resets `sides[*].last_move` to null when that side switches (the decision layer reads it for Choice lock / Encore). Derrick spells it out in `contracts/battle-state.md`.
+- The parser emits `Event.source` values exactly as the contract's examples spell them (`"stealthrock"`, `"item:<id>"`): Derrick's belief rules match on them.
 - Never commit secrets: any account password goes in `.env`, never in code.
 
 ---
@@ -50,7 +51,7 @@
    - *Done when:* the user picked and it's logged in the PRD NOW.
 2. ⬜ **Run a local Showdown server and a bot that plays random legal moves end to end**
    - *Done when:* a full battle completes unattended and the log is saved.
-3. ⬜ **Log parser to `BattleState`** `[⚠ touches @derrick: contract meaning, incl. the last_move reset]` `[⏸ waits on @nate: his yes on bot-layer ownership]`
+3. ⬜ **Log parser to `BattleState`** `[⚠ touches @derrick: contract meaning, incl. the last_move reset]` 
    - Follow `contracts/battle-state.md` and the real sample log in `design/bot-layer.md`; test on a real game, not a hand-made fixture.
    - *Done when:* a recorded game parses turn by turn into valid `BattleState` JSON matching Derrick's turn-2 example.
 4. ⬜ **Wire the decision layer** (`build_state` then `select`) `[⚠ touches @derrick]`
@@ -68,7 +69,7 @@
 - Hackathon pace (25 h): the smallest thing that passes its *Done when*; the cut order is in the research doc's READ THIS FIRST.
 
 ## 6. Open blanks (fill when the chat or repo answers them, CLAUDE.md 🔁)
-- Paths under `bot/`; the 🟠 skeleton choices; confirmation of the `last_move` reset.
+- Paths under `bot/`; the 🟠 skeleton choices (the user picks them on the main account).
 - Registry blanks (vault path, team name, Scale, Deploy) are still open in CLAUDE.md.
 
 ---
