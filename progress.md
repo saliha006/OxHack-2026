@@ -38,8 +38,7 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
-| 2026-10-24 19:01 | @derrick | @saliha | 📨 waiting on | Publish from `origin/derrick` @ `bf02d6a`: `design/decision/12-budget-fallback.md` (built: 3 s budget, fallback) and `design/decision-layer.md` (§7 tick for 12). FYI the decision layer is on `main` @ `5e203fc` (code + contracts only) | 2026-10-24 19:01 |
-| 2026-10-24 18:32 | @derrick | @saliha | 📨 waiting on | Publish from `origin/derrick` @ `eb56c61`: `design/decision/03-…`, `04-…`, `05-…` (now marked built, with the reweight method) and `design/decision-layer.md` (§7 ticks for 03-05). Your 18:30 publish carried the older `e4cef23` copies, and each sync overwrites the newer local ones. Also done: the `last_move` reset + `Event.source` spellings are now in `contracts/battle-state.md` | 2026-10-24 18:32 |
+| 2026-10-24 19:16 | @saliha | @all | ⚠️ conflict | `scripts/` and every skill except `debug` and `no-slop` are gone from `context`. Keep your local copies (they stay git-ignored); `sync`/`publish` won't update from `context` any more | 2026-10-24 19:16 |
 | 2026-10-24 18:14 | @derrick | @nate | ⚠️ conflict | `contracts/set-candidates.md` (on `derrick`) defines the set file your data layer would build for belief: 30 weighted sets per species + trimmed usage, chaos 1825 / 2026-09. Next: yes/no on the shape and on `data/set_candidates.json` as its path | 2026-10-24 18:14 |
 
 **Kinds:** ⚠️ conflict (my change touches your work) · 📨 waiting on (I'm blocked until you do X) · 🔀 scope proposal (needs
@@ -73,6 +72,15 @@ whenever you log an entry.
 
 ## Log (newest first)
 
+### 2026-10-24 19:16 — docs — Context branch trimmed; Derrick's feature 12 docs published — @saliha
+- **Where:** `context` @ `54086aa` · merged to `main`: n/a (docs branch); `.gitignore` on `main`
+- **Did:** Published `design/decision/12-budget-fallback.md` and the §7 tick from `derrick`, which closes both of Derrick's publish rows. Removed the duplicate `.claude/`, `scripts/` and every skill except `debug` and `no-slop` from `context`. `main`'s `.gitignore` now also ignores `.claude/`, `scripts/`, `builder-files/`, `design/`, `skills/` and `Research-Context/`.
+- **Touched:** `context` branch, `.gitignore`
+- **Brief task:** none
+- **⚠️ Conflicts:** @all: `scripts/` is no longer on `context`, so a fresh clone can't bootstrap the sync hook from it
+- **📨 Needs:** none
+- **Status:** open (the note to @all)
+
 ### 2026-10-24 18:50 — feat — Decision layer: 3 s turn budget and a fallback that never stalls — @derrick
 - **Where:** `derrick` @ `a57313e` · merged to `main`: yes, as one clean commit `5e203fc` (2026-10-24 19:00; agreed by saliha, nate)
 - **Did:** `Agent.choose()` always answers: a 3 s budget (most likely scenarios first, best-so-far when time's up), and any error is logged with the turn and replaced by the first legal option, or `default` if even that fails. 140 tests, 100% coverage.
@@ -98,7 +106,7 @@ whenever you log an entry.
 - **Brief task:** none
 - **⚠️ Conflicts:** none (writes down what saliha already agreed)
 - **📨 Needs:** @saliha: publish the newer 03-05 + decision-layer.md (Open board row)
-- **Status:** open
+- **Status:** open → publish asks resolved by @saliha 2026-10-24 19:16 (`context` @ `54086aa`)
 
 ### 2026-10-24 18:29 — feat — Decision layer: soft reweight by replaying each turn in poke-engine — @derrick
 - **Where:** `derrick` @ `7fb50c3` · merged to `main`: yes, as one clean commit `5e203fc` (2026-10-24 19:00; agreed by saliha, nate)
