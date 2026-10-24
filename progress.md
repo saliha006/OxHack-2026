@@ -38,6 +38,8 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
+| 2026-10-24 18:14 | @derrick | @nate | ⚠️ conflict | `contracts/set-candidates.md` (on `derrick`) defines the set file your data layer would build for belief: 30 weighted sets per species + trimmed usage, chaos 1825 / 2026-09. Next: yes/no on the shape and on `data/set_candidates.json` as its path | 2026-10-24 18:14 |
+| 2026-10-24 18:14 | @derrick | @saliha | 📨 waiting on | Publish `design/decision/02-set-priors.md`, `03-…`, `04-…`, `05-…` from `origin/derrick` @ `e4cef23` (the 02-05 decisions; the sync overwrote them locally) | 2026-10-24 18:14 |
 | 2026-10-24 17:51 | @derrick | @saliha | 📨 waiting on | Publish to `context` from `origin/derrick` @ `9c98381` (the script only lets you): `design/decision/*.md` (12 feature docs), `design/decision-layer.md` (§7 checklist), and `OxHack-2026-research.md` section 7 (Showdown protocol + poke-engine, appended after yours). E.g. `git show origin/derrick:<path> > <path>`, then publish | 2026-10-24 17:51 |
 | 2026-10-24 17:41 | @derrick | @saliha | ⚠️ conflict | The decision layer's opponent model reads `BattleState.sides[*].last_move` as the **current active Pokémon's** last move: the parser must reset it to null when that side switches. Next: confirm, or say if the contract should spell it out | 2026-10-24 17:41 |
 | 2026-10-24 16:46 | @derrick | @saliha, @nate | 🔀 scope proposal | **saliha owns the bot layer and builds the log parser**, producing the `BattleState` JSON Derrick drafted (`contracts/battle-state.md` + `contracts/battle_state.py` + an example, on `derrick`). The decision layer is blocked on it for the opponent side. Next: saliha yes/no on owning it + review the shape; Nate yes/no on the ownership | 2026-10-24 16:46 — saliha: YES (17:20), waiting on @nate |
@@ -73,6 +75,15 @@ whenever you log an entry.
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 18:14 — decision — Derrick drafts the SetCandidates contract; belief logic starts ahead of the merge — @derrick
+- **Where:** `derrick` @ `f9744ee` · merged to `main`: not yet
+- **Did:** Drafted the per-species set file the data layer builds and the decision layer's belief loads (`contracts/set-candidates.md`, `contracts/set_candidates.py`, example with real 2026-09 1825 usage). Derrick's contents decisions: chaos 1825 / 2026-09, sets combined from usage shares, 30 per species, no teammate data, no "other" set. Starting brief task 4's belief logic (hard filter, reweight, sampling) on hand-made sets before task 2 (the merge).
+- **Touched:** `contracts/set-candidates.md`, `contracts/set_candidates.py`, `contracts/examples/set_candidates_example.json`, `tests/test_set_candidates_contract.py`
+- **Brief task:** 4 in builder-file-derrick.md → 🟡 part (logic only; the set file is @nate's)
+- **⚠️ Conflicts:** @nate: this defines the shape of your set-candidates output (`data/`), please review before building it
+- **📨 Needs:** @nate: yes/no on the contract and the file path (proposed `data/set_candidates.json`). @saliha: publish the 02-05 decision notes from `origin/derrick` (`design/decision/02..05-*.md`)
+- **Status:** open
 
 ### 2026-10-24 18:00 — docs — Research merged, builder briefs filled, Derrick's docs published — @saliha
 - **Where:** `context` @ `1163870` (docs only) · merged to `main`: n/a
