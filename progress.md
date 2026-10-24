@@ -80,6 +80,14 @@ whenever you log an entry.
 
 ## Log (newest first)
 
+### 2026-10-24 22:53 — feat — Elo ladder in the eval — @saliha
+- **Where:** `eval-ladder` → `main` @ `f36a4c7` · merged to `main`: yes
+- **Did:** saliha picked option B (our bots + Foul Play on top). This part adds the levels we already have: SimpleHeuristics mixed with random moves at uneven rates (83/58/31/12%) and MaxBasePower at 46%, so steps aren't even and levels overlap; our agent variants are levels too. The agent plays every level (40 games), neighbouring levels play each other (30), 1,540 games in all. `report` fits Bradley-Terry ratings on the Elo scale (Random = 1000) with bootstrap intervals and lists the levels ±1–3 places around the agent. This is an internal ladder Elo, not a Showdown ladder Elo. Foul Play levels come next.
+- **Touched:** `bot/eval.py`, `bot/tests/test_eval.py`
+- **Brief task:** saliha task 5 🟡
+- **⚠️ Conflicts:** none
+- **📨 Needs:** none new
+
 ### 2026-10-24 22:49 — feat — Eval is blind and varied — @saliha
 - **Where:** `eval-blind` → `main` @ `10f123a` · merged to `main`: yes
 - **Did:** One seeded shuffled schedule across every pairing; opponents get random account names and a right-skewed random think time before each move (median 0.25 s, capped at 3 s); each game draws a random team from the pool for both sides. Stand-in priors merge every set across 11 validated Metamon `competitive/gen9ou` teams (5 of 16 fail now Tera Blast is banned), so belief faces real uncertainty until `data/set_candidates.json` lands. Fixed: trailing blank lines in team files made poke-env parse an empty 7th Pokémon. Results now live in `runs/eval/<machine>-<shard>.jsonl` with the battle tag.
