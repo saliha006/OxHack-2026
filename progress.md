@@ -1,0 +1,72 @@
+# OxHack-2026: progress log and conflict board
+
+The one shared doc that lives on `main`. It's where the team, and every teammate's agent, sees who shipped what, when, on
+which branch, whose work it touches, and who is waiting on whom. The plan itself (`CLAUDE.md`, the PRD, the briefs) lives
+on the `context` branch; this file is the history.
+
+> **Template.** Fill `{{…}}` as the project's details arrive. Delete this note when the first real entry lands.
+
+## How this file works (read once)
+- **Newest first.** A new entry goes at the top of the Log. Stamps are `YYYY-MM-DD HH:MM` in {{timezone}}, so top to
+  bottom is newest to oldest.
+- **One entry per finished thing:** a feature, a fix, a deploy or infra change, a decision that changes someone's work, or
+  a scope change. Not one per work-in-progress commit.
+- **Write it in the same turn you push**, then commit and push `progress.md` to `main` straight away. The board is never behind.
+- **Every ⚠️ conflict and 📨 need also gets a row on the Open board.** The row is removed once it's resolved, and the entry's
+  Status line records who resolved it. Entries are history: never delete or reword someone else's, only annotate.
+- **Merge conflict in this file?** Keep both sides, sorted newest first. Never drop an entry.
+- **Volatile facts** (current commit, test counts, deploy status) live only in 📊 Latest.
+- Agents: when to read and write this file is CLAUDE.md §2b; scope changes are §2c.
+
+**Entry format** (copy it to the top of the Log):
+```
+### <YYYY-MM-DD HH:MM> — <feat | fix | deploy | decision | scope | docs> — <what, in plain words> — @<builder>
+- **Where:** `<branch>` @ `<short sha>` · merged to `main`: yes | not yet
+- **Did:** <what changed and why, 1–3 lines; numbers if you measured something>
+- **Touched:** <files / modules / endpoints / contracts / infra>
+- **Brief task:** <task n in builder-file-<name>.md> → ✅ done | 🟡 part | none
+- **⚠️ Conflicts:** @<Name>: <what of theirs this changes or could break, and what they should do> | none
+- **📨 Needs:** @<Name>: <what you need from them, and which of your tasks it blocks> | none
+- **Agreed by:** @<Name>, @<Name> (decision and scope entries only)
+- **Status:** open | resolved by @<Name> <YYYY-MM-DD HH:MM> (only when Conflicts or Needs isn't none)
+```
+
+---
+
+## 📌 Open board (read on every prompt)
+Everything still waiting on someone. Look for your name, or `@all`, under **To**.
+
+| Since | From | To | Kind | What, and what to do | Entry |
+|---|---|---|---|---|---|
+| {{YYYY-MM-DD HH:MM}} | @{{name}} | @{{name}} | {{kind}} | {{what changed or what's needed, and the next step}} | {{entry stamp}} |
+
+**Kinds:** ⚠️ conflict (my change touches your work) · 📨 waiting on (I'm blocked until you do X) · 🔀 scope proposal (needs
+the whole team's yes, CLAUDE.md §2c) · ❓ question for a teammate (project-wide unknowns go in the PRD §21).
+
+## 👥 Team
+Full ownership and tasks live in each builder's brief (`builder-file-<name>.md` on `context`). Update your own **Now** cell
+whenever you log an entry.
+
+| Who | GitHub | Role | Branch | Owns (paths) | Now |
+|---|---|---|---|---|---|
+| {{Name}} | `{{handle}}` | {{area; extra role, e.g. doc owner, deploy owner}} | `{{branch}}` | `{{paths}}` | {{brief task n: one line}} |
+
+**Shared** (anyone may edit; flag it in ⚠️ Conflicts): {{e.g. `contracts/*`, `fixtures/*`, compose files}}
+
+## 🚀 Start here (new teammate, first 15 minutes)
+1. Clone `https://github.com/saliha006/OxHack-2026`. Set `git config user.email` to your GitHub email (commits are credited by author) and
+   `git config team.builder <your-name>` (the scripts and the Open board use it). {{Any other one-time git setup}}
+2. `bash scripts/sync-context.sh` pulls `CLAUDE.md`, the PRD, your brief and the skills. After that the prompt hook
+   re-syncs before every prompt. Codex: run `bash scripts/prompt-check.sh` at the start of each task (AGENTS.md).
+3. Read your brief's `▶ Current tasks`, then the 📌 Open board above.
+4. {{Access to the deploy target, data and secrets: where each lives. Never in git or chat}}
+
+## 📊 Latest (volatile facts live only here)
+- **As of {{YYYY-MM-DD HH:MM}}:** `main` @ `{{sha}}` · tests: {{n}} green, {{x}}% coverage · deploy: {{status, URL}}
+- **On branches, not merged yet:** {{`branch`: what}}
+
+---
+
+## Log (newest first)
+
+*(no entries yet)*
