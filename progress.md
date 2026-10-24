@@ -66,11 +66,20 @@ whenever you log an entry.
 
 ## 📊 Latest (volatile facts live only here)
 - **As of {{YYYY-MM-DD HH:MM}}:** `main` @ `{{sha}}` · tests: {{n}} green, {{x}}% coverage · deploy: {{status, URL}}
-- **On branches, not merged yet:** `derrick`: decision layer `our_actions`, `select`, `simulate`, `our_side`, `value`, `build_state`, `opp_actions`, `Belief` with reweight, `Agent` turn loop (135 tests, 100% coverage)
+- **On branches, not merged yet:** `derrick`: decision layer `our_actions`, `select`, `simulate`, `our_side`, `value`, `build_state`, `opp_actions`, `Belief` with reweight, `Agent` turn loop with budget + fallback (140 tests, 100% coverage)
 
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 18:50 — feat — Decision layer: 3 s turn budget and a fallback that never stalls — @derrick
+- **Where:** `derrick` @ `a57313e` · merged to `main`: not yet
+- **Did:** `Agent.choose()` always answers: a 3 s budget (most likely scenarios first, best-so-far when time's up), and any error is logged with the turn and replaced by the first legal option, or `default` if even that fails. 140 tests, 100% coverage.
+- **Touched:** `decision/agent.py`, `tests/test_agent.py`
+- **Brief task:** none new
+- **⚠️ Conflicts:** @saliha: `choose()` never raises now; decision errors appear on the `decision` logger, so the bot should send its logs somewhere visible. It can also return `"default"`
+- **📨 Needs:** none new
+- **Status:** open (the note to @saliha)
 
 ### 2026-10-24 18:40 — feat — Decision layer: the turn loop runs end to end — @derrick
 - **Where:** `derrick` @ `640216c` · merged to `main`: not yet
