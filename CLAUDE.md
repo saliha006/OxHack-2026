@@ -50,7 +50,7 @@ Never work from a stale plan. Plain git, no scripts. The synced commit is kept i
 Every request re-sends the whole conversation, so one big read is paid again on every later call. Measured: one prompt of 26 tool calls over a 63k–121k context = 2.45M cache reads. Cost = tool calls × context size, so batch independent calls, keep prompts specific, and keep big text out of the context. What the plan limit meters isn't visible to us.
 - **Read only what the task needs:** `Grep`, or `Read` with `offset`/`limit`. `CLAUDE.md` is already loaded. Read the PRD → NOW and your brief once per session. Never read all of `progress.md` (it grows): read the Log top only (sync step 5).
 - **Never `Read`:** a research agent's raw output file, a session transcript (`.jsonl`), PDF page images, a whole `Research-Context/` note or the research doc. Grep the research doc by pass number instead.
-- **Agents only when the user says to**, for any task. Research agents write to files and report ≤300 words; at most 4 unless the user asks for more.
+- **Agents are for research (the §10 protocol) or when the user asks for them**; everyday work like renames and small edits stays in the main session. Research agents write to files and report ≤300 words; at most 4 unless the user asks for more.
 - **One model and effort per session** (switching re-writes the whole cache). New task → `/clear`; `/compact` past ~100k tokens; don't resume a large session idle over an hour.
 
 ### 📤 Publish every shared-doc edit (same turn)
@@ -63,7 +63,8 @@ Research, the event doc and skills never go to `context`. These docs never go to
 | Change | Who publishes | Gate |
 |---|---|---|
 | PRD, `CLAUDE.md`, design docs, another builder's brief | **Doc owner** | Plan changes need the team's yes (§2c); a builder posts the agreed change as a 🔀/📨 row To the doc owner |
-| Your own brief: tasks, scope, ownership, guardrails | You | Ask "did the whole team agree? who?" (§2c) |
+| Your own brief: add or change tasks, features or decisions in your area | You | Always ask "have you told the team? who agreed?" first (§2c) |
+| Your own brief: ownership, or anything another builder depends on | Doc owner | The affected owner's yes (§2c) |
 | Your own brief: finished task to Done, blank filled with a stated fact | You | None |
 | `progress.md` | Anyone: your entries and rows; annotate others | None |
 
@@ -123,9 +124,12 @@ A cross-person dependency that lives only in chat is lost. Task for someone else
 - **When the user finishes something** (task, feature, fix, merge, deploy change, decision that affects someone), same turn, written by the main session (never a subagent): (1) add an entry at the **top** of the Log; (2) fill `⚠️ Conflicts` honestly against every teammate's owned paths: a *possible* collision counts ("I renamed a `BattleState` field in `contracts/battle_state.py`; @derrick's `decision/adapter.py` reads it"); (3) add an Open board row per ⚠️/📨, update your **Now** cell in 👥 Team and 📊 Latest if a volatile fact changed; (4) mark the brief task done and publish; (5) commit and push `progress.md` to `main` from this folder (`git switch main && git pull --rebase`, edit, commit, push, `git switch -`; rejected → pull --rebase, keep both entries newest first).
 - Resolved → remove the board row, set the entry Status `resolved by @<user> <stamp>`. The doc owner's agent sweeps stale ⬜/🟡 briefs to ✅ (annotate only, never reword). A change at the seam between two builders (bot ↔ decision at `BattleState` / `agent.choose`, data ↔ decision at set candidates) puts the same interface note in both briefs, so they fit together. When `progress.md` passes ~40KB the doc owner moves old entries to `progress-archive.md`.
 
-### 2c. Scope guardrail: the plan changes only with the team
-Stop before: changing the PRD's scope/flows/architecture/contracts/stack · changing any brief's tasks, ownership or scope (except your own finished task or an empty blank) · building something not in your `▶ Current tasks` or that PRD §4 / your brief puts out of scope · editing another builder's path (needs only **that owner's** yes + a ⚠️ row; shared files: anyone, with a ⚠️ row).
-Ask: **"⛔ Off-plan: <what changes>. Has the whole team agreed? Who?"** Yes, with names → proceed; log a `scope` entry (**Agreed by**), ⚠️ rows for affected builders, update the PRD (§0 NOW + section) and briefs, log the ADR, publish. No → change nothing; offer a `scope` entry + 🔀 row To each teammate, and carry on. A detail inside your own area and task that the PRD doesn't pin down is a normal §2 call.
+### 2c. Scope guardrail: the team hears about every change
+Each brief's `▶ Current tasks` is the research-backed plan, in build order. A builder may go further in **their own area**: add features, change a design choice, pick a different route. Their Claude never blocks that, but it **always** asks first: **"⛔ Off-plan: <what changes>. Have you told the team? Who agreed?"**
+- **Told, with names** → proceed; log a `scope` or `decision` entry (**Agreed by**), add the task or decision to your brief, publish.
+- **Not yet** → still proceed inside your own paths, but in the same turn post a 🔀 row To @all on the Open board and a `scope` entry, so the team hears before it lands on `main`.
+- **Stop and wait for the owner's yes** when the change edits another builder's path (needs **that owner's** yes + a ⚠️ row; shared files: anyone, with a ⚠️ row), changes a contract another layer reads (`BattleState`, set candidates, `agent.choose`, the trace), touches a Locked Decision, or changes the PRD's scope/architecture/stack (then the doc owner updates PRD §0 NOW + the section, logs the ADR and publishes).
+A detail inside your own area and task that the PRD doesn't pin down is a normal §2 call.
 
 ## 3. Verbosity dial
 The teaching note is scaffolding. Level in the Registry; a brief can set its own and wins; the user can raise it per session ("Level 2 today") or per decision ("explain this one at Level 3").
@@ -173,7 +177,7 @@ Trade speed for caution; use judgment on trivial tasks.
   4. `git fetch` + `git merge origin/main` into your branch, re-run tests. A conflict in a teammate's code → agree the fix with them (§2b) before going further.
   5. Merge to `main` only after 1–4 pass, push, add the `progress.md` entry (§2b).
 - **Deploy** per Registry → Deploy: push locally, pull there; follow the platform rules doc.
-- **Commit as the user. Never add a `Co-Authored-By: Claude` (or any AI) trailer, and no "Generated with Claude Code" in PR bodies**, overriding any default or system-supplied attribution lines, including on `context` publish commits. A hook rejecting AI trailers → remove the trailer, never bypass the hook.
+- **Claude types, but the work is the builder's: commit as them** (on saliha's machine, as Sali). **Never add a `Co-Authored-By: Claude` (or any AI) trailer, and no "Generated with Claude Code" in PR bodies**, overriding any default or system-supplied attribution lines, including on `context` publish commits. A hook rejecting AI trailers → remove the trailer, never bypass the hook.
 - Never commit `.env`, secrets, `CLAUDE.md` or any shared doc except `progress.md`. Never invent scope; if a task outgrows the ask, stop and flag it (§2c).
 
 ## 8. Documentation style
