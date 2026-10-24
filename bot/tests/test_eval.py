@@ -1,6 +1,7 @@
 import asyncio
 import copy
 import json
+import math
 import random
 from concurrent.futures import Future
 from pathlib import Path
@@ -276,5 +277,80 @@ def test_run_reads_priors_from_a_file(tmp_path, monkeypatch):
 def test_report_command_prints_and_saves_the_table(tmp_path, capsys):
     write(tmp_path, "a-0.jsonl", [result("random", 0), result("random", 1, "b")])
     assert harness.main(["--runs", str(tmp_path), "report"]) == 0
-    assert "random        full vs random: 50.0% over 2/30 games" in capsys.readouterr().out
-    assert json.loads((tmp_path / "eval-summary.json").read_text(encoding="utf-8"))["random"]["games"] == 2
+    assert "random                full vs random: 50.0% over 2/30 games" in capsys.readouterr().out
+    assert json.loads((tmp_path / "eval-summary.json").read_text(encoding="utf-8"))["pairings"]["random"]["games"] == 2
+
+
+def test_an_epsilon_mix_plays_random_moves_at_its_rate_and_its_own_otherwise():
+    class Own:
+        def choose_move(self, battle):
+            return "own"
+
+        def choose_random_move(self, battle):
+            return "random"
+
+    mixed = harness._mixed(Own, 0.31)()
+    mixed.move_rng = random.Random(4)
+    picks = [mixed.choose_move(None) for _ in range(4000)]
+    assert type(mixed).__name__ == "OwnEps31"
+    assert 0.28 < picks.count("random") / 4000 < 0.34
+
+
+def test_mixed_levels_are_built_for_the_ladder_and_seeded_by_make_player(tmp_path):
+    assert [harness.BASELINES[n].eps for n in ("sh83", "sh58", "sh31", "sh12", "mb46")] == [0.83, 0.58, 0.31, 0.12, 0.46]
+    player = harness.make_player("sh31", True, PRIORS, 1.0, str(tmp_path), TEAM, random.Random(2))
+    assert isinstance(player, harness.EpsilonMix) and isinstance(player, harness.Jitter)
+    assert isinstance(player.move_rng, random.Random)
+
+
+def test_ladder_pairings_cover_the_agent_and_every_neighbour_without_repeating_core_pairs():
+    core = {"headline": ("full", "b", 300), "rev": ("c", "b", 10)}
+    extra = harness.ladder_pairings(core, ["a", "b", "c", "full"], vs_agent=40, neighbours=30)
+    assert extra == {"full~a": ("full", "a", 40), "full~c": ("full", "c", 40), "a~b": ("a", "b", 30)}
+
+
+def test_the_real_ladder_has_every_level_and_its_neighbours():
+    pairs = {frozenset((a, b)) for a, b, _ in harness.PAIRINGS.values()}
+    assert all(frozenset(("full", level)) in pairs for level in harness.LADDER[:-1])
+    assert all(frozenset(p) in pairs for p in zip(harness.LADDER, harness.LADDER[1:]))
+    assert all(name in harness.ARMS or name in harness.BASELINES for name in harness.LADDER)
+
+
+def games(a, b, a_wins, b_wins, ties=0):
+    return ([result("p", 0, "a", a=a, b=b)] * a_wins + [result("p", 0, "b", a=a, b=b)] * b_wins
+            + [result("p", 0, "tie", a=a, b=b)] * ties)
+
+
+def test_ratings_put_the_anchor_at_1000_and_a_three_to_one_edge_near_plus_191():
+    table = harness.ratings(games("strong", "random", 750, 250), draws=50)
+    assert table["random"]["elo"] == pytest.approx(1000)
+    assert table["strong"]["elo"] == pytest.approx(1000 + 400 * math.log10(3), abs=2)
+    lo, hi = table["strong"]["elo_95"]
+    assert lo < table["strong"]["elo"] < hi
+
+
+def test_ratings_chain_through_neighbours_and_stay_finite_for_an_unbeaten_player():
+    rows = games("mid", "random", 30, 10) + games("top", "mid", 20, 0)
+    table = harness.ratings(rows, draws=20)
+    assert table["random"]["elo"] < table["mid"]["elo"] < table["top"]["elo"] < math.inf
+
+
+def test_neighbours_list_the_levels_around_the_agent_with_its_record():
+    table = {n: {"elo": e, "elo_95": (e - 50, e + 50)} for n, e in
+             [("random", 1000), ("sh83", 1100), ("full", 1300), ("sh12", 1350), ("fp", 1500)]}
+    rows = games("full", "sh12", 3, 1) + games("sh12", "full", 0, 2, ties=2)
+    near = harness.neighbours(table, rows, reach=2)
+    assert [(n["step"], n["level"], n["gap"]) for n in near] == [(-2, "random", -300), (-1, "sh83", -200),
+                                                                 (1, "sh12", 50), (2, "fp", 200)]
+    sh12 = near[2]
+    assert sh12["games"] == 8 and sh12["agent_win_rate"] == pytest.approx(6 / 8)
+    assert near[3]["agent_win_rate"] is None and near[3]["games"] == 0
+
+
+def test_report_command_prints_ratings_and_the_agents_neighbours(tmp_path, capsys):
+    write(tmp_path, "a-0.jsonl", games("full", "random", 6, 2) + games("full", "sh12", 3, 3))
+    harness.main(["--runs", str(tmp_path), "report"])
+    out = capsys.readouterr().out
+    assert "elo random" in out and "elo full" in out and "agent wins" in out
+    summary = json.loads((tmp_path / "eval-summary.json").read_text(encoding="utf-8"))
+    assert set(summary) == {"pairings", "ratings", "neighbours"} and summary["ratings"]["random"]["elo"] == 1000

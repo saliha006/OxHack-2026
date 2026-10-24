@@ -74,13 +74,33 @@ class Jitter:
         return super().choose_move(battle)
 
 
+class EpsilonMix:
+    """Mixin: plays a uniformly random legal move with probability `eps`, else the bot's own move; a strength dial."""
+
+    eps: float
+    move_rng: random.Random
+
+    def choose_move(self, battle):
+        if self.move_rng.random() < self.eps:
+            return self.choose_random_move(battle)
+        return super().choose_move(battle)
+
+
+def _mixed(base, eps: float):
+    return type(f"{base.__name__}Eps{round(eps * 100)}", (EpsilonMix, base), {"eps": eps})
+
+
 ARMS = {
     "full": lambda priors, budget: Agent(priors, budget=budget),
     "prior": lambda priors, budget: AblatedAgent(priors, FrozenBelief, budget=budget),
     "flat": lambda priors, budget: AblatedAgent(priors, FlatBelief, budget=budget),
     "k1": lambda priors, budget: Agent(priors, k=1, budget=budget),
 }
-BASELINES = {"simpleheuristics": SimpleHeuristicsPlayer, "maxbasepower": MaxBasePowerPlayer, "random": RandomPlayer}
+# Mix levels are deliberately uneven, so strength doesn't step up by a fixed amount; mb46 overlaps the sh levels.
+BASELINES = {"simpleheuristics": SimpleHeuristicsPlayer, "maxbasepower": MaxBasePowerPlayer, "random": RandomPlayer,
+             "sh12": _mixed(SimpleHeuristicsPlayer, 0.12), "sh31": _mixed(SimpleHeuristicsPlayer, 0.31),
+             "sh58": _mixed(SimpleHeuristicsPlayer, 0.58), "sh83": _mixed(SimpleHeuristicsPlayer, 0.83),
+             "mb46": _mixed(MaxBasePowerPlayer, 0.46)}
 
 # pairing -> (side a, side b, games); results are from a's point of view, and b is the jittered opponent.
 PAIRINGS = {
@@ -91,6 +111,26 @@ PAIRINGS = {
     "maxbasepower": ("full", "maxbasepower", 100),
     "random": ("full", "random", 30),
 }
+# Rough weakest-to-strongest order. Only neighbours play each other; the rating fit works out the true order.
+LADDER = ["random", "mb46", "sh83", "maxbasepower", "sh58", "sh31", "sh12", "simpleheuristics", "flat", "prior", "k1", "full"]
+
+
+def ladder_pairings(core: dict, ladder: list[str], vs_agent: int = 40, neighbours: int = 30) -> dict:
+    """The agent against every level, plus each neighbouring pair, skipping pairs the core matches already play."""
+    played = {frozenset((a, b)) for a, b, _ in core.values()}
+    extra = {}
+    for level in ladder[:-1]:
+        if frozenset(("full", level)) not in played:
+            extra[f"full~{level}"] = ("full", level, vs_agent)
+            played.add(frozenset(("full", level)))
+    for low, high in zip(ladder, ladder[1:]):
+        if frozenset((low, high)) not in played:
+            extra[f"{low}~{high}"] = (low, high, neighbours)
+            played.add(frozenset((low, high)))
+    return extra
+
+
+PAIRINGS |= ladder_pairings(PAIRINGS, LADDER)
 
 
 def make_player(name: str, jittered: bool, priors: dict, budget: float, runs: str, team: str, rng: random.Random):
@@ -107,6 +147,8 @@ def make_player(name: str, jittered: bool, priors: dict, budget: float, runs: st
     player = cls(**extra, **config)
     if jittered:
         player.jitter_rng = random.Random(rng.random())
+    if isinstance(player, EpsilonMix):
+        player.move_rng = random.Random(rng.random())
     return player
 
 
@@ -212,6 +254,64 @@ def report(rows: list[dict]) -> dict:
     return table
 
 
+def ratings(rows: list[dict], anchor: str = "random", draws: int = 200, seed: int = 0) -> dict[str, dict]:
+    """Bradley-Terry ratings on the Elo scale (anchor = 1000) from every game, with 95% bootstrap intervals."""
+    point = _fit(rows, anchor)
+    rng = random.Random(seed)
+    samples = {name: [] for name in point}
+    for _ in range(draws):
+        fit = _fit([rng.choice(rows) for _ in rows], anchor)
+        for name in point:
+            if name in fit:
+                samples[name].append(fit[name])
+    out = {}
+    for name, elo in point.items():
+        xs = sorted(samples[name])
+        out[name] = {"elo": elo, "elo_95": (xs[int(0.025 * len(xs))], xs[int(0.975 * len(xs)) - 1]) if xs else (elo, elo)}
+    return out
+
+
+def _fit(rows: list[dict], anchor: str, iterations: int = 500) -> dict[str, float]:
+    # Each player also gets one virtual drawn game with the anchor, so a player who never lost keeps a finite rating.
+    games: dict[tuple[str, str], list[float]] = {}  # (i, j) -> [i's score, games]
+    for r in rows:
+        for i, j, x in ((r["a"], r["b"], score(r)), (r["b"], r["a"], 1 - score(r))):
+            g = games.setdefault((i, j), [0.0, 0])
+            g[0] += x
+            g[1] += 1
+    names = {i for i, _ in games} | {anchor}
+    for name in names - {anchor}:
+        for i, j in ((name, anchor), (anchor, name)):
+            g = games.setdefault((i, j), [0.0, 0])
+            g[0] += 0.5
+            g[1] += 1
+    opponents: dict[str, list[tuple[str, int]]] = {i: [] for i in names}
+    wins = dict.fromkeys(names, 0.0)
+    for (i, j), (won, n) in games.items():
+        opponents[i].append((j, n))
+        wins[i] += won
+    strength = dict.fromkeys(names, 1.0)
+    for _ in range(iterations):
+        # Hunter's MM update for Bradley-Terry: each strength = its wins / sum of games weighted by the matchup.
+        strength = {i: wins[i] / sum(n / (strength[i] + strength[j]) for j, n in opponents[i]) for i in names}
+    return {i: 1000 + 400 * math.log10(strength[i] / strength[anchor]) for i in names}
+
+
+def neighbours(table: dict[str, dict], rows: list[dict], agent: str = "full", reach: int = 3) -> list[dict]:
+    """The levels up to `reach` places above and below the agent's rating, with the agent's record against each."""
+    ladder = sorted(table, key=lambda name: table[name]["elo"])
+    at = ladder.index(agent)
+    out = []
+    for step in [s for s in range(-reach, reach + 1) if s and 0 <= at + s < len(ladder)]:
+        name = ladder[at + step]
+        mine = [r for r in rows if {r["a"], r["b"]} == {agent, name}]
+        wins = sum(score(r) if r["a"] == agent else 1 - score(r) for r in mine)
+        out.append({"step": step, "level": name, "elo": table[name]["elo"], "elo_95": table[name]["elo_95"],
+                    "gap": table[name]["elo"] - table[agent]["elo"], "games": len(mine),
+                    "agent_win_rate": wins / len(mine) if mine else None, "wilson_95": wilson(wins, len(mine))})
+    return out
+
+
 def load_teams(path: Path) -> list[str]:
     files = sorted(path.iterdir()) if path.is_dir() else [path]
     # Trailing blank lines make poke-env parse an empty seventh Pokémon, which breaks priors and team packing.
@@ -241,14 +341,23 @@ def main(argv: list[str] | None = None) -> int:
     runs.mkdir(parents=True, exist_ok=True)
 
     if args.command == "report":
-        table = report(read_results(runs))
-        (runs / "eval-summary.json").write_text(json.dumps(table, indent=2), encoding="utf-8")
+        rows = read_results(runs)
+        table = report(rows)
+        elo = ratings(rows) if rows else {}
+        near = neighbours(elo, rows) if "full" in elo else []
+        summary = {"pairings": table, "ratings": elo, "neighbours": near}
+        (runs / "eval-summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
         for pairing, r in table.items():
             lo, hi = r["wilson_95"]
             blo, bhi = r["team_bootstrap_95"]
             fallbacks = "n/a" if r["fallback_rate"] is None else f"{r['fallback_rate']:.1%}"
-            print(f"{pairing:13} {r['a']} vs {r['b']}: {r['win_rate']:.1%} over {r['games']}/{r['planned']} games "
+            print(f"{pairing:21} {r['a']} vs {r['b']}: {r['win_rate']:.1%} over {r['games']}/{r['planned']} games "
                   f"(Wilson {lo:.1%}-{hi:.1%}, team bootstrap {blo:.1%}-{bhi:.1%}, {r['teams']} teams), fallbacks {fallbacks}")
+        for name, r in sorted(elo.items(), key=lambda kv: -kv[1]["elo"]):
+            print(f"elo {name:16} {r['elo']:6.0f}  (95% {r['elo_95'][0]:.0f}-{r['elo_95'][1]:.0f})")
+        for n in near:
+            record = "not played" if n["agent_win_rate"] is None else f"agent wins {n['agent_win_rate']:.0%} of {n['games']}"
+            print(f"{n['step']:+d} {n['level']:16} gap {n['gap']:+5.0f}  {record}")
         return 0
 
     teams = load_teams(Path(args.teams))
