@@ -11,6 +11,10 @@ target is stages 3–4** (strategy with dumb models, then the belief layer).
 
 ## 1. The loop
 
+**Flow (Derrick, 2026-10-24):** the bot gets the latest state and sends the **whole state** to the strategy layer. The
+strategy layer **updates its own beliefs first**, then uses what the data layer provides to arrive at an action.
+So belief lives inside the strategy layer, not in the bot layer.
+
 ```ts
 state  = observe(log)                       // bot layer
 sets   = sampleOppSets(state, prior, k = 5)
@@ -24,6 +28,31 @@ send(argmax(scores))                        // bot layer
 2. **Evaluate:** for each of our legal actions × each likely opponent action × each sampled set, simulate, score the
    result, and weight it by the probabilities.
 3. **Act:** pick the highest expected value, breaking ties toward the better worst case.
+
+## 1a. What Showdown gives the decision layer (via the bot)
+
+Full protocol detail: [bot-layer.md §1a](bot-layer.md#1a-what-showdown-sends-us-and-what-it-takes-back).
+
+| Need | Where it comes from | Exact or estimated? |
+|---|---|---|
+| **Our legal actions** | `|request|`: `active[0].moves[]` with `disabled`, plus `trapped` / `maybeTrapped`, `canTerastallize`, and `side.pokemon[]` (not fainted, not active) for switches | Exact: Showdown works out legality for us |
+| Which decision it is | Request kind: team preview / move / forced switch / wait | Exact |
+| Our team: HP, stats, moves, item, ability, Tera | `side.pokemon[]` | Exact (`hp/maxhp`) |
+| Opponent HP | `|-damage|` / `|-heal|` / `|switch|` | **Percent only** (`/100`) |
+| Opponent moves, item, ability, Tera | Log lines as they're revealed | Partial → the **belief** step |
+| Opponent stats, EVs, nature, unrevealed info | Never sent | **Belief** only |
+| Opponent legal actions | Never sent | Must be **inferred** from belief (their moves, Tera used?, trapped?) |
+| Field, hazards, boosts, status | Log lines | Exact once parsed |
+| Turn order evidence (speed) | Order of `|move|` lines in a turn | Exact order; the speed itself is inferred |
+
+**What this means for the design:**
+- **Step 4 (our actions) is cheap.** We read them from the request instead of computing them.
+- **Step 5 (their actions) is not.** Their legal set depends on belief: which moves they have, whether Tera is still
+  available (we saw `|-terastallize|` or not), and whether they're trapped.
+- **Belief updates need events, not only a snapshot.** Speed order and damage rolls only exist in this turn's log
+  lines. This is why Q7 matters.
+- **The output is a string** (`move N`, `move N terastallize`, `switch N`, `team …`). Slot numbers are 1-based and
+  refer to the request's order.
 
 ## 2. Components
 
