@@ -63,11 +63,20 @@ whenever you log an entry.
 
 ## 📊 Latest (volatile facts live only here)
 - **As of {{YYYY-MM-DD HH:MM}}:** `main` @ `{{sha}}` · tests: {{n}} green, {{x}}% coverage · deploy: {{status, URL}}
-- **On branches, not merged yet:** `derrick`: decision layer `our_actions`, `select`, `simulate` (31 tests, 100% coverage)
+- **On branches, not merged yet:** `derrick`: decision layer `our_actions`, `select`, `simulate`, `our_side` (47 tests, 100% coverage)
 
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 16:23 — feat — Decision layer: our poke-engine side from a Showdown request — @derrick
+- **Where:** `derrick` @ `e6cc855` · merged to `main`: not yet
+- **Did:** `our_side(request)` builds our team as a poke-engine `Side` (HP, status, stats, moves + PP, item, ability, Tera) in request order. Types and weight come from a committed snapshot of Showdown's `pokedex.json`. State is rebuilt every turn (no memory). 47 tests, 100% coverage.
+- **Touched:** `decision/state.py`, `decision/data/pokedex.json` (524 KB), `tests/test_state.py`
+- **Brief task:** none (no brief for derrick yet)
+- **⚠️ Conflicts:** bot layer owner (not assigned): boosts, volatiles, hazards, weather and the whole opponent side must come from `BattleState`; the request doesn't carry them | none else
+- **📨 Needs:** none new
+- **Status:** open (the bot layer note above)
 
 ### 2026-10-24 16:13 — feat — Decision layer: one-turn simulation via poke-engine — @derrick
 - **Where:** `derrick` @ `50b9a77` · merged to `main`: not yet
