@@ -38,7 +38,7 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
-| 2026-10-24 19:26 | @derrick | @saliha | 📨 waiting on | Publish from `origin/derrick` @ `a50936e`: `design/decision/11-special-requests.md` + the §7 tick in `design/decision-layer.md`; my brief's Done log line for feature 11; mirror the two feature 11 decisions in PRD → NOW. Also: since the trim, `publish-context.sh` lists every local `.claude/skills/` file as a new doc, so any non-owner publish is refused (even your own brief) | 2026-10-24 19:26 |
+| 2026-10-24 19:26 | @derrick | @saliha | 📨 waiting on | Publish from `origin/derrick` @ `a50936e`: `design/decision/11-special-requests.md` + the §7 tick in `design/decision-layer.md`; mirror the two feature 11 decisions in PRD → NOW. (Brief line and publish-script issue resolved by @derrick 2026-10-24 19:40: published with the plain-git steps, `context` @ `79d6713`) | 2026-10-24 19:26 |
 | 2026-10-24 19:16 | @saliha | @all | ⚠️ conflict | `scripts/` and every skill except `debug` and `no-slop` are gone from `context`. Keep your local copies (they stay git-ignored); `sync`/`publish` won't update from `context` any more | 2026-10-24 19:16 |
 | 2026-10-24 18:14 | @derrick | @nate | ⚠️ conflict | `contracts/set-candidates.md` (on `derrick`) defines the set file your data layer would build for belief: 30 weighted sets per species + trimmed usage, chaos 1825 / 2026-09. Next: yes/no on the shape and on `data/set_candidates.json` as its path | 2026-10-24 18:14 |
 
