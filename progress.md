@@ -80,7 +80,7 @@ whenever you log an entry.
 
 ## Log (newest first)
 
-### 2026-10-25 23:10 — feat — Foul Play tops the eval ladder; full eval run started — @saliha
+### 2026-10-24 23:10 — feat — Foul Play tops the eval ladder; full eval run started — @saliha
 - **Where:** `eval-foulplay` → `main` @ `61b10cc` · merged to `main`: yes
 - **Did:** Foul Play (pmariglia, same `poke-engine` 0.0.48 build) runs as three uneven search-time levels (40–80, 150–260, 450–700 ms) in its own venv inside a git-ignored `foul-play/`. Each shard feeds it a team list in its own game order so games stay same-team; it downloads real Smogon stats, so it needs internet once. Measured: Foul Play at 200 ms beat our agent in 50 turns. Turn-0 games are now void (Foul Play crashes on Keldeo-Resolute too, so team 7 left the pool). `*.env` is ignored now: `saliha-tiger.env` was not covered by `.env*`. Full run: 27 pairings, 1,750 games, 5 shards, stand-in priors from the 10 pool teams.
 - **Touched:** `bot/eval.py`, `bot/tests/test_eval.py`, `.gitignore`, `bot/teams/standin/`
