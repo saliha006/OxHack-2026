@@ -4,6 +4,8 @@
 # committed by accident. context's skills/ lands in .claude/skills/, where Claude Code loads it. A doc you edited but haven't published is copied to .git/context-backup/ before it's
 # replaced, so no edit is lost. Prints what changed since the last sync so the agent can tell the user before working.
 set -euo pipefail
+# The whole body is one function so bash has parsed it before the sync below overwrites this very file
+main() {
 # Git Bash on Windows rewrites "rev:.claude/..." arguments as Windows paths unless this is set
 export MSYS_NO_PATHCONV=1
 cd "$(git rev-parse --show-toplevel)"
@@ -70,3 +72,6 @@ if [ ${#saved[@]} -gt 0 ]; then
   echo "context: you had unpublished edits, saved in $backup. Re-apply them, then publish:"
   printf '  %s\n' "${saved[@]}"
 fi
+}
+main "$@"
+exit $?

@@ -154,8 +154,10 @@ sed -i 's/^## Log (newest first)$/## Log (newest first)\n\n### 2026-01-01 11:00 
 git commit -qam "Log the schema fix"
 git push -q origin main
 cd "$tmp/sam"
-bash scripts/prompt-check.sh | grep -q "schema index" || fail "prompt-check missed a new progress entry"
-bash scripts/prompt-check.sh | grep -q "schema index" && fail "prompt-check showed the same entry twice"
+out=$(bash scripts/prompt-check.sh)
+grep -q "schema index" <<< "$out" || fail "prompt-check missed a new progress entry"
+out=$(bash scripts/prompt-check.sh)
+grep -q "schema index" <<< "$out" && fail "prompt-check showed the same entry twice"
 
 # offline, the hook still exits 0 so it never blocks a prompt
 git remote set-url origin "$tmp/missing.git"
