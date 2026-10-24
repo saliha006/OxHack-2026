@@ -12,7 +12,7 @@
 >   gets the same interface note in both briefs.
 
 ## 0. How the agent reads this brief (every task)
-1. Read the project `CLAUDE.md` in full, then this brief. Follow both.
+1. `CLAUDE.md` is already loaded (don't re-read it); read this brief once. Follow both.
 2. **Only action `▶ Current tasks`**, top to bottom.
 3. Before starting, read `progress.md`'s 📌 Open board (CLAUDE.md §2b). Rows To @{{name}} come first: tell the user, then
    resolve or schedule them.
