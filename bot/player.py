@@ -27,6 +27,24 @@ class _ErrorCounter(logging.Handler):
         self.count += 1
 
 
+def _label(request: dict, choice: str | None) -> str | None:
+    """A choice in words, from the request it answers: "move 2 terastallize" -> "Iron Head + Tera"."""
+    kind, _, rest = (choice or "").partition(" ")
+    try:
+        if kind == "move":
+            move = request["active"][0]["moves"][int(rest.split()[0]) - 1]
+            name = move.get("move") or move["id"]
+            return f"{name} + Tera" if "terastallize" in rest else name
+        team = request["side"]["pokemon"]
+        if kind == "switch":
+            return "switch to " + team[int(rest) - 1]["details"].split(",")[0]
+        if kind == "team":
+            return "lead with " + team[int(rest[0]) - 1]["details"].split(",")[0]
+    except (KeyError, IndexError, ValueError):
+        pass  # a choice the request can't name (e.g. "default") stays as Showdown spells it
+    return None
+
+
 def _first_legal(request: dict) -> str:
     try:
         return our_actions(request)[0].to_choice()
@@ -38,10 +56,12 @@ def _first_legal(request: dict) -> str:
 class BattleSession:
     """One battle: every protocol line goes to the parser and the raw log, every request to the agent."""
 
-    def __init__(self, tag: str, agent, runs_dir: Path, clock: Callable[[], float] = time.perf_counter):
+    def __init__(self, tag: str, agent, runs_dir: Path, clock: Callable[[], float] = time.perf_counter,
+                 on_decision: Callable[[str, dict], None] | None = None):
         self.tag = tag
         self.agent = agent
         self.clock = clock
+        self.on_decision = on_decision
         # Our side is only known once poke-env has seen the |player| lines, so early lines wait here.
         self.backlog: list[str] = []
         self.parser: Parser | None = None
@@ -88,10 +108,12 @@ class BattleSession:
         self.fallbacks += fell_back
         self.think_ms.append(elapsed)
         self.answered = (rqid, 0)
-        line = {"turn": state["turn"], "kind": _kind(request), "choice": choice, "think_ms": round(elapsed, 1),
-                "fallback": fell_back, "state": state}
+        line = {"turn": state["turn"], "kind": _kind(request), "choice": choice, "label": _label(request, choice),
+                "think_ms": round(elapsed, 1), "fallback": fell_back, "state": state}
         line.update(getattr(self.agent, "last_trace", None) or {})
         self.trace.write(json.dumps(line) + "\n")
+        if self.on_decision:
+            self.on_decision(self.tag, line)
         return choice
 
     def _retry(self, request: dict, rqid) -> str:
@@ -133,9 +155,11 @@ def _percentiles(ms: list[float]) -> dict:
 class AgentPlayer(Player):
     """A poke-env player whose every choice comes from the decision layer, fed by our own parser."""
 
-    def __init__(self, make_agent: Callable[[], object], runs_dir: str | Path = "runs", **kwargs):
+    def __init__(self, make_agent: Callable[[], object], runs_dir: str | Path = "runs",
+                 on_decision: Callable[[str, dict], None] | None = None, **kwargs):
         super().__init__(**kwargs)
         self.make_agent = make_agent
+        self.on_decision = on_decision
         self.runs_dir = Path(runs_dir)
         self.runs_dir.mkdir(parents=True, exist_ok=True)
         self.sessions: dict[str, BattleSession] = {}
@@ -145,7 +169,7 @@ class AgentPlayer(Player):
         tag = split_messages[0][0].lstrip(">")
         if tag.startswith("battle-"):
             if tag not in self.sessions:
-                self.sessions[tag] = BattleSession(tag, self.make_agent(), self.runs_dir)
+                self.sessions[tag] = BattleSession(tag, self.make_agent(), self.runs_dir, on_decision=self.on_decision)
             session = self.sessions[tag]
             # Our parser sees the whole message before poke-env answers the request inside it.
             for parts in split_messages[1:]:

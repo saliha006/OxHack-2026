@@ -221,3 +221,19 @@ def test_a_finished_battle_closes_its_session_and_keeps_the_summary(tmp_path, mo
         assert p.summaries[0]["tag"] == "battle-gen9ou-1" and p.summaries[0]["won"] is True and p.summaries[0]["turns"] == 12
 
     asyncio.run(scenario())
+
+
+@pytest.mark.parametrize("choice, words", [
+    ("move 2", "Kowtow Cleave"), ("move 1 terastallize", "Swords Dance + Tera"), ("switch 3", "switch to Gholdengo"),
+    ("team 213456", "lead with Great Tusk"), ("default", None), ("move 9", None), (None, None)])
+def test_a_choice_is_labelled_in_words_from_its_request(choice, words):
+    from bot.player import _label
+    assert _label(request("move_request"), choice) == words
+
+
+def test_each_decision_is_handed_to_the_callback_with_its_battle_tag(tmp_path):
+    seen = []
+    s = BattleSession("battle-gen9ou-1", StubAgent(choice="move 2"), tmp_path, on_decision=lambda tag, line: seen.append((tag, line)))
+    s.decide(request("move_request"), "p1")
+    assert seen[0][0] == "battle-gen9ou-1" and seen[0][1]["label"] == "Kowtow Cleave"
+    assert seen[0][1] == trace_lines(tmp_path)[0]
