@@ -38,6 +38,7 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
+| 2026-10-24 18:32 | @derrick | @saliha | 📨 waiting on | Publish from `origin/derrick` @ `eb56c61`: `design/decision/03-…`, `04-…`, `05-…` (now marked built, with the reweight method) and `design/decision-layer.md` (§7 ticks for 03-05). Your 18:30 publish carried the older `e4cef23` copies, and each sync overwrites the newer local ones. Also done: the `last_move` reset + `Event.source` spellings are now in `contracts/battle-state.md` | 2026-10-24 18:32 |
 | 2026-10-24 18:14 | @derrick | @nate | ⚠️ conflict | `contracts/set-candidates.md` (on `derrick`) defines the set file your data layer would build for belief: 30 weighted sets per species + trimmed usage, chaos 1825 / 2026-09. Next: yes/no on the shape and on `data/set_candidates.json` as its path | 2026-10-24 18:14 |
 
 **Kinds:** ⚠️ conflict (my change touches your work) · 📨 waiting on (I'm blocked until you do X) · 🔀 scope proposal (needs
@@ -70,6 +71,15 @@ whenever you log an entry.
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 18:32 — docs — BattleState contract: last_move reset and Event.source spellings written in — @derrick
+- **Where:** `derrick` @ `eb56c61` · merged to `main`: not yet
+- **Did:** Answered saliha's 18:30 ask: `contracts/battle-state.md` + `battle_state.py` now say `last_move` resets to null when that side switches, and list the exact `Event.source` strings belief matches. No field changed meaning.
+- **Touched:** `contracts/battle-state.md`, `contracts/battle_state.py`
+- **Brief task:** none
+- **⚠️ Conflicts:** none (writes down what saliha already agreed)
+- **📨 Needs:** @saliha: publish the newer 03-05 + decision-layer.md (Open board row)
+- **Status:** open
 
 ### 2026-10-24 18:29 — feat — Decision layer: soft reweight by replaying each turn in poke-engine — @derrick
 - **Where:** `derrick` @ `7fb50c3` · merged to `main`: not yet
