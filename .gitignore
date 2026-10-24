@@ -8,14 +8,10 @@
 .claude/
 skills/
 builder-files/
-scripts/sync-context.sh
-scripts/publish-context.sh
-scripts/prompt-check.sh
-scripts/test-context-scripts.sh
+scripts/
 
 # Sponsor PDFs, raw research inputs and agent notes never leave this machine
-Resreach-Context/
-research-context/
+Research-Context/
 
 # Secrets
 .env
