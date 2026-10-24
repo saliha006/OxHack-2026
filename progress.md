@@ -63,11 +63,20 @@ whenever you log an entry.
 
 ## 📊 Latest (volatile facts live only here)
 - **As of {{YYYY-MM-DD HH:MM}}:** `main` @ `{{sha}}` · tests: {{n}} green, {{x}}% coverage · deploy: {{status, URL}}
-- **On branches, not merged yet:** `derrick`: decision layer `our_actions` + `select` (25 tests, 100% coverage)
+- **On branches, not merged yet:** `derrick`: decision layer `our_actions`, `select`, `simulate` (31 tests, 100% coverage)
 
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 16:13 — feat — Decision layer: one-turn simulation via poke-engine — @derrick
+- **Where:** `derrick` @ `50b9a77` · merged to `main`: not yet
+- **Did:** `simulate(state, ours, theirs)` returns every outcome of a turn as (probability, next state), using poke-engine (Rust, built from source with its gen9 Tera feature). Replaying turn 1 of a real gen9ou game matches the log (Kingambit 66%). 0.038 ms per call. 31 tests, 100% coverage.
+- **Touched:** `decision/simulate.py`, `tests/test_simulate.py`, `pyproject.toml` (new dependency `poke-engine==0.0.48`; building it needs Rust)
+- **Brief task:** none (no brief for derrick yet)
+- **⚠️ Conflicts:** bot layer owner (not assigned): the decision layer now works in poke-engine's `State`, so whatever `BattleState` becomes gets converted to it once per turn (feature 01, decision side) | none else
+- **📨 Needs:** none new
+- **Status:** open (the bot layer note above)
 
 ### 2026-10-24 16:00 — feat — Decision layer: legal actions from a request, and the action selector — @derrick
 - **Where:** `derrick` @ `b27a235` · merged to `main`: not yet (`derrick` was branched from `context`, so its shared docs must come off before a merge)
