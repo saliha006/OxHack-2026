@@ -56,7 +56,7 @@
    - Wrap `super()._handle_battle_message` in try/except: poke-env issue #973 swallows parse errors and hangs the run. Grep the log for "Unhandled exception" after the run.
    - Check that `|request|` arrives after the turn's log lines on forced switches (poke-env issue #246); if not, defer the decision until the lines land.
    - *Done when:* 10 battles in a row finish unattended, each raw log saved to `runs/<battle-id>.log`.
-3. ⬜ **Parser: protocol lines → `BattleState`** (`bot/parser.py`) `[⚠ touches @derrick: contract meaning]`
+3. ✅ **Parser: protocol lines → `BattleState`** (`bot/parser.py`) `[⚠ touches @derrick: contract meaning]`
    - A pure function over log lines, no network, so it runs on live battles **and** on saved replay `.log` files (Nate reuses it offline: Seams).
    - Covers every row of the table in `contracts/battle-state.md`, incl. the `last_move` reset on switch and the exact `Event.source` strings.
    - Tests, happy / edge / failure: replay `gen9ou-2703852247` turn 2 equals `contracts/examples/battle_state_turn2.json`; forced switch with no `|turn|` before it; double faint; nickname vs species (`p2a: Samurott` → `samurotthisui`); `|detailschange|` / `|-formechange|`; Illusion `|replace|`; Tera (`|-terastallize|` and `, tera:` in DETAILS); `[from] item:` / `[of]` tags; `0 fnt` HP; unknown lines skipped, never a crash.
@@ -93,7 +93,7 @@
 - Metamon is a research project (offline-RL agents + replay datasets) that plays through poke-env on a Showdown server; it is not a separate platform. Nate uses its replays; the bot doesn't need it.
 
 ## 4. Done log (newest first)
-- (empty)
+- ✅ **Task 3, log parser** (`bot/parser.py`): turn 2 of the sample replay equals the contract example; 20 public gen9ou games parse with no skipped line; 25 tests, 100% coverage. On `main` @ `c25be7e`. `progress.md` 2026-10-24 entry.
 
 ## 5. Working-style notes for the agent
 - Verbosity Level 0: options + a recommendation, no teaching notes. Flag scope creep at once.
