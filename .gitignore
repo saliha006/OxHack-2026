@@ -10,6 +10,8 @@ design/
 skills/
 Research-Context/
 .env*
+data/raw/
+data/clean/
 
 .venv/
 __pycache__/
