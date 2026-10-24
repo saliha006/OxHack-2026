@@ -1,4 +1,8 @@
-"""Loads cleaned battles from data/clean/battles/ into Tiger, without the logs (those stay in local parquet)."""
+"""Loads cleaned battles from data/clean/battles/ into Tiger.
+
+The logs, views, dataset rating and split stay in the local parquet only. Split is derivable from started_at and id
+(see clean_battles.py).
+"""
 import argparse
 import os
 import time
@@ -11,8 +15,7 @@ from dotenv import load_dotenv
 ROOT = Path(__file__).resolve().parents[2]
 CLEAN = ROOT / "data" / "clean" / "battles"
 
-COLUMNS = ["id", "source", "started_at", "uploaded_at", "p1", "p2", "p1_elo", "p2_elo", "winner", "turns", "rated",
-           "views", "dataset_rating", "split"]
+COLUMNS = ["id", "source", "started_at", "uploaded_at", "p1", "p2", "p1_elo", "p2_elo", "winner", "turns", "rated"]
 
 # A hypertable chunked by month on the time the game started; the primary key has to include that time column.
 SCHEMA = """
@@ -28,9 +31,6 @@ CREATE TABLE IF NOT EXISTS battles (
     winner         text,
     turns          integer     NOT NULL,
     rated          boolean     NOT NULL,
-    views          bigint,
-    dataset_rating double precision,
-    split          text        NOT NULL,
     PRIMARY KEY (id, started_at)
 );
 SELECT create_hypertable('battles', by_range('started_at', INTERVAL '1 month'), if_not_exists => true);
