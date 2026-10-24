@@ -47,8 +47,6 @@
 *Status: ⬜ not started · 🟡 in progress · ⏸ blocked · ✅ done*
 
 1. ✅ **Core decision loop on dumb models** (`our_actions`, `opp_actions`, `simulate`, `value`, `build_state`, selector): 96 tests, 100% coverage on branch `derrick`; progress entry 2026-10-24 17:51.
-2. ⬜ **Merge `derrick` into `main`** `[⚠ touches @saliha, @nate: the shared docs must come off the branch first, it was cut from context]`
-   - *Done when:* `main` has the code only (no shared docs) and tests pass after `git merge origin/main`.
 3. ⏸ **Opponent side from real parsed logs** `[⏸ waits on @saliha: the parser filling BattleState, incl. the last_move reset on switch]`
    - *Done when:* `build_state` runs on a parser-produced `BattleState` from a real game, no hand-made fixture.
 4. ⬜ **Belief layer (hard filter, soft reweight, sampling)** `[⏸ waits on @nate: set candidates + priors per species]`
@@ -60,7 +58,7 @@
 - Research doc passes 1 (maths) and 7 (Showdown protocol + poke-engine); `design/DESIGN.md` is the map.
 
 ## 4. Done log (newest first)
-- (empty)
+- ✅ **Merge `derrick` into `main`**: one clean commit `5e203fc` with the code and contracts only (no shared docs in main's history); 140 tests pass on `main`. Agreed by saliha, nate. `progress.md` 2026-10-24 entries' Where lines updated.
 
 ## 5. Working-style notes for the agent
 - Verbosity Level 0: options + a recommendation, no teaching notes. Flag scope creep at once.
