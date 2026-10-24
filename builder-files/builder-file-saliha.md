@@ -69,7 +69,7 @@
    - *Done when:* a video of one whole game plus its `runs/*.jsonl` is saved.
 7. ⬜ **Demo mode + terminal stream** (`bot/demo.py`, 1.5 h): one command starts a battle vs `SimpleHeuristicsPlayer`, prints the URL, streams each turn in plain ANSI: choice, top 3 options, win probability, top opponent sets. It can also replay a saved `runs/*.jsonl` when there's no internet.
    - *Done when:* the 4-minute walkthrough (§18) runs from one command twice in a row, and the replay mode works offline.
-8. ⬜ **Final eval** on frozen code across all three laptops (starts 07:00 UTC, code frozen by 08:00; 2–3 h wall, unattended). Report intervals as they land.
+8. ⬜ **Final eval** on frozen code: the full run started 23:10 UTC is the demo's numbers unless derrick's fixes + nate's priors land early enough for a rerun to finish by ~05:30 UTC.
 9. ⬜ *(stretch, first to cut; proposed hand-over from @derrick, needs his yes)* **Coach review** (1.5 h): per-turn regret on the **baseline's** turns in our eval games (we hold both requests; our own bot's regret is zero by construction). Value = expected next state in win-probability points [P9 D5 + critique].
 
 **Seams** (the same note is in the other two briefs):

@@ -31,7 +31,7 @@
 - Backtesting frontend: derrick mentioned it; not decided (owner: derrick).
 - Handmade piece: no plan; ask the organisers what counts (event doc §6). Elo-from-decisions: parked.
 
-**Focus right now:** Rust toolchain + smoke battle (saliha); set candidates, then the team pool (nate); turn-time profile, belief floor, build_state on parser output (derrick).
+**Focus right now:** demo ready by 04:00–06:00 UTC (saliha: demo mode, recorded battle); set candidates + team pool (nate); belief fixes (derrick). Backtesting frontend: only if needed and agreed.
 
 **▶ RESUME HERE (2026-10-24 ~21:10 UTC):** briefs rewritten to the pass 9 order. Next for saliha: task 1 (Rust + `poke_engine` build, timebox 45 min), then task 3 (smoke battle). Numbers: `progress.md` → 📊 Latest.
 
@@ -307,13 +307,13 @@ eval: N shard processes per laptop (cores − 2), one blocking Agent per battle,
 
 | When (UTC) | Milestone (done means…) |
 |---|---|
-| Sat 21:45 | Rust toolchain decided (build works, or fallback chosen) |
-| Sun 00:30 | First real game: bot + `Agent.choose` on the local server |
-| Sun 01:00 | 20k-game training extract to derrick; set candidates + team pool ready |
-| Sun 04:00 | Smoke eval vs Random / MaxBasePower; full training extract; recorded demo battle |
-| Sun 06:00 | Win-probability model frozen |
-| Sun 07:00 | Final eval starts on all three laptops (code frozen by 08:00) |
-| Sun 10:00 | Feature freeze; charts and data card final |
+| Sun 00:30 | First real game: bot + `Agent.choose` on the local server (done 21:47 Sat) |
+| Sun 01:00 | Set candidates + team pool from nate; derrick's belief fixes |
+| Sun 02:30 | Demo mode + terminal stream (saliha) |
+| Sun ~03:30 | First full blind ladder eval done (stand-in priors) |
+| Sun 04:00 | Recorded demo battle; **code frozen for the demo** |
+| Sun 04:00–06:00 | **Demo ready**: live battle, charts, eval table. A rerun on real priors only if it finishes by ~05:30 |
+| Sun 06:00–09:00 | Presentation and Devpost write-up (Devpost workshop 09:00) |
 | Sun before 12:00 | **Submit** on Devpost with the GitHub link |
 
 **Cut order (first → last):** 1. coach review · 2. MCTS arm · 3. LP A/B (keep offline exploitability) · 4. uncertainty match · 5. MaxBasePower size · 6. gradient boosting (ship logistic) · 7. the second chart
