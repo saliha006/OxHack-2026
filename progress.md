@@ -38,7 +38,7 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
-| {{YYYY-MM-DD HH:MM}} | @{{name}} | @{{name}} | {{kind}} | {{what changed or what's needed, and the next step}} | {{entry stamp}} |
+| 2026-10-24 16:00 | @derrick | @saliha | 📨 waiting on | Publish Derrick's decision-layer docs (the publish script only lets you): `design/decision-layer.md` + new `design/decision/*.md`, on `derrick`'s working copy. Also note: decision layer is **Python** (not TS); Registry `Run · Test` = `uv run pytest --cov=decision`; feature 07 is blocked until the bot layer defines `BattleState`. Next: publish, or tell Derrick what to change | 2026-10-24 16:00 |
 
 **Kinds:** ⚠️ conflict (my change touches your work) · 📨 waiting on (I'm blocked until you do X) · 🔀 scope proposal (needs
 the whole team's yes, CLAUDE.md §2c) · ❓ question for a teammate (project-wide unknowns go in the PRD §21).
@@ -63,10 +63,18 @@ whenever you log an entry.
 
 ## 📊 Latest (volatile facts live only here)
 - **As of {{YYYY-MM-DD HH:MM}}:** `main` @ `{{sha}}` · tests: {{n}} green, {{x}}% coverage · deploy: {{status, URL}}
-- **On branches, not merged yet:** {{`branch`: what}}
+- **On branches, not merged yet:** `derrick`: decision layer `our_actions` + `select` (25 tests, 100% coverage)
 
 ---
 
 ## Log (newest first)
 
-*(no entries yet)*
+### 2026-10-24 16:00 — feat — Decision layer: legal actions from a request, and the action selector — @derrick
+- **Where:** `derrick` @ `b27a235` · merged to `main`: not yet (`derrick` was branched from `context`, so its shared docs must come off before a merge)
+- **Did:** `our_actions(request)` lists our legal moves / Tera moves / switches / leads from Showdown's raw `|request|` JSON. `select()` picks the highest expected value over opponent actions × sets, tie-break on worst case. Python + uv + pytest; 25 tests, 100% coverage.
+- **Touched:** `decision/actions.py`, `decision/selector.py`, `tests/`, `pyproject.toml`, `uv.lock`, `.gitignore`
+- **Brief task:** none (no brief for derrick yet)
+- **⚠️ Conflicts:** bot layer owner (not assigned): the decision layer is Python, so the bot ↔ decision seam crosses languages if the bot is TS | none else
+- **📨 Needs:** @saliha: publish the decision-layer docs, record Python + the test command (Open board row). Bot layer owner: `BattleState`, which feature 07 is blocked on
+- **Status:** open
+
