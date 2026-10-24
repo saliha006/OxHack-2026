@@ -3,8 +3,12 @@
 !progress.md
 !README.md
 !contracts/*.md
-.claude/skills/
-.claude/settings.local.json
+.claude/
+scripts/
+builder-files/
+design/
+skills/
+Research-Context/
 .env*
 
 .venv/
