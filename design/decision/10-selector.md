@@ -32,8 +32,10 @@ def select(scores, set_probs, opp_probs) -> Action
 - Ties use `math.isclose(rel_tol=1e-6, abs_tol=1e-6)`: poke-engine's probabilities are 32-bit, and values are on 09's 0–1 scale.
 - An empty table raises `ValueError`. It can't happen in play, since `select` is never called on a wait request.
 
-## Later (not decided)
-- A blend `(1-w)·EV + w·worst`, or a mixed strategy. The table is already the full payoff matrix, so adding one won't change the interface.
+## Later (decided 2026-10-24, see decision-layer.md §6)
+- ✅ v1 stays argmax-EV. Next: maximin mixed strategy via an LP over the table, behind a flag, kept if it beats EV in
+  self-play. Then the blend `(1-w)·EV + w·worst`, with w tuned. Needs the team's yes on the LP solver dependency.
+  Revisit when the opponent policy is trained or EV gets exploited in testing.
 
 ## Done when
 - [x] Picks the argmax on hand-built score tables

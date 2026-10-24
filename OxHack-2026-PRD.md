@@ -28,6 +28,10 @@
 > Fill: what's true today. Update it the moment a decision, the direction or the headline changes (CLAUDE.md §8 mirrors).
 
 **Decisions in force** (newest first; one line each, full ADR in the vault Log):
+- 2026-10-24: forced switch reuses the main loop with the opponent's only option `None` (double faint = normal switch-vs-switch matrix). Score stays Derrick's next-turn evaluation until the trained value model lands, then post-switch value only. (saliha, delegated to a reviewing agent)
+- 2026-10-24: team preview sends a fixed hand-picked lead order for v1; a type-matchup lead score is a later upgrade if time remains. (saliha, delegated to a reviewing agent)
+- 2026-10-24: action pruning: v1 enumerates everything and measures p50/p99 turn time; over budget, Tera only on the top few moves by damage, always keeping switches and one or two status moves. Opponent top-n only once the policy is trained, and never dropping the columns that hurt us most. (saliha, delegated to a reviewing agent)
+- 2026-10-24: selector stays argmax-EV for v1 (built and tested). Next upgrade is a maximin mixed strategy from an LP over the payoff table behind a flag, kept if it wins in self-play; the tuned blend comes after that. The LP solver is a new dependency and needs the team's yes. (saliha, delegated to a reviewing agent)
 - 2026-10-24: target tracks are **HRT "Best Use of Data for Predictions & Decision Making"** (main) and **Best Handmade** (also); TIME is optional but applies to Handmade (event doc §3). (saliha)
 - 2026-10-24: the doc owner is saliha; the working branch is `sali`; `.claude/`, `Research-Context/` and `.env*` never go to GitHub. (saliha)
 

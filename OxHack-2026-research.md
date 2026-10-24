@@ -1488,3 +1488,30 @@ Ledger kept in `design/bot-layer.md §5` for now. The sim source files are all K
   typeless, ¼ max-HP recoil) — `src/choices.rs`. Encore needs `Side.last_used_move` set, or `generate_instructions`
   panics (`generate_instructions.rs:2093`). `Side` always pads teams to 6 with fainted placeholders. Pokémon, Move and
   Side attributes are read-only from Python; build them with constructor arguments.
+
+## Pass 7, design decisions (2026-10-24)
+Selector, pruning, team-preview lead and forced switch. Notes in `Research-Context/decisions-*.md`; outcomes in PRD §0 and `design/decision-layer.md` §6.
+
+| Source | Grade | Supports |
+|---|---|---|
+| Johanson, Zinkevich, Bowling, Computing Robust Counter-Strategies, NeurIPS 2007 (proceedings.neurips.cc/paper/2007/hash/6e7b33fdea3adc80ebd648fffb665bb8-Abstract.html; author PDF cs.ualberta.ca/~games/poker/publications/NIPS07-rnash.pdf, same work) | KEEP | One trust weight trades exploiting an opponent model against exploitability; best response is brittle if the model is wrong. Poker, not Pokemon |
+| von Stengel, Zero-Sum Games and LP Duality, Math. of OR 2022 (K29) + MIT 6.S890 lecture 3 | KEEP | Maximin is the LP solution and a Nash strategy in two-player zero-sum; guarantees the game value |
+| Lisy et al. NeurIPS 2013; Shafiei et al. IJCAI-GIGA 2009 (K18, K19) | KEEP | EV/UCT-style selection in simultaneous games need not reach Nash and can be exploited |
+| Milec et al., AAMAS 2024 (aamas.csc.liv.ac.uk/Proceedings/aamas2024/pdfs/p2393.pdf) | WEAK | Snippet only: robust response needs care with limited look-ahead |
+| PokeChamp, ICML 2025 (arxiv.org/html/2503.04094v1) | KEEP | Small candidate action set per side, guided by a damage-calc lookahead; no ablation or count. No team-preview logic |
+| Saffidine, Finnsson, Buro, AAAI 2012 (ojs.aaai.org/index.php/AAAI/article/view/8148) | KEEP | Sound pruning of dominated actions in simultaneous-move search |
+| Bosansky et al., IJCAI 2013 (ijcai.org/Proceedings/13/Papers/018.pdf) | KEEP | Solve on a restricted action set, grow it only when a missing action would help |
+| PokeAgent paper, arXiv 2603.15563 (K1, K3) | KEEP | Foul Play's speed comes from cheap evaluation and bucketed damage rolls, not action enumeration |
+| github.com/pmariglia/foul-play (+ fp/search/main.py) | WEAK | Only confirms it searches with poke-engine; no pruning or forced-switch detail |
+| poke-engine.readthedocs.io | WEAK | No search or pruning content |
+| github.com/UT-Austin-RPL/metamon | KEEP | Lead choice is a separate supervised team-preview model |
+| Metamon, arXiv 2504.04395 | KEEP | No lead ablation found (absence of evidence; full PDF not checked) |
+| poke-env docs, player module (poke-env.readthedocs.io/en/stable/modules/player.html) | KEEP | `teampreview()` returns `/team ORDER`; a fixed order is a one-liner |
+| jgeekstudies.org vol 12 issue 2 PDF | WEAK | VGC doubles lead prediction; no win-rate effect, wrong format |
+| Reddit lead-rate post, pokemon-zone.com | DO NOT USE | Community stats, not reputable |
+| poke-engine src/genx/state.rs (raw.githubusercontent.com/pmariglia/poke-engine/main/src/genx/state.rs) | KEEP | `get_all_options`: one side fainted gets switches, the other `MoveChoice::None`; both fainted = both switch-only |
+| Showdown sim/battle.ts (raw.githubusercontent.com/smogon/pokemon-showdown/master/sim/battle.ts) | KEEP | Only flagged sides get `forceSwitch`; the other side gets `wait` |
+| github.com/sethkarten/pokechamp (minimax_optimizer.py) | WEAK | Generic `step(player, opp)`; no forced-switch logic |
+| Showdown SIM-PROTOCOL.md | WEAK | Fetch did not surface the forceSwitch text; battle.ts used instead |
+
+Gaps: no published blend weight, prune threshold or lead win-rate effect for Pokemon. The blend objective, the forced-switch scoring rule and "a fixed lead is enough" rest on our own reasoning, so each shipped the lowest-risk option.
