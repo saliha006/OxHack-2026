@@ -38,6 +38,7 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
+| 2026-10-24 17:51 | @derrick | @saliha | 📨 waiting on | Publish to `context` from `origin/derrick` @ `9c98381` (the script only lets you): `design/decision/*.md` (12 feature docs), `design/decision-layer.md` (§7 checklist), and `OxHack-2026-research.md` section 7 (Showdown protocol + poke-engine, appended after yours). E.g. `git show origin/derrick:<path> > <path>`, then publish | 2026-10-24 17:51 |
 | 2026-10-24 17:41 | @derrick | @saliha | ⚠️ conflict | The decision layer's opponent model reads `BattleState.sides[*].last_move` as the **current active Pokémon's** last move: the parser must reset it to null when that side switches. Next: confirm, or say if the contract should spell it out | 2026-10-24 17:41 |
 | 2026-10-24 16:46 | @derrick | @saliha, @nate | 🔀 scope proposal | **saliha owns the bot layer and builds the log parser**, producing the `BattleState` JSON Derrick drafted (`contracts/battle-state.md` + `contracts/battle_state.py` + an example, on `derrick`). The decision layer is blocked on it for the opponent side. Next: saliha yes/no on owning it + review the shape; Nate yes/no on the ownership | 2026-10-24 16:46 — saliha: YES (17:20), waiting on @nate |
 | 2026-10-24 16:00 | @derrick | @saliha | 📨 waiting on | Publish Derrick's decision-layer docs (the publish script only lets you): `design/decision-layer.md` + new `design/decision/*.md`, on `derrick`'s working copy. Also note: decision layer is **Python** (not TS); Registry `Run · Test` = `uv run pytest --cov=decision`; feature 07 is blocked until the bot layer defines `BattleState`. Next: publish, or tell Derrick what to change | 2026-10-24 16:00 |
@@ -65,11 +66,20 @@ whenever you log an entry.
 
 ## 📊 Latest (volatile facts live only here)
 - **As of {{YYYY-MM-DD HH:MM}}:** `main` @ `{{sha}}` · tests: {{n}} green, {{x}}% coverage · deploy: {{status, URL}}
-- **On branches, not merged yet:** `derrick`: decision layer `our_actions`, `select`, `simulate`, `our_side`, `value`, `build_state`, `opp_actions` (92 tests, 100% coverage)
+- **On branches, not merged yet:** `derrick`: decision layer `our_actions`, `select`, `simulate`, `our_side`, `value`, `build_state`, `opp_actions` (96 tests, 100% coverage)
 
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 17:51 — feat — Decision layer: Struggle, and Encore no longer crashes the engine — @derrick
+- **Where:** `derrick` @ `bd84938` (code) · docs handed off at `9c98381` · merged to `main`: not yet
+- **Did:** When Choice lock / Encore / Taunt leave the opponent no usable move, `build_state` gives it Struggle (poke-engine only runs it from the move list). Fixed a crash: poke-engine panics on any Encored side unless `last_used_move` is set, which the adapter now does. Found: poke-engine's gen9 Struggle is a Normal-type move with no recoil (real one is typeless, ¼ recoil). 96 tests, 100% coverage.
+- **Touched:** `decision/adapter.py`, `decision/opponent.py`, `tests/test_opponent.py`
+- **Brief task:** none (no brief for derrick yet)
+- **⚠️ Conflicts:** none
+- **📨 Needs:** @saliha: publish the decision-layer docs from `origin/derrick` (Open board row). The publish script only lets the doc owner publish them
+- **Status:** open
 
 ### 2026-10-24 17:41 — feat — Decision layer: opponent options + uniform policy — @derrick
 - **Where:** `derrick` @ `82e0eb6` · merged to `main`: not yet
