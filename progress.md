@@ -41,6 +41,7 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 | 2026-10-24 20:52 | @saliha | @all | ⚠️ conflict | `context` now holds only `CLAUDE.md`, the PRD, `builder-files/` and `design-decision/` (was `design/`). Skills, the event doc and the research doc are local now. Sync with `git archive origin/context | tar -x`, then delete your old `design/` copy. Publish steps are in `CLAUDE.md` | 2026-10-24 20:52 |
 | 2026-10-24 20:36 | @saliha | @derrick | ⚠️ conflict | The parser is on `main`: `from bot.parser import Parser, states_from_log`. `Parser(us).feed(line)` per protocol line, `.snapshot()` per request. Unblocks your task 3 (build_state on a parser-made BattleState) | 2026-10-24 20:36 |
 | 2026-10-24 20:36 | @saliha | @nate | ⚠️ conflict | The parser is on `main`: `states_from_log(log_lines, us)` gives one `BattleState` per turn of a saved replay, for your (state, winner) pairs | 2026-10-24 20:36 |
+| 2026-10-24 22:49 | @saliha | @derrick @nate | ⚠️ conflict | Forme mismatch at the BattleState ↔ set-candidates seam: a Keldeo with Secret Sword shows in battle as `keldeoresolute`, but team files (and likely chaos stats) key it `keldeo`, so `Belief.__init__` raises `KeyError` and that game falls back on every turn. Same risk for other battle-only formes. Needs one agreed rule: map battle-only formes to the base species (where? parser, belief lookup, or the set file's keys) | 2026-10-24 22:49 |
 | 2026-10-24 21:47 | @saliha | @derrick | ⚠️ conflict | Two bugs in `decision/belief.py` seen in live games (all fallbacks in the smoke run): (1) line 119 unpacks `calculate_damage` as two values, but fixed-damage moves (Ruination) return one: `calculate_damage(st, "ruination", "makeitrain", True)` → `([168], [100, 223])`; treat one value as max = crit. (2) line 133 `scenarios()` hits `max()` on an empty slot when the usage rebuild also fails `_fits`; your belief floor (task 2) covers it. Also: `state.py:9` / `opponent.py:11` need `encoding="utf-8"` for Windows | 2026-10-24 21:47 |
 | 2026-10-24 21:47 | @saliha | @derrick | ⚠️ conflict | I added `poke-env==0.16.1` to your `pyproject.toml` (and `uv.lock`). `scikit-learn` and `matplotlib` come with the tasks that need them. The bot is live: `uv run python -m bot.smoke --games 10` | 2026-10-24 21:47 |
 | 2026-10-24 21:15 | @saliha | @derrick | 🔀 scope proposal | Your brief is reordered by the pass 9 build plan (two research passes + a critique: peer-reviewed papers, official source, practitioner consensus, our code and the PRD). Every "Recommended" line is advice: accept it or pick your own route (decision-layer calls are yours). Key finding: poke-engine's built-in MCTS hard-wires its Rust eval, so the learned value + LP stay in our Python loop. Also yes/no on handing task 8 (belief scoring) to nate and the coach to saliha: you're at ~13 h | 2026-10-24 21:15 |
@@ -78,6 +79,15 @@ whenever you log an entry.
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 22:49 — feat — Eval is blind and varied — @saliha
+- **Where:** `eval-blind` → `main` @ `10f123a` · merged to `main`: yes
+- **Did:** One seeded shuffled schedule across every pairing; opponents get random account names and a right-skewed random think time before each move (median 0.25 s, capped at 3 s); each game draws a random team from the pool for both sides. Stand-in priors merge every set across 11 validated Metamon `competitive/gen9ou` teams (5 of 16 fail now Tera Blast is banned), so belief faces real uncertainty until `data/set_candidates.json` lands. Fixed: trailing blank lines in team files made poke-env parse an empty 7th Pokémon. Results now live in `runs/eval/<machine>-<shard>.jsonl` with the battle tag.
+- **Touched:** `bot/eval.py`, `bot/smoke.py`, `bot/teams/standin/`, `bot/tests/test_eval.py`, `bot/tests/test_smoke.py`
+- **Brief task:** saliha task 5 🟡
+- **⚠️ Conflicts:** @derrick @nate: forme mismatch (`keldeoresolute` vs `keldeo`), Open board
+- **📨 Needs:** an agreed forme rule from @derrick and @nate
+- **Status:** open
 
 ### 2026-10-24 22:33 — feat — Eval harness: agent ablations vs baselines and each other — @saliha
 - **Where:** `sali` @ `fa8f4ed` · merged to `main`: yes (fast-forward)
