@@ -35,6 +35,7 @@
 - Idea: Momentum (Pokémon win probability + coach-style replay review, optional ElevenLabs voice) is the lead; Honest Clock is the fallback. Owner saliha, lock in the first hours.
 - Elo angle: estimate a player's Elo from their decisions, using a dataset with ratings at all levels, plus top-500 ladder players' replays. Dataset choice waits on the research notes. Owner saliha.
 - Layered design (data layer, decision layer, bot layer) and the four bot-skeleton choices (framework, server, format, bot↔decision contract): owner saliha; needs Nate and Derrick to agree (CLAUDE.md §2c).
+- Bot layer + log parser (fills Derrick's `BattleState` contract): saliha said yes on 2026-10-24 to owning it (proposed by Derrick); **waiting on Nate's yes**. Decision layer is Python (`uv run pytest --cov=decision`).
 - Handmade piece: physical or not, and what "from scratch" means: ask the organisers (event doc §6).
 
 **Focus right now:** finish the research pass (notes in the local `Resreach-Context/`), fold the verified findings into this PRD and the research doc, then lock the idea and the evaluation plan.
