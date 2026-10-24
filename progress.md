@@ -70,11 +70,20 @@ whenever you log an entry.
 
 ## 📊 Latest (volatile facts live only here)
 - **As of {{YYYY-MM-DD HH:MM}}:** `main` @ `{{sha}}` · tests: {{n}} green, {{x}}% coverage · deploy: {{status, URL}}
-- **On branches, not merged yet:** `derrick`: decision layer `our_actions`, `select`, `simulate`, `our_side`, `value`, `build_state`, `opp_actions` (96 tests, 100% coverage)
+- **On branches, not merged yet:** `derrick`: decision layer `our_actions`, `select`, `simulate`, `our_side`, `value`, `build_state`, `opp_actions`, `Belief` (113 tests, 100% coverage)
 
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 18:17 — feat — Decision layer: belief (hard filter + sampling) on hand-made priors — @derrick
+- **Where:** `derrick` @ `7ca09bb` · merged to `main`: not yet
+- **Did:** `Belief(priors, battle)` keeps each opponent slot's set weights for the battle. `update()` filters on revealed moves/item/ability/Tera and four implied-item rules (Choice, Assault Vest, Leftovers, Boots), rebuilding from usage when nothing fits. `scenarios(k=5)` gives the active's top 5 with the bench at its best guess. Soft reweight (04) is next. 113 tests, 100% coverage.
+- **Touched:** `decision/belief.py`, `tests/test_belief.py`
+- **Brief task:** 4 → 🟡 part (logic on hand-made priors; real set file waits on @nate)
+- **⚠️ Conflicts:** @saliha: the rules read `Event.source` values `"stealthrock"` and `"item:<id>"` exactly as the contract's examples spell them
+- **📨 Needs:** none new
+- **Status:** open (the note to @saliha)
 
 ### 2026-10-24 18:14 — decision — Derrick drafts the SetCandidates contract; belief logic starts ahead of the merge — @derrick
 - **Where:** `derrick` @ `f9744ee` · merged to `main`: not yet
