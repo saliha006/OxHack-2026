@@ -105,7 +105,8 @@ class BattleSession:
         return choice
 
     def close(self, won: bool | None, turns: int) -> dict:
-        summary = {"tag": self.tag, "won": won, "turns": turns, "decisions": self.decisions,
+        side = self.parser.state["us"] if self.parser else None
+        summary = {"tag": self.tag, "side": side, "won": won, "turns": turns, "decisions": self.decisions,
                    "fallbacks": self.fallbacks, **_percentiles(self.think_ms)}
         self.trace.write(json.dumps({"kind": "end", **summary}) + "\n")
         for f in (self.raw, self.trace):
