@@ -1,5 +1,5 @@
 # OxHack-2026: Product Requirements Document
-*{{event · track}} · repo: https://github.com/saliha006/OxHack-2026 · v{{n}} · {{date}}*
+*OxHack 26 · HRT: Best Use of Data for Predictions & Decision Making · repo: https://github.com/saliha006/OxHack-2026 · v2 · 2026-10-24*
 *Links: `CLAUDE.md` (how we work) · `builder-file-<name>.md` (who builds what) · the research doc (evidence) · `contracts/` (exact interfaces)*
 
 > **How Claude fills this PRD** (delete this block once §1–§6 are filled)
@@ -28,6 +28,7 @@
 > Fill: what's true today. Update it the moment a decision, the direction or the headline changes (CLAUDE.md §8 mirrors).
 
 **Decisions in force** (newest first; one line each, full ADR in the vault Log):
+- 2026-10-24: one project folder. `context` holds `CLAUDE.md`, this PRD, `builder-files/` and `design-decision/`; `main` holds code, `README.md` and `progress.md`. Research and the event doc stay local and are deleted per feature once it ships. (saliha)
 - 2026-10-24: bot = poke-env 0.16.1 (`Player` subclass tapping raw lines, calling `Agent.choose`), format gen9ou with one fixed team + a seeded validated opponent pool, local Showdown server. Own websocket client is the fallback. Research pass 8. (saliha)
 - 2026-10-24: system design choices are owned by saliha and derrick, and decision-layer choices are derrick's. The four decision-layer lines below are recommendations he can override; he already built a type-matchup lead (feature 11). (saliha)
 - 2026-10-24: forced switch reuses the main loop with the opponent's only option `None` (double faint = normal switch-vs-switch matrix). Score stays Derrick's next-turn evaluation until the trained value model lands, then post-switch value only. (saliha, delegated to a reviewing agent)
@@ -37,31 +38,31 @@
 - 2026-10-24: target tracks are **HRT "Best Use of Data for Predictions & Decision Making"** (main) and **Best Handmade** (also); TIME is optional but applies to Handmade (event doc §3). (saliha)
 - 2026-10-24: the doc owner is saliha; the working branch is `sali`; `.claude/`, `Research-Context/` and `.env*` never go to GitHub. (saliha)
 
-**Pending** (design choices not made yet; leanings, not decided):
-- Idea: Momentum (Pokémon win probability + coach-style replay review, optional ElevenLabs voice) is the lead; Honest Clock is the fallback. Owner saliha, lock in the first hours.
-- Elo angle: estimate a player's Elo from their decisions, using a dataset with ratings at all levels, plus top-500 ladder players' replays. Dataset choice waits on the research notes. Owner saliha.
-- Layered design (data layer, decision layer, bot layer) and the four bot-skeleton choices (framework, server, format, bot↔decision contract): owner saliha; needs Nate and Derrick to agree (CLAUDE.md §2c).
-- Bot layer + log parser (fills Derrick's `BattleState` contract): saliha (doc owner) said yes on 2026-10-24 to owning it (proposed by Derrick) and waived a separate yes from Nate; Nate informed. Parser resets `last_move` to null on a switch (confirmed). Decision layer is Python (`uv run pytest --cov=decision`).
-- Handmade piece: physical or not, and what "from scratch" means: ask the organisers (event doc §6).
+**Pending** (not decided yet):
+- The demo story: the battle agent is what's being built. Whether a Momentum-style replay review (win probability per turn plus the agent's preferred move) is added, reusing the parser and value model: saliha.
+- Calibrated win-probability model replacing the HP heuristic: Derrick's call (his task 8).
+- Data storage (ClickHouse vs plain files) and the high-Elo cut-off: Nate, with saliha and derrick.
+- `poke-env==0.16.1` in `pyproject.toml` (Derrick's file): waiting on his OK. A Rust toolchain on saliha's machine so `poke-engine` builds: waiting on saliha.
+- Handmade piece: no plan; ask the organisers what counts (event doc §6). Elo-from-decisions: parked.
 
-**Research pass done (2026-10-24):** merged into `OxHack-2026-research.md` (Grep it, ~200KB; passes 1-3 are the new ones). Not decided, the user's call: (a) value model = calibrated gradient-boosted win-probability (replaces the HP heuristic); (b) per-turn maximin LP over the payoff matrix instead of argmax-EV; (c) Bayesian opponent-set belief (biggest, 7-9 h); (d) data = `HolidayOugi/pokemon-showdown-replays` main + Metamon raw cross-check, Elo from the `|player|` line, split by battle/time/player; (e) coach text templated from computed numbers only. Suggested cut order: voice, LLM paraphrase, ClickHouse, Elo-from-decisions, belief layer.
+**Focus right now:** bot smoke battle and decision-layer wiring (saliha, blocked on the dependency OK); team pool and set candidates (nate); decision trace and win-probability model (derrick).
 
-**Focus right now:** pick (a)-(e), lock the idea and the evaluation plan, then build. Bot layer + log parser is saliha's once Nate agrees.
-
-**▶ RESUME HERE (2026-10-24 ~18:00, saliha signing off; any account/session):** run `fetch the context`. Layers: Nate = data (`builder-file-nate.md`), Derrick = decision (`builder-file-derrick.md`), saliha = bot (`builder-file-saliha.md`); the three briefs were filled from the template today, each ends with an "Open blanks" list. Waiting on the user (main account): (1) the (a)-(e) build choices above, (2) the bot skeleton choices (poke-env / local server / format). Settled: `last_move` reset on switch, bot-layer ownership. Next code step for saliha: local Showdown server + a random-move bot end to end (brief task 2).
+**▶ RESUME HERE (2026-10-24 ~21:30):** the log parser is on `main`. Next for saliha: brief task 2 (poke-env smoke battle) once Derrick OKs the dependency, then task 4 (wire `Agent.choose`). Numbers: `progress.md` → 📊 Latest.
 
 ---
 
 ## 1. One page ★ *(≤15 lines)*
 > Fill: the 30-second version. A judge or a new teammate should get the whole project from this section alone.
 
-**One-liner:** {{who it helps · what it does · how · why it's different, in one or two sentences}}
-- **Where it runs, for whom:** {{deployment target; first users or region}}
-- **Track:** {{event track, plus anything from other tracks that's built in}}
+**One-liner:** a Pokémon Showdown Gen 9 OU battle agent that turns usage stats and replays into predictions (the opponent's hidden sets, the chance of winning) and uses them to choose every move, with its win rate measured against standard baseline bots.
+- **Where it runs, for whom:** one laptop running a local Showdown server; judges watch live battles in the Showdown web client.
+- **Track:** HRT Best Use of Data for Predictions & Decision Making (main); Best Handmade (also; no plan yet).
 
 **What makes it real (and not a mock-up):** *(3–5 claims anyone could check: live data, real datasets with their size, a
 trained model with its metric, something that ran unattended)*
-1. {{…}}
+1. A parser that reads real Showdown logs into the shared `BattleState` (tested on public gen9ou games; numbers in `progress.md` → 📊 Latest).
+2. A tested decision layer that answers any request within a 3 s budget and never stalls.
+3. {{eval-harness win rates vs three baselines: not run yet}}
 
 **Novelty line:** *Unlike {{existing option A}} (which {{its gap}}) and {{option B}} (which {{its gap}}), OxHack-2026
 {{the one thing only it does}}.* Name the prior art openly, and claim nothing broader than the gap.
@@ -91,12 +92,12 @@ trained model with its metric, something that ran unattended)*
 
 | Layer | What's in it, and why |
 |---|---|
-| **Real / live** | {{what runs on real data or for real users}} |
-| **Simulated** (labelled on screen) | {{what's synthetic, and why: law, access, time}} |
-| **Stretch / next step** | {{…}} |
-| **Cut** | {{what was dropped, one line of reason each}} |
+| **Real / live** | Battles on a local Showdown server; set priors and training data from real replays and Smogon usage stats |
+| **Simulated** (labelled on screen) | Opponents are baseline bots, not ladder players: the public ladder needs a registered bot |
+| **Stretch / next step** | Calibrated win-probability model, maximin LP selector, browser side panel, public ladder run, replay review |
+| **Cut** | Voice and LLM coaching text (no feature scheduled); TypeScript runtime (replaced by Python + poke-engine) |
 
-**Demo-vs-product gap:** {{what a real deployment needs that the demo fakes: sensing, consent, scale, integrations}}.
+**Demo-vs-product gap:** a registered bot account under Smogon's bot policy for ladder play; opponents that adapt; more than one team.
 CLAUDE.md §2 treats anything in this list as a 🟠 decision.
 
 ## 5. User flows ★ *(2–4 flows, ≤7 steps each; the demo flow first)*
@@ -145,12 +146,18 @@ CLAUDE.md §2 treats anything in this list as a 🟠 decision.
 **Sources**
 | Role | Dataset / feed | Span / latency | Licence / access | Status |
 |---|---|---|---|---|
-| {{train / validate / live}} | {{…}} | {{…}} | {{…}} | KEEP / WEAK / cut |
+| train | `HolidayOugi/pokemon-showdown-replays` (Hugging Face) | 34.3M replays, ~2.5M gen9ou | no licence stated | KEEP |
+| validate | Metamon raw replays | ~2.68M rows, cutoff 2026-05-19 | pseudonymised; parsed set CC BY-NC 4.0 | KEEP |
+| test | Showdown replay API, games after 2026-05-19 | live | public uploads only | KEEP |
+| priors | Smogon chaos stats `gen9ou-1825`, 2026-09 | monthly | public | KEEP |
+| live | Local Showdown server battles | per turn | ours | KEEP |
 
 **Entities** (what we store)
 | Entity | Key fields | Written by | Read by | Sensitivity | Retention |
 |---|---|---|---|---|---|
-| {{…}} | {{…}} | {{component}} | {{component}} | public / internal / personal / health | {{…}} |
+| Battle log + decision trace | turn, `BattleState`, choice, top options, win probability, think time | bot | eval harness, charts, replay review | internal | local `runs/`, through the demo |
+| Set candidates | per species: weighted sets + an "other" bucket | data layer | decision layer | public (derived) | rebuilt per stats month |
+| Team pool | seeded packed gen9ou teams | data layer | bot eval | public | kept with its seed |
 
 ## 10. System architecture ★ *(diagram ≤25 lines + one table)*
 > Fill: the boxes, the arrows, where each one runs, and the resource budget. Freeze the contracts early so nobody blocks.
@@ -224,7 +231,11 @@ Showdown server ─log lines─► bot parser ─► BattleState ─► Agent.ch
 
 | Failure | Detected by | System behaviour | User sees |
 |---|---|---|---|
-| {{a feed goes stale}} | {{…}} | {{…}} | {{…}} |
+| Decision error or over 3 s | `Agent.choose` catches it; `decision` logger | first legal option, else `default` | the battle goes on |
+| Malformed protocol line | parser warning | skips the line, keeps the state | nothing |
+| Invalid choice | `|error|[Invalid choice]` | resend the first legal option, then `default` | nothing |
+| Socket drop (slow search) | poke-env keepalive | search off the event loop; reconnect | a battle may be forfeited |
+| No Wi-Fi at the demo | n/a | everything runs locally | nothing |
 
 ## 16. Sponsor / platform fit *(optional; ≤5 bullets)*
 > Fill: how each sponsor or required technology is genuinely used, not bolted on, each with a proof you can show on screen.
@@ -237,13 +248,14 @@ Showdown server ─log lines─► bot parser ─► BattleState ─► Agent.ch
 
 | Question | Evidence | Target |
 |---|---|---|
-| Does it beat the baseline? | {{…}} | {{…}} |
+| Does it beat the baseline? | 100 games each vs poke-env's `RandomPlayer`, `MaxBasePowerPlayer`, `SimpleHeuristicsPlayer`; win rate with a 95% Wilson interval | lower bound above 50% vs `MaxBasePowerPlayer` |
+| Are its win probabilities honest? | log loss, Brier and a reliability diagram on held-out games, split by battle, time and player | better than the HP heuristic |
 
 | Judging criterion | Where we prove it (§ / demo beat) |
 |---|---|
 | {{…}} | {{…}} |
 
-**Definition of done (MVP):** {{the end-to-end path that must work, on which box, with what data}}
+**Definition of done (MVP):** one command starts a live gen9ou battle on the local server in which the agent plays every turn through the decision layer with no stalls, and the eval table vs the three baselines exists.
 
 ## 18. Demo script ★ *(≤{{length}}; one row per beat)*
 > Fill: timed beats. Say what's live and what's recorded. Every beat has a fallback.
@@ -259,13 +271,13 @@ Showdown server ─log lines─► bot parser ─► BattleState ─► Agent.ch
 
 | When | Milestone (done means…) |
 |---|---|
-| {{+1 h}} | Contracts frozen (§10) |
-| {{…}} | **Walking skeleton:** {{the thinnest end-to-end path}} |
-| {{…}} | Feature freeze |
-| {{…}} | **Submit** |
+| Sat 23:00 BST | Bot plays random legal moves on the local server |
+| Sun 03:00 GMT | **Walking skeleton:** parser + decision layer play full games with no stalls |
+| Sun 07:00 GMT | Eval numbers vs three baselines; feature freeze 10:00 |
+| Sun before 12:00 GMT | **Submit** on Devpost with the GitHub link |
 
-**Cut order (first → last):** 1. {{…}}
-**Never cut:** {{…}}
+**Cut order (first → last, proposed):** 1. public ladder run · 2. browser side panel · 3. maximin LP · 4. calibrated win-probability model
+**Never cut (proposed):** the live demo battle and the eval table vs baselines
 
 ## 20. Risks ★ *(≤6 rows)*
 > Fill: what could sink the project (technical, data access, time, people, event rules), not every possible bug.
@@ -277,7 +289,9 @@ Showdown server ─log lines─► bot parser ─► BattleState ─► Agent.ch
 ## 21. Open questions ★ *(≤8; facts to find out)*
 > Fill: questions only. Undecided design choices go in §0 → Pending; tasks go to the briefs.
 
-- [ ] {{question}}: owner {{name}}, needed by {{time}}
+- [ ] The real Devpost deadline and what the form requires: owner saliha, needed by Sun 09:00 (event doc §6)
+- [ ] Can one project win HRT and Best Handmade? How is HRT judged, and by whom? Owner saliha, needed by Sun 09:00
+- [ ] Are datasets prepared before 12:00 Saturday allowed? Owner saliha, needed before training
 
 ## 22. Glossary *(★ if the domain has jargon; one line per term)*
 | Term | Meaning |

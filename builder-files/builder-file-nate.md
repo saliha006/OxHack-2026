@@ -1,13 +1,13 @@
 # Nate: Data layer (ingestion, ratings, set candidates + priors, training sets)
 **GitHub:** `aldrichbanas07` · **Branch:** `{{nate's branch}}` · **Tool:** Claude Code · **Brief last updated:** 2026-10-24 by saliha
-**Spec:** the PRD (`OxHack-2026-PRD.md`) and `design/*.md`. A bare § means the PRD; CLAUDE.md and this brief's own sections are always named.
+**Spec:** the PRD (`OxHack-2026-PRD.md`) and `design-decision/*.md`. A bare § means the PRD; CLAUDE.md and this brief's own sections are always named.
 
 ## 0. How the agent reads this brief (every task)
 1. `CLAUDE.md` is already loaded (don't re-read it); read this brief once. Follow both.
 2. **Only action `▶ Current tasks`**, top to bottom.
 3. Before starting, read `progress.md`'s 📌 Open board (CLAUDE.md §2b). Rows To @nate come first: tell the user, then resolve or schedule them.
 4. Ship each task with the CLAUDE.md §7 sequence, then log it (CLAUDE.md §2b). Use the `debug` skill on every issue.
-5. Token budget (CLAUDE.md): Grep `OxHack-2026-research.md` by pass number, never read it whole; read only the `design/` doc for your layer.
+5. Token budget (CLAUDE.md): read only the `design-decision/` doc for your layer. The research doc is saliha's and local only: ask her for a pass instead of searching for it.
 
 **Task tags:** `[⚠ touches @name: what]` = changes someone else's area or a shared contract; get that owner's yes before merging (§2c). `[⏸ waits on @name: what]` = blocked until they deliver (a 📨 row on the Open board).
 
@@ -16,7 +16,7 @@
 ## 1. Ownership
 **Owns:**
 - `data/`: ingestion, storage, ladder snapshotter, offline outputs {{exact paths: not decided}}
-- `design/data-layer.md`: its design (DRAFT, not team-agreed)
+- `design-decision/data-layer.md`: its design (DRAFT, not team-agreed)
 
 **Does NOT touch:**
 | Area / path | Owner | Why it's theirs |
@@ -28,7 +28,7 @@
 **Shared** (flag in `progress.md` ⚠️ Conflicts): `contracts/*`, `fixtures/*`.
 
 ## 2. Contract & Guardrails
-**Scope contract.** Nate builds what the decision layer consumes offline: **set candidates + priors per species** and **training sets** (`design/data-layer.md` §5), from replays and ratings.
+**Scope contract.** Nate builds what the decision layer consumes offline: **set candidates + priors per species** and **training sets** (`design-decision/data-layer.md` §5), from replays and ratings.
 - Research verdict (research doc, pass 2): main data = `HolidayOugi/pokemon-showdown-replays` (gen9ou ≈ 2.5M replays, raw usernames, no licence stated); Metamon raw (pseudonymised) as cross-check. Metamon's 28.5 GB parsed set is not needed.
 - Per-player Elo comes from the log's `|player|` line, NOT the dataset `rating` column (that is the lower player's post-game rating). Elo is floored at 1000 (left-censored).
 
@@ -69,7 +69,7 @@
 5. ⬜ **Bot filtering rule** (🟠 decision): how bot accounts are detected and dropped.
 
 ## 6a. Reference
-- Research doc passes 1-3; `design/data-layer.md`; replay API `search.json?format=gen9ou&before=<uploadtime>`; no endpoint gives ladder ranks 501-1000.
+- Research doc passes 1-3; `design-decision/data-layer.md`; replay API `search.json?format=gen9ou&before=<uploadtime>`; no endpoint gives ladder ranks 501-1000.
 
 ## 4. Done log (newest first)
 - (empty)
@@ -80,7 +80,7 @@
 
 ## 6. Open blanks (fill when the chat or repo answers them, CLAUDE.md 🔁)
 - Nate's branch name and exact owned paths.
-- 🟠 storage, Elo cut-off, bot detection (`design/data-layer.md` §6).
+- 🟠 storage, Elo cut-off, bot detection (`design-decision/data-layer.md` §6).
 
 ---
 ── Archived (superseded <date> — do NOT action) ──

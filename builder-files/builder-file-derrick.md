@@ -1,13 +1,13 @@
 # Derrick: Decision layer (state intake, belief over opponent sets, simulate, value, selector, fallback)
 **GitHub:** `RandomGeeb` · **Branch:** `derrick` · **Tool:** Claude Code · **Brief last updated:** 2026-10-24 by saliha
-**Spec:** the PRD (`OxHack-2026-PRD.md`) and `design/*.md`. A bare § means the PRD; CLAUDE.md and this brief's own sections are always named.
+**Spec:** the PRD (`OxHack-2026-PRD.md`) and `design-decision/*.md`. A bare § means the PRD; CLAUDE.md and this brief's own sections are always named.
 
 ## 0. How the agent reads this brief (every task)
 1. `CLAUDE.md` is already loaded (don't re-read it); read this brief once. Follow both.
 2. **Only action `▶ Current tasks`**, top to bottom.
 3. Before starting, read `progress.md`'s 📌 Open board (CLAUDE.md §2b). Rows To @derrick come first: tell the user, then resolve or schedule them.
 4. Ship each task with the CLAUDE.md §7 sequence, then log it (CLAUDE.md §2b). Use the `debug` skill on every issue.
-5. Token budget (CLAUDE.md): Grep `OxHack-2026-research.md` by pass number, never read it whole; read only the `design/` doc for your layer.
+5. Token budget (CLAUDE.md): read only the `design-decision/` doc for your layer. The research doc is saliha's and local only: ask her for a pass instead of searching for it.
 
 **Task tags:** `[⚠ touches @name: what]` = changes someone else's area or a shared contract; get that owner's yes before merging (§2c). `[⏸ waits on @name: what]` = blocked until they deliver (a 📨 row on the Open board).
 
@@ -16,7 +16,7 @@
 ## 1. Ownership
 **Owns:**
 - `decision/`, `tests/`, `pyproject.toml`, `uv.lock`: the Python decision layer (poke-engine based)
-- `design/decision-layer.md`, `design/decision/*.md`: its design (12 feature docs)
+- `design-decision/decision-layer.md`, `design-decision/decision/*.md`: its design (12 feature docs)
 - `contracts/battle-state.md`, `contracts/battle_state.py`, `contracts/examples/`: the `BattleState` contract (as author; the bot layer fills it)
 
 **Does NOT touch:**
@@ -29,8 +29,8 @@
 **Shared** (flag in `progress.md` ⚠️ Conflicts): `contracts/*`, `fixtures/*`.
 
 ## 2. Contract & Guardrails
-**Scope contract.** Derrick builds the layer that turns a `BattleState` + the raw `|request|` into the best `Choice`, with every model (belief, opponent policy, value) swappable without touching the loop (`design/decision-layer.md`).
-- Feature docs 01-12 under `design/decision/`: state intake, set priors, belief (hard filter, soft reweight), set sampling, our/opp actions, simulate, value, selector, special requests, budget fallback.
+**Scope contract.** Derrick builds the layer that turns a `BattleState` + the raw `|request|` into the best `Choice`, with every model (belief, opponent policy, value) swappable without touching the loop (`design-decision/decision-layer.md`).
+- Feature docs 01-12 under `design-decision/decision/`: state intake, set priors, belief (hard filter, soft reweight), set sampling, our/opp actions, simulate, value, selector, special requests, budget fallback.
 - Run · Test: `uv run pytest --cov=decision` (96 tests, 100% coverage so far).
 
 **Out of scope:** the Showdown connection and log parsing (bot layer); building set candidates and training data (data layer); voice and coaching text.
@@ -68,7 +68,7 @@
    - *Note 2026-10-24 (saliha):* split by the 2026-10-24 decisions into tasks 8 (value model) and 9 (maximin LP) above.
 
 ## 6a. Reference
-- Research doc passes 1 (maths) and 7 (Showdown protocol + poke-engine); `design/DESIGN.md` is the map.
+- Research doc passes 1 (maths) and 7 (Showdown protocol + poke-engine); `design-decision/DESIGN.md` is the map.
 
 ## 4. Done log (newest first)
 - ✅ **Feature 11, special requests** (decided by derrick 2026-10-24): type-matchup lead at preview (C), forced switch scored by the main loop (A). `decision/lead.py`, 144 tests, 100% coverage on `derrick` @ `a50936e`. Full-game *Done when* waits on @saliha's parser (task 3). `progress.md` 2026-10-24 19:26.

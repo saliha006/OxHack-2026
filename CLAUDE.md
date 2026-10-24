@@ -8,24 +8,24 @@
 
 | Slot | Value |
 |---|---|
-| Project | **OxHack-2026** (OxHack 26, Oxford Mathematical Institute, 24–25 Oct 2026; tracks: PRD §0 Pending). Team **{{team name}}**; {{who submits}}. Other Claude Code accounts share this folder: never edit a shared doc another session is mid-way through. If another session was here in the last 10 min, use your own worktree (`git worktree add ../OxHack-2026-<name> <branch>`) for anything that edits files |
+| Project | **OxHack-2026** (OxHack 26, Oxford Mathematical Institute, 24–25 Oct 2026; tracks: PRD §0 Pending). Team **{{team name}}**; {{who submits}}. Other Claude Code accounts share this folder: never edit a shared doc another session is mid-way through. If another session was here in the last 10 min, don't edit a doc it may be mid-way through |
 | Repo | `https://github.com/saliha006/OxHack-2026` · `main`. Builder branches: `progress.md` → 👥 Team |
-| Where docs live | **`context` branch** (docs only): `CLAUDE.md`, PRD, event doc, research doc, `builder-files/`, `design/`, `skills/` (`debug`, `no-slop`). `README.md`, `progress.md` and `contracts/*.md` live on `main`. `.claude/` and `scripts/` are never pushed: context's `skills/` unpacks into `.claude/skills/`. All of it is git-ignored on `main`. **Never pushed:** `Research-Context/` (sponsor PDFs, raw inputs, agent notes), `.env*`, secrets. {{Public repo? delete `context` before submission}}. Sync and publish are plain git, see below |
+| Where docs live | One folder. **`context` branch** (docs only): `CLAUDE.md`, the PRD, `builder-files/`, `design-decision/`. **`main`**: code, `README.md`, `progress.md`, `contracts/*.md`. **Local only, never pushed unless the user says so:** `Research-Context/` (event doc, research doc, sponsor PDFs, notes), `.claude/` (skills `no-slop`, `debug`, set up per machine), `pokemon-showdown/` (the local server), `runs/`, `.env*`, secrets. All of it is git-ignored on `main`. {{Public repo? delete `context` before submission}}. Sync and publish are plain git, below |
 | Vault | `{{path to the Obsidian vault}}` (**{{owner}} only**: `OxHack-2026 — Hub` = status + ▶ START HERE, `— Log` = ADRs, Unconfirmed, ▶ RESUME HERE). No vault → save notes to your memory; send decisions to the doc owner as a `decision` entry + 📨 row |
 | Doc owner | **saliha** (Saliha Shoaib, `saliha006`). Teammates: `nate` (Nate Banas, `aldrichbanas07`), `derrick` (Derrick Lim Yong Hao, `RandomGeeb`, collaborator) |
 | PRD | `OxHack-2026-PRD.md`: NOW (decisions in force, pending, active tasks) at the top, then the spec |
-| Briefs | `builder-files/builder-file-<name>.md` (from `builder-file-x.md`) |
-| Event doc | `OxHack-2026-CONTEXT.md`: rules, judging, prizes, schedule |
-| Research doc | `OxHack-2026-research.md` (git-ignored on `main`). Raw inputs and agent notes stay in `Research-Context/` |
+| Briefs | `builder-files/builder-file-<name>.md`: `derrick`, `nate`, `saliha` |
+| Event doc | `Research-Context/OxHack-2026-CONTEXT.md` (local only): rules, judging, prizes, schedule |
+| Research doc | `Research-Context/OxHack-2026-research.md` (local only). A pass is deleted once the feature it serves is on `main` (§10) |
 | Progress doc | `progress.md` (repo root; with `README.md` and `contracts/*.md` the only markdown on `main`): history, 📌 Open board, 👥 Team, 📊 Latest |
 | Decisions | Full ADRs: vault Log. Team mirror: PRD → NOW |
 | Mirror docs | PRD §0/§1 ↔ top of this file; `builder-file-*` ↔ `progress.md` 👥 Team; vault Hub + Log; `progress.md` 👥 Team + 📊 Latest. Update every mirror when a decision, owner or status changes |
-| Run · Test | Decision layer (Python): `uv run pytest --cov=decision`. Bot and data layers: {{run command}} · {{test command with coverage}} |
+| Run · Test | Decision layer: `uv run pytest --cov=decision` (`poke-engine` builds from source, so it needs a Rust toolchain). Bot layer: `uv run pytest bot/tests --cov=bot`; without Rust: `uv run --no-project --with pytest --with pytest-cov python -m pytest bot/tests --cov=bot`. Local server: `node pokemon-showdown start --no-security` in `pokemon-showdown/` (http://localhost:8000). Data layer: {{run command}} · {{test command with coverage}} |
 | Scale | {{demo load / target scale and the box}} |
 | Deploy | {{where it runs, how code gets there}}. Platform rules: {{doc or "none"}} |
 | Verbosity | **Level 0** (§3) |
 
-**Skills** (`.claude/skills/`, load when the trigger fires): `no-slop` on every code pass, before testing, and before every commit/push/merge · `debug` on every error, failing test or stuck moment (no guess-and-retry outside it). Front-end skills aren't installed; the user names one when it's needed. This file wins over a skill; never edit a skill. `no-slop` fixes only your own diff in your owned paths and reports the rest.
+**Skills** (`.claude/skills/`, local only, load when the trigger fires): `no-slop` on every code pass, before testing, and before every commit/push/merge · `debug` on every error, failing test or stuck moment (no guess-and-retry outside it). Front-end skills aren't installed; the user names one when it's needed. This file wins over a skill; never edit a skill. `no-slop` fixes only your own diff in your owned paths and reports the rest.
 
 **Ship loop** (detail in §7): code → `no-slop` → tests (happy, edge and failure paths; coverage via Run · Test) → push your branch → `git merge origin/main`, re-test → merge to `main`, push, log in `progress.md`. Never push failing code.
 
@@ -33,7 +33,7 @@
 Plain git, no scripts. The synced commit is kept in `.git/context-synced`.
 1. `git fetch -q origin context`. If `git rev-parse origin/context` equals the stamp, you're current.
 2. Else tell the user in 1–2 lines **first** (`git log --oneline <stamp>..origin/context`, `git diff --stat <stamp> origin/context`). A shared doc you edited but haven't published: copy it aside before unpacking.
-3. Unpack: `mkdir -p .claude && git archive origin/context ':(exclude)skills' | tar -x && git archive origin/context skills | tar -x -C .claude`, then `git rev-parse origin/context > .git/context-synced`. A changed `CLAUDE.md` is already loaded: act on the changed lines only, don't re-read it. Read at least the PRD → NOW and your own brief.
+3. Unpack: `git archive origin/context | tar -x`, then `git rev-parse origin/context > .git/context-synced`. A changed `CLAUDE.md` is already loaded: act on the changed lines only, don't re-read it. Read at least the PRD → NOW and your own brief.
 4. Never `git checkout origin/context -- <file>` (it stages docs into `main`). Fetch fails → say so in one line, use local copies.
 5. Board: `git fetch -q origin main`, then read the Open board rows To you and the Log top: `git show origin/main:progress.md | sed -n '/Open board/,/^## 👥/p;/^## Log/,+40p'`.
 
@@ -45,18 +45,17 @@ Every request re-sends the whole conversation, so one big read is paid again on 
 - **One model and effort per session** (switching re-writes the whole cache). New task → `/clear`; `/compact` past ~100k tokens; don't resume a large session idle over an hour.
 
 ### 📤 Publish every shared-doc edit (same turn)
-Shared docs = everything on `context`. After any edit (yours, or a local change by the user) publish before ending the turn; several edits → one commit. Plain git, via a worktree of `context` (once: `git worktree add ../OxHack-2026-context -B context origin/context`):
-1. Sync first (above), then `git -C ../OxHack-2026-context pull -q --rebase origin context`.
-2. Copy the changed docs in (a skill `.claude/skills/<name>/` goes to `skills/<name>/`), then `git -C ../OxHack-2026-context add -A`. Check the diff for secrets.
-3. Commit with a short human message (§7), `git -C ../OxHack-2026-context push origin context`. Rejected → pull --rebase, merge by hand, push again; never `force`.
-These docs never go to `main` (never `git add -f`). **On `main` the only markdown is** `progress.md`, `README.md`, `contracts/*.md`.
+Shared docs = what's on `context`: `CLAUDE.md`, the PRD, `builder-files/`, `design-decision/`. Publish before ending the turn; several edits → one commit. Plain git from this folder through a temporary index, no worktree:
+1. Sync first (above).
+2. `export GIT_INDEX_FILE=.git/context-index && git read-tree origin/context && git add -f CLAUDE.md OxHack-2026-PRD.md builder-files design-decision && git diff --cached --stat origin/context`. Check the diff, and for secrets. A removed doc: `git rm --cached <path>` in the same index.
+3. `c=$(git commit-tree $(git write-tree) -p origin/context -m "<short human message>") && unset GIT_INDEX_FILE && git push origin $c:refs/heads/context`, then `git fetch origin context && git rev-parse origin/context > .git/context-synced`. Rejected → sync, merge by hand, repeat; never `force`.
+Research, the event doc and skills never go to `context`. These docs never go to `main` (never `git add -f` there). **On `main` the only markdown is** `progress.md`, `README.md`, `contracts/*.md`.
 
 | Change | Who publishes | Gate |
 |---|---|---|
-| PRD, `CLAUDE.md`, event doc, skills, another builder's brief | **Doc owner** | Plan changes need the team's yes (§2c); a builder posts the agreed change as a 🔀/📨 row To the doc owner |
+| PRD, `CLAUDE.md`, design docs, another builder's brief | **Doc owner** | Plan changes need the team's yes (§2c); a builder posts the agreed change as a 🔀/📨 row To the doc owner |
 | Your own brief: tasks, scope, ownership, guardrails | You | Ask "did the whole team agree? who?" (§2c) |
 | Your own brief: finished task to Done, blank filled with a stated fact | You | None |
-| Research doc: new section (§10) | Anyone | None |
 | `progress.md` | Anyone: your entries and rows; annotate others | None |
 
 ### 🔁 Self-filling rule
@@ -91,7 +90,7 @@ Task for someone else → a 📨 row on `progress.md`'s Open board (From you, To
 ### 2b. Conflict board: `progress.md`
 `progress.md` on `main` is the history and live board (entry format at its top). Read the Open board rows To you and the newest Log entries (Context sync step 5); check their **Touched** lines against your own paths.
 - Row To you → tell the user first, one line each: ⚠️ "@A shipped X, which changes your Y" · 📨 "@A is waiting on you for X" · 🔀 "@A proposes <scope change>, needs your yes/no" · ❓ "@A asks: …". Flagged area touched by your task → resolve before continuing; possible clash → say so and suggest the safe order.
-- **When the user finishes something** (task, feature, fix, merge, deploy change, decision that affects someone), same turn: (1) add an entry at the **top** of the Log; (2) fill `⚠️ Conflicts` honestly against every teammate's owned paths, a *possible* collision counts; (3) add an Open board row per ⚠️/📨, update your **Now** cell in 👥 Team and 📊 Latest if a volatile fact changed; (4) mark the brief task done and publish; (5) commit and push `progress.md` to `main` from a `main` worktree (`git worktree add ../<repo>-main main`; pull --rebase, edit, push; rejected → pull --rebase, keep both entries newest first).
+- **When the user finishes something** (task, feature, fix, merge, deploy change, decision that affects someone), same turn, written by the main session (never a subagent): (1) add an entry at the **top** of the Log; (2) fill `⚠️ Conflicts` honestly against every teammate's owned paths, a *possible* collision counts; (3) add an Open board row per ⚠️/📨, update your **Now** cell in 👥 Team and 📊 Latest if a volatile fact changed; (4) mark the brief task done and publish; (5) commit and push `progress.md` to `main` from this folder (`git switch main && git pull --rebase`, edit, commit, push, `git switch -`; rejected → pull --rebase, keep both entries newest first).
 - Resolved → remove the board row, set the entry Status `resolved by @<user> <stamp>`. The doc owner's agent sweeps stale ⬜/🟡 briefs to ✅ (annotate only). A change at the seam between two builders puts the same interface note in both briefs. When `progress.md` passes ~40KB the doc owner moves old entries to `progress-archive.md`.
 
 ### 2c. Scope guardrail: the plan changes only with the team
@@ -140,7 +139,7 @@ Save everything important to the vault (or memory); de-stale every mirror (vault
 **Any** research, asked or self-initiated (including before you spawn a research agent), follows this:
 1. Grade every source `KEEP` (corroborated) / `WEAK` (one source or thin) / `DO NOT USE` (refuted or unreliable). Save the ledger into the research doc in the same pass, as a new `Pass n` section.
 2. A load-bearing claim needs ≥2 independent reputable sources (peer-reviewed, official docs, well-known repos). Stop as soon as two support the decision; no extra digging.
-3. One research file; raw notes stay in `Research-Context/`. Forums and community consensus (Reddit, Quora) are a separate pass, skipped unless the user asks.
+3. One research file, `Research-Context/OxHack-2026-research.md`, local only: never pushed unless the user asks. A pass and its raw notes live until the feature they serve is on `main`, then are deleted in the same turn. Keep the win-probability model research until that model ships. Forums and community consensus (Reddit, Quora) are a separate pass, skipped unless the user asks.
 
 ## 11. Depth vs tokens
 Never drop context that matters now, later, or records how the software evolved; depth wins when forced. Otherwise tight prose, no filler. Test: could a future instance reconstruct the decision from this note alone, fast?

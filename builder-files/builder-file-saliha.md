@@ -1,13 +1,13 @@
 # Saliha: Bot layer (Showdown connection, log parser to BattleState, request handling, end-to-end bot) + doc owner
 **GitHub:** `saliha006` · **Branch:** `sali` · **Tool:** Claude Code · **Brief last updated:** 2026-10-24 by saliha
-**Spec:** the PRD (`OxHack-2026-PRD.md`) and `design/*.md`. A bare § means the PRD; CLAUDE.md and this brief's own sections are always named.
+**Spec:** the PRD (`OxHack-2026-PRD.md`) and `design-decision/*.md`. A bare § means the PRD; CLAUDE.md and this brief's own sections are always named.
 
 ## 0. How the agent reads this brief (every task)
 1. `CLAUDE.md` is already loaded (don't re-read it); read this brief once. Follow both.
 2. **Only action `▶ Current tasks`**, top to bottom.
 3. Before starting, read `progress.md`'s 📌 Open board (CLAUDE.md §2b). Rows To @saliha come first: tell the user, then resolve or schedule them.
 4. Ship each task with the CLAUDE.md §7 sequence, then log it (CLAUDE.md §2b). Use the `debug` skill on every issue.
-5. Token budget (CLAUDE.md): Grep `OxHack-2026-research.md` by pass number, never read it whole; read only the `design/` doc for your layer.
+5. Token budget (CLAUDE.md): read only the `design-decision/` doc for your layer. The research doc is saliha's and local only: ask her for a pass instead of searching for it.
 
 **Task tags:** `[⚠ touches @name: what]` = changes someone else's area or a shared contract; get that owner's yes before merging (§2c). `[⏸ waits on @name: what]` = blocked until they deliver (a 📨 row on the Open board).
 
@@ -17,7 +17,7 @@
 **Owns:**
 - `bot/` (proposed): `player.py` (Showdown connection + request handling), `parser.py` (log → `BattleState`), `eval.py`, `demo.py`, `teams/`, `tests/`
 - `runs/` (git-ignored): raw logs, decision traces, eval results
-- `design/bot-layer.md`: its design
+- `design-decision/bot-layer.md`: its design
 - PRD, CLAUDE.md, skills, event doc, research doc, `progress.md` upkeep (doc owner)
 
 **Does NOT touch:**
@@ -29,7 +29,7 @@
 **Shared** (flag in `progress.md` ⚠️ Conflicts): `contracts/*`, `fixtures/*`.
 
 ## 2. Contract & Guardrails
-**Scope contract.** Saliha builds the layer between Showdown and the decision layer (`design/bot-layer.md`):
+**Scope contract.** Saliha builds the layer between Showdown and the decision layer (`design-decision/bot-layer.md`):
 - Connect to a Showdown server (local first), receive `|request|` JSON + log lines, track state, fill Derrick's `BattleState` each turn, call the decision layer, send the `Choice` back.
 - Agreement: Derrick proposed, saliha (doc owner) said yes (17:20) and waived a separate yes from Nate on 2026-10-24 (the bot layer touches the data layer only through `BattleState`). Nate is informed and can object on the Open board.
 - Notes (research doc pass 6): poke-env 0.16.1 works on this Python; Showdown needs Node >= 22.18; the public server requires bot registration (`/ht`) and has a bot policy; a local server needs no account.
@@ -49,7 +49,7 @@
 *Status: ⬜ not started · 🟡 in progress · ⏸ blocked · ✅ done*
 *Suggested clock: skeleton playing by 23:00 BST · parser + decision wired by 03:00 GMT · eval numbers by 07:00 · demo freeze 10:00 · submit before 12:00 GMT.*
 
-1. ✅ **Pick the bot skeleton** (2026-10-24, research pass 8): **poke-env 0.16.1**, a thin `Player` subclass that taps raw lines and calls Derrick's `Agent`; **gen9ou**, one fixed validated team for us and a seeded pool of validated opponent teams; **local server** (running from `../pokemon-showdown`, port 8000).
+1. ✅ **Pick the bot skeleton** (2026-10-24, research pass 8): **poke-env 0.16.1**, a thin `Player` subclass that taps raw lines and calls Derrick's `Agent`; **gen9ou**, one fixed validated team for us and a seeded pool of validated opponent teams; **local server** (checked out in `pokemon-showdown/`, git-ignored, port 8000).
    - Still to do: `uv add poke-env==0.16.1` (touches Derrick's `pyproject.toml` `[⚠ touches @derrick]`), then `uv sync` to confirm it installs next to `poke-engine` 0.0.48. Also confirm the `poke-engine` 0.0.48 wheel has Gen 9 built in (foul-play builds non-default generations from source); a gen9ou smoke game through `Agent.choose` settles it. Full report: `Research-Context/reports/Showdown bot framework and format.md`.
 2. ⬜ **Local server + smoke battle** (manual setup: §6a)
    - `bot/player.py`: a poke-env `Player` that picks a random legal move; two of them battle on `localhost:8000` (`ws://localhost:8000/showdown/websocket`; poke-env's `/trn name,0,` login works because of `--no-security`).
@@ -88,8 +88,8 @@
 - @nate: the parser (task 3) turns his replay `.log` files into `BattleState`s for the (state, winner) training pairs; his team pool feeds task 6; his charts read task 5's files.
 
 ## 6a. Reference
-- `design/bot-layer.md`; `contracts/battle-state.md` (on `main`); research doc passes 3 (evaluation) and 6 (bot setup); request kinds and log lines are in the design doc §1a.
-- **Manual setup, once (you):** Node ≥ 22.18 (`node -v`). Then `git clone https://github.com/smogon/pokemon-showdown ../pokemon-showdown`, and in it `npm install`, `cp config/config-example.js config/config.js`, `node pokemon-showdown start --no-security`. Watch at http://localhost:8000. A local server needs no account. Public server only: a registered account plus bot registration via `/ht` (Smogon's bot policy since 2026-10-09; unregistered bots can be banned).
+- `design-decision/bot-layer.md`; `contracts/battle-state.md` (on `main`); research doc passes 3 (evaluation) and 6 (bot setup); request kinds and log lines are in the design doc §1a.
+- **Manual setup, once (you):** Node ≥ 22.18 (`node -v`). Then `git clone https://github.com/smogon/pokemon-showdown` inside the project folder (git-ignored), and in it `npm install`, `cp config/config-example.js config/config.js`, `node pokemon-showdown start --no-security`. Watch at http://localhost:8000. A local server needs no account. Public server only: a registered account plus bot registration via `/ht` (Smogon's bot policy since 2026-10-09; unregistered bots can be banned).
 - Metamon is a research project (offline-RL agents + replay datasets) that plays through poke-env on a Showdown server; it is not a separate platform. Nate uses its replays; the bot doesn't need it.
 
 ## 4. Done log (newest first)
