@@ -134,4 +134,4 @@ Stages are the build order in [DESIGN.md §4](DESIGN.md#4-build-order-by-layer).
 - [x] **[Value function](decision/09-value.md)**: Stage 3 heuristic → Stage 5 trained (heuristic built on `derrick`, not merged)
 - [x] **[Action selector](decision/10-selector.md)**: Stage 3 (built on `derrick`, not merged)
 - [ ] **[Special requests](decision/11-special-requests.md)** (team preview, forced switch): Stage 3
-- [ ] **[Turn budget + fallback](decision/12-budget-fallback.md)**: Stage 3
+- [x] **[Turn budget + fallback](decision/12-budget-fallback.md)**: Stage 3 (built on `derrick`, not merged)
