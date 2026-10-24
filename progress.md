@@ -79,6 +79,15 @@ whenever you log an entry.
 
 ## Log (newest first)
 
+### 2026-10-24 22:33 — feat — Eval harness: agent ablations vs baselines and each other — @saliha
+- **Where:** `sali` @ `fa8f4ed` · merged to `main`: yes (fast-forward)
+- **Did:** `bot/eval.py`, saliha's pick of an improved prediction-centred design: headline full agent vs SimpleHeuristics (300); a data ladder: full vs frozen-prior belief (200), frozen prior vs flat prior (200); 5 scenarios vs 1 (200); MaxBasePower 100, Random 30. Same team on both sides, sides alternate, so results measure play, not teams. The think-time curve was dropped: think p50 is ~65 ms, so the budget never binds. Shards are separate processes appending one line per game; reruns skip finished games; `report` merges every machine's files with Wilson + team-bootstrap intervals. Ablations wrap `Agent`/`Belief` in `bot/`, so `decision/` is untouched. 2+2-game smoke passed.
+- **Touched:** `bot/eval.py`, `bot/player.py` (summary records our side), `bot/tests/test_eval.py`
+- **Brief task:** saliha task 5 🟡 (built; final run waits on the team pool, real priors and the belief fixes)
+- **⚠️ Conflicts:** @derrick: the ablations subclass `Belief` (`FrozenBelief`, `FlatBelief`) and pre-set `Agent.belief`; renaming `candidates`, `previous` or the `belief` attribute breaks them. @nate: `--teams` takes a folder of team files: one Showdown-export team per file, nothing else in it
+- **📨 Needs:** none new
+- **Status:** open
+
 ### 2026-10-24 21:47 — feat — Bot plays live Showdown games through the decision layer — @saliha
 - **Where:** `sali` @ `d8bf19f` · merged to `main`: yes (fast-forward)
 - **Did:** Rust + uv installed so `poke-engine` builds on saliha's machine. `bot/player.py`: a poke-env player feeds each whole message to our parser before poke-env answers (measured on the local server: the log always lands before the request, incl. forced switches), calls `Agent.choose`, and writes `runs/<battle>.log`, `.jsonl` trace and `.decision.log`. Rejected choices retry with the first legal option, then `default`; Showdown's timer ends any hung battle. `bot/smoke.py` runs N games vs RandomPlayer: 10/10 finished, 10 won. Stand-in team `bot/teams/standin-gen9ou.txt` (Metamon `competitive/gen9ou` team 5; 5 of those 16 teams fail validation now that Tera Blast is banned).
