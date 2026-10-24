@@ -41,8 +41,9 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 | 2026-10-24 20:52 | @saliha | @all | ⚠️ conflict | `context` now holds only `CLAUDE.md`, the PRD, `builder-files/` and `design-decision/` (was `design/`). Skills, the event doc and the research doc are local now. Sync with `git archive origin/context | tar -x`, then delete your old `design/` copy. Publish steps are in `CLAUDE.md` | 2026-10-24 20:52 |
 | 2026-10-24 20:36 | @saliha | @derrick | ⚠️ conflict | The parser is on `main`: `from bot.parser import Parser, states_from_log`. `Parser(us).feed(line)` per protocol line, `.snapshot()` per request. Unblocks your task 3 (build_state on a parser-made BattleState) | 2026-10-24 20:36 |
 | 2026-10-24 20:36 | @saliha | @nate | ⚠️ conflict | The parser is on `main`: `states_from_log(log_lines, us)` gives one `BattleState` per turn of a saved replay, for your (state, winner) pairs | 2026-10-24 20:36 |
-| 2026-10-24 20:15 | @saliha | @derrick | 📨 waiting on | New tasks 6–9 in your brief (trace, turn-time profile, win-probability model, maximin LP); the model and LP are your calls. The bot will need `poke-env==0.16.1` in your `pyproject.toml`: OK to add? | 2026-10-24 20:15 |
-| 2026-10-24 20:15 | @saliha | @nate | 📨 waiting on | New tasks 6–8 in your brief: seeded gen9ou team pool (~60 validated teams), eval and demo charts, data card. Training states should come from saliha's parser | 2026-10-24 20:15 |
+| 2026-10-24 21:15 | @saliha | @derrick | 🔀 scope proposal | Your brief is reordered by the pass 9 build plan (two research passes + a critique: peer-reviewed papers, official source, practitioner consensus, our code and the PRD). Every "Recommended" line is advice: accept it or pick your own route (decision-layer calls are yours). Key finding: poke-engine's built-in MCTS hard-wires its Rust eval, so the learned value + LP stay in our Python loop. Also yes/no on handing task 8 (belief scoring) to nate and the coach to saliha: you're at ~13 h | 2026-10-24 21:15 |
+| 2026-10-24 21:15 | @saliha | @derrick | 📨 waiting on | One OK for three deps in your `pyproject.toml`: `poke-env==0.16.1` (blocks saliha task 3), `scikit-learn` (brings scipy; your tasks 7 and 9), `matplotlib` (nate's charts) | 2026-10-24 21:15 |
+| 2026-10-24 21:15 | @saliha | @nate | 🔀 scope proposal | Your brief is reordered by the pass 9 build plan (research-backed; accept each item or pick your own route). Order: set candidates first (no priors, no agent; on `main` by 01:00 UTC), ladder = one `curl`, team pool from `jakegrigsby/metamon-teams`, then a ~100k-game Parquet + DuckDB extract with the first 20k to derrick by 01:00 UTC. Is `Data-stuff-(Nate)` your branch? | 2026-10-24 21:15 |
 | 2026-10-24 19:16 | @saliha | @all | ⚠️ conflict | `scripts/` and every skill except `debug` and `no-slop` are gone from `context`. Keep your local copies (they stay git-ignored); `sync`/`publish` won't update from `context` any more | 2026-10-24 19:16 |
 | 2026-10-24 18:14 | @derrick | @nate | ⚠️ conflict | `contracts/set-candidates.md` (on `derrick`) defines the set file your data layer would build for belief: 30 weighted sets per species + trimmed usage, chaos 1825 / 2026-09. Next: yes/no on the shape and on `data/set_candidates.json` as its path | 2026-10-24 18:14 |
 
@@ -55,8 +56,8 @@ whenever you log an entry.
 
 | Who | GitHub | Role | Branch | Owns (paths) | Now |
 |---|---|---|---|---|---|
-| Saliha | `saliha006` | Bot layer; doc owner | `sali` | `bot/` {{paths tbd}} | brief task 1: decide the bot skeleton (poke-env / local server / format) |
-| Nate | `aldrichbanas07` | Data layer | {{nate's branch}} | `data/` {{paths tbd}} | brief task 1: start the ladder snapshotter |
+| Saliha | `saliha006` | Bot layer; doc owner | `sali` | `bot/`, `runs/` (git-ignored) | brief task 1: Rust toolchain + `poke_engine` build, then task 3 smoke battle |
+| Nate | `aldrichbanas07` | Data layer | `Data-stuff-(Nate)` (to confirm) | `data/` {{paths tbd}} | brief task 1: set candidates (pass 9 order) |
 | Derrick | `RandomGeeb` | Decision layer | `derrick` | `decision/`, `tests/`, `contracts/battle_state.py` | feature 11 built on `derrick`; tasks 3–4 wait on the parser and set candidates |
 
 **Shared** (anyone may edit; flag it in ⚠️ Conflicts): {{e.g. `contracts/*`, `fixtures/*`, compose files}}
@@ -76,6 +77,16 @@ whenever you log an entry.
 ---
 
 ## Log (newest first)
+
+### 2026-10-24 21:15 — scope — Pass 9 build plan: every brief reordered, PRD filled — @saliha
+- **Where:** `context` @ `9de3c7f` (PRD v3, all three briefs, `CLAUDE.md` @ `d57de97`) · merged to `main`: n/a (docs branch)
+- **Did:** Two research agents (decision/prediction; bot/data/eval/demo) and a critic set a recommended design and an order for every feature; all three briefs now follow it and PRD §1–§22 are filled. Biggest changes: the bot runs one blocking `Agent` per shard process (the `Agent` is stateful), the eval headline is a team-neutral 300-game leg vs SimpleHeuristics, the value model goes logistic first, the LP is flagged and default off, and the live client needs internet (record a fallback video). `CLAUDE.md` §2c: builders may extend their own area after their Claude asks whether the team knows.
+- **Touched:** PRD, `builder-file-saliha/derrick/nate.md`, `CLAUDE.md`
+- **Brief task:** none (plan change)
+- **⚠️ Conflicts:** @derrick, @nate: your task lists are renumbered and reordered (old tasks archived at the bottom of each brief, nothing deleted)
+- **📨 Needs:** @derrick: three dependency OKs; yes/no on the hand-overs. @nate: confirm your branch; set candidates first
+- **Agreed by:** saliha (proposer); derrick and nate to accept or change their items (Open board rows)
+- **Status:** open
 
 ### 2026-10-24 20:52 — docs — One project folder; context trimmed to the plan docs — @saliha
 - **Where:** `context` @ `1a96e99` · `main` @ `ab7b121` (`.gitignore`) · merged to `main`: yes
