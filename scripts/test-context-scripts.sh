@@ -117,7 +117,10 @@ on_context alex extra/glossary.md | grep -q v1 || fail "a doc named on the comma
 # a rules change is called out on the next sync, because the agent loaded CLAUDE.md before it changed
 echo "| Run · Test | x |" >> CLAUDE.md
 quiet bash scripts/publish-context.sh "rules"
-(cd "$tmp/kim" && bash scripts/sync-context.sh) | grep -q "CLAUDE.md changed" || fail "sync didn't flag the CLAUDE.md change"
+sync_out=$(cd "$tmp/kim" && bash scripts/sync-context.sh)
+grep -q "CLAUDE.md changed" <<< "$sync_out" || fail "sync didn't flag the CLAUDE.md change"
+grep -q '^+| Run · Test | x |' <<< "$sync_out" || fail "sync didn't show the changed CLAUDE.md lines"
+grep -q "in full" <<< "$sync_out" && fail "sync told the agent to re-read a whole file"
 
 # credentials and an unknown builder are refused
 # built at runtime so this script itself never matches the secret scan and can still be published

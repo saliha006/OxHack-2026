@@ -64,8 +64,24 @@ branch and changes during the build. **Never work from a stale vision:** pull th
    `progress.md` check, and its output arrives with the prompt. No hook output → run `bash scripts/sync-context.sh` yourself.
    Never `git checkout origin/context -- <file>`: it stages the docs into `main`'s index.
 2. If anything changed, read what changed: at least the PRD → NOW and your own brief. Tell the user in 1–2 lines what
-   changed **before** doing anything else. If `CLAUDE.md` changed, re-read it. If a skill changed, use the new version.
+   changed **before** doing anything else. If `CLAUDE.md` changed, the hook prints the changed lines: act on those and
+   **don't re-read the file** (§ Token budget). If a skill changed, use the new version.
 3. If the sync fails (offline, branch missing), say so in one line and continue on the local copy.
+
+### 🪙 Token budget (every session; the limit burns on re-sent context, not on typing)
+Every request re-sends the whole conversation, so one big read is paid again on every later tool call. Two sessions hit
+their limits on 3 prompts and on one long research run (2.9M and 69M cache-read tokens) because of the reads below.
+- **Read only what the task needs.** `Grep`, or `Read` with `offset`/`limit`. `CLAUDE.md` is already loaded: never `Read` it
+  again. Read the PRD → NOW and your own brief once per session, not every prompt.
+- **Never `Read` these:** a research agent's raw output file, a session transcript (`.jsonl`), a PDF's page images, a
+  whole `Resreach-Context/` note. A single one is 15k–100k tokens that ride along on every following request.
+- **Research agents write to files, then report short.** Each agent saves its ledger straight into the research doc or
+  `Resreach-Context/` and returns at most 300 words. The main session reads that summary, nothing else. Keep fan-out to
+  4 agents unless the user asks for more.
+- **One model and effort per session.** Switching model, effort or tools mid-session re-writes the entire cache at the
+  expensive rate (a 163k-token miss in the log). Pick at the start and stay.
+- **New task → `/clear`.** `/compact` past ~100k tokens of context. Don't resume a large session that has sat idle
+  for over an hour: the cache has expired and the whole context is re-written.
 
 ### 📤 Publish every shared-doc edit (same turn, every time)
 **Shared docs:** everything in 📁 except `progress.md`.

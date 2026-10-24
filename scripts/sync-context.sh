@@ -27,6 +27,8 @@ if [ "$old" != none ] && git cat-file -e "$old^{commit}" 2>/dev/null; then
 else
   incoming=$(git ls-tree -r --name-only "$new")
 fi
+# Claude Code loads CLAUDE.md at session start, so a copy already on disk is already in the agent's context
+had_claude=false; [ -f CLAUDE.md ] && had_claude=true
 backup="$gitdir/context-backup/$(date +%Y%m%d-%H%M%S)"
 saved=()
 while IFS= read -r f; do
@@ -49,14 +51,19 @@ done <<< "$incoming"
 echo "$new" > "$stamp"
 
 if [ "$old" = none ]; then
-  echo "context: first sync at ${new:0:7}. Read CLAUDE.md in full, then the PRD's §0 NOW and your builder-files/builder-file-<name>.md."
+  if $had_claude; then
+    echo "context: first sync at ${new:0:7}. CLAUDE.md is already loaded; read only the PRD's §0 NOW and your builder-files/builder-file-<name>.md."
+  else
+    echo "context: first sync at ${new:0:7}. Read CLAUDE.md once, then the PRD's §0 NOW and your builder-files/builder-file-<name>.md."
+  fi
 else
   echo "context: UPDATED ${old:0:7} -> ${new:0:7}"
   git log --format='  %h %s (%an, %ar)' "$old..$new"
-  git diff --stat "$old" "$new" | tail -n +1
-  # Claude Code loads CLAUDE.md once at session start, so a mid-session rules change has to be read on purpose
+  git diff --stat "$old" "$new" | head -n 12
+  # Re-reading the whole file would put ~9k tokens into every open session on every edit, so only the changed lines are shown
   if grep -qx 'CLAUDE.md' <<< "$incoming"; then
-    echo "context: CLAUDE.md changed. Re-read it in full before doing anything else."
+    echo "context: CLAUDE.md changed (the session still holds the old copy). Changed lines only; do not re-read the file:"
+    git diff -U0 "$old" "$new" -- CLAUDE.md | grep -E '^[-+][^-+]' | cut -c1-240 | head -n 60
   fi
 fi
 if [ ${#saved[@]} -gt 0 ]; then
