@@ -1,5 +1,5 @@
 # Nate: Data layer (set candidates + priors, team pool, training sets, charts, data card)
-**GitHub:** `aldrichbanas07` · **Branch:** `Data-stuff-(Nate)` (on origin) · **Tool:** Claude Code · **Brief last updated:** 2026-10-24 21:10 UTC by saliha
+**GitHub:** `aldrichbanas07` · **Branch:** any branch with `nate` in its name (now `Data-stuff-(Nate)`) · **Tool:** Claude Code · **Brief last updated:** 2026-10-24 21:10 UTC by saliha
 **Spec:** the PRD (`OxHack-2026-PRD.md`) and `design-decision/*.md`. A bare § means the PRD; CLAUDE.md and this brief's own sections are always named.
 
 ## 0. How the agent reads this brief (every task)
@@ -59,7 +59,7 @@
    - Bot filtering (old task 5): a simple, stated rule is enough (e.g. drop accounts with a bot-like name or games under N turns); write the rule on the data card.
    - **First 20k-game extract to derrick by 01:00 UTC**; full extract by 04:00 UTC.
    - *Done when:* train/val/test Parquet files exist with the leakage check passing.
-5. ⬜ **Eval and demo charts** (old task 7), from saliha's `runs/*.jsonl` and `runs/eval-*.jsonl`: win-rate bars with 95% intervals per leg; one game's per-turn win-probability curve; the reliability diagram for derrick's model. Pre-rendered PNGs with matplotlib (pending derrick's OK).
+5. ⬜ **Eval and demo charts** (old task 7), from saliha's `runs/*.jsonl` and `runs/eval-*.jsonl`: win-rate bars with 95% intervals per leg; one game's per-turn win-probability curve; the reliability diagram for derrick's model. Pre-rendered PNGs with matplotlib `[needs matplotlib in pyproject.toml: add it when you begin, with a ⚠️ row to @derrick]`.
    - *Done when:* one command regenerates all three, and they run on the smoke-eval results tonight.
 6. ⬜ **Data card** (old task 8): datasets, sizes, date ranges, splits, licence notes, bot-filter rule, eval think budget.
    - *Done when:* every number traces to a query or a file.
@@ -78,7 +78,7 @@
 - Hackathon pace: the smallest thing that passes its *Done when*; cut order is PRD §19.
 
 ## 6. Open blanks (fill when the chat or repo answers them, CLAUDE.md 🔁)
-- Exact `data/` paths; confirm `Data-stuff-(Nate)` is your branch.
+- Exact `data/` paths.
 - 🟠 storage (Parquet + DuckDB recommended), bot-filter rule.
 
 ---

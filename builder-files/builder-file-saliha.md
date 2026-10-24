@@ -45,19 +45,19 @@
 ## 3. ▶ Current tasks (2026-10-24 21:10 UTC, pass 9 build plan), in order
 *Status: ⬜ not started · 🟡 in progress · ⏸ blocked · ✅ done · Hours = focused work*
 
-1. ⬜ **Rust toolchain + `poke_engine` build** (0.75 h, timebox 45 min). Nothing that calls `Agent.choose` runs on this machine until `poke-engine` builds from source.
+1. ✅ **Rust toolchain + `poke_engine` build** (0.75 h, timebox 45 min). Nothing that calls `Agent.choose` runs on this machine until `poke-engine` builds from source.
    - Install `uv`, then Rust: `rustup` with the `gnu` host (msys64 mingw is already on PATH) or the MSVC build tools. Then `uv sync` and `uv run pytest --cov=decision`.
    - Not building by 21:45 UTC → Docker Desktop (installed) or run agent work on Derrick's Mac, and keep going on a stub agent.
    - *Done when:* `uv run pytest --cov=decision` is green on this machine.
-2. ⬜ **Three dependency OKs in one message** (0.1 h) `[⚠ touches @derrick: pyproject.toml]`: `poke-env==0.16.1`, `scikit-learn` (brings scipy for the LP), `matplotlib`. Open board row posted 21:10.
-3. ⬜ **Smoke battle + bot integration** (`bot/player.py`, 1.5 h; first real game by 00:30 UTC) `[⚠ touches @derrick]`
+2. ✅ **Add `poke-env==0.16.1`** to `pyproject.toml` (0.1 h) `[⚠ touches @derrick: pyproject.toml]`: notify him with a ⚠️ row (he adds `scikit-learn` himself when his tasks need it; nate adds `matplotlib`).
+3. ✅ **Smoke battle + bot integration** (`bot/player.py`, 1.5 h; first real game by 00:30 UTC) `[⚠ touches @derrick]`
    - **Recommended [P9 B1 + critique]:** a poke-env `Player` subclass. Override `_handle_battle_message` and feed **the whole message** to our `Parser` **before** calling `super()`, so state is current when the request is handled (#246). `choose_move` calls `agent.choose(...)` **blocking**: one `Agent` per battle, `max_concurrent_battles=1` per process. Parallelism comes from shard processes (task 5), not threads.
    - **Rejected:** a `ProcessPoolExecutor` job per turn. `Agent` keeps per-battle state (belief, last choice), so stateless jobs lose the belief reweight.
    - Wrap `super()._handle_battle_message` in try/except, plus a per-battle watchdog that forfeits a hung battle (#973). On a forced-switch request, assert our parser's turn matches the request.
    - `/choose ` prefix on every order; team preview sends `/choose team 123456`. `|error|[Invalid choice]` → first legal option from the fresh request, then `/choose default`.
    - **Count fallbacks per game** (decision errors and timeouts); fail the smoke run if they're above a few percent. Route the `decision` logger to `runs/<battle-id>.decision.log`.
    - *Done when:* 10 battles in a row vs the random bot finish unattended, each raw log saved to `runs/<battle-id>.log`, with the fallback rate printed.
-4. ⬜ **Decision trace** (`runs/<battle-id>.jsonl`, one line per request; 0.5 h) `[⏸ waits on @derrick: agent.last_trace]`
+4. 🟡 **Decision trace** (`runs/<battle-id>.jsonl`, one line per request; 0.5 h) `[⏸ waits on @derrick: agent.last_trace]`
    - Turn, request kind, `BattleState`, choice, top 3 options with scores, win probability, top sets per opponent Pokémon, think time in ms, fallback flag.
    - *Done when:* every request of a game has a line, and the file reloads into the same `BattleState`s.
 5. ⬜ **Eval harness** (`bot/eval.py`, 3 h; smoke eval vs Random / MaxBasePower by 04:00 UTC) `[⏸ waits on @nate: team pool]`
@@ -83,6 +83,8 @@
 - **Local server (done once):** `pokemon-showdown/` checkout, `node pokemon-showdown start --no-security`, http://localhost:8000. `generate-team gen9ou` throws locally; teams come from Nate's pool.
 
 ## 4. Done log (newest first)
+- 🟡 **Task 4, trace**: `runs/<battle>.jsonl` gets a line per request (turn, kind, choice, think ms, fallback, `BattleState`), line-buffered, and reloads into the same states; top options + win probability arrive when derrick exposes `agent.last_trace`. `progress.md` 2026-10-24 21:47.
+- ✅ **Tasks 1–3, toolchain + live bot** (`bot/player.py`, `bot/smoke.py`): uv + Rust (MSVC) installed, `poke-engine` builds; `poke-env==0.16.1` added. Measured: the log always lands before the request on the local server (#246 doesn't reproduce). 10/10 smoke games vs RandomPlayer finished unattended; 51 bot tests, 100% on `player.py`. Fallbacks (12.7%) all come from two `belief.py` bugs (Open board to @derrick) and the 2-species example priors. On `main` @ `d8bf19f`. `progress.md` 2026-10-24 21:47.
 - ✅ **Task 3 (old numbering), log parser** (`bot/parser.py`): turn 2 of the sample replay equals the contract example; 20 public gen9ou games parse with no skipped line; 25 tests, 100% coverage. On `main` @ `c25be7e`. `progress.md` 2026-10-24 20:36.
 - ✅ **Task 1 (old numbering), bot skeleton** (research pass 8): poke-env 0.16.1, gen9ou with one fixed team + a seeded pool, local server. `progress.md` 2026-10-24 20:15.
 

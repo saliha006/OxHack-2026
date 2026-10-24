@@ -9,6 +9,7 @@
 ## 0. NOW ★ *(the part every agent reads at session start)*
 
 **Decisions in force** (newest first; one line each, full ADR in the vault Log):
+- 2026-10-24: dependencies are added by whoever needs them, with a ⚠️ row to derrick (`pyproject.toml` is his): saliha adds `poke-env==0.16.1` now; `scikit-learn` and `matplotlib` arrive with the tasks that need them. (saliha)
 - 2026-10-24: saliha is happy to build in Rust: she installs the Rust toolchain so `poke-engine` builds on her machine (blocks every `Agent.choose` call there). No Rust hot path of our own for now [P9 D2]. (saliha)
 - 2026-10-24: one project folder. `context` holds `CLAUDE.md`, this PRD, `builder-files/` and `design-decision/`; `main` holds code, `README.md` and `progress.md`. Research and the event doc stay local and are deleted per feature once it ships. (saliha)
 - 2026-10-24: bot = poke-env 0.16.1 (`Player` subclass tapping raw lines, calling `Agent.choose`), format gen9ou with one fixed team + a seeded validated opponent pool, local Showdown server. Own websocket client is the fallback. Research pass 8. (saliha)
@@ -22,7 +23,6 @@
 
 **Pending** (not decided yet):
 - **The pass 9 build plan** (two research agents + an adversarial critic, peer-reviewed and official sources, checked against the code): every brief's `▶ Current tasks` now follows it. Derrick and Nate accept each item or pick a different route (Open board rows). Proposed hand-overs to even the load (belief scoring, model figures and charts to nate; terminal stream and coach to saliha) need derrick's and nate's yes.
-- Three dependencies in Derrick's `pyproject.toml`: `poke-env==0.16.1`, `scikit-learn` (brings scipy for the LP), `matplotlib`: one yes from derrick.
 - Data storage: plain Parquet + DuckDB recommended over ClickHouse [P9 B4]: nate's call, with saliha and derrick.
 - Learned value model replacing the HP heuristic: derrick's call (logistic first, §7.3).
 - Demo story: whether the coach replay review (§7.6) is added. It's first to cut.

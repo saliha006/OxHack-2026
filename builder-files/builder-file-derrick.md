@@ -59,14 +59,14 @@
    - *Done when:* a full game runs on the real set file.
 6. ⬜ **Batch the leaves** (1.5 h): refactor `Agent._evaluate` to collect every leaf state and score them in one call, plus a featurizer parity test (training features from `states_from_log` equal live features). The heuristic stays the default.
    - *Done when:* same choices as before on the test states, and the parity test passes.
-7. ⬜ **Calibrated win-probability model** (4 h, timeboxed; old task 8) `[🟠 your call: whether and how]` `[⏸ waits on @nate: 20k-game extract by 01:00 UTC]`
+7. ⬜ **Calibrated win-probability model** (4 h, timeboxed; old task 8) `[needs scikit-learn in pyproject.toml: add it when you begin]` `[🟠 your call: whether and how]` `[⏸ waits on @nate: 20k-game extract by 01:00 UTC]`
    - **Recommended [P9 D3 + critique]:** ship it as a standalone prediction product, not gated on any A/B. Baselines first (constant, HP heuristic; rating-only offline only, because the local server has no ratings). Then logistic regression, then `HistGradientBoostingClassifier` with monotone constraints if time allows. Use public-info features only. Pick Platt or isotonic calibration by validation log loss. Split by battle, time and player; test on games after 2026-05-19; bootstrap intervals by battle.
    - **Alternative:** a small neural net (slower to train and calibrate, no gain shown at this data size).
    - Model frozen by 06:00 UTC; shipping logistic only is a pass.
    - *Done when:* log loss, Brier and a reliability diagram beat the HP heuristic on the test split, and the agent can switch to the model with a flag.
 8. ⬜ **Score the belief** (1.5 h) *(proposed hand-over to @nate)*: next-reveal log loss vs the prior and vs hard-filter-only, on held-out reveal events and on our eval games where the true opponent set is known. Not on pool teams: they come from the same usage stats, so the test would be circular [P9 critique].
    - *Done when:* the numbers, with intervals, are in `progress.md`.
-9. ⬜ *(stretch)* **Maximin LP behind a flag, default off** (2 h; old task 9) `[🟠 your call, incl. scipy]`
+9. ⬜ *(stretch)* **Maximin LP behind a flag, default off** (2 h; old task 9) `[🟠 your call]` `[needs scipy, which comes with scikit-learn]`
    - **Recommended [P9 D4 + critique]:** `scipy.optimize.linprog` (HiGHS) after iterated dominance deletion. Against fixed poke-env baselines it can't beat argmax-EV, so report offline exploitability. Run an A/B only against an adaptive opponent, and only if time remains.
 10. ⬜ *(stretch, only if the one-ply agent is under ~85% vs SimpleHeuristics after saliha's smoke eval)* **poke-engine MCTS arm** (2.5 h): one MCTS per sampled state, summing visit shares (the Foul Play wiring), behind a flag. Self-play decides; keep it out of the headline.
 11. ⬜ *(stretch)* **Scenario diversity** (1.5 h) [P9 D1]: the set-candidates contract multiplies independent marginals, so the top 5 scenarios are near-clones of the modal set; sample for diversity instead.
@@ -89,7 +89,9 @@
 
 ## 6. Open blanks (fill when the chat or repo answers them, CLAUDE.md 🔁)
 - Whether the HP/alive heuristic gets replaced by the learned model: Derrick's call (task 7).
-- Yes/no on the three dependencies (`poke-env==0.16.1`, `scikit-learn`, `matplotlib`) and on the proposed hand-overs (task 8 to nate, coach to saliha).
+- Yes/no on the proposed hand-overs (task 8 to nate, coach to saliha).
+- Dependencies (notice, 2026-10-24): saliha adds `poke-env==0.16.1` to `pyproject.toml` for the bot; tasks 7 and 9 need `scikit-learn` (add it when you begin); nate's charts add `matplotlib`.
+- Windows: `decision/state.py:9` and `decision/opponent.py:11` read JSON without `encoding="utf-8"`, so the suite only passes on Windows with `PYTHONUTF8=1`. A one-line fix each when you next touch them.
 
 ---
 ── Archived (superseded 2026-10-24 21:10 UTC by the pass 9 build plan — do NOT action) ──
