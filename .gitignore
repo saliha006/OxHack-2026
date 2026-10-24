@@ -1,0 +1,25 @@
+# Shared docs live on the context branch (CLAUDE.md → Where docs live); main keeps only the team log and the submission README
+*.md
+!progress.md
+!README.md
+!contracts/*.md
+
+# Unpacked from context by scripts/sync-context.sh, or local-only by design
+.claude/
+skills/
+builder-files/
+scripts/sync-context.sh
+scripts/publish-context.sh
+scripts/prompt-check.sh
+scripts/test-context-scripts.sh
+
+# Sponsor PDFs, raw research inputs and agent notes never leave this machine
+Resreach-Context/
+research-context/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+__pycache__/
