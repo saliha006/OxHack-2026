@@ -38,7 +38,9 @@
 - Bot layer + log parser (fills Derrick's `BattleState` contract): saliha said yes on 2026-10-24 to owning it (proposed by Derrick); **waiting on Nate's yes**. Decision layer is Python (`uv run pytest --cov=decision`).
 - Handmade piece: physical or not, and what "from scratch" means: ask the organisers (event doc §6).
 
-**Focus right now:** finish the research pass (notes in the local `Resreach-Context/`), fold the verified findings into this PRD and the research doc, then lock the idea and the evaluation plan.
+**Research pass done (2026-10-24):** merged into `OxHack-2026-research.md` (Grep it, ~200KB; passes 1-3 are the new ones). Not decided, the user's call: (a) value model = calibrated gradient-boosted win-probability (replaces the HP heuristic); (b) per-turn maximin LP over the payoff matrix instead of argmax-EV; (c) Bayesian opponent-set belief (biggest, 7-9 h); (d) data = `HolidayOugi/pokemon-showdown-replays` main + Metamon raw cross-check, Elo from the `|player|` line, split by battle/time/player; (e) coach text templated from computed numbers only. Suggested cut order: voice, LLM paraphrase, ClickHouse, Elo-from-decisions, belief layer.
+
+**Focus right now:** pick (a)-(e), lock the idea and the evaluation plan, then build. Bot layer + log parser is saliha's once Nate agrees.
 
 ---
 
