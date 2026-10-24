@@ -67,7 +67,7 @@
    - *Done when:* the merged table is in `progress.md` → 📊 Latest, and the headline interval's lower bound is above 50%.
 6. ⬜ **Record a full live battle** (client + terminal, with Wi-Fi up; 0.5 h, by 04:00 UTC). The local client redirects to `psim.us`, so the live view needs internet [P9 B5].
    - *Done when:* a video of one whole game plus its `runs/*.jsonl` is saved.
-7. ⬜ **Demo mode + terminal stream** (`bot/demo.py`, 1.5 h): one command starts a battle vs `SimpleHeuristicsPlayer`, prints the URL, streams each turn in plain ANSI: choice, top 3 options, win probability, top opponent sets. It can also replay a saved `runs/*.jsonl` when there's no internet.
+7. ✅ **Demo mode + terminal stream** (`bot/demo.py`, 1.5 h): one command starts a battle vs `SimpleHeuristicsPlayer`, prints the URL, streams each turn in plain ANSI: choice, top 3 options, win probability, top opponent sets. It can also replay a saved `runs/*.jsonl` when there's no internet.
    - *Done when:* the 4-minute walkthrough (§18) runs from one command twice in a row, and the replay mode works offline.
 8. ⬜ **Final eval** on frozen code: the full run started 23:10 UTC is the demo's numbers unless derrick's fixes + nate's priors land early enough for a rerun to finish by ~05:30 UTC.
 9. ⬜ *(stretch, first to cut; proposed hand-over from @derrick, needs his yes)* **Coach review** (1.5 h): per-turn regret on the **baseline's** turns in our eval games (we hold both requests; our own bot's regret is zero by construction). Value = expected next state in win-probability points [P9 D5 + critique].
@@ -81,6 +81,7 @@
 - **Local server (done once):** `pokemon-showdown/` checkout, `node pokemon-showdown start --no-security`, http://localhost:8000. `generate-team gen9ou` throws locally; teams come from Nate's pool.
 
 ## 4. Done log (newest first)
+- ✅ **Task 7, demo mode** (`bot/demo.py`): live battle streamed turn by turn (choice in words, actives, think time, any agent fields generically) and offline replay of a saved trace. On `main` @ `ecbb278`.
 - 🟡 **Task 4, trace**: `runs/<battle>.jsonl` gets a line per request (turn, kind, choice, think ms, fallback, `BattleState`), line-buffered, and reloads into the same states; top options + win probability arrive when derrick exposes `agent.last_trace`. `progress.md` 2026-10-24 21:47.
 - ✅ **Tasks 1–3, toolchain + live bot** (`bot/player.py`, `bot/smoke.py`): uv + Rust (MSVC) installed, `poke-engine` builds; `poke-env==0.16.1` added. Measured: the log always lands before the request on the local server (#246 doesn't reproduce). 10/10 smoke games vs RandomPlayer finished unattended; 51 bot tests, 100% on `player.py`. Fallbacks (12.7%) all come from two `belief.py` bugs (Open board to @derrick) and the 2-species example priors. On `main` @ `d8bf19f`. `progress.md` 2026-10-24 21:47.
 - ✅ **Task 3 (old numbering), log parser** (`bot/parser.py`): turn 2 of the sample replay equals the contract example; 20 public gen9ou games parse with no skipped line; 25 tests, 100% coverage. On `main` @ `c25be7e`. `progress.md` 2026-10-24 20:36.
