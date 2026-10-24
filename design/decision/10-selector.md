@@ -14,15 +14,18 @@
 
 ## Interface
 ```python
-def select(scores, opp_probs, set_probs) -> Action
-# scores: Mapping[Action, Mapping[OppAction, Mapping[Set, float]]]
-# OppAction and Set are any hashable key until features 07 and 05 define them.
+def select(scores, set_probs, opp_probs) -> Action
+# scores[our action][opp set][opp action] = value; opp_probs[set][opp action] = p(action | set)
+# EV = Σ p(set) · Σ p(action | set) · value  (expected_value() is public for the loop)
 ```
 
 ## Decisions (Derrick, 2026-10-24)
 1. **Rule:** highest expected value, `Σ p(opp action) · p(set) · value`. Ties go to the better worst case.
 2. **Input:** the full 3-D table, so the worst case covers both the worst opponent action and the worst set.
 3. **Final tie:** the first action in `scores` order (that is, `our_actions` order). Deterministic, so runs repeat.
+
+4. **Opponent odds per set** (Derrick, 2026-10-24): their options differ by set (Choice lock, Taunt, Struggle), so
+   `opp_probs` is given per set rather than once for all sets.
 
 ## Rules (one right answer)
 - The worst case only counts outcomes with probability > 0.

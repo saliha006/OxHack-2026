@@ -29,7 +29,7 @@
 
 **Decisions in force** (newest first; one line each, full ADR in the vault Log):
 - 2026-10-24: target tracks are **HRT "Best Use of Data for Predictions & Decision Making"** (main) and **Best Handmade** (also); TIME is optional but applies to Handmade (event doc §3). (saliha)
-- 2026-10-24: the doc owner is saliha; the working branch is `sali`; `.claude/`, `Resreach-Context/` and `.env*` never go to GitHub. (saliha)
+- 2026-10-24: the doc owner is saliha; the working branch is `sali`; `.claude/`, `Research-Context/` and `.env*` never go to GitHub. (saliha)
 
 **Pending** (design choices not made yet; leanings, not decided):
 - Idea: Momentum (Pokémon win probability + coach-style replay review, optional ElevenLabs voice) is the lead; Honest Clock is the fallback. Owner saliha, lock in the first hours.

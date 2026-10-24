@@ -31,7 +31,7 @@
 **Scope contract.** Saliha builds the layer between Showdown and the decision layer (`design/bot-layer.md`):
 - Connect to a Showdown server (local first), receive `|request|` JSON + log lines, track state, fill Derrick's `BattleState` each turn, call the decision layer, send the `Choice` back.
 - Agreement: Derrick proposed, saliha (doc owner) said yes (17:20) and waived a separate yes from Nate on 2026-10-24 (the bot layer touches the data layer only through `BattleState`). Nate is informed and can object on the Open board.
-- Notes (`Research-Context/notes-bot-setup.md`, research doc pass 6): poke-env 0.16.1 works on this Python; Showdown needs Node >= 22.18; the public server requires bot registration (`/ht`) and has a bot policy; a local server needs no account.
+- Notes (research doc pass 6): poke-env 0.16.1 works on this Python; Showdown needs Node >= 22.18; the public server requires bot registration (`/ht`) and has a bot policy; a local server needs no account.
 
 **Out of scope:** decision logic, data ingestion, training; voice.
 

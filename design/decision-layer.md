@@ -29,6 +29,10 @@ send(argmax(scores))                        // bot layer
    result, and weight it by the probabilities.
 3. **Act:** pick the highest expected value, breaking ties toward the better worst case.
 
+**The loop (built 2026-10-24):** `Agent(priors).choose(request, battle) -> str | None`, one Agent per battle,
+in `decision/agent.py`. Wait → `None`; team preview → `team 123456`; move request → belief update → top 5 scenarios →
+`build_state` → our and their actions → `simulate` → `value` → `select` → `belief.chose`; forced switch → best next turn.
+
 ## 1a. What Showdown gives the decision layer (via the bot)
 
 Full protocol detail: [bot-layer.md §1a](bot-layer.md#1a-what-showdown-sends-us-and-what-it-takes-back).
@@ -121,9 +125,9 @@ Stages are the build order in [DESIGN.md §4](DESIGN.md#4-build-order-by-layer).
 
 - [x] **[State intake](decision/01-state-intake.md)**: Stage 3 (built against the `BattleState` contract; needs a real parser)
 - [ ] **[Set priors (load)](decision/02-set-priors.md)**: Stage 4
-- [ ] **[Belief: hard filter](decision/03-belief-hard-filter.md)**: Stage 4
-- [ ] **[Belief: soft reweight](decision/04-belief-soft-reweight.md)**: Stage 4, after the hard filter
-- [ ] **[Sample opponent sets](decision/05-sample-sets.md)**: Stage 4
+- [x] **[Belief: hard filter](decision/03-belief-hard-filter.md)**: Stage 4 (built on hand-made priors)
+- [x] **[Belief: soft reweight](decision/04-belief-soft-reweight.md)**: Stage 4 (built on hand-made priors)
+- [x] **[Sample opponent sets](decision/05-sample-sets.md)**: Stage 4 (built on hand-made priors)
 - [x] **[Our actions](decision/06-our-actions.md)**: Stage 3 (built on `derrick`, not merged)
 - [x] **[Opponent actions + policy](decision/07-opp-actions.md)**: Stage 3 uniform → Stage 5 trained (uniform built on `derrick`, not merged)
 - [x] **[Simulate one turn](decision/08-simulate.md)**: Stage 2 (built on `derrick`, not merged)
