@@ -10,6 +10,7 @@ design-decision/
 skills/
 Research-Context/
 .env*
+*.env
 
 .venv/
 __pycache__/
@@ -19,3 +20,5 @@ __pycache__/
 # Local Showdown server checkout and bot run output
 pokemon-showdown/
 runs/
+# Foul Play (strong opponent for the eval ladder), cloned and set up locally
+foul-play/

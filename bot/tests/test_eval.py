@@ -353,4 +353,142 @@ def test_report_command_prints_ratings_and_the_agents_neighbours(tmp_path, capsy
     out = capsys.readouterr().out
     assert "elo random" in out and "elo full" in out and "agent wins" in out
     summary = json.loads((tmp_path / "eval-summary.json").read_text(encoding="utf-8"))
-    assert set(summary) == {"pairings", "ratings", "neighbours"} and summary["ratings"]["random"]["elo"] == 1000
+    assert set(summary) == {"pairings", "ratings", "neighbours", "void_games"} and summary["ratings"]["random"]["elo"] == 1000
+
+
+class FakeProcess:
+    def __init__(self, args, cwd, stdout, stderr):
+        self.args, self.cwd, self.stdout, self.exit_code, self.terminated = args, cwd, stdout, None, False
+
+    def poll(self):
+        return self.exit_code
+
+    def terminate(self):
+        self.terminated = True
+
+
+@pytest.fixture
+def popen(monkeypatch):
+    started = []
+
+    def fake_popen(args, cwd, stdout, stderr):
+        started.append(FakeProcess(args, cwd, stdout, stderr))
+        return started[-1]
+
+    monkeypatch.setattr(harness.subprocess, "Popen", fake_popen)
+    return started
+
+
+def test_foul_play_starts_accepting_challenges_with_its_team_list_in_game_order(tmp_path, popen):
+    paths = [tmp_path / "team_3.txt", tmp_path / "team_1.txt", tmp_path / "team_3.txt"]
+    fp = harness.FoulPlay(212, paths, tmp_path, "oxabc")
+    args = popen[0].args
+    assert args[args.index("--bot-mode") + 1] == "accept_challenge"
+    assert args[args.index("--search-time-ms") + 1] == "212" and args[args.index("--run-count") + 1] == "3"
+    assert args[args.index("--ps-username") + 1] == "oxabc" and popen[0].cwd == harness.FOUL_PLAY
+    team_list = Path(args[args.index("--team-list") + 1]).read_text(encoding="utf-8").splitlines()
+    assert team_list == [str(p.resolve()) for p in paths]
+    fp.close()
+    assert popen[0].terminated and fp.output.closed
+
+
+def test_foul_play_is_ready_once_it_waits_for_the_next_challenge(tmp_path, popen, monkeypatch):
+    fp = harness.FoulPlay(100, [tmp_path / "t.txt"], tmp_path, "oxabc")
+    fp.output.write("INFO Waiting for a gen9ou challenge\n")
+    fp.output.flush()
+    fp.wait_ready(timeout=5)
+    assert fp.games == 1
+    naps = []
+    monkeypatch.setattr(harness.time, "sleep", lambda s: (naps.append(s), fp.output.write("Waiting for a\n"), fp.output.flush()))
+    fp.wait_ready(timeout=5)
+    assert fp.games == 2 and naps == [0.5]
+    fp.close()
+
+
+def test_foul_play_that_exits_or_stalls_raises_instead_of_hanging_the_shard(tmp_path, popen, monkeypatch):
+    fp = harness.FoulPlay(100, [tmp_path / "t.txt"], tmp_path, "oxabc")
+    popen[0].exit_code = 1
+    with pytest.raises(RuntimeError, match="oxabc"):
+        fp.wait_ready(timeout=5)
+    popen[0].exit_code = None
+    monkeypatch.setattr(harness.time, "sleep", lambda s: None)
+    with pytest.raises(RuntimeError):
+        fp.wait_ready(timeout=0)
+    fp.close()
+
+
+def test_a_shard_starts_one_foul_play_per_level_it_meets_with_teams_in_its_game_order(tmp_path, monkeypatch):
+    made = []
+    monkeypatch.setattr(harness, "FoulPlay", lambda ms, paths, folder, name: made.append((ms, paths, name)) or name)
+    games = [("full~fpmid", 3), ("headline", 0), ("prior~fpmid", 1), ("full~fphigh", 0)]
+    players = harness.start_foul_play(games, ["T0", "T1", "T2"], tmp_path, random.Random(5), seed=8)
+    assert set(players) == {("b", "fpmid"), ("b", "fphigh")}
+    ms, paths, name = made[0]
+    assert 150 <= ms <= 260 and name.startswith("ox")
+    expected = [harness.game_rng(8, p, g).randrange(3) for p, g in [("full~fpmid", 3), ("prior~fpmid", 1)]]
+    assert [int(p.stem.split("_")[1]) for p in paths] == expected
+    assert (tmp_path / "teams" / "team_2.txt").read_text(encoding="utf-8") == "T2"
+    assert 450 <= made[1][0] <= 700
+
+
+class FakeFoulPlay:
+    def __init__(self):
+        self.username, self.ready, self.closed = "oxfp", 0, False
+
+    def wait_ready(self):
+        self.ready += 1
+
+    def close(self):
+        self.closed = True
+
+
+def test_a_game_against_foul_play_waits_for_it_then_challenges_it(tmp_path, monkeypatch):
+    monkeypatch.setattr(harness, "FoulPlay", FakeFoulPlay)
+    monkeypatch.setattr(harness, "AgentPlayer", FakeAgentPlayer)
+    ours, fp = FakeAgentPlayer("full"), FakeFoulPlay()
+    challenged = []
+
+    async def send_challenges(username, n):
+        challenged.append((username, n))
+        ours.battles[0] = SimpleNamespace(won=False, turn=40, player_role="p1", battle_tag="battle-gen9ou-9")
+        ours.summaries.append({"decisions": 41, "fallbacks": 0, "think_p50_ms": 50.0, "think_p99_ms": 300.0})
+
+    ours.send_challenges = send_challenges
+    players = {("a", "full"): ours, ("b", "fplow"): fp}
+    line = harness.play_game("full~fplow", 2, players, ["T0", "T1"], PRIORS, 1.0, str(tmp_path), random.Random(1), 4)
+    assert challenged == [("oxfp", 1)] and fp.ready == 1
+    assert (line["winner"], line["side"], line["turns"], line["b"]) == ("b", "p1", 40, "fplow")
+    assert ours.teams == [f"T{harness.game_rng(4, 'full~fplow', 2).randrange(2)}"]
+
+
+def test_a_game_that_ends_at_team_preview_is_void(tmp_path, fakes, monkeypatch):
+    async def instant_forfeit(self, other, n_battles):
+        a = self if self.side == "a" else other
+        a.battles[0] = SimpleNamespace(won=True, turn=0, player_role="p1", battle_tag="battle-gen9ou-0")
+        a.summaries.append({"decisions": 1, "fallbacks": 0, "think_p50_ms": 5.0, "think_p99_ms": 5.0})
+
+    monkeypatch.setattr(FakeBaseline, "battle_against", instant_forfeit)
+    harness.play_shard([("headline", 0)], ["T0"], PRIORS, 1.0, str(tmp_path), "m", 0, seed=3)
+    assert shard_rows(tmp_path)[0]["winner"] == "void"
+
+
+def test_void_games_are_left_out_of_the_score_but_counted_in_the_report(tmp_path, capsys):
+    write(tmp_path, "a-0.jsonl", [result("random", 0), result("random", 1, "void"), result("random", 2, "b")])
+    assert [r["game"] for r in harness.scored(harness.read_results(tmp_path))] == [0, 2]
+    harness.main(["--runs", str(tmp_path), "report"])
+    assert "void games (a side dropped out at team preview, not scored): 1" in capsys.readouterr().out
+    assert json.loads((tmp_path / "eval-summary.json").read_text(encoding="utf-8"))["pairings"]["random"]["games"] == 2
+
+
+def test_a_shard_closes_its_foul_play_processes_even_when_a_game_fails(tmp_path, monkeypatch):
+    fp = FakeFoulPlay()
+    monkeypatch.setattr(harness, "FoulPlay", FakeFoulPlay)
+    monkeypatch.setattr(harness, "start_foul_play", lambda *args: {("b", "fplow"): fp, ("a", "x"): object()})
+
+    def broken(*args):
+        raise RuntimeError("server went away")
+
+    monkeypatch.setattr(harness, "play_game", broken)
+    with pytest.raises(RuntimeError):
+        harness.play_shard([("full~fplow", 0)], ["T0"], PRIORS, 1.0, str(tmp_path), "m", 0, seed=1)
+    assert fp.closed

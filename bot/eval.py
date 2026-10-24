@@ -13,7 +13,9 @@ import math
 import os
 import platform
 import random
+import subprocess
 import sys
+import time
 from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 
@@ -132,6 +134,45 @@ def ladder_pairings(core: dict, ladder: list[str], vs_agent: int = 40, neighbour
 
 PAIRINGS |= ladder_pairings(PAIRINGS, LADDER)
 
+FOUL_PLAY = Path(__file__).parent.parent / "foul-play"
+# Search-time bands in ms, deliberately uneven; each Foul Play process draws its own time inside its band.
+FOUL_PLAY_LEVELS = {"fplow": (40, 80), "fpmid": (150, 260), "fphigh": (450, 700)}
+for level in FOUL_PLAY_LEVELS:
+    PAIRINGS[f"full~{level}"] = ("full", level, 50)
+    PAIRINGS[f"prior~{level}"] = ("prior", level, 20)
+
+
+class FoulPlay:
+    """A Foul Play bot in its own process, accepting our challenges and playing its team list in our game order."""
+
+    def __init__(self, search_ms: int, team_paths: list[Path], runs: Path, username: str):
+        self.username = username
+        self.log = runs / f"{username}.log"
+        team_list = runs / f"{username}.teams.txt"
+        team_list.write_text("".join(f"{p.resolve()}\n" for p in team_paths), encoding="utf-8")
+        python = FOUL_PLAY / ".venv" / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
+        self.output = open(self.log, "w", encoding="utf-8")
+        self.process = subprocess.Popen(
+            [str(python), "run.py", "--websocket-uri", "ws://localhost:8000/showdown/websocket",
+             "--ps-username", username, "--bot-mode", "accept_challenge", "--pokemon-format", "gen9ou",
+             "--team-list", str(team_list.resolve()), "--search-time-ms", str(search_ms),
+             "--run-count", str(len(team_paths)), "--log-level", "INFO"],
+            cwd=FOUL_PLAY, stdout=self.output, stderr=subprocess.STDOUT)
+        self.games = 0
+
+    def wait_ready(self, timeout: float = 180.0) -> None:
+        """Block until Foul Play waits for its next challenge; a challenge sent earlier would find nobody to accept it."""
+        deadline = time.monotonic() + timeout
+        while self.log.read_text(encoding="utf-8").count("Waiting for a") <= self.games:
+            if self.process.poll() is not None or time.monotonic() > deadline:
+                raise RuntimeError(f"Foul Play {self.username} isn't ready; see {self.log}")
+            time.sleep(0.5)
+        self.games += 1
+
+    def close(self) -> None:
+        self.process.terminate()
+        self.output.close()
+
 
 def make_player(name: str, jittered: bool, priors: dict, budget: float, runs: str, team: str, rng: random.Random):
     # A random account name, so nothing in the battle tells either side what it's playing.
@@ -161,6 +202,10 @@ def read_results(runs: Path) -> list[dict]:
             for line in path.read_text(encoding="utf-8").splitlines()]
 
 
+def scored(rows: list[dict]) -> list[dict]:
+    return [r for r in rows if r["winner"] != "void"]
+
+
 def schedule(pairings: dict[str, int], shards: int, done: set[tuple[str, int]], seed: int) -> list[list[tuple[str, int]]]:
     """Every unplayed (pairing, game), shuffled together, so no shard plays one opponent in a predictable run."""
     todo = [(p, g) for p, games in pairings.items() for g in range(games) if (p, g) not in done]
@@ -178,32 +223,66 @@ def play_shard(games: list[tuple[str, int]], teams: list[str], priors: dict, bud
     """One process: plays its games one at a time and appends a result line per game, so a crash loses one game."""
     logging.basicConfig(level=logging.WARNING, format="%(levelname)s %(name)s: %(message)s")
     rng = random.Random(f"{seed}:{machine}:{shard}")
-    players = {}
     out = Path(runs) / "eval" / f"{machine}-{shard}.jsonl"
     out.parent.mkdir(parents=True, exist_ok=True)
-    with open(out, "a", encoding="utf-8", buffering=1) as results:
-        for pairing, g in games:
-            a_name, b_name, _ = PAIRINGS[pairing]
-            for role, name in (("a", a_name), ("b", b_name)):
-                if (role, name) not in players:
-                    players[role, name] = make_player(name, role == "b", priors, budget, runs, teams[0], rng)
-            a, b = players["a", a_name], players["b", b_name]
-            pick = game_rng(seed, pairing, g)
-            team = pick.randrange(len(teams))
-            a.update_team(teams[team])
-            b.update_team(teams[team])
-            # Whoever challenges gets p1; a coin flip keeps sides balanced without a pattern.
-            first, second = (a, b) if pick.random() < 0.5 else (b, a)
-            asyncio.run(first.battle_against(second, n_battles=1))
-            battle = list(a.battles.values())[-1]
-            winner = "tie" if battle.won is None else ("a" if battle.won else "b")
-            line = {"pairing": pairing, "game": g, "a": a_name, "b": b_name, "team": team, "side": battle.player_role,
-                    "winner": winner, "turns": battle.turn, "battle": battle.battle_tag}
-            if isinstance(a, AgentPlayer):
-                s = a.summaries[-1]
-                line.update(decisions=s["decisions"], fallbacks=s["fallbacks"],
-                            think_p50_ms=s["think_p50_ms"], think_p99_ms=s["think_p99_ms"])
-            results.write(json.dumps(line) + "\n")
+    players = start_foul_play(games, teams, out.parent, rng, seed)
+    try:
+        with open(out, "a", encoding="utf-8", buffering=1) as results:
+            for pairing, g in games:
+                results.write(json.dumps(play_game(pairing, g, players, teams, priors, budget, runs, rng, seed)) + "\n")
+    finally:
+        for player in players.values():
+            if isinstance(player, FoulPlay):
+                player.close()
+
+
+def start_foul_play(games: list[tuple[str, int]], teams: list[str], folder: Path, rng: random.Random,
+                    seed: int) -> dict:
+    """One Foul Play process per level this shard meets, given its teams in the order this shard will play them."""
+    players = {}
+    team_files = folder / "teams"
+    team_files.mkdir(exist_ok=True)
+    for i, team in enumerate(teams):
+        (team_files / f"team_{i}.txt").write_text(team, encoding="utf-8")
+    for level, (low, high) in FOUL_PLAY_LEVELS.items():
+        mine = [(p, g) for p, g in games if PAIRINGS[p][1] == level]
+        if mine:
+            paths = [team_files / f"team_{game_rng(seed, p, g).randrange(len(teams))}.txt" for p, g in mine]
+            players["b", level] = FoulPlay(rng.randint(low, high), paths, folder, f"ox{rng.getrandbits(32):08x}")
+    return players
+
+
+def play_game(pairing: str, g: int, players: dict, teams: list[str], priors: dict, budget: float, runs: str,
+              rng: random.Random, seed: int) -> dict:
+    a_name, b_name, _ = PAIRINGS[pairing]
+    for role, name in (("a", a_name), ("b", b_name)):
+        if (role, name) not in players:
+            players[role, name] = make_player(name, role == "b", priors, budget, runs, teams[0], rng)
+    a, b = players["a", a_name], players["b", b_name]
+    pick = game_rng(seed, pairing, g)
+    team = pick.randrange(len(teams))
+    a.update_team(teams[team])
+    if isinstance(b, FoulPlay):
+        # Foul Play only accepts challenges, so our side is always p1 against it.
+        b.wait_ready()
+        asyncio.run(a.send_challenges(b.username, 1))
+    else:
+        b.update_team(teams[team])
+        # Whoever challenges gets p1; a coin flip keeps sides balanced without a pattern.
+        first, second = (a, b) if pick.random() < 0.5 else (b, a)
+        asyncio.run(first.battle_against(second, n_battles=1))
+    battle = list(a.battles.values())[-1]
+    if battle.turn == 0:
+        winner = "void"  # someone crashed or forfeited at team preview: no play to score
+    else:
+        winner = "tie" if battle.won is None else ("a" if battle.won else "b")
+    line = {"pairing": pairing, "game": g, "a": a_name, "b": b_name, "team": team, "side": battle.player_role,
+            "winner": winner, "turns": battle.turn, "battle": battle.battle_tag}
+    if isinstance(a, AgentPlayer):
+        s = a.summaries[-1]
+        line.update(decisions=s["decisions"], fallbacks=s["fallbacks"],
+                    think_p50_ms=s["think_p50_ms"], think_p99_ms=s["think_p99_ms"])
+    return line
 
 
 def wilson(wins: float, n: int, z: float = 1.96) -> tuple[float, float]:
@@ -341,11 +420,12 @@ def main(argv: list[str] | None = None) -> int:
     runs.mkdir(parents=True, exist_ok=True)
 
     if args.command == "report":
-        rows = read_results(runs)
+        everything = read_results(runs)
+        rows = scored(everything)
         table = report(rows)
         elo = ratings(rows) if rows else {}
         near = neighbours(elo, rows) if "full" in elo else []
-        summary = {"pairings": table, "ratings": elo, "neighbours": near}
+        summary = {"pairings": table, "ratings": elo, "neighbours": near, "void_games": len(everything) - len(rows)}
         (runs / "eval-summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
         for pairing, r in table.items():
             lo, hi = r["wilson_95"]
@@ -353,6 +433,7 @@ def main(argv: list[str] | None = None) -> int:
             fallbacks = "n/a" if r["fallback_rate"] is None else f"{r['fallback_rate']:.1%}"
             print(f"{pairing:21} {r['a']} vs {r['b']}: {r['win_rate']:.1%} over {r['games']}/{r['planned']} games "
                   f"(Wilson {lo:.1%}-{hi:.1%}, team bootstrap {blo:.1%}-{bhi:.1%}, {r['teams']} teams), fallbacks {fallbacks}")
+        print(f"void games (a side dropped out at team preview, not scored): {summary['void_games']}")
         for name, r in sorted(elo.items(), key=lambda kv: -kv[1]["elo"]):
             print(f"elo {name:16} {r['elo']:6.0f}  (95% {r['elo_95'][0]:.0f}-{r['elo_95'][1]:.0f})")
         for n in near:
