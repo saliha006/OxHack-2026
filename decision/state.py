@@ -68,7 +68,9 @@ def _pokemon(mon: dict, moves: list[Move] | None, observed: dict | None = None) 
         sleep_turns=observed.get("sleep_turns", observed.get("status_turns", 0)) if status == "slp" else 0,
         rest_turns=observed.get("rest_turns", 0) if status == "slp" else 0,
         weight_kg=entry["weightkg"],
-        terastallized=bool(mon["terastallized"]),
+        # Tera is irreversible; a fainted request slot can clear its flag.
+        # A confirmed public transformed identity still spends the resource.
+        terastallized=bool(mon["terastallized"]) or bool(observed.get("terastallized")),
         tera_type=mon["teraType"].lower(),
         # The current active request is exact. Other slots retain last-seen PP
         # by move identity; only never-seen moves use the native default of 16.

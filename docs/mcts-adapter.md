@@ -37,6 +37,11 @@ fragments. Tests check the legal action set, not repeatable native visit counts.
   also update the parser's side resource. An inconsistent opponent observation
   saying Tera is spent without identifying a transformed slot raises a structured
   world-conversion error instead of inventing a slot or resource.
+  A later captured-request regression showed that an own fainted slot can clear
+  its request Tera flag. Conversion now retains an authoritative current flag
+  **or** the confirmed transformed slot in public history. Side-level resource
+  use alone does not invent a transformed identity. The native before/after
+  probe is recorded in `evaluation/mcts-improvements/tera-memory-probe-results.json`.
 - Known moves are inserted before guessed moves, known items/abilities/Tera
   override guesses, and consumed/removed items become `none`.
 - Screens, hazards, weather, terrain and Trick Room retain their elapsed counts
@@ -124,3 +129,9 @@ and two against Showdown's stall counters, and U-turn PP 32 →31 through a livi
 pivot request and replacement. Regenerate it with
 `node tests/fixtures/generate_state_reconstruction.cjs`. Its short roster uses
 `gen9customgame` for mechanics; it makes no OU team-legality or strength claim.
+
+`tests/fixtures/fainted_tera_showdown.json` separately captures two actual
+historical development requests/public states where a fainted Kyurem's private
+request clears its transformed flag. Focused tests preserve the public Tera fact
+and execute native root search to verify that it does not offer a second Tera.
+The fixture contains our private request and public opponent observations only.

@@ -1,0 +1,67 @@
+{
+  "scope": "Stage1 followup correctness only; no playing-strength result",
+  "fix": "Own native transformed flag is current private request OR confirmed observed transformed identity. A blank fainted request slot cannot restore spent Tera. Tera type handling unchanged because both actual requests supply it.",
+  "changed_runtime_files": [
+    "decision/state.py"
+  ],
+  "before_source_sha256": "0728b716862b0c848480c3b08562bb745fd74c69874b948c52bf29b537895ed0",
+  "after_source_sha256": "0bd23daf0e4d173a8a9a3398793831d7d1cac100ba99bf238ab357f07b258a23",
+  "identical_sampled_worlds": true,
+  "requested_native_ms": 200,
+  "actual_native_ms": 225.34591105068102,
+  "before": {
+    "arm": "before",
+    "source_sha256": "0728b716862b0c848480c3b08562bb745fd74c69874b948c52bf29b537895ed0",
+    "native_tera_options": 8,
+    "mapping_failures": 8,
+    "native_elapsed_ms": 116.28833500435576
+  },
+  "after": {
+    "arm": "after",
+    "source_sha256": "0bd23daf0e4d173a8a9a3398793831d7d1cac100ba99bf238ab357f07b258a23",
+    "native_tera_options": 0,
+    "mapping_failures": 0,
+    "native_elapsed_ms": 109.05757604632527
+  },
+  "positions": [
+    {
+      "position": "battle-gen9ou-26-middle",
+      "before_tera_options": 4,
+      "after_tera_options": 0,
+      "before_mapping_rejections": 4,
+      "after_mapping_rejections": 0,
+      "before_transformed_slots": [],
+      "after_transformed_slots": [
+        "kyurem"
+      ],
+      "before_native_elapsed_ms": 60.5489089502953,
+      "after_native_elapsed_ms": 56.56244501005858
+    },
+    {
+      "position": "battle-gen9ou-26-last",
+      "before_tera_options": 4,
+      "after_tera_options": 0,
+      "before_mapping_rejections": 4,
+      "after_mapping_rejections": 0,
+      "before_transformed_slots": [],
+      "after_transformed_slots": [
+        "kyurem"
+      ],
+      "before_native_elapsed_ms": 55.73942605406046,
+      "after_native_elapsed_ms": 52.495131036266685
+    }
+  ],
+  "tests": {
+    "initial_new_regressions": "4 failed,2 passed",
+    "after_focused_suite": "64 passed in0.92s"
+  },
+  "raw": {
+    "before_probe": "runs/mcts-improvements/tera-memory-before-probe.json",
+    "after_probe": "runs/mcts-improvements/tera-memory-after-probe.json",
+    "before_tests": "runs/mcts-improvements/tera-memory-before-tests.txt",
+    "after_tests": "runs/mcts-improvements/tera-memory-after-tests.txt"
+  },
+  "plan_sha256": "c11ae87c5b2903334bc97f6c99cd32f40234f47ceadda0797f1a2ac0e09c01ac",
+  "fixture_sha256": "cb49d2f39bea30d7846a327d88e4265344595f82aabb2207ac9e8063aa56f2f1",
+  "interpretation": "8 unsupported native Tera roots/mapping rejections across2 actual positions fell to0. Legality filtering previously prevented illegal final choices. Native visits and the short probe choices are not strength evidence. Parent owns full suite, new frozen incumbent and controlled game comparisons."
+}
