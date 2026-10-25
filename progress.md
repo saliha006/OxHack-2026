@@ -77,6 +77,8 @@ whenever you log an entry.
 4. {{Access to the deploy target, data and secrets: where each lives. Never in git or chat}}
 
 ## 📊 Latest (volatile facts live only here)
+- **Optional MCTS leads, 2026-10-25 05:15 Europe/London:** `d226956` adds opt-in `lead_policy="moves_stats"`; the accepted default remains type scoring. Candidate runtime source `abbc7f19e232c50835503873ca55b0b6733d3c41592883f3b4f54ced3505b71f`; full selection 458 passed in 22.56 seconds. One regression-preview benchmark p50/max 87.49/91.02 ms is cost evidence only. Smoke passed with 224/224 usable worlds, zero fallback/rejections/failures and max 1,836.94 ms; its two six-turn-censored games supply no strength sample. Two fresh-roster 60-game original/predecessor plans are queued with side/team-assignment swaps.
+- **MCTS belief reliability, 2026-10-25 05:10 Europe/London:** Stage 2 correctness accepted as `731fb91`, effective candidate source `0728b716862b0c848480c3b08562bb745fd74c69874b948c52bf29b537895ed0`; `Agent` uses reliable inference, with legacy/revelations ablations retained. Full selection: 436 passed in 19.99 seconds. Transport smoke: 208/208 usable worlds with zero fallbacks/rejections/failures over two intentionally censored games. Two 60-game original/predecessor screening plans are frozen; original is running and predecessor queued. Strength remains unknown.
 - **MCTS improvement work, 2026-10-25 05:04 Europe/London:** Stage 1 correctness changes committed as `df1002c`; isolated candidate effective source `32ede7cb68279477331cea6d6a5dcb27c6991d75fa1640b8525eff1aa129ed1c`. Focused verification: 114 passed including real Showdown mechanics snapshots. Candidate/baseline transport smoke: 192/192 worlds usable, zero fallback/rejected choices/failed worlds over two intentionally six-turn-censored games. A frozen 60-game screening comparison is running; no new strength conclusion. Live record: `docs/mcts-improvement-log.md`.
 - **User default decision, 2026-10-25 04:30 Europe/London:** `mcts` (8 ×150 ms worlds, one thread) is the default on `Kenar-mcts`; `one_ply` remains the explicit legacy evaluation arm. Previous pilot evidence and its uncertainty remain unchanged.
 - **Kenar-mcts baseline, 2026-10-25 04:20 Europe/London:** implementation/prediction tools and 24-game pilot complete on this branch; `one_ply` remains default. Final combined suite: 402 passed, one credential-dependent Tiger integration skipped; subsequent scoring fixes: 20 prediction tests passed. Final hardening smoke: 424/424 worlds usable, zero fallbacks/bookkeeping errors, max decision 1,977 ms. Detailed historical measurements and source hashes: `docs/mcts-results.md`; live explanation: `docs/mcts-live-walkthrough.md`. Larger confirmatory comparison remains configured, not run.
@@ -87,6 +89,24 @@ whenever you log an entry.
 ---
 
 ## Log (newest first)
+
+### 2026-10-25 05:15 — feat — Add optional preview scoring from supplied moves and stats — @kenar
+- **Where:** `Kenar-mcts` · merged to `main`: not yet
+- **Did:** Added an explicit opening heuristic using our actual request moves/stats and public opposing priors, with traced damage, speed/priority, fragility and hazard/pivot/Taunt components. Preserved the type-only default and added a fixed-lead test option. The model is approximate and remains off pending controlled game evidence; a higher heuristic score is not a strength result.
+- **Touched:** `decision/lead_model.py`, Agent preview configuration, focused tests, development benchmark and staged documentation
+- **Brief task:** user's six-stage handoff → Stage 3 optional candidate implemented; evaluation pending
+- **⚠️ Conflicts:** none; changes remain on the implementation branch for review
+- **📨 Needs:** none; current priors reused and opponent private team files are not model inputs
+- **Status:** experimental/off by default; strength unknown
+
+### 2026-10-25 05:10 — fix — Guard uncertain belief inference while preserving confirmed facts — @kenar
+- **Where:** `Kenar-mcts` · merged to `main`: not yet
+- **Did:** Separate direct revelations, guarded inferred item rules and soft replay. Reproduced called-move, incomplete-turn, changed-hazard and old-item-period defects against the frozen baseline; reliable mode corrects those cases while legacy mode preserves the comparison. Added pre-revelation scoring ablations and leakage checks. Reliable mode is enabled for correctness; full original/predecessor strength comparisons remain in progress.
+- **Touched:** `decision/belief.py`, `decision/agent.py`, `decision/search.py`, reliability/scorer tests and evaluation scoring plans/tooling
+- **Brief task:** user's six-stage handoff → Stage 2 correctness accepted; game and diagnostic comparisons pending
+- **⚠️ Conflicts:** none; changes remain on the implementation branch for review
+- **📨 Needs:** none; existing local priors retained, Tiger paused
+- **Status:** correctness improved in reproduced cases; strength unknown
 
 ### 2026-10-25 05:04 — fix — Remember supported battle state through switches and continuation requests — @kenar
 - **Where:** `Kenar-mcts` · merged to `main`: not yet

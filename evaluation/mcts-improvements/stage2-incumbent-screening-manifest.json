@@ -1,0 +1,1480 @@
+{
+  "schema": 1,
+  "harness_files": {
+    "__init__.py": "117d52a420a3ca3dbe4caf2665316b3c4915e94c5a0efc8f89e52739485e3eb8",
+    "identity.py": "d91b6bbe10f406589e129c4d46628666f103322a8d0d26b198f16ace92340465",
+    "reserve_teams.py": "cf80696fe335a238f0b5d3ac8c3a6e25672a4f4c5b1639640a853c312726fc46",
+    "run.py": "9bf62377f0486e39fa327c8ce45488aef0e72c1108e1fdc5578de8b3e311b443",
+    "simulator.cjs": "8f0f954850cd3f620ce0ff42845ae71da080f921faaa0bf37f6b414f4ce444f9",
+    "worker.py": "d9d4e29ad04e768e64616a680249d8f2d511d5231ccf040bafb3b4cdf63ccc7c"
+  },
+  "phase": "screening",
+  "seed": 2026102521,
+  "concurrent_games": 4,
+  "teams": [
+    {
+      "id": "stage2-screening-01",
+      "style": "offense",
+      "roster": [
+        "Darkrai",
+        "Gholdengo",
+        "Lokix",
+        "Dragonite",
+        "Great Tusk",
+        "Latios"
+      ],
+      "template_roster": [
+        "Darkrai",
+        "Gholdengo",
+        "Zamazenta",
+        "Dragonite",
+        "Great Tusk",
+        "Primarina"
+      ],
+      "design_rationale": "Multiple fast or priority attackers, setup/wallbreaking pressure, and Great Tusk hazard removal.",
+      "substitutions": [
+        {
+          "from": "Zamazenta",
+          "to": "Lokix"
+        },
+        {
+          "from": "Primarina",
+          "to": "Latios"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_12.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_12.txt"
+      ],
+      "sha256": "d9909530b185eca21c9c424ab9db8d245a8c4f97dc37e9acd9f63c4dc8482dae",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/01.txt",
+      "validation_errors": null,
+      "packed": "Darkrai||ChoiceScarf|BadDreams|DarkPulse,IceBeam,SludgeBomb,Trick|Timid|,,,252,4,252|N|,0,,,,|||,,,,,Poison]Gholdengo||ChoiceScarf|GoodasGold|ShadowBall,MakeItRain,Trick,Recover|Timid|,,4,252,,252|N|,0,,,,|||,,,,,Steel]Lokix||HeavyDutyBoots|TintedLens|FirstImpression,Uturn,KnockOff,SuckerPunch|Adamant|,252,4,,,252|||||,,,,,Bug]Dragonite||HeavyDutyBoots|Multiscale|ExtremeSpeed,Earthquake,DragonDance,Roost|Adamant|248,104,52,,,104|F||||,,,,,Normal]Great Tusk||RockyHelmet|Protosynthesis|HeadlongRush,IceSpinner,RapidSpin,StealthRock|Jolly|,204,,,52,252|N||||,Fighting,,,,Ice]Latios||SoulDew|Levitate|DracoMeteor,PsychicNoise,FlipTurn,Recover|Timid|,,4,252,,252|M||||,,,,,Steel"
+    },
+    {
+      "id": "stage2-screening-02",
+      "style": "offense",
+      "roster": [
+        "Weavile",
+        "Darkrai",
+        "Dragonite",
+        "Kyurem",
+        "Great Tusk",
+        "Cinderace"
+      ],
+      "template_roster": [
+        "Weavile",
+        "Darkrai",
+        "Dragonite",
+        "Iron Crown",
+        "Great Tusk",
+        "Cinderace"
+      ],
+      "design_rationale": "Multiple fast or priority attackers, setup/wallbreaking pressure, and Great Tusk hazard removal.",
+      "substitutions": [
+        {
+          "from": "Iron Crown",
+          "to": "Kyurem"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_9.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_9.txt"
+      ],
+      "sha256": "b387ba88ea0f9a5c66666c5abfcf93c6a518c3753d7bda63a6b257a7cc4b1284",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/02.txt",
+      "validation_errors": null,
+      "packed": "Weavile||HeavyDutyBoots|Pressure|SwordsDance,IcicleCrash,KnockOff,IceShard|Jolly|,252,,,4,252|F||||,,,,,Fire]Darkrai||ChoiceScarf|BadDreams|DarkPulse,IceBeam,SludgeBomb,Trick|Timid|,,,252,4,252|N|,0,,,,|||,,,,,Poison]Dragonite||HeavyDutyBoots|Multiscale|ExtremeSpeed,Earthquake,DragonDance,Roost|Adamant|248,104,52,,,104|F||||,,,,,Normal]Kyurem||ChoiceSpecs|Pressure|IceBeam,FreezeDry,Blizzard,EarthPower|Timid|,,,252,4,252|N|,0,,,,|||,,,,,Ice]Great Tusk||RockyHelmet|Protosynthesis|HeadlongRush,IceSpinner,RapidSpin,StealthRock|Jolly|,204,,,52,252|N||||,Fighting,,,,Ice]Cinderace||HeavyDutyBoots|Blaze|PyroBall,Uturn,CourtChange,WillOWisp|Jolly|224,32,,,,252|||||,,,,,Fire"
+    },
+    {
+      "id": "stage2-screening-03",
+      "style": "offense",
+      "roster": [
+        "Dragonite",
+        "Latios",
+        "Zamazenta",
+        "Gholdengo",
+        "Great Tusk",
+        "Primarina"
+      ],
+      "template_roster": [
+        "Lokix",
+        "Latios",
+        "Zamazenta",
+        "Gholdengo",
+        "Great Tusk",
+        "Ogerpon-Wellspring"
+      ],
+      "design_rationale": "Multiple fast or priority attackers, setup/wallbreaking pressure, and Great Tusk hazard removal.",
+      "substitutions": [
+        {
+          "from": "Lokix",
+          "to": "Dragonite"
+        },
+        {
+          "from": "Ogerpon-Wellspring",
+          "to": "Primarina"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_12.txt",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_8.txt"
+      ],
+      "sha256": "984782a452b36c8cde46390522227f2b4db39f6deefbc98b2bf7cd328e635842",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/03.txt",
+      "validation_errors": null,
+      "packed": "Dragonite||HeavyDutyBoots|Multiscale|ExtremeSpeed,Earthquake,DragonDance,Roost|Adamant|248,104,52,,,104|F||||,,,,,Normal]Latios||SoulDew|Levitate|DracoMeteor,PsychicNoise,FlipTurn,Recover|Timid|,,4,252,,252|M||||,,,,,Steel]Zamazenta||HeavyDutyBoots|DauntlessShield|CloseCombat,HeavySlam,Crunch,StoneEdge|Jolly|80,252,,,,176|N||||,,,,,Steel]Gholdengo||ChoiceScarf|GoodasGold|ShadowBall,MakeItRain,Trick,Recover|Timid|,,4,252,,252|N|,0,,,,|||,,,,,Steel]Great Tusk||RockyHelmet|Protosynthesis|HeadlongRush,IceSpinner,RapidSpin,StealthRock|Jolly|,204,,,52,252|N||||,Fighting,,,,Ice]Primarina||HeavyDutyBoots|Torrent|Moonblast,Surf,Encore,FlipTurn|Modest|76,,,252,,180|||||,,,,,Steel"
+    },
+    {
+      "id": "stage2-screening-04",
+      "style": "sun offense",
+      "roster": [
+        "Torkoal",
+        "Walking Wake",
+        "Hydrapple",
+        "Lokix",
+        "Cinderace",
+        "Great Tusk"
+      ],
+      "template_roster": [
+        "Torkoal",
+        "Walking Wake",
+        "Hydrapple",
+        "Zamazenta",
+        "Cinderace",
+        "Great Tusk"
+      ],
+      "design_rationale": "Drought plus Heat Rock supports Walking Wake and Protosynthesis attackers; hazard removal supports the setter. Team viability is a design hypothesis, not a competitive result.",
+      "substitutions": [
+        {
+          "from": "Zamazenta",
+          "to": "Lokix"
+        }
+      ],
+      "component_sources": [
+        "evaluation/mcts_improvements/reserve_teams.py: hand-constructed weather component",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_12.txt",
+        "bot/teams/standin/team_9.txt",
+        "bot/teams/standin/team_13.txt"
+      ],
+      "sha256": "c39f8fe9301e0457c323b82f8ab0bf892aef786b2aa2e5e3247c2ca8840a9f46",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/04.txt",
+      "validation_errors": null,
+      "packed": "Torkoal||HeatRock|Drought|LavaPlume,StealthRock,RapidSpin,Protect|Bold|248,,252,,8,||,0,,,,|||,,,,,Flying]Walking Wake||HeavyDutyBoots|Protosynthesis|Surf,DracoMeteor,KnockOff,FlipTurn|Timid|,,12,244,,252|N||||,,,,,Water]Hydrapple||HeavyDutyBoots|Regenerator|DracoMeteor,GigaDrain,EarthPower,NastyPlot|Modest|248,,176,16,56,12||,0,,,,|||,,,,,Steel]Lokix||HeavyDutyBoots|TintedLens|FirstImpression,Uturn,KnockOff,SuckerPunch|Adamant|,252,4,,,252|||||,,,,,Bug]Cinderace||HeavyDutyBoots|Blaze|PyroBall,Uturn,CourtChange,WillOWisp|Jolly|224,32,,,,252|||||,,,,,Fire]Great Tusk||RockyHelmet|Protosynthesis|HeadlongRush,IceSpinner,RapidSpin,StealthRock|Jolly|,204,,,52,252|N||||,Fighting,,,,Ice"
+    },
+    {
+      "id": "stage2-screening-05",
+      "style": "balance",
+      "roster": [
+        "Tinkaton",
+        "Corviknight",
+        "Darkrai",
+        "Primarina",
+        "Gliscor",
+        "Great Tusk"
+      ],
+      "template_roster": [
+        "Ting-Lu",
+        "Corviknight",
+        "Darkrai",
+        "Primarina",
+        "Pecharunt",
+        "Great Tusk"
+      ],
+      "design_rationale": "Defensive pivots/checks accompany hazard support and an offensive progress maker; no claim of tournament quality.",
+      "substitutions": [
+        {
+          "from": "Ting-Lu",
+          "to": "Tinkaton"
+        },
+        {
+          "from": "Pecharunt",
+          "to": "Gliscor"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_8.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt"
+      ],
+      "sha256": "5665a666805e9c53e65d979ec7858eceba63ce608c2b335e939f02d653ab2251",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/05.txt",
+      "validation_errors": null,
+      "packed": "Tinkaton||AirBalloon|MoldBreaker|GigatonHammer,ThunderWave,Encore,StealthRock|Jolly|248,,,,24,236|F||||,,,,,Water]Corviknight||RockyHelmet|Pressure|IronDefense,BodyPress,BraveBird,Roost|Impish|136,,252,,,120|F||||,,,,,Water]Darkrai||ChoiceScarf|BadDreams|DarkPulse,IceBeam,SludgeBomb,Trick|Timid|,,,252,4,252|N|,0,,,,|||,,,,,Poison]Primarina||HeavyDutyBoots|Torrent|Moonblast,Surf,Encore,FlipTurn|Modest|76,,,252,,180|||||,,,,,Steel]Gliscor||ToxicOrb|PoisonHeal|SwordsDance,Facade,KnockOff,Protect|Careful|244,,,,168,96|F||||,,,,,Normal]Great Tusk||RockyHelmet|Protosynthesis|HeadlongRush,IceSpinner,RapidSpin,StealthRock|Jolly|,204,,,52,252|N||||,Fighting,,,,Ice"
+    },
+    {
+      "id": "stage2-screening-06",
+      "style": "balance",
+      "roster": [
+        "Garganacl",
+        "Gliscor",
+        "Moltres",
+        "Gholdengo",
+        "Latios",
+        "Alomomola"
+      ],
+      "template_roster": [
+        "Garganacl",
+        "Gliscor",
+        "Moltres",
+        "Gholdengo",
+        "Dragonite",
+        "Alomomola"
+      ],
+      "design_rationale": "Defensive pivots/checks accompany hazard support and an offensive progress maker; no claim of tournament quality.",
+      "substitutions": [
+        {
+          "from": "Dragonite",
+          "to": "Latios"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_12.txt",
+        "bot/teams/standin/team_13.txt"
+      ],
+      "sha256": "e191438ff1620e1b6746b0d6c84edfedcacc59a5336462b3e6fb95b80ba690c2",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/06.txt",
+      "validation_errors": null,
+      "packed": "Garganacl||Leftovers|PurifyingSalt|SaltCure,StealthRock,Protect,Recover|Careful|252,,52,,204,|||||,,,,,Fairy]Gliscor||ToxicOrb|PoisonHeal|SwordsDance,Facade,KnockOff,Protect|Careful|244,,,,168,96|F||||,,,,,Normal]Moltres||HeavyDutyBoots|FlameBody|Flamethrower,BraveBird,Roost,WillOWisp|Adamant|248,16,232,,,12|N||||,,,,,Fairy]Gholdengo||ChoiceScarf|GoodasGold|ShadowBall,MakeItRain,Trick,Recover|Timid|,,4,252,,252|N|,0,,,,|||,,,,,Steel]Latios||SoulDew|Levitate|DracoMeteor,PsychicNoise,FlipTurn,Recover|Timid|,,4,252,,252|M||||,,,,,Steel]Alomomola||AssaultVest|Regenerator|FlipTurn,PlayRough,IcyWind,MirrorCoat|Sassy|216,40,,,252,|F|,,,,,0|||,,,,,Poison"
+    },
+    {
+      "id": "stage2-screening-07",
+      "style": "balance",
+      "roster": [
+        "Tinkaton",
+        "Slowking-Galar",
+        "Hydrapple",
+        "Cinderace",
+        "Latios",
+        "Dragonite"
+      ],
+      "template_roster": [
+        "Tinkaton",
+        "Slowking-Galar",
+        "Hydrapple",
+        "Cinderace",
+        "Kyurem",
+        "Zamazenta"
+      ],
+      "design_rationale": "Defensive pivots/checks accompany hazard support and an offensive progress maker; no claim of tournament quality.",
+      "substitutions": [
+        {
+          "from": "Kyurem",
+          "to": "Latios"
+        },
+        {
+          "from": "Zamazenta",
+          "to": "Dragonite"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_9.txt",
+        "bot/teams/standin/team_12.txt",
+        "bot/teams/standin/team_10.txt"
+      ],
+      "sha256": "c5d9c5952357e619a8c85b3ccb02b62dd479743412b19b214f4f9be790953098",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/07.txt",
+      "validation_errors": null,
+      "packed": "Tinkaton||AirBalloon|MoldBreaker|GigatonHammer,ThunderWave,Encore,StealthRock|Jolly|248,,,,24,236|F||||,,,,,Water]Slowking|SlowkingGalar|HeavyDutyBoots|Regenerator|SludgeBomb,FutureSight,Flamethrower,ChillyReception|Sassy|248,,8,,252,||,0,,,,0|||,,,,,Water]Hydrapple||HeavyDutyBoots|Regenerator|DracoMeteor,GigaDrain,EarthPower,NastyPlot|Modest|248,,176,16,56,12||,0,,,,|||,,,,,Steel]Cinderace||HeavyDutyBoots|Blaze|PyroBall,Uturn,CourtChange,WillOWisp|Jolly|224,32,,,,252|||||,,,,,Fire]Latios||SoulDew|Levitate|DracoMeteor,PsychicNoise,FlipTurn,Recover|Timid|,,4,252,,252|M||||,,,,,Steel]Dragonite||HeavyDutyBoots|Multiscale|ExtremeSpeed,Earthquake,DragonDance,Roost|Adamant|248,104,52,,,104|F||||,,,,,Normal"
+    },
+    {
+      "id": "stage2-screening-08",
+      "style": "rain offense",
+      "roster": [
+        "Pelipper",
+        "Barraskewda",
+        "Zapdos",
+        "Iron Crown",
+        "Great Tusk",
+        "Walking Wake"
+      ],
+      "template_roster": [
+        "Pelipper",
+        "Barraskewda",
+        "Zapdos",
+        "Gholdengo",
+        "Great Tusk",
+        "Primarina"
+      ],
+      "design_rationale": "Drizzle plus Damp Rock enables Swift Swim and accurate Hurricane; pivots, special attackers and Great Tusk hazard removal complement the physical rain attacker. Team viability remains unmeasured.",
+      "substitutions": [
+        {
+          "from": "Gholdengo",
+          "to": "Iron Crown"
+        },
+        {
+          "from": "Primarina",
+          "to": "Walking Wake"
+        }
+      ],
+      "component_sources": [
+        "evaluation/mcts_improvements/reserve_teams.py: hand-constructed weather component",
+        "evaluation/mcts_improvements/reserve_teams.py: hand-constructed weather component",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_11.txt"
+      ],
+      "sha256": "ed687d99d6aa95f010b5ae686d3f427a0ac6dacc00637703acc6f73c09cafead",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/08.txt",
+      "validation_errors": null,
+      "packed": "Pelipper||DampRock|Drizzle|Hurricane,Surf,Uturn,Roost|Relaxed|248,,252,,8,||,,,,,0|||,,,,,Ground]Barraskewda||ChoiceBand|SwiftSwim|Liquidation,FlipTurn,CloseCombat,AquaJet|Adamant|,252,,,4,252|||||,,,,,Water]Zapdos||HeavyDutyBoots|Static|Hurricane,WeatherBall,VoltSwitch,Roost|Timid|248,,76,,,184|N|,0,,,,|||,,,,,Grass]Iron Crown||ChoiceSpecs|QuarkDrive|TachyonCutter,PsychicNoise,Psyshock,VoltSwitch|Timid|,,,252,4,252|N|,20,,,,|||,Fighting,,,,Steel]Great Tusk||RockyHelmet|Protosynthesis|HeadlongRush,IceSpinner,RapidSpin,StealthRock|Jolly|,204,,,52,252|N||||,Fighting,,,,Ice]Walking Wake||HeavyDutyBoots|Protosynthesis|Surf,DracoMeteor,KnockOff,FlipTurn|Timid|,,12,244,,252|N||||,,,,,Water"
+    },
+    {
+      "id": "stage2-screening-09",
+      "style": "semistall",
+      "roster": [
+        "Blissey",
+        "Dondozo",
+        "Corviknight",
+        "Ting-Lu",
+        "Alomomola",
+        "Lokix"
+      ],
+      "template_roster": [
+        "Blissey",
+        "Dondozo",
+        "Corviknight",
+        "Gliscor",
+        "Alomomola",
+        "Darkrai"
+      ],
+      "design_rationale": "Recovery-heavy defensive core plus an offensive progress maker; long-battle censoring is reported explicitly.",
+      "substitutions": [
+        {
+          "from": "Gliscor",
+          "to": "Ting-Lu"
+        },
+        {
+          "from": "Darkrai",
+          "to": "Lokix"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_12.txt"
+      ],
+      "sha256": "20f3ff62cd26337a248ddbbadcf6362d6c7ea15f21238fea36a1c960f5aa25ce",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/09.txt",
+      "validation_errors": null,
+      "packed": "Blissey||Leftovers|NaturalCure|CalmMind,ShadowBall,SeismicToss,SoftBoiled|Calm|4,,252,,252,|F|,0,,,,|||,,,,,Dark]Dondozo||HeavyDutyBoots|Unaware|BodyPress,Avalanche,Rest,SleepTalk|Impish|248,,252,,8,|||||,,,,,Fighting]Corviknight||RockyHelmet|Pressure|IronDefense,BodyPress,BraveBird,Roost|Impish|136,,252,,,120|F||||,,,,,Water]Ting-Lu||Leftovers|VesselofRuin|StealthRock,Earthquake,Ruination,Spikes|Careful|244,,12,,252,|N||||,,,,,Ghost]Alomomola||AssaultVest|Regenerator|FlipTurn,PlayRough,IcyWind,MirrorCoat|Sassy|216,40,,,252,|F|,,,,,0|||,,,,,Poison]Lokix||HeavyDutyBoots|TintedLens|FirstImpression,Uturn,KnockOff,SuckerPunch|Adamant|,252,4,,,252|||||,,,,,Bug"
+    },
+    {
+      "id": "stage2-screening-10",
+      "style": "semistall",
+      "roster": [
+        "Toxapex",
+        "Weezing-Galar",
+        "Iron Treads",
+        "Pecharunt",
+        "Moltres",
+        "Darkrai"
+      ],
+      "template_roster": [
+        "Toxapex",
+        "Weezing-Galar",
+        "Iron Treads",
+        "Clefable",
+        "Moltres",
+        "Weavile"
+      ],
+      "design_rationale": "Recovery-heavy defensive core plus an offensive progress maker; long-battle censoring is reported explicitly.",
+      "substitutions": [
+        {
+          "from": "Clefable",
+          "to": "Pecharunt"
+        },
+        {
+          "from": "Weavile",
+          "to": "Darkrai"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_6.txt"
+      ],
+      "sha256": "046b2570fe8adb498d0582df4339c17cf980c25fd35a96a1ff8aba411398f0c4",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/10.txt",
+      "validation_errors": null,
+      "packed": "Toxapex||AssaultVest|Regenerator|SludgeBomb,Surf,Infestation,IceBeam|Bold|248,,8,252,,||,0,,,,|||,,,,,Dark]Weezing|WeezingGalar|HeavyDutyBoots|NeutralizingGas|Defog,PainSplit,WillOWisp,SludgeBomb|Bold|248,,252,,,8||,0,,,,|||,,,,,Grass]Iron Treads||Leftovers|QuarkDrive|Earthquake,RapidSpin,StealthRock,Protect|Careful|252,,,,244,12|N||||,,,,,Ghost]Pecharunt||HeavyDutyBoots|PoisonPuppeteer|PartingShot,FoulPlay,MalignantChain,Recover|Bold|252,,196,,,60|N|,0,,,,|||,,,,,Dark]Moltres||HeavyDutyBoots|FlameBody|Flamethrower,BraveBird,Roost,WillOWisp|Adamant|248,16,232,,,12|N||||,,,,,Fairy]Darkrai||ChoiceScarf|BadDreams|DarkPulse,IceBeam,SludgeBomb,Trick|Timid|,,,252,4,252|N|,0,,,,|||,,,,,Poison"
+    }
+  ],
+  "team_reservation": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/teams.json",
+  "team_provenance": {
+    "kind": "new handmade roster combinations of familiar regression sets and three weather components",
+    "reserved_date": "2026-10-25",
+    "reservation_seed": 2026102503,
+    "reservation": "frozen before inspecting any scored stage1 outcome; later-stage pools have disjoint six-species rosters from each other, prior reservations and regression originals",
+    "holdout_limit": "Not an independent external set holdout. Species and component sets overlap; role/style labels are design intentions and team viability is unproven. No team paste is used for prior fitting.",
+    "comparison_pairing": "Within a stage the same pool is reserved jointly for comparisons to original baseline and predecessor; paired schedule controls matchup difficulty. It is fresh relative to prior-stage evaluations, not independent between these paired arms.",
+    "rules": "all teams validated using pinned local gen9ou TeamValidator before any scored outcomes"
+  },
+  "simulator": {
+    "root": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/pokemon-showdown",
+    "commit": "c0845f33d381402dfcb18ce324c20a94f18af075",
+    "effective_js_sha256": "d7924e3ae90c4db218ff446e6356dc8cef84949be8f8e69e7992972b76be3634"
+  },
+  "a": {
+    "root": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-beliefs",
+    "source_sha256": "0728b716862b0c848480c3b08562bb745fd74c69874b948c52bf29b537895ed0",
+    "source_files": {
+      "bot/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bot/demo.py": "805887cc72795b5ef2e3f1cdff65e4f90041adb8b8985876da752660084e9761",
+      "bot/eval.py": "41fbf2833152278ad3ebdcd55661ab901ffb1bcaae1f36afa696165e35c56c46",
+      "bot/parser.py": "d36ee9a18ce1b2e6229aa3df0aa5730685e693d2e3f6aaa1c836be3a9799ba8a",
+      "bot/player.py": "58b40502da95795076179ec0bc0fafd6381f0cb8c48fe2dae230d6d20db61527",
+      "bot/smoke.py": "3e12e0fad384b7ac2372ebadcc2c0043b6aa32986e91fa03d6babc13b706ac05",
+      "bot/tests/test_demo.py": "3dbf7a7aded4ae0fe5acd379c5c1266be3ddbaa5474bdd7202da7af224d5813b",
+      "bot/tests/test_eval.py": "22639e87ef7441b129e55c983ccdffceb7fbdf01ec33b7b74dfcc4923d60c246",
+      "bot/tests/test_eval_completion.py": "1d5c6c2a2f09cf8ac671c83ee47dfc6f9bb99a02a4d741798c9f70893411b8c2",
+      "bot/tests/test_eval_schedule.py": "9e79a2b18b3fd64f56bba829a1da124763adf41d4ea319f8470812b827ff644f",
+      "bot/tests/test_foul_play_eval.py": "424c537d4545552e83f8cca4111a9ba9b3ae140f6f282c22292a1242ef8f8d7b",
+      "bot/tests/test_mcts_evaluation.py": "1e901e5a6daa36fbf6dc6d0847d827a536d7f5fdfa99b7996aec40ad07b75ade",
+      "bot/tests/test_parser.py": "8ad6602ec4832452890d1c36eec4360902a87a95c83de1ad33e6b42d3d93f7f0",
+      "bot/tests/test_player.py": "44ed9e927f60e6b913161ad807579adf343e1ae4c744d53b6f109d87d5c90c27",
+      "bot/tests/test_smoke.py": "ec3a95e454be0019b407475a74d58e19a75e25e1774a5b56fab48523275fd6c5",
+      "contracts/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "contracts/battle_state.py": "377e82a448b3c67e8b79bdf46c62b1d9363dd8af57e51afa511f8d5f804f2d89",
+      "contracts/set_candidates.py": "3ee151f9ab4ad4f6fd1c77e5ac62e888990e0cc85cf687d1fccbce42400e162a",
+      "decision/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "decision/actions.py": "78233b1a0dea5a10e991908600317355b19f0b54d3c6fbbccbc88d5ddc028620",
+      "decision/adapter.py": "34773e44b090785272f3807fe7c179c9ca4b34e80706d177b3fb003b94b44068",
+      "decision/agent.py": "db48ae4e3eac455f2cb1cc07212ab5dd105103dcd67714ad2c7baa59153cafc6",
+      "decision/belief.py": "752a057da7d8fb8bc9d2086e323f83fc191a8259c94e45a36d9a3ee64660da2e",
+      "decision/data/moves.json": "26909a321a7e4528d14a7dffd24173aa03a6845776cf41c39cc3d76f8e14616b",
+      "decision/data/pokedex.json": "e74d0364b230001fc086cefb4259e051f1d16a4730eb89f7d6336a88a0d9a47e",
+      "decision/data/typechart.json": "26270c6fa9e25ba43ba9d6fd0da115fcf96eee42eae8b0bd9660bd015dc483b2",
+      "decision/lead.py": "1af618a2450672e75abae9af55b2035d64e29e3b8f420629fdd29a4f75f7c5f3",
+      "decision/opponent.py": "902a458fa0d2a97519a3a86527f2cfd3ae13f8a390fd61e62b8eda1d602643a7",
+      "decision/search.py": "a6e1a2f14c4bbdc62ca7701791196ea4e1398a8be9ed28702abd3d4503682218",
+      "decision/search_policy.py": "ac52f71753b08ea2932003fb05a11cde6cc6f4ad671c0bfa6407e938d1ea9650",
+      "decision/selector.py": "36de03df3385670f46af23ae7cc01f2077b51b70bc7a47e0fae86aad92f1267c",
+      "decision/sets.py": "5e345d60634414d723dbe1de4b0adc4459abcb542dfad0920095a7b6c4650c53",
+      "decision/simulate.py": "96e077923f6ef720a66fddbc496dab4c197c8cda386a7c0f1b5af7eee03d18a3",
+      "decision/state.py": "0c9d3a6113e21ef7ff018e5a596b57d90207956c16ba4fb7c38864a3c4995761",
+      "decision/value.py": "d25c43b6bc8e360043cf19e4c0c331aed04a692ffdc7da8b848a6fc2a705ef29"
+    },
+    "engine": {
+      "version": "0.0.48",
+      "binaries": {
+        "poke_engine.cpython-313-x86_64-linux-gnu.so": "fbffd2a1c9c48eab99def9187f9030c578174a30b49d54faad159be859846ef3"
+      }
+    },
+    "priors": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/baseline-2c02fc8/data/set_candidates.json",
+    "priors_sha256": "47b31bf7282d6578ed44d7b28f9a63e9284eddc72882856de426f7c1bfc8c7f3",
+    "config": {
+      "backend": "mcts",
+      "budget": 3.0,
+      "mcts_worlds": 8,
+      "search_ms": 150,
+      "engine_threads": 1,
+      "sampling": "team",
+      "frozen_beliefs": false,
+      "seed": 2026,
+      "belief_mode": "reliable"
+    }
+  },
+  "b": {
+    "root": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage1-state",
+    "source_sha256": "32ede7cb68279477331cea6d6a5dcb27c6991d75fa1640b8525eff1aa129ed1c",
+    "source_files": {
+      "bot/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bot/demo.py": "805887cc72795b5ef2e3f1cdff65e4f90041adb8b8985876da752660084e9761",
+      "bot/eval.py": "41fbf2833152278ad3ebdcd55661ab901ffb1bcaae1f36afa696165e35c56c46",
+      "bot/parser.py": "d36ee9a18ce1b2e6229aa3df0aa5730685e693d2e3f6aaa1c836be3a9799ba8a",
+      "bot/player.py": "58b40502da95795076179ec0bc0fafd6381f0cb8c48fe2dae230d6d20db61527",
+      "bot/smoke.py": "3e12e0fad384b7ac2372ebadcc2c0043b6aa32986e91fa03d6babc13b706ac05",
+      "bot/tests/test_demo.py": "3dbf7a7aded4ae0fe5acd379c5c1266be3ddbaa5474bdd7202da7af224d5813b",
+      "bot/tests/test_eval.py": "22639e87ef7441b129e55c983ccdffceb7fbdf01ec33b7b74dfcc4923d60c246",
+      "bot/tests/test_eval_completion.py": "1d5c6c2a2f09cf8ac671c83ee47dfc6f9bb99a02a4d741798c9f70893411b8c2",
+      "bot/tests/test_eval_schedule.py": "9e79a2b18b3fd64f56bba829a1da124763adf41d4ea319f8470812b827ff644f",
+      "bot/tests/test_foul_play_eval.py": "424c537d4545552e83f8cca4111a9ba9b3ae140f6f282c22292a1242ef8f8d7b",
+      "bot/tests/test_mcts_evaluation.py": "1e901e5a6daa36fbf6dc6d0847d827a536d7f5fdfa99b7996aec40ad07b75ade",
+      "bot/tests/test_parser.py": "b8449d80017ef8368e2c9cfbad30a9e84385d4479037a73471d7b6fc6978c8f6",
+      "bot/tests/test_player.py": "44ed9e927f60e6b913161ad807579adf343e1ae4c744d53b6f109d87d5c90c27",
+      "bot/tests/test_smoke.py": "ec3a95e454be0019b407475a74d58e19a75e25e1774a5b56fab48523275fd6c5",
+      "contracts/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "contracts/battle_state.py": "377e82a448b3c67e8b79bdf46c62b1d9363dd8af57e51afa511f8d5f804f2d89",
+      "contracts/set_candidates.py": "3ee151f9ab4ad4f6fd1c77e5ac62e888990e0cc85cf687d1fccbce42400e162a",
+      "decision/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "decision/actions.py": "78233b1a0dea5a10e991908600317355b19f0b54d3c6fbbccbc88d5ddc028620",
+      "decision/adapter.py": "34773e44b090785272f3807fe7c179c9ca4b34e80706d177b3fb003b94b44068",
+      "decision/agent.py": "ca67e7bf01bc23cb51abd81aa55cd0d5880bc3c79faf7fededdacef74c6d5d68",
+      "decision/belief.py": "3474256b93567df34e4f7aa22aac471ac791a84d30848d26348492a31955b6b7",
+      "decision/data/moves.json": "26909a321a7e4528d14a7dffd24173aa03a6845776cf41c39cc3d76f8e14616b",
+      "decision/data/pokedex.json": "e74d0364b230001fc086cefb4259e051f1d16a4730eb89f7d6336a88a0d9a47e",
+      "decision/data/typechart.json": "26270c6fa9e25ba43ba9d6fd0da115fcf96eee42eae8b0bd9660bd015dc483b2",
+      "decision/lead.py": "1af618a2450672e75abae9af55b2035d64e29e3b8f420629fdd29a4f75f7c5f3",
+      "decision/opponent.py": "902a458fa0d2a97519a3a86527f2cfd3ae13f8a390fd61e62b8eda1d602643a7",
+      "decision/search.py": "d1d36c46be7fc76db0c2dc4b56c4b11e2327ee3afb5faf0dedc4da013baeabef",
+      "decision/search_policy.py": "ac52f71753b08ea2932003fb05a11cde6cc6f4ad671c0bfa6407e938d1ea9650",
+      "decision/selector.py": "36de03df3385670f46af23ae7cc01f2077b51b70bc7a47e0fae86aad92f1267c",
+      "decision/sets.py": "5e345d60634414d723dbe1de4b0adc4459abcb542dfad0920095a7b6c4650c53",
+      "decision/simulate.py": "96e077923f6ef720a66fddbc496dab4c197c8cda386a7c0f1b5af7eee03d18a3",
+      "decision/state.py": "0c9d3a6113e21ef7ff018e5a596b57d90207956c16ba4fb7c38864a3c4995761",
+      "decision/value.py": "d25c43b6bc8e360043cf19e4c0c331aed04a692ffdc7da8b848a6fc2a705ef29"
+    },
+    "engine": {
+      "version": "0.0.48",
+      "binaries": {
+        "poke_engine.cpython-313-x86_64-linux-gnu.so": "fbffd2a1c9c48eab99def9187f9030c578174a30b49d54faad159be859846ef3"
+      }
+    },
+    "priors": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/baseline-2c02fc8/data/set_candidates.json",
+    "priors_sha256": "47b31bf7282d6578ed44d7b28f9a63e9284eddc72882856de426f7c1bfc8c7f3",
+    "config": {
+      "backend": "mcts",
+      "budget": 3.0,
+      "mcts_worlds": 8,
+      "search_ms": 150,
+      "engine_threads": 1,
+      "sampling": "team",
+      "frozen_beliefs": false,
+      "seed": 2026
+    }
+  },
+  "schedule": [
+    {
+      "game": 0,
+      "block": 0,
+      "a_team": 4,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        36572,
+        47128,
+        11813,
+        34265
+      ],
+      "sampler_seed": 1218320153,
+      "mixed_policy_seed": 1078646628
+    },
+    {
+      "game": 1,
+      "block": 0,
+      "a_team": 4,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        36572,
+        47128,
+        11813,
+        34265
+      ],
+      "sampler_seed": 1218320153,
+      "mixed_policy_seed": 1078646628
+    },
+    {
+      "game": 2,
+      "block": 1,
+      "a_team": 8,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        44217,
+        48753,
+        37489,
+        20532
+      ],
+      "sampler_seed": 1098612915,
+      "mixed_policy_seed": 568848379
+    },
+    {
+      "game": 3,
+      "block": 1,
+      "a_team": 8,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        44217,
+        48753,
+        37489,
+        20532
+      ],
+      "sampler_seed": 1098612915,
+      "mixed_policy_seed": 568848379
+    },
+    {
+      "game": 4,
+      "block": 2,
+      "a_team": 5,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        46264,
+        23006,
+        54375,
+        27964
+      ],
+      "sampler_seed": 1123965725,
+      "mixed_policy_seed": 1069969712
+    },
+    {
+      "game": 5,
+      "block": 2,
+      "a_team": 5,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        46264,
+        23006,
+        54375,
+        27964
+      ],
+      "sampler_seed": 1123965725,
+      "mixed_policy_seed": 1069969712
+    },
+    {
+      "game": 6,
+      "block": 3,
+      "a_team": 0,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        7950,
+        20974,
+        32613,
+        22675
+      ],
+      "sampler_seed": 1087511823,
+      "mixed_policy_seed": 286237057
+    },
+    {
+      "game": 7,
+      "block": 3,
+      "a_team": 0,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        7950,
+        20974,
+        32613,
+        22675
+      ],
+      "sampler_seed": 1087511823,
+      "mixed_policy_seed": 286237057
+    },
+    {
+      "game": 8,
+      "block": 4,
+      "a_team": 1,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        63426,
+        19072,
+        37650,
+        2346
+      ],
+      "sampler_seed": 1612183129,
+      "mixed_policy_seed": 2147210524
+    },
+    {
+      "game": 9,
+      "block": 4,
+      "a_team": 1,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        63426,
+        19072,
+        37650,
+        2346
+      ],
+      "sampler_seed": 1612183129,
+      "mixed_policy_seed": 2147210524
+    },
+    {
+      "game": 10,
+      "block": 5,
+      "a_team": 3,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        3477,
+        25618,
+        32508,
+        17674
+      ],
+      "sampler_seed": 266185690,
+      "mixed_policy_seed": 1175070112
+    },
+    {
+      "game": 11,
+      "block": 5,
+      "a_team": 3,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        3477,
+        25618,
+        32508,
+        17674
+      ],
+      "sampler_seed": 266185690,
+      "mixed_policy_seed": 1175070112
+    },
+    {
+      "game": 12,
+      "block": 6,
+      "a_team": 7,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        58384,
+        26698,
+        19735,
+        29978
+      ],
+      "sampler_seed": 837293844,
+      "mixed_policy_seed": 2077320212
+    },
+    {
+      "game": 13,
+      "block": 6,
+      "a_team": 7,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        58384,
+        26698,
+        19735,
+        29978
+      ],
+      "sampler_seed": 837293844,
+      "mixed_policy_seed": 2077320212
+    },
+    {
+      "game": 14,
+      "block": 7,
+      "a_team": 9,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        14510,
+        19987,
+        45353,
+        25970
+      ],
+      "sampler_seed": 592714209,
+      "mixed_policy_seed": 674468101
+    },
+    {
+      "game": 15,
+      "block": 7,
+      "a_team": 9,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        14510,
+        19987,
+        45353,
+        25970
+      ],
+      "sampler_seed": 592714209,
+      "mixed_policy_seed": 674468101
+    },
+    {
+      "game": 16,
+      "block": 8,
+      "a_team": 6,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        25078,
+        4315,
+        59996,
+        32071
+      ],
+      "sampler_seed": 564416498,
+      "mixed_policy_seed": 950700823
+    },
+    {
+      "game": 17,
+      "block": 8,
+      "a_team": 6,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        25078,
+        4315,
+        59996,
+        32071
+      ],
+      "sampler_seed": 564416498,
+      "mixed_policy_seed": 950700823
+    },
+    {
+      "game": 18,
+      "block": 9,
+      "a_team": 2,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        64454,
+        32029,
+        64132,
+        63000
+      ],
+      "sampler_seed": 93127778,
+      "mixed_policy_seed": 680246688
+    },
+    {
+      "game": 19,
+      "block": 9,
+      "a_team": 2,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        64454,
+        32029,
+        64132,
+        63000
+      ],
+      "sampler_seed": 93127778,
+      "mixed_policy_seed": 680246688
+    },
+    {
+      "game": 20,
+      "block": 10,
+      "a_team": 4,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        36306,
+        22010,
+        553,
+        12951
+      ],
+      "sampler_seed": 1753429744,
+      "mixed_policy_seed": 806760294
+    },
+    {
+      "game": 21,
+      "block": 10,
+      "a_team": 4,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        36306,
+        22010,
+        553,
+        12951
+      ],
+      "sampler_seed": 1753429744,
+      "mixed_policy_seed": 806760294
+    },
+    {
+      "game": 22,
+      "block": 11,
+      "a_team": 8,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        36307,
+        45292,
+        28234,
+        50297
+      ],
+      "sampler_seed": 847291182,
+      "mixed_policy_seed": 303568108
+    },
+    {
+      "game": 23,
+      "block": 11,
+      "a_team": 8,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        36307,
+        45292,
+        28234,
+        50297
+      ],
+      "sampler_seed": 847291182,
+      "mixed_policy_seed": 303568108
+    },
+    {
+      "game": 24,
+      "block": 12,
+      "a_team": 5,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        27596,
+        40408,
+        5189,
+        46525
+      ],
+      "sampler_seed": 293533432,
+      "mixed_policy_seed": 2047634898
+    },
+    {
+      "game": 25,
+      "block": 12,
+      "a_team": 5,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        27596,
+        40408,
+        5189,
+        46525
+      ],
+      "sampler_seed": 293533432,
+      "mixed_policy_seed": 2047634898
+    },
+    {
+      "game": 26,
+      "block": 13,
+      "a_team": 0,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        57536,
+        38251,
+        56386,
+        62712
+      ],
+      "sampler_seed": 2015090003,
+      "mixed_policy_seed": 1647000746
+    },
+    {
+      "game": 27,
+      "block": 13,
+      "a_team": 0,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        57536,
+        38251,
+        56386,
+        62712
+      ],
+      "sampler_seed": 2015090003,
+      "mixed_policy_seed": 1647000746
+    },
+    {
+      "game": 28,
+      "block": 14,
+      "a_team": 1,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        34166,
+        55606,
+        6094,
+        32204
+      ],
+      "sampler_seed": 730323828,
+      "mixed_policy_seed": 817510126
+    },
+    {
+      "game": 29,
+      "block": 14,
+      "a_team": 1,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        34166,
+        55606,
+        6094,
+        32204
+      ],
+      "sampler_seed": 730323828,
+      "mixed_policy_seed": 817510126
+    },
+    {
+      "game": 30,
+      "block": 15,
+      "a_team": 3,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        40277,
+        33503,
+        32726,
+        22625
+      ],
+      "sampler_seed": 553580703,
+      "mixed_policy_seed": 52964447
+    },
+    {
+      "game": 31,
+      "block": 15,
+      "a_team": 3,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        40277,
+        33503,
+        32726,
+        22625
+      ],
+      "sampler_seed": 553580703,
+      "mixed_policy_seed": 52964447
+    },
+    {
+      "game": 32,
+      "block": 16,
+      "a_team": 7,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        11682,
+        38774,
+        37194,
+        28267
+      ],
+      "sampler_seed": 1999522202,
+      "mixed_policy_seed": 579816811
+    },
+    {
+      "game": 33,
+      "block": 16,
+      "a_team": 7,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        11682,
+        38774,
+        37194,
+        28267
+      ],
+      "sampler_seed": 1999522202,
+      "mixed_policy_seed": 579816811
+    },
+    {
+      "game": 34,
+      "block": 17,
+      "a_team": 9,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        32354,
+        25518,
+        36111,
+        41291
+      ],
+      "sampler_seed": 935058307,
+      "mixed_policy_seed": 1297734672
+    },
+    {
+      "game": 35,
+      "block": 17,
+      "a_team": 9,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        32354,
+        25518,
+        36111,
+        41291
+      ],
+      "sampler_seed": 935058307,
+      "mixed_policy_seed": 1297734672
+    },
+    {
+      "game": 36,
+      "block": 18,
+      "a_team": 6,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        16706,
+        28356,
+        12504,
+        19317
+      ],
+      "sampler_seed": 516400780,
+      "mixed_policy_seed": 1833127302
+    },
+    {
+      "game": 37,
+      "block": 18,
+      "a_team": 6,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        16706,
+        28356,
+        12504,
+        19317
+      ],
+      "sampler_seed": 516400780,
+      "mixed_policy_seed": 1833127302
+    },
+    {
+      "game": 38,
+      "block": 19,
+      "a_team": 2,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        13101,
+        21133,
+        20101,
+        11751
+      ],
+      "sampler_seed": 395163905,
+      "mixed_policy_seed": 2040647802
+    },
+    {
+      "game": 39,
+      "block": 19,
+      "a_team": 2,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        13101,
+        21133,
+        20101,
+        11751
+      ],
+      "sampler_seed": 395163905,
+      "mixed_policy_seed": 2040647802
+    },
+    {
+      "game": 40,
+      "block": 20,
+      "a_team": 4,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        20546,
+        47674,
+        58863,
+        6766
+      ],
+      "sampler_seed": 1516503669,
+      "mixed_policy_seed": 305503313
+    },
+    {
+      "game": 41,
+      "block": 20,
+      "a_team": 4,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        20546,
+        47674,
+        58863,
+        6766
+      ],
+      "sampler_seed": 1516503669,
+      "mixed_policy_seed": 305503313
+    },
+    {
+      "game": 42,
+      "block": 21,
+      "a_team": 8,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        61001,
+        17545,
+        52057,
+        15325
+      ],
+      "sampler_seed": 95889883,
+      "mixed_policy_seed": 1394714643
+    },
+    {
+      "game": 43,
+      "block": 21,
+      "a_team": 8,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        61001,
+        17545,
+        52057,
+        15325
+      ],
+      "sampler_seed": 95889883,
+      "mixed_policy_seed": 1394714643
+    },
+    {
+      "game": 44,
+      "block": 22,
+      "a_team": 5,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        9196,
+        59119,
+        38512,
+        31596
+      ],
+      "sampler_seed": 1826701660,
+      "mixed_policy_seed": 1512472490
+    },
+    {
+      "game": 45,
+      "block": 22,
+      "a_team": 5,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        9196,
+        59119,
+        38512,
+        31596
+      ],
+      "sampler_seed": 1826701660,
+      "mixed_policy_seed": 1512472490
+    },
+    {
+      "game": 46,
+      "block": 23,
+      "a_team": 0,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        45137,
+        62727,
+        15740,
+        53603
+      ],
+      "sampler_seed": 759134,
+      "mixed_policy_seed": 193920891
+    },
+    {
+      "game": 47,
+      "block": 23,
+      "a_team": 0,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        45137,
+        62727,
+        15740,
+        53603
+      ],
+      "sampler_seed": 759134,
+      "mixed_policy_seed": 193920891
+    },
+    {
+      "game": 48,
+      "block": 24,
+      "a_team": 1,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        8440,
+        14832,
+        24790,
+        43498
+      ],
+      "sampler_seed": 36648850,
+      "mixed_policy_seed": 845094432
+    },
+    {
+      "game": 49,
+      "block": 24,
+      "a_team": 1,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        8440,
+        14832,
+        24790,
+        43498
+      ],
+      "sampler_seed": 36648850,
+      "mixed_policy_seed": 845094432
+    },
+    {
+      "game": 50,
+      "block": 25,
+      "a_team": 3,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        25467,
+        20620,
+        8176,
+        1616
+      ],
+      "sampler_seed": 2024847590,
+      "mixed_policy_seed": 1387121638
+    },
+    {
+      "game": 51,
+      "block": 25,
+      "a_team": 3,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        25467,
+        20620,
+        8176,
+        1616
+      ],
+      "sampler_seed": 2024847590,
+      "mixed_policy_seed": 1387121638
+    },
+    {
+      "game": 52,
+      "block": 26,
+      "a_team": 7,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        63745,
+        28572,
+        24294,
+        41761
+      ],
+      "sampler_seed": 2011268196,
+      "mixed_policy_seed": 312275933
+    },
+    {
+      "game": 53,
+      "block": 26,
+      "a_team": 7,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        63745,
+        28572,
+        24294,
+        41761
+      ],
+      "sampler_seed": 2011268196,
+      "mixed_policy_seed": 312275933
+    },
+    {
+      "game": 54,
+      "block": 27,
+      "a_team": 9,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        53333,
+        29956,
+        4832,
+        8837
+      ],
+      "sampler_seed": 551762035,
+      "mixed_policy_seed": 1616675374
+    },
+    {
+      "game": 55,
+      "block": 27,
+      "a_team": 9,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        53333,
+        29956,
+        4832,
+        8837
+      ],
+      "sampler_seed": 551762035,
+      "mixed_policy_seed": 1616675374
+    },
+    {
+      "game": 56,
+      "block": 28,
+      "a_team": 6,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        12439,
+        22632,
+        11725,
+        56448
+      ],
+      "sampler_seed": 513181730,
+      "mixed_policy_seed": 1268665765
+    },
+    {
+      "game": 57,
+      "block": 28,
+      "a_team": 6,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        12439,
+        22632,
+        11725,
+        56448
+      ],
+      "sampler_seed": 513181730,
+      "mixed_policy_seed": 1268665765
+    },
+    {
+      "game": 58,
+      "block": 29,
+      "a_team": 2,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        44318,
+        61294,
+        23681,
+        25509
+      ],
+      "sampler_seed": 735651734,
+      "mixed_policy_seed": 675984282
+    },
+    {
+      "game": 59,
+      "block": 29,
+      "a_team": 2,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        44318,
+        61294,
+        23681,
+        25509
+      ],
+      "sampler_seed": 735651734,
+      "mixed_policy_seed": 675984282
+    }
+  ],
+  "stopping_rule": {
+    "games": 60,
+    "max_turns": 300,
+    "censored_turn_limit": "void, never counted as a played draw or silently dropped",
+    "game_timeout_seconds": 3600,
+    "no_outcome_stopping": true
+  },
+  "promotion_rule": "Correctness fixes may be enabled without proven strength. Policy changes remain off unless fresh confirmation supports benefit and reliability; screening alone is inconclusive.",
+  "compute": "same requested settings except the allocation stage; one native thread; sequential worlds; actual CPU and search time reported",
+  "manifest_sha256": "697cad9de3ecb3eb442ec321819073eba24d986fcad7e6593cfad03cdd6ac441"
+}

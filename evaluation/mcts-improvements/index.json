@@ -1,0 +1,227 @@
+{
+  "schema": 1,
+  "objective_status": "active",
+  "original_baseline": {
+    "commit": "2c02fc8daa84f047ea2bddd7d0f36f6463fff1e2",
+    "identity_manifest": "evaluation/mcts-improvements/baseline.json",
+    "source_sha256": "5eaa172be19612c3ef49d11a59537a2794d587d26e75e2f0cc6f997946e84874",
+    "smoke_results": "evaluation/mcts-improvements/baseline-smoke-results.json"
+  },
+  "accepted_incumbent": {
+    "commit": "731fb91",
+    "snapshot": "runs/mcts-improvements/stage2-beliefs",
+    "source_sha256": "0728b716862b0c848480c3b08562bb745fd74c69874b948c52bf29b537895ed0",
+    "decision": "Accepted correctness-only by primary implementer: four demonstrated belief bugs fixed and regression gates passed. Strength remains unknown pending screening/confirmation."
+  },
+  "stages": [
+    {
+      "stage": 1,
+      "name": "state reconstruction",
+      "candidate_commit": "df1002c",
+      "candidate_source_sha256": "32ede7cb68279477331cea6d6a5dcb27c6991d75fa1640b8525eff1aa129ed1c",
+      "previous_incumbent": "2c02fc8daa84f047ea2bddd7d0f36f6463fff1e2",
+      "enabled": true,
+      "promotion_decision": "accepted correctness-only, enabled; strength unknown until sufficient independent evidence",
+      "strength_verdict": "correctness improved; strength unknown (screening incomplete)",
+      "tests": {
+        "focused": "114passed in0.84s after final live-simulator fixture; runs/mcts-improvements/stage1-after-tests.txt. Earlier113pass and old8fail reproduced are retained separately.",
+        "suite": "404passed in17.17s; runs/mcts-improvements/stage1-full-tests.txt"
+      },
+      "experiments": [
+        {
+          "id": "stage1-smoke",
+          "phase": "smoke",
+          "manifest": "evaluation/mcts-improvements/stage1-smoke-manifest.json",
+          "results": "evaluation/mcts-improvements/stage1-smoke-results.json",
+          "status": "complete",
+          "strength_games": 0
+        },
+        {
+          "id": "stage1-screening",
+          "phase": "screening",
+          "manifest": "evaluation/mcts-improvements/stage1-screening-manifest.json",
+          "raw_output": "runs/mcts-improvements/stage1-screening-v1",
+          "status": "running",
+          "planned_games": 60,
+          "fresh_team_rosters": 10,
+          "comparison": "candidate vs original; predecessor is original so this single comparison covers both"
+        },
+        {
+          "id": "stage1-confirmation",
+          "phase": "confirmation",
+          "manifest": "evaluation/mcts-improvements/stage1-confirmation-manifest.json",
+          "status": "superseded unrun by four-game-block v2 schedule",
+          "planned_games": 200,
+          "selection_caveat": "Manifest frozen after initial screening outcomes existed; no numerical promising threshold is claimed preregistered before screening. Confirmation roster pool was reserved before any scored stage1 inspection."
+        },
+        {
+          "id": "stage1-confirmation-v2",
+          "phase": "confirmation",
+          "manifest": "evaluation/mcts-improvements/stage1-confirmation-v2-manifest.json",
+          "status": "frozen conditional, not started",
+          "planned_games": 200,
+          "selection_caveat": "Manifest frozen after initial screening outcomes existed; no numerical promising threshold is claimed preregistered before screening. Confirmation roster pool was reserved before any scored stage1 inspection.",
+          "schedule_design": "four-game blocks balance simulator sides and bot/team assignments; 200 games, 10 teams, 20 games per team per bot role"
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "name": "belief reliability",
+      "status": "transport smoke clean; original-baseline screening running, incumbent screening queued",
+      "candidate_source_sha256": "0728b716862b0c848480c3b08562bb745fd74c69874b948c52bf29b537895ed0",
+      "previous_incumbent": "df1002c",
+      "config": {
+        "belief_mode": "reliable"
+      },
+      "strength_verdict": "strength unknown; no scored games yet",
+      "promotion_decision": "accepted correctness-only, enabled; strength unknown",
+      "tests": {
+        "focused": "73passed in2.46s; four demonstrated old bugs reproduced, reliable path passes",
+        "integration": "64passed in11.52s; runs/mcts-improvements/stage2-integration-tests.txt"
+      },
+      "experiments": [
+        {
+          "id": "stage2-smoke",
+          "phase": "smoke",
+          "manifest": "evaluation/mcts-improvements/stage2-smoke-manifest.json",
+          "raw_output": "runs/mcts-improvements/stage2-smoke-v1",
+          "status": "complete",
+          "strength_games": 0,
+          "results": "evaluation/mcts-improvements/stage2-smoke-results.json"
+        },
+        {
+          "id": "stage2-original-screening",
+          "phase": "screening",
+          "manifest": "evaluation/mcts-improvements/stage2-original-screening-manifest.json",
+          "status": "running",
+          "planned_games": 60,
+          "comparison": "candidate vs original",
+          "raw_output": "runs/mcts-improvements/stage2-original-screening-v1"
+        },
+        {
+          "id": "stage2-incumbent-screening",
+          "phase": "screening",
+          "manifest": "evaluation/mcts-improvements/stage2-incumbent-screening-manifest.json",
+          "status": "frozen, queued for capacity",
+          "planned_games": 60,
+          "comparison": "candidate vs accepted stage1 incumbent; paired schedule with original comparison"
+        },
+        {
+          "id": "stage2-original-confirmation",
+          "phase": "confirmation",
+          "manifest": "evaluation/mcts-improvements/stage2-original-confirmation-manifest.json",
+          "status": "superseded unrun by four-game-block v2 schedule",
+          "planned_games": 200
+        },
+        {
+          "id": "stage2-incumbent-confirmation",
+          "phase": "confirmation",
+          "manifest": "evaluation/mcts-improvements/stage2-incumbent-confirmation-manifest.json",
+          "status": "superseded unrun by four-game-block v2 schedule",
+          "planned_games": 200
+        },
+        {
+          "id": "stage2-original-confirmation-v2",
+          "phase": "confirmation",
+          "manifest": "evaluation/mcts-improvements/stage2-original-confirmation-v2-manifest.json",
+          "status": "frozen conditional, not started",
+          "planned_games": 200,
+          "schedule_design": "four-game blocks balance simulator sides and bot/team assignments; 200 games, 10 teams, 20 games per team per bot role"
+        },
+        {
+          "id": "stage2-incumbent-confirmation-v2",
+          "phase": "confirmation",
+          "manifest": "evaluation/mcts-improvements/stage2-incumbent-confirmation-v2-manifest.json",
+          "status": "frozen conditional, not started",
+          "planned_games": 200,
+          "schedule_design": "four-game blocks balance simulator sides and bot/team assignments; 200 games, 10 teams, 20 games per team per bot role"
+        }
+      ],
+      "candidate_commit": "731fb91",
+      "enabled": true
+    },
+    {
+      "stage": 3,
+      "name": "opening leads",
+      "status": "transport smoke clean; both screening comparisons frozen and queued for capacity",
+      "experimental_policy_enabled": false,
+      "flag": {
+        "lead_policy": "moves_stats"
+      },
+      "default_policy": "types",
+      "previous_incumbent": "731fb91",
+      "strength_verdict": "strength unknown; no scored Stage3 games",
+      "tests": {
+        "unit": "21 tests passed in 0.26 seconds",
+        "integration": "33 tests passed in 2.59 seconds",
+        "preview_timing": "20 development repetitions: p50 approximately 87.5 ms, maximum 91 ms",
+        "suite": "458 tests passed in 22.56 seconds; primary implementer verified, source unchanged"
+      },
+      "experiments": [
+        {
+          "id": "stage3-smoke",
+          "phase": "smoke",
+          "manifest": "evaluation/mcts-improvements/stage3-smoke-manifest.json",
+          "raw_output": "runs/mcts-improvements/stage3-smoke-v1",
+          "status": "complete",
+          "strength_games": 0,
+          "results": "evaluation/mcts-improvements/stage3-smoke-results.json"
+        },
+        {
+          "id": "stage3-original-screening",
+          "phase": "screening",
+          "manifest": "evaluation/mcts-improvements/stage3-original-screening-manifest.json",
+          "status": "frozen, queued for capacity",
+          "planned_games": 60,
+          "comparison": "candidate vs original",
+          "schedule_design": "four-game blocks, side and bot/team swaps"
+        },
+        {
+          "id": "stage3-incumbent-screening",
+          "phase": "screening",
+          "manifest": "evaluation/mcts-improvements/stage3-incumbent-screening-manifest.json",
+          "status": "frozen, queued for capacity",
+          "planned_games": 60,
+          "comparison": "candidate vs previous accepted incumbent",
+          "schedule_design": "same four-game schedule as original comparison"
+        }
+      ],
+      "candidate_commit": "d226956",
+      "candidate_source_sha256": "abbc7f19e232c50835503873ca55b0b6733d3c41592883f3b4f54ced3505b71f"
+    },
+    {
+      "stage": 4,
+      "name": "equal-effort search allocation; separately bounded adaptivity if justified",
+      "status": "pending",
+      "experimental_policy_enabled": false
+    },
+    {
+      "stage": 5,
+      "name": "failure-backed narrow strategic guards",
+      "status": "pending",
+      "experimental_policy_enabled": false
+    },
+    {
+      "stage": 6,
+      "name": "optional controlled near-tie mixing",
+      "status": "pending",
+      "experimental_policy_enabled": false
+    }
+  ],
+  "reserved_future_pools": "evaluation/mcts-improvements/future-reservations-v1/index.json",
+  "team_provenance_limit": "New handmade six-species roster combinations with familiar component sets; role labels express design intent and competitive quality is unmeasured. No independent external set holdout or unseen-set claim. Paired original/predecessor comparisons within each stage jointly reserve a pool. Pools are disjoint across stages and phases.",
+  "evaluation_contract": "At least60 balanced screening games over10 reserved teams per distinct required comparison; fresh200+ confirmation when promising; actual completion/voids/failures remain visible. No outcome stopping. Correctness can be accepted with unproven strength; policy heuristics remain off on inconclusive evidence.",
+  "deferred_roadmap": {
+    "status": "retained; outside six-stage goal until richer data/scope supplied",
+    "complete_handoff": "docs/mcts-improvement-handoff.md",
+    "complete_original_plan": "docs/mcts-improvement-plan.md",
+    "tiger": "explicitly paused; no database download/training restarted"
+  },
+  "narrative": "docs/mcts-improvement-log.md",
+  "screening_schedule_caveat": "Stage1 and Stage2 screens swap simulator sides within ordered team pairs, with equal aggregate team exposure; they do not reverse both bot/team assignments within each exact matchup. All original screen manifests and outcomes are preserved. Conditional confirmation v2 and future screens use four-game blocks balancing both dimensions.",
+  "final_cumulative_reservations": {
+    "screening": "evaluation/mcts-improvements/cumulative-reservations-v1/screening/teams.json",
+    "confirmation": "evaluation/mcts-improvements/cumulative-reservations-v1/confirmation/teams.json"
+  }
+}

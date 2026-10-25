@@ -1,0 +1,122 @@
+{
+  "planned": 2,
+  "recorded": 2,
+  "wins": 0,
+  "losses": 0,
+  "draws": 0,
+  "voids": 2,
+  "score_rate": null,
+  "wilson_95": [
+    0,
+    1
+  ],
+  "candidate_team_cluster_95": [
+    0,
+    1
+  ],
+  "cluster_limit": "Resamples candidate teams; shared opposing teams still create dependence, and ten clusters remain sparse.",
+  "wall_seconds_sum": 47.93902465503197,
+  "arms": {
+    "a": {
+      "decisions": 16,
+      "fallbacks": 0,
+      "rejected_choices": 0,
+      "requested_worlds": 112,
+      "completed_worlds": 112,
+      "failed_worlds": 0,
+      "usable_worlds": 112,
+      "cpu_seconds": 22.133832,
+      "native_visits": 1497000,
+      "state_preparation_ms": 667.3638556967489,
+      "worker_wall_ms": 20452.452499011997,
+      "recoveries": 0,
+      "belief_history_reset": 0,
+      "worker_restart_required": 0,
+      "replay_not_recorded": 0,
+      "actual_search_ms": 18757.599447737448,
+      "p50_ms": 1403.2683619880117,
+      "p95_ms": 1833.980158495251,
+      "p99_ms": 1836.3513789256103,
+      "max_ms": 1836.9441840332001,
+      "over_3000_ms": 0,
+      "fallback_reasons": {},
+      "measured_battle_perspectives": 2,
+      "unavailable_battle_perspectives": 0
+    },
+    "b": {
+      "decisions": 16,
+      "fallbacks": 0,
+      "rejected_choices": 0,
+      "requested_worlds": 112,
+      "completed_worlds": 112,
+      "failed_worlds": 0,
+      "usable_worlds": 112,
+      "cpu_seconds": 21.444801,
+      "native_visits": 1576000,
+      "state_preparation_ms": 396.4549697120674,
+      "worker_wall_ms": 20271.420084056444,
+      "recoveries": 2,
+      "belief_history_reset": 0,
+      "worker_restart_required": 0,
+      "replay_not_recorded": 0,
+      "actual_search_ms": 18865.16510671936,
+      "p50_ms": 1386.4812334941234,
+      "p95_ms": 1831.0927782877116,
+      "p99_ms": 1831.3600620575016,
+      "max_ms": 1831.4268829999492,
+      "over_3000_ms": 0,
+      "fallback_reasons": {},
+      "measured_battle_perspectives": 2,
+      "unavailable_battle_perspectives": 0
+    }
+  },
+  "side_breakdown": {
+    "p1": {},
+    "p2": {}
+  },
+  "team_breakdown": {
+    "0": {
+      "style": "regression smoke"
+    },
+    "1": {
+      "style": "regression smoke"
+    }
+  },
+  "manifest_sha256": "1671a21c0a3a342403b86418b96db0503c58d0e704a5c16387ba1f534bcf353c",
+  "phase": "smoke",
+  "status": "complete",
+  "original_raw_run": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage3-smoke-v1",
+  "source_sha256": {
+    "a": "abbc7f19e232c50835503873ca55b0b6733d3c41592883f3b4f54ced3505b71f",
+    "b": "5eaa172be19612c3ef49d11a59537a2794d587d26e75e2f0cc6f997946e84874"
+  },
+  "effective_configs": {
+    "a": {
+      "backend": "mcts",
+      "budget": 3.0,
+      "mcts_worlds": 8,
+      "search_ms": 150,
+      "engine_threads": 1,
+      "sampling": "team",
+      "frozen_beliefs": false,
+      "seed": 2026,
+      "belief_mode": "reliable",
+      "lead_policy": "moves_stats"
+    },
+    "b": {
+      "backend": "mcts",
+      "budget": 3.0,
+      "mcts_worlds": 8,
+      "search_ms": 150,
+      "engine_threads": 1,
+      "sampling": "team",
+      "frozen_beliefs": false,
+      "seed": 2026
+    }
+  },
+  "cpu_scope": "Bot Python process plus reaped native SearchWorker descendants, including startup/preparation. Simulator/coordinator CPU is excluded. Actual native search milliseconds are wall time, not CPU.",
+  "uncertainty": "Intervals use whole games. Candidate-team bootstrap acknowledges sparse clusters; shared opposing teams create additional dependence. Native MCTS is not deterministic despite repeatable simulator/sampling seeds.",
+  "team_provenance": {
+    "kind": "existing regression only; no strength interpretation"
+  }
+}

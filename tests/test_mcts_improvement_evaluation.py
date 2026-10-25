@@ -108,3 +108,51 @@ def test_native_visit_count_uses_actual_native_result_field(tmp_path):
     result=trace_metrics(path)
     assert result['native_visits']==579
     assert result['state_preparation_ms']==3.5
+
+
+def test_compact_report_refuses_incomplete_final_and_preserves_voids(tmp_path):
+    from evaluation.report_mcts_improvement import publish
+    run=tmp_path/'run'
+    game=run/'game-0000'
+    game.mkdir(parents=True)
+    manifest={'schedule':[{},{}], 'seed':1,'teams':[{'style':'offense'},{'style':'balance'}],
+        'manifest_sha256':'frozen','phase':'screening','a':{'source_sha256':'candidate','config':{}},
+        'b':{'source_sha256':'baseline','config':{}},'team_provenance':{'kind':'synthetic'}}
+    row={'game':0,'block':0,'a_team':0,'b_team':1,'a_side':'p1','simulator_seed':[1,2,3,4],
+         'sampler_seed':5,'mixed_policy_seed':6,'winner':'void','turns':0,'wall_seconds':1,
+         'completion_verified':False,'artifacts':{},'error':'worker crashed','measured':{},'identities':{}}
+    (run/'manifest.json').write_text(json.dumps(manifest))
+    (game/'result.json').write_text(json.dumps(row))
+    with pytest.raises(ValueError,match='only 1/2'):
+        publish(run,tmp_path/'final',require_complete=True)
+    result=publish(run,tmp_path/'partial')
+    assert result['status']=='incomplete'
+    assert result['voids']==1
+    assert result['arms']['a']['unavailable_battle_perspectives']==1
+    preserved=json.loads((tmp_path/'partial-games.jsonl').read_text())
+    assert preserved['error']=='worker crashed'
+    assert preserved['winner']=='void'
+    assert 'Simulator/coordinator CPU is excluded' in result['cpu_scope']
+
+
+@pytest.mark.parametrize('games',[60,200])
+def test_four_game_blocks_balance_sides_and_team_assignments(games):
+    from collections import Counter
+    from evaluation.mcts_match_schedule import four_game_schedule
+    rows=four_game_schedule(10,games,seed=44)
+    assert rows==four_game_schedule(10,games,seed=44)
+    assert len(rows)==games
+    for offset in range(0,games,4):
+        block=rows[offset:offset+4]
+        first,second=block[0]['a_team'],block[0]['b_team']
+        assert first!=second
+        assert {(r['a_team'],r['b_team'],r['a_side']) for r in block} == {
+            (first,second,'p1'),(first,second,'p2'),(second,first,'p1'),(second,first,'p2')}
+        assert len({tuple(r['simulator_seed']) for r in block})==1
+        assert len({r['sampler_seed'] for r in block})==1
+    for role in ('a','b'):
+        counts=Counter(r[f'{role}_team'] for r in rows)
+        assert len(counts)==10
+        assert set(counts.values())=={games//10}
+    for team in range(10):
+        assert Counter(r['a_side'] for r in rows if r['a_team']==team)=={'p1':games//20,'p2':games//20}
