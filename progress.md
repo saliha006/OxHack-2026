@@ -38,8 +38,8 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
-| 2026-10-25 03:30 | @derrick | @all | 🔀 scope proposal | **Backtesting engine + dashboard: @derrick wants it and builds it** (answers @saliha's 23:27 row). The engine pipes data to the strat layer untouched, from our own run logs and Nate's Tiger `turns`; it lives in `backtest/`. Nothing on `main` yet. Object or ask here | 2026-10-25 03:30 |
-| 2026-10-25 03:30 | @derrick | @saliha | 📨 waiting on | Add Derrick's four backtest decisions (entry 2026-10-25 03:30) to PRD NOW and take "Backtesting frontend" out of Pending | 2026-10-25 03:30 |
+| 2026-10-25 06:41 | @derrick | @kenar | 📨 waiting on | **Your `Kenar-coherent-sets` is now the decision layer's source of truth** (team agreed; entry 2026-10-25 06:41). Merge it to `main` when ready: resolve the overlap with `Kenar-mcts` first, get @saliha's yes for the `bot/` edits, keep `docs/*.md` off `main` (only `progress.md`, `README.md`, `contracts/*.md` go there), and log your entry on `main`'s `progress.md` | 2026-10-25 06:41 |
+| 2026-10-25 06:41 | @derrick | @saliha | 📨 waiting on | PRD NOW: add "decision layer = Kenar's `Kenar-coherent-sets` (MCTS default, coherent priors opt-in); derrick's backtest, `choose_public` and the 1825-cutoff proposal withdrawn"; take "Backtesting frontend" out of Pending. Replaces my 03:30 row | 2026-10-25 06:41 |
 | 2026-10-25 03:00 | @nate | @derrick | ⚠️ conflict | **Training data for your model is in Tiger `turns`**: 489,840 turns from 20,000 games, each `state` identical to `states_from_log`; spec, access with your read-only login, splits and baselines in `contracts/turns.md`. Bar to beat on test: HP-heuristic log loss **0.6407**, Brier **0.2246**. Also: `belief.py` `_rebuild` drops status moves on Choice items, but only Assault Vest bars them (Choice Scarf + Trick); a species missing from the set file entirely (e.g. `urshifu`) still raises KeyError in `Belief.__init__`; `predictions.md` A1 credits the set file to saliha | 2026-10-25 03:00 |
 | 2026-10-25 03:00 | @nate | @saliha | ⚠️ conflict | `data/set_candidates.json` is on `main`, so `--priors data/set_candidates.json` (your default) now runs real priors: 243 species + 78 forme aliases (`keldeoresolute → keldeo`, `zamazentacrowned → zamazenta`), which answers the forme row from the data side. Your parser skips old HP strings like `20/100y` (one fact lost per such line) | 2026-10-25 03:00 |
 | 2026-10-25 00:32 | @saliha | @derrick | 🔀 scope proposal | **Decision-layer plan from research pass 10** (`design-decision/strategy-research-pass10.md` on `context`): 4 specialist agents + a cross-check, peer-reviewed + official source + our own measurements. Core ~4.5 h: (1) instrumentation, (2) the two `belief.py` crash fixes + a floor (these caused the 12.7% fallbacks), (3) dual-path featurizer, (5) logistic `LearnedValue` behind a flag with HP fallback; stretch: switch share + quantal opponent model, then pool/depth-2/LP default-off. All your call; key measured facts: one-ply dominance drops Swords Dance and the top-3 EVs on our test position are 0.503/0.501/0.497, so the HP value is the weak point | 2026-10-25 00:32 |
@@ -63,8 +63,8 @@ whenever you log an entry.
 |---|---|---|---|---|---|
 | Saliha | `saliha006` | Bot layer; doc owner | `sali` | `bot/`, `runs/` (git-ignored) | bot plays live games through `Agent.choose`; next: task 5 eval harness |
 | Nate | `aldrichbanas07` | Data layer | `nate-data` | `data/` (`data/pipeline/`, `data/tests/`, `data/set_candidates.json`; `data/raw/` and `data/clean/` git-ignored), `contracts/turns.md`, the Tiger service `oxhack-data` | set file and turns table done; next: team-conditioned priors (A6) after the demo |
-| Derrick | `RandomGeeb` | Decision layer | `derrick` | `decision/`, `tests/`, `contracts/battle_state.py` | lead and belief fixes on `main`; building the backtest engine on `derrick` (Tiger dump done) |
-| Kenar | `kxnar` | Experimental MCTS and prediction evaluation | `Kenar-mcts` | `decision/search*`, experimental backend, evaluation/prediction tooling | MCTS baseline implemented; measured pilot and live walkthrough |
+| Derrick | `RandomGeeb` | Decision layer | `derrick` | `decision/`, `tests/`, `contracts/battle_state.py` | own unmerged work dropped (`derrick` kept as archive); Kenar's `Kenar-coherent-sets` is the decision layer's source of truth; next: TBD |
+| Kenar | `kxnar` | TBD | `Kenar-coherent-sets` | TBD | joined 2026-10-25; getting set up |
 
 **Shared** (anyone may edit; flag it in ⚠️ Conflicts): {{e.g. `contracts/*`, `fixtures/*`, compose files}}
 
@@ -77,25 +77,24 @@ whenever you log an entry.
 4. {{Access to the deploy target, data and secrets: where each lives. Never in git or chat}}
 
 ## 📊 Latest (volatile facts live only here)
-- **Completed screening, 2026-10-25 05:51 Europe/London:** Initial Stage 1 versus original finished 35–25 over 60 games, no draws/voids; Wilson 45.7–69.9%, team bootstrap 41.7–76.7%. Promising but inconclusive; the full frozen historical 200-game confirmation is queued and is not the current corrected bot. Stage 2 versus original also finished 35–25, Wilson 45.7–69.9%, bootstrap 45.0–71.7%; its predecessor comparison is still running, so contribution/confirmation decisions remain pending. Both old-source studies share the later Tera defect. Reliability/resource/native-discard detail is in `docs/mcts-improvement-log.md` and compact results.
-- **Fresh diagnostics, 2026-10-25 05:51 Europe/London:** On 848 predeclared candidate-perspective Stage 1 revelations, original-prior loss 2.405531 beats revelations 3.084628, legacy hard 3.191154, reliable hard 3.192149 and reliable soft 3.213427. No predictive benefit under this scorer's assumptions or strength gain is established. Fresh loss mining covers both perspectives of all 60 old-source games, with no missing traces; rates remain descriptive, not current-agent causal labels.
-- **Optional mixing gate, 2026-10-25 05:56 Europe/London:** opt-in mixing committed as `e84b87b`, frozen source `88409ed6…`; default remains off. Test-only fixture repair `d89eb43` preserves cold deadline coverage while separately checking post-start retention; broad selection 53 passed in 13.57 seconds and full suite 495 passed in 27.90 seconds. No production supervisor/deadline change or sole CPU cause is claimed. Native probe/smoke and 60-game original/predecessor comparisons remain pending; proposed separate panel strata are 20 games each with unmatched one-ply/frequency compute explicitly labelled.
-- **Strategic-guard audit, 2026-10-25 05:36 Europe/London:** the historical switch-cycle guard hypothesis was rejected before policy integration. The eligible case's eight-world conditional switch KO mass was 0.895182 versus a predeclared hypothetical 0.95 criterion; every staying move lost the current attacker before acting, while an HP leaf favored the sacrifice. Three native repeats still chose the switch. Four counterexample tests passed in 0.11 seconds. No guard behavior or 60-game guard-policy experiment exists; fresh failure mining after preceding screens remains pending.
-- **Integrity and queued comparisons, 2026-10-25 05:32 Europe/London:** independent probes verify actual spawned native-worker file paths/hashes under the original, corrected and rebased-lead archives, with the same engine extension. Rebased lead smoke passed (32 decisions, 224 usable worlds, no fallback/server retry/world/deadline/mapping event; max 2,000.82 ms); its two censored games are not strength evidence. Four fixed-allocation 60-game plans are frozen/queued, conditional on accepted settings at start. Fresh belief scoring has a separate immutable Tera-corrected runtime and awaits complete predeclared 60-game batches.
-- **Corrected allocation development, 2026-10-25 05:29 Europe/London:** matched v2 completed all 54 historical-position calls, 432/432 usable worlds and zero native mapping discards. All six position actions agreed across 4 ×300/8 ×150/12 ×100 ms and repeats; this is not playing-strength evidence. Actual native wall 70.816 seconds versus 64.8 requested; bot/worker CPU 97.947 seconds with scope/load limits recorded. Fresh fixed-budget game comparisons and Stage 5 evidence/counterexample audit remain pending; no adaptive or guard policy implemented.
-- **Fainted-Tera follow-up, 2026-10-25 05:29 Europe/London:** `a8613b9`, pure evaluated source `0bd23daf…`, is accepted/enabled for correctness after 468 tests and clean smoke (30 decisions, 208 usable worlds, max 1,990.39 ms, no fallback/server rejection/world/deadline event). Its specific native probe removes eight unsupported Tera roots; short smoke had no fainted-Tera exposure and supplies no strength sample. Original/Stage 2 predecessor 60-game plans are frozen on fresh synthetic rosters. Existing studies retain old sources; optional lead v2 smoke subsequently passed before queued rebased screens. Strength remains unknown.
-- **Optional MCTS leads, 2026-10-25 05:15 Europe/London:** `d226956` adds opt-in `lead_policy="moves_stats"`; the accepted default remains type scoring. Candidate runtime source `abbc7f19e232c50835503873ca55b0b6733d3c41592883f3b4f54ced3505b71f`; full selection 458 passed in 22.56 seconds. One regression-preview benchmark p50/max 87.49/91.02 ms is cost evidence only. Smoke passed with 224/224 usable worlds, zero fallback/rejections/failures and max 1,836.94 ms; its two six-turn-censored games supply no strength sample. Two fresh-roster 60-game original/predecessor plans are queued with side/team-assignment swaps.
-- **MCTS belief reliability, 2026-10-25 05:10 Europe/London:** Stage 2 correctness accepted as `731fb91`, effective candidate source `0728b716862b0c848480c3b08562bb745fd74c69874b948c52bf29b537895ed0`; `Agent` uses reliable inference, with legacy/revelations ablations retained. Full selection: 436 passed in 19.99 seconds. Transport smoke: 208/208 usable worlds with zero fallbacks/rejections/failures over two intentionally censored games. Two 60-game original/predecessor screening plans are frozen; original is running and predecessor queued. Strength remains unknown.
-- **MCTS improvement work, 2026-10-25 05:04 Europe/London:** Stage 1 correctness changes committed as `df1002c`; isolated candidate effective source `32ede7cb68279477331cea6d6a5dcb27c6991d75fa1640b8525eff1aa129ed1c`. Focused verification: 114 passed including real Showdown mechanics snapshots. Candidate/baseline transport smoke: 192/192 worlds usable, zero fallback/rejected choices/failed worlds over two intentionally six-turn-censored games. A frozen 60-game screening comparison is running; no new strength conclusion. Live record: `docs/mcts-improvement-log.md`.
-- **User default decision, 2026-10-25 04:30 Europe/London:** `mcts` (8 ×150 ms worlds, one thread) is the default on `Kenar-mcts`; `one_ply` remains the explicit legacy evaluation arm. Previous pilot evidence and its uncertainty remain unchanged.
-- **Kenar-mcts baseline, 2026-10-25 04:20 Europe/London:** implementation/prediction tools and 24-game pilot complete on this branch; `one_ply` remains default. Final combined suite: 402 passed, one credential-dependent Tiger integration skipped; subsequent scoring fixes: 20 prediction tests passed. Final hardening smoke: 424/424 worlds usable, zero fallbacks/bookkeeping errors, max decision 1,977 ms. Detailed historical measurements and source hashes: `docs/mcts-results.md`; live explanation: `docs/mcts-live-walkthrough.md`. Larger confirmatory comparison remains configured, not run.
 - **As of 2026-10-25 00:58:** `main` @ `4e88dac` · tests: 148 green, 100% coverage (`uv run pytest --cov=decision`) · smoke: 10/10 games vs RandomPlayer finished unattended, 10 won, think p50 ~65 ms / p99 ~300–700 ms, fallback rate 12.7% (all from the two `belief.py` bugs, Open board) · deploy: none yet
+- **Backtest (`derrick` @ `9f86111`):** dropped 2026-10-25 06:41, branch kept as an archive; its numbers stay in Log entries 04:15 and 04:55.
 - **Data (Tiger `oxhack-data`, 2026-10-25 03:00):** `battles` 2,506,142 games · `battle_logs` 2,506,142 (uncompressed, 9.2 GB) · `turns` 489,840 rows from 20,000 games (15k train / 5k test) · HP-heuristic test log loss 0.6407, Brier 0.2246 · opponent switch rate 19.2% of acted turns
-- **On branches, not merged yet:** none from @derrick
+- **On branches, not merged yet:** `Kenar-coherent-sets` @ `50d9a43` (decision layer source of truth, merge pending) · `derrick` @ `9f86111` (archive, won't be merged)
 
 ---
 
 ## Log (newest first)
+
+### 2026-10-25 06:41 — decision — Kenar's branch becomes the decision layer; derrick's unmerged work dropped — @derrick
+- **Where:** `Kenar-coherent-sets` @ `50d9a43` is the source of truth · `derrick` @ `9f86111` kept as an archive, not merged · merged to `main`: not yet
+- **Did:** Withdrew derrick's backtest CLI, `choose_public` and the 1825-cutoff proposal (entries 03:30–04:55). The decision layer going forward is Kenar's work: MCTS over sampled opponent teams as the default (`one_ply` kept for comparisons), the reworked belief, opt-in coherent set priors. Kenar's results are in `docs/mcts-results.md` and `docs/coherent-sets-results.md` on that branch.
+- **Touched:** none yet (board and docs only)
+- **Brief task:** derrick tasks archived (superseded)
+- **⚠️ Conflicts:** @nate: the 1825-cutoff proposal is withdrawn, so the set file needs no rebuild for it. @saliha: once Kenar's branch merges, `bot/` changes too (`eval.py`, `parser.py`, `player.py`, `demo.py`, `smoke.py`); it needs your yes first
+- **📨 Needs:** @kenar: merge plan (Open board row). @saliha: PRD NOW update (Open board row)
+- **Agreed by:** @derrick, @saliha, @nate, @kenar (whole team, per @derrick)
+- **Status:** open
 
 ### 2026-10-25 06:13 — eval — Coherent OU mixture improves forecasts but not battle screening — @kenar
 - **Where:** `Kenar-coherent-sets`, compared with isolated `a8613b9`; not merged into the concurrent policy branch.
@@ -222,6 +221,15 @@ whenever you log an entry.
 - **Agreed by:** user, 25 October 2026
 - **Status:** scope recorded; implementation/evaluation in progress
 
+### 2026-10-25 04:55 — decision — Drop the 1825 cutoff from the set priors (waits on @nate) — @derrick
+- **Where:** no branch change yet; a test build at `runs/priors/set_candidates-cutoff0.json` (local: Nate's builder, unchanged, on Smogon's 2026-09 `gen9ou-0`)
+- **Did:** Found why so many species were missing: the Tiger games are median Elo 1322 (1.7% of players 1825+, 0.8% of games with both), while the set file is Smogon's 1825 band, which lists 243 species where the all-ratings file lists 458 (same battles). The 1825 choice was @derrick's own on 2026-10-24 (`02-set-priors.md`), with no reason recorded. Backtest, same 200 test games and seed: 1825 file → 125 played, 29.9% same as p1 (95% 27.6–32.4%); no cutoff → 195 played, 31.5% (29.6–33.5%); on the 125 games both played, 29.9% → 30.8%, so common species didn't get worse priors for these games. The 5 still skipped are unevolved Pokémon and cosmetic formes (Florges colours, Gastrodon-East, Minior colours). Switching is unchanged: the strat switches on 4% of turns, the players on 24%.
+- **Decided:** the set priors drop the rating cutoff and use the same month's all-ratings usage (@derrick). Needs @nate's yes: it's his file, and the contract's source line changes
+- **Touched:** none yet
+- **⚠️ Conflicts:** @nate: rebuild `data/set_candidates.json` from `gen9ou-0` (Open board row). @saliha: the PRD's priors line changes once Nate agrees (Open board row)
+- **📨 Needs:** @nate: yes/no
+- **Status:** withdrawn by @derrick 2026-10-25 06:41 (Kenar's branch is the decision layer's source of truth)
+
 ### 2026-10-25 04:30 — decision — MCTS becomes development default by user request; assess larger replay corpus — @kenar
 - **Where:** `Kenar-mcts` · merged to `main`: not yet
 - **Did:** User selected MCTS as the direction to improve. `Agent`, demo and smoke default to eight MCTS worlds; historical one-ply evaluation arms now select their backend explicitly. This promotion records the user's choice, not a new statistically established strength result. Assessed HolidayOugi's replay corpus against existing project ingest/turn contracts; source revision and recommended inference/prediction experiments are in `docs/holidayougi-assessment.md`. No large download or new dataset training was performed.
@@ -231,6 +239,15 @@ whenever you log an entry.
 - **📨 Needs:** reuse the team's existing turn export for the next data experiment; current assessment did not verify Tiger access
 - **Agreed by:** user, 25 October 2026
 - **Status:** verified — 379 decision/bot tests passed; default CLI live smoke won in 15 turns with 0/18 fallbacks, 136/136 native worlds usable and no rejected choices. `evaluation/mcts-default-smoke-20261025.json` records the exact no-backend-flag command.
+
+### 2026-10-25 04:15 — feat — Backtest CLI on Tiger games, and its first results — @derrick
+- **Where:** `derrick` @ `9f86111` · merged to `main`: not yet
+- **Did:** `uv run python -m backtest.engine` plays a seeded sample of Tiger games turn by turn through `choose_public` and checks each choice against what p1 played. It skips games with a species missing from the set file (counted per species), records a strat error for its turn and goes on, and writes one JSONL per run plus a summary to `runs/backtest/`. No frontend. First run: 200 test games sampled (seed 2026): 125 played, 75 skipped for a species missing from the set file. Same move or switch as p1 on 29.9% of 3,003 scorable turns (95% by game: 27.6–32.4%), 21.4% counting Tera too; 38% when p1 attacked, 3% when p1 switched (the strat switches on 4% of turns, the players on 24%). Think p50 163 ms, p99 475 ms, max 954 ms on the 3 s budget. 1 error in 3,310 turns: a NaN expected value crashes `select`. That crash is in the shared selector, so live games can hit it too and fall back to the first legal option; the NaN comes from `simulate` or `value`, not traced yet. 172 tests green.
+- **Decided:** (1) games with a species missing from the set file are skipped and counted; (2) the backtest is a backend with a CLI, no frontend or dashboard. Both @derrick.
+- **Touched:** `backtest/engine.py` (new), `decision/adapter.py` (`replay_action`), `tests/test_engine.py`, `tests/test_adapter.py`
+- **⚠️ Conflicts:** none: new files, plus one new function in the adapter
+- **📨 Needs:** @saliha: decisions (1)–(2) into PRD NOW (Open board row)
+- **Status:** withdrawn by @derrick 2026-10-25 06:41 (Kenar's branch is the decision layer's source of truth)
 
 ### 2026-10-25 04:03 — feat — Alternative deadline-isolated MCTS and separate prediction evaluation — @kenar
 - **Where:** `Kenar-mcts` · base `main` @ `81c8f1c` · merged to `main`: not yet
@@ -242,6 +259,15 @@ whenever you log an entry.
 - **📨 Needs:** none for implementation; confirmatory strength evaluation needs more held-out teams/games than the bounded pilot
 - **Status:** implementation and bounded pilot complete on branch; larger confirmatory study not run
 
+### 2026-10-25 03:58 — feat — The strat layer can play a Tiger turn without a request — @derrick
+- **Where:** `derrick` @ `9c42b11` · merged to `main`: not yet
+- **Did:** `Agent.choose_public(battle, our_sets)` scores a replay turn from the `BattleState` alone. Our side is built the way the opponent's already was (what's been seen plus one guessed set per Pokémon, `build_public_state`), and our options are listed the same way (`public_actions`). `sets_from_game` makes our guesses once per game. `choose(request, battle)` is unchanged. On the first 10 Tiger games with the real set file: p50 117 ms, p99 462 ms on a 1 s budget; the same move or switch as p1 on 29 of 87 scorable turns (33%). 162 tests green, `decision/` at 100%.
+- **Decided:** (1) a request-free entry point next to `choose`, not a fake request and not a new contract; (2) our side takes moves and Tera type from the whole game, and items and abilities as each turn shows them (items change hands). Both @derrick.
+- **Touched:** `decision/adapter.py`, `decision/agent.py`, `decision/belief.py`, `decision/opponent.py`, `tests/`
+- **⚠️ Conflicts:** @saliha: nothing changes for the bot: `choose` and `opp_actions` behave as before; the private `_opponent` in `adapter.py` is now `_guessed_side`/`_guessed`. @nate: species missing from the set file (Open board row)
+- **📨 Needs:** @saliha: decisions (1)–(2) into PRD NOW (Open board row)
+- **Status:** withdrawn by @derrick 2026-10-25 06:41 (Kenar's branch is the decision layer's source of truth)
+
 ### 2026-10-25 03:30 — decision — Backtest engine started: Tiger's turns on disk, and four decisions on how it takes data — @derrick
 - **Where:** `derrick` @ `78453b9` · merged to `main`: not yet
 - **Did:** `backtest/tiger.py` copies Tiger `turns` verbatim to `runs/tiger/turns.jsonl` (git-ignored; 489,840 rows, 3.05 GB) with `uv run --group data --env-file .env python -m backtest.tiger`. The pull takes ~5–7 min because the venue network caps at ~9–10 MB/s, shared by everything (measured: a second Tiger stream and a non-Tiger download both split it; client CPU 5%, server work ~60 s). Reading the file back takes ~20 s. 152 tests green on `derrick`.
@@ -250,7 +276,7 @@ whenever you log an entry.
 - **⚠️ Conflicts:** @nate: the dump reads every column of `turns` as it is today; say before a rebuild changes them. @saliha: none yet (the engine will read `bot.parser`, without changing it)
 - **📨 Needs:** @saliha: decisions (1)–(4) into PRD NOW (Open board row)
 - **Agreed by:** @derrick (owner per PRD Pending); the team hears via the 🔀 row To @all
-- **Status:** open
+- **Status:** withdrawn by @derrick 2026-10-25 06:41 (Kenar's branch is the decision layer's source of truth)
 
 ### 2026-10-25 03:00 — feat — Set file with forme aliases, all 2.5M replays in Tiger, and a 20k-game turn table — @nate
 - **Where:** `nate-data` @ `ad5ba10` · merged to `main`: yes (fast-forward)
