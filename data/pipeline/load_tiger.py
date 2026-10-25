@@ -1,5 +1,8 @@
 """Loads cleaned battles from data/clean/battles/ into Tiger: one row per game in `battles`, its log in `battle_logs`.
 
+battle_logs stays uncompressed: storage is cheap on the credits, and reading one log is ~0.02 ms on the server against
+~12 ms compressed.
+
 Views, dataset rating and split stay in the local parquet only. Split is derivable from started_at and id
 (see clean_battles.py).
 """
@@ -55,7 +58,6 @@ TABLES = {
             PRIMARY KEY (id, started_at)
         );
         SELECT create_hypertable('battle_logs', by_range('started_at', INTERVAL '1 month'), if_not_exists => true);
-        ALTER TABLE battle_logs SET (timescaledb.compress, timescaledb.compress_orderby = 'started_at, id');
         """),
 }
 # Rows per COPY batch; a log row is ~9 KB, so this keeps memory to tens of MB.
@@ -81,13 +83,6 @@ def load(conn: psycopg.Connection, path: Path, table: str) -> int:
     return added
 
 
-def compress(conn: psycopg.Connection, table: str) -> str:
-    """Compresses every chunk of a table that isn't yet; returns its size afterwards."""
-    conn.execute(f"SELECT compress_chunk(c, if_not_compressed => true) FROM show_chunks('{table}') c")
-    conn.commit()
-    return conn.execute(f"SELECT pg_size_pretty(hypertable_size('{table}'))").fetchone()[0]
-
-
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("files", nargs="*", type=Path, help="cleaned parquet files (default: all of data/clean/battles)")
@@ -101,9 +96,6 @@ def main() -> None:
             start = time.monotonic()
             added = load(conn, path, args.table)
             print(f"{path.name}: {added} rows added to {args.table} in {time.monotonic() - start:.0f}s", flush=True)
-        if args.table == "battle_logs":
-            start = time.monotonic()
-            print(f"battle_logs compressed to {compress(conn, 'battle_logs')} in {time.monotonic() - start:.0f}s")
 
 
 if __name__ == "__main__":
