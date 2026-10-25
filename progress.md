@@ -87,6 +87,14 @@ whenever you log an entry.
 
 ## Log (newest first)
 
+### 2026-10-25 08:00 — feat — Live demo shows what the search is weighing, expecting and guessing — @saliha
+- **Where:** `sali` @ `b04c95f` · merged to `main`: yes
+- **Did:** `bot.demo live` printed all ~25 MCTS trace fields as truncated JSON each turn. Search turns now print three lines: our top options with pooled support, the opponent reply the search expects, and the guessed item/Tera for their active (counts over the sampled worlds); the raw trace still goes to the `.jsonl`. One live game on saliha's Windows laptop vs SimpleHeuristics: won in 26 turns, 0/33 fallbacks, think p50 1346 ms, p99 2134 ms. Set `PYTHONUTF8=1` so `·` prints in a Windows console.
+- **Touched:** `bot/demo.py`, `bot/player.py` (`_label` is now public `label`), `bot/tests/test_demo.py`, `bot/tests/test_player.py`
+- **Brief task:** none
+- **⚠️ Conflicts:** none (one-ply demo view and trace format unchanged)
+- **📨 Needs:** none
+
 ### 2026-10-25 06:58 — fix — Reconcile MCTS and coherent-set branches for main review — @kenar
 - **Where:** reconciled `Kenar-coherent-sets` candidate, based on `50d9a43` + committed MCTS `aecf217` + main handoff `adc8a0b`; merged to `main`: not yet
 - **Did:** Reconciled branch histories and current main without editing evaluation checkouts. Preserved MCTS state/Tera/reliable-belief fixes and optional IV conversion. Included the missing offline policy-metrics helper needed by committed reporting code; corrected the builder contract test to distinguish optional IVs from required fields.
