@@ -89,6 +89,14 @@ whenever you log an entry.
 
 ## Log (newest first)
 
+### 2026-10-25 11:31 — feat — A person can challenge the demo bot from the browser — @saliha
+- **Where:** `sali` @ `9b6c9ac` · merged to `main`: yes
+- **Did:** `bot.demo live --opponent human` waits for any gen9ou challenge to "oxhack demo" (`accept_challenges`) instead of starting a rival bot. Teammates or judges play it from http://localhost:8000 (or this laptop's IP on the same network) with `/challenge oxhack demo, gen9ou`. The default opponent and the frozen demo command are unchanged. Checked end to end with a stand-in challenger on `team_6.txt`: won in 21 turns, 0/24 fallbacks, think p50 1.36 s, 24 chat lines, no chat error. 17 demo tests pass (2 new). The public ladder stays off-limits without a registered bot account. The steps are also in the `CLAUDE.md` demo trigger (step 7) and the README.
+- **Touched:** `bot/demo.py`, `bot/tests/test_demo.py`, `README.md`; `context`: `CLAUDE.md`
+- **Brief task:** none (asked for at 11:20, after the 10:30 freeze; additive and off by default)
+- **⚠️ Conflicts:** none
+- **📨 Needs:** none
+
 ### 2026-10-25 10:27 — docs — Demo frozen with team_6 pinned; README, PRD v4, briefs and question bank rewritten — @saliha
 - **Where:** `sali` @ `51a8a5c` · merged to `main`: yes (README); shared docs on `context` @ `16c957b`, `6567f3d`, `4fa5b77`, `f3c06ad`, `832ba97`, `166b0a8`, `8c6907f`, `b16da98`
 - **Did:**

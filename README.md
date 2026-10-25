@@ -95,6 +95,11 @@ cd pokemon-showdown && npm install && node pokemon-showdown start --no-security
 # or type /join battle-gen9ou-N in the Showdown lobby
 uv run python -m bot.demo live --teams bot/teams/standin/team_6.txt
 
+# Play it yourself: the bot waits for a challenge. In the Showdown client, import a
+# gen9ou team (bot/teams/standin/team_6.txt for a mirror match), then type
+#   /challenge oxhack demo, gen9ou
+uv run python -m bot.demo live --opponent human --teams bot/teams/standin/team_6.txt
+
 # Replay a saved battle's reasoning without a server
 uv run python -m bot.demo replay runs/<battle>.jsonl
 
