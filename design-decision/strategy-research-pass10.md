@@ -1,3 +1,5 @@
+> **Parked, 2026-10-25 ~10:00 UTC:** superseded by Kenar's MCTS on `main` (PR #1, 07:01; whole team, `progress.md` 06:41). Kept for the record; not an active plan (PRD v4 §0, Parked).
+
 # Decision layer: research-backed plan (pass 10, 2026-10-25 ~00:50 UTC)
 
 **For @derrick. Every line here is a recommendation; decision-layer choices are yours (CLAUDE.md §2).**

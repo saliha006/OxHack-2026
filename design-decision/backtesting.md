@@ -1,3 +1,5 @@
+> **Archived, 2026-10-25.** Dropped at 06:41 (whole team): the backtest CLI stays on `derrick` as an archive and won't be merged; the backtesting frontend left the PRD's Pending list at derrick's request (PRD v4 §0, Parked).
+
 # Replay backtesting
 
 Verified 25 October 2026 against `derrick` at `9f86111365ecefb510408dcfdf03aea925def085`. [Branch inventory](../CURRENT-STATUS.md). Main records this work in progress but does not contain `backtest/`.

@@ -1,7 +1,7 @@
-> **Current-status correction — 25 October 2026.** Live parser/player, demo, traces and evaluation harness are implemented. Main and Kenar branch search defaults differ. Earlier Rust/startup/smoke task ordering below is historical; consult live progress for assignments. See [current branch status](../CURRENT-STATUS.md) and [data/training context](../DATA-CONTEXT.md).
+> **Status, 2026-10-25 ~10:00 UTC.** Live parser/player, demo (terminal + one battle-chat line per decision), traces and the eval harness (MCTS pairings, Foul Play levels, manifest guard) are on `main`, which runs Kenar's MCTS by default. How the system works today: PRD v4.
 
 # Saliha: Bot layer (Showdown connection, log parser to BattleState, request handling, eval harness, demo) + doc owner
-**GitHub:** `saliha006` · **Branch:** `sali` · **Tool:** Claude Code · **Brief last updated:** 2026-10-24 21:10 UTC by saliha
+**GitHub:** `saliha006` · **Branch:** `sali` · **Tool:** Claude Code · **Brief last updated:** 2026-10-25 ~10:00 UTC by saliha
 **Spec:** the PRD (`OxHack-2026-PRD.md`) and `design-decision/*.md`. A bare § means the PRD; CLAUDE.md and this brief's own sections are always named.
 
 ## 0. How the agent reads this brief (every task)
@@ -44,7 +44,19 @@
 
 ---
 
-## 3. ▶ Current tasks (2026-10-24 21:10 UTC, pass 9 build plan), in order
+## 3. ▶ Current tasks (2026-10-25 ~10:00 UTC)
+*Demo freeze 10:30 UTC (no code after it), submission 12:00 UTC. Status: ⬜ not started · 🟡 in progress · ⏸ blocked · ✅ done*
+
+1. 🟡 **Merge the eval** `[⏸ waits on @derrick @kenar @nate: runs/eval/<machine>-*.jsonl]`: this laptop's slice is done (seed 104, fphard: `mcts8` 2-2, `mcts8joint` 4-7, 15 games; games that overlapped a demo battle are flagged). Put every file in `runs/eval/`, run `uv run python -m bot.eval report`.
+2. ⬜ **Pick the demo flags and pinned team** by the PRD §0 rule (flag only with a Wilson lower bound above 50% vs `mcts8`; team by win rate among teams whose median game is 35 turns or less). Candidates: `--engine-threads 4` (Nate 11/14), `--teams bot/teams/standin/team_6.txt`. `[🟠 your call]`
+3. ⬜ **Verify the browser view** with the chosen flags: the raw log has `|c|☆oxhack demo|` lines and no "must be registered to chat". *(Already true for today's demo battles 577–591.)*
+4. ⬜ **Rehearse twice by 10:20, freeze at 10:30.**
+5. ⬜ **10:30–12:00, docs only:** README (demo command, what the terminal and battle chat show, the honest win-rate table, credit to Foul Play and Laplace); `progress.md` entry + 📊 Latest; Devpost submission.
+6. ⬜ **Board rows waiting on others:** @kenar's yes/no on the opt-in Tera gate in his files; @nate's yes/no on the joint-priors files in `data/`.
+
+── Archived (superseded 2026-10-25 ~10:00 UTC — do NOT action) ──
+
+### Current tasks (2026-10-24 21:10 UTC, pass 9 build plan), in order
 *Status: ⬜ not started · 🟡 in progress · ⏸ blocked · ✅ done · Hours = focused work*
 
 1. ✅ **Rust toolchain + `poke_engine` build** (0.75 h, timebox 45 min). Nothing that calls `Agent.choose` runs on this machine until `poke-engine` builds from source.
@@ -62,17 +74,20 @@
 4. 🟡 **Decision trace** (`runs/<battle-id>.jsonl`, one line per request; 0.5 h) `[⏸ waits on @derrick: agent.last_trace]`
    - Turn, request kind, `BattleState`, choice, top 3 options with scores, win probability, top sets per opponent Pokémon, think time in ms, fallback flag.
    - *Done when:* every request of a game has a line, and the file reloads into the same `BattleState`s.
+   - *(2026-10-25 annotation: ✅ with Kenar's MCTS `last_trace`: worlds, own/opponent support, sampled worlds. No win probability: visit shares instead.)*
 5. 🟡 **Eval harness** (`bot/eval.py`, built 22:33 UTC; final run waits on @nate's team pool + real priors and @derrick's belief fixes)
    - **Built (B+, saliha's pick):** six matches, same team on both sides, sides alternating. Headline full vs SimpleHeuristics 300; data ladder full vs frozen prior 200 and frozen prior vs flat prior 200; 5 scenarios vs 1 200; MaxBasePower 100; Random 30. Add learned vs HP value (200) when derrick's model ships.
    - Shard processes (cores − 2), one line per game in `runs/eval-<match>-<machine>-<shard>.jsonl`, reruns skip finished games, `report` merges all machines' files: Wilson 95% + team bootstrap, fallback rate, worst p99. Eval budget 1.0 s.
    - **Added 23:10 UTC (saliha's pick B):** blind shuffled schedule, anonymous names, random opponent think time, random team per game; Elo ladder (uneven random-move mixes, our variants, Foul Play at 3 uneven search bands); Bradley-Terry ratings + ±1–3 neighbour report; turn-0 games void. 27 pairings, 1,750 games; first full run started 23:10 UTC on stand-in priors.
    - *Done when:* the merged table is in `progress.md` → 📊 Latest, and the headline interval's lower bound is above 50%.
+   - *(2026-10-25 annotation: ✅ harness extended for MCTS: pairings vs SimpleHeuristics and Foul Play `fphard`, head-to-heads vs `mcts8`, `runs/eval/<machine>-<shard>.jsonl`, manifest guard. The legacy pairings measure the one-ply bot. Today's merged table is current task 1.)*
 6. ⬜ **Record a full live battle** (client + terminal, with Wi-Fi up; 0.5 h, by 04:00 UTC). The local client redirects to `psim.us`, so the live view needs internet [P9 B5].
    - *Done when:* a video of one whole game plus its `runs/*.jsonl` is saved.
+   - *(2026-10-25 annotation: traces of demo battles 577–591 are saved in `runs/`; `bot.demo replay` covers no-Wi-Fi. No video recorded.)*
 7. ✅ **Demo mode + terminal stream** (`bot/demo.py`, 1.5 h): one command starts a battle vs `SimpleHeuristicsPlayer`, prints the URL, streams each turn in plain ANSI: choice, top 3 options, win probability, top opponent sets. It can also replay a saved `runs/*.jsonl` when there's no internet.
    - *Done when:* the 4-minute walkthrough (§18) runs from one command twice in a row, and the replay mode works offline.
-8. ⬜ **Final eval** on frozen code: the full run started 23:10 UTC is the demo's numbers unless derrick's fixes + nate's priors land early enough for a rerun to finish by ~05:30 UTC.
-9. ⬜ *(stretch, first to cut; proposed hand-over from @derrick, needs his yes)* **Coach review** (1.5 h): per-turn regret on the **baseline's** turns in our eval games (we hold both requests; our own bot's regret is zero by construction). Value = expected next state in win-probability points [P9 D5 + critique].
+8. ⬜ **Final eval** on frozen code: the full run started 23:10 UTC is the demo's numbers unless derrick's fixes + nate's priors land early enough for a rerun to finish by ~05:30 UTC. *(2026-10-25 annotation: superseded: the demo bot is now MCTS, measured by today's 08:20–09:45 slices.)*
+9. ⬜ *(stretch, first to cut; proposed hand-over from @derrick, needs his yes)* *(2026-10-25 annotation: cut, PRD §4.)* **Coach review** (1.5 h): per-turn regret on the **baseline's** turns in our eval games (we hold both requests; our own bot's regret is zero by construction). Value = expected next state in win-probability points [P9 D5 + critique].
 
 **Seams** (the same note is in the other two briefs):
 - @derrick: `agent.choose(request, battle_state) -> str | None`, one `Agent` per battle; `agent.last_trace` feeds task 4; his p50/p99 profile sets the eval think budget (task 5).
@@ -83,6 +98,12 @@
 - **Local server (done once):** `pokemon-showdown/` checkout, `node pokemon-showdown start --no-security`, http://localhost:8000. `generate-team gen9ou` throws locally; teams come from Nate's pool.
 
 ## 4. Done log (newest first)
+- ✅ **Demo decisions in the battle chat + opt-in Tera gate flag** (`bot/demo.py`, `--tera-min-wins`): one chat line per decision so browser viewers see the search's view. Needs the local `pokemon-showdown/server/chat.ts` patch. On `main` @ `a466c0c`.
+- ✅ **Opt-in Tera gate + eval arms** (`mcts8tera`, `mcts8mix`; `decision/search_policy.gate_tera`, Kenar's path, ⚠️ row): on `main` @ `8f0a3f2`.
+- ✅ **Four-thread arm** (`mcts8t4`, `--engine-threads`): on `main` @ `1205e5c`.
+- ✅ **Joint-set priors** (`data/pipeline/joint_sets.py` → `data/set_candidates_joint.json`, arm `mcts8joint`; Nate's path, ⚠️ row): on `main` @ `698492b`.
+- ✅ **fphard Foul Play level + MCTS eval pairings** (vs SimpleHeuristics, vs Foul Play, head-to-heads vs `mcts8`): on `main` @ `a935f71`, `ba1b455`.
+- ✅ **Live demo search view** (Weighing / Expects them / Guessing per turn): on `main` @ `b04c95f`.
 - ✅ **Task 7, demo mode** (`bot/demo.py`): live battle streamed turn by turn (choice in words, actives, think time, any agent fields generically) and offline replay of a saved trace. On `main` @ `ecbb278`.
 - 🟡 **Task 4, trace**: `runs/<battle>.jsonl` gets a line per request (turn, kind, choice, think ms, fallback, `BattleState`), line-buffered, and reloads into the same states; top options + win probability arrive when derrick exposes `agent.last_trace`. `progress.md` 2026-10-24 21:47.
 - ✅ **Tasks 1–3, toolchain + live bot** (`bot/player.py`, `bot/smoke.py`): uv + Rust (MSVC) installed, `poke-engine` builds; `poke-env==0.16.1` added. Measured: the log always lands before the request on the local server (#246 doesn't reproduce). 10/10 smoke games vs RandomPlayer finished unattended; 51 bot tests, 100% on `player.py`. Fallbacks (12.7%) all come from two `belief.py` bugs (Open board to @derrick) and the 2-species example priors. On `main` @ `d8bf19f`. `progress.md` 2026-10-24 21:47.
@@ -94,7 +115,7 @@
 - Hackathon pace: the smallest thing that passes its *Done when*; cut order is PRD §19.
 
 ## 6. Open blanks (fill when the chat or repo answers them, CLAUDE.md 🔁)
-- Which `competitive/gen9ou` team we play (nate's task 3 picks it with saliha and derrick).
+- Which `competitive/gen9ou` team we play (nate's task 3 picks it with saliha and derrick). *(2026-10-25: superseded: the demo plays one of the 10 teams in `bot/teams/standin/`, pinned or random; current task 2.)*
 - Registry blanks (vault path, team name, Scale, Deploy) are still open in CLAUDE.md.
 
 ---

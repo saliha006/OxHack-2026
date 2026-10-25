@@ -1,5 +1,7 @@
 # Data layer
 
+> **Update, 2026-10-25 ~10:00 UTC:** opt-in priors on `main` now include `data/curated-v1/` (Kenar) and `data/set_candidates_joint.json` from `data/pipeline/joint_sets.py` (saliha; Foul Play's observed complete sets blended 75/25). `duckdb` and `pyarrow` are imported by the pipeline but not declared in `pyproject.toml`. As built: PRD v4 §5 Flow C, §9, §12.
+>
 > **Implementation audit: 25 October 2026.** Read [CURRENT-STATUS.md](../CURRENT-STATUS.md) for branch heads,
 > local-only work and the evidence hierarchy. Back to the map: [DESIGN.md](DESIGN.md).
 

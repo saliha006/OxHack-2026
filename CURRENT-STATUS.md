@@ -1,3 +1,5 @@
+> **Superseded for `main`, 2026-10-25 ~10:00 UTC.** Since this 06:30 audit, Kenar's MCTS was merged to `main` (PR #1, 07:01) and is the default; `main` also now has `prediction/`, `evaluation/`, `analysis/`, the battle-chat demo stream, MCTS eval pairings with Foul Play `fphard`, joint priors, a 4-thread arm and an opt-in Tera gate. The rows below that say "main … no MCTS" are historical. How `main` works today: [the PRD (v4)](OxHack-2026-PRD.md). The branch pins, measurements and limits below remain the evidence record.
+
 # Current implementation across branches
 
 Source audit refreshed **2026-10-25T06:30:34.334294+00:00** (branch heads re-fetched; earlier measured results retained). This is a snapshot, not a live monitor. It refreshes context from source and saved artifacts without merging implementation branches or declaring team approval for experiments. Start here, then read [DATA-CONTEXT.md](DATA-CONTEXT.md) for datasets, contracts and training/test provenance, and the relevant design doc.

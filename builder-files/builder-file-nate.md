@@ -1,7 +1,7 @@
-> **Current-status correction — 25 October 2026.** Data ingestion, real marginal priors, Tiger tables and turns contract are built. Removing the 1825 cutoff remains a proposed separate rebuild, not the committed default. Earlier build tasks below are historical; current sources/splits are in DATA-CONTEXT. See [current branch status](../CURRENT-STATUS.md) and [data/training context](../DATA-CONTEXT.md).
+> **Status, 2026-10-25 ~10:00 UTC.** Your set file (`data/set_candidates.json`) is the demo bot's default priors on `main`, and your Tiger tables (`battles`, `battle_logs`, `turns`) are loaded. Removing the 1825 cutoff stays a proposed separate rebuild, not the committed default. How the system works today: PRD v4 (§9, §10); sources and splits: `DATA-CONTEXT.md`.
 
 # Nate: Data layer (set candidates + priors, team pool, training sets, charts, data card)
-**GitHub:** `aldrichbanas07` · **Branch:** any branch with `nate` in its name (now `nate-data`: renamed from `Data-stuff-(Nate)` on 2026-10-25 01:20 UTC by saliha, same commits. One-time fix in your clone: `git fetch --prune && git branch -m "Data-stuff-(Nate)" nate-data && git branch -u origin/nate-data`. Never push to the old name; that would recreate it) · **Tool:** Claude Code · **Brief last updated:** 2026-10-24 21:10 UTC by saliha
+**GitHub:** `aldrichbanas07` · **Branch:** any branch with `nate` in its name (now `nate-data`: renamed from `Data-stuff-(Nate)` on 2026-10-25 01:20 UTC by saliha, same commits. One-time fix in your clone: `git fetch --prune && git branch -m "Data-stuff-(Nate)" nate-data && git branch -u origin/nate-data`. Never push to the old name; that would recreate it) · **Tool:** Claude Code · **Brief last updated:** 2026-10-25 ~10:00 UTC by saliha
 **Spec:** the PRD (`OxHack-2026-PRD.md`) and `design-decision/*.md`. A bare § means the PRD; CLAUDE.md and this brief's own sections are always named.
 
 ## 0. How the agent reads this brief (every task)
@@ -18,8 +18,10 @@
 
 ## 1. Ownership
 **Owns:**
-- `data/`: set candidates, team pool, training extract, charts, data card {{exact paths: confirm}}
+- `data/`: `data/pipeline/`, `data/tests/`, `data/set_candidates.json`, `data/tiger.py`; `data/raw/` and `data/clean/` are git-ignored (from `progress.md` 👥 Team)
+- `contracts/turns.md` and the Tiger service `oxhack-data`
 - `design-decision/data-layer.md`: its design (DRAFT, not team-agreed)
+- In `data/` but authored by others: `data/curated-v1/`, `pipeline/import_curated_sets.py`, `pipeline/reveal_evidence.py` (@kenar, PR #1); `pipeline/joint_sets.py` + `set_candidates_joint.json` (@saliha, opt-in, ⚠️ row waiting on your yes)
 
 **Does NOT touch:**
 | Area / path | Owner | Why it's theirs |
@@ -44,10 +46,20 @@
 
 ---
 
-## 3. ▶ Current tasks (2026-10-24 21:10 UTC, pass 9 build plan), in order
+## 3. ▶ Current tasks (2026-10-25 ~10:00 UTC)
+*Demo freeze 10:30 UTC, submission 12:00 UTC. Status: ⬜ not started · 🟡 in progress · ⏸ blocked · ✅ done*
+
+1. 🟡 **Eval slice** (`mcts-threads`, seed 103): 14 games finished by 09:32 UTC, `mcts8t4` won 11 of 14 (Wilson 52.4–92.4%), backed up to `runs/backup-0900/`. Send `runs/eval/nate-0.jsonl` to saliha (resume the same line until 09:45 if she asks).
+   - *Done when:* saliha has the file. It decides whether the demo turns on `--engine-threads 4` (PRD §0 rule).
+2. ⬜ **Answer the ⚠️ row on the Open board:** keep `data/pipeline/joint_sets.py` + `data/set_candidates_joint.json` (saliha's opt-in joint priors) in your `data/`, yes or no.
+3. ⬜ **After the demo: team-conditioned set priors (A6)**, agreed by derrick (PRD §0 decisions). Nothing in the demo depends on it.
+
+── Archived (superseded 2026-10-25 ~10:00 UTC — do NOT action) ──
+
+### Current tasks (2026-10-24 21:10 UTC, pass 9 build plan), in order
 *Status: ⬜ not started · 🟡 in progress · ⏸ blocked · ✅ done · Hours = focused work*
 
-1. ⬜ **Set candidates + priors per species** (old task 3; **first: no priors, no agent**) `[⚠ touches @derrick: the format he consumes]`
+1. ✅ *(2026-10-25 annotation: done, on `main`; `progress.md` 2026-10-25 03:00: 243 species + 78 forme aliases)* **Set candidates + priors per species** (old task 3; **first: no priors, no agent**) `[⚠ touches @derrick: the format he consumes]`
    - Build `data/set_candidates.json` from Smogon chaos stats `gen9ou-1825`, 2026-09, in the shape of `contracts/set-candidates.md` (drafted by Derrick; `tests/test_set_candidates_contract.py` checks a file against it).
    - *Done when:* the file passes the contract test and is on `main` by 01:00 UTC.
 2. ⬜ **Ladder snapshot: one `curl`** (0.1 h; old task 1). **Recommended [P9 B6]:** cut the scheduler. Save `pokemonshowdown.com/ladder/gen9ou.json` once with a timestamp, then move on (Elo-from-decisions is parked).
@@ -61,6 +73,7 @@
    - Bot filtering (old task 5): a simple, stated rule is enough (e.g. drop accounts with a bot-like name or games under N turns); write the rule on the data card.
    - **First 20k-game extract to derrick by 01:00 UTC**; full extract by 04:00 UTC.
    - *Done when:* train/val/test Parquet files exist with the leakage check passing.
+   - *(2026-10-25 annotation: ✅ built as Tiger `turns`, 489,840 turns from 20,000 games (15k train / 5k test), `progress.md` 03:00. No validation split; the test split shares players and teams with train, see `DATA-CONTEXT.md`.)*
 5. ⬜ **Eval and demo charts** (old task 7), from saliha's `runs/*.jsonl` and `runs/eval-*.jsonl`: win-rate bars with 95% intervals per leg; one game's per-turn win-probability curve; the reliability diagram for derrick's model. Pre-rendered PNGs with matplotlib `[needs matplotlib in pyproject.toml: add it when you begin, with a ⚠️ row to @derrick]`.
    - *Done when:* one command regenerates all three, and they run on the smoke-eval results tonight.
 6. ⬜ **Data card** (old task 8): datasets, sizes, date ranges, splits, licence notes, bot-filter rule, eval think budget.
@@ -73,15 +86,17 @@
 - Research doc passes 2, 3 and 9 (`research_notes/pass9-bot-data-eval.md`, `pass9-critique.md`); `design-decision/data-layer.md`; `contracts/set-candidates.md`.
 
 ## 4. Done log (newest first)
-- (empty)
+- ✅ **Tiger tables + turns** (2026-10-25 03:00): `battles` and `battle_logs` (2,506,142 games), `turns` (489,840 rows from 20,000 games, states identical to `states_from_log`); spec in `contracts/turns.md`. `progress.md` 2026-10-25 03:00. *(Logged by saliha from `progress.md`.)*
+- ✅ **Set candidates** (2026-10-25 03:00): `data/set_candidates.json` from chaos stats gen9ou-1825, 2026-09; the default priors on `main`. `progress.md` 2026-10-25 03:00. *(Logged by saliha from `progress.md`.)*
 
 ## 5. Working-style notes for the agent
 - Verbosity Level 0: options + a recommendation, no teaching notes. Flag scope creep at once.
 - Hackathon pace: the smallest thing that passes its *Done when*; cut order is PRD §19.
 
 ## 6. Open blanks (fill when the chat or repo answers them, CLAUDE.md 🔁)
-- Exact `data/` paths.
-- 🟠 storage (Parquet + DuckDB recommended), bot-filter rule.
+- ~~Exact `data/` paths.~~ Filled 2026-10-25 from `progress.md` 👥 Team (§1).
+- ~~🟠 storage~~ Decided in practice: Parquet + DuckDB offline, Tiger (Postgres) shared (PRD §0). Bot-filter rule: still open.
+- `duckdb` and `pyarrow` are imported by `data/pipeline/` but not declared in `pyproject.toml` (PRD §0 Pending; no effect on the bot).
 
 ---
 ── Archived (superseded 2026-10-24 21:10 UTC by the pass 9 build plan — do NOT action) ──

@@ -1,4 +1,4 @@
-> **Current-status correction — 25 October 2026.** Current branch/data authority: CURRENT-STATUS.md and DATA-CONTEXT.md. Kenar works on Kenar-mcts and Kenar-coherent-sets; role is MCTS/search, prediction and set-prior experiments. Data storage is Parquet/DuckDB plus Tiger/Postgres. Earlier startup/team/status and task-order text below is historical where superseded. See [current branch status](CURRENT-STATUS.md) and [data/training context](DATA-CONTEXT.md).
+> **Current-status correction — 25 October 2026 (~10:00 UTC).** How `main` works today: the PRD (v4). Kenar's MCTS is the decision layer on `main` (PR #1, 07:01). Datasets and splits: DATA-CONTEXT.md; the 06:30 cross-branch audit and its evidence pins: CURRENT-STATUS.md. Kenar works on Kenar-mcts and Kenar-coherent-sets; role is MCTS/search, prediction and set-prior experiments (brief: `builder-file-kenar.md`). Data storage is Parquet/DuckDB plus Tiger/Postgres. Earlier startup/team/status and task-order text below is historical where superseded.
 
 # OxHack-2026 — Working Charter
 
@@ -11,12 +11,12 @@ A Pokémon Showdown Gen 9 OU battle agent that turns usage stats and replays int
 | Slot | Value |
 |---|---|
 | Project | **OxHack-2026** (OxHack 26, Oxford Mathematical Institute, 24–25 Oct 2026; tracks: PRD §0 Pending). Team **{{team name}}**; {{who submits}} |
-| Team | **saliha** (Saliha Shoaib, `saliha006`): bot layer, **doc owner**, branch `sali` · **derrick** (Derrick Lim Yong Hao, `RandomGeeb`, collaborator): decision layer, branch `derrick` · **nate** (Nate Banas, `aldrichbanas07`): data layer · **kenar** (Kenar Narayaka, `kxnar`): role and branch TBD. Owned paths and **Now**: `progress.md` → 👥 Team |
+| Team | **saliha** (Saliha Shoaib, `saliha006`): bot layer, **doc owner**, branch `sali` · **derrick** (Derrick Lim Yong Hao, `RandomGeeb`, collaborator): decision layer, branch `derrick` · **nate** (Nate Banas, `aldrichbanas07`): data layer · **kenar** (Kenar Narayaka, `kxnar`): search + prediction (the MCTS decision layer on `main`, belief and set-prior experiments, `prediction/`), branches `Kenar-mcts`, `Kenar-coherent-sets`; `decision/` ownership with derrick TBC. Owned paths and **Now**: `progress.md` → 👥 Team |
 | Repo | `https://github.com/saliha006/OxHack-2026` · `main` |
 | Where docs live | One folder. **`context` branch** (docs only): `CLAUDE.md`, the PRD, `builder-files/`, `design-decision/`. **`main`**: code, `README.md`, `progress.md`, `contracts/*.md`. **Local only, never pushed unless the user says so:** `Research-Context/` (event doc, research doc, sponsor PDFs, notes), `.claude/` (skills `no-slop`, `debug`, set up per machine), `pokemon-showdown/` (the local server), `runs/`, `.env*`, secrets. All of it is git-ignored on `main`. {{Public repo? delete `context` before submission}}. Sync and publish are plain git, below |
 | Vault | `{{path to the Obsidian vault}}` (**{{owner}} only**: `OxHack-2026 — Hub` = status + ▶ START HERE, `— Log` = ADRs, Unconfirmed, ▶ RESUME HERE). No vault → save notes to your memory; send decisions to the doc owner as a `decision` entry + 📨 row |
 | PRD | `OxHack-2026-PRD.md`: NOW (decisions in force, pending, active tasks) at the top, then the spec |
-| Briefs | `builder-files/builder-file-<name>.md`: `derrick`, `nate`, `saliha` |
+| Briefs | `builder-files/builder-file-<name>.md`: `derrick`, `kenar`, `nate`, `saliha` |
 | Event doc | `Research-Context/OxHack-2026-CONTEXT.md` (local only): rules, judging, prizes, schedule |
 | Research doc | `Research-Context/OxHack-2026-research.md` (local only). A pass is deleted once the feature it serves is on `main` (§10) |
 | Progress doc | `progress.md` (repo root; with `README.md` and `contracts/*.md` the only markdown on `main`): history, 📌 Open board, 👥 Team, 📊 Latest |
@@ -158,9 +158,9 @@ Each disposed decision → one vault Log entry (create if missing): the record o
 **The parking lot:** "we picked X; later we *might* do Y" is not agreed work. Park it under Unconfirmed; never treat it as decided. When nothing active remains, offer them: "want to pick one of these up?"
 
 ## 5. Stack & architecture *(fill as decided)*
-**Stack:** Python + `uv`; decision layer on `poke-engine` 0.0.48; bot layer on poke-env 0.16.1; a local Pokémon Showdown server (Node ≥ 22.18, `--no-security`); data storage 🟠 pending. Full table: PRD §12.
-**Runtime shape:** offline, replays + Smogon chaos stats → set candidates (and later a value model); online, Showdown server → bot parser → `BattleState` → `Agent.choose()` → choice → server, with a `runs/*.jsonl` trace feeding the eval harness and demo. Diagram: PRD §10.
-**Known gaps:** opponents are baseline bots, not ladder players (the public ladder needs a registered bot). Win-probability model, maximin LP selector, replay review: stretch. Full list: PRD §4.
+**Stack:** Python + `uv`; decision layer = native MCTS in `poke-engine` 0.0.48 (built from source, Rust) in a worker process; bot layer on poke-env 0.16.1; a local Pokémon Showdown server (Node ≥ 22.18, `--no-security`, local chat patch); data storage = Parquet + DuckDB offline, Postgres "Tiger" shared; Foul Play (external checkout) as an eval opponent. Full table: PRD §12.
+**Runtime shape:** offline, replays + Smogon chaos stats → set candidates and Tiger tables (`prediction/` studies run here, not in search); online, Showdown server → bot parser → `BattleState` → `Agent.choose()` → belief → 8 sampled worlds × 150 ms MCTS → pooled choice → server, with `runs/*` traces, a battle-chat line per decision, and the eval harness. Diagram: PRD §10.
+**Known gaps:** opponents are bots, not ladder players (the public ladder needs a registered bot). The win-probability model doesn't beat the HP heuristic and isn't used by search; maximin LP and coach review are cut. Full list: PRD §4.
 
 ## 6. Locked Decisions *(none yet)*
 Add one only when the user says it's locked. A locked decision is binding: a task that contradicts one is a 🟠 handoff ("this reopens a locked decision"), never a silent change. To unlock: (1) the user confirms they discussed it with the team and names who agreed (a solo "just change it" isn't enough on a team project); (2) they explicitly approve; (3) log the reversal as an ADR: old, new, who agreed, why.

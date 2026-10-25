@@ -1,3 +1,5 @@
+> **Update, 2026-10-25 ~10:00 UTC:** `prediction/` is now on `main` (PR #1) and still isn't used by search; status and numbers in PRD v4 §7.2–7.3 and §17. Opt-in priors on `main`: `data/curated-v1/` and `data/set_candidates_joint.json`.
+>
 > **Current-status correction — 25 October 2026.** Real usage candidates and loader are built. Kenar-mcts has public-state prediction tools and completed small offline studies; those models are not integrated into search. Reliable belief and coherent-template variants exist on separate branches; results do not establish a prediction or strength gain. The old table below is retained as a historical research proposal, not current feature status. See [current branch status](../CURRENT-STATUS.md) and [data/training context](../DATA-CONTEXT.md).
 
 # Predictions

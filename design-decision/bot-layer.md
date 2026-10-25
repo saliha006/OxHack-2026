@@ -1,5 +1,7 @@
 # Bot layer
 
+> **Update, 2026-10-25 ~10:00 UTC:** the demo now posts one battle-chat line per decision (needs the local `server/chat.ts` patch), and the eval has MCTS pairings, Foul Play levels up to `fphard`, `runs/eval/<machine>-<shard>.jsonl` and a manifest guard. As built: PRD v4 §5, §7.5, §11.
+>
 > **Implementation audit: 25 October 2026.** Read [CURRENT-STATUS.md](../CURRENT-STATUS.md) for the exact branch
 > snapshot and measured evidence. Back to the map: [DESIGN.md](DESIGN.md).
 

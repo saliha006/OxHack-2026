@@ -1,3 +1,5 @@
+> **2026-10-25 ~10:00 UTC:** `main` now runs Kenar's MCTS by default (PR #1, 07:01). For how `main` works today, the PRD v4 (§7, §10, §11, §12) wins where this map disagrees.
+
 # Gen 9 OU battle agent: implemented architecture
 
 Source audit: 25 October 2026. [CURRENT-STATUS.md](../CURRENT-STATUS.md) pins branch heads, defaults, measured results and local-only boundaries. This replaces the early three-layer draft; unimplemented research proposals remain proposals.

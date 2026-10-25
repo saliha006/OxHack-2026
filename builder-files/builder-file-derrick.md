@@ -1,7 +1,7 @@
-> **Current-status correction — 25 October 2026.** Current branch: replay-backtest CLI, Tiger dump and choose_public are implemented on derrick; main remains one-ply. Recorded agreement is not win rate. Earlier pass-9 task ordering is historical; consult current progress before taking work. See [current branch status](../CURRENT-STATUS.md) and [data/training context](../DATA-CONTEXT.md).
+> **Status, 2026-10-25 ~10:00 UTC.** `main` runs Kenar's MCTS decision layer (PR #1, 07:01); your backtest CLI, `choose_public` and Tiger dump stay archived on `derrick` (recorded agreement is not win rate). How the system works today: PRD v4 (§7, §10). *(Earlier banner, 2026-10-25 06:30: "main remains one-ply". Superseded by the MCTS merge.)*
 
 # Derrick: Decision layer (state intake, belief over opponent sets, simulate, value, selector, fallback)
-**GitHub:** `RandomGeeb` · **Branch:** `derrick` · **Tool:** Claude Code · **Brief last updated:** 2026-10-24 21:10 UTC by saliha
+**GitHub:** `RandomGeeb` · **Branch:** `derrick` (archive) · **Tool:** Claude Code · **Brief last updated:** 2026-10-25 ~10:00 UTC by saliha
 **Spec:** the PRD (`OxHack-2026-PRD.md`) and `design-decision/*.md`. A bare § means the PRD; CLAUDE.md and this brief's own sections are always named.
 
 ## 0. How the agent reads this brief (every task)
@@ -31,6 +31,8 @@
 
 **Shared** (flag in `progress.md` ⚠️ Conflicts): `contracts/*`, `fixtures/*`.
 
+**Since the MCTS merge (2026-10-25 07:01):** `decision/` is shared with @kenar. `search.py`, `root_mixing.py` and `lead_model.py` are his, and he made most of the recent changes to `agent.py`, `belief.py` and `adapter.py`. `search_policy.py` also carries saliha's opt-in Tera gate. The ownership split is TBC with both of you (PRD §0 Pending).
+
 ## 2. Contract & Guardrails
 **Scope contract.** Derrick builds the layer that turns a `BattleState` + the raw `|request|` into the best `Choice`, with every model (belief, opponent policy, value) swappable without touching the loop (`design-decision/decision-layer.md`).
 - Run · Test: `uv run pytest --cov=decision` (numbers: `progress.md` → 📊 Latest).
@@ -45,10 +47,20 @@
 
 ---
 
-## 3. ▶ Current tasks (2026-10-25 06:41 UTC)
+## 3. ▶ Current tasks (2026-10-25 ~10:00 UTC)
+*The MCTS decision layer is on `main` (PR #1, 07:01): 8 worlds × 150 ms, 1 engine thread, `reliable` belief; `one_ply` stays as a comparator. Demo freeze 10:30 UTC, submission 12:00 UTC.*
+
+1. 🟡 **Eval slice:** started `mcts-joint` (seed 102) at 08:20, then moved to `mcts-headline` (`mcts8` vs SimpleHeuristics, seed 102, 3 shards) around 09:00, after backing up to `runs/backup-0900/`. Stop at 09:45 and send every `runs/eval/derrick-*.jsonl` to saliha.
+   - *Done when:* saliha has the files and the game count.
+2. ⬜ **Agree the `decision/` ownership split with @kenar** (PRD §0 Pending), then tell saliha so the 👥 Team table and both briefs match.
+3. ⬜ **After the demo:** the next decision-layer task, TBD with @kenar. Open candidates from PRD §4 *Next step*: read A6 team-conditioned priors at team preview; a learned value that beats the HP heuristic before it goes near search.
+
+── Archived (superseded 2026-10-25 ~10:00 UTC — do NOT action) ──
+
+### Current tasks (2026-10-25 06:41 UTC)
 *Kenar's `Kenar-coherent-sets` is the decision layer's source of truth: MCTS default, `one_ply` for comparisons, reworked belief, coherent priors opt-in (whole team agreed; `progress.md` 2026-10-25 06:41). The `derrick` branch (backtest CLI, `choose_public`, Tiger dump) is kept as an archive and won't be merged; the 1825-cutoff proposal is withdrawn.*
 
-1. ⬜ Next task: TBD with @kenar.
+1. ⬜ Next task: TBD with @kenar. *(Carried into task 3 above.)*
 
 ── Archived (superseded 2026-10-25 — do NOT action) ──
 
@@ -57,6 +69,7 @@
 
 1. ⬜ **Turn-time profile** (0.5 h; old task 7): p50 / p99 of one `choose` on real states. It sets the eval think budget (1.0 s proposed) and whether the MCTS arm (task 10) is worth building.
    - *Done when:* the numbers are in `progress.md` → 📊 Latest.
+   - *(2026-10-25 annotation: superseded by MCTS; its think times come from every trace and eval line, e.g. demo p50 ~1.4 s.)*
 2. ✅ **Belief floor** (0.5 h) `[🟠 your call]` — done: floor 0.03 on the replay, reveals stay hard with the floor as the empty fallback (`progress.md` ff18c93)
    - **Recommended [P9 D1]:** in `_explains_turn`, drop a set that can't explain a turn to a small floor `eps` (0.02–0.05) instead of zero, so a rounding miss or an unlisted set doesn't wipe out the belief. **Alternative:** keep the hard zero (simpler, but fragile).
    - *Done when:* a test shows a contradicted set keeps weight `eps` and recovers when later turns fit it.
@@ -64,8 +77,10 @@
    - *Done when:* `build_state` runs on parser output from a real game, with no hand-made fixture.
 4. ⬜ **Expose the decision trace** `[⚠ touches @saliha: trace fields]` (old task 6): after `choose()`, `agent.last_trace` holds the top 3 options with scores, the chosen line's win probability, and the top sets per opponent Pokémon.
    - *Done when:* saliha's bot writes it every turn, at under 5% extra think time.
+   - *(2026-10-25 annotation: ✅ via Kenar's MCTS `last_trace`: worlds, own/opponent support, sampled worlds; no win probability.)*
 5. ⬜ **Belief on real priors** (old task 4) `[⏸ waits on @nate: set candidates]`: load `data/set_candidates.json` (per `contracts/set-candidates.md`) instead of the hand-made priors.
    - *Done when:* a full game runs on the real set file.
+   - *(2026-10-25 annotation: ✅ `data/set_candidates.json` is the default priors on `main`.)*
 6. ⬜ **Batch the leaves** (1.5 h): refactor `Agent._evaluate` to collect every leaf state and score them in one call, plus a featurizer parity test (training features from `states_from_log` equal live features). The heuristic stays the default.
    - *Done when:* same choices as before on the test states, and the parity test passes.
 7. ⬜ **Calibrated win-probability model** (4 h, timeboxed; old task 8) `[needs scikit-learn in pyproject.toml: add it when you begin]` `[🟠 your call: whether and how]` `[⏸ waits on @nate: 20k-game extract by 01:00 UTC]`
@@ -73,11 +88,14 @@
    - **Alternative:** a small neural net (slower to train and calibrate, no gain shown at this data size).
    - Model frozen by 06:00 UTC; shipping logistic only is a pass.
    - *Done when:* log loss, Brier and a reliability diagram beat the HP heuristic on the test split, and the agent can switch to the model with a flag.
+   - *(2026-10-25 annotation: Kenar's `prediction/` built a logistic + Platt model; it doesn't beat the HP heuristic yet (0.6600 vs 0.6348) and search doesn't use it. PRD §7.3.)*
 8. ⬜ **Score the belief** (1.5 h) *(proposed hand-over to @nate)*: next-reveal log loss vs the prior and vs hard-filter-only, on held-out reveal events and on our eval games where the true opponent set is known. Not on pool teams: they come from the same usage stats, so the test would be circular [P9 critique].
    - *Done when:* the numbers, with intervals, are in `progress.md`.
+   - *(2026-10-25 annotation: done by Kenar's `python -m prediction score-beliefs`; the prior still beats the updated belief. PRD §17.)*
 9. ⬜ *(stretch)* **Maximin LP behind a flag, default off** (2 h; old task 9) `[🟠 your call]` `[needs scipy, which comes with scikit-learn]`
    - **Recommended [P9 D4 + critique]:** `scipy.optimize.linprog` (HiGHS) after iterated dominance deletion. Against fixed poke-env baselines it can't beat argmax-EV, so report offline exploitability. Run an A/B only against an adaptive opponent, and only if time remains.
 10. ⬜ *(stretch, only if the one-ply agent is under ~85% vs SimpleHeuristics after saliha's smoke eval)* **poke-engine MCTS arm** (2.5 h): one MCTS per sampled state, summing visit shares (the Foul Play wiring), behind a flag. Self-play decides; keep it out of the headline.
+   - *(2026-10-25 annotation: ✅ built by Kenar and made the default on `main`, 07:01. The LP (task 9) is cut.)*
 11. ⬜ *(stretch)* **Scenario diversity** (1.5 h) [P9 D1]: the set-candidates contract multiplies independent marginals, so the top 5 scenarios are near-clones of the modal set; sample for diversity instead.
 
 *Coach review moved to saliha's brief as a proposed hand-over (her task 9): needs your yes.*

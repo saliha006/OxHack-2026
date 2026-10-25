@@ -1,3 +1,5 @@
+> **Update, 2026-10-25 ~10:00 UTC:** `main` now defaults to Kenar's native MCTS (PR #1, 07:01); `one_ply` is a comparator. The turn loop as built is PRD v4 §7.1; the earlier correction below is historical.
+>
 > **Current-status correction — 25 October 2026.** Implemented backend differs by branch: main/Derrick use one-ply; Kenar-mcts defaults to native MCTS. Real candidate loading, state reconstruction, deadline workers and branch-specific reliability fixes exist. Read current-status for defaults and measured results; the older decision design below is historical where it conflicts. See [current branch status](../CURRENT-STATUS.md) and [data/training context](../DATA-CONTEXT.md).
 
 # Decision layer
