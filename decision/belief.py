@@ -32,7 +32,11 @@ FLOOR = 0.03
 class Belief:
     """What the opponent's six Pokémon are probably running, kept for one battle and updated every turn."""
 
-    def __init__(self, priors: SetCandidates, battle: BattleState):
+    def __init__(self, priors: SetCandidates, battle: BattleState, *, inference_mode: str = "legacy"):
+        if inference_mode not in {"legacy", "revelations", "reliable"}:
+            raise ValueError(f"unknown belief inference mode: {inference_mode}")
+        self.inference_mode = inference_mode
+        self.last_diagnostics: dict = {}
         self.priors = priors
         self.them = "p2" if battle["us"] == "p1" else "p1"
         team = battle["sides"][self.them]["pokemon"]
@@ -68,6 +72,89 @@ class Belief:
         """Apply what the latest BattleState reveals (the hard filter, feature 03)."""
         seen = battle["sides"][self.them]
         events = [e for e in battle["last_turn"] if e["side"] == self.them]
+        recovery_start = len(self.recovery_events)
+        self.last_diagnostics = {"turn": battle["turn"], "mode": self.inference_mode,
+                                 "confirmed_exclusions": 0, "inferred_exclusions": 0,
+                                 "rules": [], "skipped": [],
+                                 "soft": {"replayed": 0, "floored": 0, "failed": 0, "skipped": 0}}
+        if self.inference_mode == "legacy":
+            rules = self._legacy_rules(seen, events)
+        else:
+            rules = self._reliable_rules(battle, seen, events, infer=self.inference_mode == "reliable")
+        self.last_diagnostics["rules"] = [{"slot": n, "confirmed": sorted(r for r in rules_n if r.startswith("item:")),
+                                           "inferred": sorted(r for r in rules_n if not r.startswith("item:"))}
+                                          for n, rules_n in enumerate(rules) if rules_n]
+        start_active = self.previous["active"]
+        replayable = self.last_request is not None and self.last_choice is not None and start_active is not None
+        skip_reason = self._replay_skip_reason(battle) if self.inference_mode != "legacy" else None
+        if replayable and skip_reason:
+            replayable = False
+            self.last_diagnostics["soft"]["skipped"] += 1
+            self.last_diagnostics["skipped"].append({"stage": "soft_replay", "reason": skip_reason})
+        for n, mon in enumerate(seen["pokemon"]):
+            confirmed = {rule for rule in rules[n] if rule.startswith("item:")}
+            confirmed_kept = [(s, w) for s, w in self.candidates[n] if _fits(s, mon, confirmed)]
+            self.last_diagnostics["confirmed_exclusions"] += len(self.candidates[n]) - len(confirmed_kept)
+            kept = [(s, w) for s, w in confirmed_kept if self._fits_rules(s, mon, rules[n])]
+            self.last_diagnostics["inferred_exclusions"] += len(confirmed_kept) - len(kept)
+            if not kept:
+                entry, _ = _prior_entry(self.priors, mon["species"])
+                rebuilt = _rebuild(entry.get("usage", {}), mon)
+                kept = [(s, w) for s, w in rebuilt if self._fits_rules(s, mon, rules[n])]
+                reason = "rebuilt_from_usage"
+                if not kept:
+                    # Inferred item rules can be wrong (suppression, a missed heal, Trick). Relax those rules only;
+                    # never restore a set that contradicts a revealed move, item, ability or Tera type.
+                    kept = [(s, w) for s, w in self.candidates[n] + rebuilt if _fits(s, mon, confirmed)]
+                    reason = "relaxed_inferred_rules"
+                    if not kept:
+                        seed = max(self.candidates[n], key=lambda sw: sw[1], default=(None, 0))[0]
+                        recovered = _recovery_set(mon, seed)
+                        item = next((rule[5:] for rule in confirmed), None)
+                        if item and mon["item"] is None:
+                            recovered = replace(recovered, item=item)
+                        kept = [(recovered, 1.0)]
+                        reason = "reconstructed_revealed_facts"
+                self._record_recovery(n, mon, battle, reason, inferred_rules=sorted(rules[n]))
+            if replayable and n == start_active:
+                # Imperfect speed/damage evidence changes likelihoods only after the revelation filter.
+                weighted = []
+                for candidate, weight in kept:
+                    self.last_diagnostics["soft"]["replayed"] += 1
+                    try:
+                        explains = self._explains_turn(candidate, battle)
+                    except BaseException as exc:
+                        if not isinstance(exc, Exception) and type(exc).__name__ != "PanicException":
+                            raise
+                        # A failed replay is missing evidence, not evidence against a set.
+                        explains = True
+                        self.last_diagnostics["soft"]["failed"] += 1
+                        self._record_recovery(n, mon, battle, "evidence_replay_failed",
+                                              error=f"{type(exc).__name__}: {exc}")
+                    if not explains:
+                        self.last_diagnostics["soft"]["floored"] += 1
+                    weighted.append((candidate, weight if explains else weight * FLOOR))
+                kept = weighted
+            normalised = _normalised(kept)
+            if not normalised:
+                recovered = _recovery_set(mon)
+                item = next((rule[5:] for rule in rules[n] if rule.startswith("item:")), None)
+                if item and mon["item"] is None:
+                    recovered = replace(recovered, item=item)
+                normalised = [(recovered, 1.0)]
+                self._record_recovery(n, mon, battle, "invalid_candidate_weights")
+            if self.inference_mode != "legacy":
+                # A known consumed item describes the current world even though
+                # it need not identify the original set's item.
+                normalised = [(_apply_revelations(candidate, mon), weight) for candidate, weight in normalised]
+            self.candidates[n] = normalised
+        self.last_diagnostics["recoveries"] = self.recovery_events[recovery_start:]
+        self.previous = copy.deepcopy(seen)
+        self.last_battle = copy.deepcopy(battle)
+        self.last_request = self.last_choice = None
+
+    def _legacy_rules(self, seen: dict, events: list[Event]) -> list[set[str]]:
+        """Frozen historical inference behavior, retained as an explicit ablation."""
         rules = [set() for _ in self.candidates]  # per slot: item rules implied this turn
         for e in events:
             n = e["pokemon"]
@@ -97,58 +184,112 @@ class Belief:
         fainted = any(e["type"] == "damage" and e["hp_percent"] == 0 for e in events)
         if 0 < hp < 100 and not fainted and not any(e["source"] == "item:leftovers" and e["pokemon"] == active for e in events):
             rules[active].add("not_leftovers")
+        return rules
 
-        start_active = self.previous["active"]
-        replayable = self.last_request is not None and self.last_choice is not None and start_active is not None
+    def _skip(self, slot: int | None, reason: str) -> None:
+        self.last_diagnostics["skipped"].append({"slot": slot, "reason": reason})
+
+    def _reliable_rules(self, battle: BattleState, seen: dict, events: list[Event], *, infer: bool) -> list[set[str]]:
+        rules = [set() for _ in self.candidates]
+        changed = {n for n, mon in enumerate(seen["pokemon"])
+                   if mon["item"] != self.previous["pokemon"][n]["item"]}
+        swap = any(e["type"] == "move" and e["move"] in {"trick", "switcheroo"} for e in battle["last_turn"])
+        hazard_moves = {"stealthrock", "stoneaxe", "defog", "rapidspin", "mortalspin", "tidyup", "courtchange"}
+        rocks_stable = (self.previous["hazards"]["stealthrock"] > 0 and
+                        seen["hazards"]["stealthrock"] == self.previous["hazards"]["stealthrock"] and
+                        not any(e["type"] == "move" and e["move"] in hazard_moves for e in battle["last_turn"]))
+        for n in changed:
+            self.moves_since_switch[n].clear()
+            self._skip(n, "item_period_changed_or_first_revealed")
+        for e in events:
+            n = e["pokemon"]
+            if n is None or not 0 <= n < len(rules):
+                continue
+            mon = seen["pokemon"][n]
+            if e["type"] == "switch":
+                self.moves_since_switch[n].clear()
+                if infer and rocks_stable and n not in changed and not swap and not self._item_suppressed(battle, n):
+                    rules[n].add("not_boots" if _hit_by_rocks(events, n) else "boots")
+                elif infer and self.previous["hazards"]["stealthrock"]:
+                    self._skip(n, "hazard_or_item_period_not_stable")
+            elif e["type"] == "move":
+                forced = bool(e.get("source")) or bool(
+                    {"encore", "lockedmove", "twoturnmove"} &
+                    (set(seen["volatiles"]) | set(self.previous["volatiles"])))
+                if forced:
+                    self._skip(n, "called_or_forced_move")
+                elif n not in changed and not swap:
+                    self.moves_since_switch[n].add(e["move"])
+                    if infer and MOVES.get(e["move"], {}).get("category") == "Status":
+                        rules[n].add("not_av")
+            if (e.get("source") or "").startswith("item:"):
+                item = e["source"][5:]
+                if mon["item"] is None:
+                    rules[n].add("item:" + item)
+        if not infer:
+            return rules
+        for n, moves in enumerate(self.moves_since_switch):
+            if len(moves) >= 2 and n not in changed and not swap:
+                rules[n].add("not_choice")
+        active = seen["active"]
+        if active is not None:
+            mon = seen["pokemon"][active]
+            if 0 < mon["hp_percent"] < 100:
+                reason = None
+                if battle.get("last_turn_complete") is not True:
+                    reason = "no_completed_upkeep_observed"
+                elif any(e["type"] == "switch" or e["type"] == "damage" and e["hp_percent"] == 0 for e in events):
+                    reason = "switch_or_faint_interval"
+                elif active in changed or swap:
+                    reason = "item_period_changed"
+                elif self._item_suppressed(battle, active):
+                    reason = "item_or_healing_suppressed"
+                if reason:
+                    self._skip(active, reason)
+                elif not any(e["source"] == "item:leftovers" and e["pokemon"] == active for e in events):
+                    rules[active].add("not_leftovers")
         for n, mon in enumerate(seen["pokemon"]):
-            kept = [(s, w) for s, w in self.candidates[n] if _fits(s, mon, rules[n])]
-            if not kept:
-                entry, _ = _prior_entry(self.priors, mon["species"])
-                rebuilt = _rebuild(entry.get("usage", {}), mon)
-                kept = [(s, w) for s, w in rebuilt if _fits(s, mon, rules[n])]
-                reason = "rebuilt_from_usage"
-                if not kept:
-                    # Inferred item rules can be wrong (suppression, a missed heal, Trick). Relax those rules only;
-                    # never restore a set that contradicts a revealed move, item, ability or Tera type.
-                    confirmed = {rule for rule in rules[n] if rule.startswith("item:")}
-                    kept = [(s, w) for s, w in self.candidates[n] + rebuilt if _fits(s, mon, confirmed)]
-                    reason = "relaxed_inferred_rules"
-                    if not kept:
-                        seed = max(self.candidates[n], key=lambda sw: sw[1], default=(None, 0))[0]
-                        recovered = _recovery_set(mon, seed)
-                        item = next((rule[5:] for rule in confirmed), None)
-                        if item and mon["item"] is None:
-                            recovered = replace(recovered, item=item)
-                        kept = [(recovered, 1.0)]
-                        reason = "reconstructed_revealed_facts"
-                self._record_recovery(n, mon, battle, reason, inferred_rules=sorted(rules[n]))
-            if replayable and n == start_active:
-                # Imperfect speed/damage evidence changes likelihoods only after the revelation filter.
-                weighted = []
-                for candidate, weight in kept:
-                    try:
-                        explains = self._explains_turn(candidate, battle)
-                    except BaseException as exc:
-                        if not isinstance(exc, Exception) and type(exc).__name__ != "PanicException":
-                            raise
-                        # A failed replay is missing evidence, not evidence against a set.
-                        explains = True
-                        self._record_recovery(n, mon, battle, "evidence_replay_failed",
-                                              error=f"{type(exc).__name__}: {exc}")
-                    weighted.append((candidate, weight if explains else weight * FLOOR))
-                kept = weighted
-            normalised = _normalised(kept)
-            if not normalised:
-                recovered = _recovery_set(mon)
-                item = next((rule[5:] for rule in rules[n] if rule.startswith("item:")), None)
-                if item and mon["item"] is None:
-                    recovered = replace(recovered, item=item)
-                normalised = [(recovered, 1.0)]
-                self._record_recovery(n, mon, battle, "invalid_candidate_weights")
-            self.candidates[n] = normalised
-        self.previous = copy.deepcopy(seen)
-        self.last_battle = copy.deepcopy(battle)
-        self.last_request = self.last_choice = None
+            inferred = {rule for rule in rules[n] if not rule.startswith("item:")}
+            if inferred and mon["item"] is not None:
+                rules[n] -= inferred
+                self._skip(n, "confirmed_current_item_overrides_inference")
+            elif inferred and self._item_suppressed(battle, n):
+                rules[n] -= inferred
+                self._skip(n, "item_suppression_prevents_exclusion")
+        return rules
+
+    def _item_suppressed(self, battle: BattleState, slot: int) -> bool:
+        side = battle["sides"][self.them]
+        mon = side["pokemon"][slot]
+        volatile = set(side["volatiles"]) | set(self.previous["volatiles"])
+        return (mon["ability"] == "klutz" or "magicroom" in battle["field"]["effects"] or
+                "magicroom" in self.last_battle["field"]["effects"] or
+                bool({"embargo", "healblock"} & volatile))
+
+    def _fits_rules(self, candidate: PokemonSet, mon: dict, rules: set[str]) -> bool:
+        if self.inference_mode == "reliable" and candidate.ability == "klutz":
+            rules = rules - {"not_leftovers", "not_boots", "not_av", "not_choice"}
+        return _fits(candidate, mon, rules)
+
+    def _replay_skip_reason(self, battle: BattleState) -> str | None:
+        if self.inference_mode == "revelations":
+            return "revelations_only"
+        if battle.get("last_turn_complete") is not True:
+            return "incomplete_or_unknown_turn_interval"
+        if self.last_request and any(self.last_request.get("forceSwitch", [])):
+            return "continuation_request"
+        if any(e["type"] == "move" and e.get("source") for e in battle["last_turn"]):
+            return "called_or_forced_move"
+        changing_moves = {"trick", "switcheroo", "skillswap", "roleplay", "entrainment", "worryseed", "simplebeam",
+                          "knockoff", "fling", "thief", "covet", "bestow", "recycle", "corrosivegas"}
+        if any(e["type"] == "move" and e["move"] in changing_moves for e in battle["last_turn"]):
+            return "unsupported_item_or_ability_change_move"
+        for side_id, side in battle["sides"].items():
+            old = self.last_battle["sides"][side_id]
+            for before, after in zip(old["pokemon"], side["pokemon"]):
+                if any(before[field] != after[field] for field in ("item", "ability")):
+                    return "item_or_ability_changed_or_revealed"
+        return None
 
     def _explains_turn(self, candidate: PokemonSet, battle: BattleState) -> bool:
         """Soft reweight (04), as pass/fail (a fail floors the set): can poke-engine, given this set, produce what happened last turn?

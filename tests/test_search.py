@@ -413,7 +413,7 @@ def partially_failed_preparation(connection, priors):
     from decision.search import _worker
 
     class BrokenBelief:
-        def __init__(self, *args):
+        def __init__(self, *args, **kwargs):
             self.recovery_events = []
             self.last_request = {'stale': True}
             self.last_choice = 'stale'

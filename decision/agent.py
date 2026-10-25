@@ -25,11 +25,14 @@ class Agent:
     def __init__(self, priors: SetCandidates, k: int = 5, budget: float = 3.0,
                  clock: Callable[[], float] = time.monotonic, *, backend: str = "mcts",
                  mcts_worlds: int = 8, search_ms: int = 150, engine_threads: int = 1,
-                 sampling: str = "team", frozen_beliefs: bool = False, seed: int = 2026):
+                 sampling: str = "team", frozen_beliefs: bool = False, seed: int = 2026,
+                 belief_mode: str = "reliable"):
         if backend not in {"one_ply", "mcts"}:
             raise ValueError("backend must be one_ply or mcts")
         if sampling not in {"team", "active"}:
             raise ValueError("sampling must be team or active")
+        if belief_mode not in {"legacy", "revelations", "reliable"}:
+            raise ValueError("belief_mode must be legacy, revelations or reliable")
         if min(mcts_worlds, search_ms, engine_threads) < 1 or budget <= 0:
             raise ValueError("worlds, search time, threads and budget must be positive")
         self.priors = priors
@@ -42,7 +45,7 @@ class Agent:
         self.config = {"mcts_worlds": mcts_worlds, "search_ms": search_ms, "engine_threads": engine_threads,
                        "sampling": sampling, "frozen_beliefs": frozen_beliefs, "seed": seed,
                        "budget_seconds": budget, "return_reserve_seconds": min(0.3, budget * 0.1),
-                       "randomisation": False, "learned_reranker": False}
+                       "belief_mode": belief_mode, "randomisation": False, "learned_reranker": False}
         self.worker = None
         self.last_trace: dict | None = None
 
@@ -178,11 +181,12 @@ class Agent:
     def _choose(self, request: dict, battle: BattleState) -> str:
         previous_recoveries = len(self.belief.recovery_events) if self.belief is not None else 0
         if self.belief is None:
-            self.belief = Belief(self.priors, battle)
+            self.belief = Belief(self.priors, battle, inference_mode=self.config["belief_mode"])
         self.belief.update(battle)
         if self.last_trace is not None:
             self.last_trace["recovery_events"] = self.belief.recovery_events[previous_recoveries:]
             self.last_trace["belief_candidates"] = self.belief.candidate_records()
+            self.last_trace["belief_update"] = self.belief.last_diagnostics
         if request.get("teamPreview"):
             return pick_lead(request, battle).to_choice()
         if request.get("forceSwitch"):

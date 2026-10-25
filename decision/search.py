@@ -87,7 +87,7 @@ def _worker(connection, priors: dict) -> None:
             try:
                 recovery_start = len(belief.recovery_events) if belief is not None else 0
                 if belief is None:
-                    belief = Belief(priors, battle)
+                    belief = Belief(priors, battle, inference_mode=config.get("belief_mode", "legacy"))
                     recovery_start = 0
                 if rng is None:
                     rng = Random(config["seed"])
@@ -102,6 +102,7 @@ def _worker(connection, priors: dict) -> None:
                                  (time.monotonic() - preparation_start) * 1000,
                                  "sampled_worlds": belief.last_sampled_worlds,
                                  "belief_candidates": belief.candidate_records(),
+                                 "belief_update": belief.last_diagnostics,
                                  "recovery_events": belief.recovery_events[recovery_start:],
                                  "state_approximations": adapter_diagnostics(request, battle),
                                  "engine_version": version("poke-engine")})
