@@ -47,8 +47,14 @@ Then give one clear starting point and proceed.
 4. **When Claude starts it,** use a Monitor (one battle per run) and post each `NEW /join …` line to the user the moment it appears: `PYTHONUTF8=1 PYTHONUNBUFFERED=1 uv run python -m bot.demo live --teams bot/teams/standin/team_6.txt 2>&1 | grep --line-buffered -E "Watch it live|Game over|Traceback|Error" | sed -u -E 's#.*Watch it live: http://localhost:8000/(battle-gen9ou-[0-9]+).*#NEW /join \1#'`
 5. **The viewer** opens http://localhost:8000 (needs internet for the client's graphics) and types `/join battle-gen9ou-N` in the Lobby chat, or opens the printed URL. Each battle has its own room; the next game is a new number, so post a new link each time. The "battle started" line in the Lobby is only a notice.
 6. **Check and report:** `runs/battle-gen9ou-N.log` has `|c|☆oxhack demo|` lines and no "must be registered to chat". When it ends, post the `Game over: won in N turns · fallbacks · think p50/p99` line.
-7. **More games:** rerun step 3/4, or loop in PowerShell: `while ($true) { uv run python -m bot.demo live --teams bot/teams/standin/team_6.txt }`. **No Wi-Fi:** `uv run python -m bot.demo replay runs/battle-gen9ou-N.jsonl`.
-8. **Numbers rather than one game** = an eval, not a demo, and never during a live demo: `uv run python -m bot.eval run --pairings mcts-headline --games N --seed S --machine <name> --shards K`, then `uv run python -m bot.eval report` (MCTS rows only; `headline`/`full~*` are the old one-ply bot).
+7. **A person plays the bot** ("let me play it", "real players", a judge wants a go): `$env:PYTHONUTF8=1; uv run python -m bot.demo live --opponent human --teams bot/teams/standin/team_6.txt`. It prints `/challenge oxhack demo, gen9ou`. The person:
+   - opens http://localhost:8000, or `http://<this laptop's IP>:8000` from another laptop on the same network;
+   - picks any name;
+   - imports a legal gen9ou team in the Teambuilder (paste `bot/teams/standin/team_6.txt` for a mirror match);
+   - types that command in the Lobby chat.
+   One battle per run; Claude posts the `/join` link for spectators as in step 4. The public ladder is off-limits without a registered bot account (PRD §4).
+8. **More games:** rerun step 3/4, or loop in PowerShell: `while ($true) { uv run python -m bot.demo live --teams bot/teams/standin/team_6.txt }`. **No Wi-Fi:** `uv run python -m bot.demo replay runs/battle-gen9ou-N.jsonl`.
+9. **Numbers rather than one game** = an eval, not a demo, and never during a live demo: `uv run python -m bot.eval run --pairings mcts-headline --games N --seed S --machine <name> --shards K`, then `uv run python -m bot.eval report` (MCTS rows only; `headline`/`full~*` are the old one-ply bot).
 
 ### 🔄 Context sync (session start, and before editing a shared doc)
 Never work from a stale plan. Plain git, no scripts. The synced commit is kept in `.git/context-synced`.
