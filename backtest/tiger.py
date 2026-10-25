@@ -1,4 +1,4 @@
-"""Copies Nate's Tiger `turns` table to one local JSONL file, so a backtest reads it in seconds instead of streaming it for ~5 min."""
+"""Copies Nate's Tiger `turns` table to one local JSONL file: a full read takes ~20 s from disk against ~5 min over the network."""
 import json
 import os
 from collections.abc import Iterable, Iterator
