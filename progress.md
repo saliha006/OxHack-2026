@@ -40,8 +40,8 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 |---|---|---|---|---|---|
 | 2026-10-25 08:31 | @saliha | @kenar | ⚠️ conflict | Opt-in Tera gate in your `decision/agent.py` + `search_policy.py` (`tera_min_wins`, default 0 = off; nothing changes unless set). Your tests pass. Say if you want it reverted | 2026-10-25 08:31 |
 | 2026-10-25 08:18 | @saliha | @nate | ⚠️ conflict | New `data/pipeline/joint_sets.py` + `data/set_candidates_joint.json` (observed complete sets blended into usage candidates, opt-in) in your `data/`; nothing of yours changed. Yes/no on keeping it there | 2026-10-25 08:18 |
-| 2026-10-25 08:20 | @saliha | @kenar @derrick @nate | 📨 waiting on | **Eval slice, start now, stop 09:45 UTC** on `main` (`git pull && uv sync`, local server up). @kenar (has Foul Play): `uv run python -m bot.eval run --pairings mcts-foulplay-hard mcts-joint-foulplay-hard mcts-threads-foulplay-hard --games 25 --seed 101 --machine kenar --shards 2` (stop v2 panels first; one fphard game uses ~5 cores) · @derrick: `... --pairings mcts-joint --games 60 --seed 102 --machine derrick --shards 3` · @nate: `... --pairings mcts-threads --games 40 --seed 103 --machine nate --shards 1` (one game at a time: the 4-thread arm needs the cores). Own seed each. Send `runs/eval/<machine>-*.jsonl` to @saliha at 09:45; she runs `bot.eval report`. Replaces the 08:10 row | 2026-10-25 08:20 |
-| 2026-10-25 06:41 | @derrick | @saliha | 📨 waiting on | PRD NOW: add "decision layer = Kenar's `Kenar-coherent-sets` (MCTS default, coherent priors opt-in); derrick's backtest, `choose_public` and the 1825-cutoff proposal withdrawn"; take "Backtesting frontend" out of Pending. Replaces my 03:30 row | 2026-10-25 06:41 |
+| 2026-10-25 08:20 | @saliha | @kenar @derrick @nate | 📨 waiting on | **Eval slice, start now, stop 09:45 UTC** on `main` (`git pull && uv sync`, local server up). @kenar (has Foul Play): `uv run python -m bot.eval run --pairings mcts-foulplay-hard mcts-joint-foulplay-hard mcts-threads-foulplay-hard --games 25 --seed 101 --machine kenar --shards 2` (stop v2 panels first; one fphard game uses ~5 cores) · @derrick: `... --pairings mcts-joint --games 60 --seed 102 --machine derrick --shards 3` · @nate: `... --pairings mcts-threads --games 40 --seed 103 --machine nate --shards 1` (one game at a time: the 4-thread arm needs the cores). Own seed each. Send `runs/eval/<machine>-*.jsonl` to @saliha at 09:45; she runs `bot.eval report`. Replaces the 08:10 row. **Update 10:27:** @derrick and @kenar moved to `mcts-headline` (seeds 102 / 101) around 09:00; @nate stopped at 09:32 with 14 games (reports `mcts8t4` 11–3 vs `mcts8`). saliha's slice is done. Still waiting on all three files | 2026-10-25 08:20 |
+| 2026-10-25 10:27 | @saliha | @derrick @nate @kenar | ⚠️ conflict | `context` updated (`16c957b` … `b16da98`): PRD v4 describes `main` as built; each of your briefs has a new **▶ Current tasks (~10:00)** block (old blocks archived, nothing deleted); @kenar has a new `builder-file-kenar.md`. Re-sync context. `decision/` ownership between @derrick and @kenar is TBC: agree it and tell saliha | 2026-10-25 10:27 |
 | 2026-10-25 03:00 | @nate | @derrick | ⚠️ conflict | **Training data for your model is in Tiger `turns`**: 489,840 turns from 20,000 games, each `state` identical to `states_from_log`; spec, access with your read-only login, splits and baselines in `contracts/turns.md`. Bar to beat on test: HP-heuristic log loss **0.6407**, Brier **0.2246**. Also: `belief.py` `_rebuild` drops status moves on Choice items, but only Assault Vest bars them (Choice Scarf + Trick); a species missing from the set file entirely (e.g. `urshifu`) still raises KeyError in `Belief.__init__`; `predictions.md` A1 credits the set file to saliha | 2026-10-25 03:00 |
 | 2026-10-25 03:00 | @nate | @saliha | ⚠️ conflict | `data/set_candidates.json` is on `main`, so `--priors data/set_candidates.json` (your default) now runs real priors: 243 species + 78 forme aliases (`keldeoresolute → keldeo`, `zamazentacrowned → zamazenta`), which answers the forme row from the data side. Your parser skips old HP strings like `20/100y` (one fact lost per such line) | 2026-10-25 03:00 |
 | 2026-10-25 00:32 | @saliha | @derrick | 🔀 scope proposal | **Decision-layer plan from research pass 10** (`design-decision/strategy-research-pass10.md` on `context`): 4 specialist agents + a cross-check, peer-reviewed + official source + our own measurements. Core ~4.5 h: (1) instrumentation, (2) the two `belief.py` crash fixes + a floor (these caused the 12.7% fallbacks), (3) dual-path featurizer, (5) logistic `LearnedValue` behind a flag with HP fallback; stretch: switch share + quantal opponent model, then pool/depth-2/LP default-off. All your call; key measured facts: one-ply dominance drops Swords Dance and the top-3 EVs on our test position are 0.503/0.501/0.497, so the HP value is the weak point | 2026-10-25 00:32 |
@@ -63,10 +63,10 @@ whenever you log an entry.
 
 | Who | GitHub | Role | Branch | Owns (paths) | Now |
 |---|---|---|---|---|---|
-| Saliha | `saliha006` | Bot layer; doc owner | `sali` | `bot/`, `runs/` (git-ignored) | bot plays live games through `Agent.choose`; next: task 5 eval harness |
+| Saliha | `saliha006` | Bot layer; doc owner | `sali` | `bot/`, `runs/` (git-ignored) | demo frozen at 10:30 (today's bot, `--teams bot/teams/standin/team_6.txt`); README rewritten; next: merge teammates' eval files into the README table, Devpost |
 | Nate | `aldrichbanas07` | Data layer | `nate-data` | `data/` (`data/pipeline/`, `data/tests/`, `data/set_candidates.json`; `data/raw/` and `data/clean/` git-ignored), `contracts/turns.md`, the Tiger service `oxhack-data` | set file and turns table done; next: team-conditioned priors (A6) after the demo |
-| Derrick | `RandomGeeb` | Decision layer | `derrick` | `decision/`, `tests/`, `contracts/battle_state.py` | own unmerged work dropped (`derrick` kept as archive); Kenar's `Kenar-coherent-sets` is the decision layer's source of truth; next: TBD |
-| Kenar | `kxnar` | TBD | `Kenar-coherent-sets` | TBD | joined 2026-10-25; getting set up |
+| Derrick | `RandomGeeb` | Decision layer | `derrick` | `decision/`, `tests/`, `contracts/battle_state.py` | own unmerged work dropped (`derrick` kept as archive); Kenar's `Kenar-coherent-sets` is the decision layer's source of truth; next: TBD · *(10:27: eval slice `mcts-headline`; `decision/` split with @kenar TBC)* |
+| Kenar | `kxnar` | Search + prediction (MCTS decision layer on `main`) | `Kenar-mcts`, `Kenar-coherent-sets` | TBC: authored `decision/search.py`, `prediction/`, `evaluation/`, `analysis/`, `docs/`; `decision/` shared with @derrick | MCTS is the demo default; eval slice `mcts-headline`; answer the Tera-gate ⚠️ row |
 
 **Shared** (anyone may edit; flag it in ⚠️ Conflicts): {{e.g. `contracts/*`, `fixtures/*`, compose files}}
 
@@ -79,7 +79,7 @@ whenever you log an entry.
 4. {{Access to the deploy target, data and secrets: where each lives. Never in git or chat}}
 
 ## 📊 Latest (volatile facts live only here)
-- **`main` (2026-10-25 08:10):** Kenar's MCTS + coherent-set merge (PR #1, 07:01; MCTS 8 worlds × 150 ms default, coherent priors opt-in) + live demo search view + MCTS eval pairings. One live demo game on saliha's Windows laptop: won, 0/33 fallbacks, think p99 2.1 s. No MCTS-vs-baseline win rate measured yet (evals running to 09:30).
+- **`main` (2026-10-25 10:27) @ `51a8a5c`:** demo frozen at today's bot (MCTS 8 worlds × 150 ms, 1 thread, usage priors, no flags) with `--teams bot/teams/standin/team_6.txt`. Demo battles vs SimpleHeuristics today: 8–0 (Wilson 68–100%), 0 fallbacks, think p50 ~1.4 s, p99 ≤2.5 s; the three with `team_6.txt` took 19–23 turns. Eval vs Foul Play `fphard` (saliha, seed 104): `mcts8` 2–2 (15–85%), `mcts8joint` 4–7 (15–65%); several of those games overlapped a demo battle. Nate reports `mcts8t4` vs `mcts8` 11–3 (52–92%), file not merged yet. `mcts-headline` (derrick, kenar) not merged yet.
 - **As of 2026-10-25 00:58:** `main` @ `4e88dac` · tests: 148 green, 100% coverage (`uv run pytest --cov=decision`) · smoke: 10/10 games vs RandomPlayer finished unattended, 10 won, think p50 ~65 ms / p99 ~300–700 ms, fallback rate 12.7% (all from the two `belief.py` bugs, Open board) · deploy: none yet
 - **Backtest (`derrick` @ `9f86111`):** dropped 2026-10-25 06:41, branch kept as an archive; its numbers stay in Log entries 04:15 and 04:55.
 - **Data (Tiger `oxhack-data`, 2026-10-25 03:00):** `battles` 2,506,142 games · `battle_logs` 2,506,142 (uncompressed, 9.2 GB) · `turns` 489,840 rows from 20,000 games (15k train / 5k test) · HP-heuristic test log loss 0.6407, Brier 0.2246 · opponent switch rate 19.2% of acted turns
@@ -88,6 +88,29 @@ whenever you log an entry.
 ---
 
 ## Log (newest first)
+
+### 2026-10-25 10:27 — docs — Demo frozen with team_6 pinned; README, PRD v4, briefs and question bank rewritten — @saliha
+- **Where:** `sali` @ `51a8a5c` · merged to `main`: yes (README); shared docs on `context` @ `16c957b`, `6567f3d`, `4fa5b77`, `f3c06ad`, `832ba97`, `166b0a8`, `8c6907f`, `b16da98`
+- **Did:**
+  - **Eval (seed 104, machine saliha, 08:46–09:45):** `mcts8` vs `fphard` 2–2; `mcts8joint` vs `fphard` 4–7. The run resumed across opt-in-only commits by moving the old manifest to `runs/eval-manifest-7ec059b.json`, after checking the three arm configs were identical; joint games 1 and 3 ran at `7ec059b`. Games 11 and 15 (`mcts8`) and 9, 11 and 25 (joint) overlapped a demo battle on the same laptop.
+  - **Demo, no code change:**
+    - Pinned `--teams bot/teams/standin/team_6.txt`. It had the best win rate, the shortest games (one-ply median 24 turns, 11/11 in ≤35) and the best set-guess accuracy (65% item, 57% Tera) of the teams we demoed.
+    - Kept today's bot with no flags, because no flag had a merged result clearing the rule.
+    - 8 demo battles, 8–0, 0 fallbacks; battle chat verified (`|c|☆oxhack demo|` lines, no "must be registered").
+  - **README rewritten for judges:**
+    - The three layers, how they fit the HRT brief and the TIME theme, and today's results with Wilson intervals.
+    - How to run it, the design choices, and the limits.
+    - Where the ideas, data and libraries come from. All code is ours; the ideas came from Foul Play and Laplace.
+  - **`context`:**
+    - PRD v4 describes `main` as built; Derrick's 06:41 request is applied.
+    - New current-tasks blocks in every brief, and a new `builder-file-kenar.md`.
+    - `CLAUDE.md` Registry and stack lines, plus dated banners on stale design docs.
+    - `design-decision/hrt-question-bank.md` for the judges. "Joint priors" are now called observed-set priors in prose; the code names are unchanged so today's eval files still match.
+- **Touched:** `README.md`, `progress.md`; `context`: `CLAUDE.md`, PRD, `builder-files/*`, `design-decision/*`, `CURRENT-STATUS.md`
+- **Brief task:** builder-file-saliha.md tasks 2–5 → 🟡 part (eval merge still waits on files)
+- **⚠️ Conflicts:** @derrick @nate @kenar: your briefs have new current-tasks blocks, and @kenar has a new brief (Open board row). `decision/` ownership between @derrick and @kenar is marked TBC in the PRD and briefs.
+- **📨 Needs:** @derrick @kenar @nate: your `runs/eval/<machine>-*.jsonl` files (08:20 row)
+- **Status:** open
 
 ### 2026-10-25 08:36 — feat — Demo posts its thinking to the battle chat and takes the Tera gate — @saliha
 - **Where:** `sali` · merged to `main`: yes
@@ -167,7 +190,7 @@ whenever you log an entry.
 - **⚠️ Conflicts:** @nate: the 1825-cutoff proposal is withdrawn, so the set file needs no rebuild for it. @saliha: once Kenar's branch merges, `bot/` changes too (`eval.py`, `parser.py`, `player.py`, `demo.py`, `smoke.py`); it needs your yes first
 - **📨 Needs:** @kenar: merge plan (Open board row). @saliha: PRD NOW update (Open board row)
 - **Agreed by:** @derrick, @saliha, @nate, @kenar (whole team, per @derrick)
-- **Status:** resolved by @kenar 2026-10-25 07:01 (PR #1 merged to `main`)
+- **Status:** resolved by @kenar 2026-10-25 07:01 (PR #1 merged to `main`) · PRD NOW request resolved by @saliha 2026-10-25 10:27 (PRD v4 on `context` @ `16c957b`)
 
 ### 2026-10-25 06:13 — eval — Coherent OU mixture improves forecasts but not battle screening — @kenar
 - **Where:** `Kenar-coherent-sets`, compared with isolated `a8613b9`; not merged into the concurrent policy branch.
