@@ -45,7 +45,14 @@
 
 ---
 
-## 3. ▶ Current tasks (2026-10-24 21:10 UTC, pass 9 build plan), in order
+## 3. ▶ Current tasks (2026-10-25 06:41 UTC)
+*Kenar's `Kenar-coherent-sets` is the decision layer's source of truth: MCTS default, `one_ply` for comparisons, reworked belief, coherent priors opt-in (whole team agreed; `progress.md` 2026-10-25 06:41). The `derrick` branch (backtest CLI, `choose_public`, Tiger dump) is kept as an archive and won't be merged; the 1825-cutoff proposal is withdrawn.*
+
+1. ⬜ Next task: TBD with @kenar.
+
+── Archived (superseded 2026-10-25 — do NOT action) ──
+
+### Pass 9 build plan (2026-10-24 21:10 UTC)
 *Status: ⬜ not started · 🟡 in progress · ⏸ blocked · ✅ done · Hours = focused work. Total ≈ 13 h, the heaviest load: tasks marked "proposed hand-over" can move to nate or saliha if you say yes.*
 
 1. ⬜ **Turn-time profile** (0.5 h; old task 7): p50 / p99 of one `choose` on real states. It sets the eval think budget (1.0 s proposed) and whether the MCTS arm (task 10) is worth building.
