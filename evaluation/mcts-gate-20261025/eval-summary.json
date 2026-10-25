@@ -1,0 +1,90 @@
+{
+  "pairings": {
+    "mcts-current": {
+      "a": "mcts1",
+      "b": "full",
+      "games": 2,
+      "planned": 20,
+      "win_rate": 0.5,
+      "wilson_95": [
+        0.09452865480086614,
+        0.9054713451991339
+      ],
+      "team_bootstrap_95": [
+        0.5,
+        0.5
+      ],
+      "teams": 1,
+      "fallback_rate": 0.0,
+      "worst_game_p99_ms": 406.9,
+      "think_p50_ms": 181.8,
+      "think_p95_ms": 209.1,
+      "think_p99_ms": 528.1,
+      "actual_search_ms": 22835.021545004565,
+      "rejected_choices": 0,
+      "fallback_reasons": {},
+      "requested_worlds": 139,
+      "completed_worlds": 139,
+      "failed_worlds": 0,
+      "usable_worlds": 139
+    }
+  },
+  "ratings": {
+    "mcts1": {
+      "elo": 1000.0,
+      "elo_95": [
+        824.1974048930864,
+        1175.8025951069135
+      ]
+    },
+    "full": {
+      "elo": 1000.0,
+      "elo_95": [
+        824.1974048930864,
+        1175.8025951069135
+      ]
+    },
+    "random": {
+      "elo": 1000.0,
+      "elo_95": [
+        1000.0,
+        1000.0
+      ]
+    }
+  },
+  "neighbours": [
+    {
+      "step": -1,
+      "level": "mcts1",
+      "elo": 1000.0,
+      "elo_95": [
+        824.1974048930864,
+        1175.8025951069135
+      ],
+      "gap": 0.0,
+      "games": 2,
+      "agent_win_rate": 0.5,
+      "wilson_95": [
+        0.09452865480086614,
+        0.9054713451991339
+      ]
+    },
+    {
+      "step": 1,
+      "level": "random",
+      "elo": 1000.0,
+      "elo_95": [
+        1000.0,
+        1000.0
+      ],
+      "gap": 0.0,
+      "games": 0,
+      "agent_win_rate": null,
+      "wilson_95": [
+        0.0,
+        1.0
+      ]
+    }
+  ],
+  "void_games": 0
+}

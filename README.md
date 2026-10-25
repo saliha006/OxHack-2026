@@ -53,7 +53,8 @@ uv run python -m bot.eval --runs runs/mcts-comparison run --config evaluation/mc
 
 The game commands require a local Showdown server on port 8000. See the
 [implementation](docs/mcts-implementation.md), [adapter audit](docs/mcts-adapter.md),
-[evaluation instructions](docs/mcts-evaluation.md), and [original plan](docs/mcts-plan.md).
+[evaluation instructions](docs/mcts-evaluation.md), [measured results](docs/mcts-results.md),
+[live walkthrough](docs/mcts-live-walkthrough.md), and [original plan](docs/mcts-plan.md).
 Win-probability training and scoring live separately in `prediction/`; install
 their dependencies with `uv sync --group prediction`. A trained model is not used
 by the search backend.

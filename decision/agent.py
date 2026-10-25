@@ -101,9 +101,11 @@ class Agent:
         worker_started = time.monotonic()
         previous_generation = self.worker.generation
         active_world = None
+        prepared = False
         for message in self.worker.stream(request, battle, self.config, cutoff):
             kind = message["kind"]
             if kind == "prepared":
+                prepared = True
                 self.last_trace.update({k: v for k, v in message.items() if k != "kind"})
             elif kind == "world_started":
                 active_world = message["index"]
@@ -141,7 +143,17 @@ class Agent:
             action = fallback
             self.last_trace["fallback_reason"] = ("worker_failure" if self.last_trace["failures"]
                                                    else "no_supported_legal_action")
-        self.worker.chose(request, action)
+        bookkeeping_deadline = min(started + self.budget, time.monotonic() + 0.05)
+        bookkeeping_started = time.monotonic()
+        bookkeeping_error = self.worker.chose(request, action, deadline=bookkeeping_deadline) if prepared else None
+        self.last_trace["bookkeeping_ms"] = (time.monotonic() - bookkeeping_started) * 1000
+        self.last_trace["replay_not_recorded"] = bool(bookkeeping_error) or not prepared
+        if not prepared:
+            self.last_trace["replay_not_recorded_reason"] = "preparation_failed"
+        if bookkeeping_error:
+            self.last_trace["bookkeeping_error"] = bookkeeping_error
+            self.last_trace["worker_restart_required"] = self.worker.process is None
+            log.warning("chosen action retained; replay bookkeeping failed: %s", bookkeeping_error)
         return action.to_choice()
 
     def close(self) -> None:
@@ -150,12 +162,18 @@ class Agent:
             self.worker.close()
             self.worker = None
 
-    def invalidate_choice(self) -> None:
+    def invalidate_choice(self) -> dict | None:
         """A server rejection means the originally planned move is not replay evidence."""
         if self.belief is not None:
             self.belief.last_request = self.belief.last_choice = None
         if self.worker is not None:
-            self.worker.invalidate_choice()
+            error = self.worker.invalidate_choice(deadline=time.monotonic() + 0.05)
+            if error and self.last_trace is not None:
+                self.last_trace["invalidation_error"] = error
+                self.last_trace["replay_not_recorded"] = True
+                self.last_trace["worker_restart_required"] = self.worker.process is None
+            return error
+        return None
 
     def _choose(self, request: dict, battle: BattleState) -> str:
         previous_recoveries = len(self.belief.recovery_events) if self.belief is not None else 0

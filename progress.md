@@ -77,6 +77,7 @@ whenever you log an entry.
 4. {{Access to the deploy target, data and secrets: where each lives. Never in git or chat}}
 
 ## 📊 Latest (volatile facts live only here)
+- **Kenar-mcts baseline, 2026-10-25 04:20 Europe/London:** implementation/prediction tools and 24-game pilot complete on this branch; `one_ply` remains default. Final combined suite: 402 passed, one credential-dependent Tiger integration skipped; subsequent scoring fixes: 20 prediction tests passed. Final hardening smoke: 424/424 worlds usable, zero fallbacks/bookkeeping errors, max decision 1,977 ms. Detailed historical measurements and source hashes: `docs/mcts-results.md`; live explanation: `docs/mcts-live-walkthrough.md`. Larger confirmatory comparison remains configured, not run.
 - **As of 2026-10-25 00:58:** `main` @ `4e88dac` · tests: 148 green, 100% coverage (`uv run pytest --cov=decision`) · smoke: 10/10 games vs RandomPlayer finished unattended, 10 won, think p50 ~65 ms / p99 ~300–700 ms, fallback rate 12.7% (all from the two `belief.py` bugs, Open board) · deploy: none yet
 - **Data (Tiger `oxhack-data`, 2026-10-25 03:00):** `battles` 2,506,142 games · `battle_logs` 2,506,142 (uncompressed, 9.2 GB) · `turns` 489,840 rows from 20,000 games (15k train / 5k test) · HP-heuristic test log loss 0.6407, Brier 0.2246 · opponent switch rate 19.2% of acted turns
 - **On branches, not merged yet:** none from @derrick
@@ -88,12 +89,12 @@ whenever you log an entry.
 ### 2026-10-25 04:03 — feat — Alternative deadline-isolated MCTS and separate prediction evaluation — @kenar
 - **Where:** `Kenar-mcts` · base `main` @ `81c8f1c` · merged to `main`: not yet
 - **Did:** Added stock Gen9/Tera MCTS behind `backend="mcts"`, preserving the one-ply default. One persistent worker contains belief replay, preparation and native search; completed worlds stream before pooling legal visit support. Fixed revelation-preserving belief recovery, full-team sampling, state legality/counters, trace retention and evaluation lifecycle races. The original requested plan is in `docs/mcts-plan.md`.
-- **Measured:** Clean side-swapped integration: 1–1 over two games, 139/139 worlds usable, zero fallbacks/rejections. A frozen-source 24-game pilot across six comparisons is running; it is not a strength claim. Public prediction experiment: 96 eligible replays, chronological 67/14/15 battle split; calibrated logistic test log loss 0.6600 versus HP-only 0.6348, so prediction stays experimental and outside search.
+- **Measured:** Clean side-swapped integration: 1–1 over two games, 139/139 worlds usable, zero fallbacks/rejections. The frozen-source 24-game pilot completed with 7,863/7,863 worlds usable and zero observed MCTS fallbacks, rejected choices or decisions over three seconds. MCTS8 versus one-ply was 3–1 (95% interval 30.1–95.4%); this is not a strength claim. Public prediction experiment: 96 eligible replays, chronological 67/14/15 battle split; calibrated logistic test log loss 0.6600 versus HP-only 0.6348, so prediction stays experimental and outside search.
 - **Touched:** `decision/`, `bot/`, optional BattleState fields, tests, `prediction/`, evaluation configs/artifacts and `docs/` (including a live walkthrough). Real OU priors reused unchanged; no learned reranker or extra opponent weighting added.
-- **Brief task:** user's attached MCTS plan → baseline implementation and prediction tools done; comparative pilot/results documentation in progress
+- **Brief task:** user's attached MCTS plan → baseline implementation, prediction tools, bounded comparisons and live results walkthrough done; larger confirmatory evaluation remains configured
 - **⚠️ Conflicts:** Decision/bot/contract changes overlap Derrick/Saliha's paths; all changes remain on this branch for review. Default backend remains `one_ply`.
 - **📨 Needs:** none for implementation; confirmatory strength evaluation needs more held-out teams/games than the bounded pilot
-- **Status:** open — pilot and final result record pending
+- **Status:** implementation and bounded pilot complete on branch; larger confirmatory study not run
 
 ### 2026-10-25 03:30 — decision — Backtest engine started: Tiger's turns on disk, and four decisions on how it takes data — @derrick
 - **Where:** `derrick` @ `78453b9` · merged to `main`: not yet

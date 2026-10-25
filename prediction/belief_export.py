@@ -23,11 +23,14 @@ def _next_reveals(before: dict, after: dict, them: str):
 
 
 def export_belief_records(runs: Path, priors: dict) -> tuple[list[dict], dict]:
-    rows, skipped, traces_seen, prior_recoveries = [], 0, 0, 0
+    rows, skipped, traces_seen, prior_recoveries, external_roles = [], 0, 0, 0, 0
     for file in sorted((runs / "eval").glob("*.jsonl")):
         for line in file.read_text(encoding="utf-8").splitlines():
             game = json.loads(line)
             for role, artifacts in game.get("artifacts", {}).items():
+                if not artifacts.get("trace"):
+                    external_roles += 1
+                    continue  # external opponents expose their own log/search artifacts, not our posterior trace
                 lines = [json.loads(text) for text in Path(artifacts["trace"]).read_text(encoding="utf-8").splitlines()]
                 decisions = [record for record in lines if record.get("kind") in ("move", "switch") and "state" in record]
                 if not decisions:
@@ -67,4 +70,5 @@ def export_belief_records(runs: Path, priors: dict) -> tuple[list[dict], dict]:
                 score_into(final.snapshot())
     return rows, {"traces": traces_seen, "decisions_without_posterior_excluded": skipped,
                   "revelations": len(rows), "original_prior_recoveries": prior_recoveries,
+                  "external_roles_without_trace": external_roles,
                   "ground_truth_sets": "not supplied; no full-set coverage claim"}

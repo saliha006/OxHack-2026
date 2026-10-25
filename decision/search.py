@@ -64,6 +64,7 @@ def _worker(connection, priors: dict) -> None:
 
     belief = None
     rng = None
+    current_request = None
     try:
         while True:
             job = connection.recv()
@@ -74,11 +75,14 @@ def _worker(connection, priors: dict) -> None:
                     belief.last_request = belief.last_choice = None
                 continue
             if job["kind"] == "chosen":
-                if belief is not None:
-                    belief.chose(job["request"], Action(**job["action"]))
+                if belief is not None and current_request is not None:
+                    # The preceding search job already supplied this request. Resending it after search can
+                    # fill the pipe while a stalled child is no longer receiving messages.
+                    belief.chose(current_request, Action(**job["action"]))
                 continue
             config = job["config"]
             request, battle = job["request"], job["battle"]
+            current_request = request
             preparation_start = time.monotonic()
             try:
                 recovery_start = len(belief.recovery_events) if belief is not None else 0
@@ -102,6 +106,9 @@ def _worker(connection, priors: dict) -> None:
                                  "state_approximations": adapter_diagnostics(request, battle),
                                  "engine_version": version("poke-engine")})
             except BaseException as exc:
+                current_request = None
+                if belief is not None:
+                    belief.last_request = belief.last_choice = None
                 connection.send({"kind": "failure", "error": failure(exc, "preparation")})
                 connection.send({"kind": "done", "scheduled_worlds": 0})
                 continue
@@ -287,19 +294,28 @@ class SearchWorker:
             yield {"kind": "failure", "error": failure(exc, stage)}
             self.close()
 
-    def chose(self, request: dict, action) -> None:
-        if self.connection is not None and self.process is not None and self.process.is_alive():
-            try:
-                self.connection.send({"kind": "chosen", "request": request, "action": asdict(action)})
-            except (BrokenPipeError, OSError):
-                self.close()
+    def _bookkeeping(self, message: dict, *, deadline: float | None, stage: str) -> dict | None:
+        if self.connection is None or self.process is None or not self.process.is_alive():
+            self.close()
+            return {"stage": stage, "type": "worker_unavailable", "message": "worker cannot record replay bookkeeping"}
+        try:
+            self._send_before(message, time.monotonic() + 0.05 if deadline is None else deadline)
+            return None
+        except BaseException as exc:
+            # Bookkeeping must never turn a completed search into an unanswered request.
+            # Replacing this worker also discards any replay choice that could not be invalidated safely.
+            self.close()
+            return failure(exc, stage)
 
-    def invalidate_choice(self) -> None:
-        if self.connection is not None and self.process is not None and self.process.is_alive():
-            try:
-                self.connection.send({"kind": "invalidate"})
-            except (BrokenPipeError, OSError):
-                self.close()
+    def chose(self, request: dict, action, *, deadline: float | None = None) -> dict | None:
+        """Record only the chosen action under the remaining return reserve; retain the request API for callers."""
+        return self._bookkeeping({"kind": "chosen", "action": asdict(action)}, deadline=deadline,
+                                 stage="choice_bookkeeping")
+
+    def invalidate_choice(self, *, deadline: float | None = None) -> dict | None:
+        if self.process is None:
+            return None  # a discarded process cannot retain an invalid replay choice
+        return self._bookkeeping({"kind": "invalidate"}, deadline=deadline, stage="choice_invalidation")
 
     def close(self) -> None:
         if self.process is not None and self.process.pid is not None:

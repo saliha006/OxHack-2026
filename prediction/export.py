@@ -20,9 +20,10 @@ def export_bot_turns(runs: str | Path, *, both_perspectives: bool = False) -> li
             if result["battle"] in seen:
                 raise ValueError("duplicate battle tag in one run; export separate server sessions separately")
             seen.add(result["battle"])
-            artifacts = result.get("artifacts", {}).get("a")
+            artifacts = next((result.get("artifacts", {}).get(role) for role in ("a", "b")
+                              if result.get("artifacts", {}).get(role, {}).get("trace")), None)
             if not artifacts:
-                raise ValueError("game lacks separate artifact paths; cannot safely recover old overwritten traces")
+                raise ValueError("game has no Agent trace artifact; cannot recover posterior states from external search logs")
             trace = [json.loads(line) for line in Path(artifacts["trace"]).read_text(encoding="utf-8").splitlines()]
             if not any(line.get("kind") == "end" for line in trace):
                 raise ValueError("cannot export an incomplete or truncated game trace")

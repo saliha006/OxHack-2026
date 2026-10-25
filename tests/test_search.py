@@ -332,3 +332,143 @@ def test_process_start_failure_closes_bootstrap_pipes_and_allows_clean_restart()
         assert messages[-1]['kind'] == 'done'
     finally:
         worker.close()
+
+
+def done_then_stalls_receiving(connection, priors):
+    connection.recv()
+    connection.send({'kind': 'prepared', 'state_preparation_ms': 0})
+    connection.send({'kind': 'world', 'result': {
+        'index': 0, 'our_visits': [{'choice': 'ironhead', 'visits': 25}],
+        'opponent_visits': [], 'elapsed_ms': 2, 'total_visits': 25, 'error': None}})
+    connection.send({'kind': 'done', 'scheduled_worlds': 1})
+    time.sleep(30)
+
+
+def fill_parent_write_buffer(worker):
+    descriptor = worker.connection.fileno()
+    os.set_blocking(descriptor, False)
+    try:
+        while True:
+            os.write(descriptor, b'x' * 65536)
+    except BlockingIOError:
+        pass
+    finally:
+        os.set_blocking(descriptor, True)
+
+
+class FullPipeAfterDone(SearchWorker):
+    def stream(self, *args, **kwargs):
+        for message in super().stream(*args, **kwargs):
+            if message['kind'] == 'done':
+                fill_parent_write_buffer(self)
+            yield message
+
+
+def test_compact_chosen_message_does_not_resend_large_request_to_stalled_worker():
+    agent = Agent(PRIORS, backend='mcts', budget=3)
+    agent.worker = SearchWorker(PRIORS, target=done_then_stalls_receiving)
+    request = {**REQUEST, 'padding': 'x' * (4 * 1024 * 1024)}
+    before = time.monotonic()
+    try:
+        assert agent.choose(request, copy.deepcopy(EXAMPLE)) == 'move 4'
+        assert time.monotonic() - before < 3
+        assert not agent.last_trace['replay_not_recorded']
+        assert agent.last_trace['fallback_reason'] is None
+    finally:
+        agent.close()
+
+
+def test_post_search_bookkeeping_cannot_stall_or_replace_the_completed_choice():
+    agent = Agent(PRIORS, backend='mcts', budget=3)
+    agent.worker = FullPipeAfterDone(PRIORS, target=done_then_stalls_receiving)
+    before = time.monotonic()
+    try:
+        assert agent.choose(REQUEST, copy.deepcopy(EXAMPLE)) == 'move 4'
+        assert time.monotonic() - before < 3
+        assert agent.last_trace['usable_worlds'] == 1
+        assert agent.last_trace['bookkeeping_error']['type'] == 'TimeoutError'
+        assert agent.last_trace['replay_not_recorded'] and agent.last_trace['worker_restart_required']
+        assert agent.last_trace['fallback_reason'] is None
+        assert agent.worker.process is None
+    finally:
+        agent.close()
+
+
+def test_invalidation_pipe_write_is_bounded_and_discards_uncleared_replay_worker():
+    worker = SearchWorker(PRIORS, target=done_then_stalls_receiving)
+    try:
+        assert list(worker.stream(REQUEST, copy.deepcopy(EXAMPLE), {}, time.monotonic() + 3))[-1]['kind'] == 'done'
+        fill_parent_write_buffer(worker)
+        before = time.monotonic()
+        error = worker.invalidate_choice(deadline=before + .05)
+        assert time.monotonic() - before < .3
+        assert error['stage'] == 'choice_invalidation' and error['type'] == 'TimeoutError'
+        assert worker.process is None and worker.connection is None
+    finally:
+        worker.close()
+
+
+def partially_failed_preparation(connection, priors):
+    import decision.belief
+    from decision.search import _worker
+
+    class BrokenBelief:
+        def __init__(self, *args):
+            self.recovery_events = []
+            self.last_request = {'stale': True}
+            self.last_choice = 'stale'
+            self.updates = 0
+
+        def update(self, battle):
+            self.updates += 1
+            if self.updates > 1:
+                assert self.last_request is None and self.last_choice is None
+            raise ValueError('deliberate partial preparation failure')
+
+        def chose(self, *args):
+            raise AssertionError('an unprepared fallback must never become replay evidence')
+
+    decision.belief.Belief = BrokenBelief
+    _worker(connection, priors)
+
+
+def test_failed_preparation_cannot_record_fallback_against_stale_belief_snapshot():
+    from decision.actions import Action
+    worker = SearchWorker(PRIORS, target=partially_failed_preparation)
+    config = {'seed': 2026, 'frozen_beliefs': False}
+    try:
+        first = list(worker.stream(REQUEST, copy.deepcopy(EXAMPLE), config, time.monotonic() + 3))
+        assert first[0]['error']['stage'] == 'preparation'
+        pid = worker.process.pid
+        worker.chose(REQUEST, Action('move', 1))
+        second = list(worker.stream(REQUEST, copy.deepcopy(EXAMPLE), config, time.monotonic() + 3))
+        assert second[0]['error']['stage'] == 'preparation'
+        assert second[0]['error']['type'] == 'ValueError'
+        assert worker.process.pid == pid and worker.process.is_alive()
+    finally:
+        worker.close()
+
+
+def test_failed_preparation_trace_marks_replay_unrecorded_without_inventing_send_failure():
+    class PreparationFailure:
+        generation = 1
+
+        def stream(self, *args):
+            yield {'kind': 'failure', 'error': {'stage': 'preparation', 'type': 'ValueError', 'message': 'bad state'}}
+            yield {'kind': 'done', 'scheduled_worlds': 0}
+
+        def chose(self, *args, **kwargs):
+            raise AssertionError('unprepared choice must not be sent for replay')
+
+        def close(self):
+            pass
+
+    agent = Agent(PRIORS, backend='mcts')
+    agent.worker = PreparationFailure()
+    try:
+        assert agent.choose(REQUEST, copy.deepcopy(EXAMPLE)) == our_actions(REQUEST)[0].to_choice()
+        assert agent.last_trace['replay_not_recorded']
+        assert agent.last_trace['replay_not_recorded_reason'] == 'preparation_failed'
+        assert 'bookkeeping_error' not in agent.last_trace
+    finally:
+        agent.close()

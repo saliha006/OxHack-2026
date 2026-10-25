@@ -231,7 +231,8 @@ def test_bot_export_uses_completed_artifacts_true_winner_start_time_and_team_has
     raw.write_text("|t:|100\n", encoding="utf-8")
     (tmp_path / "eval-manifest.json").write_text('{"team_hashes":["full-team-hash"]}', encoding="utf-8")
     game = {"winner": "a", "side": "p2", "battle": "battle-1", "team": 0,
-            "artifacts": {"a": {"trace": str(trace), "raw_log": str(raw)}}}
+            "artifacts": {"a": {"external_log": "foul-play.log", "searches": []},
+                          "b": {"trace": str(trace), "raw_log": str(raw)}}}
     (folder / "a.jsonl").write_text(json.dumps(game) + "\n", encoding="utf-8")
     rows = export_bot_turns(tmp_path, both_perspectives=True)
     assert len(rows) == 2 and {r["state"]["us"] for r in rows} == {"p1", "p2"}
@@ -267,9 +268,11 @@ def test_belief_export_scores_the_previous_posterior_before_updating_on_target_r
     raw.write_text((Path(__file__).parents[1] / "bot/tests/fixtures/gen9ou-2703852247.log").read_text(encoding="utf-8"), encoding="utf-8")
     (tmp_path / "eval").mkdir()
     (tmp_path / "eval/a.jsonl").write_text(json.dumps({"battle": "b", "artifacts": {
-        "a": {"trace": str(trace), "raw_log": str(raw)}}}) + "\n", encoding="utf-8")
+        "a": {"trace": str(trace), "raw_log": str(raw)},
+        "b": {"external_log": "foul-play.log", "searches": []}}}) + "\n", encoding="utf-8")
     records, summary = export_belief_records(tmp_path, PRIORS)
     [item] = [r for r in records if r["decision_id"] == "b:1" and r["kind"] == "item"]
     assert item["updated"] == json.loads(json.dumps(before[2]["sets"]))
     assert item["updated"] != json.loads(json.dumps(after[2]["sets"]))
     assert item["revealed"] == "leftovers" and summary["revelations"] > 0
+    assert summary["external_roles_without_trace"] == 1

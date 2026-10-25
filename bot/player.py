@@ -172,12 +172,14 @@ class BattleSession:
         self.rejected_choices += 1
         self.fallback_reasons["rejected_choice"] += 1
         invalidate = getattr(self.agent, "invalidate_choice", None)
+        invalidation_error = None
         if invalidate:
-            invalidate()
+            invalidation_error = invalidate()
         choice = _first_legal(request) if retries == 1 else "default"
         log.warning("%s: choice rejected (retry %d), sending %s", self.tag, retries, choice)
         self.trace.write(json.dumps({"kind": "retry", "choice": choice, "fallback": True,
-                                    "decision_id": self.pending_decision["decision_id"] if self.pending_decision else None}) + "\n")
+                                    "decision_id": self.pending_decision["decision_id"] if self.pending_decision else None,
+                                    **({"invalidation_error": invalidation_error} if invalidation_error else {})}) + "\n")
         return choice
 
     def close(self, won: bool | None, turns: int) -> dict:
