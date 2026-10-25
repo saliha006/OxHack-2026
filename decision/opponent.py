@@ -8,7 +8,7 @@ from contracts.battle_state import BattleState, SideState
 from decision.actions import Action
 
 # Showdown's moves.json (play.pokemonshowdown.com/data), snapshot of 2026-10-24; only `category` is read, for Taunt.
-MOVES = json.loads((Path(__file__).parent / "data" / "moves.json").read_text())
+MOVES = json.loads((Path(__file__).parent / "data" / "moves.json").read_text(encoding="utf-8"))
 
 CHOICE_ITEMS = {"choiceband", "choicespecs", "choicescarf"}
 
