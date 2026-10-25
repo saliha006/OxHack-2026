@@ -13,7 +13,7 @@
 2. **0:30 Live battle:** open the battle room. Point at one chat line and read it: what it played, what it's weighing, what it expects, what it guesses is hidden.
 3. **1:45 Decisions:** the eval table. Same team on both sides, Wilson intervals, vs SimpleHeuristics and vs Foul Play at ladder strength.
 4. **2:30 Predictions, honestly:** guess accuracy, belief scoring and the win-probability model against their baselines. Say plainly where we don't beat the baseline yet.
-5. **3:15 Limits and next steps:** bot opponents, one format, no ladder Elo; next is team-conditioned priors. Credit Foul Play and Laplace.
+5. **3:15 Limits and next steps:** bot opponents, one format, no ladder Elo; next is team-conditioned priors. One line: all code is ours; the sampled-worlds idea comes from Foul Play, and two levers we tested come from Laplace.
 
 ---
 
@@ -376,12 +376,34 @@ On purpose: a 1.5 s pace after each decision, so the audience can read the chat.
 ## 11. Hard questions
 
 **Q: Isn't this just Foul Play?**
-We took Foul Play's core decision idea (MCTS over sampled worlds) and credit it. What's ours:
-- The belief is **explicit and shown live**.
-- The data pipeline and priors experiments: 2.5M replays, Tiger tables, coherent and observed-set priors.
-- The prediction measurement, against baselines on held-out games.
-- An eval that controls for team strength and reports intervals.
-- Laplace's ideas (more threads, the Tera gate) tested under a pre-set rule.
+No. Every line of our bot is our own code. We studied two open-source bots and took **ideas**, not code. The core idea we share with Foul Play is searching several sampled versions of the opponent's team. Everything around that idea is ours, and different (next question).
+
+**Q: How is it different from Foul Play (the `fphard` opponent) and Laplace?**
+First, `fphard` isn't a separate system: it's Foul Play at the strongest setting we run, 4 parallel searches at 900–1100 ms each, about ladder strength. It's the opponent we measure against.
+
+| | **Ours** | **Foul Play** | **Laplace** |
+|---|---|---|---|
+| Code | written by us | its own | its own |
+| What it believes about hidden sets | an **explicit weighted belief** per opponent Pokémon, updated every turn: hard filter on reveals, item inference, damage and speed replay with a 3% floor, guarded `reliable` mode, **scored** against the prior | samples whole sets from its team datasets (uniformly, ignoring how often each was seen), then partial team sets, then Smogon sets | — |
+| Where the prior comes from | **our own pipeline**: Smogon usage stats → candidate sets; optional observed-set blend **weighted by how often each set was seen** | its own team datasets | — |
+| Search per turn | 8 worlds × 150 ms, 1 thread: about **1.2 CPU-seconds** | 4 worlds (8 early in the game) × 900–1100 ms: about **4–8 CPU-seconds** | 8 worlds, **8 engine threads each** |
+| Combining worlds | equal weight (worlds are already drawn in proportion to the belief), **top move** | weighted by sample chance, then **samples among near-best moves** | plain average, with a robust "world-winners" vote option; samples among near-ties |
+| Tera | searched like any other option; gate is opt-in, off | — | Tera only if it tops **2 of 8 worlds** |
+| Deadline | separate **worker process** with a hard 3 s deadline: stalled search is killed and replaced, unfinished worlds aren't started | time per search | — |
+| Shows its reasoning | **every decision in the battle chat** + full trace | no | no |
+| Measured | same-team eval with Wilson intervals; prediction scored against baselines on held-out games | self-reported ladder results | — |
+
+*"—" = not something we checked; we don't claim either way.*
+
+**What that means in plain words:**
+- Our edge is in **knowing what we don't know**: an explicit, measured belief, built from our own data pipeline, which you can watch live.
+- Foul Play's edge is **raw compute**: about 3–6× more search per turn than ours.
+- Laplace's levers (more threads, the Tera gate) are things we **tested** as opt-in arms under a rule set before the runs, rather than adopted on faith. The thread lever is the only one that has cleared the bar so far, barely.
+
+**Q: Did you use anything from them directly?**
+- **No code.**
+- **Data:** our opt-in observed-set priors read Foul Play's **published** counts of sets seen on the ladder, the way we read Smogon's usage stats.
+- **Libraries:** the engine, `poke-engine`, is an open-source library (written by Foul Play's author), used the way we use poke-env and Pokémon Showdown.
 
 **Q: Why should we believe any of your numbers?**
 - The same team plays both sides.
@@ -437,4 +459,7 @@ Neither fits a 25-hour hackathon and our question. RL needs far more compute and
 | Reliability | 7,863/7,863 worlds usable in the pilot; demo think p50 ~1.4 s **[10:00]** |
 | Eval design | same team both sides, sides swapped, Wilson 95% + team bootstrap, manifest guard |
 
-**Credits:** ideas adapted from **Foul Play** (`pmariglia/foul-play`: one MCTS per sampled world, observed complete sets) and **Laplace** (more engine threads per world, the Tera gate). Built on `poke-engine`, poke-env and Pokémon Showdown.
+**Ideas, data and libraries (all code is ours):**
+- **Ideas:** searching several sampled worlds (Foul Play, `pmariglia/foul-play`); more engine threads per world and a Tera gate, both tested as opt-in (Laplace, `influxtion/Laplace-Pokemon-Showdown-AI`).
+- **Data:** Smogon usage stats; HolidayOugi replays; Foul Play's published set counts (opt-in priors only).
+- **Libraries:** `poke-engine`, poke-env, Pokémon Showdown.
