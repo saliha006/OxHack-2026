@@ -38,9 +38,18 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
-| 2026-10-24 20:15 | @saliha | @derrick | 📨 waiting on | New tasks 6–9 in your brief (trace, turn-time profile, win-probability model, maximin LP); the model and LP are your calls. The bot will need `poke-env==0.16.1` in your `pyproject.toml`: OK to add? | 2026-10-24 20:15 |
-| 2026-10-24 20:15 | @saliha | @nate | 📨 waiting on | New tasks 6–8 in your brief: seeded gen9ou team pool (~60 validated teams), eval and demo charts, data card. Training states should come from saliha's parser | 2026-10-24 20:15 |
-| 2026-10-24 19:26 | @derrick | @saliha | 📨 waiting on | Publish from `origin/derrick` @ `a50936e`: `design/decision/11-special-requests.md` + the §7 tick in `design/decision-layer.md`; mirror the two feature 11 decisions in PRD → NOW. (Brief line and publish-script issue resolved by @derrick 2026-10-24 19:40: published with the plain-git steps, `context` @ `79d6713`) | 2026-10-24 19:26 |
+| 2026-10-25 00:46 | @derrick | @saliha | 📨 waiting on | Add to PRD → NOW: "2026-10-25: belief floors contradicted sets: a failed speed/damage replay keeps 3% of a set's weight instead of zero; reveals stay a hard zero, but if nothing fits, the old guesses are kept at the floor. (derrick)" | 2026-10-25 00:46 |
+| 2026-10-25 00:32 | @saliha | @derrick | 🔀 scope proposal | **Decision-layer plan from research pass 10** (`design-decision/strategy-research-pass10.md` on `context`): 4 specialist agents + a cross-check, peer-reviewed + official source + our own measurements. Core ~4.5 h: (1) instrumentation, (2) the two `belief.py` crash fixes + a floor (these caused the 12.7% fallbacks), (3) dual-path featurizer, (5) logistic `LearnedValue` behind a flag with HP fallback; stretch: switch share + quantal opponent model, then pool/depth-2/LP default-off. All your call; key measured facts: one-ply dominance drops Swords Dance and the top-3 EVs on our test position are 0.503/0.501/0.497, so the HP value is the weak point | 2026-10-25 00:32 |
+| 2026-10-25 00:32 | @saliha | @nate | 📨 waiting on | Pass 10 proposes you train + calibrate the logistic win-probability model (step 4, 1.5–2 h, in parallel with derrick's featurizer) and count the real opponent switch rate from replays (0.3 h). Needs your 20k extract; if it isn't on disk by ~02:00 UTC the demo ships the HP value. Yes/no? | 2026-10-25 00:32 |
+| 2026-10-25 00:30 | @derrick | @nate | ⚠️ conflict | **Team-conditioned set priors (A6): yes, please build it after the demo.** Starting sets per opponent Pokémon from past games whose teams match theirs. Fallback: require all 5 teammates to match, then one fewer at a time until at least N games match (N is your call); at 0 it's the general priors. Belief needs it at team preview, so it's a function of their six, not a fixed file: agree the shape with @derrick first | 2026-10-25 00:30 |
+| 2026-10-24 23:27 | @saliha | @all | ⚠️ conflict | **Timeline moved up: demo ready 04:00–06:00 UTC**, presentation 06:00–09:00 (PRD §19). Whatever you want in the demo needs to be on `main` by 04:00 UTC: @nate set candidates + team pool, @derrick the two belief fixes. The eval rerun on real priors only happens if it can finish by ~05:30. @derrick: the backtesting frontend is still undecided; say if you want it and who builds it | 2026-10-24 23:27 |
+| 2026-10-24 20:52 | @saliha | @all | ⚠️ conflict | `context` now holds only `CLAUDE.md`, the PRD, `builder-files/` and `design-decision/` (was `design/`). Skills, the event doc and the research doc are local now. Sync with `git archive origin/context | tar -x`, then delete your old `design/` copy. Publish steps are in `CLAUDE.md` | 2026-10-24 20:52 |
+| 2026-10-24 20:36 | @saliha | @derrick | ⚠️ conflict | The parser is on `main`: `from bot.parser import Parser, states_from_log`. `Parser(us).feed(line)` per protocol line, `.snapshot()` per request. Unblocks your task 3 (build_state on a parser-made BattleState) | 2026-10-24 20:36 |
+| 2026-10-24 20:36 | @saliha | @nate | ⚠️ conflict | The parser is on `main`: `states_from_log(log_lines, us)` gives one `BattleState` per turn of a saved replay, for your (state, winner) pairs | 2026-10-24 20:36 |
+| 2026-10-24 22:49 | @saliha | @derrick @nate | ⚠️ conflict | Forme mismatch at the BattleState ↔ set-candidates seam: a Keldeo with Secret Sword shows in battle as `keldeoresolute`, but team files (and likely chaos stats) key it `keldeo`, so `Belief.__init__` raises `KeyError` and that game falls back on every turn. Same risk for other battle-only formes. Needs one agreed rule: map battle-only formes to the base species (where? parser, belief lookup, or the set file's keys) | 2026-10-24 22:49 |
+| 2026-10-24 21:47 | @saliha | @derrick | ⚠️ conflict | I added `poke-env==0.16.1` to your `pyproject.toml` (and `uv.lock`). `scikit-learn` and `matplotlib` come with the tasks that need them. The bot is live: `uv run python -m bot.smoke --games 10` | 2026-10-24 21:47 |
+| 2026-10-24 21:15 | @saliha | @derrick | 🔀 scope proposal | Your brief is reordered by the pass 9 build plan (two research passes + a critique: peer-reviewed papers, official source, practitioner consensus, our code and the PRD). Every "Recommended" line is advice: accept it or pick your own route (decision-layer calls are yours). Key finding: poke-engine's built-in MCTS hard-wires its Rust eval, so the learned value + LP stay in our Python loop. Also yes/no on handing task 8 (belief scoring) to nate and the coach to saliha: you're at ~13 h | 2026-10-24 21:15 |
+| 2026-10-24 21:15 | @saliha | @nate | 🔀 scope proposal | Your brief is reordered by the pass 9 build plan (research-backed; accept each item or pick your own route). Order: set candidates first (no priors, no agent; on `main` by 01:00 UTC), ladder = one `curl`, team pool from `jakegrigsby/metamon-teams`, then a ~100k-game Parquet + DuckDB extract with the first 20k to derrick by 01:00 UTC. Your branch is any branch with `nate` in its name | 2026-10-24 21:15 |
 | 2026-10-24 19:16 | @saliha | @all | ⚠️ conflict | `scripts/` and every skill except `debug` and `no-slop` are gone from `context`. Keep your local copies (they stay git-ignored); `sync`/`publish` won't update from `context` any more | 2026-10-24 19:16 |
 | 2026-10-24 18:14 | @derrick | @nate | ⚠️ conflict | `contracts/set-candidates.md` (on `derrick`) defines the set file your data layer would build for belief: 30 weighted sets per species + trimmed usage, chaos 1825 / 2026-09. Next: yes/no on the shape and on `data/set_candidates.json` as its path | 2026-10-24 18:14 |
 
@@ -53,8 +62,8 @@ whenever you log an entry.
 
 | Who | GitHub | Role | Branch | Owns (paths) | Now |
 |---|---|---|---|---|---|
-| Saliha | `saliha006` | Bot layer; doc owner | `sali` | `bot/` {{paths tbd}} | brief task 1: decide the bot skeleton (poke-env / local server / format) |
-| Nate | `aldrichbanas07` | Data layer | {{nate's branch}} | `data/` {{paths tbd}} | brief task 1: start the ladder snapshotter |
+| Saliha | `saliha006` | Bot layer; doc owner | `sali` | `bot/`, `runs/` (git-ignored) | bot plays live games through `Agent.choose`; next: task 5 eval harness |
+| Nate | `aldrichbanas07` | Data layer | any branch with `nate` in it (now `Data-stuff-(Nate)`) | `data/` {{paths tbd}} | brief task 1: set candidates (pass 9 order) |
 | Derrick | `RandomGeeb` | Decision layer | `derrick` | `decision/`, `tests/`, `contracts/battle_state.py` | feature 11 built on `derrick`; tasks 3–4 wait on the parser and set candidates |
 
 **Shared** (anyone may edit; flag it in ⚠️ Conflicts): {{e.g. `contracts/*`, `fixtures/*`, compose files}}
@@ -68,12 +77,127 @@ whenever you log an entry.
 4. {{Access to the deploy target, data and secrets: where each lives. Never in git or chat}}
 
 ## 📊 Latest (volatile facts live only here)
-- **As of 2026-10-24 19:00:** `main` @ `5e203fc` · tests: 140 green, 100% coverage (`uv run pytest --cov=decision`) · deploy: none yet
-- **On branches, not merged yet:** @derrick `derrick` @ `a50936e`: feature 11 (type-matchup lead), 144 tests green, 100% coverage
+- **As of 2026-10-25 00:58:** `main` @ `4e88dac` · tests: 148 green, 100% coverage (`uv run pytest --cov=decision`) · smoke: 10/10 games vs RandomPlayer finished unattended, 10 won, think p50 ~65 ms / p99 ~300–700 ms, fallback rate 12.7% (all from the two `belief.py` bugs, Open board) · deploy: none yet
+- **On branches, not merged yet:** none from @derrick
 
 ---
 
 ## Log (newest first)
+
+### 2026-10-25 00:58 — feat — Type-matchup lead is on main; all of derrick's code is now on main — @derrick
+- **Where:** `derrick` @ `a50936e` · merged to `main`: yes (cherry-picked as `4e88dac`; `derrick` and `main` share no history, so a merge was refused and would have brought the old doc commits along)
+- **Did:** Team preview now sends the lead with the best average STAB type edge against their six (`decision/lead.py`), as PRD → NOW records. `derrick` stops tracking the shared docs (main's ignore rules plus `design/`), so nothing doc-shaped can reach `main` from it. 148 tests, 100% coverage.
+- **Touched:** `decision/lead.py`, `decision/data/typechart.json`, `decision/agent.py`, `decision/actions.py`, `tests/test_lead.py`, `tests/test_agent.py`
+- **Brief task:** feature 11 (lead) → ✅ done
+- **⚠️ Conflicts:** @saliha: team preview no longer sends `team 123456`; the lead depends on their six, so eval/demo runs may lead differently than before
+- **📨 Needs:** none
+
+### 2026-10-25 00:46 — fix — Belief no longer crashes on Ruination or an empty belief; contradicted sets are floored — @derrick
+- **Where:** `derrick` @ `e683a12`, `5a2b9d8`, `4e9bcf1` · merged to `main`: yes (cherry-picked: `b371346`, `03a3203`, `4e9bcf1`; the rest of `derrick` waits until its tracked docs are removed)
+- **Did:** Fixed saliha's three belief reports. (1) Fixed-damage moves like Ruination return one damage value; read it as both max and crit. (2) When every set and the usage rebuild fail the reveal filter, keep the old guesses at a floor instead of an empty belief. A set that fails the speed/damage replay now keeps 3% of its weight (`FLOOR = 0.03`) instead of zero, so one misread line can't wipe out the true set. (3) Data files read as UTF-8 for Windows. 148 tests on `derrick`, 144 on `main`, 100% coverage.
+- **Touched:** `decision/belief.py`, `decision/state.py`, `decision/opponent.py`, `tests/test_belief.py`, `tests/test_reweight.py`
+- **Brief task:** derrick task 2 (belief floor) → ✅ done
+- **⚠️ Conflicts:** @saliha: belief now never empties, so the smoke run's fallback-every-turn from these two bugs should stop; rerun when convenient. One behaviour change: if no set passes the replay, belief keeps them at their old weights instead of rebuilding from usage
+- **📨 Needs:** @saliha: the PRD → NOW line (board row)
+- **Status:** open
+
+### 2026-10-25 00:32 — docs — Research pass 10: a decision-layer plan for derrick; A6 line added to PRD NOW — @saliha
+- **Where:** `context` @ `4f5e5c7` (`design-decision/strategy-research-pass10.md`, PRD NOW) · merged to `main`: n/a
+- **Did:** saliha asked for specialist research on the move-choice problem (our move × their move × hidden set × dice, collapsed to a matrix per turn). Four agents (search, belief, opponent model + value, speed) and a cross-check under the research protocol. Verdict: a one-ply expected-value agent with a learned leaf. Fix the belief crashes first, then a calibrated logistic value behind a flag; depth-2, process pool and LP are default-off stretch. Measured: poke-engine never releases the GIL (use processes); Python ~1.1–1.6 ms per cell; on our test position one-ply dominance drops Swords Dance and the top-3 EVs are within 0.006. Also added derrick's A6 decision to PRD → NOW (closes his row).
+- **Touched:** `design-decision/strategy-research-pass10.md`, PRD NOW
+- **Brief task:** none
+- **⚠️ Conflicts:** @derrick: proposal for your layer (Open board); @nate: proposed training hand-over
+- **📨 Needs:** @derrick: accept or change the plan; @nate: yes/no on step 4
+- **Status:** open
+
+### 2026-10-25 00:30 — decision — Team-conditioned set priors (A6): yes, with a stepped fallback — @derrick
+- **Where:** `context` (`design-decision/predictions.md`) · merged to `main`: n/a
+- **Did:** Said yes to nate's proposal: starting set guesses for each opponent Pokémon come from past games whose teams match theirs, which beats the general usage file. Fallback: require all 5 teammates to match, then one fewer at a time until at least N games match; at 0 it's the general priors.
+- **Touched:** `design-decision/predictions.md` (A6)
+- **Brief task:** none
+- **⚠️ Conflicts:** @nate: you build it (data layer), after the demo. Belief reads it at team preview, so the hand-off is a function of their six; agree the shape with @derrick before building
+- **📨 Needs:** @saliha: the PRD → NOW line (board row) · @nate: pick N
+- **Agreed by:** @derrick (decision-layer choices are his, PRD → NOW); proposed by @nate
+- **Status:** open
+
+### 2026-10-24 23:49 — feat — Demo mode: live battle streamed turn by turn, or replayed offline — @saliha
+- **Where:** `demo-mode` → `main` @ `ecbb278` · merged to `main`: yes
+- **Did:** `uv run python -m bot.demo live --priors-from-teams` starts a battle vs SimpleHeuristics, prints the URL to watch it and streams each turn: the choice in words ("Icicle Crash + Tera", "switch to Zapdos"), both actives with HP and Pokémon left, think time, and any field the agent adds (shown generically, so a new prediction field needs no demo change). `--pace` slows our side so judges can follow. `bot.demo replay runs/<battle>.jsonl` replays a saved game offline. Two live test games ran: one won in 44 turns.
+- **Touched:** `bot/demo.py`, `bot/player.py` (trace label + per-decision callback), `bot/tests/test_demo.py`, `bot/tests/test_player.py`
+- **Brief task:** saliha task 7 ✅
+- **⚠️ Conflicts:** @derrick: anything you put in `agent.last_trace` shows up in the demo stream as `key: value`; no shape is assumed
+- **📨 Needs:** none
+
+### 2026-10-24 23:10 — feat — Foul Play tops the eval ladder; full eval run started — @saliha
+- **Where:** `eval-foulplay` → `main` @ `61b10cc` · merged to `main`: yes
+- **Did:** Foul Play (pmariglia, same `poke-engine` 0.0.48 build) runs as three uneven search-time levels (40–80, 150–260, 450–700 ms) in its own venv inside a git-ignored `foul-play/`. Each shard feeds it a team list in its own game order so games stay same-team; it downloads real Smogon stats, so it needs internet once. Measured: Foul Play at 200 ms beat our agent in 50 turns. Turn-0 games are now void (Foul Play crashes on Keldeo-Resolute too, so team 7 left the pool). `*.env` is ignored now: `saliha-tiger.env` was not covered by `.env*`. Full run: 27 pairings, 1,750 games, 5 shards, stand-in priors from the 10 pool teams.
+- **Touched:** `bot/eval.py`, `bot/tests/test_eval.py`, `.gitignore`, `bot/teams/standin/`
+- **Brief task:** saliha task 5 🟡 (full run in progress)
+- **⚠️ Conflicts:** @nate: your `.env` file must end in `.env` or start with `.env` to stay ignored
+- **📨 Needs:** none new
+
+### 2026-10-24 22:53 — feat — Elo ladder in the eval — @saliha
+- **Where:** `eval-ladder` → `main` @ `f36a4c7` · merged to `main`: yes
+- **Did:** saliha picked option B (our bots + Foul Play on top). This part adds the levels we already have: SimpleHeuristics mixed with random moves at uneven rates (83/58/31/12%) and MaxBasePower at 46%, so steps aren't even and levels overlap; our agent variants are levels too. The agent plays every level (40 games), neighbouring levels play each other (30), 1,540 games in all. `report` fits Bradley-Terry ratings on the Elo scale (Random = 1000) with bootstrap intervals and lists the levels ±1–3 places around the agent. This is an internal ladder Elo, not a Showdown ladder Elo. Foul Play levels come next.
+- **Touched:** `bot/eval.py`, `bot/tests/test_eval.py`
+- **Brief task:** saliha task 5 🟡
+- **⚠️ Conflicts:** none
+- **📨 Needs:** none new
+
+### 2026-10-24 22:49 — feat — Eval is blind and varied — @saliha
+- **Where:** `eval-blind` → `main` @ `10f123a` · merged to `main`: yes
+- **Did:** One seeded shuffled schedule across every pairing; opponents get random account names and a right-skewed random think time before each move (median 0.25 s, capped at 3 s); each game draws a random team from the pool for both sides. Stand-in priors merge every set across 11 validated Metamon `competitive/gen9ou` teams (5 of 16 fail now Tera Blast is banned), so belief faces real uncertainty until `data/set_candidates.json` lands. Fixed: trailing blank lines in team files made poke-env parse an empty 7th Pokémon. Results now live in `runs/eval/<machine>-<shard>.jsonl` with the battle tag.
+- **Touched:** `bot/eval.py`, `bot/smoke.py`, `bot/teams/standin/`, `bot/tests/test_eval.py`, `bot/tests/test_smoke.py`
+- **Brief task:** saliha task 5 🟡
+- **⚠️ Conflicts:** @derrick @nate: forme mismatch (`keldeoresolute` vs `keldeo`), Open board
+- **📨 Needs:** an agreed forme rule from @derrick and @nate
+- **Status:** open
+
+### 2026-10-24 22:33 — feat — Eval harness: agent ablations vs baselines and each other — @saliha
+- **Where:** `sali` @ `fa8f4ed` · merged to `main`: yes (fast-forward)
+- **Did:** `bot/eval.py`, saliha's pick of an improved prediction-centred design: headline full agent vs SimpleHeuristics (300); a data ladder: full vs frozen-prior belief (200), frozen prior vs flat prior (200); 5 scenarios vs 1 (200); MaxBasePower 100, Random 30. Same team on both sides, sides alternate, so results measure play, not teams. The think-time curve was dropped: think p50 is ~65 ms, so the budget never binds. Shards are separate processes appending one line per game; reruns skip finished games; `report` merges every machine's files with Wilson + team-bootstrap intervals. Ablations wrap `Agent`/`Belief` in `bot/`, so `decision/` is untouched. 2+2-game smoke passed.
+- **Touched:** `bot/eval.py`, `bot/player.py` (summary records our side), `bot/tests/test_eval.py`
+- **Brief task:** saliha task 5 🟡 (built; final run waits on the team pool, real priors and the belief fixes)
+- **⚠️ Conflicts:** @derrick: the ablations subclass `Belief` (`FrozenBelief`, `FlatBelief`) and pre-set `Agent.belief`; renaming `candidates`, `previous` or the `belief` attribute breaks them. @nate: `--teams` takes a folder of team files: one Showdown-export team per file, nothing else in it
+- **📨 Needs:** none new
+- **Status:** open
+
+### 2026-10-24 21:47 — feat — Bot plays live Showdown games through the decision layer — @saliha
+- **Where:** `sali` @ `d8bf19f` · merged to `main`: yes (fast-forward)
+- **Did:** Rust + uv installed so `poke-engine` builds on saliha's machine. `bot/player.py`: a poke-env player feeds each whole message to our parser before poke-env answers (measured on the local server: the log always lands before the request, incl. forced switches), calls `Agent.choose`, and writes `runs/<battle>.log`, `.jsonl` trace and `.decision.log`. Rejected choices retry with the first legal option, then `default`; Showdown's timer ends any hung battle. `bot/smoke.py` runs N games vs RandomPlayer: 10/10 finished, 10 won. Stand-in team `bot/teams/standin-gen9ou.txt` (Metamon `competitive/gen9ou` team 5; 5 of those 16 teams fail validation now that Tera Blast is banned).
+- **Touched:** `bot/player.py`, `bot/smoke.py`, `bot/teams/`, `bot/tests/test_player.py`, `bot/tests/test_smoke.py`, `pyproject.toml`, `uv.lock`
+- **Brief task:** saliha tasks 1, 2, 3 ✅; task 4 (trace) 🟡: written every turn, waits on `agent.last_trace` for top options and win probability
+- **⚠️ Conflicts:** @derrick: `poke-env` added to your `pyproject.toml`; two `belief.py` bugs found live (Open board). @nate: the example priors cover 2 species, so the agent falls back on every turn until `data/set_candidates.json` exists; smoke uses `--priors-from-team` to test the plumbing meanwhile
+- **📨 Needs:** @nate: set candidates (your task 1) unblock real play
+- **Status:** open
+
+### 2026-10-24 21:15 — scope — Pass 9 build plan: every brief reordered, PRD filled — @saliha
+- **Where:** `context` @ `9de3c7f` (PRD v3, all three briefs, `CLAUDE.md` @ `d57de97`) · merged to `main`: n/a (docs branch)
+- **Did:** Two research agents (decision/prediction; bot/data/eval/demo) and a critic set a recommended design and an order for every feature; all three briefs now follow it and PRD §1–§22 are filled. Biggest changes: the bot runs one blocking `Agent` per shard process (the `Agent` is stateful), the eval headline is a team-neutral 300-game leg vs SimpleHeuristics, the value model goes logistic first, the LP is flagged and default off, and the live client needs internet (record a fallback video). `CLAUDE.md` §2c: builders may extend their own area after their Claude asks whether the team knows.
+- **Touched:** PRD, `builder-file-saliha/derrick/nate.md`, `CLAUDE.md`
+- **Brief task:** none (plan change)
+- **⚠️ Conflicts:** @derrick, @nate: your task lists are renumbered and reordered (old tasks archived at the bottom of each brief, nothing deleted)
+- **📨 Needs:** @derrick: three dependency OKs; yes/no on the hand-overs. @nate: confirm your branch; set candidates first
+- **Agreed by:** saliha (proposer); derrick and nate to accept or change their items (Open board rows)
+- **Status:** open
+
+### 2026-10-24 20:52 — docs — One project folder; context trimmed to the plan docs — @saliha
+- **Where:** `context` @ `1a96e99` · `main` @ `ab7b121` (`.gitignore`) · merged to `main`: yes
+- **Did:** Rebuilt saliha's checkout as one folder (no sibling worktrees; the Showdown server sits in a git-ignored `pokemon-showdown/`). `context` keeps `CLAUDE.md`, the PRD, the three briefs and `design-decision/`; skills, the event doc and the research doc stay local, and research is deleted per feature once it ships. `CLAUDE.md` publishes through a temporary git index instead of a second checkout. The PRD's NOW, scope, data, failure modes, evaluation, milestones and open questions are filled from what's built.
+- **Touched:** `context` (all files), `.gitignore`
+- **Brief task:** none
+- **⚠️ Conflicts:** @all: `design/` became `design-decision/`; the skills and the research and event docs left `context` (Open board row)
+- **📨 Needs:** none
+- **Status:** open (the note to @all)
+
+### 2026-10-24 20:36 — feat — Bot layer: log parser to BattleState — @saliha
+- **Where:** `sali` @ `c25be7e` · merged to `main`: yes (fast-forward)
+- **Did:** `bot/parser.py` turns Showdown protocol lines into the contract's `BattleState`. It's pure, so live battles and saved replays use the same code. Replay `gen9ou-2703852247` turn 2 equals `contracts/examples/battle_state_turn2.json`; 20 recent public gen9ou games (383–457 turns) parse with no skipped line. 25 tests, 100% coverage on `bot/`.
+- **Touched:** `bot/__init__.py`, `bot/parser.py`, `bot/tests/test_parser.py`, `bot/tests/fixtures/gen9ou-2703852247.log`
+- **Brief task:** saliha task 3 ✅
+- **⚠️ Conflicts:** @derrick, @nate: new shared entry point (Open board rows). No contract field changed meaning
+- **📨 Needs:** none
+- **Status:** open (the notes to @derrick, @nate)
 
 ### 2026-10-24 20:15 — decision — Bot runs on poke-env, gen9ou, local server; all three briefs get the demo plan — @saliha
 - **Where:** `context` @ `538549d` · merged to `main`: n/a (docs branch)

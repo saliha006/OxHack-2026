@@ -1,11 +1,12 @@
 import copy
+import math
 
 import pytest
 from poke_engine import calculate_damage
 
 from decision.actions import Action
 from decision.adapter import build_state
-from decision.belief import Belief
+from decision.belief import FLOOR, Belief
 from tests.test_belief import PRIORS, cand, event, turn
 from tests.turn2 import EXAMPLE, REQUEST
 
@@ -41,7 +42,8 @@ def belief_after(priors, events):
 
 
 def survivors(belief, names, priors):
-    left = {s for s, _ in belief.candidates[2]}
+    # A set that can't explain the turn stays at the floor weight, so surviving means keeping real weight.
+    left = {s for s, w in belief.candidates[2] if w > 0.1}
     return [name for name, c in zip(names, priors["species"]["gholdengo"]["sets"])
             if any(s.item == c["item"] and s.evs == tuple(c["spread"]["evs"]) and s.nature == c["spread"]["nature"]
                    for s in left)]
@@ -64,6 +66,32 @@ def test_moving_second_rules_out_the_faster_set():
     priors, names = priors_with(**FAST_SLOW)
     belief = belief_after(priors, [us("move", move="ironhead", target="p2"), event("move", 2, move="makeitrain", target="p1")])
     assert survivors(belief, names, priors) == ["slow"]
+
+
+def test_a_set_that_cant_explain_the_turn_drops_to_the_floor():
+    priors, _ = priors_with(**FAST_SLOW)
+    belief = belief_after(priors, [event("move", 2, move="makeitrain", target="p1"), us("move", move="ironhead", target="p2")])
+    weight = {s.item: w for s, w in belief.candidates[2]}
+    assert math.isclose(weight["leftovers"], FLOOR / (1 + FLOOR))
+    assert math.isclose(weight["choicescarf"], 1 / (1 + FLOOR))
+
+
+def test_when_no_set_explains_the_turn_the_weights_stay_as_they_were():
+    priors, names = priors_with(slow=FAST_SLOW["slow"],
+                                sassy=dict(item="leftovers", spread=spread("sassy", [252, 0, 4, 0, 252, 0])))
+    belief = belief_after(priors, [event("move", 2, move="makeitrain", target="p1"), us("move", move="ironhead", target="p2")])
+    assert survivors(belief, names, priors) == ["slow", "sassy"]
+    assert [round(w, 6) for _, w in belief.candidates[2]] == [0.5, 0.5]
+
+
+def test_a_fixed_damage_move_has_one_damage_value():
+    # Ruination always takes half the target's HP, so the engine gives one value instead of a (normal, crit) pair.
+    priors = copy.deepcopy(PRIORS)
+    priors["species"]["gholdengo"]["sets"] = [
+        cand(1.0, ["makeitrain", "ruination", "shadowball", "trick"], ability="goodasgold", tera="steel")]
+    belief = belief_after(priors, [event("move", 2, move="ruination", target="p1"), us("move", move="ironhead", target="p2"),
+                                   us("damage", hp_percent=50, source="move")])
+    assert [round(w, 6) for _, w in belief.candidates[2]] == [1.0]
 
 
 def test_without_our_choice_there_is_no_replay():

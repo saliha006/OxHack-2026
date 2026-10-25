@@ -2,7 +2,10 @@
 name = "oxhack-decision"
 version = "0.1.0"
 requires-python = ">=3.12"
-dependencies = ["poke-engine==0.0.48"]
+dependencies = [
+    "poke-engine==0.0.48",
+    "poke-env==0.16.1",
+]
 
 [dependency-groups]
 dev = ["pytest", "pytest-cov"]

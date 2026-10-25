@@ -6,7 +6,7 @@ from poke_engine import Move, Pokemon, Side
 
 # Showdown's pokedex.json (play.pokemonshowdown.com/data), snapshot of 2026-10-24. The request never sends types or
 # weight, and poke-engine would otherwise treat every Pokémon as a 0 kg Normal type.
-DEX = json.loads((Path(__file__).parent / "data" / "pokedex.json").read_text())
+DEX = json.loads((Path(__file__).parent / "data" / "pokedex.json").read_text(encoding="utf-8"))
 
 STATUS = {"brn": "burn", "par": "paralyze", "slp": "sleep", "frz": "freeze", "psn": "poison", "tox": "toxic"}
 

@@ -6,10 +6,11 @@
 .claude/
 scripts/
 builder-files/
-design/
+design-decision/
 skills/
 Research-Context/
 .env*
+*.env
 data/raw/
 data/clean/
 
@@ -17,3 +18,9 @@ data/clean/
 __pycache__/
 .coverage
 .pytest_cache/
+
+# Local Showdown server checkout and bot run output
+pokemon-showdown/
+runs/
+# Foul Play (strong opponent for the eval ladder), cloned and set up locally
+foul-play/

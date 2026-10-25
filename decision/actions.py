@@ -16,7 +16,7 @@ class Action:
             return f"move {self.slot} terastallize" if self.tera else f"move {self.slot}"
         if self.kind == "switch":
             return f"switch {self.slot}"
-        # A full order, lead first and the rest unchanged; picking the back five is feature 11.
+        # A full order, lead first and the rest unchanged: feature 11 picks only the lead.
         rest = (n for n in range(1, TEAM_SIZE + 1) if n != self.slot)
         return "team " + str(self.slot) + "".join(map(str, rest))
 
