@@ -87,6 +87,13 @@ whenever you log an entry.
 
 ## Log (newest first)
 
+### 2026-10-25 07:19 — fix — Trim team exports at live benchmark import — @kenar
+- **Where:** `Kenar-foulplay-eval`; merged to main: not yet
+- **Did:** Showdown's validator accepted the source export, but poke-env interpreted its trailing blank block as an empty seventh Pokémon. Trim whitespace only at the live team-import boundary; frozen team files remain byte-identical. Added a regression exercising the actual player-construction boundary. Preserved all rejected setup artifacts; no battle was played in those attempts.
+- **Validation:** 44 benchmark/harness tests passed. Replacement immediate-start manifest v3 preserves all 20 game assignments, policies and compute settings. Other evaluations remain running unchanged.
+- **Evidence:** `evaluation/foulplay-benchmark/latest-20-game-immediate-v3-manifest.json`; local supervisor status is smoke phase, scored games pending.
+- **Status:** live smoke restarted with corrected transport setup
+
 ### 2026-10-25 07:18 — eval — Start the 20-game Foul Play benchmark immediately at user request — @kenar
 - **Where:** `Kenar-foulplay-eval`; merged to main: not yet
 - **Did:** User explicitly revoked the wait-for-other-evaluations policy. Stopped only the waiting benchmark supervisor and restarted with immediate launch; other jobs remain unchanged. The 20-game schedule, team/side assignments and both bots' settings remain unchanged.

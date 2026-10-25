@@ -1,5 +1,5 @@
 {
-  "active_manifest": "latest-20-game-immediate-v2-manifest.json",
+  "active_manifest": "latest-20-game-immediate-v3-manifest.json",
   "planned_scored_games": 20,
   "smoke_games_excluded_from_score": 2,
   "superseded": [
@@ -15,6 +15,10 @@
     {
       "manifest": "latest-20-game-immediate-manifest.json",
       "status": "Private-server infrastructure setup failed before any battle; logs preserved locally"
+    },
+    {
+      "manifest": "latest-20-game-immediate-v2-manifest.json",
+      "status": "Live team import rejected trailing whitespace as an empty seventh Pokemon; corrected before any played battle. Setup artifacts preserved."
     }
   ],
   "start_policy": "Immediate start explicitly requested by user; other evaluations remain running and unchanged"
