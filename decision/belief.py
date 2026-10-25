@@ -19,6 +19,9 @@ REBUILD_ITEMS, REBUILD_TERAS, REBUILD_SPREADS = 3, 2, 3
 PERCENT_SLACK = 1.0
 # Damage rolls run from 85% to 100% of the maximum.
 MIN_ROLL = 0.85
+# A contradicted set keeps this share of its weight instead of dropping to zero, so a misread line or a rounding miss
+# can't wipe out the true set for good; a second contradiction leaves it at ~0.001.
+FLOOR = 0.03
 
 
 class Belief:
@@ -74,18 +77,22 @@ class Belief:
         replayable = self.last_request is not None and start_active is not None
         for n, mon in enumerate(seen["pokemon"]):
             kept = [(s, w) for s, w in self.candidates[n] if _fits(s, mon, rules[n])]
-            if replayable and n == start_active:
-                kept = [(s, w) for s, w in kept if self._explains_turn(s, battle)]
             if not kept:
                 kept = [(s, w) for s, w in _rebuild(self.priors["species"][mon["species"]]["usage"], mon)
                         if _fits(s, mon, rules[n])]
+            if not kept:
+                # Nothing we know of fits, so the reveal or our rules are off: keep the old guesses at the floor.
+                kept = [(s, w * FLOOR) for s, w in self.candidates[n]]
+            if replayable and n == start_active:
+                # Speed and damage checks rest on our own maths and rounding, so a miss floors a set, never zeroes it.
+                kept = [(s, w if self._explains_turn(s, battle) else w * FLOOR) for s, w in kept]
             self.candidates[n] = _normalised(kept)
         self.previous = seen
         self.last_battle = battle
         self.last_request = self.last_choice = None
 
     def _explains_turn(self, candidate: PokemonSet, battle: BattleState) -> bool:
-        """Soft reweight (04), as a hard zero: can poke-engine, given this set, produce what happened last turn?
+        """Soft reweight (04), as pass/fail (a fail floors the set): can poke-engine, given this set, produce what happened last turn?
 
         Replays the turn from its starting state with the candidate in the opponent's active slot, then checks the
         move order and the damage each side took against the engine's outcomes and damage range.
@@ -141,7 +148,7 @@ def _their_action(state: State, events: list[Event], them: str, n: int) -> Actio
     used = next((e for e in events if e["type"] == "move" and e["side"] == them and e["pokemon"] == n), None)
     if used is None or any(e["type"] == "switch" and e["side"] == them for e in events[: events.index(used)]):
         return None
-    # The hard filter has already kept only sets that contain every revealed move, this one included.
+    # build_state puts every revealed move in the first slots, this one included, whatever the set says.
     ids = [m.id for m in state.side_two.pokemon[int(state.side_two.active_index)].moves]
     tera = any(e["type"] == "reveal" and e["side"] == them and (e["source"] or "").startswith("tera:") for e in events)
     return Action("move", ids.index(used["move"]) + 1, tera=tera)

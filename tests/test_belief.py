@@ -172,6 +172,17 @@ def test_nothing_left_rebuilds_from_usage(battle):
     assert math.isclose(sum(w for _, w in rebuilt), 1.0)
 
 
+def test_nothing_fitting_even_after_a_rebuild_keeps_the_old_guesses(battle):
+    # Samurott's only set and its usage both say Leftovers, but taking no rock damage says Boots.
+    battle["sides"]["p2"]["hazards"]["stealthrock"] = 1
+    belief = Belief(PRIORS, battle)
+    belief.update(battle)
+    belief.update(turn(battle, [event("switch", 1)], active=1))
+    assert items(belief, 1) == ["leftovers"]
+    assert weights(belief, 1) == [1.0]
+    assert len(belief.scenarios()) == 1
+
+
 def test_scenarios_vary_the_active_and_fix_the_bench(battle):
     belief = Belief(PRIORS, battle)
     belief.update(battle)
