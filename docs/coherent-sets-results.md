@@ -1,6 +1,8 @@
 # Coherent sets and replay revelations: change and results log
 
-Status: implementation pushed as `740817f`; retrospective prediction and four-game integration smoke are complete; 60-game battle screening is running, 25 October 2026. This log distinguishes completed checks from planned experiments. No playing-strength improvement is established yet.
+Status: importer/extractor implemented, prediction diagnostic and 60-game screening complete, 25 October 2026. Initial implementation commit: `740817f`; subsequent commits harden import/extraction and verify live revelation updates. The final full test attempt has one unresolved existing timing failure.
+
+**Verdict: the mixture predicts later revelations better on this retrospective diagnostic, but it did not demonstrate a stronger battle bot.** It scored **25 wins / 35 losses** against frozen current MCTS. Keep it **opt-in**; the existing default prior stays unchanged. The sample does not prove that the mixture is harmful in general, and the positive prediction result does not override the battle result.
 
 The goal is to give MCTS more plausible opponent sets. Showdown supplies coherent role templates; our existing usage prior supplies broader coverage; replay logs supply facts revealed during battles. The bot must keep several possibilities and update them as evidence appears, rather than pretending that an unrevealed item or spread is known.
 
@@ -40,7 +42,7 @@ The candidate contract now permits optional IVs, and `decision/belief.py` preser
 
 **Review corrections:** identical role distributions under different names no longer gain extra curated mass. The A/A-copy/B regression verifies that duplicate role A cannot outvote distinct role B. A zero-curated-fraction mixture returns an exact deep copy of the original prior. The importer now also checks move IDs against the pinned native move snapshot before accepting them; no unsupported moves were found in this source. An offline rebuild reproduced the versioned `bank.json` and `priors.json` exactly. Later importer guards coalesce duplicate alternatives so they cannot gain extra mass, and check the alternative-count cap before materializing the Cartesian product. Tests cover both. A repeat in-memory rebuild still matches the frozen bank/prior exactly. These changes do not alter the frozen mixture or battle treatment.
 
-**Did it help?** Not measured yet. Better-looking templates alone do not establish better predictions or a stronger bot.
+**Did it help?** It improves the measured next-revelation forecast metric below. The completed battle screening does not support promotion: the observed record is worse than the frozen baseline, with uncertainty still including an even match.
 
 ## Change 2: chronological reveal extractor
 
@@ -87,23 +89,44 @@ The mixture improves filtered move loss from **4.9784 to 4.5982**, item loss fro
 
 The v2 scoring artifact separately records exclusions: 501 current-item observations, 69 item-acquisition/restoration cases, 116 possibly changed/copied ability cases, 10 possibly transferred-item cases, 19 transformed-identity cases and 100 observations on possible-Illusion sides. These counts describe the scorer's exclusion paths, not population frequencies.
 
-## Battle comparison: integration passed, screening running
+## Battle comparison: completed 60-game screening
 
-The four-game integration smoke is frozen in [`smoke-v2-manifest.json`](../evaluation/coherent-sets/smoke-v2-manifest.json), with completed results in [`smoke-v2-results.json`](../evaluation/coherent-sets/smoke-v2-results.json) and its companion game rows. The 60-game screening is frozen in [`screening-v2-manifest.json`](../evaluation/coherent-sets/screening-v2-manifest.json), with ten validated synthetic teams under `evaluation/coherent-sets/screening-teams-v2/`. These use distinct synthetic rosters from the other chat's reserved pools; they are not an independent external competitive-team holdout.
+The treatment is the **50/50 curated/broad prior**, plus the optional-IV loader needed to preserve template IVs. Its MCTS state model, belief mode and search settings are anchored to `a8613b9`; the other chat's subsequent policies are outside this study. Baseline records without IVs continue to use all-31 IVs. No learned role weights, roster-conditioned prior or extra online belief engine was added.
 
-Both arms request **8 worlds ×150 ms, one native thread, a three-second ceiling, whole-team sampling and deterministic root selection**. Later unrelated policy changes from the other chat remain excluded. The smoke passed before screening started. The original team-reservation attempt failed a trailing-whitespace content-hash check before any games; v2 is the corrected reservation. No failed-attempt game outcomes are being omitted.
+The frozen schedule in [`screening-v2-manifest.json`](../evaluation/coherent-sets/screening-v2-manifest.json) completed **60/60 games over ten validated synthetic teams**, with **no draws or voids**. Published results are [`screening-v2-results.json`](../evaluation/coherent-sets/screening-v2-results.json) and [`screening-v2-games.jsonl`](../evaluation/coherent-sets/screening-v2-games.jsonl). Raw local run: `runs/coherent-evaluation/screening-v1/`.
 
-The smoke finished **3 wins, 1 loss, no draws or voids** for the mixture. Across both arms, **2,728/2,728 worlds completed and were usable**, with zero fallbacks, rejected choices, failed worlds or decisions over three seconds. Candidate/baseline maximum decision latency was **1,845.83 / 1,888.37 ms**. Candidate/baseline p95 latency was **1,449.74 / 1,446.16 ms**. Candidate/baseline actual native search wall time totaled **227.73 / 223.18 seconds**; bot-process-plus-reaped-worker CPU totaled **235.07 / 230.69 seconds**. Both arms ran the same requested settings; actual measured work differs naturally.
+| Measurement | Mixture candidate | Frozen current MCTS |
+|---|---:|---:|
+| Wins | **25** | **35** |
+| Decisions | 2,793 | 2,791 |
+| Completed and usable worlds | 21,864 / 21,864 | 21,848 / 21,848 |
+| Fallbacks / rejected choices / failed worlds | 0 / 0 / 0 | 0 / 0 / 0 |
+| Decisions over 3 seconds | 0 | 0 |
+| Decision p50 | 1,382.95 ms | 1,385.28 ms |
+| Decision p95 | 1,464.79 ms | 1,464.17 ms |
+| Decision p99 | 1,910.11 ms | 1,905.01 ms |
+| Maximum decision time | 2,057.77 ms | 2,302.69 ms |
+| Actual native search wall time, summed | 3,567.55 s | 3,564.47 s |
+| Bot + reaped worker CPU, summed | 3,622.43 s | 3,615.03 s |
+| Recorded recovery events | 90 | 136 |
 
-This is an **integration gate**, not a strength result: four games give a Wilson 95% win-rate interval of approximately **30.1–95.4%**, and only a small portion of the reserved team pool was exercised. The run verifies that the new prior can play complete games under the tested deadlines.
+Both arms requested **8 worlds ×150 ms, one native thread, a three-second ceiling, whole-team sampling and deterministic root selection**. All **43,712 requested worlds completed and were usable**, with zero recorded worker restarts or belief-history resets. The actual resource totals are close; requested settings alone are not mislabeled as measured equal CPU.
 
-The 60-game screening is now running in `runs/coherent-evaluation/screening-v1/`. Its partial `summary.json` is a progress artifact, not a final verdict or stopping signal. No default-prior promotion is claimed while the frozen schedule remains incomplete.
+Candidate win rate was **41.7%**, Wilson 95% interval **30.1–54.3%**. The candidate-team bootstrap interval was **25–60%**. The observed record is worse, but these intervals include 50%; this screening neither supports a strength-improvement claim nor establishes a statistically proven general harm. Recovery counts are mechanism diagnostics, not independent proof of quality.
 
-## Final test status and unresolved timing checks
+The teams use new synthetic roster combinations built from familiar regression component sets, distinct from the other chat's reserved pools. They are **not an independent external competitive-team holdout**, and overlap with source-wide aggregate usage cannot be excluded. Ten team clusters are sparse; shared opposing teams create further dependence. Native search is stochastic despite fixed simulator/sampling seeds. Do not generalize this one opponent/team panel to ladder strength.
 
-The completed non-timing suite passed **451 tests in 16.34 seconds**, recorded in `runs/coherent-evaluation/non-timing-tests.txt`. That command explicitly deselected **22 subsecond timing tests**; it is not a claim that the entire 473-test suite passed. The expanded non-timing rerun passed **453 tests in 14.98 seconds**, recorded in `runs/coherent-evaluation/non-timing-final.txt`, still with the 22 timing tests excluded. That log predates the three latest alternative/atomic-export fixtures, so it is not a claim that all current non-timing tests ran together. After those latest fixtures, **21 focused importer/extractor/evaluator/contract/safety tests passed**. The earlier 18-test focused gate is historical. No 456-test or all-suite pass is inferred by adding these counts.
+The preceding four-game smoke finished **3–1**, with **2,728/2,728 usable worlds** and zero tested reliability failures, in [`smoke-v2-results.json`](../evaluation/coherent-sets/smoke-v2-results.json). Its apparent win rate was an integration gate only and was superseded for the promotion decision by the planned 60-game screening. The original team-reservation attempt failed a trailing-whitespace content-hash check before any games; v2 is the corrected reservation, not an omitted losing run.
 
-A full final attempt had five failures: one new fixture was corrected, while four existing timing checks failed. A focused rerun still had one existing timing failure, and a separate search-timing rerun had two. An unmodified `a8613b9` control also failed one same-family timing check while passing 21, in `runs/coherent-evaluation/baseline-search-timing-control.txt`. Concurrent load is a plausible contributor, but the timing flakiness remains unresolved; the baseline control does not prove every candidate failure harmless. No timing thresholds were weakened. Independent-prior-path and source-prefix-safety tests passed.
+**Promotion decision:** retain the coherent mixture as an explicit prior-path option and keep the default prior unchanged. This screening does not justify a 200-game promotion confirmation of the current mixture. A revised mixture or filtering change needs a separately declared experiment with development tuning and fresh confirmation data. Preserve this failed promotion attempt rather than selecting only the favorable forecast or smoke result.
+
+## Final test status and unresolved timing check
+
+The final full test attempt completed **478 passed, 1 failed in 23.07 seconds**, recorded in `runs/coherent-evaluation/final-full-tests.txt`. The failure is the existing `test_native_process_exit_returns_legal_fallback_and_restart_is_recorded`: under its 0.6-second test budget, no world was scheduled where the fixture expected one. The full suite is therefore **not green**, and no test threshold was weakened.
+
+Earlier full/focused attempts also exposed existing subsecond timing failures. An unmodified `a8613b9` control failed one same-family timing check while passing 21, in `runs/coherent-evaluation/baseline-search-timing-control.txt`. Concurrent load is a plausible contributor, but the control does not prove every candidate failure harmless; timing-test stability remains unresolved. The completed 60-game run's zero three-second overruns is useful practical evidence, not a substitute for fixing or resolving that test failure.
+
+The expanded non-timing run passed **453 tests in 14.98 seconds**, with 22 timing tests excluded, in `runs/coherent-evaluation/non-timing-final.txt`; it predates four newer focused fixtures. The latest **22-test focused gate** passed, including a live belief-update regression showing that revealed Nasty Plot removes the incompatible Choice Scarf candidate while preserving the compatible bulky role's EVs/IVs. Independent-prior-path and source-prefix-safety tests also passed. These separate runs are not added together into an invented all-suite count. Earlier 451/468-test pass records remain historical gates predating the final code/tests.
 
 A credential-value scan reported zero matches in the committed artifacts. Raw private data and credentials remain outside Git. See [usage and reproduction commands](coherent-sets-usage.md) for exact entry points and integration cautions.
 
@@ -114,15 +137,21 @@ A credential-value scan reported zero matches in the committed artifacts. Raw pr
 | Extractor correctness | Fixture, transition, copied-history and atomic-export gates passed | Final evidence hash/counts unchanged; completed v3 scorer agrees exactly; conservative coverage limitations remain |
 | Next-revelation comparison | Initial retrospective result complete | Mixture improves aggregate loss/coverage; filtering worsens both arms; no strength claim |
 | Matched-compute battle smoke | Complete | 3–1, 0 voids; 2,728/2,728 usable worlds; no tested reliability failures; integration only |
-| Controlled battle screening | Running | Frozen 60-game schedule / ten synthetic teams; final verdict pending |
-| Promotion decision | Pending | No default change justified yet |
+| Controlled battle screening | Complete | 25–35 over 60 games; no draws/voids; no demonstrated strength improvement |
+| Promotion decision | Keep opt-in | Existing default unchanged; current mixture does not justify promotion confirmation |
 
 For each completed run, record the source/prior/engine hashes, mixture configuration, team provenance, schedule/seed, W/L/draw/void counts, uncertainty, targeted prediction metric, completed worlds, rejected choices, fallbacks and p50/p95/p99/max latency. Keep failed experiments and void games visible. The existing handoff's screening/confirmation rules remain applicable; small smokes verify integration only.
 
 ## Decisions and next step
 
-The current decision is to build and test the importer, mixture and extractor in isolation. Roster-conditioned weighting and joint team hypotheses remain subsequent experiments; they are not prerequisites for this milestone. Do not add a hard rule that a defensive Pokémon makes another defensive Pokémon unlikely: team roles can complement one another, and species can run different sets.
+The importer, mixture and extractor have been built and compared in isolation. The completed decision is to keep the mixture opt-in because improved retrospective forecasts did not translate into a supported battle-strength improvement. Roster-conditioned weighting and joint team hypotheses remain subsequent experiments; they are not prerequisites for this milestone. Do not add a hard rule that a defensive Pokémon makes another defensive Pokémon unlikely: team roles can complement one another, and species can run different sets.
 
-Next: complete the frozen same-MCTS/different-prior screening and record its final result, then decide whether a fresh confirmation study is justified. Keep the filtering regression and timing-test flakiness documented as unresolved findings. Do not change the default prior based on the smoke or interim scores.
+Next: investigate why public-fact filtering worsens the diagnostic and why the fixed 50/50 mixture did not help battle results; use development evidence to propose a separately evaluated revision. Resolve the timing-test failure before claiming a clean full suite. Do not merge automatically into the other chat's active branch: review its accepted engine changes, reconcile optional-IV/evaluator support, and rerun the relevant comparisons on the combined version before attributing an interaction gain.
 
 References: [combined-data plan](mcts-combined-data-plan.md), [full MCTS handoff](mcts-improvement-handoff.md), [historical measured results](mcts-results.md), [Showdown set source](https://play.pokemonshowdown.com/data/sets/gen9ou.json), and [Showdown protocol](https://github.com/smogon/pokemon-showdown/blob/master/sim/SIM-PROTOCOL.md).
+
+### Final timing control and identity verification
+
+The sole final-suite failure was retried directly in both candidate and untouched `a8613b9` under the same host conditions. Both reproduced the exact assertion: the 0.6-second crash-worker fixture expected one scheduled world but saw zero. Logs: `runs/coherent-evaluation/final-timing-retry.txt` and `final-baseline-timing-control.txt`. This confirms an existing timing issue is reproducible independently of the new prior; it remains unresolved, and no test threshold was changed. All 22 focused data/evaluation/compatibility tests passed.
+
+After all 60 games, both arms still matched their frozen complete runtime-source, native engine and prior hashes. The original checkout and its ongoing policy work were not modified. The importer/extractor and optional prior are available on `Kenar-coherent-sets`; the 50/50 mixture is not recommended as a stronger default from this result.

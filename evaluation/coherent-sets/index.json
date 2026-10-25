@@ -31,13 +31,18 @@
     "helped": "integration/reliability passed; strength unknown"
   },
   "screening": {
-    "status": "running",
+    "status": "complete",
     "manifest": "evaluation/coherent-sets/screening-v2-manifest.json",
     "games": 60,
     "raw_run": "local ignored runs/coherent-evaluation/screening-v1",
-    "helped": "pending complete study"
+    "helped": "No demonstrated battle-strength improvement; observed 25-35 record at equal requested compute; uncertainty includes parity",
+    "results": "evaluation/coherent-sets/screening-v2-results.json",
+    "wins": 25,
+    "losses": 35,
+    "draws": 0,
+    "voids": 0
   },
-  "promotion": "experimental prior remains opt-in; no strength claim",
+  "promotion": "No default change. Keep mixture experimental/opt-in; no confirmation expansion justified by this screen.",
   "documentation": [
     "docs/coherent-sets-results.md",
     "docs/coherent-sets-usage.md",

@@ -10,5 +10,7 @@
   "study_concurrent_games": 4,
   "host_context": "Another user chat is running independent MCTS evaluations in the original checkout. No processes or source there were modified by this experiment.",
   "reliability_test_context": "Initial full suite468 passed before additional tests/harness changes. Later subsecond worker-start fixtures failed under load in candidate and unmodified a8613b9 baseline. Current non-timing suite451 passed. Preserve failure logs and recheck timing suite with reduced contention before any promotion.",
-  "comparison_scope": "candidate prior mixture vs unmodified a8613b9 state/belief pipeline; neither incorporates later concurrent policy changes"
+  "comparison_scope": "candidate prior mixture vs unmodified a8613b9 state/belief pipeline; neither incorporates later concurrent policy changes",
+  "python_version": "3.13.13 (main, Apr 14 2026, 14:28:56) [Clang 22.1.3 ]",
+  "common_worker_interpreter": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/.venv/bin/python"
 }

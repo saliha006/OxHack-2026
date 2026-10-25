@@ -2,6 +2,21 @@
 
 This branch adds an optional coherent-template prior and an offline replay-reveal extractor. It keeps `data/set_candidates.json` as the normal default. Read [measured results](coherent-sets-results.md) before deciding whether to enable the mixture.
 
+```mermaid
+flowchart LR
+    A[Showdown role templates] --> C[Offline prior mixture]
+    B[Existing usage priors] --> C
+    C --> D[Existing live belief updater]
+    E[Public moves and item or ability reveals] --> D
+    D --> F[Eight sampled opponent worlds]
+    F --> G[Existing native MCTS]
+    H[Tiger public replay logs] --> I[Offline reveal extractor]
+    I --> J[Prediction diagnostics and future data work]
+```
+
+The replay extractor prepares evidence for evaluation and later modelling. It does
+not silently train new probabilities or run database queries during live play.
+
 ## Build the prior
 
 The committed source snapshot and generated bank are versioned. No network/database access occurs during a battle.

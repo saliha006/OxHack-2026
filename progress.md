@@ -90,6 +90,14 @@ whenever you log an entry.
 
 ## Log (newest first)
 
+### 2026-10-25 06:13 — eval — Coherent OU mixture improves forecasts but not battle screening — @kenar
+- **Where:** `Kenar-coherent-sets`, compared with isolated `a8613b9`; not merged into the concurrent policy branch.
+- **Outcome:** Fixed 100-test-game retrospective next-reveal loss improved from 4.5569 to 4.2334 and coverage from 73.8% to 76.6%. At matched requested MCTS compute, the optional 50/50 mixture finished 25–35 over all 60 screened games, no draws/voids. Wilson interval 30.1–54.3%; sparse-team bootstrap 25–60%. No demonstrated strength gain; default prior stays unchanged and no confirmation expansion is justified by this screen.
+- **Reliability:** All 43,712 worlds usable; zero fallbacks, rejected choices, failed worlds or decisions over three seconds. Final suite 478 passed with one pre-existing 0.6-second fixture failure reproduced exactly in the untouched baseline; 22 focused data/evaluation tests pass. Source/engine/prior identities rechecked after completion.
+- **Evidence:** `evaluation/coherent-sets/screening-v2-results.json`, companion game rows, prediction/extraction artifacts and `docs/coherent-sets-results.md`. Team pools are synthetic combinations of known component sets, not an independent competitive-team holdout. Current source snapshots on historical replays are retrospective evidence.
+- **Next:** Diagnose/tune role probabilities on development evidence before another prior experiment. Preserve optional importer/extractor and integrate separately with the other chat's accepted engine only after resolving branch overlap.
+
+
 ### 2026-10-25 05:38 — feat — Isolated coherent-set prior and public-reveal extraction — @kenar
 - **Where:** `Kenar-coherent-sets`, separate checkout based on `a8613b9`; not merged to main or the active MCTS-policy branch.
 - **Did:** Imported pinned Showdown OU roles as validated coherent candidates, preserved IV overrides, retained broad usage fallback in an optional 50/50 mixture, and added chronological public-revelation extraction with conservative item/copy/identity exclusions. Existing default prior is unchanged. The comparison runner freezes independent prior files for each arm.
