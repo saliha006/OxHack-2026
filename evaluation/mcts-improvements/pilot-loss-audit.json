@@ -1,0 +1,678 @@
+{
+  "interpretation": "Descriptive investigation leads; no causal or strength claim. Repeated turns are not independent games.",
+  "missingness": "Final transition without next decision excluded; no unseen final-turn negative imputed.",
+  "by_outcome": {
+    "win": {
+      "perspectives": 22,
+      "counts": {
+        "boosted_foe_faint": 5,
+        "attack_chip_erased": 24
+      },
+      "opportunities": {
+        "attack_chip_erased": 345,
+        "switch_return_cycle": 54,
+        "boosted_foe_faint": 31,
+        "tera_then_faint": 21,
+        "setup_at_cap": 38
+      },
+      "rates": {
+        "attack_chip_erased": 0.06956521739130435,
+        "switch_return_cycle": 0.0,
+        "boosted_foe_faint": 0.16129032258064516,
+        "tera_then_faint": 0.0,
+        "setup_at_cap": 0.0
+      }
+    },
+    "loss": {
+      "perspectives": 22,
+      "counts": {
+        "boosted_foe_faint": 13,
+        "attack_chip_erased": 21,
+        "switch_return_cycle": 3
+      },
+      "opportunities": {
+        "attack_chip_erased": 290,
+        "setup_at_cap": 17,
+        "tera_then_faint": 19,
+        "hazard_at_cap": 10,
+        "switch_return_cycle": 86,
+        "boosted_foe_faint": 58
+      },
+      "rates": {
+        "attack_chip_erased": 0.07241379310344828,
+        "setup_at_cap": 0.0,
+        "tera_then_faint": 0.0,
+        "hazard_at_cap": 0.0,
+        "switch_return_cycle": 0.03488372093023256,
+        "boosted_foe_faint": 0.22413793103448276
+      }
+    }
+  },
+  "unavailable": [
+    {
+      "battle": "battle-gen9ou-31",
+      "role": "b",
+      "reason": "trace_unavailable"
+    },
+    {
+      "battle": "battle-gen9ou-40",
+      "role": "b",
+      "reason": "trace_unavailable"
+    },
+    {
+      "battle": "battle-gen9ou-28",
+      "role": "b",
+      "reason": "trace_unavailable"
+    },
+    {
+      "battle": "battle-gen9ou-43",
+      "role": "b",
+      "reason": "trace_unavailable"
+    }
+  ],
+  "input": "evaluation/mcts-pilot-20261025/games.jsonl",
+  "scope": "Historical development diagnostics only; pooled arms; not fresh strength evidence",
+  "raw_report": "runs/mcts-improvements/pilot-loss-signatures.json",
+  "examples": [
+    {
+      "battle": "battle-gen9ou-42",
+      "role": "a",
+      "outcome": "win",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-gen9ou-42:6",
+      "turn": 5,
+      "choice": "move 1",
+      "move": "outrage"
+    },
+    {
+      "battle": "battle-gen9ou-36",
+      "role": "a",
+      "outcome": "loss",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-gen9ou-36:27",
+      "turn": 22,
+      "choice": "move 1",
+      "move": "headlongrush"
+    },
+    {
+      "battle": "battle-gen9ou-36",
+      "role": "b",
+      "outcome": "win",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-gen9ou-36:12",
+      "turn": 10,
+      "choice": "move 1",
+      "move": "shadowball"
+    },
+    {
+      "battle": "battle-gen9ou-37",
+      "role": "a",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-37:5",
+      "turn": 4,
+      "choice": "move 3",
+      "move": "ironhead"
+    },
+    {
+      "battle": "battle-gen9ou-37",
+      "role": "a",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-37:18",
+      "turn": 14,
+      "choice": "move 3",
+      "move": "sludgebomb"
+    },
+    {
+      "battle": "battle-gen9ou-37",
+      "role": "a",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-37:19",
+      "turn": 15,
+      "choice": "move 3",
+      "move": "sludgebomb"
+    },
+    {
+      "battle": "battle-gen9ou-37",
+      "role": "a",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-37:20",
+      "turn": 16,
+      "choice": "move 3",
+      "move": "sludgebomb"
+    },
+    {
+      "battle": "battle-gen9ou-37",
+      "role": "a",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-37:21",
+      "turn": 17,
+      "choice": "move 3",
+      "move": "sludgebomb"
+    },
+    {
+      "battle": "battle-gen9ou-38",
+      "role": "b",
+      "outcome": "loss",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-gen9ou-38:9",
+      "turn": 7,
+      "choice": "move 4",
+      "move": "hurricane"
+    },
+    {
+      "battle": "battle-gen9ou-38",
+      "role": "b",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-38:19",
+      "turn": 15,
+      "choice": "move 3",
+      "move": "sludgebomb"
+    },
+    {
+      "battle": "battle-gen9ou-38",
+      "role": "b",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-38:22",
+      "turn": 18,
+      "choice": "move 3",
+      "move": "sludgebomb"
+    },
+    {
+      "battle": "battle-gen9ou-38",
+      "role": "b",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-38:23",
+      "turn": 19,
+      "choice": "move 3",
+      "move": "sludgebomb"
+    },
+    {
+      "battle": "battle-gen9ou-38",
+      "role": "b",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-38:25",
+      "turn": 21,
+      "choice": "move 3",
+      "move": "sludgebomb"
+    },
+    {
+      "battle": "battle-gen9ou-33",
+      "role": "b",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-33:3",
+      "turn": 2,
+      "choice": "move 2",
+      "move": "makeitrain"
+    },
+    {
+      "battle": "battle-gen9ou-33",
+      "role": "b",
+      "outcome": "loss",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-gen9ou-33:5",
+      "turn": 4,
+      "choice": "move 3",
+      "move": "recover"
+    },
+    {
+      "battle": "battle-gen9ou-32",
+      "role": "b",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-32:4",
+      "turn": 3,
+      "choice": "move 2",
+      "move": "makeitrain"
+    },
+    {
+      "battle": "battle-gen9ou-32",
+      "role": "b",
+      "outcome": "loss",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-gen9ou-32:5",
+      "turn": 4,
+      "choice": "move 3",
+      "move": "recover"
+    },
+    {
+      "battle": "battle-gen9ou-34",
+      "role": "a",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-34:18",
+      "turn": 13,
+      "choice": "move 3",
+      "move": "sludgebomb"
+    },
+    {
+      "battle": "battle-gen9ou-34",
+      "role": "a",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-34:23",
+      "turn": 18,
+      "choice": "move 4",
+      "move": "hurricane"
+    },
+    {
+      "battle": "battle-gen9ou-34",
+      "role": "b",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-34:29",
+      "turn": 23,
+      "choice": "move 3",
+      "move": "sludgebomb"
+    },
+    {
+      "battle": "battle-gen9ou-34",
+      "role": "b",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-34:31",
+      "turn": 25,
+      "choice": "move 3",
+      "move": "sludgebomb"
+    },
+    {
+      "battle": "battle-gen9ou-34",
+      "role": "b",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-34:32",
+      "turn": 26,
+      "choice": "move 3",
+      "move": "sludgebomb"
+    },
+    {
+      "battle": "battle-gen9ou-46",
+      "role": "b",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-46:8",
+      "turn": 5,
+      "choice": "move 1",
+      "move": "pyroball"
+    },
+    {
+      "battle": "battle-gen9ou-46",
+      "role": "b",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-46:10",
+      "turn": 7,
+      "choice": "move 1",
+      "move": "pyroball"
+    },
+    {
+      "battle": "battle-gen9ou-46",
+      "role": "b",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-46:11",
+      "turn": 8,
+      "choice": "move 1",
+      "move": "pyroball"
+    },
+    {
+      "battle": "battle-gen9ou-31",
+      "role": "a",
+      "outcome": "win",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-gen9ou-31:4",
+      "turn": 3,
+      "choice": "move 1",
+      "move": "outrage"
+    },
+    {
+      "battle": "battle-gen9ou-40",
+      "role": "a",
+      "outcome": "loss",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-gen9ou-40:7",
+      "turn": 6,
+      "choice": "move 1",
+      "move": "outrage"
+    },
+    {
+      "battle": "battle-gen9ou-40",
+      "role": "a",
+      "outcome": "loss",
+      "signature": "switch_return_cycle",
+      "decision_id": "battle-gen9ou-40:24",
+      "turn": 19,
+      "choice": "switch 4",
+      "move": null
+    },
+    {
+      "battle": "battle-gen9ou-28",
+      "role": "a",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-28:13",
+      "turn": 10,
+      "choice": "move 1",
+      "move": "pyroball"
+    },
+    {
+      "battle": "battle-gen9ou-43",
+      "role": "a",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-43:12",
+      "turn": 10,
+      "choice": "move 3",
+      "move": "voltswitch"
+    },
+    {
+      "battle": "battle-gen9ou-45",
+      "role": "a",
+      "outcome": "loss",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-gen9ou-45:15",
+      "turn": 12,
+      "choice": "move 2",
+      "move": "icespinner"
+    },
+    {
+      "battle": "battle-gen9ou-45",
+      "role": "a",
+      "outcome": "loss",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-gen9ou-45:17",
+      "turn": 13,
+      "choice": "move 1",
+      "move": "shadowball"
+    },
+    {
+      "battle": "battle-gen9ou-41",
+      "role": "a",
+      "outcome": "win",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-gen9ou-41:15",
+      "turn": 11,
+      "choice": "move 1",
+      "move": "closecombat"
+    },
+    {
+      "battle": "battle-gen9ou-41",
+      "role": "b",
+      "outcome": "loss",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-gen9ou-41:18",
+      "turn": 15,
+      "choice": "move 1",
+      "move": "headlongrush"
+    },
+    {
+      "battle": "battle-gen9ou-30",
+      "role": "b",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-30:15",
+      "turn": 14,
+      "choice": "move 1",
+      "move": "pyroball"
+    },
+    {
+      "battle": "battle-gen9ou-30",
+      "role": "b",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-30:16",
+      "turn": 15,
+      "choice": "move 1",
+      "move": "pyroball"
+    },
+    {
+      "battle": "battle-gen9ou-39",
+      "role": "a",
+      "outcome": "win",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-gen9ou-39:7",
+      "turn": 5,
+      "choice": "move 4",
+      "move": "hurricane"
+    },
+    {
+      "battle": "battle-gen9ou-35",
+      "role": "a",
+      "outcome": "loss",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-gen9ou-35:18",
+      "turn": 14,
+      "choice": "move 2",
+      "move": "icespinner"
+    },
+    {
+      "battle": "battle-gen9ou-35",
+      "role": "a",
+      "outcome": "loss",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-gen9ou-35:22",
+      "turn": 17,
+      "choice": "move 1",
+      "move": "shadowball"
+    },
+    {
+      "battle": "battle-gen9ou-47",
+      "role": "a",
+      "outcome": "loss",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-gen9ou-47:11",
+      "turn": 9,
+      "choice": "move 4",
+      "move": "hurricane"
+    },
+    {
+      "battle": "battle-gen9ou-47",
+      "role": "a",
+      "outcome": "loss",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-gen9ou-47:14",
+      "turn": 11,
+      "choice": "move 3",
+      "move": "willowisp"
+    },
+    {
+      "battle": "battle-gen9ou-47",
+      "role": "a",
+      "outcome": "loss",
+      "signature": "switch_return_cycle",
+      "decision_id": "battle-gen9ou-47:24",
+      "turn": 19,
+      "choice": "switch 2",
+      "move": null
+    },
+    {
+      "battle": "battle-gen9ou-47",
+      "role": "b",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-47:5",
+      "turn": 4,
+      "choice": "move 3",
+      "move": "ironhead"
+    },
+    {
+      "battle": "battle-gen9ou-47",
+      "role": "b",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-47:8",
+      "turn": 7,
+      "choice": "move 3",
+      "move": "ironhead"
+    },
+    {
+      "battle": "battle-gen9ou-25",
+      "role": "a",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-25:49",
+      "turn": 40,
+      "choice": "move 3",
+      "move": "sludgebomb"
+    },
+    {
+      "battle": "battle-gen9ou-25",
+      "role": "a",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-25:51",
+      "turn": 42,
+      "choice": "move 3",
+      "move": "sludgebomb"
+    },
+    {
+      "battle": "battle-gen9ou-25",
+      "role": "a",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-25:52",
+      "turn": 43,
+      "choice": "move 3",
+      "move": "sludgebomb"
+    },
+    {
+      "battle": "battle-gen9ou-25",
+      "role": "a",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-25:54",
+      "turn": 45,
+      "choice": "move 3",
+      "move": "sludgebomb"
+    },
+    {
+      "battle": "battle-gen9ou-25",
+      "role": "a",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-25:56",
+      "turn": 47,
+      "choice": "move 3",
+      "move": "sludgebomb"
+    },
+    {
+      "battle": "battle-gen9ou-25",
+      "role": "b",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-25:16",
+      "turn": 13,
+      "choice": "move 1",
+      "move": "pyroball"
+    },
+    {
+      "battle": "battle-gen9ou-25",
+      "role": "b",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-25:17",
+      "turn": 14,
+      "choice": "move 1",
+      "move": "pyroball"
+    },
+    {
+      "battle": "battle-gen9ou-25",
+      "role": "b",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-25:47",
+      "turn": 37,
+      "choice": "move 4",
+      "move": "hurricane"
+    },
+    {
+      "battle": "battle-gen9ou-25",
+      "role": "b",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-25:48",
+      "turn": 38,
+      "choice": "move 4",
+      "move": "hurricane"
+    },
+    {
+      "battle": "battle-gen9ou-27",
+      "role": "a",
+      "outcome": "loss",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-gen9ou-27:12",
+      "turn": 10,
+      "choice": "move 2",
+      "move": "icespinner"
+    },
+    {
+      "battle": "battle-gen9ou-27",
+      "role": "a",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-27:21",
+      "turn": 17,
+      "choice": "move 2",
+      "move": "crunch"
+    },
+    {
+      "battle": "battle-gen9ou-26",
+      "role": "a",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-26:36",
+      "turn": 27,
+      "choice": "move 3",
+      "move": "sludgebomb"
+    },
+    {
+      "battle": "battle-gen9ou-26",
+      "role": "b",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-26:16",
+      "turn": 12,
+      "choice": "move 1",
+      "move": "pyroball"
+    },
+    {
+      "battle": "battle-gen9ou-26",
+      "role": "b",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-26:30",
+      "turn": 24,
+      "choice": "move 3",
+      "move": "sludgebomb"
+    },
+    {
+      "battle": "battle-gen9ou-44",
+      "role": "a",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-44:54",
+      "turn": 44,
+      "choice": "move 4",
+      "move": "hurricane"
+    },
+    {
+      "battle": "battle-gen9ou-44",
+      "role": "b",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-gen9ou-44:45",
+      "turn": 37,
+      "choice": "move 3",
+      "move": "voltswitch"
+    }
+  ]
+}

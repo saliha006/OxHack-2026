@@ -77,6 +77,7 @@ whenever you log an entry.
 4. {{Access to the deploy target, data and secrets: where each lives. Never in git or chat}}
 
 ## 📊 Latest (volatile facts live only here)
+- **MCTS improvement work, 2026-10-25 05:04 Europe/London:** Stage 1 correctness changes committed as `df1002c`; isolated candidate effective source `32ede7cb68279477331cea6d6a5dcb27c6991d75fa1640b8525eff1aa129ed1c`. Focused verification: 114 passed including real Showdown mechanics snapshots. Candidate/baseline transport smoke: 192/192 worlds usable, zero fallback/rejected choices/failed worlds over two intentionally six-turn-censored games. A frozen 60-game screening comparison is running; no new strength conclusion. Live record: `docs/mcts-improvement-log.md`.
 - **User default decision, 2026-10-25 04:30 Europe/London:** `mcts` (8 ×150 ms worlds, one thread) is the default on `Kenar-mcts`; `one_ply` remains the explicit legacy evaluation arm. Previous pilot evidence and its uncertainty remain unchanged.
 - **Kenar-mcts baseline, 2026-10-25 04:20 Europe/London:** implementation/prediction tools and 24-game pilot complete on this branch; `one_ply` remains default. Final combined suite: 402 passed, one credential-dependent Tiger integration skipped; subsequent scoring fixes: 20 prediction tests passed. Final hardening smoke: 424/424 worlds usable, zero fallbacks/bookkeeping errors, max decision 1,977 ms. Detailed historical measurements and source hashes: `docs/mcts-results.md`; live explanation: `docs/mcts-live-walkthrough.md`. Larger confirmatory comparison remains configured, not run.
 - **As of 2026-10-25 00:58:** `main` @ `4e88dac` · tests: 148 green, 100% coverage (`uv run pytest --cov=decision`) · smoke: 10/10 games vs RandomPlayer finished unattended, 10 won, think p50 ~65 ms / p99 ~300–700 ms, fallback rate 12.7% (all from the two `belief.py` bugs, Open board) · deploy: none yet
@@ -86,6 +87,25 @@ whenever you log an entry.
 ---
 
 ## Log (newest first)
+
+### 2026-10-25 05:04 — fix — Remember supported battle state through switches and continuation requests — @kenar
+- **Where:** `Kenar-mcts` · merged to `main`: not yet
+- **Did:** Retain own request PP and max HP by Pokémon/move identity; label observed PP spend as estimated; reconstruct observed Protect streaks and keep publicly visible extended effects present. Added partial-turn/source metadata without inventing a hidden queued opponent action. Reproduced the targeted defects and added controlled Showdown mechanics fixtures. Correctness improved in those fixtures; playing-strength comparison is still in progress.
+- **Touched:** `bot/parser.py`, `bot/player.py`, `decision/state.py`, `decision/adapter.py`, optional BattleState fields/docs, adapter audit and focused fixtures/tests
+- **Brief task:** user's six-stage handoff → Stage 1 correctness work committed; controlled comparison pending
+- **⚠️ Conflicts:** none; changes remain on the implementation branch for review
+- **📨 Needs:** none; Tiger remains paused and its unrelated files were excluded
+- **Status:** focused correctness work committed; strength unknown
+
+### 2026-10-25 04:58 — scope — Six data-independent MCTS stages opened with a frozen comparison anchor — @kenar
+- **Where:** `Kenar-mcts` · merged to `main`: not yet
+- **Did:** User requested state reconstruction, belief reliability, leads, search allocation, evidence-backed guards and optional near-tie mixing in that order. Opened a persistent goal and a live record in `docs/mcts-improvement-log.md`; original anchor is `2c02fc8daa84f047ea2bddd7d0f36f6463fff1e2`. Each change requires original/predecessor comparisons and a recorded decision. No new implementation or strength result is claimed by this scope entry.
+- **Touched:** improvement documentation; compact experiment records will live in `evaluation/mcts-improvements/`
+- **Brief task:** user's six-stage handoff → started
+- **⚠️ Conflicts:** none; requested work stays on the implementation branch for review
+- **📨 Needs:** none for this scope; richer sets, Nate's A6/team priors and learned evaluation remain deferred until new data/scope is supplied. Tiger download/training remains paused and its pending files are preserved
+- **Agreed by:** user, 25 October 2026
+- **Status:** scope recorded; implementation/evaluation in progress
 
 ### 2026-10-25 04:30 — decision — MCTS becomes development default by user request; assess larger replay corpus — @kenar
 - **Where:** `Kenar-mcts` · merged to `main`: not yet

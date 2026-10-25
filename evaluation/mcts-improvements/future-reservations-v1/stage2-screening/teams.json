@@ -1,0 +1,423 @@
+{
+  "phase": "screening",
+  "stage": "stage2",
+  "provenance": {
+    "kind": "new handmade roster combinations of familiar regression sets and three weather components",
+    "reserved_date": "2026-10-25",
+    "reservation_seed": 2026102503,
+    "reservation": "frozen before inspecting any scored stage1 outcome; later-stage pools have disjoint six-species rosters from each other, prior reservations and regression originals",
+    "holdout_limit": "Not an independent external set holdout. Species and component sets overlap; role/style labels are design intentions and team viability is unproven. No team paste is used for prior fitting.",
+    "comparison_pairing": "Within a stage the same pool is reserved jointly for comparisons to original baseline and predecessor; paired schedule controls matchup difficulty. It is fresh relative to prior-stage evaluations, not independent between these paired arms.",
+    "rules": "all teams validated using pinned local gen9ou TeamValidator before any scored outcomes"
+  },
+  "teams": [
+    {
+      "id": "stage2-screening-01",
+      "style": "offense",
+      "roster": [
+        "Darkrai",
+        "Gholdengo",
+        "Lokix",
+        "Dragonite",
+        "Great Tusk",
+        "Latios"
+      ],
+      "template_roster": [
+        "Darkrai",
+        "Gholdengo",
+        "Zamazenta",
+        "Dragonite",
+        "Great Tusk",
+        "Primarina"
+      ],
+      "design_rationale": "Multiple fast or priority attackers, setup/wallbreaking pressure, and Great Tusk hazard removal.",
+      "substitutions": [
+        {
+          "from": "Zamazenta",
+          "to": "Lokix"
+        },
+        {
+          "from": "Primarina",
+          "to": "Latios"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_12.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_12.txt"
+      ],
+      "sha256": "d9909530b185eca21c9c424ab9db8d245a8c4f97dc37e9acd9f63c4dc8482dae",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/01.txt",
+      "validation_errors": null
+    },
+    {
+      "id": "stage2-screening-02",
+      "style": "offense",
+      "roster": [
+        "Weavile",
+        "Darkrai",
+        "Dragonite",
+        "Kyurem",
+        "Great Tusk",
+        "Cinderace"
+      ],
+      "template_roster": [
+        "Weavile",
+        "Darkrai",
+        "Dragonite",
+        "Iron Crown",
+        "Great Tusk",
+        "Cinderace"
+      ],
+      "design_rationale": "Multiple fast or priority attackers, setup/wallbreaking pressure, and Great Tusk hazard removal.",
+      "substitutions": [
+        {
+          "from": "Iron Crown",
+          "to": "Kyurem"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_9.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_9.txt"
+      ],
+      "sha256": "b387ba88ea0f9a5c66666c5abfcf93c6a518c3753d7bda63a6b257a7cc4b1284",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/02.txt",
+      "validation_errors": null
+    },
+    {
+      "id": "stage2-screening-03",
+      "style": "offense",
+      "roster": [
+        "Dragonite",
+        "Latios",
+        "Zamazenta",
+        "Gholdengo",
+        "Great Tusk",
+        "Primarina"
+      ],
+      "template_roster": [
+        "Lokix",
+        "Latios",
+        "Zamazenta",
+        "Gholdengo",
+        "Great Tusk",
+        "Ogerpon-Wellspring"
+      ],
+      "design_rationale": "Multiple fast or priority attackers, setup/wallbreaking pressure, and Great Tusk hazard removal.",
+      "substitutions": [
+        {
+          "from": "Lokix",
+          "to": "Dragonite"
+        },
+        {
+          "from": "Ogerpon-Wellspring",
+          "to": "Primarina"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_12.txt",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_8.txt"
+      ],
+      "sha256": "984782a452b36c8cde46390522227f2b4db39f6deefbc98b2bf7cd328e635842",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/03.txt",
+      "validation_errors": null
+    },
+    {
+      "id": "stage2-screening-04",
+      "style": "sun offense",
+      "roster": [
+        "Torkoal",
+        "Walking Wake",
+        "Hydrapple",
+        "Lokix",
+        "Cinderace",
+        "Great Tusk"
+      ],
+      "template_roster": [
+        "Torkoal",
+        "Walking Wake",
+        "Hydrapple",
+        "Zamazenta",
+        "Cinderace",
+        "Great Tusk"
+      ],
+      "design_rationale": "Drought plus Heat Rock supports Walking Wake and Protosynthesis attackers; hazard removal supports the setter. Team viability is a design hypothesis, not a competitive result.",
+      "substitutions": [
+        {
+          "from": "Zamazenta",
+          "to": "Lokix"
+        }
+      ],
+      "component_sources": [
+        "evaluation/mcts_improvements/reserve_teams.py: hand-constructed weather component",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_12.txt",
+        "bot/teams/standin/team_9.txt",
+        "bot/teams/standin/team_13.txt"
+      ],
+      "sha256": "c39f8fe9301e0457c323b82f8ab0bf892aef786b2aa2e5e3247c2ca8840a9f46",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/04.txt",
+      "validation_errors": null
+    },
+    {
+      "id": "stage2-screening-05",
+      "style": "balance",
+      "roster": [
+        "Tinkaton",
+        "Corviknight",
+        "Darkrai",
+        "Primarina",
+        "Gliscor",
+        "Great Tusk"
+      ],
+      "template_roster": [
+        "Ting-Lu",
+        "Corviknight",
+        "Darkrai",
+        "Primarina",
+        "Pecharunt",
+        "Great Tusk"
+      ],
+      "design_rationale": "Defensive pivots/checks accompany hazard support and an offensive progress maker; no claim of tournament quality.",
+      "substitutions": [
+        {
+          "from": "Ting-Lu",
+          "to": "Tinkaton"
+        },
+        {
+          "from": "Pecharunt",
+          "to": "Gliscor"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_8.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt"
+      ],
+      "sha256": "5665a666805e9c53e65d979ec7858eceba63ce608c2b335e939f02d653ab2251",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/05.txt",
+      "validation_errors": null
+    },
+    {
+      "id": "stage2-screening-06",
+      "style": "balance",
+      "roster": [
+        "Garganacl",
+        "Gliscor",
+        "Moltres",
+        "Gholdengo",
+        "Latios",
+        "Alomomola"
+      ],
+      "template_roster": [
+        "Garganacl",
+        "Gliscor",
+        "Moltres",
+        "Gholdengo",
+        "Dragonite",
+        "Alomomola"
+      ],
+      "design_rationale": "Defensive pivots/checks accompany hazard support and an offensive progress maker; no claim of tournament quality.",
+      "substitutions": [
+        {
+          "from": "Dragonite",
+          "to": "Latios"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_12.txt",
+        "bot/teams/standin/team_13.txt"
+      ],
+      "sha256": "e191438ff1620e1b6746b0d6c84edfedcacc59a5336462b3e6fb95b80ba690c2",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/06.txt",
+      "validation_errors": null
+    },
+    {
+      "id": "stage2-screening-07",
+      "style": "balance",
+      "roster": [
+        "Tinkaton",
+        "Slowking-Galar",
+        "Hydrapple",
+        "Cinderace",
+        "Latios",
+        "Dragonite"
+      ],
+      "template_roster": [
+        "Tinkaton",
+        "Slowking-Galar",
+        "Hydrapple",
+        "Cinderace",
+        "Kyurem",
+        "Zamazenta"
+      ],
+      "design_rationale": "Defensive pivots/checks accompany hazard support and an offensive progress maker; no claim of tournament quality.",
+      "substitutions": [
+        {
+          "from": "Kyurem",
+          "to": "Latios"
+        },
+        {
+          "from": "Zamazenta",
+          "to": "Dragonite"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_9.txt",
+        "bot/teams/standin/team_12.txt",
+        "bot/teams/standin/team_10.txt"
+      ],
+      "sha256": "c5d9c5952357e619a8c85b3ccb02b62dd479743412b19b214f4f9be790953098",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/07.txt",
+      "validation_errors": null
+    },
+    {
+      "id": "stage2-screening-08",
+      "style": "rain offense",
+      "roster": [
+        "Pelipper",
+        "Barraskewda",
+        "Zapdos",
+        "Iron Crown",
+        "Great Tusk",
+        "Walking Wake"
+      ],
+      "template_roster": [
+        "Pelipper",
+        "Barraskewda",
+        "Zapdos",
+        "Gholdengo",
+        "Great Tusk",
+        "Primarina"
+      ],
+      "design_rationale": "Drizzle plus Damp Rock enables Swift Swim and accurate Hurricane; pivots, special attackers and Great Tusk hazard removal complement the physical rain attacker. Team viability remains unmeasured.",
+      "substitutions": [
+        {
+          "from": "Gholdengo",
+          "to": "Iron Crown"
+        },
+        {
+          "from": "Primarina",
+          "to": "Walking Wake"
+        }
+      ],
+      "component_sources": [
+        "evaluation/mcts_improvements/reserve_teams.py: hand-constructed weather component",
+        "evaluation/mcts_improvements/reserve_teams.py: hand-constructed weather component",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_11.txt"
+      ],
+      "sha256": "ed687d99d6aa95f010b5ae686d3f427a0ac6dacc00637703acc6f73c09cafead",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/08.txt",
+      "validation_errors": null
+    },
+    {
+      "id": "stage2-screening-09",
+      "style": "semistall",
+      "roster": [
+        "Blissey",
+        "Dondozo",
+        "Corviknight",
+        "Ting-Lu",
+        "Alomomola",
+        "Lokix"
+      ],
+      "template_roster": [
+        "Blissey",
+        "Dondozo",
+        "Corviknight",
+        "Gliscor",
+        "Alomomola",
+        "Darkrai"
+      ],
+      "design_rationale": "Recovery-heavy defensive core plus an offensive progress maker; long-battle censoring is reported explicitly.",
+      "substitutions": [
+        {
+          "from": "Gliscor",
+          "to": "Ting-Lu"
+        },
+        {
+          "from": "Darkrai",
+          "to": "Lokix"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_12.txt"
+      ],
+      "sha256": "20f3ff62cd26337a248ddbbadcf6362d6c7ea15f21238fea36a1c960f5aa25ce",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/09.txt",
+      "validation_errors": null
+    },
+    {
+      "id": "stage2-screening-10",
+      "style": "semistall",
+      "roster": [
+        "Toxapex",
+        "Weezing-Galar",
+        "Iron Treads",
+        "Pecharunt",
+        "Moltres",
+        "Darkrai"
+      ],
+      "template_roster": [
+        "Toxapex",
+        "Weezing-Galar",
+        "Iron Treads",
+        "Clefable",
+        "Moltres",
+        "Weavile"
+      ],
+      "design_rationale": "Recovery-heavy defensive core plus an offensive progress maker; long-battle censoring is reported explicitly.",
+      "substitutions": [
+        {
+          "from": "Clefable",
+          "to": "Pecharunt"
+        },
+        {
+          "from": "Weavile",
+          "to": "Darkrai"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_6.txt"
+      ],
+      "sha256": "046b2570fe8adb498d0582df4339c17cf980c25fd35a96a1ff8aba411398f0c4",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/10.txt",
+      "validation_errors": null
+    }
+  ]
+}

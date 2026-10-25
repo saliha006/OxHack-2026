@@ -1,0 +1,209 @@
+{
+  "reservation_seed": 2026102503,
+  "pools": [
+    {
+      "stage": "stage2",
+      "phase": "screening",
+      "manifest": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/teams.json",
+      "team_hashes": [
+        "d9909530b185eca21c9c424ab9db8d245a8c4f97dc37e9acd9f63c4dc8482dae",
+        "b387ba88ea0f9a5c66666c5abfcf93c6a518c3753d7bda63a6b257a7cc4b1284",
+        "984782a452b36c8cde46390522227f2b4db39f6deefbc98b2bf7cd328e635842",
+        "c39f8fe9301e0457c323b82f8ab0bf892aef786b2aa2e5e3247c2ca8840a9f46",
+        "5665a666805e9c53e65d979ec7858eceba63ce608c2b335e939f02d653ab2251",
+        "e191438ff1620e1b6746b0d6c84edfedcacc59a5336462b3e6fb95b80ba690c2",
+        "c5d9c5952357e619a8c85b3ccb02b62dd479743412b19b214f4f9be790953098",
+        "ed687d99d6aa95f010b5ae686d3f427a0ac6dacc00637703acc6f73c09cafead",
+        "20f3ff62cd26337a248ddbbadcf6362d6c7ea15f21238fea36a1c960f5aa25ce",
+        "046b2570fe8adb498d0582df4339c17cf980c25fd35a96a1ff8aba411398f0c4"
+      ]
+    },
+    {
+      "stage": "stage2",
+      "phase": "confirmation",
+      "manifest": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/teams.json",
+      "team_hashes": [
+        "0424acc8662fccd3b4c2b3a4c047d909386b9fb8a97cb2340aae4fac696d624d",
+        "f985409d6ee0f181833c8a728f62072cd00534dbbff2bec9c49d827ba4eea873",
+        "01ef2931e13a2450e0fd520b0d90e98d4ebba70b7e1a04f9462772b4e4288ba0",
+        "90aa84275f5d874fbffa46019d77748b8ae8a20fee879918c2f24614d69561f3",
+        "d434a07decb0fd6d0c7feba8d6ea6db043cbe3b468cdcbfcefa43c6aa7217036",
+        "aaa149978b4defd3ece3e262ba93674966926272f560a6a0e812da9ca570ff38",
+        "bff654886113bd7a7dad36871c9ed895f9ada17715e5bfe47c72377b77c27272",
+        "9b3fa7c51c7cb717b992f66c550a59f8e439fe8e845b0f50ce0547b31f4d62f0",
+        "e8e9f241ac2c84cdf8f6b748adbd3ab5b8004ea38461ccab7fa567f42a0e2253",
+        "d590faa7411149037730d753394cfaae378e977539c47a0ecee941659901a899"
+      ]
+    },
+    {
+      "stage": "stage3",
+      "phase": "screening",
+      "manifest": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage3-screening/teams.json",
+      "team_hashes": [
+        "d38931046ca601cb763ec042da5db9eb7039ae38a9cc8af6a0cecba76fe301db",
+        "5bdafeffa9d066adf1500686969ae7d83cc39a59cdfa1ce1f6af5e174af3d437",
+        "6057bd42b0c4bbbc925c57d4f6c7d766814602c45b48b71bd00db1c95bd1915a",
+        "ec4dd1bade6fc529d0749209d16b11a413117463febd6baa1df4926c6b33a3f0",
+        "2a7c5b1fbfe6f806d5fa6c19feebdb235f88e042faaf3b4dfa77f1a89478f139",
+        "fcab393bac03a2f6bffaf624063d86807a242e472055b6531dcdaf8f683ca551",
+        "8e7f2850f6223e79052164bf8c190504f103dd2cd3d4d3ac234ffb6e56f07867",
+        "467667bc568a4f61407c872171d894ccedd463261ff0d8e4ffc874eecaa10176",
+        "26f5ccafff700ae8c05bd49aa896b9a2e194825227d8d526a03262984c61a940",
+        "800c13e14efe6211557cb038eaa93f480072c5864ea8c3fd44843441aedf0418"
+      ]
+    },
+    {
+      "stage": "stage3",
+      "phase": "confirmation",
+      "manifest": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage3-confirmation/teams.json",
+      "team_hashes": [
+        "24b9f081b4baf0c9cf8dbc921d777d2c6d445d158bf00ae94d1dada3c40df03c",
+        "51f3e01166bce998cbfdb2c113580dfaafc4825361047c5ebce075ce3e1b77c6",
+        "dc528e854ae3f2048e50a1f4821d55ee59c75dd7424277626fa13611344dd6d1",
+        "3ebd560f95f6c73475c531a5d6d5cc3426cce86c009f725ef74a0e496f9a0ee9",
+        "998e25ebda2a8708d4ec41c3bc19c3282090ace581f863336610ac72ca4f9a9d",
+        "7d19f0b8096d4eb812a54220e5e270c56b2b50a33f08435045f7e9dd259da44a",
+        "8219735ec2234363b226972acb09acb4668877e262d5c74eb6fd6f2464f01603",
+        "8c5a62ae4f3b8b9d05e40a589fdcd6a07511e77bf8d9649a84bb32be22425072",
+        "998b616492bc689e3a1c15a663685871ad3689d1420ec3e101d9ebae85fac990",
+        "c17fc9b00f8fdcb0deed2402e3058944844b98536aa69ccde5d03e9fa6783169"
+      ]
+    },
+    {
+      "stage": "stage4-fixed",
+      "phase": "screening",
+      "manifest": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage4-fixed-screening/teams.json",
+      "team_hashes": [
+        "922ccc6580b9c6e9a558ebbe8e56dbc83d182c9401a4cfa2f227815f06289c44",
+        "a25cf02bced83aaa505fd62844ae02b50ee35a808222bb229ab90b45b48781bd",
+        "731b89316b4aa5be8a4515e31f6f2c059d68368bdef5217a60d2c68136ab0b59",
+        "9ce6c1b6c4f8737bbc17a123d8ecbc787fdfbe79ddaa37a6ea27bc25dc0031e9",
+        "4df3f4291707e99a72835242fbcaae3fc3fc8c7821eb22930358026fbcbaf0fa",
+        "3878330c6d3bc8a5e89dd8cb3e329c68f80084df402f9442adee21d9dd2ee45c",
+        "b05adc5939e1c13201479692e5c89dbc2fb8b736c675fb044d2b9ad6a5e590f1",
+        "686c4390355701e1f23bbb636f16aba4cbb49b61f845283ef543d7f4c054cfa7",
+        "a4758a675e51bdab2b7a5847ebb109f7f01b1e00a3f2503903a9b7478a8ad342",
+        "135bbc88c0306991e58664d6f3f9faa3f414259994fc9ffefd2070605383124e"
+      ]
+    },
+    {
+      "stage": "stage4-fixed",
+      "phase": "confirmation",
+      "manifest": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage4-fixed-confirmation/teams.json",
+      "team_hashes": [
+        "f3a2202f74f3ea93ab2a01627267082122224620c4d43ef94d99bbaada7568f8",
+        "8198570148538e95befa414fca06f9d51a469979b1f58edd9a90acdb786ef98e",
+        "01c99b66c36d4ea494722cb5e69be0364cbe8bd76ce9de301e995e181b805da4",
+        "4684e91a7965a7ea256a29484ebedee5c66c6652010192dd1483c9ff393ab3a8",
+        "f64108ba19fac1d5b88d4fbfc881a0d8abad504af6230eb396c4bb3a38177f7f",
+        "a912c3dc34587df021aa3a1a13f710feaf48899fe3c6acea154eb1dcfb61dfa7",
+        "4cfe5a7dfa54f443f141c7f4db11daf335eff1e293f0c446575870b42b62480b",
+        "fa535f1ba167a1c9cb73de21098b328d963ac8f92dc8ef4407717936131d0e52",
+        "c8f01f83e248f6af9d5cdc7cd776507caa51736965709d79a2dec48aa7dd98d5",
+        "0f96fc91f2e6b36688f3546633477d17931bac95e0847ed55911ee5da4d61300"
+      ]
+    },
+    {
+      "stage": "stage4-adaptive",
+      "phase": "screening",
+      "manifest": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage4-adaptive-screening/teams.json",
+      "team_hashes": [
+        "ca331fae32999c80adc54565d25717bf1820cd50545d667a084882ec058576f0",
+        "5ce971c1ac177f8935a31b3a7d6394bc4598c51f4083c3f4cf95f2f04c668c62",
+        "8fba9fccf5af4d6ce0a6de62d758c67066c60323c18c5ed807c2b6f19b3026db",
+        "351607220deecb76eaa7f1042bd9db3e8475743de878e94f7ab07909227016ab",
+        "44b5b77f4d37bba4c106a55de58498a49c0e53474e89f06289f61caea7cef308",
+        "1d68ab6fd75f005c17b86360be2aafdb711066ca9b9235013d4fe9679dc65aad",
+        "f02663660799489e0d31c12b65f4af89d5e4f9268ddcca61a76016b28ac30f19",
+        "17de6fab986da96bb21c456680becffa3164cee4bedb273a747c1088c41afbbf",
+        "f112c2cda5fc6889909a05f5338aa37095b5a2ec5d940416f1ad3ac23c4da12a",
+        "9cb9ec3faf0864783b6d3f653c1308cb2282ac19438f42150ff067625c6a5818"
+      ]
+    },
+    {
+      "stage": "stage4-adaptive",
+      "phase": "confirmation",
+      "manifest": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage4-adaptive-confirmation/teams.json",
+      "team_hashes": [
+        "87134e68fba4d6a1cf7e99d0a00dd52ed5eb6aedf06d6b679d0dad8cbd4d285e",
+        "b07aa763bd9baae04434ae18faa6025e63db91ee7f08b4a327aa4d3335a84d8c",
+        "c69a04a8219bc79d16fd66a0c2d574e893430bf50dad57e1a60cd1327230001b",
+        "5ea3c3345884ef9aa23c85e02409498e522a91c14b327e75922fca2b3e5ebb5e",
+        "8fe5c160b48d78ad39839e132219f647096cdb5e478232625322ea28c2bbdae7",
+        "fe5866b9350509e7495f2db11cc6184e162d5bc22a929d2318f1abf1aa94e81e",
+        "347a9eb6e94fec3769717a236ed038b5ebd9574d74cad7d78970dfd475104e0a",
+        "d8ac78c81fe59bbcc0d163b4e07bf40f44fc02b8f2ee10fe55a6fa4d66336362",
+        "c1fde96ed90ad2cccdd8dea4a2dabfa068d8d66bdee0884bd2c9ad169dd17af5",
+        "394f7db94a0b661744ea3ea9ef0540e7c57cdff07a5e896df8d88e618a852f4a"
+      ]
+    },
+    {
+      "stage": "stage5-guard",
+      "phase": "screening",
+      "manifest": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage5-guard-screening/teams.json",
+      "team_hashes": [
+        "71aad36ec8f0bb07a72b3f6c91bd027fc151a200d6ef00623dac70259551b271",
+        "b72e4ac4ef9cbddfc95aa439e93c4e16b8aa8182cd0504b8f9081328a9fc804f",
+        "c8d800e77754b6d0fd16b70f3df6b073d5b83e97aa2f40f8ea458ee224abb58f",
+        "054ce50c8134de8cd0a0258c8377a86574d12b64a0e3a9afa421008265626a3d",
+        "4fefbde853201eaf468484a1fa89c31b59311b1139c5f0870a83151099e95a48",
+        "4f778a4e03c41ad910c5c6a23452346e8c22c1a78e1c9ea6968a693b7daa6cb2",
+        "35bbd1f0ecbdf49361f64e1cee2171d1b761a7b4e43ec052f87ca0452cd7b3de",
+        "a8c3f638b5c80a972b25cfa83445411c77dcff4ddaebb9ceabc7ab4f8f9f816c",
+        "8bbcb4b013af73e24d11bb2ac94e582e25e044a692f1e99a74193592f38118d4",
+        "65fba527c09fb882df6d5188b477d37b191a0fd23f9679987c91b766f85494c8"
+      ]
+    },
+    {
+      "stage": "stage5-guard",
+      "phase": "confirmation",
+      "manifest": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage5-guard-confirmation/teams.json",
+      "team_hashes": [
+        "bc0b250efb7e799ae0fad3038701e556ae421dc2751dce9aa0a0f3004d4e0141",
+        "6724694bedd2b98aa3d4a75ab53b22c09473702d60af7314df7ca54d9e336090",
+        "4a03e6a48f6dae02cf7dc9fe01d9b205716f48504c9e8ff639342fdee65577bd",
+        "c228ebfff3009b6d0a492b4e18fb1dc5923797da6aeaf031b3f232250a9fcb1f",
+        "f8db1428c89bcbdc95791a6951a4bff8115f6cafb0e66bfe8363dad392eae8a1",
+        "8e337153b6d149a560f8eaec3be5b2b4419e99d34db466f239756cbae453924d",
+        "760efcc509aeff650390d5478b748ed518496898ec4de555090acd457693feb7",
+        "84d7debfc997a8eca83f36939a889546ec2eb23a55a8ba2fae0f4820be74d2aa",
+        "332942fbb03c7427f0dbec8658e01a2c2a64bd87f8e9b6b311767012261023d1",
+        "0024f2ef986bf436d85654bf4194235dea647c5375d0dfbe0dc4bbcb73ac7f1b"
+      ]
+    },
+    {
+      "stage": "stage6-mixing",
+      "phase": "screening",
+      "manifest": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage6-mixing-screening/teams.json",
+      "team_hashes": [
+        "06347f94782dcafe047b234a49615f547450037eba1fdee2cc10df52f4ca1cf4",
+        "a7df9c7b702af1e99de476e0eaf75b95b4d3c08e364cb8a9b2759babdb1133af",
+        "b73aa9e7f1b99b641ccac82c8314ed12efbb51709ba3514d49113ce230ce4eb3",
+        "8e4224963522db79d85ebd8a9cd53164c71bcfb9d5577ed7eb5f753954d19bd2",
+        "6760b05305cac57cc3cb8d97ef65da64d2006dc346633cd725e09e05767676d5",
+        "6c90aab3ea19d36ecaa36198393775f65e74ab409652ac39f86ca92fcb0e77ee",
+        "05a4a6d637734e946bc2c3431484be01bc253c5e6ae4e5db8427229775218bf1",
+        "eeca33272f3100a23903133f8a8f69b9198c39f0f082dbe63378b05101e5a4b1",
+        "aed72fcef0ecbc88095564fbd10aa7abd0388f302f6093e964d75d828198d715",
+        "a1a5e237d2fde1102fe4663903fccb0b1ed0de9cf13f4de3d43af030e63890a5"
+      ]
+    },
+    {
+      "stage": "stage6-mixing",
+      "phase": "confirmation",
+      "manifest": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage6-mixing-confirmation/teams.json",
+      "team_hashes": [
+        "14417512ad6ce203ba487414e437c8baad9f71d07b4111368913ca7df4d3d657",
+        "45d9d719e0da741ac03e156c0e85860e7e4c0bb1717f5fa49f6b037e8ae143b8",
+        "f7254db6643b74fbef79848b22bf99f325b3588436d37ff89e965520caa36064",
+        "70215c1f72891a9abe49241027fe9d98df037dad6fd091fa815205c8191366fd",
+        "116876ed4f7506ade8bda43393fc685e88863a6440706270df0a2b11441c378c",
+        "0bff494a53a97359c22648d2c49b23dc718e9bfe89248faeb8550e93fbd2bd07",
+        "82c11ae266ad546d28b99d5c45aca97acf6f479528c8e10306fbedfce337b662",
+        "6dae2bba44808e84694e60bb62db0c1d2f15ec19cd567fe4da9ec657a3d2b08e",
+        "69089ebb3a64fda66da0fa13fb5ced5920a4c219a00bddb389ed77f1b2cbc37e",
+        "db00f4323a8a8d153e621c38d3f30b8cd1ad41a051432f0b594ce4a759f95541"
+      ]
+    }
+  ]
+}

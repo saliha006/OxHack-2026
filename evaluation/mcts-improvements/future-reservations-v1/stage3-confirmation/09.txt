@@ -1,0 +1,61 @@
+Blissey @ Leftovers
+Ability: Natural Cure  
+Tera Type: Dark  
+EVs: 4 HP / 252 Def / 252 SpD  
+Calm Nature  
+IVs: 0 Atk  
+- Calm Mind  
+- Shadow Ball  
+- Seismic Toss  
+- Soft-Boiled  
+
+Dondozo @ Heavy-Duty Boots
+Ability: Unaware  
+Tera Type: Fighting  
+EVs: 248 HP / 252 Def / 8 SpD  
+Impish Nature  
+- Body Press  
+- Avalanche  
+- Rest  
+- Sleep Talk  
+
+Corviknight (F) @ Rocky Helmet  
+Ability: Pressure  
+Tera Type: Water  
+EVs: 136 HP / 252 Def / 120 Spe  
+Impish Nature  
+- Iron Defense  
+- Body Press  
+- Brave Bird  
+- Roost  
+
+Tinkaton @ Air Balloon  
+Ability: Mold Breaker  
+Tera Type: Water  
+EVs: 248 HP / 24 SpD / 236 Spe  
+Jolly Nature  
+- Gigaton Hammer  
+- Thunder Wave  
+- Encore  
+- Stealth Rock  
+
+Alomomola (F) @ Assault Vest  
+Ability: Regenerator  
+Tera Type: Poison  
+EVs: 216 HP / 40 Atk / 252 SpD  
+Sassy Nature  
+IVs: 0 Spe  
+- Flip Turn  
+- Play Rough  
+- Icy Wind  
+- Mirror Coat  
+
+Lokix @ Heavy-Duty Boots  
+Ability: Tinted Lens  
+Tera Type: Bug  
+EVs: 252 Atk / 4 Def / 252 Spe  
+Adamant Nature  
+- First Impression  
+- U-turn  
+- Knock Off  
+- Sucker Punch
