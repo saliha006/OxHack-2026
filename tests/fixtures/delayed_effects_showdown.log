@@ -1,0 +1,61 @@
+|t:|1792900398
+|gametype|singles
+|player|p1|Player 1||
+|player|p2|Player 2||
+|gen|9
+|tier|[Gen 9] Anything Goes
+|rule|HP Percentage Mod: HP is shown in percentages
+|raw|<div class="infobox"><details class="readmore" open><summary><strong>4 custom rules:</strong></summary> ^!Obtainable, ^!Team Preview, !Cancel Mod, ^!Endless Battle Clause</details></div>
+|
+|t:|1792900398
+|teamsize|p1|2
+|teamsize|p2|1
+|start
+|split|p1
+|switch|p1a: Gardevoir|Gardevoir, M|340/340
+|switch|p1a: Gardevoir|Gardevoir, M|100/100
+|split|p2
+|switch|p2a: Blissey|Blissey, F|714/714
+|switch|p2a: Blissey|Blissey, F|100/100
+|turn|1
+|
+|t:|1792900398
+|move|p1a: Gardevoir|Future Sight|p2a: Blissey
+|-start|p1a: Gardevoir|move: Future Sight
+|move|p2a: Blissey|Pound|p1a: Gardevoir
+|split|p1
+|-damage|p1a: Gardevoir|324/340
+|-damage|p1a: Gardevoir|96/100
+|
+|upkeep
+|turn|2
+|
+|t:|1792900398
+|move|p1a: Gardevoir|Wish|p1a: Gardevoir
+|move|p2a: Blissey|Pound|p1a: Gardevoir
+|split|p1
+|-damage|p1a: Gardevoir|308/340
+|-damage|p1a: Gardevoir|91/100
+|
+|upkeep
+|turn|3
+|
+|t:|1792900398
+|split|p1
+|switch|p1a: Chansey|Chansey, F|704/704
+|switch|p1a: Chansey|Chansey, F|100/100
+|move|p2a: Blissey|Pound|p1a: Chansey
+|-crit|p1a: Chansey
+|split|p1
+|-damage|p1a: Chansey|670/704
+|-damage|p1a: Chansey|96/100
+|
+|-end|p2a: Blissey|move: Future Sight
+|split|p2
+|-damage|p2a: Blissey|533/714
+|-damage|p2a: Blissey|75/100
+|split|p1
+|-heal|p1a: Chansey|704/704|[from] move: Wish|[wisher] Gardevoir
+|-heal|p1a: Chansey|100/100|[from] move: Wish|[wisher] Gardevoir
+|upkeep
+|turn|4

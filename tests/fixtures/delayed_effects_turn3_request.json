@@ -1,0 +1,90 @@
+{
+  "active": [
+    {
+      "moves": [
+        {
+          "move": "Future Sight",
+          "id": "futuresight",
+          "pp": 15,
+          "maxpp": 16,
+          "target": "normal",
+          "disabled": false
+        },
+        {
+          "move": "Sleep Talk",
+          "id": "sleeptalk",
+          "pp": 16,
+          "maxpp": 16,
+          "target": "self",
+          "disabled": false
+        },
+        {
+          "move": "Wish",
+          "id": "wish",
+          "pp": 15,
+          "maxpp": 16,
+          "target": "self",
+          "disabled": false
+        }
+      ],
+      "canTerastallize": "Psychic"
+    }
+  ],
+  "side": {
+    "name": "Player 1",
+    "id": "p1",
+    "pokemon": [
+      {
+        "ident": "p1: Gardevoir",
+        "details": "Gardevoir, M",
+        "condition": "308/340",
+        "active": true,
+        "stats": {
+          "atk": 149,
+          "def": 166,
+          "spa": 383,
+          "spd": 267,
+          "spe": 196
+        },
+        "moves": [
+          "futuresight",
+          "sleeptalk",
+          "wish"
+        ],
+        "baseAbility": "synchronize",
+        "item": "",
+        "pokeball": "pokeball",
+        "ability": "synchronize",
+        "commanding": false,
+        "reviving": false,
+        "teraType": "Psychic",
+        "terastallized": ""
+      },
+      {
+        "ident": "p1: Chansey",
+        "details": "Chansey, F",
+        "condition": "704/704",
+        "active": false,
+        "stats": {
+          "atk": 41,
+          "def": 119,
+          "spa": 106,
+          "spd": 247,
+          "spe": 136
+        },
+        "moves": [
+          "sleeptalk"
+        ],
+        "baseAbility": "naturalcure",
+        "item": "",
+        "pokeball": "pokeball",
+        "ability": "naturalcure",
+        "commanding": false,
+        "reviving": false,
+        "teraType": "Normal",
+        "terastallized": ""
+      }
+    ]
+  },
+  "noCancel": true
+}

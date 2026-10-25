@@ -64,7 +64,7 @@ whenever you log an entry.
 | Saliha | `saliha006` | Bot layer; doc owner | `sali` | `bot/`, `runs/` (git-ignored) | bot plays live games through `Agent.choose`; next: task 5 eval harness |
 | Nate | `aldrichbanas07` | Data layer | `nate-data` | `data/` (`data/pipeline/`, `data/tests/`, `data/set_candidates.json`; `data/raw/` and `data/clean/` git-ignored), `contracts/turns.md`, the Tiger service `oxhack-data` | set file and turns table done; next: team-conditioned priors (A6) after the demo |
 | Derrick | `RandomGeeb` | Decision layer | `derrick` | `decision/`, `tests/`, `contracts/battle_state.py` | lead and belief fixes on `main`; building the backtest engine on `derrick` (Tiger dump done) |
-| Kenar | `kxnar` | TBD | TBD | TBD | joined 2026-10-25; getting set up |
+| Kenar | `kxnar` | Experimental MCTS and prediction evaluation | `Kenar-mcts` | `decision/search*`, experimental backend, evaluation/prediction tooling | MCTS baseline implemented; measured pilot and live walkthrough |
 
 **Shared** (anyone may edit; flag it in ⚠️ Conflicts): {{e.g. `contracts/*`, `fixtures/*`, compose files}}
 
@@ -84,6 +84,16 @@ whenever you log an entry.
 ---
 
 ## Log (newest first)
+
+### 2026-10-25 04:03 — feat — Alternative deadline-isolated MCTS and separate prediction evaluation — @kenar
+- **Where:** `Kenar-mcts` · base `main` @ `81c8f1c` · merged to `main`: not yet
+- **Did:** Added stock Gen9/Tera MCTS behind `backend="mcts"`, preserving the one-ply default. One persistent worker contains belief replay, preparation and native search; completed worlds stream before pooling legal visit support. Fixed revelation-preserving belief recovery, full-team sampling, state legality/counters, trace retention and evaluation lifecycle races. The original requested plan is in `docs/mcts-plan.md`.
+- **Measured:** Clean side-swapped integration: 1–1 over two games, 139/139 worlds usable, zero fallbacks/rejections. A frozen-source 24-game pilot across six comparisons is running; it is not a strength claim. Public prediction experiment: 96 eligible replays, chronological 67/14/15 battle split; calibrated logistic test log loss 0.6600 versus HP-only 0.6348, so prediction stays experimental and outside search.
+- **Touched:** `decision/`, `bot/`, optional BattleState fields, tests, `prediction/`, evaluation configs/artifacts and `docs/` (including a live walkthrough). Real OU priors reused unchanged; no learned reranker or extra opponent weighting added.
+- **Brief task:** user's attached MCTS plan → baseline implementation and prediction tools done; comparative pilot/results documentation in progress
+- **⚠️ Conflicts:** Decision/bot/contract changes overlap Derrick/Saliha's paths; all changes remain on this branch for review. Default backend remains `one_ply`.
+- **📨 Needs:** none for implementation; confirmatory strength evaluation needs more held-out teams/games than the bounded pilot
+- **Status:** open — pilot and final result record pending
 
 ### 2026-10-25 03:30 — decision — Backtest engine started: Tiger's turns on disk, and four decisions on how it takes data — @derrick
 - **Where:** `derrick` @ `78453b9` · merged to `main`: not yet

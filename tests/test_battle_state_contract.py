@@ -7,7 +7,7 @@ EXAMPLE = Path(__file__).parent.parent / "contracts" / "examples" / "battle_stat
 
 
 def keys(typed_dict):
-    return set(typed_dict.__annotations__)
+    return set(typed_dict.__required_keys__)
 
 
 def test_example_has_exactly_the_contract_keys():

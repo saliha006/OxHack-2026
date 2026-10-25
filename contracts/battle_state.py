@@ -1,5 +1,5 @@
 """BattleState: what the bot layer hands the decision layer each turn, as JSON. Spec: contracts/battle-state.md."""
-from typing import Literal, TypedDict
+from typing import Literal, NotRequired, TypedDict
 
 SideId = Literal["p1", "p2"]
 
@@ -16,6 +16,8 @@ class PokemonState(TypedDict):
     ability: str | None       # None = not revealed
     tera_type: str | None     # None = not revealed
     terastallized: bool
+    sleep_turns: NotRequired[int]  # observed failed sleep actions, rather than elapsed end-of-turns
+    rest_turns: NotRequired[int]  # engine convention: 3 initially, decrements on sleeping action attempts
 
 
 class SideState(TypedDict):
@@ -29,6 +31,10 @@ class SideState(TypedDict):
     last_move: str | None     # the active Pokémon's last move ID (Choice lock, Encore); reset to None when this side switches
     hazards: dict[Literal["stealthrock", "spikes", "toxicspikes", "stickyweb"], int]  # layers, 0 if absent
     side_effects: dict[str, int]  # timed side conditions in play -> turns elapsed, e.g. {"reflect": 2, "tailwind": 1}
+    volatile_turns: NotRequired[dict[str, int]]  # optional extension: elapsed upkeeps since each -start
+    wish: NotRequired[dict[str, int]]  # {turns: elapsed upkeeps, source: preview slot, hp?: exact heal amount}
+    future_sight: NotRequired[dict[str, int]]  # {turns: elapsed upkeeps, source: attacker preview slot}
+    substitute_hp: NotRequired[int]  # exact remaining HP only if known; otherwise adapter explicitly estimates
 
 
 class Field(TypedDict):

@@ -1,0 +1,52 @@
+{
+  "source": "bot",
+  "purpose": "two-game integration prediction diagnostics; not a human replay result",
+  "battle_count": 2,
+  "compute_source_sha256": "f182c3b0e26228d90e25ff94f011e1aa94d1124e98abe6fd0f95556d075a2692",
+  "engine_version": "0.0.48",
+  "belief": {
+    "coverage": {
+      "traces": 4,
+      "decisions_without_posterior_excluded": 0,
+      "revelations": 65,
+      "original_prior_recoveries": 0,
+      "ground_truth_sets": "not supplied; no full-set coverage claim"
+    },
+    "scores": {
+      "bot": {
+        "revelations": 65,
+        "smoothing_alpha": 1e-06,
+        "next_move_assumption": "uniform over each set's remaining unrevealed moves",
+        "log_loss": {
+          "prior": 1.5130984189668109,
+          "hard_filter": 1.5022171926311,
+          "updated": 1.5591783019913334
+        },
+        "ground_truth_examples": 0,
+        "full_set_coverage": {
+          "prior": null,
+          "hard_filter": null,
+          "updated": null
+        }
+      }
+    }
+  },
+  "opponent_actions": {
+    "source": "bot",
+    "observed_replies": 124,
+    "unknown_replies_excluded": 15,
+    "team_preview_excluded": 2,
+    "missing_prediction_excluded": 0,
+    "outside_native_options": 5,
+    "smoothing_alpha": 1e-06,
+    "smoothing": "add alpha to every native option plus a reserved OTHER category",
+    "visit_log_loss": 2.0970467560035413,
+    "uniform_log_loss": 2.5242002295960466,
+    "interpretation": "diagnostic visit-share likelihood, not calibrated action probabilities"
+  },
+  "supervised_export": {
+    "turn_rows_with_both_perspectives": 258,
+    "battle_groups": 2,
+    "status": "insufficient for three chronological train/validation/test battle groups"
+  }
+}

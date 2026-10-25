@@ -27,12 +27,13 @@ def our_actions(request: dict) -> list[Action]:
     team = request["side"]["pokemon"]
     if request.get("teamPreview"):
         return [Action("lead", n) for n in range(1, len(team) + 1)]
-    if request.get("forceSwitch"):
+    if any(request.get("forceSwitch", [])):
         return _switches(team)
 
     active = request["active"][0]
     # `disabled` is either a bool or the name of the effect disabling the move.
-    usable = [n for n, move in enumerate(active["moves"], 1) if not move.get("disabled")]
+    usable = [n for n, move in enumerate(active["moves"], 1)
+              if not move.get("disabled") and move.get("pp", 1) > 0]
     actions = [Action("move", n) for n in usable]
     if active.get("canTerastallize"):
         actions += [Action("move", n, tera=True) for n in usable]

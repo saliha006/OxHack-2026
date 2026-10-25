@@ -1,0 +1,12 @@
+{
+  "platform": "Linux-7.2.7-arch1-1-x86_64-with-glibc2.44",
+  "logical_cpus": 16,
+  "cpu_model": "AMD Ryzen 7 5700U with Radeon Graphics",
+  "showdown_revision": "c0845f33d381402dfcb18ce324c20a94f18af075",
+  "foul_play_revision": "8f541f80f91f960603673796559f796b10ccf0fb",
+  "engine_binary_sha256": "fbffd2a1c9c48eab99def9187f9030c578174a30b49d54faad159be859846ef3",
+  "source_sha256": "f182c3b0e26228d90e25ff94f011e1aa94d1124e98abe6fd0f95556d075a2692",
+  "comparison_games_concurrent": 4,
+  "measurement_scope": "bounded pilot, two reserved offense/bulky-offense teams; no default backend change",
+  "other_load": "Desktop and development tests/documentation were active; a short separate position-comparison analysis may overlap. Native visit counts/latency are practical observations, not isolated hardware benchmarks."
+}

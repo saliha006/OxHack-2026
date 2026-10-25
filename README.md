@@ -37,3 +37,23 @@ Decisions in force and open choices are in the project's shared docs (kept off `
 - `context`: the team's shared planning docs (no code).
 
 Secrets stay in a local `.env`; it is never committed.
+
+## Alternative MCTS backend
+
+`Agent(priors, backend="mcts")` searches independently sampled hidden teams with
+stock Gen 9/Tera `poke-engine`. The existing `one_ply` backend remains the default.
+Search runs in a persistent isolated worker with a parent-enforced deadline and
+streams completed worlds before pooling their normalised visits as search support.
+
+```sh
+uv sync
+uv run python -m bot.smoke --backend mcts --worlds 1 --priors data/set_candidates.json
+uv run python -m bot.eval --runs runs/mcts-comparison run --config evaluation/mcts-baseline.json
+```
+
+The game commands require a local Showdown server on port 8000. See the
+[implementation](docs/mcts-implementation.md), [adapter audit](docs/mcts-adapter.md),
+[evaluation instructions](docs/mcts-evaluation.md), and [original plan](docs/mcts-plan.md).
+Win-probability training and scoring live separately in `prediction/`; install
+their dependencies with `uv sync --group prediction`. A trained model is not used
+by the search backend.

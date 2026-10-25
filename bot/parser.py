@@ -42,7 +42,8 @@ def parse_hp(text: str) -> tuple[int, str | None]:
     if status == "fnt" or hp == "0":
         return 0, None
     current, _, total = hp.partition("/")
-    current, total = int(current), int(total or 100)
+    # Legacy replays append a colour code (e.g. 20/100y); it is presentation, not part of the HP value.
+    current, total = int(current), int(re.sub(r"[a-z]+$", "", total) or 100)
     # Our own side's lines carry exact HP; the contract wants Showdown's 0-100 scale for both sides.
     percent = current if total == 100 else max(1, round(current * 100 / total))
     return percent, status
@@ -138,6 +139,8 @@ class Parser:
         mon["hp_percent"] = hp
         if status is not None and status in STATUSES and status != mon["status"]:
             mon["status"], mon["status_turns"] = status, 0
+            mon.pop("sleep_turns", None)
+            mon.pop("rest_turns", None)
 
     def reveal(self, tags: dict[str, str], owner: tuple[SideId, int] | None) -> str | None:
         """Record what a [from] tag gives away; return it as an Event.source string."""
@@ -174,6 +177,7 @@ class Parser:
         mon["level"] = level
         if tera:
             mon["tera_type"], mon["terastallized"] = tera, True
+            side["tera_used"] = True
         self.set_hp(mon, *parse_hp(args[2]))
         previous = side["active"]
         if previous is not None and previous != index and self.pokemon(side_id, previous)["status"] == "tox":
@@ -181,6 +185,8 @@ class Parser:
         side["active"] = index
         side["boosts"] = dict.fromkeys(BOOSTS, 0)
         side["volatiles"] = []
+        side.pop("volatile_turns", None)
+        side.pop("substitute_hp", None)
         side["last_move"] = None
         self.names[side_id][name] = index
         self.event("switch", side_id, index)
@@ -205,6 +211,11 @@ class Parser:
             self.side(side_id)["last_move"] = move
         target = args[2][:2] if len(args) > 2 and args[2][:2] in ("p1", "p2") else None
         self.event("move", side_id, index, move=move, target=target)
+        if move == "sleeptalk" and self.pokemon(side_id, index)["status"] == "slp":
+            self._sleep_attempt(self.pokemon(side_id, index))
+        if move in ("wish", "futuresight") and not tags.get("from"):
+            key = "wish" if move == "wish" else "future_sight"
+            self.side(side_id).setdefault(key, {"turns": 0, "source": index})
 
     def _hp_change(self, kind, args):
         side_id, index = self.mon(args[0])
@@ -235,6 +246,14 @@ class Parser:
     def _cant(self, args):
         move = to_id(args[2]) if len(args) > 2 else None
         self.event("cant", *self.mon(args[0]), reason=effect_id(args[1]), move=move)
+        if effect_id(args[1]) == "slp":
+            self._sleep_attempt(self.pokemon(*self.mon(args[0])))
+
+    @staticmethod
+    def _sleep_attempt(mon):
+        mon["sleep_turns"] = mon.get("sleep_turns", 0) + 1
+        if mon.get("rest_turns", 0):
+            mon["rest_turns"] = max(1, mon["rest_turns"] - 1)
 
     def _item(self, args):
         owner = self.mon(args[0])
@@ -287,14 +306,23 @@ class Parser:
         if args[1].startswith(("ability:", "item:")):
             self.reveal({"from": args[1]}, owner)
         volatiles, effect = self.side(owner[0])["volatiles"], effect_id(args[1])
+        if effect == "futuresight":
+            return  # Showdown marks the source; the delayed attack is tracked separately from active volatiles
         if effect not in volatiles:
             volatiles.append(effect)
+        self.side(owner[0]).setdefault("volatile_turns", {})[effect] = 0
         self.reveal(parse_tags(args[2:]), owner)  # e.g. Libero: '[from] ability: Libero'
 
     def _end(self, args):
         volatiles, effect = self.side(self.mon(args[0])[0])["volatiles"], effect_id(args[1])
         if effect in volatiles:
             volatiles.remove(effect)
+        self.side(self.mon(args[0])[0]).get("volatile_turns", {}).pop(effect, None)
+        if effect == "substitute":
+            self.side(self.mon(args[0])[0]).pop("substitute_hp", None)
+        if effect == "futuresight":
+            owner = self.mon(args[0])[0]
+            self.side("p2" if owner == "p1" else "p1").pop("future_sight", None)
 
     def _activate(self, args):
         if args[1].startswith(("ability:", "item:")):
@@ -304,15 +332,25 @@ class Parser:
         side_id, index = self.mon(args[0])
         mon = self.pokemon(side_id, index)
         mon["status"], mon["status_turns"] = args[1], 0
+        mon.pop("sleep_turns", None)
+        mon.pop("rest_turns", None)
+        if args[1] == "slp":
+            mon["sleep_turns"] = 0
+            if effect_id(parse_tags(args[2:]).get("from", "")) == "rest":
+                mon["rest_turns"] = 3
         self.reveal(parse_tags(args[2:]), (side_id, index))  # e.g. '[from] item: Flame Orb'
 
     def _curestatus(self, args):
         mon = self.pokemon(*self.mon(args[0]))
         mon["status"], mon["status_turns"] = "", 0
+        mon.pop("sleep_turns", None)
+        mon.pop("rest_turns", None)
 
     def _cureteam(self, args):
         for mon in self.side(self.mon(args[0])[0])["pokemon"]:
             mon["status"], mon["status_turns"] = "", 0
+            mon.pop("sleep_turns", None)
+            mon.pop("rest_turns", None)
 
     def _faint(self, args):
         self.pokemon(*self.mon(args[0]))["hp_percent"] = 0
@@ -323,6 +361,7 @@ class Parser:
         mon["species"], mon["forme_known"] = species, True
         if tera:
             mon["tera_type"], mon["terastallized"] = tera, True
+            self.side(self.mon(args[0])[0])["tera_used"] = True
 
     def _sidestart(self, args):
         side = self.side(args[0][:2])
@@ -380,6 +419,13 @@ class Parser:
         for side in self.state["sides"].values():
             for effect in side["side_effects"]:
                 side["side_effects"][effect] += 1
+            for effect in side.get("volatile_turns", {}):
+                side["volatile_turns"][effect] += 1
+            for effect, duration in (("wish", 2), ("future_sight", 3)):
+                if effect in side:
+                    side[effect]["turns"] += 1
+                    if side[effect]["turns"] >= duration:
+                        del side[effect]
             if side["active"] is not None:
                 mon = side["pokemon"][side["active"]]
                 if mon["status"] in COUNTED_STATUSES:
@@ -387,6 +433,13 @@ class Parser:
 
     def _turn(self, args):
         self.state["turn"] = int(args[0])
+
+    def _fail(self, args):
+        # A just-attempted delayed effect that Showdown rejected must not become a pending effect.
+        side = self.side(self.mon(args[0])[0])
+        key = {"wish": "wish", "futuresight": "future_sight"}.get(side["last_move"])
+        if key and side.get(key, {}).get("turns") == 0:
+            side.pop(key, None)
 
     HANDLERS = {
         "player": _player, "poke": _poke, "switch": _switch, "drag": _switch, "replace": _replace, "move": _move,
@@ -402,6 +455,7 @@ class Parser:
         "-setboost": _setboost, "-clearboost": _clearboost,
         "-clearallboost": _clearallboost, "-clearnegativeboost": _clearnegativeboost,
         "-start": _start, "-end": _end, "-activate": _activate,
+        "-fail": _fail,
         "-status": _status, "-curestatus": _curestatus, "-cureteam": _cureteam, "faint": _faint,
         "detailschange": _formechange, "-formechange": _formechange,
         "-sidestart": _sidestart, "-sideend": _sideend, "-swapsideconditions": _swapsideconditions,
