@@ -584,3 +584,45 @@ Neither fits a 25-hour hackathon and our question. RL needs far more compute and
 - **Ideas:** searching several sampled worlds (Foul Play, `pmariglia/foul-play`); more engine threads per world and a Tera gate, both tested as opt-in (Laplace, `influxtion/Laplace-Pokemon-Showdown-AI`).
 - **Data:** Smogon usage stats; HolidayOugi replays; Foul Play's published set counts (opt-in priors only).
 - **Libraries:** `poke-engine`, poke-env, Pokémon Showdown.
+
+---
+
+## 14. Bot layer talking points, by audience
+
+*Saliha's layer. For each audience: one version for someone who has never seen the project, one for someone who saw it earlier and missed how fast it changed. Facts as of 2026-10-25 ~13:10 UTC.*
+
+### The general judges *(creativity, technicality, completeness, presentation; theme TIME)*
+
+**Never seen it.** The bot layer is the part that actually sits at the table. It connects to a Pokémon Showdown server, reads every message the game sends, and keeps its own exact record of the battle: health, status, boosts, traps, and every move and item the other side has shown. When the game asks for a move, it hands that record to the strategy layer, gets an answer back inside three seconds, sends it, and writes down what it did and why. Two things make it worth watching. Every decision is posted into the battle chat next to the board, and you can play it yourself: open the Showdown page, challenge "oxhack demo", and it plays you live while explaining itself. Time runs through all of it. Each decision gets three seconds, and the search behind it is killed and replaced if it runs over.
+
+**Saw it earlier.** Most of what changed today happened behind one line. The bot calls `agent.choose(request, state)` and doesn't care what's behind it. On Saturday that was a one-ply bot; this morning Kenar's tree search replaced it, and the bot layer didn't have to change to take it. What did change in the bot layer is everything around the decision:
+- The search's reasoning now goes into the battle chat.
+- A person can challenge the bot from the browser. It went 4–0 against a teammate in mirror matches today.
+- The evaluation harness was re-pointed at the new bot, with Foul Play on hard mode as the opponent.
+
+### HRT *(Best Use of Data for Predictions & Decision Making)*
+
+**Never seen it.** For a prize about data, the bot layer is where the data comes from and where decisions become measurable.
+- **Every decision is written down.** Each turn the bot records the exact state, the request, what it chose, how long it thought and what it believed, one line per decision, so any move can be audited afterwards.
+- **One parser for live play and training.** The same parser turns saved replays into training data. That's how the 489,840 positions in our database were built, so the models learn from exactly the picture the live bot sees.
+- **The evaluation harness lives here too.** It plays both sides with the same team, swaps sides, merges results from several laptops, and gives every win rate a 95% interval.
+- **It refuses to mix code versions.** That check fired on us this morning, and we only resumed after confirming the bots under test hadn't changed.
+
+**Saw it earlier.** The measurement changed with the bot.
+- The old evaluation measured the one-ply bot. This morning we added matchups that measure the tree-search bot: against the easy baseline, against Foul Play at four strengths up to hard mode, and head to head against variants of itself.
+- The rule for turning a variant on was written down before any game: beat the current bot with the interval's lower bound above 50%. Four engine threads cleared it at 11 of 14, only just, so it's still off.
+- Against Foul Play on hard mode, today's bot is 3–3 across all runs. That's too few games to call, and we say so.
+
+### Tiger Data *(most innovative, impactful, performance-driven use of Tiger Data)*
+
+**Never seen it.**
+- **What's in Tiger.** We loaded 2.5 million public Pokémon Showdown battles into a Tiger Postgres database; the raw logs alone are 9.2 GB. We then cut 20,000 of those games into 489,840 turn-by-turn positions in a `turns` table, split by date: 15,000 games from 2025 onwards for training, 5,000 from 19 May 2026 for testing.
+- **The bot layer's part is the parser.** The `turns` table was built by running each battle through the same code that reads the live game, so a row in Tiger is exactly what the bot would have seen at that moment.
+- **How the team uses it.** Four laptops read it with read-only logins. Rows join on battle ID *and* start time, so two games can't be confused.
+- **The bar to beat.** The first baseline on it, a plain health count, scores a log loss of 0.641 on the test games. Any learned model has to beat that.
+
+**Saw it earlier.**
+- **One shared copy.** The replay data moved from local files into Tiger, so all four of us work from the same copy instead of one per laptop.
+- **Not queried mid-battle, on purpose.** The live bot never queries Tiger during a battle: the Tiger reader is offline-only, and a three-second turn is no place for a database round trip.
+- **What Tiger feeds.** Training and testing prediction models, and checking the bot's guesses against real games.
+- **Next step.** A model trained on the full `turns` table. The first win-probability model came from a much smaller public sample and doesn't yet beat the health count.
