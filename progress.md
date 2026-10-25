@@ -87,6 +87,15 @@ whenever you log an entry.
 
 ## Log (newest first)
 
+### 2026-10-25 07:11 — eval — Prepare a fixed 400-game latest-bot versus Foul Play benchmark — @kenar
+- **Where:** `Kenar-foulplay-eval`, isolated from merge/evaluation checkouts; merged to main: not yet
+- **Did:** Added a dedicated fixed-own-team external benchmark. Latest corrected MCTS keeps team_6 and its conservative defaults; Foul Play uses the 14 other existing team exports at 600 ms per sampled world, one thread/parallel worker. Pin both code/data/runtime versions; these are not equal-compute or ladder claims.
+- **Plan:** 400 games, 200 on each side, balanced team-matchup pairs, no outcome-based early stopping. Two full smoke games precede the main sample and are excluded from its score. Report raw win rate, draw-adjusted score, Wilson intervals, opponent-team-cluster bootstrap, fallbacks, rejections and visible infrastructure failures.
+- **Isolation:** Private localhost Showdown server on port 8127 and copied external code/data. The supervisor waits for all observed existing evaluation runners to exit before any battle. At most two benchmark games run concurrently. No original process, schedule or runtime is changed.
+- **Validation:** 43 benchmark/harness tests passed. Private server + Foul Play login/team/challenge-readiness preflight passed without launching a battle or native search. Actual battle smoke and strength results remain pending.
+- **Touched:** standalone `evaluation/foulplay_benchmark.py`, benchmark tests and versioned manifest
+- **Status:** prepared/queued; zero benchmark games completed at preparation; no win-rate claim
+
 ### 2026-10-25 06:58 — fix — Reconcile MCTS and coherent-set branches for main review — @kenar
 - **Where:** reconciled `Kenar-coherent-sets` candidate, based on `50d9a43` + committed MCTS `aecf217` + main handoff `adc8a0b`; merged to `main`: not yet
 - **Did:** Reconciled branch histories and current main without editing evaluation checkouts. Preserved MCTS state/Tera/reliable-belief fixes and optional IV conversion. Included the missing offline policy-metrics helper needed by committed reporting code; corrected the builder contract test to distinguish optional IVs from required fields.
