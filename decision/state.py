@@ -27,9 +27,12 @@ def our_side(request: dict, observed_side: dict | None = None) -> Side:
         # Move slots count from active[0].moves, which is a single move when locked or Struggling.
         active_moves = [Move(id=m["id"], pp=m.get("pp", 1), disabled=bool(m.get("disabled")))
                         for m in request["active"][0]["moves"]]
-    observed = {mon["species"]: mon for mon in (observed_side or {}).get("pokemon", [])}
+    observed_team = (observed_side or {}).get("pokemon", [])
+    observed = {mon["species"]: mon for mon in observed_team}
+    identities = {mon["request_ident"]: mon for mon in observed_team if mon.get("request_ident")}
     pokemon = [_pokemon(mon, active_moves if i == active_index else None,
-                        observed.get(to_id(mon["details"].split(",")[0]), {})) for i, mon in enumerate(team)]
+                        identities.get(mon.get("ident"), observed.get(to_id(mon["details"].split(",")[0]), {})))
+               for i, mon in enumerate(team)]
     return Side(pokemon=pokemon, active_index=str(active_index))
 
 
@@ -41,7 +44,7 @@ def _pokemon(mon: dict, moves: list[Move] | None, observed: dict | None = None) 
     if status == "fnt":
         # Preserve identity and transformed state even after fainting: the engine determines spent Tera by
         # looking for a terastallized Pokémon anywhere on the team, including fainted slots.
-        current, maxhp = 0, int(mon.get("maxhp", 100))
+        current, maxhp = 0, int(mon.get("maxhp", observed.get("exact_maxhp", 100)))
     else:
         current, maxhp = map(int, hp.split("/"))
     entry = DEX[to_id(species)]
@@ -67,6 +70,7 @@ def _pokemon(mon: dict, moves: list[Move] | None, observed: dict | None = None) 
         weight_kg=entry["weightkg"],
         terastallized=bool(mon["terastallized"]),
         tera_type=mon["teraType"].lower(),
-        # Benched PP isn't in the request; the engine's default (full) is assumed.
-        moves=moves or [Move(id=m) for m in mon["moves"]],
+        # The current active request is exact. Other slots retain last-seen PP
+        # by move identity; only never-seen moves use the native default of 16.
+        moves=moves or [Move(id=m, pp=observed.get("move_pp", {}).get(m, {}).get("pp", 16)) for m in mon["moves"]],
     )

@@ -45,6 +45,29 @@ what the log shows and the request doesn't: both sides as seen in the battle, th
 | `field` | `|-weather|`, `|-fieldstart|` / `|-fieldend|` |
 | `last_turn` | Everything since the previous request, as `Event`s |
 
+## Optional request-memory extensions (25 October MCTS work)
+
+These additive fields preserve consumers of the original required shape. Private
+own-team memory is populated only for `us`; it does not reveal opposing PP or
+other private opponent state.
+
+| Field | Meaning and authority |
+|---|---|
+| `pokemon[].request_ident` | Own request ident, used to match remembered information after request party reordering |
+| `pokemon[].exact_maxhp` | Last exact own request max HP; retained when a later fainted condition is only `0 fnt` |
+| `pokemon[].move_pp` | Own move ID to `{pp, maxpp, certainty, source}`. Current active requests are exact. Observed spending is estimated; called/locked-repeat moves do not spend twice. PP restoration can invalidate memory. Never-observed moves remain unknown to the parser; the adapter's default is an explicit estimate |
+| `sides[*].protect_streak` | Observed successful consecutive Protect-family turns, capped at six; failure, switching and an intervening non-Protect turn reset it |
+| `last_turn_complete` | An `upkeep` occurred since the previous snapshot. False marks a partial interval, including living-pivot continuation; it does not supply a queued hidden opponent move |
+
+For called moves, a move event may use source `"move:<caller-id>"`; locked repeat
+events use `"lockedmove"`. Direct move use remains `"move"`. Inference must
+distinguish these sources instead of treating every displayed move as a newly
+chosen move or PP spend.
+
+The exact/remembered/estimated distinction is also emitted in adapter diagnostics.
+The controlled simulator fixture and remaining caveats are described in the
+[MCTS adapter audit](../docs/mcts-adapter.md) and [staged record](../docs/mcts-improvement-log.md).
+
 ## Still open
 - 🟠 **Parked:** `Event.hit_count` for multi-hit moves (`|-hitcount|`). Until then belief takes no damage evidence from them.
 - 🟠 Agreement from the bot layer owner (proposed: saliha) on the shape, and on JSON as the hand-over.

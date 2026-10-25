@@ -34,7 +34,9 @@ def events(parser):
 
 
 def test_replay_turn_two_matches_the_contract_example():
-    assert states_from_log(REPLAY)[2] == EXAMPLE
+    state = states_from_log(REPLAY)[2]
+    assert state.pop("last_turn_complete") is True
+    assert state == EXAMPLE
 
 
 def test_whole_replay_parses_without_a_skipped_line(caplog):

@@ -100,6 +100,7 @@ class BattleSession:
         if self.answered is not None and rqid is not None and self.answered[0] == rqid:
             return self._retry(request, rqid)
 
+        self.parser.observe_request(request)
         state = self.parser.snapshot()
         self._observe_reply(state)
         before = self.errors.count

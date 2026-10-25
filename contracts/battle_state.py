@@ -18,6 +18,9 @@ class PokemonState(TypedDict):
     terastallized: bool
     sleep_turns: NotRequired[int]  # observed failed sleep actions, rather than elapsed end-of-turns
     rest_turns: NotRequired[int]  # engine convention: 3 initially, decrements on sleeping action attempts
+    request_ident: NotRequired[str]  # stable private own-team ident across request reordering
+    exact_maxhp: NotRequired[int]  # remembered private max HP, including after fainting
+    move_pp: NotRequired[dict[str, dict]]  # own move id -> {pp, maxpp, certainty, source}; no opponent PP claim
 
 
 class SideState(TypedDict):
@@ -35,6 +38,7 @@ class SideState(TypedDict):
     wish: NotRequired[dict[str, int]]  # {turns: elapsed upkeeps, source: preview slot, hp?: exact heal amount}
     future_sight: NotRequired[dict[str, int]]  # {turns: elapsed upkeeps, source: attacker preview slot}
     substitute_hp: NotRequired[int]  # exact remaining HP only if known; otherwise adapter explicitly estimates
+    protect_streak: NotRequired[int]  # successful consecutive Protect-family turns, capped at six
 
 
 class Field(TypedDict):
@@ -65,3 +69,4 @@ class BattleState(TypedDict):
     sides: dict[SideId, SideState]
     field: Field
     last_turn: list[Event]    # everything since the previous request; empty at team preview
+    last_turn_complete: NotRequired[bool]  # an observed |upkeep| occurred since the previous snapshot

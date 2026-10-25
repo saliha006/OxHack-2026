@@ -40,12 +40,12 @@ def build_state(request: dict, battle: BattleState, sets: list[PokemonSet]) -> S
                                           request.get("active", [{}])[0].get("maybeTrapped"))),
         side_two=_side(seen, theirs, seen["active"]),
         weather=WEATHER.get(field["weather"], "none"),
-        weather_turns_remaining=_left(WEATHER_TURNS, field["weather_turns"]) if field["weather"] else 0,
+        weather_turns_remaining=_active_left(WEATHER_TURNS, field["weather_turns"]) if field["weather"] else 0,
         terrain=field["terrain"] or "none",
-        terrain_turns_remaining=_left(TERRAIN_TURNS, field["terrain_turns"]) if field["terrain"] else 0,
+        terrain_turns_remaining=_active_left(TERRAIN_TURNS, field["terrain_turns"]) if field["terrain"] else 0,
         trick_room="trickroom" in field["effects"],
         trick_room_turns_remaining=(
-            _left(TRICK_ROOM_TURNS, field["effects"]["trickroom"]) if "trickroom" in field["effects"] else 0
+            _active_left(TRICK_ROOM_TURNS, field["effects"]["trickroom"]) if "trickroom" in field["effects"] else 0
         ),
     )
 
@@ -54,7 +54,7 @@ def _side(seen: SideState, pokemon: list[Pokemon], active: int, *,
           force_switch: bool = False, force_trapped: bool = False, check_resource: bool = True) -> Side:
     boosts = seen["boosts"]
     hazards = seen["hazards"]
-    timed = {SIDE_EFFECT_FIELD[name]: _left(SIDE_EFFECT_TURNS[name], turns)
+    timed = {SIDE_EFFECT_FIELD[name]: _active_left(SIDE_EFFECT_TURNS[name], turns)
              for name, turns in seen["side_effects"].items() if name in SIDE_EFFECT_FIELD}
     active_mon = pokemon[active]
     if check_resource and seen["tera_used"] and not any(mon.terastallized for mon in pokemon):
@@ -105,6 +105,7 @@ def _side(seen: SideState, pokemon: list[Pokemon], active: int, *,
             toxic_spikes=hazards["toxicspikes"],
             sticky_web=hazards["stickyweb"],
             toxic_count=seen["pokemon"][seen["active"]]["status_turns"] if active_mon.status == "toxic" else 0,
+            protect=min(6, max(0, seen.get("protect_streak", 0))),
             **timed,
         ),
     )
@@ -158,10 +159,36 @@ def _left(total: int, elapsed: int) -> int:
     return max(total - elapsed, 0)
 
 
+def _active_left(total: int, elapsed: int) -> int:
+    # A currently observed effect cannot already be absent. Its unknown expiry
+    # is still an estimate; recheck on the next protocol snapshot.
+    return max(total - elapsed, 1)
+
+
 def adapter_diagnostics(request: dict, battle: BattleState) -> list[dict]:
     """Explicit estimates in the native state; these are observations about conversion, not engine errors."""
-    estimates = [{"field": "opponent_pp", "reason": "not observed; engine defaults to 16 per move"},
-                 {"field": "our_bench_pp", "reason": "not supplied by request; engine defaults to 16 per move"}]
+    estimates = [{"field": "opponent_pp", "certainty": "estimated",
+                  "reason": "not observed; engine defaults to 16 per move"},
+                 {"field": "our_bench_pp", "reason": "per-move provenance below; unseen moves still default to 16"}]
+    observed = battle["sides"][battle["us"]]["pokemon"]
+    for slot in request.get("side", {}).get("pokemon", []):
+        species = ''.join(char.lower() for char in slot["details"].split(',')[0] if char.isalnum())
+        mon = next((mon for mon in observed if mon.get("request_ident") == slot.get("ident") or
+                    mon["species"] == species), {})
+        current = {move['id']: move for move in request.get('active', [{}])[0].get('moves', [])
+                   if 'pp' in move} if slot.get('active') else {}
+        for move in slot.get('moves', []):
+            cached = mon.get('move_pp', {}).get(move)
+            certainty = ('exact' if move in current else
+                         'estimated' if cached is None or cached.get('certainty') == 'estimated' else 'remembered')
+            estimates.append({'field': 'move_pp', 'side': battle['us'], 'species': species, 'move': move,
+                              'certainty': certainty,
+                              'reason': 'current request' if move in current else
+                                        cached.get('source', 'last request') if cached else 'native default 16; never observed'})
+    if any(request.get('forceSwitch', [])) and any(mon.get('active') and not mon.get('condition', '').endswith('fnt')
+                                                  for mon in request.get('side', {}).get('pokemon', [])):
+        estimates.append({'field': 'continuation_request', 'certainty': 'estimated',
+                          'reason': 'living pivot/replacement; any unobserved queued opponent move remains unknown; native saved move omitted'})
     for side_id, side in battle["sides"].items():
         for effect in side["side_effects"]:
             if effect in SIDE_EFFECT_TURNS:

@@ -3,6 +3,7 @@
 Pure: no network, so the same code reads a live battle and a saved replay log.
 """
 import copy
+import json
 import logging
 import re
 from collections.abc import Iterable
@@ -16,6 +17,9 @@ BOOSTS = ("atk", "def", "spa", "spd", "spe", "accuracy", "evasion")
 STATUSES = ("", "brn", "par", "slp", "frz", "psn", "tox")
 COUNTED_STATUSES = ("slp", "tox")
 EFFECTIVENESS = {"-supereffective": "super", "-resisted": "resisted", "-immune": "immune"}
+PROTECT_EFFECTS = {"protect", "endure", "kingsshield", "spikyshield", "banefulbunker", "obstruct",
+                   "silktrap", "burningbulwark"}
+STALL_MOVES = PROTECT_EFFECTS | {"detect"}
 
 
 def to_id(text: str) -> str:
@@ -88,6 +92,7 @@ class Parser:
         }
         self.names: dict[SideId, dict[str, int]] = {"p1": {}, "p2": {}}  # ident name -> team index
         self.pending_hits: dict[tuple[SideId, int], dict] = {}  # crit / effectiveness waiting for their -damage
+        self.protect_succeeded: set[SideId] = set()
 
     def feed(self, line: str) -> None:
         kind, *args = line.rstrip("\r\n").split("|")[1:] or [""]
@@ -104,6 +109,8 @@ class Parser:
         """The state for the request being answered; last_turn then starts over."""
         state = copy.deepcopy(self.state)
         self.state["last_turn"] = []
+        if "last_turn_complete" in self.state:
+            self.state["last_turn_complete"] = False
         return state
 
     def side(self, side_id: SideId) -> SideState:
@@ -167,6 +174,44 @@ class Parser:
         if all(mon["species"] != species for mon in team):
             team.append(new_pokemon(species, forme_known, level))
 
+    def _request(self, args):
+        """Remember private supplied values by identity, never by the reordered party slot.
+
+        Team-list moves have no PP in Showdown; active moves do. Missing PP in a
+        locked/Struggle request is not a fresh measurement of the underlying move.
+        """
+        request = json.loads(args[0])
+        if isinstance(request, dict):
+            self.observe_request(request)
+
+    def observe_request(self, request: dict) -> None:
+        supplied = request.get("side", {})
+        side_id = supplied.get("id")
+        if side_id != self.state["us"]:
+            return
+        for slot in supplied.get("pokemon", []):
+            species, known, level, _ = parse_details(slot["details"])
+            index = self.find(side_id, species, known)
+            mon = self.pokemon(side_id, index)
+            _, name = split_ref(slot.get("ident", ""))
+            if name:
+                self.names[side_id][name] = index
+                mon["request_ident"] = slot["ident"]
+            condition = slot.get("condition", "").split(" ")[0]
+            if "/" in condition:
+                mon["exact_maxhp"] = int(condition.split("/")[1])
+            if slot.get("active") and request.get("active"):
+                cache = mon.setdefault("move_pp", {})
+                # Drop copied/transformed moves that the current request no longer lists.
+                team_moves = set(slot.get("moves", []))
+                for move_id in list(cache):
+                    if move_id not in team_moves:
+                        cache.pop(move_id)
+                for move in request["active"][0].get("moves", []):
+                    if "pp" in move and move["id"] in team_moves:
+                        cache[move["id"]] = {"pp": max(0, move["pp"]), "maxpp": move.get("maxpp"),
+                                             "certainty": "exact", "source": "request"}
+
     def _switch(self, args):
         side_id, name = split_ref(args[0])
         species, forme_known, level, tera = parse_details(args[1])
@@ -187,6 +232,9 @@ class Parser:
         side["volatiles"] = []
         side.pop("volatile_turns", None)
         side.pop("substitute_hp", None)
+        if "protect_streak" in side:
+            side["protect_streak"] = 0
+        self.protect_succeeded.discard(side_id)
         side["last_move"] = None
         self.names[side_id][name] = index
         self.event("switch", side_id, index)
@@ -210,7 +258,20 @@ class Parser:
                 moves.append(move)
             self.side(side_id)["last_move"] = move
         target = args[2][:2] if len(args) > 2 and args[2][:2] in ("p1", "p2") else None
-        self.event("move", side_id, index, move=move, target=target)
+        remembered = self.pokemon(side_id, index).get("move_pp", {}).get(move)
+        # Locked repeats and externally called moves don't spend this move's PP.
+        # Pressure / suppression / unusual PP mechanics make any inferred spend
+        # an estimate; the next exact request always replaces it.
+        if remembered is not None and not tags.get("from"):
+            pressure = 0
+            if target and target != side_id and self.side(target)["active"] is not None:
+                pressure = self.pokemon(target, self.side(target)["active"])["ability"] == "pressure"
+            remembered.update(pp=max(0, remembered["pp"] - 1 - pressure), certainty="estimated",
+                              source="observed_move_spend")
+        source = tags.get("from")
+        if source and ":" in source:
+            source = source.split(":", 1)[0] + ":" + effect_id(source)
+        self.event("move", side_id, index, move=move, target=target, source=source)
         if move == "sleeptalk" and self.pokemon(side_id, index)["status"] == "slp":
             self._sleep_attempt(self.pokemon(side_id, index))
         if move in ("wish", "futuresight") and not tags.get("from"):
@@ -265,6 +326,9 @@ class Parser:
     def _enditem(self, args):
         owner = self.mon(args[0])
         self.pokemon(*owner)["item"] = ""  # consumed, knocked off or popped: known to hold nothing now
+        if to_id(args[1]) == "leppaberry":
+            # Its restored move/amount is not present on this line. Await exact PP.
+            self.pokemon(*owner).pop("move_pp", None)
         self.event("reveal", *owner, source=f"item:{to_id(args[1])}")
 
     def _ability(self, args):
@@ -327,6 +391,16 @@ class Parser:
     def _activate(self, args):
         if args[1].startswith(("ability:", "item:")):
             self.reveal({"from": args[1]}, self.mon(args[0]))
+
+    def _singleturn(self, args):
+        side_id = self.mon(args[0])[0]
+        effect = effect_id(args[1])
+        if effect in PROTECT_EFFECTS:
+            side = self.side(side_id)
+            if effect not in side["volatiles"]:
+                side["volatiles"].append(effect)
+            side.setdefault("protect_streak", 0)
+            self.protect_succeeded.add(side_id)
 
     def _status(self, args):
         side_id, index = self.mon(args[0])
@@ -409,6 +483,7 @@ class Parser:
 
     def _upkeep(self, args):
         # Every counter in the contract counts end-of-turns, and |upkeep is the end of a turn.
+        self.state["last_turn_complete"] = True
         field = self.state["field"]
         if field["weather"]:
             field["weather_turns"] += 1
@@ -416,7 +491,13 @@ class Parser:
             field["terrain_turns"] += 1
         for effect in field["effects"]:
             field["effects"][effect] += 1
-        for side in self.state["sides"].values():
+        for side_id, side in self.state["sides"].items():
+            if side_id in self.protect_succeeded:
+                # Showdown caps the repeated-success divisor at 3**6.
+                side["protect_streak"] = min(6, side.get("protect_streak", 0) + 1)
+            elif "protect_streak" in side:
+                side["protect_streak"] = 0
+            side["volatiles"] = [effect for effect in side["volatiles"] if effect not in PROTECT_EFFECTS]
             for effect in side["side_effects"]:
                 side["side_effects"][effect] += 1
             for effect in side.get("volatile_turns", {}):
@@ -430,6 +511,7 @@ class Parser:
                 mon = side["pokemon"][side["active"]]
                 if mon["status"] in COUNTED_STATUSES:
                     mon["status_turns"] += 1
+        self.protect_succeeded.clear()
 
     def _turn(self, args):
         self.state["turn"] = int(args[0])
@@ -437,12 +519,16 @@ class Parser:
     def _fail(self, args):
         # A just-attempted delayed effect that Showdown rejected must not become a pending effect.
         side = self.side(self.mon(args[0])[0])
+        if side["last_move"] in STALL_MOVES and "protect_streak" in side:
+            side["protect_streak"] = 0
+            self.protect_succeeded.discard(self.mon(args[0])[0])
         key = {"wish": "wish", "futuresight": "future_sight"}.get(side["last_move"])
         if key and side.get(key, {}).get("turns") == 0:
             side.pop(key, None)
 
     HANDLERS = {
-        "player": _player, "poke": _poke, "switch": _switch, "drag": _switch, "replace": _replace, "move": _move,
+        "player": _player, "poke": _poke, "request": _request,
+        "switch": _switch, "drag": _switch, "replace": _replace, "move": _move,
         "-damage": lambda self, args: self._hp_change("damage", args),
         "-heal": lambda self, args: self._hp_change("heal", args),
         "-sethp": _sethp, "-miss": _miss, "cant": _cant,
@@ -454,7 +540,7 @@ class Parser:
         "-boost": _boost, "-unboost": lambda self, args: self._boost(args, sign=-1),
         "-setboost": _setboost, "-clearboost": _clearboost,
         "-clearallboost": _clearallboost, "-clearnegativeboost": _clearnegativeboost,
-        "-start": _start, "-end": _end, "-activate": _activate,
+        "-start": _start, "-end": _end, "-activate": _activate, "-singleturn": _singleturn,
         "-fail": _fail,
         "-status": _status, "-curestatus": _curestatus, "-cureteam": _cureteam, "faint": _faint,
         "detailschange": _formechange, "-formechange": _formechange,
