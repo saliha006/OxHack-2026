@@ -1,0 +1,1436 @@
+{
+  "scope": "Historical development guard evidence audit, no strength claim or runtime guard implementation",
+  "source_sha256": "0bd23daf0e4d173a8a9a3398793831d7d1cac100ba99bf238ab357f07b258a23",
+  "cycle_cases": [
+    {
+      "battle": "battle-gen9ou-40",
+      "role": "a",
+      "trace": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-comparison-final/players/ox23e0e1a1/battle-gen9ou-40.jsonl",
+      "trace_sha256": "f6741591315167a332c39c659285ba830cec47b92ee0607523cacb18e17bd50c",
+      "line": 47,
+      "decision_id": "battle-gen9ou-40:24",
+      "roots": [
+        {
+          "turn": 17,
+          "choice": "switch 4",
+          "our_active": "zamazenta",
+          "our_hp_percent_sum": 166,
+          "foe_active": "deoxysspeed",
+          "foe_active_hp_percent": 100
+        },
+        {
+          "turn": 18,
+          "choice": "switch 4",
+          "our_active": "deoxysspeed",
+          "our_hp_percent_sum": 166,
+          "foe_active": "zamazenta",
+          "foe_active_hp_percent": 59
+        },
+        {
+          "turn": 19,
+          "choice": "switch 4",
+          "our_active": "zamazenta",
+          "our_hp_percent_sum": 134,
+          "foe_active": "zamazenta",
+          "foe_active_hp_percent": 49
+        }
+      ],
+      "recorded_world_count": 8,
+      "opponent_stable": false,
+      "near_supported_nontera_moves": {},
+      "potentially_eligible": false
+    },
+    {
+      "battle": "battle-gen9ou-47",
+      "role": "a",
+      "trace": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-comparison-final/players/ox99933744/battle-gen9ou-47.jsonl",
+      "trace_sha256": "2e7bbc9a827c17f84b63d450fbc03f7d7f86ecd546c280aec7d0fbfc4049fe0e",
+      "line": 47,
+      "decision_id": "battle-gen9ou-47:24",
+      "roots": [
+        {
+          "turn": 17,
+          "choice": "switch 2",
+          "our_active": "kyurem",
+          "our_hp_percent_sum": 200,
+          "foe_active": "greattusk",
+          "foe_active_hp_percent": 87
+        },
+        {
+          "turn": 18,
+          "choice": "switch 2",
+          "our_active": "slowkinggalar",
+          "our_hp_percent_sum": 186,
+          "foe_active": "greattusk",
+          "foe_active_hp_percent": 93
+        },
+        {
+          "turn": 19,
+          "choice": "switch 2",
+          "our_active": "kyurem",
+          "our_hp_percent_sum": 127,
+          "foe_active": "greattusk",
+          "foe_active_hp_percent": 99
+        }
+      ],
+      "recorded_world_count": 1,
+      "opponent_stable": true,
+      "near_supported_nontera_moves": {},
+      "potentially_eligible": false
+    },
+    {
+      "battle": "battle-gen9ou-44",
+      "role": "b",
+      "trace": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-comparison-final/players/oxb4db3c68/battle-gen9ou-44.jsonl",
+      "trace_sha256": "ab6a9b5d5cdeb4e14bda2eff2b70f5782d692aa428f4bfd6be58b7ef3bbb1efe",
+      "line": 135,
+      "decision_id": "battle-gen9ou-44:68",
+      "roots": [
+        {
+          "turn": 55,
+          "choice": "switch 6",
+          "our_active": "greattusk",
+          "our_hp_percent_sum": 135,
+          "foe_active": "greattusk",
+          "foe_active_hp_percent": 100
+        },
+        {
+          "turn": 56,
+          "choice": "switch 6",
+          "our_active": "slowkinggalar",
+          "our_hp_percent_sum": 139,
+          "foe_active": "greattusk",
+          "foe_active_hp_percent": 100
+        },
+        {
+          "turn": 57,
+          "choice": "switch 6",
+          "our_active": "greattusk",
+          "our_hp_percent_sum": 100,
+          "foe_active": "greattusk",
+          "foe_active_hp_percent": 100
+        }
+      ],
+      "recorded_world_count": 8,
+      "opponent_stable": true,
+      "near_supported_nontera_moves": {
+        "move 1": 0.1942861713963553,
+        "move 2": 0.1921964277529822,
+        "move 3": 0.19891342447331042,
+        "move 4": 0.19427147790057972
+      },
+      "potentially_eligible": true
+    }
+  ],
+  "counterfactuals": {
+    "switch 6": {
+      "worlds": 8,
+      "expected": {
+        "our_active_fainted": 0.8951822948455811,
+        "original_active_fainted": 0.0,
+        "new_our_faints": 0.8951822948455811,
+        "our_alive": 1.104817705154419,
+        "our_hp_fraction_sum": 0.13958752640408512,
+        "foe_alive": 2.0,
+        "foe_hp_fraction_sum": 1.7389033942558747,
+        "basic_hp_value": 0.39606257655427624
+      },
+      "per_world": [
+        {
+          "world": 0,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9923478260869565,
+          "our_active_fainted": 0.5807291793823243,
+          "original_active_fainted": 0.0,
+          "new_our_faints": 0.5807291793823243,
+          "our_alive": 1.4192708206176758,
+          "our_hp_fraction_sum": 0.1531553004215353,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.40973011361597234
+        },
+        {
+          "world": 1,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9914873949579832,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 0.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 0.13506493506493505,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.3915067308670442
+        },
+        {
+          "world": 2,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9919166666666667,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 0.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 0.13506493506493505,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.3915067308670442
+        },
+        {
+          "world": 3,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9918916666666666,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 0.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 0.13506493506493505,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.3915067308670442
+        },
+        {
+          "world": 4,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9908172043010752,
+          "our_active_fainted": 0.5807291793823243,
+          "original_active_fainted": 0.0,
+          "new_our_faints": 0.5807291793823243,
+          "our_alive": 1.4192708206176758,
+          "our_hp_fraction_sum": 0.1531553004215353,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.40973011361597234
+        },
+        {
+          "world": 5,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9920074074074074,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 0.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 0.13506493506493505,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.3915067308670442
+        },
+        {
+          "world": 6,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9922740740740741,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 0.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 0.13506493506493505,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.3915067308670442
+        },
+        {
+          "world": 7,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9914850746268656,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 0.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 0.13506493506493505,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.3915067308670442
+        }
+      ]
+    },
+    "move 1": {
+      "worlds": 8,
+      "expected": {
+        "our_active_fainted": 1.0,
+        "original_active_fainted": 1.0,
+        "new_our_faints": 1.0,
+        "our_alive": 1.0,
+        "our_hp_fraction_sum": 1.0,
+        "foe_alive": 2.0,
+        "foe_hp_fraction_sum": 1.7389033942558747,
+        "basic_hp_value": 0.4275456919060052
+      },
+      "per_world": [
+        {
+          "world": 0,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9923478260869565,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 1,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9914873949579832,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 2,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9919166666666667,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 3,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9918916666666666,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 4,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9908172043010752,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 5,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9920074074074074,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 6,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9922740740740741,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 7,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9914850746268656,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        }
+      ]
+    },
+    "move 2": {
+      "worlds": 8,
+      "expected": {
+        "our_active_fainted": 1.0,
+        "original_active_fainted": 1.0,
+        "new_our_faints": 1.0,
+        "our_alive": 1.0,
+        "our_hp_fraction_sum": 1.0,
+        "foe_alive": 2.0,
+        "foe_hp_fraction_sum": 1.7389033942558747,
+        "basic_hp_value": 0.4275456919060052
+      },
+      "per_world": [
+        {
+          "world": 0,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9923478260869565,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 1,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9914873949579832,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 2,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9919166666666667,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 3,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9918916666666666,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 4,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9908172043010752,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 5,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9920074074074074,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 6,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9922740740740741,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 7,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9914850746268656,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        }
+      ]
+    },
+    "move 3": {
+      "worlds": 8,
+      "expected": {
+        "our_active_fainted": 1.0,
+        "original_active_fainted": 1.0,
+        "new_our_faints": 1.0,
+        "our_alive": 1.0,
+        "our_hp_fraction_sum": 1.0,
+        "foe_alive": 2.0,
+        "foe_hp_fraction_sum": 1.7389033942558747,
+        "basic_hp_value": 0.4275456919060052
+      },
+      "per_world": [
+        {
+          "world": 0,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9923478260869565,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 1,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9914873949579832,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 2,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9919166666666667,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 3,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9918916666666666,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 4,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9908172043010752,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 5,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9920074074074074,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 6,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9922740740740741,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 7,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9914850746268656,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        }
+      ]
+    },
+    "move 4": {
+      "worlds": 8,
+      "expected": {
+        "our_active_fainted": 1.0,
+        "original_active_fainted": 1.0,
+        "new_our_faints": 1.0,
+        "our_alive": 1.0,
+        "our_hp_fraction_sum": 1.0,
+        "foe_alive": 2.0,
+        "foe_hp_fraction_sum": 1.7389033942558747,
+        "basic_hp_value": 0.4275456919060052
+      },
+      "per_world": [
+        {
+          "world": 0,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9923478260869565,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 1,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9914873949579832,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 2,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9919166666666667,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 3,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9918916666666666,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 4,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9908172043010752,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 5,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9920074074074074,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 6,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9922740740740741,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        },
+        {
+          "world": 7,
+          "modal_reply": "headlongrush",
+          "modal_share": 0.9914850746268656,
+          "our_active_fainted": 1.0,
+          "original_active_fainted": 1.0,
+          "new_our_faints": 1.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.7389033942558747,
+          "basic_hp_value": 0.4275456919060052
+        }
+      ]
+    }
+  },
+  "recorded_choice": "switch 6",
+  "recorded_support": {
+    "move 1": 0.1942861713963553,
+    "move 2": 0.1921964277529822,
+    "move 3": 0.19891342447331042,
+    "move 4": 0.19427147790057972,
+    "switch 6": 0.2203324984767724
+  },
+  "search_repeats": [
+    {
+      "repetition": 0,
+      "wall_ms": 1669.662354979664,
+      "cpu_ms": 1639.182,
+      "completed_worlds": 8,
+      "native_ms": 1235.3606350370683,
+      "failures": [],
+      "pooled": {
+        "search_support": {
+          "move 1": 0.19633602096967268,
+          "move 2": 0.19624567994469208,
+          "move 3": 0.1993157319361471,
+          "move 4": 0.19499385929294905,
+          "switch 6": 0.21310870785653904
+        },
+        "opponent_support": {
+          "headlongrush": 0.9895063824400464,
+          "icespinner": 0.0036134660191521092,
+          "rapidspin": 0.0016009965792216933,
+          "closecombat": 0.004094011877619674,
+          "switch zapdos": 0.0011851430839600993
+        },
+        "usable_worlds": 8,
+        "mapping_failures": [],
+        "unusable_worlds": [],
+        "aggregation": "sampled",
+        "choice": "switch 6"
+      }
+    },
+    {
+      "repetition": 1,
+      "wall_ms": 1684.543784998823,
+      "cpu_ms": 1654.0629999999999,
+      "completed_worlds": 8,
+      "native_ms": 1240.894903021399,
+      "failures": [],
+      "pooled": {
+        "search_support": {
+          "move 1": 0.1963381207958087,
+          "move 2": 0.19667073535351867,
+          "move 3": 0.20127167363325474,
+          "move 4": 0.19500284235026802,
+          "switch 6": 0.21071662786714992
+        },
+        "opponent_support": {
+          "headlongrush": 0.9879894482871399,
+          "icespinner": 0.004236897248500548,
+          "rapidspin": 0.0017171641075530305,
+          "closecombat": 0.004654118498754973,
+          "switch zapdos": 0.0014023718580516457
+        },
+        "usable_worlds": 8,
+        "mapping_failures": [],
+        "unusable_worlds": [],
+        "aggregation": "sampled",
+        "choice": "switch 6"
+      }
+    },
+    {
+      "repetition": 2,
+      "wall_ms": 1716.7662109714001,
+      "cpu_ms": 1650.4569999999994,
+      "completed_worlds": 8,
+      "native_ms": 1236.435652070213,
+      "failures": [],
+      "pooled": {
+        "search_support": {
+          "move 1": 0.19437043274737617,
+          "move 2": 0.1948482298113621,
+          "move 3": 0.20223005889520726,
+          "move 4": 0.19647962958323859,
+          "switch 6": 0.21207164896281588
+        },
+        "opponent_support": {
+          "headlongrush": 0.9890478088848105,
+          "icespinner": 0.003845591722746196,
+          "rapidspin": 0.0015634448881290362,
+          "closecombat": 0.0042650718104750625,
+          "switch zapdos": 0.0012780826938392407
+        },
+        "usable_worlds": 8,
+        "mapping_failures": [],
+        "unusable_worlds": [],
+        "aggregation": "sampled",
+        "choice": "switch 6"
+      }
+    }
+  ],
+  "counterfactual_batch": {
+    "mode": "counterfactuals",
+    "wall_ms": 545.3083839965984,
+    "cpu_ms": 517.503,
+    "completed": 40,
+    "messages": [
+      {
+        "kind": "prepared",
+        "loaded_modules": {
+          "decision.search": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-tera-probe/decision/search.py",
+          "decision.actions": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-tera-probe/decision/actions.py",
+          "contracts.battle_state": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-tera-probe/contracts/battle_state.py",
+          "decision.opponent": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-tera-probe/decision/opponent.py",
+          "decision.state": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-tera-probe/decision/state.py",
+          "decision.sets": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-tera-probe/decision/sets.py",
+          "decision.adapter": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-tera-probe/decision/adapter.py",
+          "decision.search_policy": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-tera-probe/decision/search_policy.py"
+        }
+      },
+      {
+        "kind": "world_started",
+        "index": 0
+      },
+      {
+        "kind": "world_started",
+        "index": 1
+      },
+      {
+        "kind": "world_started",
+        "index": 2
+      },
+      {
+        "kind": "world_started",
+        "index": 3
+      },
+      {
+        "kind": "world_started",
+        "index": 4
+      },
+      {
+        "kind": "world_started",
+        "index": 5
+      },
+      {
+        "kind": "world_started",
+        "index": 6
+      },
+      {
+        "kind": "world_started",
+        "index": 7
+      },
+      {
+        "kind": "world_started",
+        "index": 8
+      },
+      {
+        "kind": "world_started",
+        "index": 9
+      },
+      {
+        "kind": "world_started",
+        "index": 10
+      },
+      {
+        "kind": "world_started",
+        "index": 11
+      },
+      {
+        "kind": "world_started",
+        "index": 12
+      },
+      {
+        "kind": "world_started",
+        "index": 13
+      },
+      {
+        "kind": "world_started",
+        "index": 14
+      },
+      {
+        "kind": "world_started",
+        "index": 15
+      },
+      {
+        "kind": "world_started",
+        "index": 16
+      },
+      {
+        "kind": "world_started",
+        "index": 17
+      },
+      {
+        "kind": "world_started",
+        "index": 18
+      },
+      {
+        "kind": "world_started",
+        "index": 19
+      },
+      {
+        "kind": "world_started",
+        "index": 20
+      },
+      {
+        "kind": "world_started",
+        "index": 21
+      },
+      {
+        "kind": "world_started",
+        "index": 22
+      },
+      {
+        "kind": "world_started",
+        "index": 23
+      },
+      {
+        "kind": "world_started",
+        "index": 24
+      },
+      {
+        "kind": "world_started",
+        "index": 25
+      },
+      {
+        "kind": "world_started",
+        "index": 26
+      },
+      {
+        "kind": "world_started",
+        "index": 27
+      },
+      {
+        "kind": "world_started",
+        "index": 28
+      },
+      {
+        "kind": "world_started",
+        "index": 29
+      },
+      {
+        "kind": "world_started",
+        "index": 30
+      },
+      {
+        "kind": "world_started",
+        "index": 31
+      },
+      {
+        "kind": "world_started",
+        "index": 32
+      },
+      {
+        "kind": "world_started",
+        "index": 33
+      },
+      {
+        "kind": "world_started",
+        "index": 34
+      },
+      {
+        "kind": "world_started",
+        "index": 35
+      },
+      {
+        "kind": "world_started",
+        "index": 36
+      },
+      {
+        "kind": "world_started",
+        "index": 37
+      },
+      {
+        "kind": "world_started",
+        "index": 38
+      },
+      {
+        "kind": "world_started",
+        "index": 39
+      },
+      {
+        "kind": "done",
+        "scheduled_worlds": 40
+      }
+    ]
+  },
+  "counterexamples": {
+    "full_hp_slower_recovery": {
+      "with_recover": {
+        "outcome_mass_before_roundoff_normalisation": 0.9999999523162842,
+        "outcome_count": 2,
+        "expected": {
+          "our_active_fainted": 0.0,
+          "original_active_fainted": 0.0,
+          "new_our_faints": 0.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 1.0,
+          "foe_hp_fraction_sum": 1.0,
+          "basic_hp_value": 0.5
+        },
+        "leaves": [
+          {
+            "probability": 0.9583333281675972,
+            "our_active_fainted": false,
+            "original_active_fainted": false,
+            "new_our_faints": 0,
+            "our_alive": 1,
+            "our_hp_fraction_sum": 1.0,
+            "foe_alive": 1,
+            "foe_hp_fraction_sum": 1.0,
+            "our_hp_by_slot": [
+              300,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "foe_hp_by_slot": [
+              300,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "basic_hp_value": 0.5
+          },
+          {
+            "probability": 0.04166667183240279,
+            "our_active_fainted": false,
+            "original_active_fainted": false,
+            "new_our_faints": 0,
+            "our_alive": 1,
+            "our_hp_fraction_sum": 1.0,
+            "foe_alive": 1,
+            "foe_hp_fraction_sum": 1.0,
+            "our_hp_by_slot": [
+              300,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "foe_hp_by_slot": [
+              300,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "basic_hp_value": 0.5
+          }
+        ]
+      },
+      "without_recover": {
+        "outcome_mass_before_roundoff_normalisation": 0.9999999523162842,
+        "outcome_count": 2,
+        "expected": {
+          "our_active_fainted": 0.0,
+          "original_active_fainted": 0.0,
+          "new_our_faints": 0.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 0.8877777775022718,
+          "foe_alive": 1.0,
+          "foe_hp_fraction_sum": 1.0,
+          "basic_hp_value": 0.49532407406259465
+        },
+        "leaves": [
+          {
+            "probability": 0.9583333281675972,
+            "our_active_fainted": false,
+            "original_active_fainted": false,
+            "new_our_faints": 0,
+            "our_alive": 1,
+            "our_hp_fraction_sum": 0.89,
+            "foe_alive": 1,
+            "foe_hp_fraction_sum": 1.0,
+            "our_hp_by_slot": [
+              267,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "foe_hp_by_slot": [
+              300,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "basic_hp_value": 0.49541666666666667
+          },
+          {
+            "probability": 0.04166667183240279,
+            "our_active_fainted": false,
+            "original_active_fainted": false,
+            "new_our_faints": 0,
+            "our_alive": 1,
+            "our_hp_fraction_sum": 0.8366666666666667,
+            "foe_alive": 1,
+            "foe_hp_fraction_sum": 1.0,
+            "our_hp_by_slot": [
+              251,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "foe_hp_by_slot": [
+              300,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "basic_hp_value": 0.49319444444444444
+          }
+        ]
+      }
+    },
+    "protect_residual_healing": {
+      "outcome_mass_before_roundoff_normalisation": 1.0,
+      "outcome_count": 1,
+      "expected": {
+        "our_active_fainted": 0.0,
+        "original_active_fainted": 0.0,
+        "new_our_faints": 0.0,
+        "our_alive": 1.0,
+        "our_hp_fraction_sum": 0.5625,
+        "foe_alive": 1.0,
+        "foe_hp_fraction_sum": 1.0,
+        "basic_hp_value": 0.48177083333333337
+      },
+      "leaves": [
+        {
+          "probability": 1.0,
+          "our_active_fainted": false,
+          "original_active_fainted": false,
+          "new_our_faints": 0,
+          "our_alive": 1,
+          "our_hp_fraction_sum": 0.5625,
+          "foe_alive": 1,
+          "foe_hp_fraction_sum": 1.0,
+          "our_hp_by_slot": [
+            225,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "foe_hp_by_slot": [
+            300,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "basic_hp_value": 0.48177083333333337
+        }
+      ]
+    },
+    "immune_opponent_can_switch": {
+      "stays": {
+        "outcome_mass_before_roundoff_normalisation": 1.0,
+        "outcome_count": 1,
+        "expected": {
+          "our_active_fainted": 0.0,
+          "original_active_fainted": 0.0,
+          "new_our_faints": 0.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 2.0,
+          "basic_hp_value": 0.4166666666666667
+        },
+        "leaves": [
+          {
+            "probability": 1.0,
+            "our_active_fainted": false,
+            "original_active_fainted": false,
+            "new_our_faints": 0,
+            "our_alive": 1,
+            "our_hp_fraction_sum": 1.0,
+            "foe_alive": 2,
+            "foe_hp_fraction_sum": 2.0,
+            "our_hp_by_slot": [
+              300,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "foe_hp_by_slot": [
+              300,
+              300,
+              0,
+              0,
+              0,
+              0
+            ],
+            "basic_hp_value": 0.4166666666666667
+          }
+        ]
+      },
+      "switches": {
+        "outcome_mass_before_roundoff_normalisation": 0.9999999731779098,
+        "outcome_count": 4,
+        "expected": {
+          "our_active_fainted": 0.0,
+          "original_active_fainted": 0.0,
+          "new_our_faints": 0.0,
+          "our_alive": 1.0,
+          "our_hp_fraction_sum": 1.0,
+          "foe_alive": 2.0,
+          "foe_hp_fraction_sum": 1.782083332664023,
+          "basic_hp_value": 0.4257465278056658
+        },
+        "leaves": [
+          {
+            "probability": 0.7666666617989539,
+            "our_active_fainted": false,
+            "original_active_fainted": false,
+            "new_our_faints": 0,
+            "our_alive": 1,
+            "our_hp_fraction_sum": 1.0,
+            "foe_alive": 2,
+            "foe_hp_fraction_sum": 1.7866666666666666,
+            "our_hp_by_slot": [
+              300,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "foe_hp_by_slot": [
+              300,
+              236,
+              0,
+              0,
+              0,
+              0
+            ],
+            "basic_hp_value": 0.4255555555555556
+          },
+          {
+            "probability": 0.19166666544973848,
+            "our_active_fainted": false,
+            "original_active_fainted": false,
+            "new_our_faints": 0,
+            "our_alive": 1,
+            "our_hp_fraction_sum": 1.0,
+            "foe_alive": 2,
+            "foe_hp_fraction_sum": 1.7866666666666666,
+            "our_hp_by_slot": [
+              300,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "foe_hp_by_slot": [
+              300,
+              236,
+              0,
+              0,
+              0,
+              0
+            ],
+            "basic_hp_value": 0.4255555555555556
+          },
+          {
+            "probability": 0.03333333820104612,
+            "our_active_fainted": false,
+            "original_active_fainted": false,
+            "new_our_faints": 0,
+            "our_alive": 1,
+            "our_hp_fraction_sum": 1.0,
+            "foe_alive": 2,
+            "foe_hp_fraction_sum": 1.6766666666666667,
+            "our_hp_by_slot": [
+              300,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "foe_hp_by_slot": [
+              300,
+              203,
+              0,
+              0,
+              0,
+              0
+            ],
+            "basic_hp_value": 0.4301388888888889
+          },
+          {
+            "probability": 0.00833333455026153,
+            "our_active_fainted": false,
+            "original_active_fainted": false,
+            "new_our_faints": 0,
+            "our_alive": 1,
+            "our_hp_fraction_sum": 1.0,
+            "foe_alive": 2,
+            "foe_hp_fraction_sum": 1.6766666666666667,
+            "our_hp_by_slot": [
+              300,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "foe_hp_by_slot": [
+              300,
+              203,
+              0,
+              0,
+              0,
+              0
+            ],
+            "basic_hp_value": 0.4301388888888889
+          }
+        ]
+      }
+    },
+    "regenerator_immunity_switch": {
+      "outcome_mass_before_roundoff_normalisation": 1.0,
+      "outcome_count": 1,
+      "expected": {
+        "our_active_fainted": 0.0,
+        "original_active_fainted": 0.0,
+        "new_our_faints": 0.0,
+        "our_alive": 2.0,
+        "our_hp_fraction_sum": 1.53,
+        "foe_alive": 1.0,
+        "foe_hp_fraction_sum": 1.0,
+        "basic_hp_value": 0.56375
+      },
+      "leaves": [
+        {
+          "probability": 1.0,
+          "our_active_fainted": false,
+          "original_active_fainted": false,
+          "new_our_faints": 0,
+          "our_alive": 2,
+          "our_hp_fraction_sum": 1.53,
+          "foe_alive": 1,
+          "foe_hp_fraction_sum": 1.0,
+          "our_hp_by_slot": [
+            106,
+            200,
+            0,
+            0,
+            0,
+            0
+          ],
+          "foe_hp_by_slot": [
+            300,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "basic_hp_value": 0.56375
+        }
+      ]
+    }
+  },
+  "counterexample_batch": {
+    "mode": "counterexamples",
+    "wall_ms": 487.4542520265095,
+    "cpu_ms": 454.3649999999999,
+    "completed": 1,
+    "messages": [
+      {
+        "kind": "prepared",
+        "loaded_modules": {
+          "decision.search": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-tera-probe/decision/search.py",
+          "decision.actions": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-tera-probe/decision/actions.py",
+          "contracts.battle_state": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-tera-probe/contracts/battle_state.py",
+          "decision.opponent": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-tera-probe/decision/opponent.py",
+          "decision.state": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-tera-probe/decision/state.py",
+          "decision.sets": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-tera-probe/decision/sets.py",
+          "decision.adapter": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-tera-probe/decision/adapter.py",
+          "decision.search_policy": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-tera-probe/decision/search_policy.py"
+        }
+      },
+      {
+        "kind": "world_started",
+        "index": 0
+      },
+      {
+        "kind": "done",
+        "scheduled_worlds": 1
+      }
+    ]
+  },
+  "raw_sha256": "52ad53eb24de04db02bcb5e578ea44afb961bc5eb1395a09db5f1387aceb2e97",
+  "plan_sha256": "0e864349a21e0953f4907fefd1e0249afddffad5f9cbfc892de6d0c161b598da",
+  "runtime_guard_enabled": false,
+  "interpretation_limit": "Native conditional successor model given recorded modal reply and sampled hypotheses; modal/root supports are not calibrated win probabilities. Historical loss and pilot outcomes known. No fresh holdout, no causal or general strength proof. Native continuations unavailable; every search starts a new tree."
+}

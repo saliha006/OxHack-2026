@@ -1,0 +1,35 @@
+{
+  "scope": "Retrospective pilot diagnostic. Battle-disjoint development and scoring subsets assigned by sorted battle ID before ablation calculation; historical pooled outcomes and aggregate scores already known, so no claim of fresh holdout. No floor or strength tuning. Fresh stage2 battles will be scored separately.",
+  "development_battles": [
+    "battle-gen9ou-24",
+    "battle-gen9ou-26",
+    "battle-gen9ou-28",
+    "battle-gen9ou-30",
+    "battle-gen9ou-32",
+    "battle-gen9ou-34",
+    "battle-gen9ou-36",
+    "battle-gen9ou-38",
+    "battle-gen9ou-40",
+    "battle-gen9ou-42",
+    "battle-gen9ou-44",
+    "battle-gen9ou-46"
+  ],
+  "scoring_battles": [
+    "battle-gen9ou-25",
+    "battle-gen9ou-27",
+    "battle-gen9ou-29",
+    "battle-gen9ou-31",
+    "battle-gen9ou-33",
+    "battle-gen9ou-35",
+    "battle-gen9ou-37",
+    "battle-gen9ou-39",
+    "battle-gen9ou-41",
+    "battle-gen9ou-43",
+    "battle-gen9ou-45",
+    "battle-gen9ou-47"
+  ],
+  "selection_rule": "sorted unique battle identifiers, alternate whole games; both perspectives remain in same subset",
+  "assumptions": "No final unseen transition scored; target facts enter only after pre-reveal prediction captured.",
+  "fixed_floor": 0.03,
+  "fixed_smoothing_alpha": 1e-06
+}

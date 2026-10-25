@@ -1,0 +1,3781 @@
+{
+  "schema": 1,
+  "harness_files": {
+    "__init__.py": "117d52a420a3ca3dbe4caf2665316b3c4915e94c5a0efc8f89e52739485e3eb8",
+    "identity.py": "d91b6bbe10f406589e129c4d46628666f103322a8d0d26b198f16ace92340465",
+    "reserve_teams.py": "cf80696fe335a238f0b5d3ac8c3a6e25672a4f4c5b1639640a853c312726fc46",
+    "run.py": "9bf62377f0486e39fa327c8ce45488aef0e72c1108e1fdc5578de8b3e311b443",
+    "simulator.cjs": "8f0f954850cd3f620ce0ff42845ae71da080f921faaa0bf37f6b414f4ce444f9",
+    "worker.py": "d9d4e29ad04e768e64616a680249d8f2d511d5231ccf040bafb3b4cdf63ccc7c"
+  },
+  "phase": "confirmation",
+  "seed": 2026102522,
+  "concurrent_games": 4,
+  "teams": [
+    {
+      "id": "stage2-confirmation-01",
+      "style": "offense",
+      "roster": [
+        "Darkrai",
+        "Gholdengo",
+        "Ogerpon-Wellspring",
+        "Dragonite",
+        "Great Tusk",
+        "Iron Crown"
+      ],
+      "template_roster": [
+        "Darkrai",
+        "Gholdengo",
+        "Zamazenta",
+        "Dragonite",
+        "Great Tusk",
+        "Primarina"
+      ],
+      "design_rationale": "Multiple fast or priority attackers, setup/wallbreaking pressure, and Great Tusk hazard removal.",
+      "substitutions": [
+        {
+          "from": "Zamazenta",
+          "to": "Ogerpon-Wellspring"
+        },
+        {
+          "from": "Primarina",
+          "to": "Iron Crown"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_13.txt"
+      ],
+      "sha256": "0424acc8662fccd3b4c2b3a4c047d909386b9fb8a97cb2340aae4fac696d624d",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/01.txt",
+      "validation_errors": null,
+      "packed": "Darkrai||ChoiceScarf|BadDreams|DarkPulse,IceBeam,SludgeBomb,Trick|Timid|,,,252,4,252|N|,0,,,,|||,,,,,Poison]Gholdengo||ChoiceScarf|GoodasGold|ShadowBall,MakeItRain,Trick,Recover|Timid|,,4,252,,252|N|,0,,,,|||,,,,,Steel]Ogerpon|OgerponWellspring|WellspringMask|WaterAbsorb|IvyCudgel,KnockOff,Uturn,Spikes|Jolly|,252,,,4,252|F||||,Poison,,,,Water]Dragonite||HeavyDutyBoots|Multiscale|ExtremeSpeed,Earthquake,DragonDance,Roost|Adamant|248,104,52,,,104|F||||,,,,,Normal]Great Tusk||RockyHelmet|Protosynthesis|HeadlongRush,IceSpinner,RapidSpin,StealthRock|Jolly|,204,,,52,252|N||||,Fighting,,,,Ice]Iron Crown||ChoiceSpecs|QuarkDrive|TachyonCutter,PsychicNoise,Psyshock,VoltSwitch|Timid|,,,252,4,252|N|,20,,,,|||,Fighting,,,,Steel"
+    },
+    {
+      "id": "stage2-confirmation-02",
+      "style": "offense",
+      "roster": [
+        "Weavile",
+        "Darkrai",
+        "Dragonite",
+        "Iron Crown",
+        "Great Tusk",
+        "Slowking-Galar"
+      ],
+      "template_roster": [
+        "Weavile",
+        "Darkrai",
+        "Dragonite",
+        "Iron Crown",
+        "Great Tusk",
+        "Cinderace"
+      ],
+      "design_rationale": "Multiple fast or priority attackers, setup/wallbreaking pressure, and Great Tusk hazard removal.",
+      "substitutions": [
+        {
+          "from": "Cinderace",
+          "to": "Slowking-Galar"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_5.txt"
+      ],
+      "sha256": "f985409d6ee0f181833c8a728f62072cd00534dbbff2bec9c49d827ba4eea873",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/02.txt",
+      "validation_errors": null,
+      "packed": "Weavile||HeavyDutyBoots|Pressure|SwordsDance,IcicleCrash,KnockOff,IceShard|Jolly|,252,,,4,252|F||||,,,,,Fire]Darkrai||ChoiceScarf|BadDreams|DarkPulse,IceBeam,SludgeBomb,Trick|Timid|,,,252,4,252|N|,0,,,,|||,,,,,Poison]Dragonite||HeavyDutyBoots|Multiscale|ExtremeSpeed,Earthquake,DragonDance,Roost|Adamant|248,104,52,,,104|F||||,,,,,Normal]Iron Crown||ChoiceSpecs|QuarkDrive|TachyonCutter,PsychicNoise,Psyshock,VoltSwitch|Timid|,,,252,4,252|N|,20,,,,|||,Fighting,,,,Steel]Great Tusk||RockyHelmet|Protosynthesis|HeadlongRush,IceSpinner,RapidSpin,StealthRock|Jolly|,204,,,52,252|N||||,Fighting,,,,Ice]Slowking|SlowkingGalar|HeavyDutyBoots|Regenerator|SludgeBomb,FutureSight,Flamethrower,ChillyReception|Sassy|248,,8,,252,||,0,,,,0|||,,,,,Water"
+    },
+    {
+      "id": "stage2-confirmation-03",
+      "style": "offense",
+      "roster": [
+        "Lokix",
+        "Latios",
+        "Zamazenta",
+        "Gholdengo",
+        "Great Tusk",
+        "Primarina"
+      ],
+      "template_roster": [
+        "Lokix",
+        "Latios",
+        "Zamazenta",
+        "Gholdengo",
+        "Great Tusk",
+        "Ogerpon-Wellspring"
+      ],
+      "design_rationale": "Multiple fast or priority attackers, setup/wallbreaking pressure, and Great Tusk hazard removal.",
+      "substitutions": [
+        {
+          "from": "Ogerpon-Wellspring",
+          "to": "Primarina"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_12.txt",
+        "bot/teams/standin/team_12.txt",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_8.txt"
+      ],
+      "sha256": "01ef2931e13a2450e0fd520b0d90e98d4ebba70b7e1a04f9462772b4e4288ba0",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/03.txt",
+      "validation_errors": null,
+      "packed": "Lokix||HeavyDutyBoots|TintedLens|FirstImpression,Uturn,KnockOff,SuckerPunch|Adamant|,252,4,,,252|||||,,,,,Bug]Latios||SoulDew|Levitate|DracoMeteor,PsychicNoise,FlipTurn,Recover|Timid|,,4,252,,252|M||||,,,,,Steel]Zamazenta||HeavyDutyBoots|DauntlessShield|CloseCombat,HeavySlam,Crunch,StoneEdge|Jolly|80,252,,,,176|N||||,,,,,Steel]Gholdengo||ChoiceScarf|GoodasGold|ShadowBall,MakeItRain,Trick,Recover|Timid|,,4,252,,252|N|,0,,,,|||,,,,,Steel]Great Tusk||RockyHelmet|Protosynthesis|HeadlongRush,IceSpinner,RapidSpin,StealthRock|Jolly|,204,,,52,252|N||||,Fighting,,,,Ice]Primarina||HeavyDutyBoots|Torrent|Moonblast,Surf,Encore,FlipTurn|Modest|76,,,252,,180|||||,,,,,Steel"
+    },
+    {
+      "id": "stage2-confirmation-04",
+      "style": "sun offense",
+      "roster": [
+        "Torkoal",
+        "Walking Wake",
+        "Hydrapple",
+        "Weavile",
+        "Iron Crown",
+        "Great Tusk"
+      ],
+      "template_roster": [
+        "Torkoal",
+        "Walking Wake",
+        "Hydrapple",
+        "Zamazenta",
+        "Cinderace",
+        "Great Tusk"
+      ],
+      "design_rationale": "Drought plus Heat Rock supports Walking Wake and Protosynthesis attackers; hazard removal supports the setter. Team viability is a design hypothesis, not a competitive result.",
+      "substitutions": [
+        {
+          "from": "Zamazenta",
+          "to": "Weavile"
+        },
+        {
+          "from": "Cinderace",
+          "to": "Iron Crown"
+        }
+      ],
+      "component_sources": [
+        "evaluation/mcts_improvements/reserve_teams.py: hand-constructed weather component",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_13.txt"
+      ],
+      "sha256": "90aa84275f5d874fbffa46019d77748b8ae8a20fee879918c2f24614d69561f3",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/04.txt",
+      "validation_errors": null,
+      "packed": "Torkoal||HeatRock|Drought|LavaPlume,StealthRock,RapidSpin,Protect|Bold|248,,252,,8,||,0,,,,|||,,,,,Flying]Walking Wake||HeavyDutyBoots|Protosynthesis|Surf,DracoMeteor,KnockOff,FlipTurn|Timid|,,12,244,,252|N||||,,,,,Water]Hydrapple||HeavyDutyBoots|Regenerator|DracoMeteor,GigaDrain,EarthPower,NastyPlot|Modest|248,,176,16,56,12||,0,,,,|||,,,,,Steel]Weavile||HeavyDutyBoots|Pressure|SwordsDance,IcicleCrash,KnockOff,IceShard|Jolly|,252,,,4,252|F||||,,,,,Fire]Iron Crown||ChoiceSpecs|QuarkDrive|TachyonCutter,PsychicNoise,Psyshock,VoltSwitch|Timid|,,,252,4,252|N|,20,,,,|||,Fighting,,,,Steel]Great Tusk||RockyHelmet|Protosynthesis|HeadlongRush,IceSpinner,RapidSpin,StealthRock|Jolly|,204,,,52,252|N||||,Fighting,,,,Ice"
+    },
+    {
+      "id": "stage2-confirmation-05",
+      "style": "balance",
+      "roster": [
+        "Ting-Lu",
+        "Corviknight",
+        "Darkrai",
+        "Primarina",
+        "Moltres",
+        "Great Tusk"
+      ],
+      "template_roster": [
+        "Ting-Lu",
+        "Corviknight",
+        "Darkrai",
+        "Primarina",
+        "Pecharunt",
+        "Great Tusk"
+      ],
+      "design_rationale": "Defensive pivots/checks accompany hazard support and an offensive progress maker; no claim of tournament quality.",
+      "substitutions": [
+        {
+          "from": "Pecharunt",
+          "to": "Moltres"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_8.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_13.txt"
+      ],
+      "sha256": "d434a07decb0fd6d0c7feba8d6ea6db043cbe3b468cdcbfcefa43c6aa7217036",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/05.txt",
+      "validation_errors": null,
+      "packed": "Ting-Lu||Leftovers|VesselofRuin|StealthRock,Earthquake,Ruination,Spikes|Careful|244,,12,,252,|N||||,,,,,Ghost]Corviknight||RockyHelmet|Pressure|IronDefense,BodyPress,BraveBird,Roost|Impish|136,,252,,,120|F||||,,,,,Water]Darkrai||ChoiceScarf|BadDreams|DarkPulse,IceBeam,SludgeBomb,Trick|Timid|,,,252,4,252|N|,0,,,,|||,,,,,Poison]Primarina||HeavyDutyBoots|Torrent|Moonblast,Surf,Encore,FlipTurn|Modest|76,,,252,,180|||||,,,,,Steel]Moltres||HeavyDutyBoots|FlameBody|Flamethrower,BraveBird,Roost,WillOWisp|Adamant|248,16,232,,,12|N||||,,,,,Fairy]Great Tusk||RockyHelmet|Protosynthesis|HeadlongRush,IceSpinner,RapidSpin,StealthRock|Jolly|,204,,,52,252|N||||,Fighting,,,,Ice"
+    },
+    {
+      "id": "stage2-confirmation-06",
+      "style": "balance",
+      "roster": [
+        "Tinkaton",
+        "Gliscor",
+        "Moltres",
+        "Gholdengo",
+        "Dragonite",
+        "Alomomola"
+      ],
+      "template_roster": [
+        "Garganacl",
+        "Gliscor",
+        "Moltres",
+        "Gholdengo",
+        "Dragonite",
+        "Alomomola"
+      ],
+      "design_rationale": "Defensive pivots/checks accompany hazard support and an offensive progress maker; no claim of tournament quality.",
+      "substitutions": [
+        {
+          "from": "Garganacl",
+          "to": "Tinkaton"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt"
+      ],
+      "sha256": "aaa149978b4defd3ece3e262ba93674966926272f560a6a0e812da9ca570ff38",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/06.txt",
+      "validation_errors": null,
+      "packed": "Tinkaton||AirBalloon|MoldBreaker|GigatonHammer,ThunderWave,Encore,StealthRock|Jolly|248,,,,24,236|F||||,,,,,Water]Gliscor||ToxicOrb|PoisonHeal|SwordsDance,Facade,KnockOff,Protect|Careful|244,,,,168,96|F||||,,,,,Normal]Moltres||HeavyDutyBoots|FlameBody|Flamethrower,BraveBird,Roost,WillOWisp|Adamant|248,16,232,,,12|N||||,,,,,Fairy]Gholdengo||ChoiceScarf|GoodasGold|ShadowBall,MakeItRain,Trick,Recover|Timid|,,4,252,,252|N|,0,,,,|||,,,,,Steel]Dragonite||HeavyDutyBoots|Multiscale|ExtremeSpeed,Earthquake,DragonDance,Roost|Adamant|248,104,52,,,104|F||||,,,,,Normal]Alomomola||AssaultVest|Regenerator|FlipTurn,PlayRough,IcyWind,MirrorCoat|Sassy|216,40,,,252,|F|,,,,,0|||,,,,,Poison"
+    },
+    {
+      "id": "stage2-confirmation-07",
+      "style": "balance",
+      "roster": [
+        "Tinkaton",
+        "Slowking-Galar",
+        "Hydrapple",
+        "Cinderace",
+        "Iron Crown",
+        "Dragonite"
+      ],
+      "template_roster": [
+        "Tinkaton",
+        "Slowking-Galar",
+        "Hydrapple",
+        "Cinderace",
+        "Kyurem",
+        "Zamazenta"
+      ],
+      "design_rationale": "Defensive pivots/checks accompany hazard support and an offensive progress maker; no claim of tournament quality.",
+      "substitutions": [
+        {
+          "from": "Kyurem",
+          "to": "Iron Crown"
+        },
+        {
+          "from": "Zamazenta",
+          "to": "Dragonite"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_9.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_10.txt"
+      ],
+      "sha256": "bff654886113bd7a7dad36871c9ed895f9ada17715e5bfe47c72377b77c27272",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/07.txt",
+      "validation_errors": null,
+      "packed": "Tinkaton||AirBalloon|MoldBreaker|GigatonHammer,ThunderWave,Encore,StealthRock|Jolly|248,,,,24,236|F||||,,,,,Water]Slowking|SlowkingGalar|HeavyDutyBoots|Regenerator|SludgeBomb,FutureSight,Flamethrower,ChillyReception|Sassy|248,,8,,252,||,0,,,,0|||,,,,,Water]Hydrapple||HeavyDutyBoots|Regenerator|DracoMeteor,GigaDrain,EarthPower,NastyPlot|Modest|248,,176,16,56,12||,0,,,,|||,,,,,Steel]Cinderace||HeavyDutyBoots|Blaze|PyroBall,Uturn,CourtChange,WillOWisp|Jolly|224,32,,,,252|||||,,,,,Fire]Iron Crown||ChoiceSpecs|QuarkDrive|TachyonCutter,PsychicNoise,Psyshock,VoltSwitch|Timid|,,,252,4,252|N|,20,,,,|||,Fighting,,,,Steel]Dragonite||HeavyDutyBoots|Multiscale|ExtremeSpeed,Earthquake,DragonDance,Roost|Adamant|248,104,52,,,104|F||||,,,,,Normal"
+    },
+    {
+      "id": "stage2-confirmation-08",
+      "style": "rain offense",
+      "roster": [
+        "Pelipper",
+        "Barraskewda",
+        "Zapdos",
+        "Darkrai",
+        "Great Tusk",
+        "Kyurem"
+      ],
+      "template_roster": [
+        "Pelipper",
+        "Barraskewda",
+        "Zapdos",
+        "Gholdengo",
+        "Great Tusk",
+        "Primarina"
+      ],
+      "design_rationale": "Drizzle plus Damp Rock enables Swift Swim and accurate Hurricane; pivots, special attackers and Great Tusk hazard removal complement the physical rain attacker. Team viability remains unmeasured.",
+      "substitutions": [
+        {
+          "from": "Gholdengo",
+          "to": "Darkrai"
+        },
+        {
+          "from": "Primarina",
+          "to": "Kyurem"
+        }
+      ],
+      "component_sources": [
+        "evaluation/mcts_improvements/reserve_teams.py: hand-constructed weather component",
+        "evaluation/mcts_improvements/reserve_teams.py: hand-constructed weather component",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_9.txt"
+      ],
+      "sha256": "9b3fa7c51c7cb717b992f66c550a59f8e439fe8e845b0f50ce0547b31f4d62f0",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/08.txt",
+      "validation_errors": null,
+      "packed": "Pelipper||DampRock|Drizzle|Hurricane,Surf,Uturn,Roost|Relaxed|248,,252,,8,||,,,,,0|||,,,,,Ground]Barraskewda||ChoiceBand|SwiftSwim|Liquidation,FlipTurn,CloseCombat,AquaJet|Adamant|,252,,,4,252|||||,,,,,Water]Zapdos||HeavyDutyBoots|Static|Hurricane,WeatherBall,VoltSwitch,Roost|Timid|248,,76,,,184|N|,0,,,,|||,,,,,Grass]Darkrai||ChoiceScarf|BadDreams|DarkPulse,IceBeam,SludgeBomb,Trick|Timid|,,,252,4,252|N|,0,,,,|||,,,,,Poison]Great Tusk||RockyHelmet|Protosynthesis|HeadlongRush,IceSpinner,RapidSpin,StealthRock|Jolly|,204,,,52,252|N||||,Fighting,,,,Ice]Kyurem||ChoiceSpecs|Pressure|IceBeam,FreezeDry,Blizzard,EarthPower|Timid|,,,252,4,252|N|,0,,,,|||,,,,,Ice"
+    },
+    {
+      "id": "stage2-confirmation-09",
+      "style": "semistall",
+      "roster": [
+        "Blissey",
+        "Dondozo",
+        "Corviknight",
+        "Ting-Lu",
+        "Alomomola",
+        "Darkrai"
+      ],
+      "template_roster": [
+        "Blissey",
+        "Dondozo",
+        "Corviknight",
+        "Gliscor",
+        "Alomomola",
+        "Darkrai"
+      ],
+      "design_rationale": "Recovery-heavy defensive core plus an offensive progress maker; long-battle censoring is reported explicitly.",
+      "substitutions": [
+        {
+          "from": "Gliscor",
+          "to": "Ting-Lu"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_6.txt"
+      ],
+      "sha256": "e8e9f241ac2c84cdf8f6b748adbd3ab5b8004ea38461ccab7fa567f42a0e2253",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/09.txt",
+      "validation_errors": null,
+      "packed": "Blissey||Leftovers|NaturalCure|CalmMind,ShadowBall,SeismicToss,SoftBoiled|Calm|4,,252,,252,|F|,0,,,,|||,,,,,Dark]Dondozo||HeavyDutyBoots|Unaware|BodyPress,Avalanche,Rest,SleepTalk|Impish|248,,252,,8,|||||,,,,,Fighting]Corviknight||RockyHelmet|Pressure|IronDefense,BodyPress,BraveBird,Roost|Impish|136,,252,,,120|F||||,,,,,Water]Ting-Lu||Leftovers|VesselofRuin|StealthRock,Earthquake,Ruination,Spikes|Careful|244,,12,,252,|N||||,,,,,Ghost]Alomomola||AssaultVest|Regenerator|FlipTurn,PlayRough,IcyWind,MirrorCoat|Sassy|216,40,,,252,|F|,,,,,0|||,,,,,Poison]Darkrai||ChoiceScarf|BadDreams|DarkPulse,IceBeam,SludgeBomb,Trick|Timid|,,,252,4,252|N|,0,,,,|||,,,,,Poison"
+    },
+    {
+      "id": "stage2-confirmation-10",
+      "style": "semistall",
+      "roster": [
+        "Toxapex",
+        "Weezing-Galar",
+        "Iron Treads",
+        "Slowking-Galar",
+        "Moltres",
+        "Zamazenta"
+      ],
+      "template_roster": [
+        "Toxapex",
+        "Weezing-Galar",
+        "Iron Treads",
+        "Clefable",
+        "Moltres",
+        "Weavile"
+      ],
+      "design_rationale": "Recovery-heavy defensive core plus an offensive progress maker; long-battle censoring is reported explicitly.",
+      "substitutions": [
+        {
+          "from": "Clefable",
+          "to": "Slowking-Galar"
+        },
+        {
+          "from": "Weavile",
+          "to": "Zamazenta"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_11.txt"
+      ],
+      "sha256": "d590faa7411149037730d753394cfaae378e977539c47a0ecee941659901a899",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/10.txt",
+      "validation_errors": null,
+      "packed": "Toxapex||AssaultVest|Regenerator|SludgeBomb,Surf,Infestation,IceBeam|Bold|248,,8,252,,||,0,,,,|||,,,,,Dark]Weezing|WeezingGalar|HeavyDutyBoots|NeutralizingGas|Defog,PainSplit,WillOWisp,SludgeBomb|Bold|248,,252,,,8||,0,,,,|||,,,,,Grass]Iron Treads||Leftovers|QuarkDrive|Earthquake,RapidSpin,StealthRock,Protect|Careful|252,,,,244,12|N||||,,,,,Ghost]Slowking|SlowkingGalar|HeavyDutyBoots|Regenerator|SludgeBomb,FutureSight,Flamethrower,ChillyReception|Sassy|248,,8,,252,||,0,,,,0|||,,,,,Water]Moltres||HeavyDutyBoots|FlameBody|Flamethrower,BraveBird,Roost,WillOWisp|Adamant|248,16,232,,,12|N||||,,,,,Fairy]Zamazenta||HeavyDutyBoots|DauntlessShield|CloseCombat,HeavySlam,Crunch,StoneEdge|Jolly|80,252,,,,176|N||||,,,,,Steel"
+    }
+  ],
+  "team_reservation": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/teams.json",
+  "team_provenance": {
+    "kind": "new handmade roster combinations of familiar regression sets and three weather components",
+    "reserved_date": "2026-10-25",
+    "reservation_seed": 2026102503,
+    "reservation": "frozen before inspecting any scored stage1 outcome; later-stage pools have disjoint six-species rosters from each other, prior reservations and regression originals",
+    "holdout_limit": "Not an independent external set holdout. Species and component sets overlap; role/style labels are design intentions and team viability is unproven. No team paste is used for prior fitting.",
+    "comparison_pairing": "Within a stage the same pool is reserved jointly for comparisons to original baseline and predecessor; paired schedule controls matchup difficulty. It is fresh relative to prior-stage evaluations, not independent between these paired arms.",
+    "rules": "all teams validated using pinned local gen9ou TeamValidator before any scored outcomes"
+  },
+  "simulator": {
+    "root": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/pokemon-showdown",
+    "commit": "c0845f33d381402dfcb18ce324c20a94f18af075",
+    "effective_js_sha256": "d7924e3ae90c4db218ff446e6356dc8cef84949be8f8e69e7992972b76be3634"
+  },
+  "a": {
+    "root": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-beliefs",
+    "source_sha256": "0728b716862b0c848480c3b08562bb745fd74c69874b948c52bf29b537895ed0",
+    "source_files": {
+      "bot/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bot/demo.py": "805887cc72795b5ef2e3f1cdff65e4f90041adb8b8985876da752660084e9761",
+      "bot/eval.py": "41fbf2833152278ad3ebdcd55661ab901ffb1bcaae1f36afa696165e35c56c46",
+      "bot/parser.py": "d36ee9a18ce1b2e6229aa3df0aa5730685e693d2e3f6aaa1c836be3a9799ba8a",
+      "bot/player.py": "58b40502da95795076179ec0bc0fafd6381f0cb8c48fe2dae230d6d20db61527",
+      "bot/smoke.py": "3e12e0fad384b7ac2372ebadcc2c0043b6aa32986e91fa03d6babc13b706ac05",
+      "bot/tests/test_demo.py": "3dbf7a7aded4ae0fe5acd379c5c1266be3ddbaa5474bdd7202da7af224d5813b",
+      "bot/tests/test_eval.py": "22639e87ef7441b129e55c983ccdffceb7fbdf01ec33b7b74dfcc4923d60c246",
+      "bot/tests/test_eval_completion.py": "1d5c6c2a2f09cf8ac671c83ee47dfc6f9bb99a02a4d741798c9f70893411b8c2",
+      "bot/tests/test_eval_schedule.py": "9e79a2b18b3fd64f56bba829a1da124763adf41d4ea319f8470812b827ff644f",
+      "bot/tests/test_foul_play_eval.py": "424c537d4545552e83f8cca4111a9ba9b3ae140f6f282c22292a1242ef8f8d7b",
+      "bot/tests/test_mcts_evaluation.py": "1e901e5a6daa36fbf6dc6d0847d827a536d7f5fdfa99b7996aec40ad07b75ade",
+      "bot/tests/test_parser.py": "8ad6602ec4832452890d1c36eec4360902a87a95c83de1ad33e6b42d3d93f7f0",
+      "bot/tests/test_player.py": "44ed9e927f60e6b913161ad807579adf343e1ae4c744d53b6f109d87d5c90c27",
+      "bot/tests/test_smoke.py": "ec3a95e454be0019b407475a74d58e19a75e25e1774a5b56fab48523275fd6c5",
+      "contracts/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "contracts/battle_state.py": "377e82a448b3c67e8b79bdf46c62b1d9363dd8af57e51afa511f8d5f804f2d89",
+      "contracts/set_candidates.py": "3ee151f9ab4ad4f6fd1c77e5ac62e888990e0cc85cf687d1fccbce42400e162a",
+      "decision/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "decision/actions.py": "78233b1a0dea5a10e991908600317355b19f0b54d3c6fbbccbc88d5ddc028620",
+      "decision/adapter.py": "34773e44b090785272f3807fe7c179c9ca4b34e80706d177b3fb003b94b44068",
+      "decision/agent.py": "db48ae4e3eac455f2cb1cc07212ab5dd105103dcd67714ad2c7baa59153cafc6",
+      "decision/belief.py": "752a057da7d8fb8bc9d2086e323f83fc191a8259c94e45a36d9a3ee64660da2e",
+      "decision/data/moves.json": "26909a321a7e4528d14a7dffd24173aa03a6845776cf41c39cc3d76f8e14616b",
+      "decision/data/pokedex.json": "e74d0364b230001fc086cefb4259e051f1d16a4730eb89f7d6336a88a0d9a47e",
+      "decision/data/typechart.json": "26270c6fa9e25ba43ba9d6fd0da115fcf96eee42eae8b0bd9660bd015dc483b2",
+      "decision/lead.py": "1af618a2450672e75abae9af55b2035d64e29e3b8f420629fdd29a4f75f7c5f3",
+      "decision/opponent.py": "902a458fa0d2a97519a3a86527f2cfd3ae13f8a390fd61e62b8eda1d602643a7",
+      "decision/search.py": "a6e1a2f14c4bbdc62ca7701791196ea4e1398a8be9ed28702abd3d4503682218",
+      "decision/search_policy.py": "ac52f71753b08ea2932003fb05a11cde6cc6f4ad671c0bfa6407e938d1ea9650",
+      "decision/selector.py": "36de03df3385670f46af23ae7cc01f2077b51b70bc7a47e0fae86aad92f1267c",
+      "decision/sets.py": "5e345d60634414d723dbe1de4b0adc4459abcb542dfad0920095a7b6c4650c53",
+      "decision/simulate.py": "96e077923f6ef720a66fddbc496dab4c197c8cda386a7c0f1b5af7eee03d18a3",
+      "decision/state.py": "0c9d3a6113e21ef7ff018e5a596b57d90207956c16ba4fb7c38864a3c4995761",
+      "decision/value.py": "d25c43b6bc8e360043cf19e4c0c331aed04a692ffdc7da8b848a6fc2a705ef29"
+    },
+    "engine": {
+      "version": "0.0.48",
+      "binaries": {
+        "poke_engine.cpython-313-x86_64-linux-gnu.so": "fbffd2a1c9c48eab99def9187f9030c578174a30b49d54faad159be859846ef3"
+      }
+    },
+    "priors": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/baseline-2c02fc8/data/set_candidates.json",
+    "priors_sha256": "47b31bf7282d6578ed44d7b28f9a63e9284eddc72882856de426f7c1bfc8c7f3",
+    "config": {
+      "backend": "mcts",
+      "budget": 3.0,
+      "mcts_worlds": 8,
+      "search_ms": 150,
+      "engine_threads": 1,
+      "sampling": "team",
+      "frozen_beliefs": false,
+      "seed": 2026,
+      "belief_mode": "reliable"
+    }
+  },
+  "b": {
+    "root": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/baseline-2c02fc8",
+    "source_sha256": "5eaa172be19612c3ef49d11a59537a2794d587d26e75e2f0cc6f997946e84874",
+    "source_files": {
+      "bot/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bot/demo.py": "805887cc72795b5ef2e3f1cdff65e4f90041adb8b8985876da752660084e9761",
+      "bot/eval.py": "41fbf2833152278ad3ebdcd55661ab901ffb1bcaae1f36afa696165e35c56c46",
+      "bot/parser.py": "0bd351d61cd15d0e8ef75671ee1cfcd7cd97bfdd724543514cbb91fbc01e6cc3",
+      "bot/player.py": "1db15f3cab2c705be505ee0ad6249a1f2961d999b92c7e1ff404c5524a03d162",
+      "bot/smoke.py": "3e12e0fad384b7ac2372ebadcc2c0043b6aa32986e91fa03d6babc13b706ac05",
+      "bot/tests/test_demo.py": "3dbf7a7aded4ae0fe5acd379c5c1266be3ddbaa5474bdd7202da7af224d5813b",
+      "bot/tests/test_eval.py": "22639e87ef7441b129e55c983ccdffceb7fbdf01ec33b7b74dfcc4923d60c246",
+      "bot/tests/test_eval_completion.py": "1d5c6c2a2f09cf8ac671c83ee47dfc6f9bb99a02a4d741798c9f70893411b8c2",
+      "bot/tests/test_eval_schedule.py": "9e79a2b18b3fd64f56bba829a1da124763adf41d4ea319f8470812b827ff644f",
+      "bot/tests/test_foul_play_eval.py": "424c537d4545552e83f8cca4111a9ba9b3ae140f6f282c22292a1242ef8f8d7b",
+      "bot/tests/test_mcts_evaluation.py": "1e901e5a6daa36fbf6dc6d0847d827a536d7f5fdfa99b7996aec40ad07b75ade",
+      "bot/tests/test_parser.py": "b8449d80017ef8368e2c9cfbad30a9e84385d4479037a73471d7b6fc6978c8f6",
+      "bot/tests/test_player.py": "44ed9e927f60e6b913161ad807579adf343e1ae4c744d53b6f109d87d5c90c27",
+      "bot/tests/test_smoke.py": "ec3a95e454be0019b407475a74d58e19a75e25e1774a5b56fab48523275fd6c5",
+      "contracts/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "contracts/battle_state.py": "c774b106e1bd9ae4b6c2ac3811b3518323e086595cbe4769c462b02b557056f3",
+      "contracts/set_candidates.py": "3ee151f9ab4ad4f6fd1c77e5ac62e888990e0cc85cf687d1fccbce42400e162a",
+      "decision/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "decision/actions.py": "78233b1a0dea5a10e991908600317355b19f0b54d3c6fbbccbc88d5ddc028620",
+      "decision/adapter.py": "f34e39759b6efc446fc447898e3969c16f1c6644cac1fcd0f7c416eb0f47a423",
+      "decision/agent.py": "ca67e7bf01bc23cb51abd81aa55cd0d5880bc3c79faf7fededdacef74c6d5d68",
+      "decision/belief.py": "3474256b93567df34e4f7aa22aac471ac791a84d30848d26348492a31955b6b7",
+      "decision/data/moves.json": "26909a321a7e4528d14a7dffd24173aa03a6845776cf41c39cc3d76f8e14616b",
+      "decision/data/pokedex.json": "e74d0364b230001fc086cefb4259e051f1d16a4730eb89f7d6336a88a0d9a47e",
+      "decision/data/typechart.json": "26270c6fa9e25ba43ba9d6fd0da115fcf96eee42eae8b0bd9660bd015dc483b2",
+      "decision/lead.py": "1af618a2450672e75abae9af55b2035d64e29e3b8f420629fdd29a4f75f7c5f3",
+      "decision/opponent.py": "902a458fa0d2a97519a3a86527f2cfd3ae13f8a390fd61e62b8eda1d602643a7",
+      "decision/search.py": "d1d36c46be7fc76db0c2dc4b56c4b11e2327ee3afb5faf0dedc4da013baeabef",
+      "decision/search_policy.py": "ac52f71753b08ea2932003fb05a11cde6cc6f4ad671c0bfa6407e938d1ea9650",
+      "decision/selector.py": "36de03df3385670f46af23ae7cc01f2077b51b70bc7a47e0fae86aad92f1267c",
+      "decision/sets.py": "5e345d60634414d723dbe1de4b0adc4459abcb542dfad0920095a7b6c4650c53",
+      "decision/simulate.py": "96e077923f6ef720a66fddbc496dab4c197c8cda386a7c0f1b5af7eee03d18a3",
+      "decision/state.py": "bd924f33ad6ed8106918e318466b9a0a9ed2a9c5bf1ed4badd61889deab61078",
+      "decision/value.py": "d25c43b6bc8e360043cf19e4c0c331aed04a692ffdc7da8b848a6fc2a705ef29"
+    },
+    "engine": {
+      "version": "0.0.48",
+      "binaries": {
+        "poke_engine.cpython-313-x86_64-linux-gnu.so": "fbffd2a1c9c48eab99def9187f9030c578174a30b49d54faad159be859846ef3"
+      }
+    },
+    "priors": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/baseline-2c02fc8/data/set_candidates.json",
+    "priors_sha256": "47b31bf7282d6578ed44d7b28f9a63e9284eddc72882856de426f7c1bfc8c7f3",
+    "config": {
+      "backend": "mcts",
+      "budget": 3.0,
+      "mcts_worlds": 8,
+      "search_ms": 150,
+      "engine_threads": 1,
+      "sampling": "team",
+      "frozen_beliefs": false,
+      "seed": 2026
+    }
+  },
+  "schedule": [
+    {
+      "game": 0,
+      "block": 0,
+      "assignment": 0,
+      "a_team": 6,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        13267,
+        28898,
+        12854,
+        12474
+      ],
+      "sampler_seed": 1551076154,
+      "mixed_policy_seed": 1324883215
+    },
+    {
+      "game": 1,
+      "block": 0,
+      "assignment": 0,
+      "a_team": 6,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        13267,
+        28898,
+        12854,
+        12474
+      ],
+      "sampler_seed": 1551076154,
+      "mixed_policy_seed": 1324883215
+    },
+    {
+      "game": 2,
+      "block": 0,
+      "assignment": 1,
+      "a_team": 9,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        13267,
+        28898,
+        12854,
+        12474
+      ],
+      "sampler_seed": 1551076154,
+      "mixed_policy_seed": 1324883215
+    },
+    {
+      "game": 3,
+      "block": 0,
+      "assignment": 1,
+      "a_team": 9,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        13267,
+        28898,
+        12854,
+        12474
+      ],
+      "sampler_seed": 1551076154,
+      "mixed_policy_seed": 1324883215
+    },
+    {
+      "game": 4,
+      "block": 1,
+      "assignment": 0,
+      "a_team": 7,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        17630,
+        61589,
+        58001,
+        4292
+      ],
+      "sampler_seed": 1411764172,
+      "mixed_policy_seed": 825319360
+    },
+    {
+      "game": 5,
+      "block": 1,
+      "assignment": 0,
+      "a_team": 7,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        17630,
+        61589,
+        58001,
+        4292
+      ],
+      "sampler_seed": 1411764172,
+      "mixed_policy_seed": 825319360
+    },
+    {
+      "game": 6,
+      "block": 1,
+      "assignment": 1,
+      "a_team": 8,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        17630,
+        61589,
+        58001,
+        4292
+      ],
+      "sampler_seed": 1411764172,
+      "mixed_policy_seed": 825319360
+    },
+    {
+      "game": 7,
+      "block": 1,
+      "assignment": 1,
+      "a_team": 8,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        17630,
+        61589,
+        58001,
+        4292
+      ],
+      "sampler_seed": 1411764172,
+      "mixed_policy_seed": 825319360
+    },
+    {
+      "game": 8,
+      "block": 2,
+      "assignment": 0,
+      "a_team": 0,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        22794,
+        52455,
+        45124,
+        20846
+      ],
+      "sampler_seed": 438522305,
+      "mixed_policy_seed": 53455695
+    },
+    {
+      "game": 9,
+      "block": 2,
+      "assignment": 0,
+      "a_team": 0,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        22794,
+        52455,
+        45124,
+        20846
+      ],
+      "sampler_seed": 438522305,
+      "mixed_policy_seed": 53455695
+    },
+    {
+      "game": 10,
+      "block": 2,
+      "assignment": 1,
+      "a_team": 4,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        22794,
+        52455,
+        45124,
+        20846
+      ],
+      "sampler_seed": 438522305,
+      "mixed_policy_seed": 53455695
+    },
+    {
+      "game": 11,
+      "block": 2,
+      "assignment": 1,
+      "a_team": 4,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        22794,
+        52455,
+        45124,
+        20846
+      ],
+      "sampler_seed": 438522305,
+      "mixed_policy_seed": 53455695
+    },
+    {
+      "game": 12,
+      "block": 3,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        27398,
+        22345,
+        55657,
+        1028
+      ],
+      "sampler_seed": 1873994904,
+      "mixed_policy_seed": 1794868291
+    },
+    {
+      "game": 13,
+      "block": 3,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        27398,
+        22345,
+        55657,
+        1028
+      ],
+      "sampler_seed": 1873994904,
+      "mixed_policy_seed": 1794868291
+    },
+    {
+      "game": 14,
+      "block": 3,
+      "assignment": 1,
+      "a_team": 2,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        27398,
+        22345,
+        55657,
+        1028
+      ],
+      "sampler_seed": 1873994904,
+      "mixed_policy_seed": 1794868291
+    },
+    {
+      "game": 15,
+      "block": 3,
+      "assignment": 1,
+      "a_team": 2,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        27398,
+        22345,
+        55657,
+        1028
+      ],
+      "sampler_seed": 1873994904,
+      "mixed_policy_seed": 1794868291
+    },
+    {
+      "game": 16,
+      "block": 4,
+      "assignment": 0,
+      "a_team": 5,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        33729,
+        9544,
+        28714,
+        31561
+      ],
+      "sampler_seed": 2061097866,
+      "mixed_policy_seed": 49455452
+    },
+    {
+      "game": 17,
+      "block": 4,
+      "assignment": 0,
+      "a_team": 5,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        33729,
+        9544,
+        28714,
+        31561
+      ],
+      "sampler_seed": 2061097866,
+      "mixed_policy_seed": 49455452
+    },
+    {
+      "game": 18,
+      "block": 4,
+      "assignment": 1,
+      "a_team": 3,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        33729,
+        9544,
+        28714,
+        31561
+      ],
+      "sampler_seed": 2061097866,
+      "mixed_policy_seed": 49455452
+    },
+    {
+      "game": 19,
+      "block": 4,
+      "assignment": 1,
+      "a_team": 3,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        33729,
+        9544,
+        28714,
+        31561
+      ],
+      "sampler_seed": 2061097866,
+      "mixed_policy_seed": 49455452
+    },
+    {
+      "game": 20,
+      "block": 5,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        44119,
+        53744,
+        5195,
+        63863
+      ],
+      "sampler_seed": 1609661590,
+      "mixed_policy_seed": 966894014
+    },
+    {
+      "game": 21,
+      "block": 5,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        44119,
+        53744,
+        5195,
+        63863
+      ],
+      "sampler_seed": 1609661590,
+      "mixed_policy_seed": 966894014
+    },
+    {
+      "game": 22,
+      "block": 5,
+      "assignment": 1,
+      "a_team": 0,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        44119,
+        53744,
+        5195,
+        63863
+      ],
+      "sampler_seed": 1609661590,
+      "mixed_policy_seed": 966894014
+    },
+    {
+      "game": 23,
+      "block": 5,
+      "assignment": 1,
+      "a_team": 0,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        44119,
+        53744,
+        5195,
+        63863
+      ],
+      "sampler_seed": 1609661590,
+      "mixed_policy_seed": 966894014
+    },
+    {
+      "game": 24,
+      "block": 6,
+      "assignment": 0,
+      "a_team": 8,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        27654,
+        28413,
+        8995,
+        58498
+      ],
+      "sampler_seed": 1634213496,
+      "mixed_policy_seed": 1652936744
+    },
+    {
+      "game": 25,
+      "block": 6,
+      "assignment": 0,
+      "a_team": 8,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        27654,
+        28413,
+        8995,
+        58498
+      ],
+      "sampler_seed": 1634213496,
+      "mixed_policy_seed": 1652936744
+    },
+    {
+      "game": 26,
+      "block": 6,
+      "assignment": 1,
+      "a_team": 3,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        27654,
+        28413,
+        8995,
+        58498
+      ],
+      "sampler_seed": 1634213496,
+      "mixed_policy_seed": 1652936744
+    },
+    {
+      "game": 27,
+      "block": 6,
+      "assignment": 1,
+      "a_team": 3,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        27654,
+        28413,
+        8995,
+        58498
+      ],
+      "sampler_seed": 1634213496,
+      "mixed_policy_seed": 1652936744
+    },
+    {
+      "game": 28,
+      "block": 7,
+      "assignment": 0,
+      "a_team": 4,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        37754,
+        2648,
+        7561,
+        60752
+      ],
+      "sampler_seed": 1949665125,
+      "mixed_policy_seed": 1001435029
+    },
+    {
+      "game": 29,
+      "block": 7,
+      "assignment": 0,
+      "a_team": 4,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        37754,
+        2648,
+        7561,
+        60752
+      ],
+      "sampler_seed": 1949665125,
+      "mixed_policy_seed": 1001435029
+    },
+    {
+      "game": 30,
+      "block": 7,
+      "assignment": 1,
+      "a_team": 2,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        37754,
+        2648,
+        7561,
+        60752
+      ],
+      "sampler_seed": 1949665125,
+      "mixed_policy_seed": 1001435029
+    },
+    {
+      "game": 31,
+      "block": 7,
+      "assignment": 1,
+      "a_team": 2,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        37754,
+        2648,
+        7561,
+        60752
+      ],
+      "sampler_seed": 1949665125,
+      "mixed_policy_seed": 1001435029
+    },
+    {
+      "game": 32,
+      "block": 8,
+      "assignment": 0,
+      "a_team": 6,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        54404,
+        17606,
+        6059,
+        65446
+      ],
+      "sampler_seed": 921363954,
+      "mixed_policy_seed": 1156042980
+    },
+    {
+      "game": 33,
+      "block": 8,
+      "assignment": 0,
+      "a_team": 6,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        54404,
+        17606,
+        6059,
+        65446
+      ],
+      "sampler_seed": 921363954,
+      "mixed_policy_seed": 1156042980
+    },
+    {
+      "game": 34,
+      "block": 8,
+      "assignment": 1,
+      "a_team": 7,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        54404,
+        17606,
+        6059,
+        65446
+      ],
+      "sampler_seed": 921363954,
+      "mixed_policy_seed": 1156042980
+    },
+    {
+      "game": 35,
+      "block": 8,
+      "assignment": 1,
+      "a_team": 7,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        54404,
+        17606,
+        6059,
+        65446
+      ],
+      "sampler_seed": 921363954,
+      "mixed_policy_seed": 1156042980
+    },
+    {
+      "game": 36,
+      "block": 9,
+      "assignment": 0,
+      "a_team": 9,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        9039,
+        38329,
+        60763,
+        52565
+      ],
+      "sampler_seed": 1297537127,
+      "mixed_policy_seed": 910767705
+    },
+    {
+      "game": 37,
+      "block": 9,
+      "assignment": 0,
+      "a_team": 9,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        9039,
+        38329,
+        60763,
+        52565
+      ],
+      "sampler_seed": 1297537127,
+      "mixed_policy_seed": 910767705
+    },
+    {
+      "game": 38,
+      "block": 9,
+      "assignment": 1,
+      "a_team": 5,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        9039,
+        38329,
+        60763,
+        52565
+      ],
+      "sampler_seed": 1297537127,
+      "mixed_policy_seed": 910767705
+    },
+    {
+      "game": 39,
+      "block": 9,
+      "assignment": 1,
+      "a_team": 5,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        9039,
+        38329,
+        60763,
+        52565
+      ],
+      "sampler_seed": 1297537127,
+      "mixed_policy_seed": 910767705
+    },
+    {
+      "game": 40,
+      "block": 10,
+      "assignment": 0,
+      "a_team": 3,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        50609,
+        34001,
+        6456,
+        54108
+      ],
+      "sampler_seed": 2098835239,
+      "mixed_policy_seed": 794702497
+    },
+    {
+      "game": 41,
+      "block": 10,
+      "assignment": 0,
+      "a_team": 3,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        50609,
+        34001,
+        6456,
+        54108
+      ],
+      "sampler_seed": 2098835239,
+      "mixed_policy_seed": 794702497
+    },
+    {
+      "game": 42,
+      "block": 10,
+      "assignment": 1,
+      "a_team": 7,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        50609,
+        34001,
+        6456,
+        54108
+      ],
+      "sampler_seed": 2098835239,
+      "mixed_policy_seed": 794702497
+    },
+    {
+      "game": 43,
+      "block": 10,
+      "assignment": 1,
+      "a_team": 7,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        50609,
+        34001,
+        6456,
+        54108
+      ],
+      "sampler_seed": 2098835239,
+      "mixed_policy_seed": 794702497
+    },
+    {
+      "game": 44,
+      "block": 11,
+      "assignment": 0,
+      "a_team": 2,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        35532,
+        1648,
+        47390,
+        38455
+      ],
+      "sampler_seed": 1428452233,
+      "mixed_policy_seed": 94166484
+    },
+    {
+      "game": 45,
+      "block": 11,
+      "assignment": 0,
+      "a_team": 2,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        35532,
+        1648,
+        47390,
+        38455
+      ],
+      "sampler_seed": 1428452233,
+      "mixed_policy_seed": 94166484
+    },
+    {
+      "game": 46,
+      "block": 11,
+      "assignment": 1,
+      "a_team": 5,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        35532,
+        1648,
+        47390,
+        38455
+      ],
+      "sampler_seed": 1428452233,
+      "mixed_policy_seed": 94166484
+    },
+    {
+      "game": 47,
+      "block": 11,
+      "assignment": 1,
+      "a_team": 5,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        35532,
+        1648,
+        47390,
+        38455
+      ],
+      "sampler_seed": 1428452233,
+      "mixed_policy_seed": 94166484
+    },
+    {
+      "game": 48,
+      "block": 12,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        14244,
+        8372,
+        32352,
+        48799
+      ],
+      "sampler_seed": 1899319468,
+      "mixed_policy_seed": 1005683597
+    },
+    {
+      "game": 49,
+      "block": 12,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        14244,
+        8372,
+        32352,
+        48799
+      ],
+      "sampler_seed": 1899319468,
+      "mixed_policy_seed": 1005683597
+    },
+    {
+      "game": 50,
+      "block": 12,
+      "assignment": 1,
+      "a_team": 9,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        14244,
+        8372,
+        32352,
+        48799
+      ],
+      "sampler_seed": 1899319468,
+      "mixed_policy_seed": 1005683597
+    },
+    {
+      "game": 51,
+      "block": 12,
+      "assignment": 1,
+      "a_team": 9,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        14244,
+        8372,
+        32352,
+        48799
+      ],
+      "sampler_seed": 1899319468,
+      "mixed_policy_seed": 1005683597
+    },
+    {
+      "game": 52,
+      "block": 13,
+      "assignment": 0,
+      "a_team": 8,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        51966,
+        45958,
+        55245,
+        31767
+      ],
+      "sampler_seed": 838215412,
+      "mixed_policy_seed": 787340890
+    },
+    {
+      "game": 53,
+      "block": 13,
+      "assignment": 0,
+      "a_team": 8,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        51966,
+        45958,
+        55245,
+        31767
+      ],
+      "sampler_seed": 838215412,
+      "mixed_policy_seed": 787340890
+    },
+    {
+      "game": 54,
+      "block": 13,
+      "assignment": 1,
+      "a_team": 0,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        51966,
+        45958,
+        55245,
+        31767
+      ],
+      "sampler_seed": 838215412,
+      "mixed_policy_seed": 787340890
+    },
+    {
+      "game": 55,
+      "block": 13,
+      "assignment": 1,
+      "a_team": 0,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        51966,
+        45958,
+        55245,
+        31767
+      ],
+      "sampler_seed": 838215412,
+      "mixed_policy_seed": 787340890
+    },
+    {
+      "game": 56,
+      "block": 14,
+      "assignment": 0,
+      "a_team": 4,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        10879,
+        42874,
+        26828,
+        60117
+      ],
+      "sampler_seed": 484771969,
+      "mixed_policy_seed": 903264097
+    },
+    {
+      "game": 57,
+      "block": 14,
+      "assignment": 0,
+      "a_team": 4,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        10879,
+        42874,
+        26828,
+        60117
+      ],
+      "sampler_seed": 484771969,
+      "mixed_policy_seed": 903264097
+    },
+    {
+      "game": 58,
+      "block": 14,
+      "assignment": 1,
+      "a_team": 6,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        10879,
+        42874,
+        26828,
+        60117
+      ],
+      "sampler_seed": 484771969,
+      "mixed_policy_seed": 903264097
+    },
+    {
+      "game": 59,
+      "block": 14,
+      "assignment": 1,
+      "a_team": 6,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        10879,
+        42874,
+        26828,
+        60117
+      ],
+      "sampler_seed": 484771969,
+      "mixed_policy_seed": 903264097
+    },
+    {
+      "game": 60,
+      "block": 15,
+      "assignment": 0,
+      "a_team": 8,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        1285,
+        32372,
+        55669,
+        59627
+      ],
+      "sampler_seed": 1406224958,
+      "mixed_policy_seed": 847586897
+    },
+    {
+      "game": 61,
+      "block": 15,
+      "assignment": 0,
+      "a_team": 8,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        1285,
+        32372,
+        55669,
+        59627
+      ],
+      "sampler_seed": 1406224958,
+      "mixed_policy_seed": 847586897
+    },
+    {
+      "game": 62,
+      "block": 15,
+      "assignment": 1,
+      "a_team": 5,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        1285,
+        32372,
+        55669,
+        59627
+      ],
+      "sampler_seed": 1406224958,
+      "mixed_policy_seed": 847586897
+    },
+    {
+      "game": 63,
+      "block": 15,
+      "assignment": 1,
+      "a_team": 5,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        1285,
+        32372,
+        55669,
+        59627
+      ],
+      "sampler_seed": 1406224958,
+      "mixed_policy_seed": 847586897
+    },
+    {
+      "game": 64,
+      "block": 16,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        19195,
+        34302,
+        9171,
+        25322
+      ],
+      "sampler_seed": 1564374189,
+      "mixed_policy_seed": 1227926102
+    },
+    {
+      "game": 65,
+      "block": 16,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        19195,
+        34302,
+        9171,
+        25322
+      ],
+      "sampler_seed": 1564374189,
+      "mixed_policy_seed": 1227926102
+    },
+    {
+      "game": 66,
+      "block": 16,
+      "assignment": 1,
+      "a_team": 6,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        19195,
+        34302,
+        9171,
+        25322
+      ],
+      "sampler_seed": 1564374189,
+      "mixed_policy_seed": 1227926102
+    },
+    {
+      "game": 67,
+      "block": 16,
+      "assignment": 1,
+      "a_team": 6,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        19195,
+        34302,
+        9171,
+        25322
+      ],
+      "sampler_seed": 1564374189,
+      "mixed_policy_seed": 1227926102
+    },
+    {
+      "game": 68,
+      "block": 17,
+      "assignment": 0,
+      "a_team": 4,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        39768,
+        46736,
+        36873,
+        40324
+      ],
+      "sampler_seed": 578453802,
+      "mixed_policy_seed": 1182772810
+    },
+    {
+      "game": 69,
+      "block": 17,
+      "assignment": 0,
+      "a_team": 4,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        39768,
+        46736,
+        36873,
+        40324
+      ],
+      "sampler_seed": 578453802,
+      "mixed_policy_seed": 1182772810
+    },
+    {
+      "game": 70,
+      "block": 17,
+      "assignment": 1,
+      "a_team": 7,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        39768,
+        46736,
+        36873,
+        40324
+      ],
+      "sampler_seed": 578453802,
+      "mixed_policy_seed": 1182772810
+    },
+    {
+      "game": 71,
+      "block": 17,
+      "assignment": 1,
+      "a_team": 7,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        39768,
+        46736,
+        36873,
+        40324
+      ],
+      "sampler_seed": 578453802,
+      "mixed_policy_seed": 1182772810
+    },
+    {
+      "game": 72,
+      "block": 18,
+      "assignment": 0,
+      "a_team": 3,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        28433,
+        48129,
+        20791,
+        9459
+      ],
+      "sampler_seed": 1097803216,
+      "mixed_policy_seed": 1181697432
+    },
+    {
+      "game": 73,
+      "block": 18,
+      "assignment": 0,
+      "a_team": 3,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        28433,
+        48129,
+        20791,
+        9459
+      ],
+      "sampler_seed": 1097803216,
+      "mixed_policy_seed": 1181697432
+    },
+    {
+      "game": 74,
+      "block": 18,
+      "assignment": 1,
+      "a_team": 2,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        28433,
+        48129,
+        20791,
+        9459
+      ],
+      "sampler_seed": 1097803216,
+      "mixed_policy_seed": 1181697432
+    },
+    {
+      "game": 75,
+      "block": 18,
+      "assignment": 1,
+      "a_team": 2,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        28433,
+        48129,
+        20791,
+        9459
+      ],
+      "sampler_seed": 1097803216,
+      "mixed_policy_seed": 1181697432
+    },
+    {
+      "game": 76,
+      "block": 19,
+      "assignment": 0,
+      "a_team": 9,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        34315,
+        47380,
+        37357,
+        37089
+      ],
+      "sampler_seed": 599303370,
+      "mixed_policy_seed": 380130375
+    },
+    {
+      "game": 77,
+      "block": 19,
+      "assignment": 0,
+      "a_team": 9,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        34315,
+        47380,
+        37357,
+        37089
+      ],
+      "sampler_seed": 599303370,
+      "mixed_policy_seed": 380130375
+    },
+    {
+      "game": 78,
+      "block": 19,
+      "assignment": 1,
+      "a_team": 0,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        34315,
+        47380,
+        37357,
+        37089
+      ],
+      "sampler_seed": 599303370,
+      "mixed_policy_seed": 380130375
+    },
+    {
+      "game": 79,
+      "block": 19,
+      "assignment": 1,
+      "a_team": 0,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        34315,
+        47380,
+        37357,
+        37089
+      ],
+      "sampler_seed": 599303370,
+      "mixed_policy_seed": 380130375
+    },
+    {
+      "game": 80,
+      "block": 20,
+      "assignment": 0,
+      "a_team": 7,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        63625,
+        15810,
+        46230,
+        25725
+      ],
+      "sampler_seed": 134562978,
+      "mixed_policy_seed": 1570318027
+    },
+    {
+      "game": 81,
+      "block": 20,
+      "assignment": 0,
+      "a_team": 7,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        63625,
+        15810,
+        46230,
+        25725
+      ],
+      "sampler_seed": 134562978,
+      "mixed_policy_seed": 1570318027
+    },
+    {
+      "game": 82,
+      "block": 20,
+      "assignment": 1,
+      "a_team": 2,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        63625,
+        15810,
+        46230,
+        25725
+      ],
+      "sampler_seed": 134562978,
+      "mixed_policy_seed": 1570318027
+    },
+    {
+      "game": 83,
+      "block": 20,
+      "assignment": 1,
+      "a_team": 2,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        63625,
+        15810,
+        46230,
+        25725
+      ],
+      "sampler_seed": 134562978,
+      "mixed_policy_seed": 1570318027
+    },
+    {
+      "game": 84,
+      "block": 21,
+      "assignment": 0,
+      "a_team": 9,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        45600,
+        31840,
+        6117,
+        56956
+      ],
+      "sampler_seed": 566646804,
+      "mixed_policy_seed": 2112526071
+    },
+    {
+      "game": 85,
+      "block": 21,
+      "assignment": 0,
+      "a_team": 9,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        45600,
+        31840,
+        6117,
+        56956
+      ],
+      "sampler_seed": 566646804,
+      "mixed_policy_seed": 2112526071
+    },
+    {
+      "game": 86,
+      "block": 21,
+      "assignment": 1,
+      "a_team": 4,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        45600,
+        31840,
+        6117,
+        56956
+      ],
+      "sampler_seed": 566646804,
+      "mixed_policy_seed": 2112526071
+    },
+    {
+      "game": 87,
+      "block": 21,
+      "assignment": 1,
+      "a_team": 4,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        45600,
+        31840,
+        6117,
+        56956
+      ],
+      "sampler_seed": 566646804,
+      "mixed_policy_seed": 2112526071
+    },
+    {
+      "game": 88,
+      "block": 22,
+      "assignment": 0,
+      "a_team": 6,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        31384,
+        41690,
+        17295,
+        706
+      ],
+      "sampler_seed": 1400831156,
+      "mixed_policy_seed": 1639997248
+    },
+    {
+      "game": 89,
+      "block": 22,
+      "assignment": 0,
+      "a_team": 6,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        31384,
+        41690,
+        17295,
+        706
+      ],
+      "sampler_seed": 1400831156,
+      "mixed_policy_seed": 1639997248
+    },
+    {
+      "game": 90,
+      "block": 22,
+      "assignment": 1,
+      "a_team": 8,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        31384,
+        41690,
+        17295,
+        706
+      ],
+      "sampler_seed": 1400831156,
+      "mixed_policy_seed": 1639997248
+    },
+    {
+      "game": 91,
+      "block": 22,
+      "assignment": 1,
+      "a_team": 8,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        31384,
+        41690,
+        17295,
+        706
+      ],
+      "sampler_seed": 1400831156,
+      "mixed_policy_seed": 1639997248
+    },
+    {
+      "game": 92,
+      "block": 23,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        28494,
+        47255,
+        34678,
+        39063
+      ],
+      "sampler_seed": 1154385777,
+      "mixed_policy_seed": 1066475188
+    },
+    {
+      "game": 93,
+      "block": 23,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        28494,
+        47255,
+        34678,
+        39063
+      ],
+      "sampler_seed": 1154385777,
+      "mixed_policy_seed": 1066475188
+    },
+    {
+      "game": 94,
+      "block": 23,
+      "assignment": 1,
+      "a_team": 5,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        28494,
+        47255,
+        34678,
+        39063
+      ],
+      "sampler_seed": 1154385777,
+      "mixed_policy_seed": 1066475188
+    },
+    {
+      "game": 95,
+      "block": 23,
+      "assignment": 1,
+      "a_team": 5,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        28494,
+        47255,
+        34678,
+        39063
+      ],
+      "sampler_seed": 1154385777,
+      "mixed_policy_seed": 1066475188
+    },
+    {
+      "game": 96,
+      "block": 24,
+      "assignment": 0,
+      "a_team": 0,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        51535,
+        33892,
+        31915,
+        56846
+      ],
+      "sampler_seed": 1096651588,
+      "mixed_policy_seed": 1950389231
+    },
+    {
+      "game": 97,
+      "block": 24,
+      "assignment": 0,
+      "a_team": 0,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        51535,
+        33892,
+        31915,
+        56846
+      ],
+      "sampler_seed": 1096651588,
+      "mixed_policy_seed": 1950389231
+    },
+    {
+      "game": 98,
+      "block": 24,
+      "assignment": 1,
+      "a_team": 3,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        51535,
+        33892,
+        31915,
+        56846
+      ],
+      "sampler_seed": 1096651588,
+      "mixed_policy_seed": 1950389231
+    },
+    {
+      "game": 99,
+      "block": 24,
+      "assignment": 1,
+      "a_team": 3,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        51535,
+        33892,
+        31915,
+        56846
+      ],
+      "sampler_seed": 1096651588,
+      "mixed_policy_seed": 1950389231
+    },
+    {
+      "game": 100,
+      "block": 25,
+      "assignment": 0,
+      "a_team": 8,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        13224,
+        9524,
+        31735,
+        60461
+      ],
+      "sampler_seed": 1341909720,
+      "mixed_policy_seed": 1376677532
+    },
+    {
+      "game": 101,
+      "block": 25,
+      "assignment": 0,
+      "a_team": 8,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        13224,
+        9524,
+        31735,
+        60461
+      ],
+      "sampler_seed": 1341909720,
+      "mixed_policy_seed": 1376677532
+    },
+    {
+      "game": 102,
+      "block": 25,
+      "assignment": 1,
+      "a_team": 9,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        13224,
+        9524,
+        31735,
+        60461
+      ],
+      "sampler_seed": 1341909720,
+      "mixed_policy_seed": 1376677532
+    },
+    {
+      "game": 103,
+      "block": 25,
+      "assignment": 1,
+      "a_team": 9,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        13224,
+        9524,
+        31735,
+        60461
+      ],
+      "sampler_seed": 1341909720,
+      "mixed_policy_seed": 1376677532
+    },
+    {
+      "game": 104,
+      "block": 26,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        49686,
+        42130,
+        4707,
+        43673
+      ],
+      "sampler_seed": 348703105,
+      "mixed_policy_seed": 2142265209
+    },
+    {
+      "game": 105,
+      "block": 26,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        49686,
+        42130,
+        4707,
+        43673
+      ],
+      "sampler_seed": 348703105,
+      "mixed_policy_seed": 2142265209
+    },
+    {
+      "game": 106,
+      "block": 26,
+      "assignment": 1,
+      "a_team": 4,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        49686,
+        42130,
+        4707,
+        43673
+      ],
+      "sampler_seed": 348703105,
+      "mixed_policy_seed": 2142265209
+    },
+    {
+      "game": 107,
+      "block": 26,
+      "assignment": 1,
+      "a_team": 4,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        49686,
+        42130,
+        4707,
+        43673
+      ],
+      "sampler_seed": 348703105,
+      "mixed_policy_seed": 2142265209
+    },
+    {
+      "game": 108,
+      "block": 27,
+      "assignment": 0,
+      "a_team": 3,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        6059,
+        36183,
+        56474,
+        37451
+      ],
+      "sampler_seed": 57558211,
+      "mixed_policy_seed": 659029950
+    },
+    {
+      "game": 109,
+      "block": 27,
+      "assignment": 0,
+      "a_team": 3,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        6059,
+        36183,
+        56474,
+        37451
+      ],
+      "sampler_seed": 57558211,
+      "mixed_policy_seed": 659029950
+    },
+    {
+      "game": 110,
+      "block": 27,
+      "assignment": 1,
+      "a_team": 6,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        6059,
+        36183,
+        56474,
+        37451
+      ],
+      "sampler_seed": 57558211,
+      "mixed_policy_seed": 659029950
+    },
+    {
+      "game": 111,
+      "block": 27,
+      "assignment": 1,
+      "a_team": 6,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        6059,
+        36183,
+        56474,
+        37451
+      ],
+      "sampler_seed": 57558211,
+      "mixed_policy_seed": 659029950
+    },
+    {
+      "game": 112,
+      "block": 28,
+      "assignment": 0,
+      "a_team": 2,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        56998,
+        30253,
+        15688,
+        2795
+      ],
+      "sampler_seed": 425831746,
+      "mixed_policy_seed": 2124320012
+    },
+    {
+      "game": 113,
+      "block": 28,
+      "assignment": 0,
+      "a_team": 2,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        56998,
+        30253,
+        15688,
+        2795
+      ],
+      "sampler_seed": 425831746,
+      "mixed_policy_seed": 2124320012
+    },
+    {
+      "game": 114,
+      "block": 28,
+      "assignment": 1,
+      "a_team": 0,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        56998,
+        30253,
+        15688,
+        2795
+      ],
+      "sampler_seed": 425831746,
+      "mixed_policy_seed": 2124320012
+    },
+    {
+      "game": 115,
+      "block": 28,
+      "assignment": 1,
+      "a_team": 0,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        56998,
+        30253,
+        15688,
+        2795
+      ],
+      "sampler_seed": 425831746,
+      "mixed_policy_seed": 2124320012
+    },
+    {
+      "game": 116,
+      "block": 29,
+      "assignment": 0,
+      "a_team": 5,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        24920,
+        64289,
+        32182,
+        30193
+      ],
+      "sampler_seed": 775348188,
+      "mixed_policy_seed": 332530408
+    },
+    {
+      "game": 117,
+      "block": 29,
+      "assignment": 0,
+      "a_team": 5,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        24920,
+        64289,
+        32182,
+        30193
+      ],
+      "sampler_seed": 775348188,
+      "mixed_policy_seed": 332530408
+    },
+    {
+      "game": 118,
+      "block": 29,
+      "assignment": 1,
+      "a_team": 7,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        24920,
+        64289,
+        32182,
+        30193
+      ],
+      "sampler_seed": 775348188,
+      "mixed_policy_seed": 332530408
+    },
+    {
+      "game": 119,
+      "block": 29,
+      "assignment": 1,
+      "a_team": 7,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        24920,
+        64289,
+        32182,
+        30193
+      ],
+      "sampler_seed": 775348188,
+      "mixed_policy_seed": 332530408
+    },
+    {
+      "game": 120,
+      "block": 30,
+      "assignment": 0,
+      "a_team": 9,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        14780,
+        34213,
+        16520,
+        17115
+      ],
+      "sampler_seed": 2008572390,
+      "mixed_policy_seed": 2068044360
+    },
+    {
+      "game": 121,
+      "block": 30,
+      "assignment": 0,
+      "a_team": 9,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        14780,
+        34213,
+        16520,
+        17115
+      ],
+      "sampler_seed": 2008572390,
+      "mixed_policy_seed": 2068044360
+    },
+    {
+      "game": 122,
+      "block": 30,
+      "assignment": 1,
+      "a_team": 3,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        14780,
+        34213,
+        16520,
+        17115
+      ],
+      "sampler_seed": 2008572390,
+      "mixed_policy_seed": 2068044360
+    },
+    {
+      "game": 123,
+      "block": 30,
+      "assignment": 1,
+      "a_team": 3,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        14780,
+        34213,
+        16520,
+        17115
+      ],
+      "sampler_seed": 2008572390,
+      "mixed_policy_seed": 2068044360
+    },
+    {
+      "game": 124,
+      "block": 31,
+      "assignment": 0,
+      "a_team": 6,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        16869,
+        14042,
+        46098,
+        37209
+      ],
+      "sampler_seed": 540561965,
+      "mixed_policy_seed": 873038525
+    },
+    {
+      "game": 125,
+      "block": 31,
+      "assignment": 0,
+      "a_team": 6,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        16869,
+        14042,
+        46098,
+        37209
+      ],
+      "sampler_seed": 540561965,
+      "mixed_policy_seed": 873038525
+    },
+    {
+      "game": 126,
+      "block": 31,
+      "assignment": 1,
+      "a_team": 2,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        16869,
+        14042,
+        46098,
+        37209
+      ],
+      "sampler_seed": 540561965,
+      "mixed_policy_seed": 873038525
+    },
+    {
+      "game": 127,
+      "block": 31,
+      "assignment": 1,
+      "a_team": 2,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        16869,
+        14042,
+        46098,
+        37209
+      ],
+      "sampler_seed": 540561965,
+      "mixed_policy_seed": 873038525
+    },
+    {
+      "game": 128,
+      "block": 32,
+      "assignment": 0,
+      "a_team": 4,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        58266,
+        25986,
+        39216,
+        37381
+      ],
+      "sampler_seed": 928617838,
+      "mixed_policy_seed": 659048298
+    },
+    {
+      "game": 129,
+      "block": 32,
+      "assignment": 0,
+      "a_team": 4,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        58266,
+        25986,
+        39216,
+        37381
+      ],
+      "sampler_seed": 928617838,
+      "mixed_policy_seed": 659048298
+    },
+    {
+      "game": 130,
+      "block": 32,
+      "assignment": 1,
+      "a_team": 8,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        58266,
+        25986,
+        39216,
+        37381
+      ],
+      "sampler_seed": 928617838,
+      "mixed_policy_seed": 659048298
+    },
+    {
+      "game": 131,
+      "block": 32,
+      "assignment": 1,
+      "a_team": 8,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        58266,
+        25986,
+        39216,
+        37381
+      ],
+      "sampler_seed": 928617838,
+      "mixed_policy_seed": 659048298
+    },
+    {
+      "game": 132,
+      "block": 33,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        33927,
+        43686,
+        19631,
+        7324
+      ],
+      "sampler_seed": 877271115,
+      "mixed_policy_seed": 467152191
+    },
+    {
+      "game": 133,
+      "block": 33,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        33927,
+        43686,
+        19631,
+        7324
+      ],
+      "sampler_seed": 877271115,
+      "mixed_policy_seed": 467152191
+    },
+    {
+      "game": 134,
+      "block": 33,
+      "assignment": 1,
+      "a_team": 7,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        33927,
+        43686,
+        19631,
+        7324
+      ],
+      "sampler_seed": 877271115,
+      "mixed_policy_seed": 467152191
+    },
+    {
+      "game": 135,
+      "block": 33,
+      "assignment": 1,
+      "a_team": 7,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        33927,
+        43686,
+        19631,
+        7324
+      ],
+      "sampler_seed": 877271115,
+      "mixed_policy_seed": 467152191
+    },
+    {
+      "game": 136,
+      "block": 34,
+      "assignment": 0,
+      "a_team": 0,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        4875,
+        56278,
+        40765,
+        65324
+      ],
+      "sampler_seed": 1439775959,
+      "mixed_policy_seed": 1861622874
+    },
+    {
+      "game": 137,
+      "block": 34,
+      "assignment": 0,
+      "a_team": 0,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        4875,
+        56278,
+        40765,
+        65324
+      ],
+      "sampler_seed": 1439775959,
+      "mixed_policy_seed": 1861622874
+    },
+    {
+      "game": 138,
+      "block": 34,
+      "assignment": 1,
+      "a_team": 5,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        4875,
+        56278,
+        40765,
+        65324
+      ],
+      "sampler_seed": 1439775959,
+      "mixed_policy_seed": 1861622874
+    },
+    {
+      "game": 139,
+      "block": 34,
+      "assignment": 1,
+      "a_team": 5,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        4875,
+        56278,
+        40765,
+        65324
+      ],
+      "sampler_seed": 1439775959,
+      "mixed_policy_seed": 1861622874
+    },
+    {
+      "game": 140,
+      "block": 35,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        61104,
+        42022,
+        50383,
+        6855
+      ],
+      "sampler_seed": 973806850,
+      "mixed_policy_seed": 1229185751
+    },
+    {
+      "game": 141,
+      "block": 35,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        61104,
+        42022,
+        50383,
+        6855
+      ],
+      "sampler_seed": 973806850,
+      "mixed_policy_seed": 1229185751
+    },
+    {
+      "game": 142,
+      "block": 35,
+      "assignment": 1,
+      "a_team": 8,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        61104,
+        42022,
+        50383,
+        6855
+      ],
+      "sampler_seed": 973806850,
+      "mixed_policy_seed": 1229185751
+    },
+    {
+      "game": 143,
+      "block": 35,
+      "assignment": 1,
+      "a_team": 8,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        61104,
+        42022,
+        50383,
+        6855
+      ],
+      "sampler_seed": 973806850,
+      "mixed_policy_seed": 1229185751
+    },
+    {
+      "game": 144,
+      "block": 36,
+      "assignment": 0,
+      "a_team": 7,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        50879,
+        33276,
+        19364,
+        7201
+      ],
+      "sampler_seed": 213301416,
+      "mixed_policy_seed": 2093963695
+    },
+    {
+      "game": 145,
+      "block": 36,
+      "assignment": 0,
+      "a_team": 7,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        50879,
+        33276,
+        19364,
+        7201
+      ],
+      "sampler_seed": 213301416,
+      "mixed_policy_seed": 2093963695
+    },
+    {
+      "game": 146,
+      "block": 36,
+      "assignment": 1,
+      "a_team": 0,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        50879,
+        33276,
+        19364,
+        7201
+      ],
+      "sampler_seed": 213301416,
+      "mixed_policy_seed": 2093963695
+    },
+    {
+      "game": 147,
+      "block": 36,
+      "assignment": 1,
+      "a_team": 0,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        50879,
+        33276,
+        19364,
+        7201
+      ],
+      "sampler_seed": 213301416,
+      "mixed_policy_seed": 2093963695
+    },
+    {
+      "game": 148,
+      "block": 37,
+      "assignment": 0,
+      "a_team": 5,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        9921,
+        52242,
+        57580,
+        63085
+      ],
+      "sampler_seed": 1756101878,
+      "mixed_policy_seed": 1177936388
+    },
+    {
+      "game": 149,
+      "block": 37,
+      "assignment": 0,
+      "a_team": 5,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        9921,
+        52242,
+        57580,
+        63085
+      ],
+      "sampler_seed": 1756101878,
+      "mixed_policy_seed": 1177936388
+    },
+    {
+      "game": 150,
+      "block": 37,
+      "assignment": 1,
+      "a_team": 6,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        9921,
+        52242,
+        57580,
+        63085
+      ],
+      "sampler_seed": 1756101878,
+      "mixed_policy_seed": 1177936388
+    },
+    {
+      "game": 151,
+      "block": 37,
+      "assignment": 1,
+      "a_team": 6,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        9921,
+        52242,
+        57580,
+        63085
+      ],
+      "sampler_seed": 1756101878,
+      "mixed_policy_seed": 1177936388
+    },
+    {
+      "game": 152,
+      "block": 38,
+      "assignment": 0,
+      "a_team": 2,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        41500,
+        17235,
+        31033,
+        9030
+      ],
+      "sampler_seed": 965870841,
+      "mixed_policy_seed": 995019603
+    },
+    {
+      "game": 153,
+      "block": 38,
+      "assignment": 0,
+      "a_team": 2,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        41500,
+        17235,
+        31033,
+        9030
+      ],
+      "sampler_seed": 965870841,
+      "mixed_policy_seed": 995019603
+    },
+    {
+      "game": 154,
+      "block": 38,
+      "assignment": 1,
+      "a_team": 9,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        41500,
+        17235,
+        31033,
+        9030
+      ],
+      "sampler_seed": 965870841,
+      "mixed_policy_seed": 995019603
+    },
+    {
+      "game": 155,
+      "block": 38,
+      "assignment": 1,
+      "a_team": 9,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        41500,
+        17235,
+        31033,
+        9030
+      ],
+      "sampler_seed": 965870841,
+      "mixed_policy_seed": 995019603
+    },
+    {
+      "game": 156,
+      "block": 39,
+      "assignment": 0,
+      "a_team": 3,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        1199,
+        26372,
+        18070,
+        207
+      ],
+      "sampler_seed": 891776187,
+      "mixed_policy_seed": 1390751953
+    },
+    {
+      "game": 157,
+      "block": 39,
+      "assignment": 0,
+      "a_team": 3,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        1199,
+        26372,
+        18070,
+        207
+      ],
+      "sampler_seed": 891776187,
+      "mixed_policy_seed": 1390751953
+    },
+    {
+      "game": 158,
+      "block": 39,
+      "assignment": 1,
+      "a_team": 4,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        1199,
+        26372,
+        18070,
+        207
+      ],
+      "sampler_seed": 891776187,
+      "mixed_policy_seed": 1390751953
+    },
+    {
+      "game": 159,
+      "block": 39,
+      "assignment": 1,
+      "a_team": 4,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        1199,
+        26372,
+        18070,
+        207
+      ],
+      "sampler_seed": 891776187,
+      "mixed_policy_seed": 1390751953
+    },
+    {
+      "game": 160,
+      "block": 40,
+      "assignment": 0,
+      "a_team": 2,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        31136,
+        52493,
+        29441,
+        33856
+      ],
+      "sampler_seed": 557808269,
+      "mixed_policy_seed": 105557267
+    },
+    {
+      "game": 161,
+      "block": 40,
+      "assignment": 0,
+      "a_team": 2,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        31136,
+        52493,
+        29441,
+        33856
+      ],
+      "sampler_seed": 557808269,
+      "mixed_policy_seed": 105557267
+    },
+    {
+      "game": 162,
+      "block": 40,
+      "assignment": 1,
+      "a_team": 8,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        31136,
+        52493,
+        29441,
+        33856
+      ],
+      "sampler_seed": 557808269,
+      "mixed_policy_seed": 105557267
+    },
+    {
+      "game": 163,
+      "block": 40,
+      "assignment": 1,
+      "a_team": 8,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        31136,
+        52493,
+        29441,
+        33856
+      ],
+      "sampler_seed": 557808269,
+      "mixed_policy_seed": 105557267
+    },
+    {
+      "game": 164,
+      "block": 41,
+      "assignment": 0,
+      "a_team": 0,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        12176,
+        57198,
+        34665,
+        14533
+      ],
+      "sampler_seed": 1046998810,
+      "mixed_policy_seed": 2085906439
+    },
+    {
+      "game": 165,
+      "block": 41,
+      "assignment": 0,
+      "a_team": 0,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        12176,
+        57198,
+        34665,
+        14533
+      ],
+      "sampler_seed": 1046998810,
+      "mixed_policy_seed": 2085906439
+    },
+    {
+      "game": 166,
+      "block": 41,
+      "assignment": 1,
+      "a_team": 6,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        12176,
+        57198,
+        34665,
+        14533
+      ],
+      "sampler_seed": 1046998810,
+      "mixed_policy_seed": 2085906439
+    },
+    {
+      "game": 167,
+      "block": 41,
+      "assignment": 1,
+      "a_team": 6,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        12176,
+        57198,
+        34665,
+        14533
+      ],
+      "sampler_seed": 1046998810,
+      "mixed_policy_seed": 2085906439
+    },
+    {
+      "game": 168,
+      "block": 42,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        44531,
+        58019,
+        32735,
+        9324
+      ],
+      "sampler_seed": 1921624417,
+      "mixed_policy_seed": 412444349
+    },
+    {
+      "game": 169,
+      "block": 42,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        44531,
+        58019,
+        32735,
+        9324
+      ],
+      "sampler_seed": 1921624417,
+      "mixed_policy_seed": 412444349
+    },
+    {
+      "game": 170,
+      "block": 42,
+      "assignment": 1,
+      "a_team": 3,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        44531,
+        58019,
+        32735,
+        9324
+      ],
+      "sampler_seed": 1921624417,
+      "mixed_policy_seed": 412444349
+    },
+    {
+      "game": 171,
+      "block": 42,
+      "assignment": 1,
+      "a_team": 3,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        44531,
+        58019,
+        32735,
+        9324
+      ],
+      "sampler_seed": 1921624417,
+      "mixed_policy_seed": 412444349
+    },
+    {
+      "game": 172,
+      "block": 43,
+      "assignment": 0,
+      "a_team": 5,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        53745,
+        15415,
+        3514,
+        51846
+      ],
+      "sampler_seed": 1093231366,
+      "mixed_policy_seed": 1273753286
+    },
+    {
+      "game": 173,
+      "block": 43,
+      "assignment": 0,
+      "a_team": 5,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        53745,
+        15415,
+        3514,
+        51846
+      ],
+      "sampler_seed": 1093231366,
+      "mixed_policy_seed": 1273753286
+    },
+    {
+      "game": 174,
+      "block": 43,
+      "assignment": 1,
+      "a_team": 4,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        53745,
+        15415,
+        3514,
+        51846
+      ],
+      "sampler_seed": 1093231366,
+      "mixed_policy_seed": 1273753286
+    },
+    {
+      "game": 175,
+      "block": 43,
+      "assignment": 1,
+      "a_team": 4,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        53745,
+        15415,
+        3514,
+        51846
+      ],
+      "sampler_seed": 1093231366,
+      "mixed_policy_seed": 1273753286
+    },
+    {
+      "game": 176,
+      "block": 44,
+      "assignment": 0,
+      "a_team": 7,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        64648,
+        27999,
+        24192,
+        45660
+      ],
+      "sampler_seed": 5500369,
+      "mixed_policy_seed": 1625602812
+    },
+    {
+      "game": 177,
+      "block": 44,
+      "assignment": 0,
+      "a_team": 7,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        64648,
+        27999,
+        24192,
+        45660
+      ],
+      "sampler_seed": 5500369,
+      "mixed_policy_seed": 1625602812
+    },
+    {
+      "game": 178,
+      "block": 44,
+      "assignment": 1,
+      "a_team": 9,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        64648,
+        27999,
+        24192,
+        45660
+      ],
+      "sampler_seed": 5500369,
+      "mixed_policy_seed": 1625602812
+    },
+    {
+      "game": 179,
+      "block": 44,
+      "assignment": 1,
+      "a_team": 9,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        64648,
+        27999,
+        24192,
+        45660
+      ],
+      "sampler_seed": 5500369,
+      "mixed_policy_seed": 1625602812
+    },
+    {
+      "game": 180,
+      "block": 45,
+      "assignment": 0,
+      "a_team": 9,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        14080,
+        51107,
+        20707,
+        42154
+      ],
+      "sampler_seed": 1437309115,
+      "mixed_policy_seed": 1472265552
+    },
+    {
+      "game": 181,
+      "block": 45,
+      "assignment": 0,
+      "a_team": 9,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        14080,
+        51107,
+        20707,
+        42154
+      ],
+      "sampler_seed": 1437309115,
+      "mixed_policy_seed": 1472265552
+    },
+    {
+      "game": 182,
+      "block": 45,
+      "assignment": 1,
+      "a_team": 3,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        14080,
+        51107,
+        20707,
+        42154
+      ],
+      "sampler_seed": 1437309115,
+      "mixed_policy_seed": 1472265552
+    },
+    {
+      "game": 183,
+      "block": 45,
+      "assignment": 1,
+      "a_team": 3,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        14080,
+        51107,
+        20707,
+        42154
+      ],
+      "sampler_seed": 1437309115,
+      "mixed_policy_seed": 1472265552
+    },
+    {
+      "game": 184,
+      "block": 46,
+      "assignment": 0,
+      "a_team": 4,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        61703,
+        51571,
+        65142,
+        48272
+      ],
+      "sampler_seed": 1038520628,
+      "mixed_policy_seed": 512577683
+    },
+    {
+      "game": 185,
+      "block": 46,
+      "assignment": 0,
+      "a_team": 4,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        61703,
+        51571,
+        65142,
+        48272
+      ],
+      "sampler_seed": 1038520628,
+      "mixed_policy_seed": 512577683
+    },
+    {
+      "game": 186,
+      "block": 46,
+      "assignment": 1,
+      "a_team": 8,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        61703,
+        51571,
+        65142,
+        48272
+      ],
+      "sampler_seed": 1038520628,
+      "mixed_policy_seed": 512577683
+    },
+    {
+      "game": 187,
+      "block": 46,
+      "assignment": 1,
+      "a_team": 8,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        61703,
+        51571,
+        65142,
+        48272
+      ],
+      "sampler_seed": 1038520628,
+      "mixed_policy_seed": 512577683
+    },
+    {
+      "game": 188,
+      "block": 47,
+      "assignment": 0,
+      "a_team": 6,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        65062,
+        12603,
+        40136,
+        48065
+      ],
+      "sampler_seed": 2009923733,
+      "mixed_policy_seed": 970916223
+    },
+    {
+      "game": 189,
+      "block": 47,
+      "assignment": 0,
+      "a_team": 6,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        65062,
+        12603,
+        40136,
+        48065
+      ],
+      "sampler_seed": 2009923733,
+      "mixed_policy_seed": 970916223
+    },
+    {
+      "game": 190,
+      "block": 47,
+      "assignment": 1,
+      "a_team": 2,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        65062,
+        12603,
+        40136,
+        48065
+      ],
+      "sampler_seed": 2009923733,
+      "mixed_policy_seed": 970916223
+    },
+    {
+      "game": 191,
+      "block": 47,
+      "assignment": 1,
+      "a_team": 2,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        65062,
+        12603,
+        40136,
+        48065
+      ],
+      "sampler_seed": 2009923733,
+      "mixed_policy_seed": 970916223
+    },
+    {
+      "game": 192,
+      "block": 48,
+      "assignment": 0,
+      "a_team": 0,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        15168,
+        5714,
+        34832,
+        29296
+      ],
+      "sampler_seed": 1015035869,
+      "mixed_policy_seed": 1400186750
+    },
+    {
+      "game": 193,
+      "block": 48,
+      "assignment": 0,
+      "a_team": 0,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        15168,
+        5714,
+        34832,
+        29296
+      ],
+      "sampler_seed": 1015035869,
+      "mixed_policy_seed": 1400186750
+    },
+    {
+      "game": 194,
+      "block": 48,
+      "assignment": 1,
+      "a_team": 5,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        15168,
+        5714,
+        34832,
+        29296
+      ],
+      "sampler_seed": 1015035869,
+      "mixed_policy_seed": 1400186750
+    },
+    {
+      "game": 195,
+      "block": 48,
+      "assignment": 1,
+      "a_team": 5,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        15168,
+        5714,
+        34832,
+        29296
+      ],
+      "sampler_seed": 1015035869,
+      "mixed_policy_seed": 1400186750
+    },
+    {
+      "game": 196,
+      "block": 49,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        675,
+        50757,
+        36673,
+        4807
+      ],
+      "sampler_seed": 1520523934,
+      "mixed_policy_seed": 5603216
+    },
+    {
+      "game": 197,
+      "block": 49,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        675,
+        50757,
+        36673,
+        4807
+      ],
+      "sampler_seed": 1520523934,
+      "mixed_policy_seed": 5603216
+    },
+    {
+      "game": 198,
+      "block": 49,
+      "assignment": 1,
+      "a_team": 7,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        675,
+        50757,
+        36673,
+        4807
+      ],
+      "sampler_seed": 1520523934,
+      "mixed_policy_seed": 5603216
+    },
+    {
+      "game": 199,
+      "block": 49,
+      "assignment": 1,
+      "a_team": 7,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        675,
+        50757,
+        36673,
+        4807
+      ],
+      "sampler_seed": 1520523934,
+      "mixed_policy_seed": 5603216
+    }
+  ],
+  "stopping_rule": {
+    "games": 200,
+    "max_turns": 300,
+    "censored_turn_limit": "void, never counted as a played draw or silently dropped",
+    "game_timeout_seconds": 3600,
+    "no_outcome_stopping": true
+  },
+  "promotion_rule": "Correctness fixes may be enabled without proven strength. Policy changes remain off unless fresh confirmation supports benefit and reliability; screening alone is inconclusive.",
+  "compute": "same requested settings except the allocation stage; one native thread; sequential worlds; actual CPU and search time reported",
+  "schedule_design": {
+    "kind": "four-game blocks: both simulator-side swaps and both bot/team assignments",
+    "planner": "evaluation/mcts_match_schedule.py",
+    "planner_sha256": "071ca542c0519118a2ada41909cbc92dba7dbdecafaaf26f795fe2f04ee5873c",
+    "equal_team_exposure": true,
+    "supersedes_unrun_manifest": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage2-original-confirmation-manifest.json",
+    "supersedes_manifest_sha256": "f1f625e6ab2d43081734485e45faa5c55d34312e89fa0efff46be08c71246ca9",
+    "outcome_separation": "Frozen before any outcome under this revised schedule. Earlier screening outcomes may already exist; this is not a retrospective claim about screening preregistration."
+  },
+  "manifest_sha256": "38293cc2557d3f3c38545587a14f3ad67fcfc7e29121cf6282a3975cf2302a57"
+}

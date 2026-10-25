@@ -1,5 +1,5 @@
 """SetCandidates: the data layer's per-species set file that the decision layer's belief loads. Spec: contracts/set-candidates.md."""
-from typing import TypedDict
+from typing import NotRequired, TypedDict
 
 
 class Spread(TypedDict):
@@ -14,6 +14,7 @@ class CandidateSet(TypedDict):
     ability: str
     tera_type: str            # lowercase type, e.g. "steel"
     spread: Spread
+    ivs: NotRequired[list[int]]  # optional [hp, atk, def, spa, spd, spe]; old usage files default to 31
 
 
 class Usage(TypedDict):

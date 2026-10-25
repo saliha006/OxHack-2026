@@ -1,0 +1,61 @@
+{
+  "scope": "Retrospective review of all3hazard-at-cap losses and all7setup-at-cap wins in the first60-game comparison. No causal/strength claim or new policy.",
+  "frozen_before_native_checks": true,
+  "report": "runs/mcts-improvements/stage1-loss-signatures.json",
+  "report_sha256": "ecfffaf6892a50dd635b708b7aa4051c44201698348967f76b442b3d27c861ee",
+  "inputs": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage1-cap-audit-v1-inputs.json",
+  "inputs_sha256": "7226265956444dccc212a1a8a7a3ebf44017e969b7084940a49e03776b9cc1d0",
+  "snapshot": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-tera-probe",
+  "source": {
+    "source_sha256": "0bd23daf0e4d173a8a9a3398793831d7d1cac100ba99bf238ab357f07b258a23",
+    "files": {
+      "bot/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bot/demo.py": "805887cc72795b5ef2e3f1cdff65e4f90041adb8b8985876da752660084e9761",
+      "bot/eval.py": "41fbf2833152278ad3ebdcd55661ab901ffb1bcaae1f36afa696165e35c56c46",
+      "bot/parser.py": "d36ee9a18ce1b2e6229aa3df0aa5730685e693d2e3f6aaa1c836be3a9799ba8a",
+      "bot/player.py": "58b40502da95795076179ec0bc0fafd6381f0cb8c48fe2dae230d6d20db61527",
+      "bot/smoke.py": "3e12e0fad384b7ac2372ebadcc2c0043b6aa32986e91fa03d6babc13b706ac05",
+      "bot/tests/test_demo.py": "3dbf7a7aded4ae0fe5acd379c5c1266be3ddbaa5474bdd7202da7af224d5813b",
+      "bot/tests/test_eval.py": "22639e87ef7441b129e55c983ccdffceb7fbdf01ec33b7b74dfcc4923d60c246",
+      "bot/tests/test_eval_completion.py": "1d5c6c2a2f09cf8ac671c83ee47dfc6f9bb99a02a4d741798c9f70893411b8c2",
+      "bot/tests/test_eval_schedule.py": "9e79a2b18b3fd64f56bba829a1da124763adf41d4ea319f8470812b827ff644f",
+      "bot/tests/test_foul_play_eval.py": "424c537d4545552e83f8cca4111a9ba9b3ae140f6f282c22292a1242ef8f8d7b",
+      "bot/tests/test_mcts_evaluation.py": "1e901e5a6daa36fbf6dc6d0847d827a536d7f5fdfa99b7996aec40ad07b75ade",
+      "bot/tests/test_parser.py": "8ad6602ec4832452890d1c36eec4360902a87a95c83de1ad33e6b42d3d93f7f0",
+      "bot/tests/test_player.py": "44ed9e927f60e6b913161ad807579adf343e1ae4c744d53b6f109d87d5c90c27",
+      "bot/tests/test_smoke.py": "ec3a95e454be0019b407475a74d58e19a75e25e1774a5b56fab48523275fd6c5",
+      "contracts/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "contracts/battle_state.py": "377e82a448b3c67e8b79bdf46c62b1d9363dd8af57e51afa511f8d5f804f2d89",
+      "contracts/set_candidates.py": "3ee151f9ab4ad4f6fd1c77e5ac62e888990e0cc85cf687d1fccbce42400e162a",
+      "decision/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "decision/actions.py": "78233b1a0dea5a10e991908600317355b19f0b54d3c6fbbccbc88d5ddc028620",
+      "decision/adapter.py": "34773e44b090785272f3807fe7c179c9ca4b34e80706d177b3fb003b94b44068",
+      "decision/agent.py": "db48ae4e3eac455f2cb1cc07212ab5dd105103dcd67714ad2c7baa59153cafc6",
+      "decision/belief.py": "752a057da7d8fb8bc9d2086e323f83fc191a8259c94e45a36d9a3ee64660da2e",
+      "decision/data/moves.json": "26909a321a7e4528d14a7dffd24173aa03a6845776cf41c39cc3d76f8e14616b",
+      "decision/data/pokedex.json": "e74d0364b230001fc086cefb4259e051f1d16a4730eb89f7d6336a88a0d9a47e",
+      "decision/data/typechart.json": "26270c6fa9e25ba43ba9d6fd0da115fcf96eee42eae8b0bd9660bd015dc483b2",
+      "decision/lead.py": "1af618a2450672e75abae9af55b2035d64e29e3b8f420629fdd29a4f75f7c5f3",
+      "decision/opponent.py": "902a458fa0d2a97519a3a86527f2cfd3ae13f8a390fd61e62b8eda1d602643a7",
+      "decision/search.py": "a6e1a2f14c4bbdc62ca7701791196ea4e1398a8be9ed28702abd3d4503682218",
+      "decision/search_policy.py": "ac52f71753b08ea2932003fb05a11cde6cc6f4ad671c0bfa6407e938d1ea9650",
+      "decision/selector.py": "36de03df3385670f46af23ae7cc01f2077b51b70bc7a47e0fae86aad92f1267c",
+      "decision/sets.py": "5e345d60634414d723dbe1de4b0adc4459abcb542dfad0920095a7b6c4650c53",
+      "decision/simulate.py": "96e077923f6ef720a66fddbc496dab4c197c8cda386a7c0f1b5af7eee03d18a3",
+      "decision/state.py": "e97dd27902014dd3fc432dae5ca66da75887b1d9d5dabe2666dc82b3863bf28b",
+      "decision/value.py": "d25c43b6bc8e360043cf19e4c0c331aed04a692ffdc7da8b848a6fc2a705ef29"
+    }
+  },
+  "engine": {
+    "version": "0.0.48",
+    "binaries": {
+      "poke_engine.cpython-313-x86_64-linux-gnu.so": "fbffd2a1c9c48eab99def9187f9030c578174a30b49d54faad159be859846ef3"
+    }
+  },
+  "runner_sha256": "d234a80f3467d023c9059f9f0be92f51481252b3ed99e552496a803ad38d8129",
+  "support_helper_sha256": "403fe1cd0686e9922af46abd7eb2c6fd0de298bd5094364274146742af0d14a5",
+  "native_plan": "For each of the3hazard decisions compare original capped Rock vs the recorded highest-supported nonTera alternative, using all8original sampled hypotheses and each original modal reply;48conditional successors total, equal occurrence mass.",
+  "stopping": "Three predetermined16-check batches.3s total allowance/2.7s worker cutoff each; retain successful streamed checks/errors. No added checks chosen from results.",
+  "limits": "First comparison arms include the previously diagnosed Tera bug and earlier belief behavior; current corrected adapter with old recorded world hypotheses is off-policy. No full current-agent history replay, hidden opponent set truth or new scoring-team fitting. Native root/modal support is not calibrated probability. Winning does not establish capped setup was useful.",
+  "source_identity_note": "Raw miner game battle fields are null for this new harness; trace stems and full decision IDs supply actual identities. Per-game example lists truncate at5, so all10cases were recovered from executed raw transitions."
+}

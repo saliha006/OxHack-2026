@@ -1,0 +1,19 @@
+{
+  "provenance": {
+    "kind": "existing regression only; no strength interpretation"
+  },
+  "teams": [
+    {
+      "id": "team_5.txt",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/bot/teams/standin/team_5.txt",
+      "sha256": "f5c0cb1b15267c68822c35e71c8bebbe02a4c1d8186afc77456a7be8a6def853",
+      "style": "regression smoke"
+    },
+    {
+      "id": "team_6.txt",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/bot/teams/standin/team_6.txt",
+      "sha256": "60fd276a2186c911033fc9ab4b5207a4bf722f2d06e629a293b4ac6225bf45e2",
+      "style": "regression smoke"
+    }
+  ]
+}

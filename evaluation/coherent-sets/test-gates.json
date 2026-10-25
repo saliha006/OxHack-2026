@@ -1,0 +1,50 @@
+{
+  "scope": "isolated coherent-set experiment",
+  "focused": {
+    "passed": 22,
+    "command": ".venv/bin/python -m pytest tests/test_curated_sets.py tests/test_reveal_evidence.py tests/test_coherent_evaluation.py tests/test_set_candidates_contract.py tests/test_tiger_reader_safety.py -q"
+  },
+  "non_timing": {
+    "passed": 453,
+    "seconds": 14.98,
+    "deselected_timing_tests": 22,
+    "raw": "runs/coherent-evaluation/non-timing-final.txt"
+  },
+  "initial_full_suite": {
+    "passed": 468,
+    "raw": "runs/coherent-evaluation/tests.txt",
+    "limit": "before later evaluator fixtures/hardening; not a final all-tests claim"
+  },
+  "subsecond_timing": {
+    "status": "unresolved under concurrent native load",
+    "candidate_raw": [
+      "runs/coherent-evaluation/tests-final.txt",
+      "runs/coherent-evaluation/focused-gates.txt",
+      "runs/coherent-evaluation/search-timing-rerun.txt"
+    ],
+    "baseline_control": {
+      "commit": "a8613b9",
+      "passed": 21,
+      "failed": 1,
+      "raw": "runs/coherent-evaluation/baseline-search-timing-control.txt"
+    },
+    "interpretation": "Baseline also reproduces a same-family timing failure. No thresholds changed. This does not establish all candidate failures harmless; real 3-second game reliability is reported separately."
+  },
+  "reproducibility": {
+    "rebuilt_bank_matches": true,
+    "rebuilt_mixture_matches": true,
+    "no_imported_moves_outside_native_snapshot": true,
+    "v2_v3_final_extraction_output_sha256": "60a471e54420e2f0b783ac13728a1e470f999e3ebcdb35dfb84942ee34290db0"
+  },
+  "credential_scan_matches": 0,
+  "final_full_suite": {
+    "passed": 478,
+    "failed": 1,
+    "seconds": 23.07,
+    "raw": "runs/coherent-evaluation/final-full-tests.txt",
+    "failure": "test_native_process_exit_returns_legal_fallback_and_restart_is_recorded; 0.6-second fixture startup race; scheduled_worlds0 instead1",
+    "status": "478 passed, one existing 0.6-second worker fixture failed; exact same failure reproduced in candidate and unchanged a8613b9 control",
+    "exact_failure_candidate_retry": "runs/coherent-evaluation/final-timing-retry.txt",
+    "exact_failure_baseline_control": "runs/coherent-evaluation/final-baseline-timing-control.txt"
+  }
+}

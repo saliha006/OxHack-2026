@@ -1,0 +1,13 @@
+{
+  "source": "bot",
+  "observed_replies": 927,
+  "unknown_replies_excluded": 350,
+  "team_preview_excluded": 44,
+  "missing_prediction_excluded": 80,
+  "outside_native_options": 107,
+  "smoothing_alpha": 1e-06,
+  "smoothing": "add alpha to every native option plus a reserved OTHER category",
+  "visit_log_loss": 2.8222745801064555,
+  "uniform_log_loss": 3.5419983892587643,
+  "interpretation": "diagnostic visit-share likelihood, not calibrated action probabilities"
+}

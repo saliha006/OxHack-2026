@@ -1,0 +1,61 @@
+Torkoal @ Heat Rock
+Ability: Drought
+Tera Type: Flying
+EVs: 248 HP / 252 Def / 8 SpD
+Bold Nature
+IVs: 0 Atk
+- Lava Plume
+- Stealth Rock
+- Rapid Spin
+- Protect
+
+Walking Wake @ Heavy-Duty Boots  
+Ability: Protosynthesis  
+Tera Type: Water  
+EVs: 12 Def / 244 SpA / 252 Spe  
+Timid Nature  
+- Surf  
+- Draco Meteor  
+- Knock Off  
+- Flip Turn
+
+Hydrapple @ Heavy-Duty Boots  
+Ability: Regenerator  
+Tera Type: Steel  
+EVs: 248 HP / 176 Def / 16 SpA / 56 SpD / 12 Spe  
+Modest Nature  
+IVs: 0 Atk  
+- Draco Meteor  
+- Giga Drain  
+- Earth Power  
+- Nasty Plot  
+
+Lokix @ Heavy-Duty Boots  
+Ability: Tinted Lens  
+Tera Type: Bug  
+EVs: 252 Atk / 4 Def / 252 Spe  
+Adamant Nature  
+- First Impression  
+- U-turn  
+- Knock Off  
+- Sucker Punch  
+
+Cinderace @ Heavy-Duty Boots
+Ability: Blaze  
+Tera Type: Fire  
+EVs: 224 HP / 32 Atk / 252 Spe  
+Jolly Nature  
+- Pyro Ball  
+- U-turn  
+- Court Change  
+- Will-O-Wisp  
+
+Great Tusk @ Rocky Helmet  
+Ability: Protosynthesis  
+Tera Type: Ice  
+EVs: 204 Atk / 52 SpD / 252 Spe  
+Jolly Nature  
+- Headlong Rush  
+- Ice Spinner  
+- Rapid Spin  
+- Stealth Rock

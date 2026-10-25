@@ -1,0 +1,99 @@
+{
+  "logical_cpu_count_observed": 16,
+  "bot_cpu_scope": "Each worker Python process plus reaped native SearchWorker descendants, including startup and preparation. Simulator/coordinator CPU is excluded. Native elapsed milliseconds are measured wall time, not CPU.",
+  "native_world_concurrency": "One thread per native search, sequential worlds within each bot. A game coordinator currently waits for one side choice at a time. Each screening batch runs at most four games.",
+  "normal_active_screening_cap": {
+    "global_games": 8,
+    "maximum_per_batch": 4,
+    "tail_overlap_rule": "sum(min(4, remaining planned games) over old active batches) <= 4 before admitting a new four-game batch"
+  },
+  "observed_phase_overlaps": [
+    {
+      "phase": "baseline smoke",
+      "screening_batches": [],
+      "smoke_games": 1,
+      "notes": "Transport smoke only; two games run sequentially."
+    },
+    {
+      "phase": "Stage1 screening start",
+      "screening_batches": [
+        "stage1-screening-v1"
+      ],
+      "games_per_batch": 4
+    },
+    {
+      "phase": "Stage2 transport smoke",
+      "screening_batches": [
+        "stage1-screening-v1"
+      ],
+      "games_per_batch": 4,
+      "smoke_games": 1
+    },
+    {
+      "phase": "Stage2 original screening start",
+      "screening_batches": [
+        "stage1-screening-v1",
+        "stage2-original-screening-v1"
+      ],
+      "games_per_batch": 4
+    },
+    {
+      "phase": "Stage3 transport smoke",
+      "screening_batches": [
+        "stage1-screening-v1",
+        "stage2-original-screening-v1"
+      ],
+      "games_per_batch": 4,
+      "smoke_games": 1,
+      "notes": "Primary implementer explicitly allowed this temporary ninth game; smoke ended and the normal eight-game cap resumed."
+    },
+    {
+      "phase": "Tera follow-up transport smoke",
+      "screening_batches": [
+        "stage1-screening-v1",
+        "stage2-original-screening-v1"
+      ],
+      "games_per_batch": 4,
+      "smoke_games": 1,
+      "notes": "Another explicitly authorized temporary ninth game; smoke completed before starting the sequential Stage3 rebase smoke."
+    },
+    {
+      "phase": "Stage3 Tera-rebase transport smoke",
+      "screening_batches": [
+        "stage1-screening-v1",
+        "stage2-original-screening-v1"
+      ],
+      "games_per_batch": 4,
+      "smoke_games": 1,
+      "notes": "Explicit temporary ninth game; ran sequentially after Tera-fix smoke and completed before returning to normal eight-game cap."
+    },
+    {
+      "phase": "Stage2 predecessor screening admission",
+      "screening_batches": [
+        "stage2-original-screening-v1",
+        "stage2-incumbent-screening-v1"
+      ],
+      "games_per_batch": 4,
+      "notes": "Stage1 had completed all 60 games. Stage2 original had four remaining; new predecessor batch admitted within the global eight-game bound."
+    },
+    {
+      "phase": "Tera follow-up original screening admission",
+      "screening_batches": [
+        "stage2-incumbent-screening-v1",
+        "tera-followup-original-screening-v1"
+      ],
+      "games_per_batch": 4,
+      "notes": "Stage2 original finished all 60 games; its freed capacity admitted the next frozen four-way batch under the global eight-game cap."
+    }
+  ],
+  "other_shared_work": "Development tests, diagnostic scoring and later a single native allocation-benchmark child may overlap. They are not counted as screening games. No claim of exclusive whole-machine benchmarking is made.",
+  "measurement_limit": "Per-bot CPU and decision/search timing are measured, but exact whole-machine CPU utilization and a complete timestamped scheduler history were not collected. Requested search effort is not actual CPU or completed work. Compare recorded visits, completed worlds, preparation and latency alongside game outcomes.",
+  "status": "Live record; append later phase changes rather than rewriting prior observations.",
+  "capacity_policy_changes": [
+    {
+      "previous": "At most two screening batches, four games each",
+      "current": "Global upper bound of eight long games; each manifest still allows at most four. A new four-game batch may start while old tails remain only when the sum of min(4, planned minus completed) over prior active batches is at most four. Count queued games too.",
+      "reason": "Primary implementer approved tail overlap without changing per-manifest settings or global eight-game cap."
+    }
+  ]
+}

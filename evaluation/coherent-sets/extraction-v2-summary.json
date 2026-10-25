@@ -1,0 +1,14 @@
+{
+  "battles": 200,
+  "counts": {
+    "move": 4025,
+    "native_set_evidence": 5648,
+    "ability": 653,
+    "item": 1003,
+    "current_item": 510,
+    "tera_type": 272
+  },
+  "input_sha256": "23ff7b44ad357054d7c4fd655ef2583302ad783893a5d3d4da99847e82ff7ac9",
+  "extractor_sha256": "6903c0fe0c737c9a92cf1ac20837b813097d65e0c48c0f6d2db1630415aca8e6",
+  "output_sha256": "60a471e54420e2f0b783ac13728a1e470f999e3ebcdb35dfb84942ee34290db0"
+}

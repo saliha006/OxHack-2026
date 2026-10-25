@@ -1,0 +1,18 @@
+{
+  "pairings": [
+    "mcts-current-pooled",
+    "mcts-worlds-equal-total",
+    "mcts-worlds-equal-per-world",
+    "mcts-bench",
+    "mcts-inference",
+    "mcts-foulplay"
+  ],
+  "games": 4,
+  "teams": "bot/teams/held-out-pilot",
+  "priors": "data/set_candidates.json",
+  "priors_from_teams": false,
+  "budget": 3.0,
+  "shards": 4,
+  "seed": 2026,
+  "team_role": "held-out"
+}

@@ -1,0 +1,181 @@
+{
+  "format": "gen9ou",
+  "status": "locked_before_reserved_evaluation",
+  "locked_at_utc": "2026-10-25T03:44:29+00:00",
+  "selection": "Four current first-post samples spanning offense, bulky offense, balance and stall; selected by archetype before any games on these files.",
+  "reservation_scope": "Reserved from this Kenar-mcts integration and tuning pool; not demonstrably disjoint from Smogon aggregate priors or prior public battles.",
+  "no_tuning_rule": "Keep bytes and sets unchanged after lock. Report any evaluation-driven implementation fixes and use a new untouched pool for a confirmatory strength claim after such fixes.",
+  "forum_snapshot": {
+    "source": "https://www.smogon.com/forums/threads/sv-ou-sample-teams-new-samples-added-post-spl-and-tera-blast-ban.3712513/",
+    "host": "OU Room and Forum staff",
+    "displayed_update": "July 13th 2026",
+    "displayed_last_moderator_edit": "Aug 16, 2026",
+    "sha256": "135b02c262413c59bbfef4ffb8d419400ebec0d0bc2ebf0e6c5897dfc3f9a361"
+  },
+  "validator": {
+    "implementation": "Pokemon Showdown TeamValidator.get(\"gen9ou\").validateTeam",
+    "checkout": "pokemon-showdown",
+    "commit": "c0845f33d381402dfcb18ce324c20a94f18af075",
+    "result": "All four exact source imports contain six Pokemon and return null problems.",
+    "reproduce": "node docs/validate-mcts-heldout.cjs"
+  },
+  "canonicalisation": "Parse with Showdown Teams.import; omit nicknames; sort Pokemon by species and moves alphabetically; compare species, item, ability, nature, EVs, IVs, Tera type, level, gender, happiness and shiny.",
+  "standin_snapshot": [
+    {
+      "file": "team_10.txt",
+      "sha256": "21bc1ea7db06300c5e09e1e5b879674ec724d620cf7e44a202d80a399af09f2c",
+      "canonical_sha256": "9bb4a21cec133929333a8e1780afd91bdd489e7b6a7253a80c03b917c0a9e40b"
+    },
+    {
+      "file": "team_11.txt",
+      "sha256": "019d255db45ddb5a54aff175aaad33fa585be7b58696b12eb746ac0f6b28fc59",
+      "canonical_sha256": "5b930f3182a104254bf9189a7d1ebb80d6d398aef6a9d7ec9bf940b430ac7ae5"
+    },
+    {
+      "file": "team_12.txt",
+      "sha256": "b63fceeed8ce3f6995f2e09fa725ede1d960eb5e1bbf8c09e5c9fb8911fd3904",
+      "canonical_sha256": "3d67b4f457c6380468428b7ccee6ef4994e6b8278ee2f87a8eeed16cb7bb37b2"
+    },
+    {
+      "file": "team_13.txt",
+      "sha256": "6e6aa4e4a153be479ca19e71dae9079d36640bccf83648dbf9f0da07d4571752",
+      "canonical_sha256": "76ddb7b5d2f8d3c0a967d55b7b7e8aa4451fc24f1bc547d6497f348250c800af"
+    },
+    {
+      "file": "team_14.txt",
+      "sha256": "3b10427c967dff33dbc3c0c20248e708e823c554a851a56b2fbe6e49a27303cf",
+      "canonical_sha256": "1bf29bfdb6c3f8c283ffd4b5c4af38b8677a7cdec9f868c42311063ffe3a1cdf"
+    },
+    {
+      "file": "team_15.txt",
+      "sha256": "8aaba793ebf4e492d13f8c454572d0b4635fedb533146672a31d359cee1b72f3",
+      "canonical_sha256": "f7acbfd6f2e16c12a4a8f041922918fb58331dcdf29e9b062dccd6e583c7d13d"
+    },
+    {
+      "file": "team_5.txt",
+      "sha256": "56b0ff0140f9fbdd651dadc1acb17e94da645b0720a48f53d4c52cdafd9c468d",
+      "canonical_sha256": "9b663672076fb88e5c1e18c7814fbccec1d197eec16dc0b5e597a6a31b365863"
+    },
+    {
+      "file": "team_6.txt",
+      "sha256": "385607ae7f3d1f71330244b49b4eb50e309d06d9b3f8b0dbe4b46decbb95c584",
+      "canonical_sha256": "a423b2ac1cf0c1a9ae5296d3f1f75da043fb0256ebbc6dbfc4eb2ebffba49cb4"
+    },
+    {
+      "file": "team_8.txt",
+      "sha256": "00701ea70daf51547a1a1d3854fa7e8b84424c12873a21ae4cd54d812f8872e8",
+      "canonical_sha256": "307ef0a87ed54f324b3c810f225468e8478e37c31e3e71ee78e78f481d9593ea"
+    },
+    {
+      "file": "team_9.txt",
+      "sha256": "46f53728d3b4d4aab81e7b481f15911d0f89a1da4f16548d289902c1d9d07b4b",
+      "canonical_sha256": "bc2c001a7321e0b249eff1b50a1429157acd40dfe634af08d750441a055ecf5e"
+    }
+  ],
+  "teams": [
+    {
+      "file": "bot/teams/held-out/01-vert-dragonite-deoxys-ho.txt",
+      "sample_title": "Life Orb Outrage Dragonite + Hazards Deoxys-S HO",
+      "archetype": "offense",
+      "forum_credited_builder": "Vert",
+      "forum_source": "https://www.smogon.com/forums/threads/sv-ou-sample-teams-new-samples-added-post-spl-and-tera-blast-ban.3712513/",
+      "paste_source": "https://pokepast.es/57780b9afe26d51b",
+      "paste_json_source": "https://pokepast.es/57780b9afe26d51b/json",
+      "paste_title": "03 apex",
+      "paste_author_field": "Vert",
+      "retrieved_at_utc": "2026-10-25T03:44:29+00:00",
+      "sha256": "d3fd2023e76e22dfe109a77866df2be461b43bc58f491a6b578bb0af78d4d29b",
+      "canonical_sets_sha256": "2157c36ba26a85c002ed84f2c191a0d598985f48710f29921514e4560c3fd38d",
+      "members": [
+        "Dragonite",
+        "Great Tusk",
+        "Deoxys-Speed",
+        "Gholdengo",
+        "Zamazenta",
+        "Iron Valiant"
+      ],
+      "num_pokemon": 6,
+      "validator_problems": null,
+      "standin_canonical_duplicates": [],
+      "source_edits": []
+    },
+    {
+      "file": "bot/teams/held-out/02-ewin-kyurem-cinderace-bo.txt",
+      "sample_title": "Specs Kyurem + Cinderace BO",
+      "archetype": "bulky_offense",
+      "forum_credited_builder": "Ewin",
+      "forum_source": "https://www.smogon.com/forums/threads/sv-ou-sample-teams-new-samples-added-post-spl-and-tera-blast-ban.3712513/",
+      "paste_source": "https://pokepast.es/02b19c79ad13bbdd",
+      "paste_json_source": "https://pokepast.es/02b19c79ad13bbdd/json",
+      "paste_title": "Cinderace Kyurem BO",
+      "paste_author_field": "Ewin",
+      "retrieved_at_utc": "2026-10-25T03:44:29+00:00",
+      "sha256": "5448297adfedf56cce589d3b711460a8552d4b91acda995f5192ca505532d8c5",
+      "canonical_sets_sha256": "11fafdfa3fadde165b691536cc0ddbab5ed7af6a2e344bafffdd550df470bad9",
+      "members": [
+        "Slowking-Galar",
+        "Great Tusk",
+        "Kyurem",
+        "Kingambit",
+        "Cinderace",
+        "Zapdos"
+      ],
+      "num_pokemon": 6,
+      "validator_problems": null,
+      "standin_canonical_duplicates": [],
+      "source_edits": []
+    },
+    {
+      "file": "bot/teams/held-out/03-ctc-darkrai-ogerpon-balance.txt",
+      "sample_title": "Choice Specs Darkrai + Ogerpon Balance",
+      "archetype": "balance",
+      "forum_credited_builder": "CTC",
+      "forum_source": "https://www.smogon.com/forums/threads/sv-ou-sample-teams-new-samples-added-post-spl-and-tera-blast-ban.3712513/",
+      "paste_source": "https://pokepast.es/b1c94db7a26e6e90",
+      "paste_json_source": "https://pokepast.es/b1c94db7a26e6e90/json",
+      "paste_title": "Geez Alo Rai Alt ",
+      "paste_author_field": "noonemorebased",
+      "retrieved_at_utc": "2026-10-25T03:44:29+00:00",
+      "sha256": "15f988851b6a49144892e2746799bac40934ea4798accd81d04b900719044a61",
+      "canonical_sets_sha256": "de4434b7e7236fe575987457447a66856cb18c044b03880b250a17d79ec9ab6b",
+      "members": [
+        "Darkrai",
+        "Garchomp",
+        "Alomomola",
+        "Corviknight",
+        "Weezing-Galar",
+        "Ogerpon"
+      ],
+      "num_pokemon": 6,
+      "validator_problems": null,
+      "standin_canonical_duplicates": [],
+      "source_edits": []
+    },
+    {
+      "file": "bot/teams/held-out/04-jb291-talonflame-mandibuzz-stall.txt",
+      "sample_title": "Talonflame + Mandibuzz Removal Stall",
+      "archetype": "stall",
+      "forum_credited_builder": "jb291",
+      "forum_source": "https://www.smogon.com/forums/threads/sv-ou-sample-teams-new-samples-added-post-spl-and-tera-blast-ban.3712513/",
+      "paste_source": "https://pokepast.es/056ce7c40fa545c6",
+      "paste_json_source": "https://pokepast.es/056ce7c40fa545c6/json",
+      "paste_title": "Mandibuzz Talonflame peaked 2108",
+      "paste_author_field": "jb291",
+      "retrieved_at_utc": "2026-10-25T03:44:29+00:00",
+      "sha256": "4200a5ea777188008040e7cac34db13809288c6893626aeff302cb56e289c589",
+      "canonical_sets_sha256": "206fe3c42455d4c14735c376afb50918a56b02a4b69275bdcd3d790fb1fe5c9c",
+      "members": [
+        "Dondozo",
+        "Blissey",
+        "Gliscor",
+        "Toxapex",
+        "Mandibuzz",
+        "Talonflame"
+      ],
+      "num_pokemon": 6,
+      "validator_problems": null,
+      "standin_canonical_duplicates": [],
+      "source_edits": []
+    }
+  ]
+}

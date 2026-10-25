@@ -1,0 +1,3572 @@
+{
+  "schema": 1,
+  "harness_files": {
+    "__init__.py": "117d52a420a3ca3dbe4caf2665316b3c4915e94c5a0efc8f89e52739485e3eb8",
+    "identity.py": "d91b6bbe10f406589e129c4d46628666f103322a8d0d26b198f16ace92340465",
+    "reserve_teams.py": "cf80696fe335a238f0b5d3ac8c3a6e25672a4f4c5b1639640a853c312726fc46",
+    "run.py": "9bf62377f0486e39fa327c8ce45488aef0e72c1108e1fdc5578de8b3e311b443",
+    "simulator.cjs": "8f0f954850cd3f620ce0ff42845ae71da080f921faaa0bf37f6b414f4ce444f9",
+    "worker.py": "d9d4e29ad04e768e64616a680249d8f2d511d5231ccf040bafb3b4cdf63ccc7c"
+  },
+  "phase": "confirmation",
+  "seed": 2026102522,
+  "concurrent_games": 4,
+  "teams": [
+    {
+      "id": "stage2-confirmation-01",
+      "style": "offense",
+      "roster": [
+        "Darkrai",
+        "Gholdengo",
+        "Ogerpon-Wellspring",
+        "Dragonite",
+        "Great Tusk",
+        "Iron Crown"
+      ],
+      "template_roster": [
+        "Darkrai",
+        "Gholdengo",
+        "Zamazenta",
+        "Dragonite",
+        "Great Tusk",
+        "Primarina"
+      ],
+      "design_rationale": "Multiple fast or priority attackers, setup/wallbreaking pressure, and Great Tusk hazard removal.",
+      "substitutions": [
+        {
+          "from": "Zamazenta",
+          "to": "Ogerpon-Wellspring"
+        },
+        {
+          "from": "Primarina",
+          "to": "Iron Crown"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_13.txt"
+      ],
+      "sha256": "0424acc8662fccd3b4c2b3a4c047d909386b9fb8a97cb2340aae4fac696d624d",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/01.txt",
+      "validation_errors": null,
+      "packed": "Darkrai||ChoiceScarf|BadDreams|DarkPulse,IceBeam,SludgeBomb,Trick|Timid|,,,252,4,252|N|,0,,,,|||,,,,,Poison]Gholdengo||ChoiceScarf|GoodasGold|ShadowBall,MakeItRain,Trick,Recover|Timid|,,4,252,,252|N|,0,,,,|||,,,,,Steel]Ogerpon|OgerponWellspring|WellspringMask|WaterAbsorb|IvyCudgel,KnockOff,Uturn,Spikes|Jolly|,252,,,4,252|F||||,Poison,,,,Water]Dragonite||HeavyDutyBoots|Multiscale|ExtremeSpeed,Earthquake,DragonDance,Roost|Adamant|248,104,52,,,104|F||||,,,,,Normal]Great Tusk||RockyHelmet|Protosynthesis|HeadlongRush,IceSpinner,RapidSpin,StealthRock|Jolly|,204,,,52,252|N||||,Fighting,,,,Ice]Iron Crown||ChoiceSpecs|QuarkDrive|TachyonCutter,PsychicNoise,Psyshock,VoltSwitch|Timid|,,,252,4,252|N|,20,,,,|||,Fighting,,,,Steel"
+    },
+    {
+      "id": "stage2-confirmation-02",
+      "style": "offense",
+      "roster": [
+        "Weavile",
+        "Darkrai",
+        "Dragonite",
+        "Iron Crown",
+        "Great Tusk",
+        "Slowking-Galar"
+      ],
+      "template_roster": [
+        "Weavile",
+        "Darkrai",
+        "Dragonite",
+        "Iron Crown",
+        "Great Tusk",
+        "Cinderace"
+      ],
+      "design_rationale": "Multiple fast or priority attackers, setup/wallbreaking pressure, and Great Tusk hazard removal.",
+      "substitutions": [
+        {
+          "from": "Cinderace",
+          "to": "Slowking-Galar"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_5.txt"
+      ],
+      "sha256": "f985409d6ee0f181833c8a728f62072cd00534dbbff2bec9c49d827ba4eea873",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/02.txt",
+      "validation_errors": null,
+      "packed": "Weavile||HeavyDutyBoots|Pressure|SwordsDance,IcicleCrash,KnockOff,IceShard|Jolly|,252,,,4,252|F||||,,,,,Fire]Darkrai||ChoiceScarf|BadDreams|DarkPulse,IceBeam,SludgeBomb,Trick|Timid|,,,252,4,252|N|,0,,,,|||,,,,,Poison]Dragonite||HeavyDutyBoots|Multiscale|ExtremeSpeed,Earthquake,DragonDance,Roost|Adamant|248,104,52,,,104|F||||,,,,,Normal]Iron Crown||ChoiceSpecs|QuarkDrive|TachyonCutter,PsychicNoise,Psyshock,VoltSwitch|Timid|,,,252,4,252|N|,20,,,,|||,Fighting,,,,Steel]Great Tusk||RockyHelmet|Protosynthesis|HeadlongRush,IceSpinner,RapidSpin,StealthRock|Jolly|,204,,,52,252|N||||,Fighting,,,,Ice]Slowking|SlowkingGalar|HeavyDutyBoots|Regenerator|SludgeBomb,FutureSight,Flamethrower,ChillyReception|Sassy|248,,8,,252,||,0,,,,0|||,,,,,Water"
+    },
+    {
+      "id": "stage2-confirmation-03",
+      "style": "offense",
+      "roster": [
+        "Lokix",
+        "Latios",
+        "Zamazenta",
+        "Gholdengo",
+        "Great Tusk",
+        "Primarina"
+      ],
+      "template_roster": [
+        "Lokix",
+        "Latios",
+        "Zamazenta",
+        "Gholdengo",
+        "Great Tusk",
+        "Ogerpon-Wellspring"
+      ],
+      "design_rationale": "Multiple fast or priority attackers, setup/wallbreaking pressure, and Great Tusk hazard removal.",
+      "substitutions": [
+        {
+          "from": "Ogerpon-Wellspring",
+          "to": "Primarina"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_12.txt",
+        "bot/teams/standin/team_12.txt",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_8.txt"
+      ],
+      "sha256": "01ef2931e13a2450e0fd520b0d90e98d4ebba70b7e1a04f9462772b4e4288ba0",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/03.txt",
+      "validation_errors": null,
+      "packed": "Lokix||HeavyDutyBoots|TintedLens|FirstImpression,Uturn,KnockOff,SuckerPunch|Adamant|,252,4,,,252|||||,,,,,Bug]Latios||SoulDew|Levitate|DracoMeteor,PsychicNoise,FlipTurn,Recover|Timid|,,4,252,,252|M||||,,,,,Steel]Zamazenta||HeavyDutyBoots|DauntlessShield|CloseCombat,HeavySlam,Crunch,StoneEdge|Jolly|80,252,,,,176|N||||,,,,,Steel]Gholdengo||ChoiceScarf|GoodasGold|ShadowBall,MakeItRain,Trick,Recover|Timid|,,4,252,,252|N|,0,,,,|||,,,,,Steel]Great Tusk||RockyHelmet|Protosynthesis|HeadlongRush,IceSpinner,RapidSpin,StealthRock|Jolly|,204,,,52,252|N||||,Fighting,,,,Ice]Primarina||HeavyDutyBoots|Torrent|Moonblast,Surf,Encore,FlipTurn|Modest|76,,,252,,180|||||,,,,,Steel"
+    },
+    {
+      "id": "stage2-confirmation-04",
+      "style": "sun offense",
+      "roster": [
+        "Torkoal",
+        "Walking Wake",
+        "Hydrapple",
+        "Weavile",
+        "Iron Crown",
+        "Great Tusk"
+      ],
+      "template_roster": [
+        "Torkoal",
+        "Walking Wake",
+        "Hydrapple",
+        "Zamazenta",
+        "Cinderace",
+        "Great Tusk"
+      ],
+      "design_rationale": "Drought plus Heat Rock supports Walking Wake and Protosynthesis attackers; hazard removal supports the setter. Team viability is a design hypothesis, not a competitive result.",
+      "substitutions": [
+        {
+          "from": "Zamazenta",
+          "to": "Weavile"
+        },
+        {
+          "from": "Cinderace",
+          "to": "Iron Crown"
+        }
+      ],
+      "component_sources": [
+        "evaluation/mcts_improvements/reserve_teams.py: hand-constructed weather component",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_13.txt"
+      ],
+      "sha256": "90aa84275f5d874fbffa46019d77748b8ae8a20fee879918c2f24614d69561f3",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/04.txt",
+      "validation_errors": null,
+      "packed": "Torkoal||HeatRock|Drought|LavaPlume,StealthRock,RapidSpin,Protect|Bold|248,,252,,8,||,0,,,,|||,,,,,Flying]Walking Wake||HeavyDutyBoots|Protosynthesis|Surf,DracoMeteor,KnockOff,FlipTurn|Timid|,,12,244,,252|N||||,,,,,Water]Hydrapple||HeavyDutyBoots|Regenerator|DracoMeteor,GigaDrain,EarthPower,NastyPlot|Modest|248,,176,16,56,12||,0,,,,|||,,,,,Steel]Weavile||HeavyDutyBoots|Pressure|SwordsDance,IcicleCrash,KnockOff,IceShard|Jolly|,252,,,4,252|F||||,,,,,Fire]Iron Crown||ChoiceSpecs|QuarkDrive|TachyonCutter,PsychicNoise,Psyshock,VoltSwitch|Timid|,,,252,4,252|N|,20,,,,|||,Fighting,,,,Steel]Great Tusk||RockyHelmet|Protosynthesis|HeadlongRush,IceSpinner,RapidSpin,StealthRock|Jolly|,204,,,52,252|N||||,Fighting,,,,Ice"
+    },
+    {
+      "id": "stage2-confirmation-05",
+      "style": "balance",
+      "roster": [
+        "Ting-Lu",
+        "Corviknight",
+        "Darkrai",
+        "Primarina",
+        "Moltres",
+        "Great Tusk"
+      ],
+      "template_roster": [
+        "Ting-Lu",
+        "Corviknight",
+        "Darkrai",
+        "Primarina",
+        "Pecharunt",
+        "Great Tusk"
+      ],
+      "design_rationale": "Defensive pivots/checks accompany hazard support and an offensive progress maker; no claim of tournament quality.",
+      "substitutions": [
+        {
+          "from": "Pecharunt",
+          "to": "Moltres"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_8.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_13.txt"
+      ],
+      "sha256": "d434a07decb0fd6d0c7feba8d6ea6db043cbe3b468cdcbfcefa43c6aa7217036",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/05.txt",
+      "validation_errors": null,
+      "packed": "Ting-Lu||Leftovers|VesselofRuin|StealthRock,Earthquake,Ruination,Spikes|Careful|244,,12,,252,|N||||,,,,,Ghost]Corviknight||RockyHelmet|Pressure|IronDefense,BodyPress,BraveBird,Roost|Impish|136,,252,,,120|F||||,,,,,Water]Darkrai||ChoiceScarf|BadDreams|DarkPulse,IceBeam,SludgeBomb,Trick|Timid|,,,252,4,252|N|,0,,,,|||,,,,,Poison]Primarina||HeavyDutyBoots|Torrent|Moonblast,Surf,Encore,FlipTurn|Modest|76,,,252,,180|||||,,,,,Steel]Moltres||HeavyDutyBoots|FlameBody|Flamethrower,BraveBird,Roost,WillOWisp|Adamant|248,16,232,,,12|N||||,,,,,Fairy]Great Tusk||RockyHelmet|Protosynthesis|HeadlongRush,IceSpinner,RapidSpin,StealthRock|Jolly|,204,,,52,252|N||||,Fighting,,,,Ice"
+    },
+    {
+      "id": "stage2-confirmation-06",
+      "style": "balance",
+      "roster": [
+        "Tinkaton",
+        "Gliscor",
+        "Moltres",
+        "Gholdengo",
+        "Dragonite",
+        "Alomomola"
+      ],
+      "template_roster": [
+        "Garganacl",
+        "Gliscor",
+        "Moltres",
+        "Gholdengo",
+        "Dragonite",
+        "Alomomola"
+      ],
+      "design_rationale": "Defensive pivots/checks accompany hazard support and an offensive progress maker; no claim of tournament quality.",
+      "substitutions": [
+        {
+          "from": "Garganacl",
+          "to": "Tinkaton"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt"
+      ],
+      "sha256": "aaa149978b4defd3ece3e262ba93674966926272f560a6a0e812da9ca570ff38",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/06.txt",
+      "validation_errors": null,
+      "packed": "Tinkaton||AirBalloon|MoldBreaker|GigatonHammer,ThunderWave,Encore,StealthRock|Jolly|248,,,,24,236|F||||,,,,,Water]Gliscor||ToxicOrb|PoisonHeal|SwordsDance,Facade,KnockOff,Protect|Careful|244,,,,168,96|F||||,,,,,Normal]Moltres||HeavyDutyBoots|FlameBody|Flamethrower,BraveBird,Roost,WillOWisp|Adamant|248,16,232,,,12|N||||,,,,,Fairy]Gholdengo||ChoiceScarf|GoodasGold|ShadowBall,MakeItRain,Trick,Recover|Timid|,,4,252,,252|N|,0,,,,|||,,,,,Steel]Dragonite||HeavyDutyBoots|Multiscale|ExtremeSpeed,Earthquake,DragonDance,Roost|Adamant|248,104,52,,,104|F||||,,,,,Normal]Alomomola||AssaultVest|Regenerator|FlipTurn,PlayRough,IcyWind,MirrorCoat|Sassy|216,40,,,252,|F|,,,,,0|||,,,,,Poison"
+    },
+    {
+      "id": "stage2-confirmation-07",
+      "style": "balance",
+      "roster": [
+        "Tinkaton",
+        "Slowking-Galar",
+        "Hydrapple",
+        "Cinderace",
+        "Iron Crown",
+        "Dragonite"
+      ],
+      "template_roster": [
+        "Tinkaton",
+        "Slowking-Galar",
+        "Hydrapple",
+        "Cinderace",
+        "Kyurem",
+        "Zamazenta"
+      ],
+      "design_rationale": "Defensive pivots/checks accompany hazard support and an offensive progress maker; no claim of tournament quality.",
+      "substitutions": [
+        {
+          "from": "Kyurem",
+          "to": "Iron Crown"
+        },
+        {
+          "from": "Zamazenta",
+          "to": "Dragonite"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_9.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_10.txt"
+      ],
+      "sha256": "bff654886113bd7a7dad36871c9ed895f9ada17715e5bfe47c72377b77c27272",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/07.txt",
+      "validation_errors": null,
+      "packed": "Tinkaton||AirBalloon|MoldBreaker|GigatonHammer,ThunderWave,Encore,StealthRock|Jolly|248,,,,24,236|F||||,,,,,Water]Slowking|SlowkingGalar|HeavyDutyBoots|Regenerator|SludgeBomb,FutureSight,Flamethrower,ChillyReception|Sassy|248,,8,,252,||,0,,,,0|||,,,,,Water]Hydrapple||HeavyDutyBoots|Regenerator|DracoMeteor,GigaDrain,EarthPower,NastyPlot|Modest|248,,176,16,56,12||,0,,,,|||,,,,,Steel]Cinderace||HeavyDutyBoots|Blaze|PyroBall,Uturn,CourtChange,WillOWisp|Jolly|224,32,,,,252|||||,,,,,Fire]Iron Crown||ChoiceSpecs|QuarkDrive|TachyonCutter,PsychicNoise,Psyshock,VoltSwitch|Timid|,,,252,4,252|N|,20,,,,|||,Fighting,,,,Steel]Dragonite||HeavyDutyBoots|Multiscale|ExtremeSpeed,Earthquake,DragonDance,Roost|Adamant|248,104,52,,,104|F||||,,,,,Normal"
+    },
+    {
+      "id": "stage2-confirmation-08",
+      "style": "rain offense",
+      "roster": [
+        "Pelipper",
+        "Barraskewda",
+        "Zapdos",
+        "Darkrai",
+        "Great Tusk",
+        "Kyurem"
+      ],
+      "template_roster": [
+        "Pelipper",
+        "Barraskewda",
+        "Zapdos",
+        "Gholdengo",
+        "Great Tusk",
+        "Primarina"
+      ],
+      "design_rationale": "Drizzle plus Damp Rock enables Swift Swim and accurate Hurricane; pivots, special attackers and Great Tusk hazard removal complement the physical rain attacker. Team viability remains unmeasured.",
+      "substitutions": [
+        {
+          "from": "Gholdengo",
+          "to": "Darkrai"
+        },
+        {
+          "from": "Primarina",
+          "to": "Kyurem"
+        }
+      ],
+      "component_sources": [
+        "evaluation/mcts_improvements/reserve_teams.py: hand-constructed weather component",
+        "evaluation/mcts_improvements/reserve_teams.py: hand-constructed weather component",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_9.txt"
+      ],
+      "sha256": "9b3fa7c51c7cb717b992f66c550a59f8e439fe8e845b0f50ce0547b31f4d62f0",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/08.txt",
+      "validation_errors": null,
+      "packed": "Pelipper||DampRock|Drizzle|Hurricane,Surf,Uturn,Roost|Relaxed|248,,252,,8,||,,,,,0|||,,,,,Ground]Barraskewda||ChoiceBand|SwiftSwim|Liquidation,FlipTurn,CloseCombat,AquaJet|Adamant|,252,,,4,252|||||,,,,,Water]Zapdos||HeavyDutyBoots|Static|Hurricane,WeatherBall,VoltSwitch,Roost|Timid|248,,76,,,184|N|,0,,,,|||,,,,,Grass]Darkrai||ChoiceScarf|BadDreams|DarkPulse,IceBeam,SludgeBomb,Trick|Timid|,,,252,4,252|N|,0,,,,|||,,,,,Poison]Great Tusk||RockyHelmet|Protosynthesis|HeadlongRush,IceSpinner,RapidSpin,StealthRock|Jolly|,204,,,52,252|N||||,Fighting,,,,Ice]Kyurem||ChoiceSpecs|Pressure|IceBeam,FreezeDry,Blizzard,EarthPower|Timid|,,,252,4,252|N|,0,,,,|||,,,,,Ice"
+    },
+    {
+      "id": "stage2-confirmation-09",
+      "style": "semistall",
+      "roster": [
+        "Blissey",
+        "Dondozo",
+        "Corviknight",
+        "Ting-Lu",
+        "Alomomola",
+        "Darkrai"
+      ],
+      "template_roster": [
+        "Blissey",
+        "Dondozo",
+        "Corviknight",
+        "Gliscor",
+        "Alomomola",
+        "Darkrai"
+      ],
+      "design_rationale": "Recovery-heavy defensive core plus an offensive progress maker; long-battle censoring is reported explicitly.",
+      "substitutions": [
+        {
+          "from": "Gliscor",
+          "to": "Ting-Lu"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_6.txt"
+      ],
+      "sha256": "e8e9f241ac2c84cdf8f6b748adbd3ab5b8004ea38461ccab7fa567f42a0e2253",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/09.txt",
+      "validation_errors": null,
+      "packed": "Blissey||Leftovers|NaturalCure|CalmMind,ShadowBall,SeismicToss,SoftBoiled|Calm|4,,252,,252,|F|,0,,,,|||,,,,,Dark]Dondozo||HeavyDutyBoots|Unaware|BodyPress,Avalanche,Rest,SleepTalk|Impish|248,,252,,8,|||||,,,,,Fighting]Corviknight||RockyHelmet|Pressure|IronDefense,BodyPress,BraveBird,Roost|Impish|136,,252,,,120|F||||,,,,,Water]Ting-Lu||Leftovers|VesselofRuin|StealthRock,Earthquake,Ruination,Spikes|Careful|244,,12,,252,|N||||,,,,,Ghost]Alomomola||AssaultVest|Regenerator|FlipTurn,PlayRough,IcyWind,MirrorCoat|Sassy|216,40,,,252,|F|,,,,,0|||,,,,,Poison]Darkrai||ChoiceScarf|BadDreams|DarkPulse,IceBeam,SludgeBomb,Trick|Timid|,,,252,4,252|N|,0,,,,|||,,,,,Poison"
+    },
+    {
+      "id": "stage2-confirmation-10",
+      "style": "semistall",
+      "roster": [
+        "Toxapex",
+        "Weezing-Galar",
+        "Iron Treads",
+        "Slowking-Galar",
+        "Moltres",
+        "Zamazenta"
+      ],
+      "template_roster": [
+        "Toxapex",
+        "Weezing-Galar",
+        "Iron Treads",
+        "Clefable",
+        "Moltres",
+        "Weavile"
+      ],
+      "design_rationale": "Recovery-heavy defensive core plus an offensive progress maker; long-battle censoring is reported explicitly.",
+      "substitutions": [
+        {
+          "from": "Clefable",
+          "to": "Slowking-Galar"
+        },
+        {
+          "from": "Weavile",
+          "to": "Zamazenta"
+        }
+      ],
+      "component_sources": [
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_11.txt"
+      ],
+      "sha256": "d590faa7411149037730d753394cfaae378e977539c47a0ecee941659901a899",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/10.txt",
+      "validation_errors": null,
+      "packed": "Toxapex||AssaultVest|Regenerator|SludgeBomb,Surf,Infestation,IceBeam|Bold|248,,8,252,,||,0,,,,|||,,,,,Dark]Weezing|WeezingGalar|HeavyDutyBoots|NeutralizingGas|Defog,PainSplit,WillOWisp,SludgeBomb|Bold|248,,252,,,8||,0,,,,|||,,,,,Grass]Iron Treads||Leftovers|QuarkDrive|Earthquake,RapidSpin,StealthRock,Protect|Careful|252,,,,244,12|N||||,,,,,Ghost]Slowking|SlowkingGalar|HeavyDutyBoots|Regenerator|SludgeBomb,FutureSight,Flamethrower,ChillyReception|Sassy|248,,8,,252,||,0,,,,0|||,,,,,Water]Moltres||HeavyDutyBoots|FlameBody|Flamethrower,BraveBird,Roost,WillOWisp|Adamant|248,16,232,,,12|N||||,,,,,Fairy]Zamazenta||HeavyDutyBoots|DauntlessShield|CloseCombat,HeavySlam,Crunch,StoneEdge|Jolly|80,252,,,,176|N||||,,,,,Steel"
+    }
+  ],
+  "team_reservation": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/teams.json",
+  "team_provenance": {
+    "kind": "new handmade roster combinations of familiar regression sets and three weather components",
+    "reserved_date": "2026-10-25",
+    "reservation_seed": 2026102503,
+    "reservation": "frozen before inspecting any scored stage1 outcome; later-stage pools have disjoint six-species rosters from each other, prior reservations and regression originals",
+    "holdout_limit": "Not an independent external set holdout. Species and component sets overlap; role/style labels are design intentions and team viability is unproven. No team paste is used for prior fitting.",
+    "comparison_pairing": "Within a stage the same pool is reserved jointly for comparisons to original baseline and predecessor; paired schedule controls matchup difficulty. It is fresh relative to prior-stage evaluations, not independent between these paired arms.",
+    "rules": "all teams validated using pinned local gen9ou TeamValidator before any scored outcomes"
+  },
+  "simulator": {
+    "root": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/pokemon-showdown",
+    "commit": "c0845f33d381402dfcb18ce324c20a94f18af075",
+    "effective_js_sha256": "d7924e3ae90c4db218ff446e6356dc8cef84949be8f8e69e7992972b76be3634"
+  },
+  "a": {
+    "root": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-beliefs",
+    "source_sha256": "0728b716862b0c848480c3b08562bb745fd74c69874b948c52bf29b537895ed0",
+    "source_files": {
+      "bot/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bot/demo.py": "805887cc72795b5ef2e3f1cdff65e4f90041adb8b8985876da752660084e9761",
+      "bot/eval.py": "41fbf2833152278ad3ebdcd55661ab901ffb1bcaae1f36afa696165e35c56c46",
+      "bot/parser.py": "d36ee9a18ce1b2e6229aa3df0aa5730685e693d2e3f6aaa1c836be3a9799ba8a",
+      "bot/player.py": "58b40502da95795076179ec0bc0fafd6381f0cb8c48fe2dae230d6d20db61527",
+      "bot/smoke.py": "3e12e0fad384b7ac2372ebadcc2c0043b6aa32986e91fa03d6babc13b706ac05",
+      "bot/tests/test_demo.py": "3dbf7a7aded4ae0fe5acd379c5c1266be3ddbaa5474bdd7202da7af224d5813b",
+      "bot/tests/test_eval.py": "22639e87ef7441b129e55c983ccdffceb7fbdf01ec33b7b74dfcc4923d60c246",
+      "bot/tests/test_eval_completion.py": "1d5c6c2a2f09cf8ac671c83ee47dfc6f9bb99a02a4d741798c9f70893411b8c2",
+      "bot/tests/test_eval_schedule.py": "9e79a2b18b3fd64f56bba829a1da124763adf41d4ea319f8470812b827ff644f",
+      "bot/tests/test_foul_play_eval.py": "424c537d4545552e83f8cca4111a9ba9b3ae140f6f282c22292a1242ef8f8d7b",
+      "bot/tests/test_mcts_evaluation.py": "1e901e5a6daa36fbf6dc6d0847d827a536d7f5fdfa99b7996aec40ad07b75ade",
+      "bot/tests/test_parser.py": "8ad6602ec4832452890d1c36eec4360902a87a95c83de1ad33e6b42d3d93f7f0",
+      "bot/tests/test_player.py": "44ed9e927f60e6b913161ad807579adf343e1ae4c744d53b6f109d87d5c90c27",
+      "bot/tests/test_smoke.py": "ec3a95e454be0019b407475a74d58e19a75e25e1774a5b56fab48523275fd6c5",
+      "contracts/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "contracts/battle_state.py": "377e82a448b3c67e8b79bdf46c62b1d9363dd8af57e51afa511f8d5f804f2d89",
+      "contracts/set_candidates.py": "3ee151f9ab4ad4f6fd1c77e5ac62e888990e0cc85cf687d1fccbce42400e162a",
+      "decision/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "decision/actions.py": "78233b1a0dea5a10e991908600317355b19f0b54d3c6fbbccbc88d5ddc028620",
+      "decision/adapter.py": "34773e44b090785272f3807fe7c179c9ca4b34e80706d177b3fb003b94b44068",
+      "decision/agent.py": "db48ae4e3eac455f2cb1cc07212ab5dd105103dcd67714ad2c7baa59153cafc6",
+      "decision/belief.py": "752a057da7d8fb8bc9d2086e323f83fc191a8259c94e45a36d9a3ee64660da2e",
+      "decision/data/moves.json": "26909a321a7e4528d14a7dffd24173aa03a6845776cf41c39cc3d76f8e14616b",
+      "decision/data/pokedex.json": "e74d0364b230001fc086cefb4259e051f1d16a4730eb89f7d6336a88a0d9a47e",
+      "decision/data/typechart.json": "26270c6fa9e25ba43ba9d6fd0da115fcf96eee42eae8b0bd9660bd015dc483b2",
+      "decision/lead.py": "1af618a2450672e75abae9af55b2035d64e29e3b8f420629fdd29a4f75f7c5f3",
+      "decision/opponent.py": "902a458fa0d2a97519a3a86527f2cfd3ae13f8a390fd61e62b8eda1d602643a7",
+      "decision/search.py": "a6e1a2f14c4bbdc62ca7701791196ea4e1398a8be9ed28702abd3d4503682218",
+      "decision/search_policy.py": "ac52f71753b08ea2932003fb05a11cde6cc6f4ad671c0bfa6407e938d1ea9650",
+      "decision/selector.py": "36de03df3385670f46af23ae7cc01f2077b51b70bc7a47e0fae86aad92f1267c",
+      "decision/sets.py": "5e345d60634414d723dbe1de4b0adc4459abcb542dfad0920095a7b6c4650c53",
+      "decision/simulate.py": "96e077923f6ef720a66fddbc496dab4c197c8cda386a7c0f1b5af7eee03d18a3",
+      "decision/state.py": "0c9d3a6113e21ef7ff018e5a596b57d90207956c16ba4fb7c38864a3c4995761",
+      "decision/value.py": "d25c43b6bc8e360043cf19e4c0c331aed04a692ffdc7da8b848a6fc2a705ef29"
+    },
+    "engine": {
+      "version": "0.0.48",
+      "binaries": {
+        "poke_engine.cpython-313-x86_64-linux-gnu.so": "fbffd2a1c9c48eab99def9187f9030c578174a30b49d54faad159be859846ef3"
+      }
+    },
+    "priors": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/baseline-2c02fc8/data/set_candidates.json",
+    "priors_sha256": "47b31bf7282d6578ed44d7b28f9a63e9284eddc72882856de426f7c1bfc8c7f3",
+    "config": {
+      "backend": "mcts",
+      "budget": 3.0,
+      "mcts_worlds": 8,
+      "search_ms": 150,
+      "engine_threads": 1,
+      "sampling": "team",
+      "frozen_beliefs": false,
+      "seed": 2026,
+      "belief_mode": "reliable"
+    }
+  },
+  "b": {
+    "root": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/baseline-2c02fc8",
+    "source_sha256": "5eaa172be19612c3ef49d11a59537a2794d587d26e75e2f0cc6f997946e84874",
+    "source_files": {
+      "bot/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bot/demo.py": "805887cc72795b5ef2e3f1cdff65e4f90041adb8b8985876da752660084e9761",
+      "bot/eval.py": "41fbf2833152278ad3ebdcd55661ab901ffb1bcaae1f36afa696165e35c56c46",
+      "bot/parser.py": "0bd351d61cd15d0e8ef75671ee1cfcd7cd97bfdd724543514cbb91fbc01e6cc3",
+      "bot/player.py": "1db15f3cab2c705be505ee0ad6249a1f2961d999b92c7e1ff404c5524a03d162",
+      "bot/smoke.py": "3e12e0fad384b7ac2372ebadcc2c0043b6aa32986e91fa03d6babc13b706ac05",
+      "bot/tests/test_demo.py": "3dbf7a7aded4ae0fe5acd379c5c1266be3ddbaa5474bdd7202da7af224d5813b",
+      "bot/tests/test_eval.py": "22639e87ef7441b129e55c983ccdffceb7fbdf01ec33b7b74dfcc4923d60c246",
+      "bot/tests/test_eval_completion.py": "1d5c6c2a2f09cf8ac671c83ee47dfc6f9bb99a02a4d741798c9f70893411b8c2",
+      "bot/tests/test_eval_schedule.py": "9e79a2b18b3fd64f56bba829a1da124763adf41d4ea319f8470812b827ff644f",
+      "bot/tests/test_foul_play_eval.py": "424c537d4545552e83f8cca4111a9ba9b3ae140f6f282c22292a1242ef8f8d7b",
+      "bot/tests/test_mcts_evaluation.py": "1e901e5a6daa36fbf6dc6d0847d827a536d7f5fdfa99b7996aec40ad07b75ade",
+      "bot/tests/test_parser.py": "b8449d80017ef8368e2c9cfbad30a9e84385d4479037a73471d7b6fc6978c8f6",
+      "bot/tests/test_player.py": "44ed9e927f60e6b913161ad807579adf343e1ae4c744d53b6f109d87d5c90c27",
+      "bot/tests/test_smoke.py": "ec3a95e454be0019b407475a74d58e19a75e25e1774a5b56fab48523275fd6c5",
+      "contracts/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "contracts/battle_state.py": "c774b106e1bd9ae4b6c2ac3811b3518323e086595cbe4769c462b02b557056f3",
+      "contracts/set_candidates.py": "3ee151f9ab4ad4f6fd1c77e5ac62e888990e0cc85cf687d1fccbce42400e162a",
+      "decision/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "decision/actions.py": "78233b1a0dea5a10e991908600317355b19f0b54d3c6fbbccbc88d5ddc028620",
+      "decision/adapter.py": "f34e39759b6efc446fc447898e3969c16f1c6644cac1fcd0f7c416eb0f47a423",
+      "decision/agent.py": "ca67e7bf01bc23cb51abd81aa55cd0d5880bc3c79faf7fededdacef74c6d5d68",
+      "decision/belief.py": "3474256b93567df34e4f7aa22aac471ac791a84d30848d26348492a31955b6b7",
+      "decision/data/moves.json": "26909a321a7e4528d14a7dffd24173aa03a6845776cf41c39cc3d76f8e14616b",
+      "decision/data/pokedex.json": "e74d0364b230001fc086cefb4259e051f1d16a4730eb89f7d6336a88a0d9a47e",
+      "decision/data/typechart.json": "26270c6fa9e25ba43ba9d6fd0da115fcf96eee42eae8b0bd9660bd015dc483b2",
+      "decision/lead.py": "1af618a2450672e75abae9af55b2035d64e29e3b8f420629fdd29a4f75f7c5f3",
+      "decision/opponent.py": "902a458fa0d2a97519a3a86527f2cfd3ae13f8a390fd61e62b8eda1d602643a7",
+      "decision/search.py": "d1d36c46be7fc76db0c2dc4b56c4b11e2327ee3afb5faf0dedc4da013baeabef",
+      "decision/search_policy.py": "ac52f71753b08ea2932003fb05a11cde6cc6f4ad671c0bfa6407e938d1ea9650",
+      "decision/selector.py": "36de03df3385670f46af23ae7cc01f2077b51b70bc7a47e0fae86aad92f1267c",
+      "decision/sets.py": "5e345d60634414d723dbe1de4b0adc4459abcb542dfad0920095a7b6c4650c53",
+      "decision/simulate.py": "96e077923f6ef720a66fddbc496dab4c197c8cda386a7c0f1b5af7eee03d18a3",
+      "decision/state.py": "bd924f33ad6ed8106918e318466b9a0a9ed2a9c5bf1ed4badd61889deab61078",
+      "decision/value.py": "d25c43b6bc8e360043cf19e4c0c331aed04a692ffdc7da8b848a6fc2a705ef29"
+    },
+    "engine": {
+      "version": "0.0.48",
+      "binaries": {
+        "poke_engine.cpython-313-x86_64-linux-gnu.so": "fbffd2a1c9c48eab99def9187f9030c578174a30b49d54faad159be859846ef3"
+      }
+    },
+    "priors": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/baseline-2c02fc8/data/set_candidates.json",
+    "priors_sha256": "47b31bf7282d6578ed44d7b28f9a63e9284eddc72882856de426f7c1bfc8c7f3",
+    "config": {
+      "backend": "mcts",
+      "budget": 3.0,
+      "mcts_worlds": 8,
+      "search_ms": 150,
+      "engine_threads": 1,
+      "sampling": "team",
+      "frozen_beliefs": false,
+      "seed": 2026
+    }
+  },
+  "schedule": [
+    {
+      "game": 0,
+      "block": 0,
+      "a_team": 1,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        45507,
+        56967,
+        44698,
+        39942
+      ],
+      "sampler_seed": 1788405000,
+      "mixed_policy_seed": 28854636
+    },
+    {
+      "game": 1,
+      "block": 0,
+      "a_team": 1,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        45507,
+        56967,
+        44698,
+        39942
+      ],
+      "sampler_seed": 1788405000,
+      "mixed_policy_seed": 28854636
+    },
+    {
+      "game": 2,
+      "block": 1,
+      "a_team": 9,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        58885,
+        24648,
+        7646,
+        29774
+      ],
+      "sampler_seed": 925885932,
+      "mixed_policy_seed": 434739639
+    },
+    {
+      "game": 3,
+      "block": 1,
+      "a_team": 9,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        58885,
+        24648,
+        7646,
+        29774
+      ],
+      "sampler_seed": 925885932,
+      "mixed_policy_seed": 434739639
+    },
+    {
+      "game": 4,
+      "block": 2,
+      "a_team": 4,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        28898,
+        12854,
+        12474,
+        47335
+      ],
+      "sampler_seed": 1324883215,
+      "mixed_policy_seed": 577725190
+    },
+    {
+      "game": 5,
+      "block": 2,
+      "a_team": 4,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        28898,
+        12854,
+        12474,
+        47335
+      ],
+      "sampler_seed": 1324883215,
+      "mixed_policy_seed": 577725190
+    },
+    {
+      "game": 6,
+      "block": 3,
+      "a_team": 8,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        61589,
+        58001,
+        4292,
+        43083
+      ],
+      "sampler_seed": 825319360,
+      "mixed_policy_seed": 746943472
+    },
+    {
+      "game": 7,
+      "block": 3,
+      "a_team": 8,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        61589,
+        58001,
+        4292,
+        43083
+      ],
+      "sampler_seed": 825319360,
+      "mixed_policy_seed": 746943472
+    },
+    {
+      "game": 8,
+      "block": 4,
+      "a_team": 3,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        52455,
+        45124,
+        20846,
+        13382
+      ],
+      "sampler_seed": 53455695,
+      "mixed_policy_seed": 897810335
+    },
+    {
+      "game": 9,
+      "block": 4,
+      "a_team": 3,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        52455,
+        45124,
+        20846,
+        13382
+      ],
+      "sampler_seed": 53455695,
+      "mixed_policy_seed": 897810335
+    },
+    {
+      "game": 10,
+      "block": 5,
+      "a_team": 2,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        22345,
+        55657,
+        1028,
+        57189
+      ],
+      "sampler_seed": 1794868291,
+      "mixed_policy_seed": 1105248851
+    },
+    {
+      "game": 11,
+      "block": 5,
+      "a_team": 2,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        22345,
+        55657,
+        1028,
+        57189
+      ],
+      "sampler_seed": 1794868291,
+      "mixed_policy_seed": 1105248851
+    },
+    {
+      "game": 12,
+      "block": 6,
+      "a_team": 5,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        9544,
+        28714,
+        31561,
+        62899
+      ],
+      "sampler_seed": 49455452,
+      "mixed_policy_seed": 1173543980
+    },
+    {
+      "game": 13,
+      "block": 6,
+      "a_team": 5,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        9544,
+        28714,
+        31561,
+        62899
+      ],
+      "sampler_seed": 49455452,
+      "mixed_policy_seed": 1173543980
+    },
+    {
+      "game": 14,
+      "block": 7,
+      "a_team": 7,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        20513,
+        59253,
+        50161,
+        44119
+      ],
+      "sampler_seed": 1761099519,
+      "mixed_policy_seed": 170252901
+    },
+    {
+      "game": 15,
+      "block": 7,
+      "a_team": 7,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        20513,
+        59253,
+        50161,
+        44119
+      ],
+      "sampler_seed": 1761099519,
+      "mixed_policy_seed": 170252901
+    },
+    {
+      "game": 16,
+      "block": 8,
+      "a_team": 0,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        63863,
+        49122,
+        29507,
+        27654
+      ],
+      "sampler_seed": 931058234,
+      "mixed_policy_seed": 294754678
+    },
+    {
+      "game": 17,
+      "block": 8,
+      "a_team": 0,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        63863,
+        49122,
+        29507,
+        27654
+      ],
+      "sampler_seed": 931058234,
+      "mixed_policy_seed": 294754678
+    },
+    {
+      "game": 18,
+      "block": 9,
+      "a_team": 6,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        58498,
+        49872,
+        50443,
+        37754
+      ],
+      "sampler_seed": 86791123,
+      "mixed_policy_seed": 247760149
+    },
+    {
+      "game": 19,
+      "block": 9,
+      "a_team": 6,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        58498,
+        49872,
+        50443,
+        37754
+      ],
+      "sampler_seed": 86791123,
+      "mixed_policy_seed": 247760149
+    },
+    {
+      "game": 20,
+      "block": 10,
+      "a_team": 1,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        60752,
+        59499,
+        30561,
+        54404
+      ],
+      "sampler_seed": 576935501,
+      "mixed_policy_seed": 198546628
+    },
+    {
+      "game": 21,
+      "block": 10,
+      "a_team": 1,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        60752,
+        59499,
+        30561,
+        54404
+      ],
+      "sampler_seed": 576935501,
+      "mixed_policy_seed": 198546628
+    },
+    {
+      "game": 22,
+      "block": 11,
+      "a_team": 9,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        65446,
+        28117,
+        35279,
+        9039
+      ],
+      "sampler_seed": 1255982189,
+      "mixed_policy_seed": 1991091162
+    },
+    {
+      "game": 23,
+      "block": 11,
+      "a_team": 9,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        65446,
+        28117,
+        35279,
+        9039
+      ],
+      "sampler_seed": 1255982189,
+      "mixed_policy_seed": 1991091162
+    },
+    {
+      "game": 24,
+      "block": 12,
+      "a_team": 4,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        52565,
+        39597,
+        27794,
+        25887
+      ],
+      "sampler_seed": 1238992824,
+      "mixed_policy_seed": 921073180
+    },
+    {
+      "game": 25,
+      "block": 12,
+      "a_team": 4,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        52565,
+        39597,
+        27794,
+        25887
+      ],
+      "sampler_seed": 1238992824,
+      "mixed_policy_seed": 921073180
+    },
+    {
+      "game": 26,
+      "block": 13,
+      "a_team": 8,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        48972,
+        50609,
+        34001,
+        6456
+      ],
+      "sampler_seed": 1773028713,
+      "mixed_policy_seed": 2098835239
+    },
+    {
+      "game": 27,
+      "block": 13,
+      "a_team": 8,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        48972,
+        50609,
+        34001,
+        6456
+      ],
+      "sampler_seed": 1773028713,
+      "mixed_policy_seed": 2098835239
+    },
+    {
+      "game": 28,
+      "block": 14,
+      "a_team": 3,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        24252,
+        35532,
+        1648,
+        47390
+      ],
+      "sampler_seed": 1260096592,
+      "mixed_policy_seed": 1428452233
+    },
+    {
+      "game": 29,
+      "block": 14,
+      "a_team": 3,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        24252,
+        35532,
+        1648,
+        47390
+      ],
+      "sampler_seed": 1260096592,
+      "mixed_policy_seed": 1428452233
+    },
+    {
+      "game": 30,
+      "block": 15,
+      "a_team": 2,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        2873,
+        14244,
+        8372,
+        32352
+      ],
+      "sampler_seed": 1599052525,
+      "mixed_policy_seed": 1899319468
+    },
+    {
+      "game": 31,
+      "block": 15,
+      "a_team": 2,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        2873,
+        14244,
+        8372,
+        32352
+      ],
+      "sampler_seed": 1599052525,
+      "mixed_policy_seed": 1899319468
+    },
+    {
+      "game": 32,
+      "block": 16,
+      "a_team": 5,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        30691,
+        51966,
+        45958,
+        55245
+      ],
+      "sampler_seed": 1040966866,
+      "mixed_policy_seed": 838215412
+    },
+    {
+      "game": 33,
+      "block": 16,
+      "a_team": 5,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        30691,
+        51966,
+        45958,
+        55245
+      ],
+      "sampler_seed": 1040966866,
+      "mixed_policy_seed": 838215412
+    },
+    {
+      "game": 34,
+      "block": 17,
+      "a_team": 7,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        24027,
+        10879,
+        42874,
+        26828
+      ],
+      "sampler_seed": 1969936336,
+      "mixed_policy_seed": 484771969
+    },
+    {
+      "game": 35,
+      "block": 17,
+      "a_team": 7,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        24027,
+        10879,
+        42874,
+        26828
+      ],
+      "sampler_seed": 1969936336,
+      "mixed_policy_seed": 484771969
+    },
+    {
+      "game": 36,
+      "block": 18,
+      "a_team": 0,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        27565,
+        16515,
+        19959,
+        14333
+      ],
+      "sampler_seed": 42107353,
+      "mixed_policy_seed": 1060777988
+    },
+    {
+      "game": 37,
+      "block": 18,
+      "a_team": 0,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        27565,
+        16515,
+        19959,
+        14333
+      ],
+      "sampler_seed": 42107353,
+      "mixed_policy_seed": 1060777988
+    },
+    {
+      "game": 38,
+      "block": 19,
+      "a_team": 6,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        55669,
+        59627,
+        42914,
+        25866
+      ],
+      "sampler_seed": 629001102,
+      "mixed_policy_seed": 1124027271
+    },
+    {
+      "game": 39,
+      "block": 19,
+      "a_team": 6,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        55669,
+        59627,
+        42914,
+        25866
+      ],
+      "sampler_seed": 629001102,
+      "mixed_policy_seed": 1124027271
+    },
+    {
+      "game": 40,
+      "block": 20,
+      "a_team": 1,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        9171,
+        25322,
+        47740,
+        37473
+      ],
+      "sampler_seed": 1303134930,
+      "mixed_policy_seed": 1531464132
+    },
+    {
+      "game": 41,
+      "block": 20,
+      "a_team": 1,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        9171,
+        25322,
+        47740,
+        37473
+      ],
+      "sampler_seed": 1303134930,
+      "mixed_policy_seed": 1531464132
+    },
+    {
+      "game": 42,
+      "block": 21,
+      "a_team": 9,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        36873,
+        40324,
+        17653,
+        36095
+      ],
+      "sampler_seed": 931701233,
+      "mixed_policy_seed": 1577093832
+    },
+    {
+      "game": 43,
+      "block": 21,
+      "a_team": 9,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        36873,
+        40324,
+        17653,
+        36095
+      ],
+      "sampler_seed": 931701233,
+      "mixed_policy_seed": 1577093832
+    },
+    {
+      "game": 44,
+      "block": 22,
+      "a_team": 4,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        20791,
+        9459,
+        33502,
+        36062
+      ],
+      "sampler_seed": 1124463506,
+      "mixed_policy_seed": 1552549260
+    },
+    {
+      "game": 45,
+      "block": 22,
+      "a_team": 4,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        20791,
+        9459,
+        33502,
+        36062
+      ],
+      "sampler_seed": 1124463506,
+      "mixed_policy_seed": 1552549260
+    },
+    {
+      "game": 46,
+      "block": 23,
+      "a_team": 8,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        37357,
+        37089,
+        18289,
+        11600
+      ],
+      "sampler_seed": 1438594521,
+      "mixed_policy_seed": 65399826
+    },
+    {
+      "game": 47,
+      "block": 23,
+      "a_team": 8,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        37357,
+        37089,
+        18289,
+        11600
+      ],
+      "sampler_seed": 1438594521,
+      "mixed_policy_seed": 65399826
+    },
+    {
+      "game": 48,
+      "block": 24,
+      "a_team": 3,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        29654,
+        14329,
+        63625,
+        15810
+      ],
+      "sampler_seed": 1514873308,
+      "mixed_policy_seed": 842986281
+    },
+    {
+      "game": 49,
+      "block": 24,
+      "a_team": 3,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        29654,
+        14329,
+        63625,
+        15810
+      ],
+      "sampler_seed": 1514873308,
+      "mixed_policy_seed": 842986281
+    },
+    {
+      "game": 50,
+      "block": 25,
+      "a_team": 2,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        4106,
+        47922,
+        45600,
+        31840
+      ],
+      "sampler_seed": 200468705,
+      "mixed_policy_seed": 1866346992
+    },
+    {
+      "game": 51,
+      "block": 25,
+      "a_team": 2,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        4106,
+        47922,
+        45600,
+        31840
+      ],
+      "sampler_seed": 200468705,
+      "mixed_policy_seed": 1866346992
+    },
+    {
+      "game": 52,
+      "block": 26,
+      "a_team": 5,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        17292,
+        64469,
+        31384,
+        41690
+      ],
+      "sampler_seed": 566728454,
+      "mixed_policy_seed": 23140137
+    },
+    {
+      "game": 53,
+      "block": 26,
+      "a_team": 5,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        17292,
+        64469,
+        31384,
+        41690
+      ],
+      "sampler_seed": 566728454,
+      "mixed_policy_seed": 23140137
+    },
+    {
+      "game": 54,
+      "block": 27,
+      "a_team": 7,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        42749,
+        50048,
+        28494,
+        47255
+      ],
+      "sampler_seed": 1136332398,
+      "mixed_policy_seed": 1280016944
+    },
+    {
+      "game": 55,
+      "block": 27,
+      "a_team": 7,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        42749,
+        50048,
+        28494,
+        47255
+      ],
+      "sampler_seed": 1136332398,
+      "mixed_policy_seed": 1280016944
+    },
+    {
+      "game": 56,
+      "block": 28,
+      "a_team": 0,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        35229,
+        32546,
+        51535,
+        33892
+      ],
+      "sampler_seed": 1045791920,
+      "mixed_policy_seed": 1862731205
+    },
+    {
+      "game": 57,
+      "block": 28,
+      "a_team": 0,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        35229,
+        32546,
+        51535,
+        33892
+      ],
+      "sampler_seed": 1045791920,
+      "mixed_policy_seed": 1862731205
+    },
+    {
+      "game": 58,
+      "block": 29,
+      "a_team": 6,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        33467,
+        59521,
+        59278,
+        16981
+      ],
+      "sampler_seed": 433334811,
+      "mixed_policy_seed": 312110690
+    },
+    {
+      "game": 59,
+      "block": 29,
+      "a_team": 6,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        33467,
+        59521,
+        59278,
+        16981
+      ],
+      "sampler_seed": 433334811,
+      "mixed_policy_seed": 312110690
+    },
+    {
+      "game": 60,
+      "block": 30,
+      "a_team": 1,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        31735,
+        60461,
+        40951,
+        42012
+      ],
+      "sampler_seed": 1628128636,
+      "mixed_policy_seed": 1380545906
+    },
+    {
+      "game": 61,
+      "block": 30,
+      "a_team": 1,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        31735,
+        60461,
+        40951,
+        42012
+      ],
+      "sampler_seed": 1628128636,
+      "mixed_policy_seed": 1380545906
+    },
+    {
+      "game": 62,
+      "block": 31,
+      "a_team": 9,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        4707,
+        43673,
+        10641,
+        65376
+      ],
+      "sampler_seed": 198561406,
+      "mixed_policy_seed": 1185662685
+    },
+    {
+      "game": 63,
+      "block": 31,
+      "a_team": 9,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        4707,
+        43673,
+        10641,
+        65376
+      ],
+      "sampler_seed": 198561406,
+      "mixed_policy_seed": 1185662685
+    },
+    {
+      "game": 64,
+      "block": 32,
+      "a_team": 4,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        56474,
+        37451,
+        1756,
+        20111
+      ],
+      "sampler_seed": 1867729755,
+      "mixed_policy_seed": 991344751
+    },
+    {
+      "game": 65,
+      "block": 32,
+      "a_team": 4,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        56474,
+        37451,
+        1756,
+        20111
+      ],
+      "sampler_seed": 1867729755,
+      "mixed_policy_seed": 991344751
+    },
+    {
+      "game": 66,
+      "block": 33,
+      "a_team": 8,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        15688,
+        2795,
+        12995,
+        64829
+      ],
+      "sampler_seed": 816588311,
+      "mixed_policy_seed": 2106634072
+    },
+    {
+      "game": 67,
+      "block": 33,
+      "a_team": 8,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        15688,
+        2795,
+        12995,
+        64829
+      ],
+      "sampler_seed": 816588311,
+      "mixed_policy_seed": 2106634072
+    },
+    {
+      "game": 68,
+      "block": 34,
+      "a_team": 3,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        32182,
+        30193,
+        23661,
+        10148
+      ],
+      "sampler_seed": 587241043,
+      "mixed_policy_seed": 170107387
+    },
+    {
+      "game": 69,
+      "block": 34,
+      "a_team": 3,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        32182,
+        30193,
+        23661,
+        10148
+      ],
+      "sampler_seed": 587241043,
+      "mixed_policy_seed": 170107387
+    },
+    {
+      "game": 70,
+      "block": 35,
+      "a_team": 2,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        49621,
+        63525,
+        14780,
+        34213
+      ],
+      "sampler_seed": 541359217,
+      "mixed_policy_seed": 560838131
+    },
+    {
+      "game": 71,
+      "block": 35,
+      "a_team": 2,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        49621,
+        63525,
+        14780,
+        34213
+      ],
+      "sampler_seed": 541359217,
+      "mixed_policy_seed": 560838131
+    },
+    {
+      "game": 72,
+      "block": 36,
+      "a_team": 5,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        61296,
+        63111,
+        16869,
+        14042
+      ],
+      "sampler_seed": 1510565858,
+      "mixed_policy_seed": 1219271880
+    },
+    {
+      "game": 73,
+      "block": 36,
+      "a_team": 5,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        61296,
+        63111,
+        16869,
+        14042
+      ],
+      "sampler_seed": 1510565858,
+      "mixed_policy_seed": 1219271880
+    },
+    {
+      "game": 74,
+      "block": 37,
+      "a_team": 7,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        16496,
+        26643,
+        58266,
+        25986
+      ],
+      "sampler_seed": 1285056163,
+      "mixed_policy_seed": 1224917401
+    },
+    {
+      "game": 75,
+      "block": 37,
+      "a_team": 7,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        16496,
+        26643,
+        58266,
+        25986
+      ],
+      "sampler_seed": 1285056163,
+      "mixed_policy_seed": 1224917401
+    },
+    {
+      "game": 76,
+      "block": 38,
+      "a_team": 0,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        28339,
+        20112,
+        33927,
+        43686
+      ],
+      "sampler_seed": 643296428,
+      "mixed_policy_seed": 240012406
+    },
+    {
+      "game": 77,
+      "block": 38,
+      "a_team": 0,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        28339,
+        20112,
+        33927,
+        43686
+      ],
+      "sampler_seed": 643296428,
+      "mixed_policy_seed": 240012406
+    },
+    {
+      "game": 78,
+      "block": 39,
+      "a_team": 6,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        26772,
+        14256,
+        4875,
+        56278
+      ],
+      "sampler_seed": 1335801612,
+      "mixed_policy_seed": 2140547641
+    },
+    {
+      "game": 79,
+      "block": 39,
+      "a_team": 6,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        26772,
+        14256,
+        4875,
+        56278
+      ],
+      "sampler_seed": 1335801612,
+      "mixed_policy_seed": 2140547641
+    },
+    {
+      "game": 80,
+      "block": 40,
+      "a_team": 1,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        43938,
+        56812,
+        28583,
+        34695
+      ],
+      "sampler_seed": 1408374131,
+      "mixed_policy_seed": 2002259706
+    },
+    {
+      "game": 81,
+      "block": 40,
+      "a_team": 1,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        43938,
+        56812,
+        28583,
+        34695
+      ],
+      "sampler_seed": 1408374131,
+      "mixed_policy_seed": 2002259706
+    },
+    {
+      "game": 82,
+      "block": 41,
+      "a_team": 9,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        42022,
+        50383,
+        6855,
+        29718
+      ],
+      "sampler_seed": 1229185751,
+      "mixed_policy_seed": 1667227618
+    },
+    {
+      "game": 83,
+      "block": 41,
+      "a_team": 9,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        42022,
+        50383,
+        6855,
+        29718
+      ],
+      "sampler_seed": 1229185751,
+      "mixed_policy_seed": 1667227618
+    },
+    {
+      "game": 84,
+      "block": 42,
+      "a_team": 4,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        33276,
+        19364,
+        7201,
+        6509
+      ],
+      "sampler_seed": 2093963695,
+      "mixed_policy_seed": 325111388
+    },
+    {
+      "game": 85,
+      "block": 42,
+      "a_team": 4,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        33276,
+        19364,
+        7201,
+        6509
+      ],
+      "sampler_seed": 2093963695,
+      "mixed_policy_seed": 325111388
+    },
+    {
+      "game": 86,
+      "block": 43,
+      "a_team": 8,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        52242,
+        57580,
+        63085,
+        53591
+      ],
+      "sampler_seed": 1177936388,
+      "mixed_policy_seed": 1359888858
+    },
+    {
+      "game": 87,
+      "block": 43,
+      "a_team": 8,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        52242,
+        57580,
+        63085,
+        53591
+      ],
+      "sampler_seed": 1177936388,
+      "mixed_policy_seed": 1359888858
+    },
+    {
+      "game": 88,
+      "block": 44,
+      "a_team": 3,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        17235,
+        31033,
+        9030,
+        29476
+      ],
+      "sampler_seed": 995019603,
+      "mixed_policy_seed": 39306352
+    },
+    {
+      "game": 89,
+      "block": 44,
+      "a_team": 3,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        17235,
+        31033,
+        9030,
+        29476
+      ],
+      "sampler_seed": 995019603,
+      "mixed_policy_seed": 39306352
+    },
+    {
+      "game": 90,
+      "block": 45,
+      "a_team": 2,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        26372,
+        18070,
+        207,
+        27214
+      ],
+      "sampler_seed": 1390751953,
+      "mixed_policy_seed": 2102092523
+    },
+    {
+      "game": 91,
+      "block": 45,
+      "a_team": 2,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        26372,
+        18070,
+        207,
+        27214
+      ],
+      "sampler_seed": 1390751953,
+      "mixed_policy_seed": 2102092523
+    },
+    {
+      "game": 92,
+      "block": 46,
+      "a_team": 5,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        46355,
+        13478,
+        22963,
+        31136
+      ],
+      "sampler_seed": 1720108303,
+      "mixed_policy_seed": 964734327
+    },
+    {
+      "game": 93,
+      "block": 46,
+      "a_team": 5,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        46355,
+        13478,
+        22963,
+        31136
+      ],
+      "sampler_seed": 1720108303,
+      "mixed_policy_seed": 964734327
+    },
+    {
+      "game": 94,
+      "block": 47,
+      "a_team": 7,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        33856,
+        17022,
+        3221,
+        12176
+      ],
+      "sampler_seed": 1874273816,
+      "mixed_policy_seed": 1135919365
+    },
+    {
+      "game": 95,
+      "block": 47,
+      "a_team": 7,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        33856,
+        17022,
+        3221,
+        12176
+      ],
+      "sampler_seed": 1874273816,
+      "mixed_policy_seed": 1135919365
+    },
+    {
+      "game": 96,
+      "block": 48,
+      "a_team": 0,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        14533,
+        31951,
+        63656,
+        44531
+      ],
+      "sampler_seed": 1901177774,
+      "mixed_policy_seed": 1072674606
+    },
+    {
+      "game": 97,
+      "block": 48,
+      "a_team": 0,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        14533,
+        31951,
+        63656,
+        44531
+      ],
+      "sampler_seed": 1901177774,
+      "mixed_policy_seed": 1072674606
+    },
+    {
+      "game": 98,
+      "block": 49,
+      "a_team": 6,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        9324,
+        58643,
+        12586,
+        53745
+      ],
+      "sampler_seed": 505145187,
+      "mixed_policy_seed": 115150294
+    },
+    {
+      "game": 99,
+      "block": 49,
+      "a_team": 6,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        9324,
+        58643,
+        12586,
+        53745
+      ],
+      "sampler_seed": 505145187,
+      "mixed_policy_seed": 115150294
+    },
+    {
+      "game": 100,
+      "block": 50,
+      "a_team": 1,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        51846,
+        33362,
+        38871,
+        64648
+      ],
+      "sampler_seed": 917477608,
+      "mixed_policy_seed": 792733185
+    },
+    {
+      "game": 101,
+      "block": 50,
+      "a_team": 1,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        51846,
+        33362,
+        38871,
+        64648
+      ],
+      "sampler_seed": 917477608,
+      "mixed_policy_seed": 792733185
+    },
+    {
+      "game": 102,
+      "block": 51,
+      "a_team": 9,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        45660,
+        167,
+        49609,
+        57866
+      ],
+      "sampler_seed": 1807203321,
+      "mixed_policy_seed": 1813781639
+    },
+    {
+      "game": 103,
+      "block": 51,
+      "a_team": 9,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        45660,
+        167,
+        49609,
+        57866
+      ],
+      "sampler_seed": 1807203321,
+      "mixed_policy_seed": 1813781639
+    },
+    {
+      "game": 104,
+      "block": 52,
+      "a_team": 4,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        28996,
+        5530,
+        8931,
+        53701
+      ],
+      "sampler_seed": 473910453,
+      "mixed_policy_seed": 851044646
+    },
+    {
+      "game": 105,
+      "block": 52,
+      "a_team": 4,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        28996,
+        5530,
+        8931,
+        53701
+      ],
+      "sampler_seed": 473910453,
+      "mixed_policy_seed": 851044646
+    },
+    {
+      "game": 106,
+      "block": 53,
+      "a_team": 8,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        13039,
+        14080,
+        51107,
+        20707
+      ],
+      "sampler_seed": 1381333051,
+      "mixed_policy_seed": 1437309115
+    },
+    {
+      "game": 107,
+      "block": 53,
+      "a_team": 8,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        13039,
+        14080,
+        51107,
+        20707
+      ],
+      "sampler_seed": 1381333051,
+      "mixed_policy_seed": 1437309115
+    },
+    {
+      "game": 108,
+      "block": 54,
+      "a_team": 3,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        44929,
+        61703,
+        51571,
+        65142
+      ],
+      "sampler_seed": 1581798846,
+      "mixed_policy_seed": 1038520628
+    },
+    {
+      "game": 109,
+      "block": 54,
+      "a_team": 3,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        44929,
+        61703,
+        51571,
+        65142
+      ],
+      "sampler_seed": 1581798846,
+      "mixed_policy_seed": 1038520628
+    },
+    {
+      "game": 110,
+      "block": 55,
+      "a_team": 2,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        15642,
+        65062,
+        12603,
+        40136
+      ],
+      "sampler_seed": 1575018068,
+      "mixed_policy_seed": 2009923733
+    },
+    {
+      "game": 111,
+      "block": 55,
+      "a_team": 2,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        15642,
+        65062,
+        12603,
+        40136
+      ],
+      "sampler_seed": 1575018068,
+      "mixed_policy_seed": 2009923733
+    },
+    {
+      "game": 112,
+      "block": 56,
+      "a_team": 5,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        29630,
+        15168,
+        5714,
+        34832
+      ],
+      "sampler_seed": 959993448,
+      "mixed_policy_seed": 1015035869
+    },
+    {
+      "game": 113,
+      "block": 56,
+      "a_team": 5,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        29630,
+        15168,
+        5714,
+        34832
+      ],
+      "sampler_seed": 959993448,
+      "mixed_policy_seed": 1015035869
+    },
+    {
+      "game": 114,
+      "block": 57,
+      "a_team": 7,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        42730,
+        675,
+        50757,
+        36673
+      ],
+      "sampler_seed": 157545165,
+      "mixed_policy_seed": 1520523934
+    },
+    {
+      "game": 115,
+      "block": 57,
+      "a_team": 7,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        42730,
+        675,
+        50757,
+        36673
+      ],
+      "sampler_seed": 157545165,
+      "mixed_policy_seed": 1520523934
+    },
+    {
+      "game": 116,
+      "block": 58,
+      "a_team": 0,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        170,
+        7429,
+        24490,
+        29912
+      ],
+      "sampler_seed": 1848119144,
+      "mixed_policy_seed": 832869953
+    },
+    {
+      "game": 117,
+      "block": 58,
+      "a_team": 0,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        170,
+        7429,
+        24490,
+        29912
+      ],
+      "sampler_seed": 1848119144,
+      "mixed_policy_seed": 832869953
+    },
+    {
+      "game": 118,
+      "block": 59,
+      "a_team": 6,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        15509,
+        20860,
+        42249,
+        8054
+      ],
+      "sampler_seed": 1629980499,
+      "mixed_policy_seed": 1832070384
+    },
+    {
+      "game": 119,
+      "block": 59,
+      "a_team": 6,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        15509,
+        20860,
+        42249,
+        8054
+      ],
+      "sampler_seed": 1629980499,
+      "mixed_policy_seed": 1832070384
+    },
+    {
+      "game": 120,
+      "block": 60,
+      "a_team": 1,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        34597,
+        13365,
+        49038,
+        7982
+      ],
+      "sampler_seed": 2025416202,
+      "mixed_policy_seed": 914228028
+    },
+    {
+      "game": 121,
+      "block": 60,
+      "a_team": 1,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        34597,
+        13365,
+        49038,
+        7982
+      ],
+      "sampler_seed": 2025416202,
+      "mixed_policy_seed": 914228028
+    },
+    {
+      "game": 122,
+      "block": 61,
+      "a_team": 9,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        16930,
+        18397,
+        35161,
+        62880
+      ],
+      "sampler_seed": 145110833,
+      "mixed_policy_seed": 368562609
+    },
+    {
+      "game": 123,
+      "block": 61,
+      "a_team": 9,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        16930,
+        18397,
+        35161,
+        62880
+      ],
+      "sampler_seed": 145110833,
+      "mixed_policy_seed": 368562609
+    },
+    {
+      "game": 124,
+      "block": 62,
+      "a_team": 4,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        5276,
+        61396,
+        42390,
+        7939
+      ],
+      "sampler_seed": 1517393720,
+      "mixed_policy_seed": 980959360
+    },
+    {
+      "game": 125,
+      "block": 62,
+      "a_team": 4,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        5276,
+        61396,
+        42390,
+        7939
+      ],
+      "sampler_seed": 1517393720,
+      "mixed_policy_seed": 980959360
+    },
+    {
+      "game": 126,
+      "block": 63,
+      "a_team": 8,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        597,
+        49137,
+        19417,
+        30866
+      ],
+      "sampler_seed": 2048070434,
+      "mixed_policy_seed": 779652410
+    },
+    {
+      "game": 127,
+      "block": 63,
+      "a_team": 8,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        597,
+        49137,
+        19417,
+        30866
+      ],
+      "sampler_seed": 2048070434,
+      "mixed_policy_seed": 779652410
+    },
+    {
+      "game": 128,
+      "block": 64,
+      "a_team": 3,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        49917,
+        31463,
+        54349,
+        26492
+      ],
+      "sampler_seed": 1499515253,
+      "mixed_policy_seed": 928455971
+    },
+    {
+      "game": 129,
+      "block": 64,
+      "a_team": 3,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        49917,
+        31463,
+        54349,
+        26492
+      ],
+      "sampler_seed": 1499515253,
+      "mixed_policy_seed": 928455971
+    },
+    {
+      "game": 130,
+      "block": 65,
+      "a_team": 2,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        9285,
+        24038,
+        49799,
+        48203
+      ],
+      "sampler_seed": 1127590675,
+      "mixed_policy_seed": 1284434323
+    },
+    {
+      "game": 131,
+      "block": 65,
+      "a_team": 2,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        9285,
+        24038,
+        49799,
+        48203
+      ],
+      "sampler_seed": 1127590675,
+      "mixed_policy_seed": 1284434323
+    },
+    {
+      "game": 132,
+      "block": 66,
+      "a_team": 5,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        58616,
+        41101,
+        12633,
+        15227
+      ],
+      "sampler_seed": 2125176626,
+      "mixed_policy_seed": 1704791178
+    },
+    {
+      "game": 133,
+      "block": 66,
+      "a_team": 5,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        58616,
+        41101,
+        12633,
+        15227
+      ],
+      "sampler_seed": 2125176626,
+      "mixed_policy_seed": 1704791178
+    },
+    {
+      "game": 134,
+      "block": 67,
+      "a_team": 7,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        27164,
+        33836,
+        13366,
+        27430
+      ],
+      "sampler_seed": 1396760903,
+      "mixed_policy_seed": 819481766
+    },
+    {
+      "game": 135,
+      "block": 67,
+      "a_team": 7,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        27164,
+        33836,
+        13366,
+        27430
+      ],
+      "sampler_seed": 1396760903,
+      "mixed_policy_seed": 819481766
+    },
+    {
+      "game": 136,
+      "block": 68,
+      "a_team": 0,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        60639,
+        62452,
+        37165,
+        1788
+      ],
+      "sampler_seed": 1244743182,
+      "mixed_policy_seed": 2050507988
+    },
+    {
+      "game": 137,
+      "block": 68,
+      "a_team": 0,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        60639,
+        62452,
+        37165,
+        1788
+      ],
+      "sampler_seed": 1244743182,
+      "mixed_policy_seed": 2050507988
+    },
+    {
+      "game": 138,
+      "block": 69,
+      "a_team": 6,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        36248,
+        6735,
+        24495,
+        50099
+      ],
+      "sampler_seed": 1665655252,
+      "mixed_policy_seed": 1066268162
+    },
+    {
+      "game": 139,
+      "block": 69,
+      "a_team": 6,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        36248,
+        6735,
+        24495,
+        50099
+      ],
+      "sampler_seed": 1665655252,
+      "mixed_policy_seed": 1066268162
+    },
+    {
+      "game": 140,
+      "block": 70,
+      "a_team": 1,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        54756,
+        15366,
+        57679,
+        21925
+      ],
+      "sampler_seed": 1226913709,
+      "mixed_policy_seed": 366219432
+    },
+    {
+      "game": 141,
+      "block": 70,
+      "a_team": 1,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        54756,
+        15366,
+        57679,
+        21925
+      ],
+      "sampler_seed": 1226913709,
+      "mixed_policy_seed": 366219432
+    },
+    {
+      "game": 142,
+      "block": 71,
+      "a_team": 9,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        13258,
+        8247,
+        29677,
+        48826
+      ],
+      "sampler_seed": 815952672,
+      "mixed_policy_seed": 1062797205
+    },
+    {
+      "game": 143,
+      "block": 71,
+      "a_team": 9,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        13258,
+        8247,
+        29677,
+        48826
+      ],
+      "sampler_seed": 815952672,
+      "mixed_policy_seed": 1062797205
+    },
+    {
+      "game": 144,
+      "block": 72,
+      "a_team": 4,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        15750,
+        4899,
+        60000,
+        60516
+      ],
+      "sampler_seed": 330580712,
+      "mixed_policy_seed": 683507101
+    },
+    {
+      "game": 145,
+      "block": 72,
+      "a_team": 4,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        15750,
+        4899,
+        60000,
+        60516
+      ],
+      "sampler_seed": 330580712,
+      "mixed_policy_seed": 683507101
+    },
+    {
+      "game": 146,
+      "block": 73,
+      "a_team": 8,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        16936,
+        38529,
+        2415,
+        38783
+      ],
+      "sampler_seed": 1249183941,
+      "mixed_policy_seed": 532638048
+    },
+    {
+      "game": 147,
+      "block": 73,
+      "a_team": 8,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        16936,
+        38529,
+        2415,
+        38783
+      ],
+      "sampler_seed": 1249183941,
+      "mixed_policy_seed": 532638048
+    },
+    {
+      "game": 148,
+      "block": 74,
+      "a_team": 3,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        48969,
+        64925,
+        43267,
+        6905
+      ],
+      "sampler_seed": 1908909266,
+      "mixed_policy_seed": 944872062
+    },
+    {
+      "game": 149,
+      "block": 74,
+      "a_team": 3,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        48969,
+        64925,
+        43267,
+        6905
+      ],
+      "sampler_seed": 1908909266,
+      "mixed_policy_seed": 944872062
+    },
+    {
+      "game": 150,
+      "block": 75,
+      "a_team": 2,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        6509,
+        57312,
+        34351,
+        39207
+      ],
+      "sampler_seed": 2064535482,
+      "mixed_policy_seed": 804132607
+    },
+    {
+      "game": 151,
+      "block": 75,
+      "a_team": 2,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        6509,
+        57312,
+        34351,
+        39207
+      ],
+      "sampler_seed": 2064535482,
+      "mixed_policy_seed": 804132607
+    },
+    {
+      "game": 152,
+      "block": 76,
+      "a_team": 5,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        38659,
+        21054,
+        48814,
+        18921
+      ],
+      "sampler_seed": 1282085617,
+      "mixed_policy_seed": 949698168
+    },
+    {
+      "game": 153,
+      "block": 76,
+      "a_team": 5,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        38659,
+        21054,
+        48814,
+        18921
+      ],
+      "sampler_seed": 1282085617,
+      "mixed_policy_seed": 949698168
+    },
+    {
+      "game": 154,
+      "block": 77,
+      "a_team": 7,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        19499,
+        57384,
+        4593,
+        3234
+      ],
+      "sampler_seed": 1036285835,
+      "mixed_policy_seed": 1598091872
+    },
+    {
+      "game": 155,
+      "block": 77,
+      "a_team": 7,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        19499,
+        57384,
+        4593,
+        3234
+      ],
+      "sampler_seed": 1036285835,
+      "mixed_policy_seed": 1598091872
+    },
+    {
+      "game": 156,
+      "block": 78,
+      "a_team": 0,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        43603,
+        21700,
+        51683,
+        61811
+      ],
+      "sampler_seed": 1280787933,
+      "mixed_policy_seed": 1831239609
+    },
+    {
+      "game": 157,
+      "block": 78,
+      "a_team": 0,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        43603,
+        21700,
+        51683,
+        61811
+      ],
+      "sampler_seed": 1280787933,
+      "mixed_policy_seed": 1831239609
+    },
+    {
+      "game": 158,
+      "block": 79,
+      "a_team": 6,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        60163,
+        37276,
+        54002,
+        60044
+      ],
+      "sampler_seed": 1668920581,
+      "mixed_policy_seed": 911522896
+    },
+    {
+      "game": 159,
+      "block": 79,
+      "a_team": 6,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        60163,
+        37276,
+        54002,
+        60044
+      ],
+      "sampler_seed": 1668920581,
+      "mixed_policy_seed": 911522896
+    },
+    {
+      "game": 160,
+      "block": 80,
+      "a_team": 1,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        34661,
+        4088,
+        12004,
+        17311
+      ],
+      "sampler_seed": 628892111,
+      "mixed_policy_seed": 1856548881
+    },
+    {
+      "game": 161,
+      "block": 80,
+      "a_team": 1,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        34661,
+        4088,
+        12004,
+        17311
+      ],
+      "sampler_seed": 628892111,
+      "mixed_policy_seed": 1856548881
+    },
+    {
+      "game": 162,
+      "block": 81,
+      "a_team": 9,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        50930,
+        29971,
+        138,
+        20741
+      ],
+      "sampler_seed": 429470004,
+      "mixed_policy_seed": 419775471
+    },
+    {
+      "game": 163,
+      "block": 81,
+      "a_team": 9,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        50930,
+        29971,
+        138,
+        20741
+      ],
+      "sampler_seed": 429470004,
+      "mixed_policy_seed": 419775471
+    },
+    {
+      "game": 164,
+      "block": 82,
+      "a_team": 4,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        55355,
+        31285,
+        60732,
+        9602
+      ],
+      "sampler_seed": 1556485945,
+      "mixed_policy_seed": 384244526
+    },
+    {
+      "game": 165,
+      "block": 82,
+      "a_team": 4,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        55355,
+        31285,
+        60732,
+        9602
+      ],
+      "sampler_seed": 1556485945,
+      "mixed_policy_seed": 384244526
+    },
+    {
+      "game": 166,
+      "block": 83,
+      "a_team": 8,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        53667,
+        16637,
+        26944,
+        17228
+      ],
+      "sampler_seed": 1977429973,
+      "mixed_policy_seed": 1783378552
+    },
+    {
+      "game": 167,
+      "block": 83,
+      "a_team": 8,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        53667,
+        16637,
+        26944,
+        17228
+      ],
+      "sampler_seed": 1977429973,
+      "mixed_policy_seed": 1783378552
+    },
+    {
+      "game": 168,
+      "block": 84,
+      "a_team": 3,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        47297,
+        5706,
+        38729,
+        63338
+      ],
+      "sampler_seed": 1530193291,
+      "mixed_policy_seed": 1073818502
+    },
+    {
+      "game": 169,
+      "block": 84,
+      "a_team": 3,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        47297,
+        5706,
+        38729,
+        63338
+      ],
+      "sampler_seed": 1530193291,
+      "mixed_policy_seed": 1073818502
+    },
+    {
+      "game": 170,
+      "block": 85,
+      "a_team": 2,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        1275,
+        58139,
+        46640,
+        56037
+      ],
+      "sampler_seed": 901737463,
+      "mixed_policy_seed": 1428712456
+    },
+    {
+      "game": 171,
+      "block": 85,
+      "a_team": 2,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        1275,
+        58139,
+        46640,
+        56037
+      ],
+      "sampler_seed": 901737463,
+      "mixed_policy_seed": 1428712456
+    },
+    {
+      "game": 172,
+      "block": 86,
+      "a_team": 5,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        64588,
+        45801,
+        30489,
+        20766
+      ],
+      "sampler_seed": 1233540065,
+      "mixed_policy_seed": 1442175606
+    },
+    {
+      "game": 173,
+      "block": 86,
+      "a_team": 5,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        64588,
+        45801,
+        30489,
+        20766
+      ],
+      "sampler_seed": 1233540065,
+      "mixed_policy_seed": 1442175606
+    },
+    {
+      "game": 174,
+      "block": 87,
+      "a_team": 7,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        45028,
+        25041,
+        24299,
+        26959
+      ],
+      "sampler_seed": 579037502,
+      "mixed_policy_seed": 899168582
+    },
+    {
+      "game": 175,
+      "block": 87,
+      "a_team": 7,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        45028,
+        25041,
+        24299,
+        26959
+      ],
+      "sampler_seed": 579037502,
+      "mixed_policy_seed": 899168582
+    },
+    {
+      "game": 176,
+      "block": 88,
+      "a_team": 0,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        28901,
+        15973,
+        5393,
+        55314
+      ],
+      "sampler_seed": 538906457,
+      "mixed_policy_seed": 1361466047
+    },
+    {
+      "game": 177,
+      "block": 88,
+      "a_team": 0,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        28901,
+        15973,
+        5393,
+        55314
+      ],
+      "sampler_seed": 538906457,
+      "mixed_policy_seed": 1361466047
+    },
+    {
+      "game": 178,
+      "block": 89,
+      "a_team": 6,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        46013,
+        11475,
+        38996,
+        30256
+      ],
+      "sampler_seed": 2093000520,
+      "mixed_policy_seed": 2124215538
+    },
+    {
+      "game": 179,
+      "block": 89,
+      "a_team": 6,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        46013,
+        11475,
+        38996,
+        30256
+      ],
+      "sampler_seed": 2093000520,
+      "mixed_policy_seed": 2124215538
+    },
+    {
+      "game": 180,
+      "block": 90,
+      "a_team": 1,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        25430,
+        53333,
+        52373,
+        3916
+      ],
+      "sampler_seed": 1838081369,
+      "mixed_policy_seed": 1236149480
+    },
+    {
+      "game": 181,
+      "block": 90,
+      "a_team": 1,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        25430,
+        53333,
+        52373,
+        3916
+      ],
+      "sampler_seed": 1838081369,
+      "mixed_policy_seed": 1236149480
+    },
+    {
+      "game": 182,
+      "block": 91,
+      "a_team": 9,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        40422,
+        46042,
+        21793,
+        2907
+      ],
+      "sampler_seed": 795331303,
+      "mixed_policy_seed": 963414553
+    },
+    {
+      "game": 183,
+      "block": 91,
+      "a_team": 9,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        40422,
+        46042,
+        21793,
+        2907
+      ],
+      "sampler_seed": 795331303,
+      "mixed_policy_seed": 963414553
+    },
+    {
+      "game": 184,
+      "block": 92,
+      "a_team": 4,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        53846,
+        19988,
+        36652,
+        51868
+      ],
+      "sampler_seed": 600129160,
+      "mixed_policy_seed": 1701361187
+    },
+    {
+      "game": 185,
+      "block": 92,
+      "a_team": 4,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        53846,
+        19988,
+        36652,
+        51868
+      ],
+      "sampler_seed": 600129160,
+      "mixed_policy_seed": 1701361187
+    },
+    {
+      "game": 186,
+      "block": 93,
+      "a_team": 8,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        59424,
+        1471,
+        28655,
+        27221
+      ],
+      "sampler_seed": 362654211,
+      "mixed_policy_seed": 81369089
+    },
+    {
+      "game": 187,
+      "block": 93,
+      "a_team": 8,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        59424,
+        1471,
+        28655,
+        27221
+      ],
+      "sampler_seed": 362654211,
+      "mixed_policy_seed": 81369089
+    },
+    {
+      "game": 188,
+      "block": 94,
+      "a_team": 3,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        39903,
+        11684,
+        113,
+        48336
+      ],
+      "sampler_seed": 1758892595,
+      "mixed_policy_seed": 432718595
+    },
+    {
+      "game": 189,
+      "block": 94,
+      "a_team": 3,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        39903,
+        11684,
+        113,
+        48336
+      ],
+      "sampler_seed": 1758892595,
+      "mixed_policy_seed": 432718595
+    },
+    {
+      "game": 190,
+      "block": 95,
+      "a_team": 2,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        36016,
+        31998,
+        60296,
+        25104
+      ],
+      "sampler_seed": 2023018789,
+      "mixed_policy_seed": 1289777847
+    },
+    {
+      "game": 191,
+      "block": 95,
+      "a_team": 2,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        36016,
+        31998,
+        60296,
+        25104
+      ],
+      "sampler_seed": 2023018789,
+      "mixed_policy_seed": 1289777847
+    },
+    {
+      "game": 192,
+      "block": 96,
+      "a_team": 5,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        9427,
+        2979,
+        52741,
+        30205
+      ],
+      "sampler_seed": 193749490,
+      "mixed_policy_seed": 718712340
+    },
+    {
+      "game": 193,
+      "block": 96,
+      "a_team": 5,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        9427,
+        2979,
+        52741,
+        30205
+      ],
+      "sampler_seed": 193749490,
+      "mixed_policy_seed": 718712340
+    },
+    {
+      "game": 194,
+      "block": 97,
+      "a_team": 7,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        38150,
+        37440,
+        35308,
+        26925
+      ],
+      "sampler_seed": 888626611,
+      "mixed_policy_seed": 590261442
+    },
+    {
+      "game": 195,
+      "block": 97,
+      "a_team": 7,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        38150,
+        37440,
+        35308,
+        26925
+      ],
+      "sampler_seed": 888626611,
+      "mixed_policy_seed": 590261442
+    },
+    {
+      "game": 196,
+      "block": 98,
+      "a_team": 0,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        40372,
+        16888,
+        36133,
+        63442
+      ],
+      "sampler_seed": 1821922635,
+      "mixed_policy_seed": 226344141
+    },
+    {
+      "game": 197,
+      "block": 98,
+      "a_team": 0,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        40372,
+        16888,
+        36133,
+        63442
+      ],
+      "sampler_seed": 1821922635,
+      "mixed_policy_seed": 226344141
+    },
+    {
+      "game": 198,
+      "block": 99,
+      "a_team": 6,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        23806,
+        27481,
+        20373,
+        45445
+      ],
+      "sampler_seed": 1133937362,
+      "mixed_policy_seed": 711533
+    },
+    {
+      "game": 199,
+      "block": 99,
+      "a_team": 6,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        23806,
+        27481,
+        20373,
+        45445
+      ],
+      "sampler_seed": 1133937362,
+      "mixed_policy_seed": 711533
+    }
+  ],
+  "stopping_rule": {
+    "games": 200,
+    "max_turns": 300,
+    "censored_turn_limit": "void, never counted as a played draw or silently dropped",
+    "game_timeout_seconds": 3600,
+    "no_outcome_stopping": true
+  },
+  "promotion_rule": "Correctness fixes may be enabled without proven strength. Policy changes remain off unless fresh confirmation supports benefit and reliability; screening alone is inconclusive.",
+  "compute": "same requested settings except the allocation stage; one native thread; sequential worlds; actual CPU and search time reported",
+  "manifest_sha256": "f1f625e6ab2d43081734485e45faa5c55d34312e89fa0efff46be08c71246ca9"
+}

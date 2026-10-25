@@ -49,9 +49,11 @@ def priors_from_teams(teams: list[str]) -> dict:
     return {"source": {"format": "gen9ou", "month": "teams", "cutoff": 0, "battles": 0}, "species": species}
 
 
-def run(games: int, team: str, priors: dict, budget: float, runs_dir: str) -> list[dict]:
+def run(games: int, team: str, priors: dict, budget: float, runs_dir: str,
+        backend: str = "mcts", worlds: int = 8, search_ms: int = 150, engine_threads: int = 1) -> list[dict]:
     agent_player = AgentPlayer(
-        make_agent=lambda: Agent(priors, budget=budget),
+        make_agent=lambda: Agent(priors, budget=budget, backend=backend, mcts_worlds=worlds,
+                                 search_ms=search_ms, engine_threads=engine_threads),
         runs_dir=runs_dir,
         account_configuration=AccountConfiguration("oxhack agent", None),
         battle_format="gen9ou",
@@ -69,10 +71,13 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--games", type=int, default=10)
     parser.add_argument("--team", default="bot/teams/standin-gen9ou.txt")
-    # The example priors cover two species; data/set_candidates.json replaces them once the data layer ships it.
-    parser.add_argument("--priors", default="contracts/examples/set_candidates_example.json")
+    parser.add_argument("--priors", default="data/set_candidates.json")
     parser.add_argument("--priors-from-team", action="store_true", help="test only: priors = the team's exact sets")
     parser.add_argument("--budget", type=float, default=3.0, help="decision deadline per turn, seconds")
+    parser.add_argument("--backend", choices=("one_ply", "mcts"), default="mcts")
+    parser.add_argument("--worlds", type=int, default=8, help="sampled hidden teams per MCTS decision")
+    parser.add_argument("--search-ms", type=int, default=150, help="native search budget per world")
+    parser.add_argument("--engine-threads", type=int, default=1)
     parser.add_argument("--max-fallback", type=float, default=0.05, help="fail above this share of decisions")
     parser.add_argument("--runs", default="runs")
     args = parser.parse_args(argv)
@@ -80,11 +85,14 @@ def main(argv: list[str] | None = None) -> int:
 
     team = Path(args.team).read_text(encoding="utf-8").strip()
     priors = priors_from_teams([team]) if args.priors_from_team else json.loads(Path(args.priors).read_text(encoding="utf-8"))
-    summaries = run(args.games, team, priors, args.budget, args.runs)
+    summaries = run(args.games, team, priors, args.budget, args.runs,
+                    args.backend, args.worlds, args.search_ms, args.engine_threads)
 
     for s in summaries:
         print(f"{s['tag']}: {'won' if s['won'] else 'lost'} in {s['turns']} turns, "
               f"{s['fallbacks']}/{s['decisions']} fallbacks, think p50 {s['think_p50_ms']} ms p99 {s['think_p99_ms']} ms")
+        if s.get("fallback_reasons"):
+            print("fallback reasons: " + json.dumps(s["fallback_reasons"], sort_keys=True))
     decisions = sum(s["decisions"] for s in summaries)
     fallbacks = sum(s["fallbacks"] for s in summaries)
     rate = fallbacks / decisions if decisions else 1.0

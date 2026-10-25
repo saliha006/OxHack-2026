@@ -1,0 +1,1019 @@
+{
+  "purpose": "Actual historical development requests/public states: fainted Kyurem Tera flag blank in request, irreversible observed Tera fact preserved. Contains only own private request and public opposing observations; no opposing private team.",
+  "frames": [
+    {
+      "id": "battle-gen9ou-26-middle",
+      "source": {
+        "file": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-comparison-final/players/oxb4db3c68/battle-gen9ou-26.jsonl",
+        "sha256": "1395bff6c8f6c8ed363ca5227a59ddc4535279823b5ae057384b225737997a84",
+        "line": 57,
+        "battle_id": "battle-gen9ou-26",
+        "turn": 23,
+        "selection": "middle",
+        "eligible_move_requests": 44
+      },
+      "request": {
+        "active": [
+          {
+            "moves": [
+              {
+                "move": "Chilly Reception",
+                "id": "chillyreception",
+                "pp": 16,
+                "maxpp": 16,
+                "target": "all",
+                "disabled": false
+              },
+              {
+                "move": "Thunder Wave",
+                "id": "thunderwave",
+                "pp": 32,
+                "maxpp": 32,
+                "target": "normal",
+                "disabled": false
+              },
+              {
+                "move": "Sludge Bomb",
+                "id": "sludgebomb",
+                "pp": 12,
+                "maxpp": 16,
+                "target": "normal",
+                "disabled": false
+              },
+              {
+                "move": "Future Sight",
+                "id": "futuresight",
+                "pp": 16,
+                "maxpp": 16,
+                "target": "normal",
+                "disabled": false
+              }
+            ]
+          }
+        ],
+        "side": {
+          "name": "oxb4db3c68",
+          "id": "p2",
+          "pokemon": [
+            {
+              "ident": "p2: Slowking",
+              "details": "Slowking-Galar, M",
+              "condition": "352/394",
+              "active": true,
+              "stats": {
+                "atk": 135,
+                "def": 213,
+                "spa": 256,
+                "spd": 333,
+                "spe": 58
+              },
+              "moves": [
+                "chillyreception",
+                "thunderwave",
+                "sludgebomb",
+                "futuresight"
+              ],
+              "baseAbility": "regenerator",
+              "item": "colburberry",
+              "pokeball": "pokeball",
+              "ability": "regenerator",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Water",
+              "terastallized": ""
+            },
+            {
+              "ident": "p2: Cinderace",
+              "details": "Cinderace, M",
+              "condition": "0 fnt",
+              "active": false,
+              "stats": {
+                "atk": 276,
+                "def": 186,
+                "spa": 149,
+                "spd": 186,
+                "spe": 370
+              },
+              "moves": [
+                "pyroball",
+                "uturn",
+                "willowisp",
+                "courtchange"
+              ],
+              "baseAbility": "blaze",
+              "item": "heavydutyboots",
+              "pokeball": "pokeball",
+              "ability": "blaze",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Flying",
+              "terastallized": ""
+            },
+            {
+              "ident": "p2: Zapdos",
+              "details": "Zapdos, shiny",
+              "condition": "155/383",
+              "active": false,
+              "stats": {
+                "atk": 166,
+                "def": 295,
+                "spa": 288,
+                "spd": 216,
+                "spe": 236
+              },
+              "moves": [
+                "thunderwave",
+                "roost",
+                "voltswitch",
+                "hurricane"
+              ],
+              "baseAbility": "static",
+              "item": "heavydutyboots",
+              "pokeball": "pokeball",
+              "ability": "static",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Grass",
+              "terastallized": ""
+            },
+            {
+              "ident": "p2: Great Tusk",
+              "details": "Great Tusk",
+              "condition": "0 fnt",
+              "active": false,
+              "stats": {
+                "atk": 348,
+                "def": 298,
+                "spa": 127,
+                "spd": 142,
+                "spe": 300
+              },
+              "moves": [
+                "headlongrush",
+                "rapidspin",
+                "closecombat",
+                "icespinner"
+              ],
+              "baseAbility": "protosynthesis",
+              "item": "leftovers",
+              "pokeball": "pokeball",
+              "ability": "protosynthesis",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Ice",
+              "terastallized": ""
+            },
+            {
+              "ident": "p2: Kyurem",
+              "details": "Kyurem",
+              "condition": "0 fnt",
+              "active": false,
+              "stats": {
+                "atk": 238,
+                "def": 216,
+                "spa": 359,
+                "spd": 217,
+                "spe": 317
+              },
+              "moves": [
+                "blizzard",
+                "freezedry",
+                "earthpower",
+                "icebeam"
+              ],
+              "baseAbility": "pressure",
+              "item": "choicespecs",
+              "pokeball": "pokeball",
+              "ability": "pressure",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Ice",
+              "terastallized": ""
+            },
+            {
+              "ident": "p2: Kingambit",
+              "details": "Kingambit, M",
+              "condition": "0 fnt",
+              "active": false,
+              "stats": {
+                "atk": 405,
+                "def": 276,
+                "spa": 140,
+                "spd": 206,
+                "spe": 165
+              },
+              "moves": [
+                "swordsdance",
+                "lowkick",
+                "ironhead",
+                "suckerpunch"
+              ],
+              "baseAbility": "supremeoverlord",
+              "item": "leftovers",
+              "pokeball": "pokeball",
+              "ability": "supremeoverlord",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Ghost",
+              "terastallized": ""
+            }
+          ]
+        },
+        "rqid": 69
+      },
+      "battle": {
+        "us": "p2",
+        "turn": 23,
+        "sides": {
+          "p1": {
+            "player": "oxe44427d4",
+            "rating": null,
+            "pokemon": [
+              {
+                "species": "slowkinggalar",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 100,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [],
+                "item": null,
+                "ability": null,
+                "tera_type": null,
+                "terastallized": false
+              },
+              {
+                "species": "greattusk",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 33,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [
+                  "icespinner",
+                  "headlongrush"
+                ],
+                "item": "leftovers",
+                "ability": null,
+                "tera_type": "ice",
+                "terastallized": true
+              },
+              {
+                "species": "kyurem",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 0,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [
+                  "earthpower",
+                  "icebeam"
+                ],
+                "item": null,
+                "ability": "pressure",
+                "tera_type": null,
+                "terastallized": false
+              },
+              {
+                "species": "kingambit",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 0,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [],
+                "item": null,
+                "ability": null,
+                "tera_type": null,
+                "terastallized": false
+              },
+              {
+                "species": "cinderace",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 0,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [
+                  "pyroball"
+                ],
+                "item": null,
+                "ability": null,
+                "tera_type": null,
+                "terastallized": false
+              },
+              {
+                "species": "zapdos",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 96,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [
+                  "voltswitch",
+                  "roost",
+                  "hurricane"
+                ],
+                "item": null,
+                "ability": null,
+                "tera_type": null,
+                "terastallized": false
+              }
+            ],
+            "active": 0,
+            "tera_used": true,
+            "boosts": {
+              "atk": 0,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0,
+              "accuracy": 0,
+              "evasion": 0
+            },
+            "volatiles": [],
+            "last_move": null,
+            "hazards": {
+              "stealthrock": 0,
+              "spikes": 0,
+              "toxicspikes": 0,
+              "stickyweb": 0
+            },
+            "side_effects": {}
+          },
+          "p2": {
+            "player": "oxb4db3c68",
+            "rating": null,
+            "pokemon": [
+              {
+                "species": "slowkinggalar",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 89,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [
+                  "sludgebomb"
+                ],
+                "item": null,
+                "ability": null,
+                "tera_type": null,
+                "terastallized": false
+              },
+              {
+                "species": "greattusk",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 0,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [
+                  "closecombat"
+                ],
+                "item": "leftovers",
+                "ability": null,
+                "tera_type": null,
+                "terastallized": false
+              },
+              {
+                "species": "kyurem",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 0,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [
+                  "earthpower"
+                ],
+                "item": null,
+                "ability": "pressure",
+                "tera_type": "ice",
+                "terastallized": true
+              },
+              {
+                "species": "kingambit",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 0,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [
+                  "lowkick"
+                ],
+                "item": "leftovers",
+                "ability": null,
+                "tera_type": null,
+                "terastallized": false
+              },
+              {
+                "species": "cinderace",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 0,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [
+                  "pyroball"
+                ],
+                "item": null,
+                "ability": null,
+                "tera_type": null,
+                "terastallized": false
+              },
+              {
+                "species": "zapdos",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 40,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [
+                  "hurricane",
+                  "voltswitch"
+                ],
+                "item": null,
+                "ability": null,
+                "tera_type": null,
+                "terastallized": false
+              }
+            ],
+            "active": 0,
+            "tera_used": true,
+            "boosts": {
+              "atk": 0,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0,
+              "accuracy": 0,
+              "evasion": 0
+            },
+            "volatiles": [],
+            "last_move": null,
+            "hazards": {
+              "stealthrock": 0,
+              "spikes": 0,
+              "toxicspikes": 0,
+              "stickyweb": 0
+            },
+            "side_effects": {}
+          }
+        },
+        "field": {
+          "weather": "",
+          "weather_turns": 0,
+          "terrain": "",
+          "terrain_turns": 0,
+          "effects": {}
+        },
+        "last_turn": [
+          {
+            "type": "switch",
+            "side": "p1",
+            "pokemon": 0,
+            "move": null,
+            "target": null,
+            "hp_percent": null,
+            "source": null,
+            "crit": false,
+            "effectiveness": null,
+            "reason": null
+          },
+          {
+            "type": "switch",
+            "side": "p2",
+            "pokemon": 0,
+            "move": null,
+            "target": null,
+            "hp_percent": null,
+            "source": null,
+            "crit": false,
+            "effectiveness": null,
+            "reason": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "battle-gen9ou-26-last",
+      "source": {
+        "file": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-comparison-final/players/oxb4db3c68/battle-gen9ou-26.jsonl",
+        "sha256": "1395bff6c8f6c8ed363ca5227a59ddc4535279823b5ae057384b225737997a84",
+        "line": 109,
+        "battle_id": "battle-gen9ou-26",
+        "turn": 44,
+        "selection": "last",
+        "eligible_move_requests": 44
+      },
+      "request": {
+        "active": [
+          {
+            "moves": [
+              {
+                "move": "Chilly Reception",
+                "id": "chillyreception",
+                "pp": 14,
+                "maxpp": 16,
+                "target": "all",
+                "disabled": false
+              },
+              {
+                "move": "Thunder Wave",
+                "id": "thunderwave",
+                "pp": 31,
+                "maxpp": 32,
+                "target": "normal",
+                "disabled": false
+              },
+              {
+                "move": "Sludge Bomb",
+                "id": "sludgebomb",
+                "pp": 7,
+                "maxpp": 16,
+                "target": "normal",
+                "disabled": false
+              },
+              {
+                "move": "Future Sight",
+                "id": "futuresight",
+                "pp": 14,
+                "maxpp": 16,
+                "target": "normal",
+                "disabled": false
+              }
+            ]
+          }
+        ],
+        "side": {
+          "name": "oxb4db3c68",
+          "id": "p2",
+          "pokemon": [
+            {
+              "ident": "p2: Slowking",
+              "details": "Slowking-Galar, M",
+              "condition": "162/394",
+              "active": true,
+              "stats": {
+                "atk": 135,
+                "def": 213,
+                "spa": 256,
+                "spd": 333,
+                "spe": 58
+              },
+              "moves": [
+                "chillyreception",
+                "thunderwave",
+                "sludgebomb",
+                "futuresight"
+              ],
+              "baseAbility": "regenerator",
+              "item": "colburberry",
+              "pokeball": "pokeball",
+              "ability": "regenerator",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Water",
+              "terastallized": ""
+            },
+            {
+              "ident": "p2: Cinderace",
+              "details": "Cinderace, M",
+              "condition": "0 fnt",
+              "active": false,
+              "stats": {
+                "atk": 276,
+                "def": 186,
+                "spa": 149,
+                "spd": 186,
+                "spe": 370
+              },
+              "moves": [
+                "pyroball",
+                "uturn",
+                "willowisp",
+                "courtchange"
+              ],
+              "baseAbility": "blaze",
+              "item": "heavydutyboots",
+              "pokeball": "pokeball",
+              "ability": "blaze",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Flying",
+              "terastallized": ""
+            },
+            {
+              "ident": "p2: Zapdos",
+              "details": "Zapdos, shiny",
+              "condition": "0 fnt",
+              "active": false,
+              "stats": {
+                "atk": 166,
+                "def": 295,
+                "spa": 288,
+                "spd": 216,
+                "spe": 236
+              },
+              "moves": [
+                "thunderwave",
+                "roost",
+                "voltswitch",
+                "hurricane"
+              ],
+              "baseAbility": "static",
+              "item": "heavydutyboots",
+              "pokeball": "pokeball",
+              "ability": "static",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Grass",
+              "terastallized": ""
+            },
+            {
+              "ident": "p2: Great Tusk",
+              "details": "Great Tusk",
+              "condition": "0 fnt",
+              "active": false,
+              "stats": {
+                "atk": 348,
+                "def": 298,
+                "spa": 127,
+                "spd": 142,
+                "spe": 300
+              },
+              "moves": [
+                "headlongrush",
+                "rapidspin",
+                "closecombat",
+                "icespinner"
+              ],
+              "baseAbility": "protosynthesis",
+              "item": "leftovers",
+              "pokeball": "pokeball",
+              "ability": "protosynthesis",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Ice",
+              "terastallized": ""
+            },
+            {
+              "ident": "p2: Kyurem",
+              "details": "Kyurem",
+              "condition": "0 fnt",
+              "active": false,
+              "stats": {
+                "atk": 238,
+                "def": 216,
+                "spa": 359,
+                "spd": 217,
+                "spe": 317
+              },
+              "moves": [
+                "blizzard",
+                "freezedry",
+                "earthpower",
+                "icebeam"
+              ],
+              "baseAbility": "pressure",
+              "item": "choicespecs",
+              "pokeball": "pokeball",
+              "ability": "pressure",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Ice",
+              "terastallized": ""
+            },
+            {
+              "ident": "p2: Kingambit",
+              "details": "Kingambit, M",
+              "condition": "0 fnt",
+              "active": false,
+              "stats": {
+                "atk": 405,
+                "def": 276,
+                "spa": 140,
+                "spd": 206,
+                "spe": 165
+              },
+              "moves": [
+                "swordsdance",
+                "lowkick",
+                "ironhead",
+                "suckerpunch"
+              ],
+              "baseAbility": "supremeoverlord",
+              "item": "leftovers",
+              "pokeball": "pokeball",
+              "ability": "supremeoverlord",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Ghost",
+              "terastallized": ""
+            }
+          ]
+        },
+        "rqid": 131
+      },
+      "battle": {
+        "us": "p2",
+        "turn": 44,
+        "sides": {
+          "p1": {
+            "player": "oxe44427d4",
+            "rating": null,
+            "pokemon": [
+              {
+                "species": "slowkinggalar",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 90,
+                "status": "par",
+                "status_turns": 0,
+                "revealed_moves": [
+                  "chillyreception",
+                  "futuresight",
+                  "sludgebomb"
+                ],
+                "item": null,
+                "ability": null,
+                "tera_type": null,
+                "terastallized": false
+              },
+              {
+                "species": "greattusk",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 0,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [
+                  "icespinner",
+                  "headlongrush"
+                ],
+                "item": "leftovers",
+                "ability": null,
+                "tera_type": "ice",
+                "terastallized": true
+              },
+              {
+                "species": "kyurem",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 0,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [
+                  "earthpower",
+                  "icebeam"
+                ],
+                "item": null,
+                "ability": "pressure",
+                "tera_type": null,
+                "terastallized": false
+              },
+              {
+                "species": "kingambit",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 0,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [],
+                "item": null,
+                "ability": null,
+                "tera_type": null,
+                "terastallized": false
+              },
+              {
+                "species": "cinderace",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 0,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [
+                  "pyroball"
+                ],
+                "item": null,
+                "ability": null,
+                "tera_type": null,
+                "terastallized": false
+              },
+              {
+                "species": "zapdos",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 91,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [
+                  "voltswitch",
+                  "roost",
+                  "hurricane"
+                ],
+                "item": null,
+                "ability": null,
+                "tera_type": null,
+                "terastallized": false
+              }
+            ],
+            "active": 0,
+            "tera_used": true,
+            "boosts": {
+              "atk": 0,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0,
+              "accuracy": 0,
+              "evasion": 0
+            },
+            "volatiles": [],
+            "last_move": "futuresight",
+            "hazards": {
+              "stealthrock": 0,
+              "spikes": 0,
+              "toxicspikes": 0,
+              "stickyweb": 0
+            },
+            "side_effects": {},
+            "future_sight": {
+              "turns": 2,
+              "source": 0
+            }
+          },
+          "p2": {
+            "player": "oxb4db3c68",
+            "rating": null,
+            "pokemon": [
+              {
+                "species": "slowkinggalar",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 41,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [
+                  "sludgebomb",
+                  "chillyreception",
+                  "futuresight",
+                  "thunderwave"
+                ],
+                "item": null,
+                "ability": null,
+                "tera_type": null,
+                "terastallized": false
+              },
+              {
+                "species": "greattusk",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 0,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [
+                  "closecombat"
+                ],
+                "item": "leftovers",
+                "ability": null,
+                "tera_type": null,
+                "terastallized": false
+              },
+              {
+                "species": "kyurem",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 0,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [
+                  "earthpower"
+                ],
+                "item": null,
+                "ability": "pressure",
+                "tera_type": "ice",
+                "terastallized": true
+              },
+              {
+                "species": "kingambit",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 0,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [
+                  "lowkick"
+                ],
+                "item": "leftovers",
+                "ability": null,
+                "tera_type": null,
+                "terastallized": false
+              },
+              {
+                "species": "cinderace",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 0,
+                "status": "",
+                "status_turns": 0,
+                "revealed_moves": [
+                  "pyroball"
+                ],
+                "item": null,
+                "ability": null,
+                "tera_type": null,
+                "terastallized": false
+              },
+              {
+                "species": "zapdos",
+                "forme_known": true,
+                "level": 100,
+                "hp_percent": 0,
+                "status": "psn",
+                "status_turns": 0,
+                "revealed_moves": [
+                  "hurricane",
+                  "voltswitch",
+                  "roost"
+                ],
+                "item": null,
+                "ability": null,
+                "tera_type": null,
+                "terastallized": false
+              }
+            ],
+            "active": 0,
+            "tera_used": true,
+            "boosts": {
+              "atk": 0,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0,
+              "accuracy": 0,
+              "evasion": 0
+            },
+            "volatiles": [],
+            "last_move": "sludgebomb",
+            "hazards": {
+              "stealthrock": 0,
+              "spikes": 0,
+              "toxicspikes": 0,
+              "stickyweb": 0
+            },
+            "side_effects": {},
+            "future_sight": {
+              "turns": 2,
+              "source": 0
+            }
+          }
+        },
+        "field": {
+          "weather": "",
+          "weather_turns": 0,
+          "terrain": "",
+          "terrain_turns": 0,
+          "effects": {}
+        },
+        "last_turn": [
+          {
+            "type": "move",
+            "side": "p2",
+            "pokemon": 0,
+            "move": "sludgebomb",
+            "target": "p1",
+            "hp_percent": null,
+            "source": null,
+            "crit": false,
+            "effectiveness": null,
+            "reason": null
+          },
+          {
+            "type": "damage",
+            "side": "p1",
+            "pokemon": 0,
+            "move": null,
+            "target": null,
+            "hp_percent": 90,
+            "source": "move",
+            "crit": false,
+            "effectiveness": "resisted",
+            "reason": null
+          },
+          {
+            "type": "cant",
+            "side": "p1",
+            "pokemon": 0,
+            "move": null,
+            "target": null,
+            "hp_percent": null,
+            "source": null,
+            "crit": false,
+            "effectiveness": null,
+            "reason": "par"
+          }
+        ]
+      }
+    }
+  ]
+}

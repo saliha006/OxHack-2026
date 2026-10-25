@@ -1,0 +1,1460 @@
+{
+  "source": "public_ladder",
+  "feature_version": 1,
+  "feature_names": [
+    "difference_alive",
+    "difference_hp",
+    "difference_active_hp",
+    "difference_statused",
+    "difference_tera_available",
+    "difference_revealed_moves",
+    "difference_atk",
+    "difference_def",
+    "difference_spa",
+    "difference_spd",
+    "difference_spe",
+    "difference_accuracy",
+    "difference_evasion",
+    "difference_stealthrock",
+    "difference_spikes",
+    "difference_toxicspikes",
+    "difference_stickyweb",
+    "difference_reflect",
+    "difference_lightscreen",
+    "difference_auroraveil",
+    "difference_tailwind",
+    "difference_safeguard",
+    "difference_substitute",
+    "difference_taunt",
+    "difference_encore",
+    "difference_confusion",
+    "difference_leechseed",
+    "difference_yawn",
+    "difference_wish",
+    "difference_future_sight",
+    "turn",
+    "trickroom"
+  ],
+  "models": {
+    "validation": {
+      "constant_0.5": {
+        "rows": 279,
+        "log_loss": 0.6931471805599453,
+        "brier": 0.25,
+        "calibration": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 279,
+            "predicted": 0.5,
+            "observed": 0.5017921146953405
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          }
+        ],
+        "probability_clip": 1e-06
+      },
+      "training_constant": {
+        "rows": 279,
+        "log_loss": 0.696118722168392,
+        "brier": 0.25148187382859,
+        "calibration": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 279,
+            "predicted": 0.4632553075666848,
+            "observed": 0.5017921146953405
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          }
+        ],
+        "probability_clip": 1e-06
+      },
+      "hp_only": {
+        "rows": 279,
+        "log_loss": 0.6672651804320694,
+        "brier": 0.23780028001792114,
+        "calibration": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "count": 4,
+            "predicted": 0.2571875,
+            "observed": 0.25
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "count": 23,
+            "predicted": 0.3652173913043478,
+            "observed": 0.6521739130434783
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 103,
+            "predicted": 0.45571197411003234,
+            "observed": 0.42718446601941745
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 121,
+            "predicted": 0.5326411845730028,
+            "observed": 0.4297520661157025
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "count": 16,
+            "predicted": 0.644140625,
+            "observed": 1.0
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "count": 11,
+            "predicted": 0.7353030303030302,
+            "observed": 1.0
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 1,
+            "predicted": 0.8045833333333333,
+            "observed": 1.0
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          }
+        ],
+        "probability_clip": 1e-06
+      },
+      "logistic": {
+        "rows": 279,
+        "log_loss": 0.8700823350713237,
+        "brier": 0.293001289505392,
+        "calibration": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "count": 14,
+            "predicted": 0.054731035530762244,
+            "observed": 0.42857142857142855
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "count": 10,
+            "predicted": 0.1484290661034845,
+            "observed": 0.6
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "count": 17,
+            "predicted": 0.24733713128459353,
+            "observed": 0.4117647058823529
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "count": 22,
+            "predicted": 0.3416704050476734,
+            "observed": 0.36363636363636365
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 47,
+            "predicted": 0.4602100257585616,
+            "observed": 0.425531914893617
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 31,
+            "predicted": 0.5524996218973778,
+            "observed": 0.4838709677419355
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "count": 26,
+            "predicted": 0.6490303916894511,
+            "observed": 0.46153846153846156
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "count": 29,
+            "predicted": 0.7473587863899003,
+            "observed": 0.4482758620689655
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 37,
+            "predicted": 0.8446897766828894,
+            "observed": 0.7297297297297297
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 46,
+            "predicted": 0.9519441742774175,
+            "observed": 0.5652173913043478
+          }
+        ],
+        "probability_clip": 1e-06
+      },
+      "calibrated_logistic": {
+        "rows": 279,
+        "log_loss": 0.6833499683627716,
+        "brier": 0.24513141742685948,
+        "calibration": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "count": 1,
+            "predicted": 0.2870509134390635,
+            "observed": 0.0
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "count": 17,
+            "predicted": 0.3624640520066609,
+            "observed": 0.5294117647058824
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 133,
+            "predicted": 0.4633882995810555,
+            "observed": 0.42857142857142855
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 100,
+            "predicted": 0.5410168541033529,
+            "observed": 0.57
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "count": 28,
+            "predicted": 0.631154907370951,
+            "observed": 0.6071428571428571
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          }
+        ],
+        "probability_clip": 1e-06
+      }
+    },
+    "test": {
+      "constant_0.5": {
+        "rows": 401,
+        "log_loss": 0.6931471805599453,
+        "brier": 0.25,
+        "calibration": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 401,
+            "predicted": 0.5,
+            "observed": 0.48129675810473815
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          }
+        ],
+        "probability_clip": 1e-06
+      },
+      "training_constant": {
+        "rows": 401,
+        "log_loss": 0.6931008992500151,
+        "brier": 0.24997568268012438,
+        "calibration": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 401,
+            "predicted": 0.4632553075666848,
+            "observed": 0.48129675810473815
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          }
+        ],
+        "probability_clip": 1e-06
+      },
+      "hp_only": {
+        "rows": 401,
+        "log_loss": 0.6347755610459526,
+        "brier": 0.2215187041077861,
+        "calibration": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "count": 7,
+            "predicted": 0.26339285714285715,
+            "observed": 0.0
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "count": 41,
+            "predicted": 0.3533028455284553,
+            "observed": 0.04878048780487805
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 153,
+            "predicted": 0.4630964052287582,
+            "observed": 0.40522875816993464
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 177,
+            "predicted": 0.5407344632768362,
+            "observed": 0.6610169491525424
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "count": 23,
+            "predicted": 0.6282427536231884,
+            "observed": 0.5217391304347826
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          }
+        ],
+        "probability_clip": 1e-06
+      },
+      "logistic": {
+        "rows": 401,
+        "log_loss": 0.7009121051334956,
+        "brier": 0.2405673969438275,
+        "calibration": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "count": 34,
+            "predicted": 0.05810555279864493,
+            "observed": 0.08823529411764706
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "count": 38,
+            "predicted": 0.14672706250312514,
+            "observed": 0.23684210526315788
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "count": 27,
+            "predicted": 0.24801759452167607,
+            "observed": 0.4074074074074074
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "count": 31,
+            "predicted": 0.34231962126803595,
+            "observed": 0.5483870967741935
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 53,
+            "predicted": 0.46224347173289865,
+            "observed": 0.37735849056603776
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 47,
+            "predicted": 0.5473870080478809,
+            "observed": 0.6382978723404256
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "count": 43,
+            "predicted": 0.6509197376100195,
+            "observed": 0.4418604651162791
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "count": 57,
+            "predicted": 0.7413146735541949,
+            "observed": 0.6842105263157895
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 45,
+            "predicted": 0.8487803957322967,
+            "observed": 0.6666666666666666
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 26,
+            "predicted": 0.9521760962600987,
+            "observed": 0.5769230769230769
+          }
+        ],
+        "probability_clip": 1e-06
+      },
+      "calibrated_logistic": {
+        "rows": 401,
+        "log_loss": 0.6599735193016835,
+        "brier": 0.2337640205149027,
+        "calibration": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "count": 2,
+            "predicted": 0.2831851336946891,
+            "observed": 0.0
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "count": 52,
+            "predicted": 0.3722111224535403,
+            "observed": 0.1346153846153846
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 189,
+            "predicted": 0.45965977194506524,
+            "observed": 0.4708994708994709
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 144,
+            "predicted": 0.5331786726693442,
+            "observed": 0.6180555555555556
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "count": 14,
+            "predicted": 0.6384264623522239,
+            "observed": 0.5714285714285714
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          }
+        ],
+        "probability_clip": 1e-06
+      }
+    },
+    "test_unseen": {
+      "constant_0.5": {
+        "rows": 128,
+        "log_loss": 0.6931471805599453,
+        "brier": 0.25,
+        "calibration": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 128,
+            "predicted": 0.5,
+            "observed": 0.5703125
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          }
+        ],
+        "probability_clip": 1e-06
+      },
+      "training_constant": {
+        "rows": 128,
+        "log_loss": 0.7062079532698033,
+        "brier": 0.25651739479545393,
+        "calibration": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 128,
+            "predicted": 0.4632553075666848,
+            "observed": 0.5703125
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          }
+        ],
+        "probability_clip": 1e-06
+      },
+      "hp_only": {
+        "rows": 128,
+        "log_loss": 0.6192465433078734,
+        "brier": 0.2136908433702257,
+        "calibration": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "count": 11,
+            "predicted": 0.3349621212121212,
+            "observed": 0.0
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 70,
+            "predicted": 0.464625,
+            "observed": 0.4714285714285714
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 44,
+            "predicted": 0.5408901515151515,
+            "observed": 0.8409090909090909
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "count": 3,
+            "predicted": 0.6231944444444445,
+            "observed": 1.0
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          }
+        ],
+        "probability_clip": 1e-06
+      },
+      "logistic": {
+        "rows": 128,
+        "log_loss": 0.5174019925567449,
+        "brier": 0.17510453339228646,
+        "calibration": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "count": 14,
+            "predicted": 0.06533431067406724,
+            "observed": 0.14285714285714285
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "count": 15,
+            "predicted": 0.144915451554115,
+            "observed": 0.06666666666666667
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "count": 4,
+            "predicted": 0.25922527494900055,
+            "observed": 0.5
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "count": 14,
+            "predicted": 0.34286794043552477,
+            "observed": 0.5714285714285714
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 11,
+            "predicted": 0.45196588906730484,
+            "observed": 0.7272727272727273
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 7,
+            "predicted": 0.5520340012916494,
+            "observed": 0.5714285714285714
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "count": 19,
+            "predicted": 0.6561085065347895,
+            "observed": 0.47368421052631576
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "count": 27,
+            "predicted": 0.7392596354684092,
+            "observed": 0.8148148148148148
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 11,
+            "predicted": 0.8516459991863337,
+            "observed": 1.0
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 6,
+            "predicted": 0.9528376829788772,
+            "observed": 1.0
+          }
+        ],
+        "probability_clip": 1e-06
+      },
+      "calibrated_logistic": {
+        "rows": 128,
+        "log_loss": 0.636922950314468,
+        "brier": 0.2223621997007364,
+        "calibration": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "count": 23,
+            "predicted": 0.3744231359025721,
+            "observed": 0.08695652173913043
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 47,
+            "predicted": 0.4566780048030465,
+            "observed": 0.5319148936170213
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 55,
+            "predicted": 0.5278324026807886,
+            "observed": 0.7818181818181819
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "count": 3,
+            "predicted": 0.6320965772637135,
+            "observed": 1.0
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 0,
+            "predicted": null,
+            "observed": null
+          }
+        ],
+        "probability_clip": 1e-06
+      }
+    }
+  },
+  "split_manifest": {
+    "validation_start": "2026-10-25T03:10:21+00:00",
+    "test_start": "2026-10-25T03:25:03+00:00",
+    "grouping": "whole battles ordered by started_at; no turn-level random split",
+    "unseen_control": "exclude any player or team appearing in any earlier split",
+    "splits": {
+      "train": {
+        "battles": 67,
+        "turns": 1837,
+        "battle_ids": [
+          "gen9ou-2704135328",
+          "gen9ou-2704136019",
+          "gen9ou-2704136285",
+          "gen9ou-2704137542",
+          "gen9ou-2704140180",
+          "gen9ou-2704140235",
+          "gen9ou-2704140302",
+          "gen9ou-2704140671",
+          "gen9ou-2704141014",
+          "gen9ou-2704141586",
+          "gen9ou-2704142134",
+          "gen9ou-2704142299",
+          "gen9ou-2704142699",
+          "gen9ou-2704142822",
+          "gen9ou-2704142909",
+          "gen9ou-2704142971",
+          "gen9ou-2704143250",
+          "gen9ou-2704143286",
+          "gen9ou-2704143665",
+          "gen9ou-2704143783",
+          "gen9ou-2704144073",
+          "gen9ou-2704144257",
+          "gen9ou-2704144325",
+          "gen9ou-2704144475",
+          "gen9ou-2704144615",
+          "gen9ou-2704144698",
+          "gen9ou-2704144856",
+          "gen9ou-2704145112",
+          "gen9ou-2704145153",
+          "gen9ou-2704145336",
+          "gen9ou-2704145575",
+          "gen9ou-2704145647",
+          "gen9ou-2704145862",
+          "gen9ou-2704145994",
+          "gen9ou-2704146389",
+          "gen9ou-2704146809",
+          "gen9ou-2704147274",
+          "gen9ou-2704147919",
+          "gen9ou-2704148482",
+          "gen9ou-2704148845",
+          "gen9ou-2704149061",
+          "gen9ou-2704150751",
+          "gen9ou-2704150851",
+          "gen9ou-2704150940",
+          "gen9ou-2704151194",
+          "gen9ou-2704151780",
+          "gen9ou-2704152750",
+          "gen9ou-2704153406",
+          "gen9ou-2704153694",
+          "gen9ou-2704154114",
+          "gen9ou-2704154591",
+          "gen9ou-2704154912",
+          "gen9ou-2704155035",
+          "gen9ou-2704155268",
+          "gen9ou-2704155994",
+          "gen9ou-2704156026",
+          "gen9ou-2704156666",
+          "gen9ou-2704158189",
+          "gen9ou-2704158567",
+          "gen9ou-2704159734",
+          "gen9ou-2704160214",
+          "gen9ou-2704161306",
+          "gen9ou-2704162084",
+          "gen9ou-2704162097",
+          "gen9ou-2704162115",
+          "gen9ou-2704162361",
+          "gen9ou-2704163279"
+        ],
+        "shared_player_battles": 0,
+        "shared_team_battles": 0,
+        "unseen_battle_ids": [
+          "gen9ou-2704135328",
+          "gen9ou-2704136019",
+          "gen9ou-2704136285",
+          "gen9ou-2704137542",
+          "gen9ou-2704140180",
+          "gen9ou-2704140235",
+          "gen9ou-2704140302",
+          "gen9ou-2704140671",
+          "gen9ou-2704141014",
+          "gen9ou-2704141586",
+          "gen9ou-2704142134",
+          "gen9ou-2704142299",
+          "gen9ou-2704142699",
+          "gen9ou-2704142822",
+          "gen9ou-2704142909",
+          "gen9ou-2704142971",
+          "gen9ou-2704143250",
+          "gen9ou-2704143286",
+          "gen9ou-2704143665",
+          "gen9ou-2704143783",
+          "gen9ou-2704144073",
+          "gen9ou-2704144257",
+          "gen9ou-2704144325",
+          "gen9ou-2704144475",
+          "gen9ou-2704144615",
+          "gen9ou-2704144698",
+          "gen9ou-2704144856",
+          "gen9ou-2704145112",
+          "gen9ou-2704145153",
+          "gen9ou-2704145336",
+          "gen9ou-2704145575",
+          "gen9ou-2704145647",
+          "gen9ou-2704145862",
+          "gen9ou-2704145994",
+          "gen9ou-2704146389",
+          "gen9ou-2704146809",
+          "gen9ou-2704147274",
+          "gen9ou-2704147919",
+          "gen9ou-2704148482",
+          "gen9ou-2704148845",
+          "gen9ou-2704149061",
+          "gen9ou-2704150751",
+          "gen9ou-2704150851",
+          "gen9ou-2704150940",
+          "gen9ou-2704151194",
+          "gen9ou-2704151780",
+          "gen9ou-2704152750",
+          "gen9ou-2704153406",
+          "gen9ou-2704153694",
+          "gen9ou-2704154114",
+          "gen9ou-2704154591",
+          "gen9ou-2704154912",
+          "gen9ou-2704155035",
+          "gen9ou-2704155268",
+          "gen9ou-2704155994",
+          "gen9ou-2704156026",
+          "gen9ou-2704156666",
+          "gen9ou-2704158189",
+          "gen9ou-2704158567",
+          "gen9ou-2704159734",
+          "gen9ou-2704160214",
+          "gen9ou-2704161306",
+          "gen9ou-2704162084",
+          "gen9ou-2704162097",
+          "gen9ou-2704162115",
+          "gen9ou-2704162361",
+          "gen9ou-2704163279"
+        ],
+        "roster_proxy_battles": 67
+      },
+      "validation": {
+        "battles": 14,
+        "turns": 279,
+        "battle_ids": [
+          "gen9ou-2704163955",
+          "gen9ou-2704164318",
+          "gen9ou-2704164413",
+          "gen9ou-2704165475",
+          "gen9ou-2704165566",
+          "gen9ou-2704165813",
+          "gen9ou-2704165946",
+          "gen9ou-2704166047",
+          "gen9ou-2704166055",
+          "gen9ou-2704166184",
+          "gen9ou-2704167257",
+          "gen9ou-2704167583",
+          "gen9ou-2704167916",
+          "gen9ou-2704168482"
+        ],
+        "shared_player_battles": 9,
+        "shared_team_battles": 7,
+        "unseen_battle_ids": [
+          "gen9ou-2704163955",
+          "gen9ou-2704164413",
+          "gen9ou-2704165813",
+          "gen9ou-2704166047",
+          "gen9ou-2704167257"
+        ],
+        "roster_proxy_battles": 14
+      },
+      "test": {
+        "battles": 15,
+        "turns": 401,
+        "battle_ids": [
+          "gen9ou-2704168670",
+          "gen9ou-2704168706",
+          "gen9ou-2704168774",
+          "gen9ou-2704168801",
+          "gen9ou-2704168811",
+          "gen9ou-2704168903",
+          "gen9ou-2704169171",
+          "gen9ou-2704169711",
+          "gen9ou-2704170249",
+          "gen9ou-2704170363",
+          "gen9ou-2704170978",
+          "gen9ou-2704171589",
+          "gen9ou-2704172404",
+          "gen9ou-2704173194",
+          "gen9ou-2704173885"
+        ],
+        "shared_player_battles": 9,
+        "shared_team_battles": 9,
+        "unseen_battle_ids": [
+          "gen9ou-2704168706",
+          "gen9ou-2704168811",
+          "gen9ou-2704169171",
+          "gen9ou-2704169711",
+          "gen9ou-2704170978"
+        ],
+        "roster_proxy_battles": 15
+      }
+    }
+  },
+  "metadata": {
+    "epochs": 400,
+    "rate": 0.2,
+    "l2": 0.001,
+    "training_rows": 1837,
+    "training_battles": 67,
+    "preprocessing_fit_on": "train",
+    "calibration_fit_on": "validation",
+    "calibration_battles": [
+      "gen9ou-2704163955",
+      "gen9ou-2704164318",
+      "gen9ou-2704164413",
+      "gen9ou-2704165475",
+      "gen9ou-2704165566",
+      "gen9ou-2704165813",
+      "gen9ou-2704165946",
+      "gen9ou-2704166047",
+      "gen9ou-2704166055",
+      "gen9ou-2704166184",
+      "gen9ou-2704167257",
+      "gen9ou-2704167583",
+      "gen9ou-2704167916",
+      "gen9ou-2704168482"
+    ],
+    "source": "public_ladder",
+    "input_sha256": "cc5d31031dadf0ae5974772e3fc98e22b13532b685e309cc12f2b099a375f6ee",
+    "validation_start": "2026-10-25T03:10:21+00:00",
+    "test_start": "2026-10-25T03:25:03+00:00"
+  },
+  "claim": "offline prediction experiment; not used in search"
+}

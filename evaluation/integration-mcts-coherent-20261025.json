@@ -1,0 +1,89 @@
+{
+  "purpose": "Integration correctness and default checks, not battle strength or a new evaluation run",
+  "inputs": {
+    "coherent_sets": "50d9a4362da5946918bd0a52d6689e582d16e46f",
+    "mcts": "aecf217",
+    "main": "adc8a0b87a29ba2a6a79b60ec181b561d188f820"
+  },
+  "validation": {
+    "command": "nice -n 10 .venv/bin/python -m pytest -q tests bot/tests data/tests",
+    "passed": 551,
+    "skipped": 1,
+    "skip_reason": "Locally downloaded chaos file absent from isolated checkout",
+    "elapsed_seconds": 36.78,
+    "python": "3.13.13",
+    "optional_test_packages": {
+      "duckdb": "2.0.0",
+      "pyarrow": "26.0.0",
+      "pytz": "2026.5"
+    }
+  },
+  "defaults": {
+    "mcts_worlds": 8,
+    "search_ms": 150,
+    "engine_threads": 1,
+    "sampling": "team",
+    "frozen_beliefs": false,
+    "seed": 2026,
+    "budget_seconds": 3.0,
+    "return_reserve_seconds": 0.3,
+    "belief_mode": "reliable",
+    "lead_policy": "types",
+    "fixed_lead": null,
+    "randomisation": false,
+    "mix_root": false,
+    "mix_seed": null,
+    "mixing_policy": null,
+    "learned_reranker": false
+  },
+  "default_prior_sha256": "47b31bf7282d6578ed44d7b28f9a63e9284eddc72882856de426f7c1bfc8c7f3",
+  "default_prior_matches_main": true,
+  "native_worker_probe": {
+    "verified": true,
+    "source_sha256": "c56ff324a45b40a3d1104289df2a1457cdb9243229d89a5b3b41b408f39342af",
+    "engine": {
+      "version": "0.0.48",
+      "binaries": {
+        "poke_engine.cpython-313-x86_64-linux-gnu.so": "fbffd2a1c9c48eab99def9187f9030c578174a30b49d54faad159be859846ef3"
+      }
+    },
+    "config": {
+      "mcts_worlds": 1,
+      "search_ms": 20,
+      "engine_threads": 1,
+      "sampling": "team",
+      "frozen_beliefs": false,
+      "seed": 2026102599,
+      "belief_mode": "reliable"
+    },
+    "world": {
+      "total_visits": 2000,
+      "elapsed_ms": 29.775856994092464,
+      "preparation_ms": 2.3837339831516147,
+      "error": null
+    },
+    "all_pipeline_imports_from_isolated_checkout": true
+  },
+  "evaluation_checkout_integrity": {
+    "OxHack-2026": {
+      "runtime_files_checked": 31,
+      "changed_files": []
+    },
+    "OxHack-coherent-sets": {
+      "runtime_files_checked": 30,
+      "changed_files": []
+    },
+    "OxHack-coherent-v2": {
+      "runtime_files_checked": 30,
+      "changed_files": []
+    }
+  },
+  "excluded_work": [
+    "Uncommitted MCTS experiments and queue changes",
+    "Uncommitted observed-fact diagnosis and provenance revisions",
+    "Revised coherent-v2 mixture and unfinished comparisons",
+    "Learned opponent behavior experiment",
+    "Paused Tiger prediction training"
+  ],
+  "merge_gate": "Saliha approval for bot edits required by main progress handoff; not merged to main"
+}

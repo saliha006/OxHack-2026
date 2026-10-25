@@ -167,8 +167,9 @@ def test_nothing_left_rebuilds_from_usage(battle):
     rebuilt = belief.candidates[2]
     assert rebuilt
     assert all({"makeitrain", "focusblast", "recover"} <= set(s.moves) and s.tera_type == "steel" for s, _ in rebuilt)
-    # A Choice item or Assault Vest can't run Recover (a status move).
-    assert {s.item for s, _ in rebuilt} == {"airballoon", "leftovers"}
+    # Choice items can carry and select status moves; they lock the next selection to that move.
+    assert {s.item for s, _ in rebuilt} == {"choicescarf", "airballoon", "leftovers"}
+    assert belief.recovery_events[-1]["reason"] == "rebuilt_from_usage"
     assert math.isclose(sum(w for _, w in rebuilt), 1.0)
 
 
@@ -181,6 +182,7 @@ def test_nothing_fitting_even_after_a_rebuild_keeps_the_old_guesses(battle):
     assert items(belief, 1) == ["leftovers"]
     assert weights(belief, 1) == [1.0]
     assert len(belief.scenarios()) == 1
+    assert belief.recovery_events[-1]["reason"] == "relaxed_inferred_rules"
 
 
 def test_scenarios_vary_the_active_and_fix_the_bench(battle):

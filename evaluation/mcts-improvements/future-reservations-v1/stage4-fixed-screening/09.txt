@@ -1,0 +1,61 @@
+Blissey @ Leftovers
+Ability: Natural Cure  
+Tera Type: Dark  
+EVs: 4 HP / 252 Def / 252 SpD  
+Calm Nature  
+IVs: 0 Atk  
+- Calm Mind  
+- Shadow Ball  
+- Seismic Toss  
+- Soft-Boiled  
+
+Dondozo @ Heavy-Duty Boots
+Ability: Unaware  
+Tera Type: Fighting  
+EVs: 248 HP / 252 Def / 8 SpD  
+Impish Nature  
+- Body Press  
+- Avalanche  
+- Rest  
+- Sleep Talk  
+
+Corviknight (F) @ Rocky Helmet  
+Ability: Pressure  
+Tera Type: Water  
+EVs: 136 HP / 252 Def / 120 Spe  
+Impish Nature  
+- Iron Defense  
+- Body Press  
+- Brave Bird  
+- Roost  
+
+Garganacl @ Leftovers  
+Ability: Purifying Salt  
+Tera Type: Fairy  
+EVs: 252 HP / 52 Def / 204 SpD  
+Careful Nature  
+- Salt Cure  
+- Stealth Rock  
+- Protect  
+- Recover  
+
+Alomomola (F) @ Assault Vest  
+Ability: Regenerator  
+Tera Type: Poison  
+EVs: 216 HP / 40 Atk / 252 SpD  
+Sassy Nature  
+IVs: 0 Spe  
+- Flip Turn  
+- Play Rough  
+- Icy Wind  
+- Mirror Coat  
+
+Latios (M) @ Soul Dew  
+Ability: Levitate  
+Tera Type: Steel  
+EVs: 4 Def / 252 SpA / 252 Spe  
+Timid Nature  
+- Draco Meteor  
+- Psychic Noise  
+- Flip Turn  
+- Recover

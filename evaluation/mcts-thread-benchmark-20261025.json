@@ -1,0 +1,74 @@
+{
+  "engine_version": "0.0.48",
+  "source_sha256": "1fe6ef76f764428da9ff78da5d1fae0717ef1d32e8795abcd84bf2796ff0ced6",
+  "seed": 2026,
+  "position": "evaluation/mcts-benchmark-position.json",
+  "position_sha256": "36bd97aa6722e8ad770a9796a63f052c8898d9475d24e5802dd6dcb10d3fd96b",
+  "schedule": "sequential after comparative pilot and final smoke; one native search at a time",
+  "results": [
+    {
+      "threads": 1,
+      "repeats": 5,
+      "worlds": 1,
+      "search_ms_per_world": 150,
+      "choices": {
+        "move 1": 5
+      },
+      "pairwise_action_agreement": 1.0,
+      "fallbacks": 0,
+      "native_search_median_ms": 164.99311901861802,
+      "total_decision_median_ms": 732.1039860253222,
+      "native_visits_median": 18000,
+      "total_visits": [
+        18000,
+        19000,
+        19000,
+        18000,
+        16000
+      ]
+    },
+    {
+      "threads": 2,
+      "repeats": 5,
+      "worlds": 1,
+      "search_ms_per_world": 150,
+      "choices": {
+        "move 1": 5
+      },
+      "pairwise_action_agreement": 1.0,
+      "fallbacks": 0,
+      "native_search_median_ms": 173.9329089759849,
+      "total_decision_median_ms": 712.1797139989212,
+      "native_visits_median": 34000,
+      "total_visits": [
+        28000,
+        34000,
+        34000,
+        34000,
+        34000
+      ]
+    },
+    {
+      "threads": 4,
+      "repeats": 5,
+      "worlds": 1,
+      "search_ms_per_world": 150,
+      "choices": {
+        "move 1": 5
+      },
+      "pairwise_action_agreement": 1.0,
+      "fallbacks": 0,
+      "native_search_median_ms": 196.05032197432593,
+      "total_decision_median_ms": 767.7158099832013,
+      "native_visits_median": 57000,
+      "total_visits": [
+        57000,
+        57000,
+        59000,
+        54000,
+        59000
+      ]
+    }
+  ],
+  "interpretation": "single-position throughput/agreement observation; not a strength comparison; native randomness is not seeded by our sampling RNG; keep1thread default"
+}

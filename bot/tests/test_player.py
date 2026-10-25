@@ -153,6 +153,25 @@ def player(tmp_path, agent=None):
     return p
 
 
+def test_late_battle_message_does_not_reopen_or_truncate_finished_artifacts(tmp_path, monkeypatch):
+    p = player(tmp_path)
+    tag = "battle-gen9ou-1"
+    s = BattleSession(tag, StubAgent(), tmp_path)
+    p.sessions[tag] = s
+    s.feed("|turn|12")
+    p._battle_finished_callback(battle(request("move_request")))
+    trace = (tmp_path / f"{tag}.jsonl").read_bytes()
+    raw = (tmp_path / f"{tag}.log").read_bytes()
+    upstream = AsyncMock()
+    monkeypatch.setattr(Player, "_handle_battle_message", upstream)
+    asyncio.run(p._handle_battle_message([[f">{tag}"], ["", "request", ""]]))
+    assert tag not in p.sessions
+    assert len(p.summaries) == 1
+    assert (tmp_path / f"{tag}.jsonl").read_bytes() == trace
+    assert (tmp_path / f"{tag}.log").read_bytes() == raw
+    assert not upstream.called
+
+
 def battle(req, tag="battle-gen9ou-1"):
     return SimpleNamespace(battle_tag=tag, last_request=req, player_role="p1", won=True, turn=12)
 

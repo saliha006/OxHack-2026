@@ -1,0 +1,529 @@
+{
+  "showdown_revision": "c0845f33d381402dfcb18ce324c20a94f18af075",
+  "format": "gen9customgame",
+  "seed": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "purpose": "State mechanics only; custom game permits a short controlled roster. No strength or OU team-validation claim.",
+  "frames": [
+    {
+      "label": "initial",
+      "protocol": [
+        "|gametype|singles",
+        "|player|p1|A||",
+        "|player|p2|B||",
+        "|gen|9",
+        "|tier|[Gen 9] Custom Game",
+        "|clearpoke",
+        "|poke|p1|Corviknight, M|",
+        "|poke|p1|Kingambit, F|",
+        "|poke|p2|Blissey, F|",
+        "|teampreview",
+        "|",
+        "|teamsize|p1|2",
+        "|teamsize|p2|1",
+        "|start",
+        "|split|p1",
+        "|switch|p1a: Corviknight|Corviknight, M|400/400",
+        "|switch|p1a: Corviknight|Corviknight, M|400/400",
+        "|split|p2",
+        "|switch|p2a: Blissey|Blissey, F|651/651",
+        "|switch|p2a: Blissey|Blissey, F|651/651",
+        "|-ability|p1a: Corviknight|Pressure",
+        "|turn|1"
+      ],
+      "request": {
+        "active": [
+          {
+            "moves": [
+              {
+                "move": "Protect",
+                "id": "protect",
+                "pp": 16,
+                "maxpp": 16,
+                "target": "self",
+                "disabled": false
+              },
+              {
+                "move": "U-turn",
+                "id": "uturn",
+                "pp": 32,
+                "maxpp": 32,
+                "target": "normal",
+                "disabled": false
+              }
+            ],
+            "canTerastallize": "Flying"
+          }
+        ],
+        "side": {
+          "name": "A",
+          "id": "p1",
+          "pokemon": [
+            {
+              "ident": "p1: Corviknight",
+              "details": "Corviknight, M",
+              "condition": "400/400",
+              "active": true,
+              "stats": {
+                "atk": 210,
+                "def": 246,
+                "spa": 142,
+                "spd": 206,
+                "spe": 170
+              },
+              "moves": [
+                "protect",
+                "uturn"
+              ],
+              "baseAbility": "pressure",
+              "item": "",
+              "pokeball": "pokeball",
+              "ability": "pressure",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Flying",
+              "terastallized": ""
+            },
+            {
+              "ident": "p1: Kingambit",
+              "details": "Kingambit, F",
+              "condition": "341/341",
+              "active": false,
+              "stats": {
+                "atk": 306,
+                "def": 276,
+                "spa": 156,
+                "spd": 206,
+                "spe": 136
+              },
+              "moves": [
+                "ironhead"
+              ],
+              "baseAbility": "supremeoverlord",
+              "item": "",
+              "pokeball": "pokeball",
+              "ability": "supremeoverlord",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Dark",
+              "terastallized": ""
+            }
+          ]
+        }
+      },
+      "expected": {
+        "active": "corviknight",
+        "protect_streak": 0,
+        "own_pp": {
+          "corviknight": {
+            "protect": 16,
+            "uturn": 32
+          },
+          "kingambit": {
+            "ironhead": 24
+          }
+        }
+      }
+    },
+    {
+      "label": "first protect success",
+      "protocol": [
+        "|",
+        "|move|p1a: Corviknight|Protect|p1a: Corviknight",
+        "|-singleturn|p1a: Corviknight|Protect",
+        "|move|p2a: Blissey|Splash|p2a: Blissey",
+        "|-nothing",
+        "|",
+        "|upkeep",
+        "|turn|2"
+      ],
+      "request": {
+        "active": [
+          {
+            "moves": [
+              {
+                "move": "Protect",
+                "id": "protect",
+                "pp": 15,
+                "maxpp": 16,
+                "target": "self",
+                "disabled": false
+              },
+              {
+                "move": "U-turn",
+                "id": "uturn",
+                "pp": 32,
+                "maxpp": 32,
+                "target": "normal",
+                "disabled": false
+              }
+            ],
+            "canTerastallize": "Flying"
+          }
+        ],
+        "side": {
+          "name": "A",
+          "id": "p1",
+          "pokemon": [
+            {
+              "ident": "p1: Corviknight",
+              "details": "Corviknight, M",
+              "condition": "400/400",
+              "active": true,
+              "stats": {
+                "atk": 210,
+                "def": 246,
+                "spa": 142,
+                "spd": 206,
+                "spe": 170
+              },
+              "moves": [
+                "protect",
+                "uturn"
+              ],
+              "baseAbility": "pressure",
+              "item": "",
+              "pokeball": "pokeball",
+              "ability": "pressure",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Flying",
+              "terastallized": ""
+            },
+            {
+              "ident": "p1: Kingambit",
+              "details": "Kingambit, F",
+              "condition": "341/341",
+              "active": false,
+              "stats": {
+                "atk": 306,
+                "def": 276,
+                "spa": 156,
+                "spd": 206,
+                "spe": 136
+              },
+              "moves": [
+                "ironhead"
+              ],
+              "baseAbility": "supremeoverlord",
+              "item": "",
+              "pokeball": "pokeball",
+              "ability": "supremeoverlord",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Dark",
+              "terastallized": ""
+            }
+          ]
+        }
+      },
+      "expected": {
+        "active": "corviknight",
+        "protect_streak": 1,
+        "own_pp": {
+          "corviknight": {
+            "protect": 15,
+            "uturn": 32
+          },
+          "kingambit": {
+            "ironhead": 24
+          }
+        }
+      }
+    },
+    {
+      "label": "second protect success",
+      "protocol": [
+        "|",
+        "|move|p1a: Corviknight|Protect|p1a: Corviknight",
+        "|debug|Success chance: 33%",
+        "|-singleturn|p1a: Corviknight|Protect",
+        "|move|p2a: Blissey|Splash|p2a: Blissey",
+        "|-nothing",
+        "|",
+        "|upkeep",
+        "|turn|3"
+      ],
+      "request": {
+        "active": [
+          {
+            "moves": [
+              {
+                "move": "Protect",
+                "id": "protect",
+                "pp": 14,
+                "maxpp": 16,
+                "target": "self",
+                "disabled": false
+              },
+              {
+                "move": "U-turn",
+                "id": "uturn",
+                "pp": 32,
+                "maxpp": 32,
+                "target": "normal",
+                "disabled": false
+              }
+            ],
+            "canTerastallize": "Flying"
+          }
+        ],
+        "side": {
+          "name": "A",
+          "id": "p1",
+          "pokemon": [
+            {
+              "ident": "p1: Corviknight",
+              "details": "Corviknight, M",
+              "condition": "400/400",
+              "active": true,
+              "stats": {
+                "atk": 210,
+                "def": 246,
+                "spa": 142,
+                "spd": 206,
+                "spe": 170
+              },
+              "moves": [
+                "protect",
+                "uturn"
+              ],
+              "baseAbility": "pressure",
+              "item": "",
+              "pokeball": "pokeball",
+              "ability": "pressure",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Flying",
+              "terastallized": ""
+            },
+            {
+              "ident": "p1: Kingambit",
+              "details": "Kingambit, F",
+              "condition": "341/341",
+              "active": false,
+              "stats": {
+                "atk": 306,
+                "def": 276,
+                "spa": 156,
+                "spd": 206,
+                "spe": 136
+              },
+              "moves": [
+                "ironhead"
+              ],
+              "baseAbility": "supremeoverlord",
+              "item": "",
+              "pokeball": "pokeball",
+              "ability": "supremeoverlord",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Dark",
+              "terastallized": ""
+            }
+          ]
+        }
+      },
+      "expected": {
+        "active": "corviknight",
+        "protect_streak": 2,
+        "own_pp": {
+          "corviknight": {
+            "protect": 14,
+            "uturn": 32
+          },
+          "kingambit": {
+            "ironhead": 24
+          }
+        }
+      }
+    },
+    {
+      "label": "living pivot continuation",
+      "protocol": [
+        "|",
+        "|move|p1a: Corviknight|U-turn|p2a: Blissey",
+        "|split|p2",
+        "|-damage|p2a: Blissey|443/651",
+        "|-damage|p2a: Blissey|443/651"
+      ],
+      "request": {
+        "forceSwitch": [
+          true
+        ],
+        "side": {
+          "name": "A",
+          "id": "p1",
+          "pokemon": [
+            {
+              "ident": "p1: Corviknight",
+              "details": "Corviknight, M",
+              "condition": "400/400",
+              "active": true,
+              "stats": {
+                "atk": 210,
+                "def": 246,
+                "spa": 142,
+                "spd": 206,
+                "spe": 170
+              },
+              "moves": [
+                "protect",
+                "uturn"
+              ],
+              "baseAbility": "pressure",
+              "item": "",
+              "pokeball": "pokeball",
+              "ability": "pressure",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Flying",
+              "terastallized": ""
+            },
+            {
+              "ident": "p1: Kingambit",
+              "details": "Kingambit, F",
+              "condition": "341/341",
+              "active": false,
+              "stats": {
+                "atk": 306,
+                "def": 276,
+                "spa": 156,
+                "spd": 206,
+                "spe": 136
+              },
+              "moves": [
+                "ironhead"
+              ],
+              "baseAbility": "supremeoverlord",
+              "item": "",
+              "pokeball": "pokeball",
+              "ability": "supremeoverlord",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Dark",
+              "terastallized": ""
+            }
+          ]
+        },
+        "noCancel": true
+      },
+      "expected": {
+        "active": "corviknight",
+        "protect_streak": 2,
+        "own_pp": {
+          "corviknight": {
+            "protect": 14,
+            "uturn": 31
+          },
+          "kingambit": {
+            "ironhead": 24
+          }
+        }
+      }
+    },
+    {
+      "label": "after pivot replacement and end of turn",
+      "protocol": [
+        "|",
+        "|split|p1",
+        "|switch|p1a: Kingambit|Kingambit, F|341/341|[from] U-turn",
+        "|switch|p1a: Kingambit|Kingambit, F|341/341|[from] U-turn",
+        "|move|p2a: Blissey|Splash|p2a: Blissey",
+        "|-nothing",
+        "|",
+        "|upkeep",
+        "|turn|4"
+      ],
+      "request": {
+        "active": [
+          {
+            "moves": [
+              {
+                "move": "Iron Head",
+                "id": "ironhead",
+                "pp": 24,
+                "maxpp": 24,
+                "target": "normal",
+                "disabled": false
+              }
+            ],
+            "canTerastallize": "Dark"
+          }
+        ],
+        "side": {
+          "name": "A",
+          "id": "p1",
+          "pokemon": [
+            {
+              "ident": "p1: Kingambit",
+              "details": "Kingambit, F",
+              "condition": "341/341",
+              "active": true,
+              "stats": {
+                "atk": 306,
+                "def": 276,
+                "spa": 156,
+                "spd": 206,
+                "spe": 136
+              },
+              "moves": [
+                "ironhead"
+              ],
+              "baseAbility": "supremeoverlord",
+              "item": "",
+              "pokeball": "pokeball",
+              "ability": "supremeoverlord",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Dark",
+              "terastallized": ""
+            },
+            {
+              "ident": "p1: Corviknight",
+              "details": "Corviknight, M",
+              "condition": "400/400",
+              "active": false,
+              "stats": {
+                "atk": 210,
+                "def": 246,
+                "spa": 142,
+                "spd": 206,
+                "spe": 170
+              },
+              "moves": [
+                "protect",
+                "uturn"
+              ],
+              "baseAbility": "pressure",
+              "item": "",
+              "pokeball": "pokeball",
+              "ability": "pressure",
+              "commanding": false,
+              "reviving": false,
+              "teraType": "Flying",
+              "terastallized": ""
+            }
+          ]
+        }
+      },
+      "expected": {
+        "active": "kingambit",
+        "protect_streak": 0,
+        "own_pp": {
+          "kingambit": {
+            "ironhead": 24
+          },
+          "corviknight": {
+            "protect": 14,
+            "uturn": 31
+          }
+        }
+      }
+    }
+  ]
+}

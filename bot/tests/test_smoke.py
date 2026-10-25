@@ -34,6 +34,7 @@ def test_main_passes_only_when_every_game_finishes_under_the_fallback_limit(monk
     monkeypatch.setattr(smoke, "run", lambda *args: calls.append(args) or summaries)
     assert smoke.main(["--games", str(games)]) == code
     assert calls[0][0] == games and "kingambit" in calls[0][2]["species"]
+    assert calls[0][5:] == ("mcts", 8, 150, 1)
     assert f"{len(summaries)}/{games} games finished" in capsys.readouterr().out
 
 

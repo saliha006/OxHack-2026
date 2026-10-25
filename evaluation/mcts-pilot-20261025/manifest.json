@@ -1,0 +1,127 @@
+{
+  "engine_version": "0.0.48",
+  "python_version": "3.13.13",
+  "git_revision": "81c8f1cdc06a4e524760e5174ffba559908371ba",
+  "source_sha256": "f182c3b0e26228d90e25ff94f011e1aa94d1124e98abe6fd0f95556d075a2692",
+  "seed": 2026,
+  "concurrent_games": 4,
+  "budget_seconds": 3.0,
+  "team_role": "held-out",
+  "team_hashes": [
+    "54ddf1f0afbcb655f51485390a776c1d24567cd3b5aa1aa82bdde43b396ce15b",
+    "71f7e946ecb01b002402b39c0fce58cb0301d42348d39922b0b0cc2bc225a7b8"
+  ],
+  "priors_sha256": "ef070dc93fa4476d9b597959fcb0e11d91c42180f9e0edc893ae374bb2b1c65d",
+  "priors_source": {
+    "format": "gen9ou",
+    "month": "2026-09",
+    "cutoff": 1825,
+    "battles": 574541
+  },
+  "arms": {
+    "full": {
+      "backend": "one_ply",
+      "budget_seconds": 3.0,
+      "arm": "full"
+    },
+    "prior": {
+      "backend": "one_ply",
+      "budget_seconds": 3.0,
+      "arm": "prior"
+    },
+    "flat": {
+      "backend": "one_ply",
+      "budget_seconds": 3.0,
+      "arm": "flat"
+    },
+    "k1": {
+      "backend": "one_ply",
+      "budget_seconds": 3.0,
+      "arm": "k1"
+    },
+    "mcts1": {
+      "backend": "mcts",
+      "budget_seconds": 3.0,
+      "engine_threads": 1,
+      "sampling": "team",
+      "frozen_beliefs": false,
+      "mcts_worlds": 1,
+      "search_ms": 150
+    },
+    "mcts8": {
+      "backend": "mcts",
+      "budget_seconds": 3.0,
+      "engine_threads": 1,
+      "sampling": "team",
+      "frozen_beliefs": false,
+      "mcts_worlds": 8,
+      "search_ms": 150
+    },
+    "mcts1long": {
+      "backend": "mcts",
+      "budget_seconds": 3.0,
+      "engine_threads": 1,
+      "sampling": "team",
+      "frozen_beliefs": false,
+      "mcts_worlds": 1,
+      "search_ms": 1200
+    },
+    "mcts8active": {
+      "backend": "mcts",
+      "budget_seconds": 3.0,
+      "engine_threads": 1,
+      "sampling": "active",
+      "frozen_beliefs": false,
+      "mcts_worlds": 8,
+      "search_ms": 150
+    },
+    "mcts8frozen": {
+      "backend": "mcts",
+      "budget_seconds": 3.0,
+      "engine_threads": 1,
+      "sampling": "team",
+      "frozen_beliefs": true,
+      "mcts_worlds": 8,
+      "search_ms": 150
+    },
+    "fplow": {
+      "backend": "foul_play",
+      "search_ms_band": [
+        40,
+        80
+      ],
+      "engine_threads": 1,
+      "search_parallelism": 1,
+      "source_commit": "8f541f80f91f960603673796559f796b10ccf0fb",
+      "world_policy": "2 early/preview, 1 after >=3 opposing moves; stock source decides",
+      "compute_matched": false
+    },
+    "fpmid": {
+      "backend": "foul_play",
+      "search_ms_band": [
+        150,
+        260
+      ],
+      "engine_threads": 1,
+      "search_parallelism": 1,
+      "source_commit": "8f541f80f91f960603673796559f796b10ccf0fb",
+      "world_policy": "2 early/preview, 1 after >=3 opposing moves; stock source decides",
+      "compute_matched": false
+    },
+    "fphigh": {
+      "backend": "foul_play",
+      "search_ms_band": [
+        450,
+        700
+      ],
+      "engine_threads": 1,
+      "search_parallelism": 1,
+      "source_commit": "8f541f80f91f960603673796559f796b10ccf0fb",
+      "world_policy": "2 early/preview, 1 after >=3 opposing moves; stock source decides",
+      "compute_matched": false
+    }
+  },
+  "final_randomisation": false,
+  "learned_reranker": false,
+  "side_balance": "adjacent MCTS games share teams and swap challenge direction, including Foul Play; legacy FP arms accept only"
+}

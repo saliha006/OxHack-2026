@@ -77,6 +77,7 @@ whenever you log an entry.
 4. {{Access to the deploy target, data and secrets: where each lives. Never in git or chat}}
 
 ## 📊 Latest (volatile facts live only here)
+- **Merge candidate:** reconciled MCTS/coherent source; 551 tests pass, one expected local-download skip, native-worker probe passes. Main remains unmerged pending bot-owner approval; experimental defaults unchanged.
 - **As of 2026-10-25 00:58:** `main` @ `4e88dac` · tests: 148 green, 100% coverage (`uv run pytest --cov=decision`) · smoke: 10/10 games vs RandomPlayer finished unattended, 10 won, think p50 ~65 ms / p99 ~300–700 ms, fallback rate 12.7% (all from the two `belief.py` bugs, Open board) · deploy: none yet
 - **Backtest (`derrick` @ `9f86111`):** dropped 2026-10-25 06:41, branch kept as an archive; its numbers stay in Log entries 04:15 and 04:55.
 - **Data (Tiger `oxhack-data`, 2026-10-25 03:00):** `battles` 2,506,142 games · `battle_logs` 2,506,142 (uncompressed, 9.2 GB) · `turns` 489,840 rows from 20,000 games (15k train / 5k test) · HP-heuristic test log loss 0.6407, Brier 0.2246 · opponent switch rate 19.2% of acted turns
@@ -85,6 +86,17 @@ whenever you log an entry.
 ---
 
 ## Log (newest first)
+
+### 2026-10-25 06:58 — fix — Reconcile MCTS and coherent-set branches for main review — @kenar
+- **Where:** reconciled `Kenar-coherent-sets` candidate, based on `50d9a43` + committed MCTS `aecf217` + main handoff `adc8a0b`; merged to `main`: not yet
+- **Did:** Reconciled branch histories and current main without editing evaluation checkouts. Preserved MCTS state/Tera/reliable-belief fixes and optional IV conversion. Included the missing offline policy-metrics helper needed by committed reporting code; corrected the builder contract test to distinguish optional IVs from required fields.
+- **Defaults:** broad `data/set_candidates.json` unchanged; MCTS 8 × 150 ms, one native thread, three-second ceiling, reliable beliefs and type-based leads. Coherent priors, move/stat leads and root mixing stay opt-in; no learned policy/value or cycle veto enabled. Uncommitted experiments remain outside the candidate.
+- **Validation:** 551 tests passed, one local-chaos-download test skipped; isolated native-worker import/search probe passed. Original 91 bot/decision source files across the three evaluation checkouts were hash-verified unchanged. No new battle evaluation, queue/process changes or Tiger work.
+- **Evidence:** `evaluation/integration-mcts-coherent-20261025.json`; detailed docs retained on the reconciled coherent branch and omitted from the separate main PR candidate, per the handoff.
+- **Touched:** decision/bot integration, contracts/data compatibility, offline evaluation tools/tests, README and progress history
+- **⚠️ Conflicts:** @saliha: bot changes still require your approval under the 06:41 handoff
+- **📨 Needs:** @saliha: approve bot edits before main merge; existing evaluation worktrees deliberately retain their original local branch heads
+- **Status:** prepared for review; no main merge or experimental promotion
 
 ### 2026-10-25 06:41 — decision — Kenar's branch becomes the decision layer; derrick's unmerged work dropped — @derrick
 - **Where:** `Kenar-coherent-sets` @ `50d9a43` is the source of truth · `derrick` @ `9f86111` kept as an archive, not merged · merged to `main`: not yet
@@ -96,6 +108,131 @@ whenever you log an entry.
 - **Agreed by:** @derrick, @saliha, @nate, @kenar (whole team, per @derrick)
 - **Status:** open
 
+### 2026-10-25 06:13 — eval — Coherent OU mixture improves forecasts but not battle screening — @kenar
+- **Where:** `Kenar-coherent-sets`, compared with isolated `a8613b9`; not merged into the concurrent policy branch.
+- **Outcome:** Fixed 100-test-game retrospective next-reveal loss improved from 4.5569 to 4.2334 and coverage from 73.8% to 76.6%. At matched requested MCTS compute, the optional 50/50 mixture finished 25–35 over all 60 screened games, no draws/voids. Wilson interval 30.1–54.3%; sparse-team bootstrap 25–60%. No demonstrated strength gain; default prior stays unchanged and no confirmation expansion is justified by this screen.
+- **Reliability:** All 43,712 worlds usable; zero fallbacks, rejected choices, failed worlds or decisions over three seconds. Final suite 478 passed with one pre-existing 0.6-second fixture failure reproduced exactly in the untouched baseline; 22 focused data/evaluation tests pass. Source/engine/prior identities rechecked after completion.
+- **Evidence:** `evaluation/coherent-sets/screening-v2-results.json`, companion game rows, prediction/extraction artifacts and `docs/coherent-sets-results.md`. Team pools are synthetic combinations of known component sets, not an independent competitive-team holdout. Current source snapshots on historical replays are retrospective evidence.
+- **Next:** Diagnose/tune role probabilities on development evidence before another prior experiment. Preserve optional importer/extractor and integrate separately with the other chat's accepted engine only after resolving branch overlap.
+
+
+### 2026-10-25 05:56 — feat — Add opt-in seeded mixing of mature supported move pairs — @kenar
+- **Where:** `Kenar-mcts` · merged to `main`: not yet
+- **Did:** Added a separately seeded heuristic for exactly two sufficiently supported near-tied legal non-Tera moves, with conservative fixed maturity gates, deterministic fallback and detailed decision traces. Worker replay records the final chosen action; preview, switch and Tera decisions stay deterministic. Tests pass, but native transport/exposure and original/predecessor/opponent-panel comparisons remain pending. The policy remains off by default.
+- **Touched:** `decision/root_mixing.py`, Agent opt-in configuration/bookkeeping, fixed policy plan/verification and focused tests
+- **Brief task:** user's six-stage handoff → Stage 6 optional candidate committed; evaluation pending
+- **⚠️ Conflicts:** none; accepted deterministic policy unchanged
+- **📨 Needs:** none; no richer-data requirement
+- **Status:** experimental/off; no strength or exploitation-resistance claim
+
+### 2026-10-25 05:56 — fix — Separate cold bootstrap coverage from post-start retention fixtures — @kenar
+- **Where:** `Kenar-mcts` · merged to `main`: not yet
+- **Did:** Preserved an investigation showing that both frozen baseline/current workers can miss a short fixture's event precondition before any result exists. Post-start fault tests now wait for and requeue the real ready handshake before measuring their unchanged short budget/bounds; explicit cold-bootstrap/fallback coverage remains, and genuine cold crash/history tests use the production ceiling with exact assertions. No production Agent/SearchWorker/deadline behavior changed, and no sole CPU cause or new retention defect was established.
+- **Touched:** `tests/test_search.py`, preserved deadline investigation artifact and logs
+- **Brief task:** user's six-stage handoff → Stage 6 broader verification gate repaired
+- **⚠️ Conflicts:** none; running evaluation sources unchanged
+- **📨 Needs:** none
+- **Status:** broad and full regression selections pass; candidate live smoke still pending
+
+### 2026-10-25 05:51 — docs — Publish two full screening comparisons and fresh diagnostics — @kenar
+- **Where:** `Kenar-mcts` · merged to `main`: not yet
+- **Did:** Published complete initial-state-fix and reliable-belief-versus-original screens with intervals, reliability, resource and native-discard measurements. Initial Stage 1 is promising but inconclusive, so its already frozen full historical confirmation is queued; it predates the Tera repair. Stage 2's incremental comparison remains in progress. Fixed pre-revelation ablations on the completed Stage 1 histories show no predictive benefit, and fresh win/loss-controlled signatures remain investigation leads rather than guard justifications.
+- **Touched:** complete screening/game artifacts, fresh belief scores/loss audit, experiment index and staged documentation
+- **Brief task:** user's six-stage handoff → first controlled screens and fresh diagnostics published; remaining comparisons/stages pending
+- **⚠️ Conflicts:** none; measured source identities and old-source limits remain explicit
+- **📨 Needs:** none; no new data access or scoring-set tuning
+- **Status:** Stage 1 promising but inconclusive; Stage 2 contribution pending; no demonstrated strength improvement
+
+### 2026-10-25 05:38 — feat — Isolated coherent-set prior and public-reveal extraction — @kenar
+- **Where:** `Kenar-coherent-sets`, separate checkout based on `a8613b9`; not merged to main or the active MCTS-policy branch.
+- **Did:** Imported pinned Showdown OU roles as validated coherent candidates, preserved IV overrides, retained broad usage fallback in an optional 50/50 mixture, and added chronological public-revelation extraction with conservative item/copy/identity exclusions. Existing default prior is unchanged. The comparison runner freezes independent prior files for each arm.
+- **Measured so far:** Bounded 200-game Tiger sample; retrospective 100-game test diagnostic favors the mixture on next-reveal loss/coverage. This is not a strength result. Frozen source/priors and side/team-balanced game manifests are under `evaluation/coherent-sets/`; measured status and limits stay current in `docs/coherent-sets-results.md`.
+- **Touched:** `data/pipeline/import_curated_sets.py`, `data/pipeline/reveal_evidence.py`, `data/pipeline/sample_replay_logs.py`, optional-IV candidate compatibility and isolated evaluation support. No writes to the original active checkout.
+- **Coordination:** Data-independent MCTS work continues separately; reconcile IV compatibility and evaluator prior-path support at integration. No new roster-conditioned learned prior or joint-team model yet.
+
+### 2026-10-25 05:36 — docs — Reject an unsupported historical switch-cycle guard — @kenar
+- **Where:** `Kenar-mcts` · merged to `main`: not yet
+- **Did:** Audited three historical switch cycles and the one eligible near-support case with all recorded worlds, conditional successors, repeat searches and controlled counterexamples. Staying and switching trade different remaining resources; neither the observed faint nor a simple HP diagnostic proves the search choice was wrong. Rejected the proposed guard before adding runtime behavior, retaining its failed-bootstrap and successful-audit artifacts.
+- **Touched:** strategic-guard development audit plan/results, offline successor/counterexample tooling/tests and staged documentation
+- **Brief task:** user's six-stage handoff → historical Stage 5 hypothesis assessed; fresh loss mining remains pending
+- **⚠️ Conflicts:** none; no production policy, native checks or deadline overhead added
+- **📨 Needs:** none; continue fresh diagnostics from the preceding controlled screens
+- **Status:** hypothesis rejected; no guard enabled and no strength gain claimed
+
+### 2026-10-25 05:32 — docs — Verify the actual native-worker import boundary and rebased lead transport — @kenar
+- **Where:** `Kenar-mcts` · merged to `main`: not yet
+- **Did:** Independently recorded the spawned native grandchild's loaded decision modules and engine extension for original/corrected/lead snapshots; the probe delegates unchanged frozen workers. Rebased optional-lead transport passed, and four fresh fixed-allocation screening plans are frozen with matched side/team assignments. Preserved the historical scorer and froze a separate corrected runtime for future predeclared fresh scoring. These are integrity/integration gates and plans, not strength results.
+- **Touched:** native-import provenance, rebased lead smoke/results, fixed-allocation manifests, scoring runtime and staged documentation
+- **Brief task:** user's six-stage handoff → evaluation integrity and controlled comparisons prepared
+- **⚠️ Conflicts:** none; no active source/schedule mutation
+- **📨 Needs:** none; Tiger pause unchanged
+- **Status:** integrity/smoke complete; queued game comparisons, fresh scoring and later-stage audits pending
+
+### 2026-10-25 05:29 — docs — Repeat equal-effort allocation measurements after the Tera correction — @kenar
+- **Where:** `Kenar-mcts` · merged to `main`: not yet
+- **Did:** Repeated the exact development positions/order/seeds/world samples on corrected state. The unsupported native Tera roots disappeared while legitimate unspent-Tera options remained. All selected position actions agreed across allocations; native disagreement and real compute differences are still reported. Preserved both versions and kept the default eight-world allocation. The Tera correction also passed transport smoke and is accepted for correctness, with separate strength comparisons pending.
+- **Touched:** allocation v2 plan/results/integrity, follow-up smoke/results/index and live documentation
+- **Brief task:** user's six-stage handoff → Stage 4 development measurement complete; fixed-budget games and later stages pending
+- **⚠️ Conflicts:** none; active evaluations retain frozen source and original scope
+- **📨 Needs:** none; Tiger pause and deferred data roadmap unchanged
+- **Status:** development evidence only; no allocation/adaptivity/guard promotion or strength claim
+
+### 2026-10-25 05:24 — fix — Preserve irreversible Tera history when a fainted request omits it — @kenar
+- **Where:** `Kenar-mcts` · merged to `main`: not yet
+- **Did:** Native own-team reconstruction now retains a current request's transformed flag or the confirmed transformed identity in public history. Added two actual historical request fixtures, regression tests and a matched native before/after probe. This corrects the newly reproduced search-resource defect without inventing a transformed slot from side-level resource use. Formal acceptance awaits smoke, and strength comparisons remain separate.
+- **Touched:** `decision/state.py`, captured request fixture/tests, adapter audit and Tera probe plan/results
+- **Brief task:** user's six-stage handoff → Stage 1 follow-up correction committed; evaluation pending
+- **⚠️ Conflicts:** none; existing running studies retain their original source and scope
+- **📨 Needs:** none; original data roadmap and Tiger pause unchanged
+- **Status:** correctness regression gates pass; transport smoke and controlled comparisons pending
+- **Update, 2026-10-25 05:29:** transport smoke passed and the correction was accepted for correctness; controlled strength comparisons remain pending. The earlier Status records the state at commit time.
+
+### 2026-10-25 05:21 — docs — Allocation diagnostics expose an omitted fainted-Tera transition — @kenar
+- **Where:** `Kenar-mcts` · merged to `main`: not yet
+- **Did:** Completed the frozen equal-requested-effort development measurement and audited mapping discards separately from server rejections. A historical request can omit a fainted Pokémon's irreversible Tera state despite public history retaining it, allowing native search to consider a second Tera before final legality filtering. This requires a narrow state correction before allocation/lead policy conclusions; earlier fixtures did not cover the omitted request flag. Preserved the affected measurements with this limitation and verified that the installed native API exposes no tree-continuation handle.
+- **Touched:** allocation development plan/results/integrity/API audit and offline measurement tooling; state repair is in progress
+- **Brief task:** user's six-stage handoff → Stage 4 development diagnostics; Stage 1 follow-up defect reproduced
+- **⚠️ Conflicts:** none; active evaluations retain their frozen source and original scope
+- **📨 Needs:** none; no Tiger/data dependency
+- **Status:** diagnostic measurement complete; correction and fresh comparisons pending, allocation/adaptivity unchanged
+
+### 2026-10-25 05:15 — feat — Add optional preview scoring from supplied moves and stats — @kenar
+- **Where:** `Kenar-mcts` · merged to `main`: not yet
+- **Did:** Added an explicit opening heuristic using our actual request moves/stats and public opposing priors, with traced damage, speed/priority, fragility and hazard/pivot/Taunt components. Preserved the type-only default and added a fixed-lead test option. The model is approximate and remains off pending controlled game evidence; a higher heuristic score is not a strength result.
+- **Touched:** `decision/lead_model.py`, Agent preview configuration, focused tests, development benchmark and staged documentation
+- **Brief task:** user's six-stage handoff → Stage 3 optional candidate implemented; evaluation pending
+- **⚠️ Conflicts:** none; changes remain on the implementation branch for review
+- **📨 Needs:** none; current priors reused and opponent private team files are not model inputs
+- **Status:** experimental/off by default; strength unknown
+
+### 2026-10-25 05:10 — fix — Guard uncertain belief inference while preserving confirmed facts — @kenar
+- **Where:** `Kenar-mcts` · merged to `main`: not yet
+- **Did:** Separate direct revelations, guarded inferred item rules and soft replay. Reproduced called-move, incomplete-turn, changed-hazard and old-item-period defects against the frozen baseline; reliable mode corrects those cases while legacy mode preserves the comparison. Added pre-revelation scoring ablations and leakage checks. Reliable mode is enabled for correctness; full original/predecessor strength comparisons remain in progress.
+- **Touched:** `decision/belief.py`, `decision/agent.py`, `decision/search.py`, reliability/scorer tests and evaluation scoring plans/tooling
+- **Brief task:** user's six-stage handoff → Stage 2 correctness accepted; game and diagnostic comparisons pending
+- **⚠️ Conflicts:** none; changes remain on the implementation branch for review
+- **📨 Needs:** none; existing local priors retained, Tiger paused
+- **Status:** correctness improved in reproduced cases; strength unknown
+
+### 2026-10-25 05:04 — fix — Remember supported battle state through switches and continuation requests — @kenar
+- **Where:** `Kenar-mcts` · merged to `main`: not yet
+- **Did:** Retain own request PP and max HP by Pokémon/move identity; label observed PP spend as estimated; reconstruct observed Protect streaks and keep publicly visible extended effects present. Added partial-turn/source metadata without inventing a hidden queued opponent action. Reproduced the targeted defects and added controlled Showdown mechanics fixtures. Correctness improved in those fixtures; playing-strength comparison is still in progress.
+- **Touched:** `bot/parser.py`, `bot/player.py`, `decision/state.py`, `decision/adapter.py`, optional BattleState fields/docs, adapter audit and focused fixtures/tests
+- **Brief task:** user's six-stage handoff → Stage 1 correctness work committed; controlled comparison pending
+- **⚠️ Conflicts:** none; changes remain on the implementation branch for review
+- **📨 Needs:** none; Tiger remains paused and its unrelated files were excluded
+- **Status:** focused correctness work committed; strength unknown
+
+### 2026-10-25 04:58 — scope — Six data-independent MCTS stages opened with a frozen comparison anchor — @kenar
+- **Where:** `Kenar-mcts` · merged to `main`: not yet
+- **Did:** User requested state reconstruction, belief reliability, leads, search allocation, evidence-backed guards and optional near-tie mixing in that order. Opened a persistent goal and a live record in `docs/mcts-improvement-log.md`; original anchor is `2c02fc8daa84f047ea2bddd7d0f36f6463fff1e2`. Each change requires original/predecessor comparisons and a recorded decision. No new implementation or strength result is claimed by this scope entry.
+- **Touched:** improvement documentation; compact experiment records will live in `evaluation/mcts-improvements/`
+- **Brief task:** user's six-stage handoff → started
+- **⚠️ Conflicts:** none; requested work stays on the implementation branch for review
+- **📨 Needs:** none for this scope; richer sets, Nate's A6/team priors and learned evaluation remain deferred until new data/scope is supplied. Tiger download/training remains paused and its pending files are preserved
+- **Agreed by:** user, 25 October 2026
+- **Status:** scope recorded; implementation/evaluation in progress
+
 ### 2026-10-25 04:55 — decision — Drop the 1825 cutoff from the set priors (waits on @nate) — @derrick
 - **Where:** no branch change yet; a test build at `runs/priors/set_candidates-cutoff0.json` (local: Nate's builder, unchanged, on Smogon's 2026-09 `gen9ou-0`)
 - **Did:** Found why so many species were missing: the Tiger games are median Elo 1322 (1.7% of players 1825+, 0.8% of games with both), while the set file is Smogon's 1825 band, which lists 243 species where the all-ratings file lists 458 (same battles). The 1825 choice was @derrick's own on 2026-10-24 (`02-set-priors.md`), with no reason recorded. Backtest, same 200 test games and seed: 1825 file → 125 played, 29.9% same as p1 (95% 27.6–32.4%); no cutoff → 195 played, 31.5% (29.6–33.5%); on the 125 games both played, 29.9% → 30.8%, so common species didn't get worse priors for these games. The 5 still skipped are unevolved Pokémon and cosmetic formes (Florges colours, Gastrodon-East, Minior colours). Switching is unchanged: the strat switches on 4% of turns, the players on 24%.
@@ -105,6 +242,16 @@ whenever you log an entry.
 - **📨 Needs:** @nate: yes/no
 - **Status:** withdrawn by @derrick 2026-10-25 06:41 (Kenar's branch is the decision layer's source of truth)
 
+### 2026-10-25 04:30 — decision — MCTS becomes development default by user request; assess larger replay corpus — @kenar
+- **Where:** `Kenar-mcts` · merged to `main`: not yet
+- **Did:** User selected MCTS as the direction to improve. `Agent`, demo and smoke default to eight MCTS worlds; historical one-ply evaluation arms now select their backend explicitly. This promotion records the user's choice, not a new statistically established strength result. Assessed HolidayOugi's replay corpus against existing project ingest/turn contracts; source revision and recommended inference/prediction experiments are in `docs/holidayougi-assessment.md`. No large download or new dataset training was performed.
+- **Touched:** decision default, bot CLI defaults, pinned comparison arms, regression fixtures and current documentation
+- **Brief task:** user's follow-up → default promotion and dataset assessment
+- **⚠️ Conflicts:** retained comparisons explicitly use one-ply, so switching the application default cannot silently change their opponent
+- **📨 Needs:** reuse the team's existing turn export for the next data experiment; current assessment did not verify Tiger access
+- **Agreed by:** user, 25 October 2026
+- **Status:** verified — 379 decision/bot tests passed; default CLI live smoke won in 15 turns with 0/18 fallbacks, 136/136 native worlds usable and no rejected choices. `evaluation/mcts-default-smoke-20261025.json` records the exact no-backend-flag command.
+
 ### 2026-10-25 04:15 — feat — Backtest CLI on Tiger games, and its first results — @derrick
 - **Where:** `derrick` @ `9f86111` · merged to `main`: not yet
 - **Did:** `uv run python -m backtest.engine` plays a seeded sample of Tiger games turn by turn through `choose_public` and checks each choice against what p1 played. It skips games with a species missing from the set file (counted per species), records a strat error for its turn and goes on, and writes one JSONL per run plus a summary to `runs/backtest/`. No frontend. First run: 200 test games sampled (seed 2026): 125 played, 75 skipped for a species missing from the set file. Same move or switch as p1 on 29.9% of 3,003 scorable turns (95% by game: 27.6–32.4%), 21.4% counting Tera too; 38% when p1 attacked, 3% when p1 switched (the strat switches on 4% of turns, the players on 24%). Think p50 163 ms, p99 475 ms, max 954 ms on the 3 s budget. 1 error in 3,310 turns: a NaN expected value crashes `select`. That crash is in the shared selector, so live games can hit it too and fall back to the first legal option; the NaN comes from `simulate` or `value`, not traced yet. 172 tests green.
@@ -113,6 +260,16 @@ whenever you log an entry.
 - **⚠️ Conflicts:** none: new files, plus one new function in the adapter
 - **📨 Needs:** @saliha: decisions (1)–(2) into PRD NOW (Open board row)
 - **Status:** withdrawn by @derrick 2026-10-25 06:41 (Kenar's branch is the decision layer's source of truth)
+
+### 2026-10-25 04:03 — feat — Alternative deadline-isolated MCTS and separate prediction evaluation — @kenar
+- **Where:** `Kenar-mcts` · base `main` @ `81c8f1c` · merged to `main`: not yet
+- **Did:** Added stock Gen9/Tera MCTS behind `backend="mcts"`, preserving the one-ply default. One persistent worker contains belief replay, preparation and native search; completed worlds stream before pooling legal visit support. Fixed revelation-preserving belief recovery, full-team sampling, state legality/counters, trace retention and evaluation lifecycle races. The original requested plan is in `docs/mcts-plan.md`.
+- **Measured:** Clean side-swapped integration: 1–1 over two games, 139/139 worlds usable, zero fallbacks/rejections. The frozen-source 24-game pilot completed with 7,863/7,863 worlds usable and zero observed MCTS fallbacks, rejected choices or decisions over three seconds. MCTS8 versus one-ply was 3–1 (95% interval 30.1–95.4%); this is not a strength claim. Public prediction experiment: 96 eligible replays, chronological 67/14/15 battle split; calibrated logistic test log loss 0.6600 versus HP-only 0.6348, so prediction stays experimental and outside search.
+- **Touched:** `decision/`, `bot/`, optional BattleState fields, tests, `prediction/`, evaluation configs/artifacts and `docs/` (including a live walkthrough). Real OU priors reused unchanged; no learned reranker or extra opponent weighting added.
+- **Brief task:** user's attached MCTS plan → baseline implementation, prediction tools, bounded comparisons and live results walkthrough done; larger confirmatory evaluation remains configured
+- **⚠️ Conflicts:** Decision/bot/contract changes overlap Derrick/Saliha's paths; all changes remain on this branch for review. Default backend remains `one_ply`.
+- **📨 Needs:** none for implementation; confirmatory strength evaluation needs more held-out teams/games than the bounded pilot
+- **Status:** implementation and bounded pilot complete on branch; larger confirmatory study not run
 
 ### 2026-10-25 03:58 — feat — The strat layer can play a Tiger turn without a request — @derrick
 - **Where:** `derrick` @ `9c42b11` · merged to `main`: not yet
@@ -320,15 +477,6 @@ whenever you log an entry.
 - **📨 Needs:** @saliha: publish the newer 03-05 + decision-layer.md (Open board row)
 - **Status:** open → publish asks resolved by @saliha 2026-10-24 19:16 (`context` @ `54086aa`)
 
-### 2026-10-24 18:29 — feat — Decision layer: soft reweight by replaying each turn in poke-engine — @derrick
-- **Where:** `derrick` @ `7fb50c3` · merged to `main`: yes, as one clean commit `5e203fc` (2026-10-24 19:00; agreed by saliha, nate)
-- **Did:** Belief now replays last turn per candidate set (the loop calls `belief.chose(request, action)` after choosing) and drops sets the engine can't square with the observed move order or damage (both ways, crits included, ±1 for rounding). Speed ties, flinches, U-turn pivots and KOs handled; switches, one-sided turns and multi-hit moves give no evidence. 126 tests, 100% coverage.
-- **Touched:** `decision/belief.py`, `decision/simulate.py` (`engine_move` now public), `tests/test_reweight.py`
-- **Brief task:** 4 → 🟡 part (all belief logic built on hand-made priors; the real set file and the "beats uniform log loss" check wait on @nate's data)
-- **⚠️ Conflicts:** @saliha: belief reads event order within `last_turn` (move → damage) and each damage event's `crit`; `hit_count` is parked in the contract for multi-hit moves
-- **📨 Needs:** none new
-- **Status:** open (the note to @saliha)
-
 ### 2026-10-24 18:30 — decision — Bot layer is saliha's; `last_move` resets on switch; Derrick's notes 02-05 published — @saliha
 - **Where:** `context` @ `cb32fd0` (docs only) · merged to `main`: n/a
 - **Did:** (1) saliha owns the bot layer and the log parser; as doc owner saliha waived a separate yes from Nate (the bot layer meets the data layer only through `BattleState`), Nate is informed and can object here. (2) Answer to Derrick's ⚠️: yes, the parser resets `sides[*].last_move` to null when that side switches; Derrick please spell it out in `contracts/battle-state.md`. (3) The parser will emit `Event.source` exactly as the contract examples spell it (`"stealthrock"`, `"item:<id>"`). (4) Published `design/decision/02..05-*.md` from `derrick` @ `e4cef23`; the earlier 12 docs were already out.
@@ -338,6 +486,15 @@ whenever you log an entry.
 - **📨 Needs:** @derrick: add the `last_move` rule to the contract. @nate: review `contracts/set-candidates.md` (Derrick's 18:14 entry). The user picks the (a)-(e) build choices and the bot skeleton on the main account
 - **Agreed by:** saliha, derrick (proposer); nate informed
 - **Status:** resolved by @saliha 2026-10-24 18:30 (the 🔀, ⚠️ and 📨 rows above are cleared)
+
+### 2026-10-24 18:29 — feat — Decision layer: soft reweight by replaying each turn in poke-engine — @derrick
+- **Where:** `derrick` @ `7fb50c3` · merged to `main`: yes, as one clean commit `5e203fc` (2026-10-24 19:00; agreed by saliha, nate)
+- **Did:** Belief now replays last turn per candidate set (the loop calls `belief.chose(request, action)` after choosing) and drops sets the engine can't square with the observed move order or damage (both ways, crits included, ±1 for rounding). Speed ties, flinches, U-turn pivots and KOs handled; switches, one-sided turns and multi-hit moves give no evidence. 126 tests, 100% coverage.
+- **Touched:** `decision/belief.py`, `decision/simulate.py` (`engine_move` now public), `tests/test_reweight.py`
+- **Brief task:** 4 → 🟡 part (all belief logic built on hand-made priors; the real set file and the "beats uniform log loss" check wait on @nate's data)
+- **⚠️ Conflicts:** @saliha: belief reads event order within `last_turn` (move → damage) and each damage event's `crit`; `hit_count` is parked in the contract for multi-hit moves
+- **📨 Needs:** none new
+- **Status:** open (the note to @saliha)
 
 ### 2026-10-24 18:17 — feat — Decision layer: belief (hard filter + sampling) on hand-made priors — @derrick
 - **Where:** `derrick` @ `7ca09bb` · merged to `main`: yes, as one clean commit `5e203fc` (2026-10-24 19:00; agreed by saliha, nate)

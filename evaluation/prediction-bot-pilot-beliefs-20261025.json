@@ -1,0 +1,28 @@
+{
+  "coverage": {
+    "traces": 44,
+    "decisions_without_posterior_excluded": 0,
+    "revelations": 611,
+    "original_prior_recoveries": 0,
+    "external_roles_without_trace": 4,
+    "ground_truth_sets": "not supplied; no full-set coverage claim"
+  },
+  "scores": {
+    "bot": {
+      "revelations": 611,
+      "smoothing_alpha": 1e-06,
+      "next_move_assumption": "uniform over each set's remaining unrevealed moves",
+      "log_loss": {
+        "prior": 2.7074068315166793,
+        "hard_filter": 3.074506344363501,
+        "updated": 3.0772734162516806
+      },
+      "ground_truth_examples": 0,
+      "full_set_coverage": {
+        "prior": null,
+        "hard_filter": null,
+        "updated": null
+      }
+    }
+  }
+}

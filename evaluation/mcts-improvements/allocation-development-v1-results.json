@@ -1,0 +1,400 @@
+{
+  "scope": "historical development mechanism/compute study; no strength or fresh holdout claim",
+  "planned_calls": 54,
+  "recorded_calls": 54,
+  "source_sha256": "0728b716862b0c848480c3b08562bb745fd74c69874b948c52bf29b537895ed0",
+  "engine": {
+    "version": "0.0.48",
+    "binaries": {
+      "poke_engine.cpython-313-x86_64-linux-gnu.so": "fbffd2a1c9c48eab99def9187f9030c578174a30b49d54faad159be859846ef3"
+    }
+  },
+  "priors_sha256": "47b31bf7282d6578ed44d7b28f9a63e9284eddc72882856de426f7c1bfc8c7f3",
+  "cpu_scope": "Bot Python process plus reaped SearchWorker descendants between Agent construction and close; source validation/import and coordinator CPU excluded from this delta",
+  "allocations": {
+    "4x300": {
+      "scheduled": 18,
+      "returned": 18,
+      "worker_errors": 0,
+      "illegal_choices": 0,
+      "fallbacks": {},
+      "statistics": {
+        "latency_ms": {
+          "n": 18,
+          "mean": 1778.918703277466,
+          "p50": 1766.9065200025216,
+          "p95": 1900.8361038228031,
+          "p99": 1913.378988764016,
+          "max": 1916.5147099993192
+        },
+        "native_elapsed_ms": {
+          "n": 18,
+          "mean": 1300.2867759431765,
+          "p50": 1312.0157744851895,
+          "p95": 1347.8701945306966,
+          "p99": 1350.8226981275948,
+          "max": 1351.5608240268193
+        },
+        "preparation_ms": {
+          "n": 18,
+          "mean": 11.13883800442434,
+          "p50": 10.888162447372451,
+          "p95": 13.031766100903042,
+          "p99": 13.400602769688701,
+          "max": 13.492811936885118
+        },
+        "cpu_ms": {
+          "n": 18,
+          "mean": 1757.1773333333333,
+          "p50": 1743.9070000000002,
+          "p95": 1857.545,
+          "p99": 1862.441,
+          "max": 1863.665
+        },
+        "visits": {
+          "n": 18,
+          "mean": 493944.44444444444,
+          "p50": 128000.0,
+          "p95": 2328850.0,
+          "p99": 2368970.0,
+          "max": 2379000
+        },
+        "completed_worlds": {
+          "n": 18,
+          "mean": 4.0,
+          "p50": 4.0,
+          "p95": 4.0,
+          "p99": 4.0,
+          "max": 4
+        },
+        "usable_worlds": {
+          "n": 18,
+          "mean": 4.0,
+          "p50": 4.0,
+          "p95": 4.0,
+          "p99": 4.0,
+          "max": 4
+        },
+        "failed_worlds": {
+          "n": 18,
+          "mean": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "max": 0
+        },
+        "world_winner_disagreement": {
+          "n": 18,
+          "mean": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "max": 0.0
+        },
+        "pooled_top_two_margin": {
+          "n": 18,
+          "mean": 0.3181847125879075,
+          "p50": 0.10817931295806146,
+          "p95": 0.9981176907827113,
+          "p99": 0.9982233619354042,
+          "max": 0.9982497797235774
+        }
+      },
+      "action_repeat_agreement": {
+        "battle-gen9ou-24-first": {
+          "counts": {
+            "move 1": 3
+          },
+          "modal_fraction": 1.0
+        },
+        "battle-gen9ou-24-middle": {
+          "counts": {
+            "move 4": 3
+          },
+          "modal_fraction": 1.0
+        },
+        "battle-gen9ou-24-last": {
+          "counts": {
+            "move 3": 3
+          },
+          "modal_fraction": 1.0
+        },
+        "battle-gen9ou-26-first": {
+          "counts": {
+            "move 2": 3
+          },
+          "modal_fraction": 1.0
+        },
+        "battle-gen9ou-26-middle": {
+          "counts": {
+            "move 4": 3
+          },
+          "modal_fraction": 1.0
+        },
+        "battle-gen9ou-26-last": {
+          "counts": {
+            "move 3": 3
+          },
+          "modal_fraction": 1.0
+        }
+      }
+    },
+    "8x150": {
+      "scheduled": 18,
+      "returned": 18,
+      "worker_errors": 0,
+      "illegal_choices": 0,
+      "fallbacks": {},
+      "statistics": {
+        "latency_ms": {
+          "n": 18,
+          "mean": 1799.4451078346983,
+          "p50": 1807.7700169815216,
+          "p95": 1965.1479569089133,
+          "p99": 1979.5991034118924,
+          "max": 1983.2118900376372
+        },
+        "native_elapsed_ms": {
+          "n": 18,
+          "mean": 1312.5763430014356,
+          "p50": 1323.7697539443616,
+          "p95": 1376.8787573557347,
+          "p99": 1403.767781117931,
+          "max": 1410.49003705848
+        },
+        "preparation_ms": {
+          "n": 18,
+          "mean": 15.625663725788602,
+          "p50": 15.089606022229418,
+          "p95": 19.340510593610816,
+          "p99": 19.58739415218588,
+          "max": 19.649115041829646
+        },
+        "cpu_ms": {
+          "n": 18,
+          "mean": 1781.2593888888887,
+          "p50": 1795.8395,
+          "p95": 1931.3378499999997,
+          "p99": 1939.5923699999996,
+          "max": 1941.6559999999995
+        },
+        "visits": {
+          "n": 18,
+          "mean": 501666.6666666667,
+          "p50": 139000.0,
+          "p95": 2177350.0,
+          "p99": 2237870.0,
+          "max": 2253000
+        },
+        "completed_worlds": {
+          "n": 18,
+          "mean": 8.0,
+          "p50": 8.0,
+          "p95": 8.0,
+          "p99": 8.0,
+          "max": 8
+        },
+        "usable_worlds": {
+          "n": 18,
+          "mean": 8.0,
+          "p50": 8.0,
+          "p95": 8.0,
+          "p99": 8.0,
+          "max": 8
+        },
+        "failed_worlds": {
+          "n": 18,
+          "mean": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "max": 0
+        },
+        "world_winner_disagreement": {
+          "n": 18,
+          "mean": 0.1388888888888889,
+          "p50": 0.0,
+          "p95": 0.5187499999999998,
+          "p99": 0.6037499999999998,
+          "max": 0.625
+        },
+        "pooled_top_two_margin": {
+          "n": 18,
+          "mean": 0.272465739285279,
+          "p50": 0.06655914267916352,
+          "p95": 0.9964270347059282,
+          "p99": 0.9965296462926505,
+          "max": 0.9965552991893311
+        }
+      },
+      "action_repeat_agreement": {
+        "battle-gen9ou-24-first": {
+          "counts": {
+            "move 1": 3
+          },
+          "modal_fraction": 1.0
+        },
+        "battle-gen9ou-24-middle": {
+          "counts": {
+            "move 4": 3
+          },
+          "modal_fraction": 1.0
+        },
+        "battle-gen9ou-24-last": {
+          "counts": {
+            "move 3": 3
+          },
+          "modal_fraction": 1.0
+        },
+        "battle-gen9ou-26-first": {
+          "counts": {
+            "move 2": 3
+          },
+          "modal_fraction": 1.0
+        },
+        "battle-gen9ou-26-middle": {
+          "counts": {
+            "move 4": 2,
+            "move 3": 1
+          },
+          "modal_fraction": 0.6666666666666666
+        },
+        "battle-gen9ou-26-last": {
+          "counts": {
+            "move 3": 3
+          },
+          "modal_fraction": 1.0
+        }
+      }
+    },
+    "12x100": {
+      "scheduled": 18,
+      "returned": 18,
+      "worker_errors": 0,
+      "illegal_choices": 0,
+      "fallbacks": {},
+      "statistics": {
+        "latency_ms": {
+          "n": 18,
+          "mean": 1832.328075999006,
+          "p50": 1832.9740749904886,
+          "p95": 1918.131387673202,
+          "p99": 1922.7918159443652,
+          "max": 1923.956923012156
+        },
+        "native_elapsed_ms": {
+          "n": 18,
+          "mean": 1317.660131084267,
+          "p50": 1336.5334155096207,
+          "p95": 1367.2138915979303,
+          "p99": 1368.6497414507903,
+          "max": 1369.0087039140053
+        },
+        "preparation_ms": {
+          "n": 18,
+          "mean": 21.77050363388844,
+          "p50": 22.233209514524788,
+          "p95": 24.27846453792881,
+          "p99": 25.550891374587078,
+          "max": 25.86899808375165
+        },
+        "cpu_ms": {
+          "n": 18,
+          "mean": 1816.196222222222,
+          "p50": 1823.367,
+          "p95": 1883.0273999999997,
+          "p99": 1886.1526800000001,
+          "max": 1886.9340000000002
+        },
+        "visits": {
+          "n": 18,
+          "mean": 495444.44444444444,
+          "p50": 137500.0,
+          "p95": 2230899.9999999995,
+          "p99": 2343779.9999999995,
+          "max": 2372000
+        },
+        "completed_worlds": {
+          "n": 18,
+          "mean": 12.0,
+          "p50": 12.0,
+          "p95": 12.0,
+          "p99": 12.0,
+          "max": 12
+        },
+        "usable_worlds": {
+          "n": 18,
+          "mean": 12.0,
+          "p50": 12.0,
+          "p95": 12.0,
+          "p99": 12.0,
+          "max": 12
+        },
+        "failed_worlds": {
+          "n": 18,
+          "mean": 0.0,
+          "p50": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "max": 0
+        },
+        "world_winner_disagreement": {
+          "n": 18,
+          "mean": 0.1111111111111111,
+          "p50": 0.0,
+          "p95": 0.5,
+          "p99": 0.5,
+          "max": 0.5
+        },
+        "pooled_top_two_margin": {
+          "n": 18,
+          "mean": 0.2725881780591935,
+          "p50": 0.09384112684159565,
+          "p95": 0.9910249033655875,
+          "p99": 0.9945769680229269,
+          "max": 0.9954649841872618
+        }
+      },
+      "action_repeat_agreement": {
+        "battle-gen9ou-24-first": {
+          "counts": {
+            "move 1": 3
+          },
+          "modal_fraction": 1.0
+        },
+        "battle-gen9ou-24-middle": {
+          "counts": {
+            "move 4": 3
+          },
+          "modal_fraction": 1.0
+        },
+        "battle-gen9ou-24-last": {
+          "counts": {
+            "move 3": 3
+          },
+          "modal_fraction": 1.0
+        },
+        "battle-gen9ou-26-first": {
+          "counts": {
+            "move 2": 3
+          },
+          "modal_fraction": 1.0
+        },
+        "battle-gen9ou-26-middle": {
+          "counts": {
+            "move 3": 2,
+            "move 1": 1
+          },
+          "modal_fraction": 0.6666666666666666
+        },
+        "battle-gen9ou-26-last": {
+          "counts": {
+            "move 3": 3
+          },
+          "modal_fraction": 1.0
+        }
+      }
+    }
+  },
+  "interpretation_limit": "six historical positions/three native repeats are descriptive. Search support is not calibrated win probability. Fresh controlled games decide promotion; no adaptive behavior enabled."
+}

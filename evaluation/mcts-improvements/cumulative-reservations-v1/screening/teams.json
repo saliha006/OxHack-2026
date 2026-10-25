@@ -1,0 +1,254 @@
+{
+  "phase": "screening",
+  "stage": "final cumulative comparison",
+  "teams": [
+    {
+      "roster": [
+        "Darkrai",
+        "Gholdengo",
+        "Ogerpon-Wellspring",
+        "Dragonite",
+        "Great Tusk",
+        "Walking Wake"
+      ],
+      "style": "offense",
+      "design_rationale": "Multiple fast or priority attackers, setup/wallbreaking pressure, and Great Tusk hazard removal.",
+      "component_sources": [
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_11.txt"
+      ],
+      "sha256": "6888121a2fc4613f7ea7596b19e000bd3ea893893ddc2d86774a80e481eb4188",
+      "id": "cumulative-screening-01",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/cumulative-reservations-v1/screening/01.txt",
+      "validation_errors": null
+    },
+    {
+      "roster": [
+        "Weavile",
+        "Darkrai",
+        "Dragonite",
+        "Gholdengo",
+        "Great Tusk",
+        "Zapdos"
+      ],
+      "style": "offense",
+      "design_rationale": "Multiple fast or priority attackers, setup/wallbreaking pressure, and Great Tusk hazard removal.",
+      "component_sources": [
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_5.txt"
+      ],
+      "sha256": "8255687043f35f1f3257de175480ceddd99e9981e138e91f654296f03fab9300",
+      "id": "cumulative-screening-02",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/cumulative-reservations-v1/screening/02.txt",
+      "validation_errors": null
+    },
+    {
+      "roster": [
+        "Weavile",
+        "Latios",
+        "Zamazenta",
+        "Gholdengo",
+        "Great Tusk",
+        "Kyurem"
+      ],
+      "style": "offense",
+      "design_rationale": "Multiple fast or priority attackers, setup/wallbreaking pressure, and Great Tusk hazard removal.",
+      "component_sources": [
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_12.txt",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_9.txt"
+      ],
+      "sha256": "8ba11b9ead5ba5dd3b20feb79e1326603c562b181b10e31b44abcee5865197fc",
+      "id": "cumulative-screening-03",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/cumulative-reservations-v1/screening/03.txt",
+      "validation_errors": null
+    },
+    {
+      "roster": [
+        "Torkoal",
+        "Walking Wake",
+        "Hydrapple",
+        "Zamazenta",
+        "Dragonite",
+        "Great Tusk"
+      ],
+      "style": "sun offense",
+      "design_rationale": "Drought plus Heat Rock supports Walking Wake and Protosynthesis attackers; hazard removal supports the setter. Team viability is a design hypothesis, not a competitive result.",
+      "component_sources": [
+        "evaluation/mcts_improvements/reserve_teams.py: constructed weather component",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt"
+      ],
+      "sha256": "29094f983451a77686dd121083f0948b3858fd289c2c8d6cd21e9ae587c67baf",
+      "id": "cumulative-screening-04",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/cumulative-reservations-v1/screening/04.txt",
+      "validation_errors": null
+    },
+    {
+      "roster": [
+        "Tinkaton",
+        "Corviknight",
+        "Darkrai",
+        "Primarina",
+        "Moltres",
+        "Great Tusk"
+      ],
+      "style": "balance",
+      "design_rationale": "Defensive pivots/checks accompany hazard support and an offensive progress maker; no claim of tournament quality.",
+      "component_sources": [
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_8.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_13.txt"
+      ],
+      "sha256": "e0b714c688a3497b5cf69d7dbf397c97a55c029de086eb1566a4051ac42eb9e0",
+      "id": "cumulative-screening-05",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/cumulative-reservations-v1/screening/05.txt",
+      "validation_errors": null
+    },
+    {
+      "roster": [
+        "Tinkaton",
+        "Gliscor",
+        "Moltres",
+        "Gholdengo",
+        "Darkrai",
+        "Alomomola"
+      ],
+      "style": "balance",
+      "design_rationale": "Defensive pivots/checks accompany hazard support and an offensive progress maker; no claim of tournament quality.",
+      "component_sources": [
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_13.txt"
+      ],
+      "sha256": "8b3a803ef6f2618ea534bdb156be2b4244949ef4ea98de49c01a7e81f3985e90",
+      "id": "cumulative-screening-06",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/cumulative-reservations-v1/screening/06.txt",
+      "validation_errors": null
+    },
+    {
+      "roster": [
+        "Tinkaton",
+        "Slowking-Galar",
+        "Hydrapple",
+        "Cinderace",
+        "Primarina",
+        "Zamazenta"
+      ],
+      "style": "balance",
+      "design_rationale": "Defensive pivots/checks accompany hazard support and an offensive progress maker; no claim of tournament quality.",
+      "component_sources": [
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_9.txt",
+        "bot/teams/standin/team_8.txt",
+        "bot/teams/standin/team_11.txt"
+      ],
+      "sha256": "a40bea90a98f0dfbbb41d8cc659ea47368e13d9290192228d911277301cd7be1",
+      "id": "cumulative-screening-07",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/cumulative-reservations-v1/screening/07.txt",
+      "validation_errors": null
+    },
+    {
+      "roster": [
+        "Pelipper",
+        "Barraskewda",
+        "Zapdos",
+        "Gholdengo",
+        "Great Tusk",
+        "Kyurem"
+      ],
+      "style": "rain offense",
+      "design_rationale": "Drizzle plus Damp Rock enables Swift Swim and accurate Hurricane; pivots, special attackers and Great Tusk hazard removal complement the physical rain attacker. Team viability remains unmeasured.",
+      "component_sources": [
+        "evaluation/mcts_improvements/reserve_teams.py: constructed weather component",
+        "evaluation/mcts_improvements/reserve_teams.py: constructed weather component",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_9.txt"
+      ],
+      "sha256": "24983c8666ba23ed9ec79ae5ebdd16ab750be08f95552919d1341a311fad9085",
+      "id": "cumulative-screening-08",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/cumulative-reservations-v1/screening/08.txt",
+      "validation_errors": null
+    },
+    {
+      "roster": [
+        "Blissey",
+        "Dondozo",
+        "Corviknight",
+        "Tinkaton",
+        "Alomomola",
+        "Darkrai"
+      ],
+      "style": "semistall",
+      "design_rationale": "Recovery-heavy defensive core plus an offensive progress maker; long-battle censoring is reported explicitly.",
+      "component_sources": [
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_6.txt"
+      ],
+      "sha256": "047563d419f8459439cb5eb161053fa7b0dd169421e2bee495f3fbb70028fb05",
+      "id": "cumulative-screening-09",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/cumulative-reservations-v1/screening/09.txt",
+      "validation_errors": null
+    },
+    {
+      "roster": [
+        "Toxapex",
+        "Weezing-Galar",
+        "Iron Treads",
+        "Slowking-Galar",
+        "Moltres",
+        "Dragonite"
+      ],
+      "style": "semistall",
+      "design_rationale": "Recovery-heavy defensive core plus an offensive progress maker; long-battle censoring is reported explicitly.",
+      "component_sources": [
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_10.txt"
+      ],
+      "sha256": "8eeaa1241edce617173b49996b42d303f057e63a9d9271b36f894d0ca8548251",
+      "id": "cumulative-screening-10",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/cumulative-reservations-v1/screening/10.txt",
+      "validation_errors": null
+    }
+  ],
+  "provenance": {
+    "kind": "new synthetic roster combinations, separated from all stage experiment reservations",
+    "reservation_seed": 2026102590,
+    "construction_rules_sha256": "8b2e9ea32e392410fdd3dd51ba51f4b9f0f2ac57837191c212fb5885aac5a70d",
+    "reservation_timing": "After some Stage1/Stage2 screening outcomes existed, before final cumulative comparison and later policy tuning; construction uses the earlier fixed role-substitution lists and a fixed seed, without outcome-dependent team selection.",
+    "holdout_limit": "Not an independent external set holdout. Familiar component sets/species overlap with previous games, and handmade team quality is unmeasured. Exact six-species rosters are distinct from prior reservations and stand-in originals. No team paste is used for prior fitting.",
+    "rules": "validated with pinned local Gen9OU TeamValidator"
+  }
+}

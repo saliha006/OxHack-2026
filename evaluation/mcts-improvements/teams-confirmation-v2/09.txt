@@ -1,0 +1,61 @@
+Blissey @ Leftovers
+Ability: Natural Cure  
+Tera Type: Dark  
+EVs: 4 HP / 252 Def / 252 SpD  
+Calm Nature  
+IVs: 0 Atk  
+- Calm Mind  
+- Shadow Ball  
+- Seismic Toss  
+- Soft-Boiled  
+
+Dondozo @ Heavy-Duty Boots
+Ability: Unaware  
+Tera Type: Fighting  
+EVs: 248 HP / 252 Def / 8 SpD  
+Impish Nature  
+- Body Press  
+- Avalanche  
+- Rest  
+- Sleep Talk  
+
+Corviknight (F) @ Rocky Helmet  
+Ability: Pressure  
+Tera Type: Water  
+EVs: 136 HP / 252 Def / 120 Spe  
+Impish Nature  
+- Iron Defense  
+- Body Press  
+- Brave Bird  
+- Roost  
+
+Gliscor (F) @ Toxic Orb  
+Ability: Poison Heal  
+Tera Type: Normal  
+EVs: 244 HP / 168 SpD / 96 Spe  
+Careful Nature  
+- Swords Dance  
+- Facade  
+- Knock Off  
+- Protect  
+
+Alomomola (F) @ Assault Vest  
+Ability: Regenerator  
+Tera Type: Poison  
+EVs: 216 HP / 40 Atk / 252 SpD  
+Sassy Nature  
+IVs: 0 Spe  
+- Flip Turn  
+- Play Rough  
+- Icy Wind  
+- Mirror Coat  
+
+Weavile (F) @ Heavy-Duty Boots  
+Ability: Pressure  
+Tera Type: Fire  
+EVs: 252 Atk / 4 SpD / 252 Spe  
+Jolly Nature  
+- Swords Dance  
+- Icicle Crash  
+- Knock Off  
+- Ice Shard

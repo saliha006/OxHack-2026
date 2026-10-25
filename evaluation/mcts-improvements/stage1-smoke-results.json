@@ -1,0 +1,82 @@
+{
+  "planned": 2,
+  "recorded": 2,
+  "wins": 0,
+  "losses": 0,
+  "draws": 0,
+  "voids": 2,
+  "score_rate": null,
+  "wilson_95": [
+    0,
+    1
+  ],
+  "candidate_team_cluster_95": [
+    0,
+    1
+  ],
+  "cluster_limit": "Resamples candidate teams; shared opposing teams still create dependence, and ten clusters remain sparse.",
+  "wall_seconds_sum": 38.63884146796772,
+  "arms": {
+    "a": {
+      "decisions": 14,
+      "fallbacks": 0,
+      "rejected_choices": 0,
+      "requested_worlds": 96,
+      "completed_worlds": 96,
+      "failed_worlds": 0,
+      "usable_worlds": 96,
+      "cpu_seconds": 18.134954999999998,
+      "native_visits": 1459000,
+      "state_preparation_ms": 225.31661757966504,
+      "worker_wall_ms": 16931.45952001214,
+      "recoveries": 0,
+      "belief_history_reset": 0,
+      "worker_restart_required": 0,
+      "replay_not_recorded": 0,
+      "actual_search_ms": 15955.296991684008,
+      "p50_ms": 1366.6349025152158,
+      "p95_ms": 1673.4571465174668,
+      "p99_ms": 1697.7493885229342,
+      "max_ms": 1703.822449024301,
+      "over_3000_ms": 0,
+      "fallback_reasons": {}
+    },
+    "b": {
+      "decisions": 14,
+      "fallbacks": 0,
+      "rejected_choices": 0,
+      "requested_worlds": 96,
+      "completed_worlds": 96,
+      "failed_worlds": 0,
+      "usable_worlds": 96,
+      "cpu_seconds": 18.163251,
+      "native_visits": 1510000,
+      "state_preparation_ms": 314.5012372988276,
+      "worker_wall_ms": 16963.327419944108,
+      "recoveries": 0,
+      "belief_history_reset": 0,
+      "worker_restart_required": 0,
+      "replay_not_recorded": 0,
+      "actual_search_ms": 15879.007240699138,
+      "p50_ms": 1357.7513495110907,
+      "p95_ms": 1698.4962927730521,
+      "p99_ms": 1723.9456673542736,
+      "max_ms": 1730.308010999579,
+      "over_3000_ms": 0,
+      "fallback_reasons": {}
+    }
+  },
+  "side_breakdown": {
+    "p1": {},
+    "p2": {}
+  },
+  "team_breakdown": {
+    "0": {
+      "style": "regression smoke"
+    },
+    "1": {
+      "style": "regression smoke"
+    }
+  },
+  "purpose": "transport/correctness smoke; every game deliberately censored at six turns; no strength conclusion"
+}

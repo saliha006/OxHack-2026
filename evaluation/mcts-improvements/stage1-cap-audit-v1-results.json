@@ -1,0 +1,1814 @@
+{
+  "scope": "Retrospective review of all3hazard-at-cap losses and all7setup-at-cap wins in the first60-game comparison. No causal/strength claim or new policy.",
+  "source_sha256": "0bd23daf0e4d173a8a9a3398793831d7d1cac100ba99bf238ab357f07b258a23",
+  "facts": [
+    {
+      "id": "battle-mcts-19:28",
+      "signature": "hazard_at_cap",
+      "outcome": "loss",
+      "trace": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage1-screening-v1/game-0019/b/battle-mcts-19.jsonl",
+      "trace_sha256": "e5cdd3841e7dae1e66682db936e86f28a0ce5c0b45a2825904a93c8d9e0b2f99",
+      "line": 55,
+      "turn": 25,
+      "choice": "move 4",
+      "move": "stealthrock",
+      "own_species": "greattusk",
+      "own_hp_before": 46,
+      "own_hp_after": 46,
+      "own_boosts_before": {
+        "atk": 0,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 1,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "own_boosts_after": {
+        "atk": 0,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 1,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "own_ability_exact": "protosynthesis",
+      "own_item_exact": "rockyhelmet",
+      "own_volatiles": [],
+      "own_moves_exact": [
+        {
+          "move": "Headlong Rush",
+          "id": "headlongrush",
+          "pp": 8,
+          "maxpp": 8,
+          "target": "normal",
+          "disabled": false
+        },
+        {
+          "move": "Ice Spinner",
+          "id": "icespinner",
+          "pp": 24,
+          "maxpp": 24,
+          "target": "normal",
+          "disabled": false
+        },
+        {
+          "move": "Rapid Spin",
+          "id": "rapidspin",
+          "pp": 62,
+          "maxpp": 64,
+          "target": "normal",
+          "disabled": false
+        },
+        {
+          "move": "Stealth Rock",
+          "id": "stealthrock",
+          "pp": 30,
+          "maxpp": 32,
+          "target": "foeSide",
+          "disabled": false
+        }
+      ],
+      "foe_species": "corviknight",
+      "foe_revealed_moves": [
+        "irondefense",
+        "bravebird",
+        "bodypress",
+        "roost"
+      ],
+      "foe_hazards_before": {
+        "stealthrock": 1,
+        "spikes": 0,
+        "toxicspikes": 0,
+        "stickyweb": 0
+      },
+      "foe_hazards_after": {
+        "stealthrock": 1,
+        "spikes": 0,
+        "toxicspikes": 0,
+        "stickyweb": 0
+      },
+      "following_events": [
+        {
+          "type": "move",
+          "side": "p1",
+          "pokemon": 4,
+          "move": "stealthrock",
+          "target": null,
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        },
+        {
+          "type": "move",
+          "side": "p2",
+          "pokemon": 1,
+          "move": "roost",
+          "target": "p2",
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        },
+        {
+          "type": "heal",
+          "side": "p2",
+          "pokemon": 1,
+          "move": null,
+          "target": null,
+          "hp_percent": 96,
+          "source": "move",
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        },
+        {
+          "type": "damage",
+          "side": "p2",
+          "pokemon": 1,
+          "move": null,
+          "target": null,
+          "hp_percent": 90,
+          "source": "brn",
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        }
+      ],
+      "chosen_support": 0.21232504307644112,
+      "best_supported_nontera_alternative": "move 1",
+      "alternative_support": 0.20033417528195488,
+      "support_gap": 0.011990867794486243,
+      "legal_actions": [
+        "move 1",
+        "move 2",
+        "move 3",
+        "move 4",
+        "move 1 terastallize",
+        "move 2 terastallize",
+        "move 3 terastallize",
+        "move 4 terastallize",
+        "switch 2",
+        "switch 3",
+        "switch 5"
+      ],
+      "recorded_usable_worlds": 8,
+      "recorded_mapping_discards": 0,
+      "recorded_fallback": null
+    },
+    {
+      "id": "battle-mcts-21:37",
+      "signature": "hazard_at_cap",
+      "outcome": "loss",
+      "trace": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage1-screening-v1/game-0021/a/battle-mcts-21.jsonl",
+      "trace_sha256": "2875bff64bcc8d6a62a571c68a9707f647d66125dcff9cb0b52325450ed8eba7",
+      "line": 73,
+      "turn": 32,
+      "choice": "move 4",
+      "move": "stealthrock",
+      "own_species": "greattusk",
+      "own_hp_before": 57,
+      "own_hp_after": 57,
+      "own_boosts_before": {
+        "atk": 0,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 1,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "own_boosts_after": {
+        "atk": 0,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 1,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "own_ability_exact": "protosynthesis",
+      "own_item_exact": "rockyhelmet",
+      "own_volatiles": [],
+      "own_moves_exact": [
+        {
+          "move": "Headlong Rush",
+          "id": "headlongrush",
+          "pp": 8,
+          "maxpp": 8,
+          "target": "normal",
+          "disabled": false
+        },
+        {
+          "move": "Ice Spinner",
+          "id": "icespinner",
+          "pp": 24,
+          "maxpp": 24,
+          "target": "normal",
+          "disabled": false
+        },
+        {
+          "move": "Rapid Spin",
+          "id": "rapidspin",
+          "pp": 62,
+          "maxpp": 64,
+          "target": "normal",
+          "disabled": false
+        },
+        {
+          "move": "Stealth Rock",
+          "id": "stealthrock",
+          "pp": 30,
+          "maxpp": 32,
+          "target": "foeSide",
+          "disabled": false
+        }
+      ],
+      "foe_species": "corviknight",
+      "foe_revealed_moves": [
+        "irondefense",
+        "bodypress",
+        "bravebird",
+        "roost"
+      ],
+      "foe_hazards_before": {
+        "stealthrock": 1,
+        "spikes": 0,
+        "toxicspikes": 0,
+        "stickyweb": 0
+      },
+      "foe_hazards_after": {
+        "stealthrock": 1,
+        "spikes": 0,
+        "toxicspikes": 0,
+        "stickyweb": 0
+      },
+      "following_events": [
+        {
+          "type": "move",
+          "side": "p2",
+          "pokemon": 4,
+          "move": "stealthrock",
+          "target": null,
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        },
+        {
+          "type": "move",
+          "side": "p1",
+          "pokemon": 2,
+          "move": "roost",
+          "target": "p1",
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        },
+        {
+          "type": "heal",
+          "side": "p1",
+          "pokemon": 2,
+          "move": null,
+          "target": null,
+          "hp_percent": 100,
+          "source": "move",
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        },
+        {
+          "type": "damage",
+          "side": "p1",
+          "pokemon": 2,
+          "move": null,
+          "target": null,
+          "hp_percent": 94,
+          "source": "brn",
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        }
+      ],
+      "chosen_support": 0.21570634518989784,
+      "best_supported_nontera_alternative": "move 1",
+      "alternative_support": 0.2137220551378446,
+      "support_gap": 0.0019842900520532503,
+      "legal_actions": [
+        "move 1",
+        "move 2",
+        "move 3",
+        "move 4",
+        "move 1 terastallize",
+        "move 2 terastallize",
+        "move 3 terastallize",
+        "move 4 terastallize",
+        "switch 5"
+      ],
+      "recorded_usable_worlds": 8,
+      "recorded_mapping_discards": 0,
+      "recorded_fallback": null
+    },
+    {
+      "id": "battle-mcts-21:39",
+      "signature": "hazard_at_cap",
+      "outcome": "loss",
+      "trace": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage1-screening-v1/game-0021/a/battle-mcts-21.jsonl",
+      "trace_sha256": "2875bff64bcc8d6a62a571c68a9707f647d66125dcff9cb0b52325450ed8eba7",
+      "line": 77,
+      "turn": 34,
+      "choice": "move 4",
+      "move": "stealthrock",
+      "own_species": "greattusk",
+      "own_hp_before": 30,
+      "own_hp_after": 30,
+      "own_boosts_before": {
+        "atk": 0,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 1,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "own_boosts_after": {
+        "atk": 0,
+        "def": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 1,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "own_ability_exact": "protosynthesis",
+      "own_item_exact": "rockyhelmet",
+      "own_volatiles": [],
+      "own_moves_exact": [
+        {
+          "move": "Headlong Rush",
+          "id": "headlongrush",
+          "pp": 6,
+          "maxpp": 8,
+          "target": "normal",
+          "disabled": false
+        },
+        {
+          "move": "Ice Spinner",
+          "id": "icespinner",
+          "pp": 24,
+          "maxpp": 24,
+          "target": "normal",
+          "disabled": false
+        },
+        {
+          "move": "Rapid Spin",
+          "id": "rapidspin",
+          "pp": 62,
+          "maxpp": 64,
+          "target": "normal",
+          "disabled": false
+        },
+        {
+          "move": "Stealth Rock",
+          "id": "stealthrock",
+          "pp": 28,
+          "maxpp": 32,
+          "target": "foeSide",
+          "disabled": false
+        }
+      ],
+      "foe_species": "corviknight",
+      "foe_revealed_moves": [
+        "irondefense",
+        "bodypress",
+        "bravebird",
+        "roost"
+      ],
+      "foe_hazards_before": {
+        "stealthrock": 1,
+        "spikes": 0,
+        "toxicspikes": 0,
+        "stickyweb": 0
+      },
+      "foe_hazards_after": {
+        "stealthrock": 1,
+        "spikes": 0,
+        "toxicspikes": 0,
+        "stickyweb": 0
+      },
+      "following_events": [
+        {
+          "type": "move",
+          "side": "p2",
+          "pokemon": 4,
+          "move": "stealthrock",
+          "target": null,
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        },
+        {
+          "type": "move",
+          "side": "p1",
+          "pokemon": 2,
+          "move": "roost",
+          "target": "p1",
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        },
+        {
+          "type": "heal",
+          "side": "p1",
+          "pokemon": 2,
+          "move": null,
+          "target": null,
+          "hp_percent": 100,
+          "source": "move",
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        },
+        {
+          "type": "damage",
+          "side": "p1",
+          "pokemon": 2,
+          "move": null,
+          "target": null,
+          "hp_percent": 94,
+          "source": "brn",
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        }
+      ],
+      "chosen_support": 0.2404091030271758,
+      "best_supported_nontera_alternative": "move 1",
+      "alternative_support": 0.2403367647058823,
+      "support_gap": 7.233832129349693e-05,
+      "legal_actions": [
+        "move 1",
+        "move 2",
+        "move 3",
+        "move 4",
+        "move 1 terastallize",
+        "move 2 terastallize",
+        "move 3 terastallize",
+        "move 4 terastallize",
+        "switch 5"
+      ],
+      "recorded_usable_worlds": 8,
+      "recorded_mapping_discards": 0,
+      "recorded_fallback": null
+    },
+    {
+      "id": "battle-mcts-58:95",
+      "signature": "setup_at_cap",
+      "outcome": "win",
+      "trace": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage1-screening-v1/game-0058/b/battle-mcts-58.jsonl",
+      "trace_sha256": "ae338b2ed5de26af105522609db5997b27f86329f74c84113c2146b25b005614",
+      "line": 189,
+      "turn": 93,
+      "choice": "move 1",
+      "move": "irondefense",
+      "own_species": "corviknight",
+      "own_hp_before": 88,
+      "own_hp_after": 88,
+      "own_boosts_before": {
+        "atk": -1,
+        "def": 6,
+        "spa": -1,
+        "spd": 0,
+        "spe": 0,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "own_boosts_after": {
+        "atk": -1,
+        "def": 6,
+        "spa": -1,
+        "spd": 0,
+        "spe": 0,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "own_ability_exact": "pressure",
+      "own_item_exact": "rockyhelmet",
+      "own_volatiles": [],
+      "own_moves_exact": [
+        {
+          "move": "Iron Defense",
+          "id": "irondefense",
+          "pp": 19,
+          "maxpp": 24,
+          "target": "self",
+          "disabled": false
+        },
+        {
+          "move": "Body Press",
+          "id": "bodypress",
+          "pp": 1,
+          "maxpp": 16,
+          "target": "normal",
+          "disabled": false
+        },
+        {
+          "move": "Brave Bird",
+          "id": "bravebird",
+          "pp": 24,
+          "maxpp": 24,
+          "target": "any",
+          "disabled": false
+        },
+        {
+          "move": "Roost",
+          "id": "roost",
+          "pp": 0,
+          "maxpp": 8,
+          "target": "self",
+          "disabled": true
+        }
+      ],
+      "foe_species": "pecharunt",
+      "foe_revealed_moves": [
+        "malignantchain",
+        "partingshot",
+        "foulplay",
+        "recover"
+      ],
+      "foe_hazards_before": {
+        "stealthrock": 0,
+        "spikes": 0,
+        "toxicspikes": 0,
+        "stickyweb": 0
+      },
+      "foe_hazards_after": {
+        "stealthrock": 0,
+        "spikes": 0,
+        "toxicspikes": 0,
+        "stickyweb": 0
+      },
+      "following_events": [
+        {
+          "type": "move",
+          "side": "p1",
+          "pokemon": 4,
+          "move": "recover",
+          "target": null,
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        },
+        {
+          "type": "move",
+          "side": "p2",
+          "pokemon": 2,
+          "move": "irondefense",
+          "target": "p2",
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        }
+      ],
+      "chosen_support": 0.3616654918546366,
+      "best_supported_nontera_alternative": "move 2",
+      "alternative_support": 0.26561782581453636,
+      "support_gap": 0.09604766604010023,
+      "legal_actions": [
+        "move 1",
+        "move 2",
+        "move 3",
+        "switch 2",
+        "switch 3",
+        "switch 4",
+        "switch 6"
+      ],
+      "recorded_usable_worlds": 8,
+      "recorded_mapping_discards": 0,
+      "recorded_fallback": null
+    },
+    {
+      "id": "battle-mcts-58:96",
+      "signature": "setup_at_cap",
+      "outcome": "win",
+      "trace": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage1-screening-v1/game-0058/b/battle-mcts-58.jsonl",
+      "trace_sha256": "ae338b2ed5de26af105522609db5997b27f86329f74c84113c2146b25b005614",
+      "line": 191,
+      "turn": 94,
+      "choice": "move 1",
+      "move": "irondefense",
+      "own_species": "corviknight",
+      "own_hp_before": 88,
+      "own_hp_after": 88,
+      "own_boosts_before": {
+        "atk": -1,
+        "def": 6,
+        "spa": -1,
+        "spd": 0,
+        "spe": 0,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "own_boosts_after": {
+        "atk": -1,
+        "def": 6,
+        "spa": -1,
+        "spd": 0,
+        "spe": 0,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "own_ability_exact": "pressure",
+      "own_item_exact": "rockyhelmet",
+      "own_volatiles": [],
+      "own_moves_exact": [
+        {
+          "move": "Iron Defense",
+          "id": "irondefense",
+          "pp": 18,
+          "maxpp": 24,
+          "target": "self",
+          "disabled": false
+        },
+        {
+          "move": "Body Press",
+          "id": "bodypress",
+          "pp": 1,
+          "maxpp": 16,
+          "target": "normal",
+          "disabled": false
+        },
+        {
+          "move": "Brave Bird",
+          "id": "bravebird",
+          "pp": 24,
+          "maxpp": 24,
+          "target": "any",
+          "disabled": false
+        },
+        {
+          "move": "Roost",
+          "id": "roost",
+          "pp": 0,
+          "maxpp": 8,
+          "target": "self",
+          "disabled": true
+        }
+      ],
+      "foe_species": "pecharunt",
+      "foe_revealed_moves": [
+        "malignantchain",
+        "partingshot",
+        "foulplay",
+        "recover"
+      ],
+      "foe_hazards_before": {
+        "stealthrock": 0,
+        "spikes": 0,
+        "toxicspikes": 0,
+        "stickyweb": 0
+      },
+      "foe_hazards_after": {
+        "stealthrock": 0,
+        "spikes": 0,
+        "toxicspikes": 0,
+        "stickyweb": 0
+      },
+      "following_events": [
+        {
+          "type": "move",
+          "side": "p1",
+          "pokemon": 4,
+          "move": "recover",
+          "target": null,
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        },
+        {
+          "type": "move",
+          "side": "p2",
+          "pokemon": 2,
+          "move": "irondefense",
+          "target": "p2",
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        }
+      ],
+      "chosen_support": 0.3353297540726817,
+      "best_supported_nontera_alternative": "move 2",
+      "alternative_support": 0.27103183610066833,
+      "support_gap": 0.06429791797201334,
+      "legal_actions": [
+        "move 1",
+        "move 2",
+        "move 3",
+        "switch 2",
+        "switch 3",
+        "switch 4",
+        "switch 6"
+      ],
+      "recorded_usable_worlds": 8,
+      "recorded_mapping_discards": 0,
+      "recorded_fallback": null
+    },
+    {
+      "id": "battle-mcts-58:97",
+      "signature": "setup_at_cap",
+      "outcome": "win",
+      "trace": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage1-screening-v1/game-0058/b/battle-mcts-58.jsonl",
+      "trace_sha256": "ae338b2ed5de26af105522609db5997b27f86329f74c84113c2146b25b005614",
+      "line": 193,
+      "turn": 95,
+      "choice": "move 1",
+      "move": "irondefense",
+      "own_species": "corviknight",
+      "own_hp_before": 88,
+      "own_hp_after": 88,
+      "own_boosts_before": {
+        "atk": -1,
+        "def": 6,
+        "spa": -1,
+        "spd": 0,
+        "spe": 0,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "own_boosts_after": {
+        "atk": -2,
+        "def": 6,
+        "spa": -2,
+        "spd": 0,
+        "spe": 0,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "own_ability_exact": "pressure",
+      "own_item_exact": "rockyhelmet",
+      "own_volatiles": [],
+      "own_moves_exact": [
+        {
+          "move": "Iron Defense",
+          "id": "irondefense",
+          "pp": 17,
+          "maxpp": 24,
+          "target": "self",
+          "disabled": false
+        },
+        {
+          "move": "Body Press",
+          "id": "bodypress",
+          "pp": 1,
+          "maxpp": 16,
+          "target": "normal",
+          "disabled": false
+        },
+        {
+          "move": "Brave Bird",
+          "id": "bravebird",
+          "pp": 24,
+          "maxpp": 24,
+          "target": "any",
+          "disabled": false
+        },
+        {
+          "move": "Roost",
+          "id": "roost",
+          "pp": 0,
+          "maxpp": 8,
+          "target": "self",
+          "disabled": true
+        }
+      ],
+      "foe_species": "pecharunt",
+      "foe_revealed_moves": [
+        "malignantchain",
+        "partingshot",
+        "foulplay",
+        "recover"
+      ],
+      "foe_hazards_before": {
+        "stealthrock": 0,
+        "spikes": 0,
+        "toxicspikes": 0,
+        "stickyweb": 0
+      },
+      "foe_hazards_after": {
+        "stealthrock": 0,
+        "spikes": 0,
+        "toxicspikes": 0,
+        "stickyweb": 0
+      },
+      "following_events": [
+        {
+          "type": "move",
+          "side": "p1",
+          "pokemon": 4,
+          "move": "partingshot",
+          "target": "p2",
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        },
+        {
+          "type": "switch",
+          "side": "p1",
+          "pokemon": 5,
+          "move": null,
+          "target": null,
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        },
+        {
+          "type": "move",
+          "side": "p2",
+          "pokemon": 2,
+          "move": "irondefense",
+          "target": "p2",
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        }
+      ],
+      "chosen_support": 0.35546298374613006,
+      "best_supported_nontera_alternative": "move 2",
+      "alternative_support": 0.264811779755762,
+      "support_gap": 0.09065120399036808,
+      "legal_actions": [
+        "move 1",
+        "move 2",
+        "move 3",
+        "switch 2",
+        "switch 3",
+        "switch 4",
+        "switch 6"
+      ],
+      "recorded_usable_worlds": 8,
+      "recorded_mapping_discards": 0,
+      "recorded_fallback": null
+    },
+    {
+      "id": "battle-mcts-58:99",
+      "signature": "setup_at_cap",
+      "outcome": "win",
+      "trace": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage1-screening-v1/game-0058/b/battle-mcts-58.jsonl",
+      "trace_sha256": "ae338b2ed5de26af105522609db5997b27f86329f74c84113c2146b25b005614",
+      "line": 197,
+      "turn": 97,
+      "choice": "move 1",
+      "move": "irondefense",
+      "own_species": "corviknight",
+      "own_hp_before": 88,
+      "own_hp_after": 88,
+      "own_boosts_before": {
+        "atk": -2,
+        "def": 6,
+        "spa": -2,
+        "spd": 0,
+        "spe": 0,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "own_boosts_after": {
+        "atk": -3,
+        "def": 6,
+        "spa": -3,
+        "spd": 0,
+        "spe": 0,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "own_ability_exact": "pressure",
+      "own_item_exact": "rockyhelmet",
+      "own_volatiles": [],
+      "own_moves_exact": [
+        {
+          "move": "Iron Defense",
+          "id": "irondefense",
+          "pp": 16,
+          "maxpp": 24,
+          "target": "self",
+          "disabled": false
+        },
+        {
+          "move": "Body Press",
+          "id": "bodypress",
+          "pp": 0,
+          "maxpp": 16,
+          "target": "normal",
+          "disabled": true
+        },
+        {
+          "move": "Brave Bird",
+          "id": "bravebird",
+          "pp": 24,
+          "maxpp": 24,
+          "target": "any",
+          "disabled": false
+        },
+        {
+          "move": "Roost",
+          "id": "roost",
+          "pp": 0,
+          "maxpp": 8,
+          "target": "self",
+          "disabled": true
+        }
+      ],
+      "foe_species": "pecharunt",
+      "foe_revealed_moves": [
+        "malignantchain",
+        "partingshot",
+        "foulplay",
+        "recover"
+      ],
+      "foe_hazards_before": {
+        "stealthrock": 0,
+        "spikes": 0,
+        "toxicspikes": 0,
+        "stickyweb": 0
+      },
+      "foe_hazards_after": {
+        "stealthrock": 0,
+        "spikes": 0,
+        "toxicspikes": 0,
+        "stickyweb": 0
+      },
+      "following_events": [
+        {
+          "type": "move",
+          "side": "p1",
+          "pokemon": 4,
+          "move": "partingshot",
+          "target": "p2",
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        },
+        {
+          "type": "switch",
+          "side": "p1",
+          "pokemon": 5,
+          "move": null,
+          "target": null,
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        },
+        {
+          "type": "move",
+          "side": "p2",
+          "pokemon": 2,
+          "move": "irondefense",
+          "target": "p2",
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        }
+      ],
+      "chosen_support": 0.40446192564745204,
+      "best_supported_nontera_alternative": "move 3",
+      "alternative_support": 0.21410342522974102,
+      "support_gap": 0.19035850041771102,
+      "legal_actions": [
+        "move 1",
+        "move 3",
+        "switch 2",
+        "switch 3",
+        "switch 4",
+        "switch 6"
+      ],
+      "recorded_usable_worlds": 8,
+      "recorded_mapping_discards": 0,
+      "recorded_fallback": null
+    },
+    {
+      "id": "battle-mcts-58:100",
+      "signature": "setup_at_cap",
+      "outcome": "win",
+      "trace": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage1-screening-v1/game-0058/b/battle-mcts-58.jsonl",
+      "trace_sha256": "ae338b2ed5de26af105522609db5997b27f86329f74c84113c2146b25b005614",
+      "line": 199,
+      "turn": 98,
+      "choice": "move 1",
+      "move": "irondefense",
+      "own_species": "corviknight",
+      "own_hp_before": 88,
+      "own_hp_after": 88,
+      "own_boosts_before": {
+        "atk": -3,
+        "def": 6,
+        "spa": -3,
+        "spd": 0,
+        "spe": 0,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "own_boosts_after": {
+        "atk": -3,
+        "def": 6,
+        "spa": -3,
+        "spd": 0,
+        "spe": 0,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "own_ability_exact": "pressure",
+      "own_item_exact": "rockyhelmet",
+      "own_volatiles": [],
+      "own_moves_exact": [
+        {
+          "move": "Iron Defense",
+          "id": "irondefense",
+          "pp": 15,
+          "maxpp": 24,
+          "target": "self",
+          "disabled": false
+        },
+        {
+          "move": "Body Press",
+          "id": "bodypress",
+          "pp": 0,
+          "maxpp": 16,
+          "target": "normal",
+          "disabled": true
+        },
+        {
+          "move": "Brave Bird",
+          "id": "bravebird",
+          "pp": 24,
+          "maxpp": 24,
+          "target": "any",
+          "disabled": false
+        },
+        {
+          "move": "Roost",
+          "id": "roost",
+          "pp": 0,
+          "maxpp": 8,
+          "target": "self",
+          "disabled": true
+        }
+      ],
+      "foe_species": "greattusk",
+      "foe_revealed_moves": [
+        "rapidspin"
+      ],
+      "foe_hazards_before": {
+        "stealthrock": 0,
+        "spikes": 0,
+        "toxicspikes": 0,
+        "stickyweb": 0
+      },
+      "foe_hazards_after": {
+        "stealthrock": 0,
+        "spikes": 0,
+        "toxicspikes": 0,
+        "stickyweb": 0
+      },
+      "following_events": [
+        {
+          "type": "switch",
+          "side": "p1",
+          "pokemon": 4,
+          "move": null,
+          "target": null,
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        },
+        {
+          "type": "move",
+          "side": "p2",
+          "pokemon": 2,
+          "move": "irondefense",
+          "target": "p2",
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        }
+      ],
+      "chosen_support": 0.32552854532163744,
+      "best_supported_nontera_alternative": "move 3",
+      "alternative_support": 0.2891384868421053,
+      "support_gap": 0.03639005847953214,
+      "legal_actions": [
+        "move 1",
+        "move 3",
+        "switch 2",
+        "switch 3",
+        "switch 4",
+        "switch 6"
+      ],
+      "recorded_usable_worlds": 8,
+      "recorded_mapping_discards": 0,
+      "recorded_fallback": null
+    },
+    {
+      "id": "battle-mcts-58:101",
+      "signature": "setup_at_cap",
+      "outcome": "win",
+      "trace": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage1-screening-v1/game-0058/b/battle-mcts-58.jsonl",
+      "trace_sha256": "ae338b2ed5de26af105522609db5997b27f86329f74c84113c2146b25b005614",
+      "line": 201,
+      "turn": 99,
+      "choice": "move 1",
+      "move": "irondefense",
+      "own_species": "corviknight",
+      "own_hp_before": 88,
+      "own_hp_after": 87,
+      "own_boosts_before": {
+        "atk": -3,
+        "def": 6,
+        "spa": -3,
+        "spd": 0,
+        "spe": 0,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "own_boosts_after": {
+        "atk": -3,
+        "def": 6,
+        "spa": -3,
+        "spd": 0,
+        "spe": 0,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "own_ability_exact": "pressure",
+      "own_item_exact": "rockyhelmet",
+      "own_volatiles": [],
+      "own_moves_exact": [
+        {
+          "move": "Iron Defense",
+          "id": "irondefense",
+          "pp": 14,
+          "maxpp": 24,
+          "target": "self",
+          "disabled": false
+        },
+        {
+          "move": "Body Press",
+          "id": "bodypress",
+          "pp": 0,
+          "maxpp": 16,
+          "target": "normal",
+          "disabled": true
+        },
+        {
+          "move": "Brave Bird",
+          "id": "bravebird",
+          "pp": 24,
+          "maxpp": 24,
+          "target": "any",
+          "disabled": false
+        },
+        {
+          "move": "Roost",
+          "id": "roost",
+          "pp": 0,
+          "maxpp": 8,
+          "target": "self",
+          "disabled": true
+        }
+      ],
+      "foe_species": "pecharunt",
+      "foe_revealed_moves": [
+        "malignantchain",
+        "partingshot",
+        "foulplay",
+        "recover"
+      ],
+      "foe_hazards_before": {
+        "stealthrock": 0,
+        "spikes": 0,
+        "toxicspikes": 0,
+        "stickyweb": 0
+      },
+      "foe_hazards_after": {
+        "stealthrock": 0,
+        "spikes": 0,
+        "toxicspikes": 0,
+        "stickyweb": 0
+      },
+      "following_events": [
+        {
+          "type": "move",
+          "side": "p1",
+          "pokemon": 4,
+          "move": "foulplay",
+          "target": "p2",
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        },
+        {
+          "type": "damage",
+          "side": "p2",
+          "pokemon": 2,
+          "move": null,
+          "target": null,
+          "hp_percent": 87,
+          "source": "move",
+          "crit": false,
+          "effectiveness": "neutral",
+          "reason": null
+        },
+        {
+          "type": "damage",
+          "side": "p1",
+          "pokemon": 4,
+          "move": null,
+          "target": null,
+          "hp_percent": 84,
+          "source": "item:rockyhelmet",
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        },
+        {
+          "type": "move",
+          "side": "p2",
+          "pokemon": 2,
+          "move": "irondefense",
+          "target": "p2",
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        }
+      ],
+      "chosen_support": 0.34002382449690405,
+      "best_supported_nontera_alternative": "switch 3",
+      "alternative_support": 0.21760375279497762,
+      "support_gap": 0.12242007170192643,
+      "legal_actions": [
+        "move 1",
+        "move 3",
+        "switch 2",
+        "switch 3",
+        "switch 4",
+        "switch 6"
+      ],
+      "recorded_usable_worlds": 8,
+      "recorded_mapping_discards": 0,
+      "recorded_fallback": null
+    },
+    {
+      "id": "battle-mcts-58:102",
+      "signature": "setup_at_cap",
+      "outcome": "win",
+      "trace": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage1-screening-v1/game-0058/b/battle-mcts-58.jsonl",
+      "trace_sha256": "ae338b2ed5de26af105522609db5997b27f86329f74c84113c2146b25b005614",
+      "line": 203,
+      "turn": 100,
+      "choice": "move 1",
+      "move": "irondefense",
+      "own_species": "corviknight",
+      "own_hp_before": 87,
+      "own_hp_after": 85,
+      "own_boosts_before": {
+        "atk": -3,
+        "def": 6,
+        "spa": -3,
+        "spd": 0,
+        "spe": 0,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "own_boosts_after": {
+        "atk": -3,
+        "def": 6,
+        "spa": -3,
+        "spd": 0,
+        "spe": 0,
+        "accuracy": 0,
+        "evasion": 0
+      },
+      "own_ability_exact": "pressure",
+      "own_item_exact": "rockyhelmet",
+      "own_volatiles": [],
+      "own_moves_exact": [
+        {
+          "move": "Iron Defense",
+          "id": "irondefense",
+          "pp": 13,
+          "maxpp": 24,
+          "target": "self",
+          "disabled": false
+        },
+        {
+          "move": "Body Press",
+          "id": "bodypress",
+          "pp": 0,
+          "maxpp": 16,
+          "target": "normal",
+          "disabled": true
+        },
+        {
+          "move": "Brave Bird",
+          "id": "bravebird",
+          "pp": 24,
+          "maxpp": 24,
+          "target": "any",
+          "disabled": false
+        },
+        {
+          "move": "Roost",
+          "id": "roost",
+          "pp": 0,
+          "maxpp": 8,
+          "target": "self",
+          "disabled": true
+        }
+      ],
+      "foe_species": "pecharunt",
+      "foe_revealed_moves": [
+        "malignantchain",
+        "partingshot",
+        "foulplay",
+        "recover"
+      ],
+      "foe_hazards_before": {
+        "stealthrock": 0,
+        "spikes": 0,
+        "toxicspikes": 0,
+        "stickyweb": 0
+      },
+      "foe_hazards_after": {
+        "stealthrock": 0,
+        "spikes": 0,
+        "toxicspikes": 0,
+        "stickyweb": 0
+      },
+      "following_events": [
+        {
+          "type": "move",
+          "side": "p1",
+          "pokemon": 4,
+          "move": "foulplay",
+          "target": "p2",
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        },
+        {
+          "type": "damage",
+          "side": "p2",
+          "pokemon": 2,
+          "move": null,
+          "target": null,
+          "hp_percent": 85,
+          "source": "move",
+          "crit": false,
+          "effectiveness": "neutral",
+          "reason": null
+        },
+        {
+          "type": "damage",
+          "side": "p1",
+          "pokemon": 4,
+          "move": null,
+          "target": null,
+          "hp_percent": 67,
+          "source": "item:rockyhelmet",
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        },
+        {
+          "type": "move",
+          "side": "p2",
+          "pokemon": 2,
+          "move": "irondefense",
+          "target": "p2",
+          "hp_percent": null,
+          "source": null,
+          "crit": false,
+          "effectiveness": null,
+          "reason": null
+        }
+      ],
+      "chosen_support": 0.277163224969475,
+      "best_supported_nontera_alternative": "switch 3",
+      "alternative_support": 0.23147055288461538,
+      "support_gap": 0.04569267208485961,
+      "legal_actions": [
+        "move 1",
+        "move 3",
+        "switch 2",
+        "switch 3",
+        "switch 4",
+        "switch 6"
+      ],
+      "recorded_usable_worlds": 8,
+      "recorded_mapping_discards": 0,
+      "recorded_fallback": null
+    }
+  ],
+  "conditional_native_comparisons": [
+    {
+      "id": "battle-mcts-19:28",
+      "completed": 16,
+      "wall_ms": 464.9595040245913,
+      "cpu_ms": 441.9390000000001,
+      "choices": {
+        "move 4": {
+          "worlds": 8,
+          "expected": {
+            "our_active_fainted": 0.0,
+            "original_active_fainted": 0.0,
+            "new_our_faints": 0.0,
+            "our_alive": 4.0,
+            "our_hp_fraction_sum": 2.827863220760002,
+            "foe_alive": 6.0,
+            "foe_hp_fraction_sum": 5.218686250509996,
+            "basic_hp_value": 0.3170490404270836
+          },
+          "modal_replies": [
+            {
+              "world": 0,
+              "reply": "roost",
+              "share": 0.47075
+            },
+            {
+              "world": 1,
+              "reply": "roost",
+              "share": 0.49055
+            },
+            {
+              "world": 2,
+              "reply": "roost",
+              "share": 0.49447368421052634
+            },
+            {
+              "world": 3,
+              "reply": "roost",
+              "share": 0.4553125
+            },
+            {
+              "world": 4,
+              "reply": "roost",
+              "share": 0.44293333333333335
+            },
+            {
+              "world": 5,
+              "reply": "roost",
+              "share": 0.4536
+            },
+            {
+              "world": 6,
+              "reply": "roost",
+              "share": 0.4357142857142857
+            },
+            {
+              "world": 7,
+              "reply": "roost",
+              "share": 0.44793333333333335
+            }
+          ]
+        },
+        "move 1": {
+          "worlds": 8,
+          "expected": {
+            "our_active_fainted": 0.0,
+            "original_active_fainted": 0.0,
+            "new_our_faints": 0.0,
+            "our_alive": 4.0,
+            "our_hp_fraction_sum": 2.827863220760002,
+            "foe_alive": 6.0,
+            "foe_hp_fraction_sum": 5.218686250509996,
+            "basic_hp_value": 0.3170490404270836
+          },
+          "modal_replies": [
+            {
+              "world": 0,
+              "reply": "roost",
+              "share": 0.47075
+            },
+            {
+              "world": 1,
+              "reply": "roost",
+              "share": 0.49055
+            },
+            {
+              "world": 2,
+              "reply": "roost",
+              "share": 0.49447368421052634
+            },
+            {
+              "world": 3,
+              "reply": "roost",
+              "share": 0.4553125
+            },
+            {
+              "world": 4,
+              "reply": "roost",
+              "share": 0.44293333333333335
+            },
+            {
+              "world": 5,
+              "reply": "roost",
+              "share": 0.4536
+            },
+            {
+              "world": 6,
+              "reply": "roost",
+              "share": 0.4357142857142857
+            },
+            {
+              "world": 7,
+              "reply": "roost",
+              "share": 0.44793333333333335
+            }
+          ]
+        }
+      },
+      "failures": []
+    },
+    {
+      "id": "battle-mcts-21:37",
+      "completed": 16,
+      "wall_ms": 481.4938500057906,
+      "cpu_ms": 452.7770000000002,
+      "choices": {
+        "move 4": {
+          "worlds": 8,
+          "expected": {
+            "our_active_fainted": 0.0,
+            "original_active_fainted": 0.0,
+            "new_our_faints": 0.0,
+            "our_alive": 2.0,
+            "our_hp_fraction_sum": 0.9112334653864231,
+            "foe_alive": 6.0,
+            "foe_hp_fraction_sum": 4.065690438493668,
+            "basic_hp_value": 0.20189762612053144
+          },
+          "modal_replies": [
+            {
+              "world": 0,
+              "reply": "roost",
+              "share": 0.26784615384615384
+            },
+            {
+              "world": 1,
+              "reply": "roost",
+              "share": 0.26152631578947366
+            },
+            {
+              "world": 2,
+              "reply": "roost",
+              "share": 0.2774736842105263
+            },
+            {
+              "world": 3,
+              "reply": "roost",
+              "share": 0.2561333333333333
+            },
+            {
+              "world": 4,
+              "reply": "irondefense",
+              "share": 0.2631428571428571
+            },
+            {
+              "world": 5,
+              "reply": "roost",
+              "share": 0.2498
+            },
+            {
+              "world": 6,
+              "reply": "roost",
+              "share": 0.2595
+            },
+            {
+              "world": 7,
+              "reply": "roost",
+              "share": 0.2601428571428571
+            }
+          ]
+        },
+        "move 1": {
+          "worlds": 8,
+          "expected": {
+            "our_active_fainted": 0.0,
+            "original_active_fainted": 0.0,
+            "new_our_faints": 0.0,
+            "our_alive": 2.0,
+            "our_hp_fraction_sum": 0.9112334653864231,
+            "foe_alive": 6.0,
+            "foe_hp_fraction_sum": 4.065690438493668,
+            "basic_hp_value": 0.20189762612053144
+          },
+          "modal_replies": [
+            {
+              "world": 0,
+              "reply": "roost",
+              "share": 0.26784615384615384
+            },
+            {
+              "world": 1,
+              "reply": "roost",
+              "share": 0.26152631578947366
+            },
+            {
+              "world": 2,
+              "reply": "roost",
+              "share": 0.2774736842105263
+            },
+            {
+              "world": 3,
+              "reply": "roost",
+              "share": 0.2561333333333333
+            },
+            {
+              "world": 4,
+              "reply": "irondefense",
+              "share": 0.2631428571428571
+            },
+            {
+              "world": 5,
+              "reply": "roost",
+              "share": 0.2498
+            },
+            {
+              "world": 6,
+              "reply": "roost",
+              "share": 0.2595
+            },
+            {
+              "world": 7,
+              "reply": "roost",
+              "share": 0.2601428571428571
+            }
+          ]
+        }
+      },
+      "failures": []
+    },
+    {
+      "id": "battle-mcts-21:39",
+      "completed": 16,
+      "wall_ms": 483.37042797356844,
+      "cpu_ms": 459.2280000000004,
+      "choices": {
+        "move 4": {
+          "worlds": 8,
+          "expected": {
+            "our_active_fainted": 0.0052083339790503485,
+            "original_active_fainted": 0.0052083339790503485,
+            "new_our_faints": 0.0052083339790503485,
+            "our_alive": 1.9947916660209497,
+            "our_hp_fraction_sum": 0.6105399568317882,
+            "foe_alive": 6.0,
+            "foe_hp_fraction_sum": 4.033342679957045,
+            "basic_hp_value": 0.19049953928732055
+          },
+          "modal_replies": [
+            {
+              "world": 0,
+              "reply": "roost",
+              "share": 0.25333333333333335
+            },
+            {
+              "world": 1,
+              "reply": "roost",
+              "share": 0.26323529411764707
+            },
+            {
+              "world": 2,
+              "reply": "roost",
+              "share": 0.26976470588235296
+            },
+            {
+              "world": 3,
+              "reply": "roost",
+              "share": 0.25344444444444447
+            },
+            {
+              "world": 4,
+              "reply": "bravebird",
+              "share": 0.26342105263157894
+            },
+            {
+              "world": 5,
+              "reply": "roost",
+              "share": 0.2591052631578947
+            },
+            {
+              "world": 6,
+              "reply": "roost",
+              "share": 0.2683684210526316
+            },
+            {
+              "world": 7,
+              "reply": "roost",
+              "share": 0.2886666666666667
+            }
+          ]
+        },
+        "move 1": {
+          "worlds": 8,
+          "expected": {
+            "our_active_fainted": 0.0052083339790503485,
+            "original_active_fainted": 0.0052083339790503485,
+            "new_our_faints": 0.0052083339790503485,
+            "our_alive": 1.9947916660209497,
+            "our_hp_fraction_sum": 0.6105399568317882,
+            "foe_alive": 6.0,
+            "foe_hp_fraction_sum": 4.033342679957045,
+            "basic_hp_value": 0.19049953928732055
+          },
+          "modal_replies": [
+            {
+              "world": 0,
+              "reply": "roost",
+              "share": 0.25333333333333335
+            },
+            {
+              "world": 1,
+              "reply": "roost",
+              "share": 0.26323529411764707
+            },
+            {
+              "world": 2,
+              "reply": "roost",
+              "share": 0.26976470588235296
+            },
+            {
+              "world": 3,
+              "reply": "roost",
+              "share": 0.25344444444444447
+            },
+            {
+              "world": 4,
+              "reply": "bravebird",
+              "share": 0.26342105263157894
+            },
+            {
+              "world": 5,
+              "reply": "roost",
+              "share": 0.2591052631578947
+            },
+            {
+              "world": 6,
+              "reply": "roost",
+              "share": 0.2683684210526316
+            },
+            {
+              "world": 7,
+              "reply": "roost",
+              "share": 0.2886666666666667
+            }
+          ]
+        }
+      },
+      "failures": []
+    }
+  ],
+  "runtime_guard_enabled": false,
+  "limits": "First comparison arms include the previously diagnosed Tera bug and earlier belief behavior; current corrected adapter with old recorded world hypotheses is off-policy. No full current-agent history replay, hidden opponent set truth or new scoring-team fitting. Native root/modal support is not calibrated probability. Winning does not establish capped setup was useful.",
+  "plan_sha256": "3b9d67630fdbd244f3aa63f94ed9cebf9a7f8324849d1d8abd6cc8c9eb220cbd",
+  "raw_sha256": "ce01d0ae292c1cbf5be78ff180ee8c6a779d5f47f524e5a8259f431e37c912ba"
+}

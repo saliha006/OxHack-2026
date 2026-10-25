@@ -37,3 +37,48 @@ Decisions in force and open choices are in the project's shared docs (kept off `
 - `context`: the team's shared planning docs (no code).
 
 Secrets stay in a local `.env`; it is never committed.
+
+## Decision backend and defaults
+
+`Agent(priors, backend="mcts")` searches independently sampled hidden teams with
+stock Gen 9/Tera `poke-engine`. MCTS is the default by user decision; use `backend="one_ply"` for the retained comparison backend.
+Search runs in a persistent isolated worker with a parent-enforced deadline and
+streams completed worlds before pooling their normalised visits as search support.
+
+```sh
+uv sync
+uv run python -m bot.smoke --backend mcts --worlds 1 --priors data/set_candidates.json
+uv run python -m bot.eval --runs runs/mcts-comparison run --config evaluation/mcts-baseline.json
+```
+
+The game commands require a local Showdown server on port 8000.
+
+The default bot uses broad `data/set_candidates.json` priors, reliable belief
+updates, the original type-based preview lead, eight sampled worlds × 150 ms,
+one native engine thread, and a three-second decision ceiling. State conversion
+preserves remembered PP, switch/continuation history and confirmed spent Tera.
+Search visit shares are search support, not calibrated win probabilities.
+
+Experimental settings remain explicit opt-ins: coherent priors require supplying
+`data/curated-v1/priors.json`; move/stat preview requires
+`Agent(..., lead_policy="moves_stats")`; root mixing requires
+`Agent(..., mix_root=True)`. The default allocation remains 8 × 150 ms.
+There is no enabled cycle veto, learned value model or learned opponent policy.
+
+The first coherent-prior mixture improved the replay prediction diagnostic but
+finished 25–35 in its 60-game battle screen; it has no demonstrated playing-strength
+gain. Later policy and revised-prior studies are separate experiments and do not
+change these defaults.
+
+Detailed development documentation is preserved at the reconciled source snapshot:
+[implementation](https://github.com/saliha006/OxHack-2026/blob/0e16a96/docs/mcts-implementation.md),
+[adapter audit](https://github.com/saliha006/OxHack-2026/blob/0e16a96/docs/mcts-adapter.md),
+[evaluation](https://github.com/saliha006/OxHack-2026/blob/0e16a96/docs/mcts-evaluation.md),
+[MCTS results](https://github.com/saliha006/OxHack-2026/blob/0e16a96/docs/mcts-results.md),
+[coherent-prior results](https://github.com/saliha006/OxHack-2026/blob/0e16a96/docs/coherent-sets-results.md),
+and [live walkthrough](https://github.com/saliha006/OxHack-2026/blob/0e16a96/docs/mcts-live-walkthrough.md).
+These are historical source/evidence records; pending manifests are not completed results.
+
+Win-probability training and scoring live separately in `prediction/`; install
+their dependencies with `uv sync --group prediction`. A trained model is not used
+by the search backend.

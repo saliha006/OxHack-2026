@@ -1,0 +1,83 @@
+{
+  "planned": 2,
+  "recorded": 2,
+  "wins": 0,
+  "losses": 0,
+  "draws": 0,
+  "voids": 2,
+  "score_rate": null,
+  "wilson_95": [
+    0,
+    1
+  ],
+  "candidate_team_cluster_95": [
+    0,
+    1
+  ],
+  "cluster_limit": "Resamples candidate teams; shared opposing teams still create dependence, and ten clusters remain sparse.",
+  "wall_seconds_sum": 38.69385009998223,
+  "arms": {
+    "a": {
+      "decisions": 14,
+      "fallbacks": 0,
+      "rejected_choices": 0,
+      "requested_worlds": 96,
+      "completed_worlds": 96,
+      "failed_worlds": 0,
+      "usable_worlds": 96,
+      "cpu_seconds": 18.156021,
+      "native_visits": 1511000,
+      "state_preparation_ms": 294.93888397701085,
+      "worker_wall_ms": 16927.14214604348,
+      "recoveries": 0,
+      "belief_history_reset": 0,
+      "worker_restart_required": 0,
+      "replay_not_recorded": 0,
+      "actual_search_ms": 15871.84843205614,
+      "p50_ms": 1357.906327524688,
+      "p95_ms": 1691.653360388591,
+      "p99_ms": 1708.5874536557822,
+      "max_ms": 1712.82097697258,
+      "over_3000_ms": 0,
+      "fallback_reasons": {}
+    },
+    "b": {
+      "decisions": 14,
+      "fallbacks": 0,
+      "rejected_choices": 0,
+      "requested_worlds": 96,
+      "completed_worlds": 96,
+      "failed_worlds": 0,
+      "usable_worlds": 96,
+      "cpu_seconds": 18.188134,
+      "native_visits": 1434000,
+      "state_preparation_ms": 306.9326240802184,
+      "worker_wall_ms": 17018.81759997923,
+      "recoveries": 2,
+      "belief_history_reset": 0,
+      "worker_restart_required": 0,
+      "replay_not_recorded": 0,
+      "actual_search_ms": 15971.860078221653,
+      "p50_ms": 1372.0775794936344,
+      "p95_ms": 1671.7650359671097,
+      "p99_ms": 1691.8678496067878,
+      "max_ms": 1696.8935530167073,
+      "over_3000_ms": 0,
+      "fallback_reasons": {}
+    }
+  },
+  "side_breakdown": {
+    "p1": {},
+    "p2": {}
+  },
+  "team_breakdown": {
+    "0": {
+      "style": "regression smoke"
+    },
+    "1": {
+      "style": "regression smoke"
+    }
+  },
+  "purpose": "transport/correctness smoke; every game deliberately censored at six turns; no strength conclusion",
+  "reporting_correction": "Original raw summary used nonexistent iterations field and reported zero native visits. Recomputed here from total_visits in preserved raw traces; no search rerun."
+}

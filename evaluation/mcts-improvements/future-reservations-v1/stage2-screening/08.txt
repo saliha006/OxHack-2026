@@ -1,0 +1,62 @@
+Pelipper @ Damp Rock
+Ability: Drizzle
+Tera Type: Ground
+EVs: 248 HP / 252 Def / 8 SpD
+Relaxed Nature
+IVs: 0 Spe
+- Hurricane
+- Surf
+- U-turn
+- Roost
+
+Barraskewda @ Choice Band
+Ability: Swift Swim
+Tera Type: Water
+EVs: 252 Atk / 4 SpD / 252 Spe
+Adamant Nature
+- Liquidation
+- Flip Turn
+- Close Combat
+- Aqua Jet
+
+Zapdos @ Heavy-Duty Boots  
+Ability: Static  
+Tera Type: Grass  
+EVs: 248 HP / 76 Def / 184 Spe  
+Timid Nature  
+IVs: 0 Atk  
+- Hurricane  
+- Weather Ball  
+- Volt Switch  
+- Roost  
+
+Iron Crown @ Choice Specs  
+Ability: Quark Drive  
+Tera Type: Steel  
+EVs: 252 SpA / 4 SpD / 252 Spe  
+Timid Nature  
+IVs: 20 Atk  
+- Tachyon Cutter  
+- Psychic Noise  
+- Psyshock  
+- Volt Switch
+
+Great Tusk @ Rocky Helmet  
+Ability: Protosynthesis  
+Tera Type: Ice  
+EVs: 204 Atk / 52 SpD / 252 Spe  
+Jolly Nature  
+- Headlong Rush  
+- Ice Spinner  
+- Rapid Spin  
+- Stealth Rock  
+
+Walking Wake @ Heavy-Duty Boots  
+Ability: Protosynthesis  
+Tera Type: Water  
+EVs: 12 Def / 244 SpA / 252 Spe  
+Timid Nature  
+- Surf  
+- Draco Meteor  
+- Knock Off  
+- Flip Turn

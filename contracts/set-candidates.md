@@ -32,3 +32,20 @@ plus trimmed usage shares. The decision layer's belief loads it once at startup.
 ## Still open
 - 🟠 Nate's yes on building it to this shape, and where the file lives (proposed: `data/set_candidates.json`).
 - 🟠 How sets are combined beyond "product of shares" (e.g. how many moves/items/spreads are tried per species).
+
+## Optional coherent-template extension (Kenar-coherent-sets)
+
+`CandidateSet.ivs` may supply six IVs in the same stat order, each 0–31. Existing
+files without it retain all-31 behavior. This preserves source overrides such as
+zero Attack; values describe sampled hypotheses, not observed opponent stats.
+The importer validates all concrete variants against the pinned local Gen9 OU
+TeamValidator. Choice items may legally have status moves (for example Trick);
+the current builder already permits them. The earlier draft consistency line
+above is historical and must not be used to reject those sets.
+
+`data/curated-v1/priors.json` is an **opt-in** 50/50 coherent-template/broad-usage
+experiment. It preserves the existing `usage` fallback and source structure.
+Its separate manifest records template provenance, assumed completions and
+mixture weights; neither these weights nor source role counts are measured joint
+set frequencies. Duplicated role distributions are coalesced before weighting.
+The normal `data/set_candidates.json` and default bot invocation are unchanged.

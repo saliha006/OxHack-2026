@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "baseline_commit": "a8613b9",
+  "implementation_branch": "Kenar-coherent-sets",
+  "original_checkout_unchanged": true,
+  "default_prior_changed": false,
+  "importer": {
+    "status": "implemented",
+    "source": "data/sources/gen9ou-20261025.json",
+    "bank": "data/curated-v1/bank.json",
+    "mixture": "data/curated-v1/priors.json",
+    "manifest": "data/curated-v1/manifest.json",
+    "fraction": 0.5,
+    "validated_variants": 556,
+    "augmented_species_and_aliases": 160
+  },
+  "extractor": {
+    "status": "implemented",
+    "summary": "evaluation/coherent-sets/extraction-final-summary.json",
+    "raw_logs": "local ignored runs/reveals/tiger-200.jsonl"
+  },
+  "prediction": {
+    "status": "retrospective diagnostic complete",
+    "results": "evaluation/coherent-sets/reveal-diagnostic-v3.json",
+    "helped": "better loss/coverage on fixed test sample; not exact-set accuracy or forward-time performance"
+  },
+  "smoke": {
+    "status": "complete",
+    "results": "evaluation/coherent-sets/smoke-v2-results.json",
+    "games": 4,
+    "helped": "integration/reliability passed; strength unknown"
+  },
+  "screening": {
+    "status": "complete",
+    "manifest": "evaluation/coherent-sets/screening-v2-manifest.json",
+    "games": 60,
+    "raw_run": "local ignored runs/coherent-evaluation/screening-v1",
+    "helped": "No demonstrated battle-strength improvement; observed 25-35 record at equal requested compute; uncertainty includes parity",
+    "results": "evaluation/coherent-sets/screening-v2-results.json",
+    "wins": 25,
+    "losses": 35,
+    "draws": 0,
+    "voids": 0
+  },
+  "promotion": "No default change. Keep mixture experimental/opt-in; no confirmation expansion justified by this screen.",
+  "documentation": [
+    "docs/coherent-sets-results.md",
+    "docs/coherent-sets-usage.md",
+    "docs/mcts-combined-data-plan.md"
+  ]
+}

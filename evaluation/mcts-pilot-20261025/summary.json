@@ -1,0 +1,281 @@
+{
+  "pairings": {
+    "mcts-current-pooled": {
+      "a": "mcts8",
+      "b": "full",
+      "games": 4,
+      "planned": 200,
+      "win_rate": 0.75,
+      "wilson_95": [
+        0.3006360524426366,
+        0.9544139373553637
+      ],
+      "team_bootstrap_95": [
+        0.5,
+        1.0
+      ],
+      "teams": 2,
+      "fallback_rate": 0.0,
+      "worst_game_p99_ms": 1869.0,
+      "think_p50_ms": 1369.2,
+      "think_p95_ms": 1447.2,
+      "think_p99_ms": 1987.4,
+      "actual_search_ms": 130319.44458169164,
+      "rejected_choices": 0,
+      "fallback_reasons": {},
+      "requested_worlds": 816,
+      "completed_worlds": 816,
+      "failed_worlds": 0,
+      "usable_worlds": 816
+    },
+    "mcts-worlds-equal-total": {
+      "a": "mcts1long",
+      "b": "mcts8",
+      "games": 4,
+      "planned": 200,
+      "win_rate": 0.5,
+      "wilson_95": [
+        0.15003570882017148,
+        0.8499642911798285
+      ],
+      "team_bootstrap_95": [
+        0.0,
+        1.0
+      ],
+      "teams": 2,
+      "fallback_rate": 0.0,
+      "worst_game_p99_ms": 1853.2,
+      "think_p50_ms": 1344.6,
+      "think_p95_ms": 1400.4,
+      "think_p99_ms": 1920.0,
+      "actual_search_ms": 216059.4894742244,
+      "rejected_choices": 0,
+      "fallback_reasons": {},
+      "requested_worlds": 170,
+      "completed_worlds": 170,
+      "failed_worlds": 0,
+      "usable_worlds": 170
+    },
+    "mcts-worlds-equal-per-world": {
+      "a": "mcts1",
+      "b": "mcts8",
+      "games": 4,
+      "planned": 200,
+      "win_rate": 0.25,
+      "wilson_95": [
+        0.045586062644636216,
+        0.6993639475573634
+      ],
+      "team_bootstrap_95": [
+        0.0,
+        0.5
+      ],
+      "teams": 2,
+      "fallback_rate": 0.0,
+      "worst_game_p99_ms": 889.1,
+      "think_p50_ms": 184.5,
+      "think_p95_ms": 228.3,
+      "think_p99_ms": 766.2,
+      "actual_search_ms": 21381.303333910182,
+      "rejected_choices": 0,
+      "fallback_reasons": {},
+      "requested_worlds": 133,
+      "completed_worlds": 133,
+      "failed_worlds": 0,
+      "usable_worlds": 133
+    },
+    "mcts-bench": {
+      "a": "mcts8",
+      "b": "mcts8active",
+      "games": 4,
+      "planned": 200,
+      "win_rate": 0.75,
+      "wilson_95": [
+        0.3006360524426366,
+        0.9544139373553637
+      ],
+      "team_bootstrap_95": [
+        0.5,
+        1.0
+      ],
+      "teams": 2,
+      "fallback_rate": 0.0,
+      "worst_game_p99_ms": 1922.9,
+      "think_p50_ms": 1373.7,
+      "think_p95_ms": 1430.6,
+      "think_p99_ms": 1992.6,
+      "actual_search_ms": 148549.50603737962,
+      "rejected_choices": 0,
+      "fallback_reasons": {},
+      "requested_worlds": 912,
+      "completed_worlds": 912,
+      "failed_worlds": 0,
+      "usable_worlds": 912
+    },
+    "mcts-inference": {
+      "a": "mcts8",
+      "b": "mcts8frozen",
+      "games": 4,
+      "planned": 200,
+      "win_rate": 0.5,
+      "wilson_95": [
+        0.15003570882017148,
+        0.8499642911798285
+      ],
+      "team_bootstrap_95": [
+        0.5,
+        0.5
+      ],
+      "teams": 2,
+      "fallback_rate": 0.0,
+      "worst_game_p99_ms": 1853.6,
+      "think_p50_ms": 1359.3,
+      "think_p95_ms": 1432.3,
+      "think_p99_ms": 1979.8,
+      "actual_search_ms": 128557.8169823857,
+      "rejected_choices": 0,
+      "fallback_reasons": {},
+      "requested_worlds": 792,
+      "completed_worlds": 792,
+      "failed_worlds": 0,
+      "usable_worlds": 792
+    },
+    "mcts-foulplay": {
+      "a": "mcts8",
+      "b": "fpmid",
+      "games": 4,
+      "planned": 100,
+      "win_rate": 0.5,
+      "wilson_95": [
+        0.15003570882017148,
+        0.8499642911798285
+      ],
+      "team_bootstrap_95": [
+        0.5,
+        0.5
+      ],
+      "teams": 2,
+      "fallback_rate": 0.0,
+      "worst_game_p99_ms": 1851.6,
+      "think_p50_ms": 1369.2,
+      "think_p95_ms": 1424.0,
+      "think_p99_ms": 1969.5,
+      "actual_search_ms": 147529.42220517434,
+      "rejected_choices": 0,
+      "fallback_reasons": {},
+      "requested_worlds": 904,
+      "completed_worlds": 904,
+      "failed_worlds": 0,
+      "usable_worlds": 904
+    }
+  },
+  "ratings": {
+    "full": {
+      "elo": 912.7632042129139,
+      "elo_95": [
+        606.0722234998534,
+        1218.6082276664426
+      ]
+    },
+    "mcts8": {
+      "elo": 1076.193609769809,
+      "elo_95": [
+        953.0130904022849,
+        1223.1069588418013
+      ]
+    },
+    "mcts1long": {
+      "elo": 1061.0715174347315,
+      "elo_95": [
+        739.9184786146188,
+        1393.2678699957225
+      ]
+    },
+    "fpmid": {
+      "elo": 1061.0715174347315,
+      "elo_95": [
+        718.5857984645102,
+        1355.6709532479733
+      ]
+    },
+    "mcts8frozen": {
+      "elo": 1061.0715174347315,
+      "elo_95": [
+        781.690697353362,
+        1399.681904022737
+      ]
+    },
+    "mcts8active": {
+      "elo": 912.7632042129139,
+      "elo_95": [
+        633.1662181775877,
+        1192.7544455136785
+      ]
+    },
+    "random": {
+      "elo": 1000.0,
+      "elo_95": [
+        1000.0,
+        1000.0
+      ]
+    },
+    "mcts1": {
+      "elo": 912.7632042129139,
+      "elo_95": [
+        653.051364250234,
+        1228.2542297202551
+      ]
+    }
+  },
+  "neighbours": [
+    {
+      "step": 1,
+      "level": "mcts8active",
+      "elo": 912.7632042129139,
+      "elo_95": [
+        633.1662181775877,
+        1192.7544455136785
+      ],
+      "gap": 0.0,
+      "games": 0,
+      "agent_win_rate": null,
+      "wilson_95": [
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "step": 2,
+      "level": "mcts1",
+      "elo": 912.7632042129139,
+      "elo_95": [
+        653.051364250234,
+        1228.2542297202551
+      ],
+      "gap": 0.0,
+      "games": 0,
+      "agent_win_rate": null,
+      "wilson_95": [
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "step": 3,
+      "level": "random",
+      "elo": 1000.0,
+      "elo_95": [
+        1000.0,
+        1000.0
+      ],
+      "gap": 87.23679578708607,
+      "games": 0,
+      "agent_win_rate": null,
+      "wilson_95": [
+        0.0,
+        1.0
+      ]
+    }
+  ],
+  "void_games": 0
+}

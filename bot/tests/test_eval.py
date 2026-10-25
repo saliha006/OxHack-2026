@@ -30,7 +30,7 @@ def test_frozen_belief_keeps_the_prior_after_a_reveal_but_still_tracks_the_activ
     battle["sides"]["p2"]["pokemon"][2]["item"] = "leftovers"
     belief.update(battle)
     assert weights(belief, 2) == [0.5, 0.3, 0.2]
-    assert belief.previous is battle["sides"]["p2"]
+    assert belief.previous == battle["sides"]["p2"]
 
 
 def test_flat_belief_weighs_every_known_set_equally_for_the_whole_battle():
@@ -47,10 +47,10 @@ def test_an_ablated_agent_decides_with_its_own_belief():
     assert type(agent.belief) is FrozenBelief
 
 
-def test_an_ablated_agent_still_answers_when_its_belief_cannot_be_built():
+def test_an_ablated_agent_recovers_from_missing_species_priors():
     agent = AblatedAgent({"source": PRIORS["source"], "species": {}}, FrozenBelief)
-    assert agent.choose(REQUEST, copy.deepcopy(EXAMPLE)) == "move 1"
-    assert agent.belief is None
+    assert agent.choose(REQUEST, copy.deepcopy(EXAMPLE)).startswith(("move ", "switch "))
+    assert agent.belief.recovery_events[0]["reason"] == "missing_species_prior"
 
 
 def test_an_ablated_agent_builds_nothing_on_a_wait_request():
@@ -64,6 +64,7 @@ def test_each_arm_builds_the_agent_it_names():
     assert type(full) is Agent and (full.k, full.budget) == (5, 1.0)
     assert (prior.belief_cls, flat.belief_cls) == (FrozenBelief, FlatBelief)
     assert k1.k == 1
+    assert all(a.backend == "one_ply" for a in (full, prior, flat, k1))
 
 
 def test_players_get_random_names_and_only_the_opponent_side_is_jittered(tmp_path):
@@ -183,10 +184,13 @@ class FakeBaseline:
         a, b = (self, other) if self.side == "a" else (other, self)
         n = len(a.battles)
         won = None if n == 2 else n % 2 == 0
-        a.battles[n] = SimpleNamespace(won=won, turn=20 + n, player_role="p1" if a is self else "p2",
+        a.battles[n] = SimpleNamespace(won=won, turn=20 + n, finished=True, player_role="p1" if a is self else "p2",
                                        battle_tag=f"battle-gen9ou-{n}")
+        b.battles[n] = a.battles[n]
         if isinstance(a, FakeAgentPlayer):
-            a.summaries.append({"decisions": 21, "fallbacks": n, "think_p50_ms": 50.0, "think_p99_ms": 200.0})
+            a.summaries.append({"tag": f"battle-gen9ou-{n}", "decisions": 21, "fallbacks": n, "think_p50_ms": 50.0, "think_p99_ms": 200.0})
+        if isinstance(b, FakeAgentPlayer):
+            b.summaries.append({"tag": f"battle-gen9ou-{n}", "decisions": 21, "fallbacks": n, "think_p50_ms": 50.0, "think_p99_ms": 200.0})
 
 
 class FakeAgentPlayer(FakeBaseline):
@@ -201,7 +205,9 @@ def fakes(monkeypatch):
 
     def make_player(name, jittered, priors, budget, runs, team, rng):
         player = (FakeAgentPlayer if name in harness.ARMS else FakeBaseline)(name)
-        player.side = "b" if jittered else "a"
+        # MCTS comparisons do not add artificial jitter. In those pairs creation
+        # order supplies the two simulated roles independently of jitter.
+        player.side = "b" if jittered or len(made) % 2 else "a"
         made.append(player)
         return player
 
@@ -233,8 +239,9 @@ def test_a_shard_with_a_baseline_on_side_a_records_no_agent_numbers(tmp_path, fa
 
 
 class InlinePool:
-    def __init__(self, max_workers):
+    def __init__(self, max_workers, mp_context=None):
         self.max_workers = max_workers
+        self.mp_context = mp_context
 
     def __enter__(self):
         return self
@@ -450,8 +457,8 @@ def test_a_game_against_foul_play_waits_for_it_then_challenges_it(tmp_path, monk
 
     async def send_challenges(username, n):
         challenged.append((username, n))
-        ours.battles[0] = SimpleNamespace(won=False, turn=40, player_role="p1", battle_tag="battle-gen9ou-9")
-        ours.summaries.append({"decisions": 41, "fallbacks": 0, "think_p50_ms": 50.0, "think_p99_ms": 300.0})
+        ours.battles[0] = SimpleNamespace(won=False, turn=40, finished=True, player_role="p1", battle_tag="battle-gen9ou-9")
+        ours.summaries.append({"tag": "battle-gen9ou-9", "decisions": 41, "fallbacks": 0, "think_p50_ms": 50.0, "think_p99_ms": 300.0})
 
     ours.send_challenges = send_challenges
     players = {("a", "full"): ours, ("b", "fplow"): fp}
@@ -464,8 +471,10 @@ def test_a_game_against_foul_play_waits_for_it_then_challenges_it(tmp_path, monk
 def test_a_game_that_ends_at_team_preview_is_void(tmp_path, fakes, monkeypatch):
     async def instant_forfeit(self, other, n_battles):
         a = self if self.side == "a" else other
-        a.battles[0] = SimpleNamespace(won=True, turn=0, player_role="p1", battle_tag="battle-gen9ou-0")
-        a.summaries.append({"decisions": 1, "fallbacks": 0, "think_p50_ms": 5.0, "think_p99_ms": 5.0})
+        a.battles[0] = SimpleNamespace(won=True, turn=0, finished=True, player_role="p1", battle_tag="battle-gen9ou-0")
+        other.battles[0] = a.battles[0]
+        self.battles[0] = a.battles[0]
+        a.summaries.append({"tag": "battle-gen9ou-0", "decisions": 1, "fallbacks": 0, "think_p50_ms": 5.0, "think_p99_ms": 5.0})
 
     monkeypatch.setattr(FakeBaseline, "battle_against", instant_forfeit)
     harness.play_shard([("headline", 0)], ["T0"], PRIORS, 1.0, str(tmp_path), "m", 0, seed=3)

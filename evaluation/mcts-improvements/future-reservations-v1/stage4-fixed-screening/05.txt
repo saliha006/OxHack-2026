@@ -1,0 +1,61 @@
+Iron Treads @ Leftovers
+Ability: Quark Drive  
+Tera Type: Ghost  
+EVs: 252 HP / 244 SpD / 12 Spe  
+Careful Nature  
+- Earthquake  
+- Rapid Spin  
+- Stealth Rock  
+- Protect  
+
+Corviknight (F) @ Rocky Helmet  
+Ability: Pressure  
+Tera Type: Water  
+EVs: 136 HP / 252 Def / 120 Spe  
+Impish Nature  
+- Iron Defense  
+- Body Press  
+- Brave Bird  
+- Roost  
+
+Darkrai @ Choice Scarf  
+Ability: Bad Dreams  
+Tera Type: Poison  
+EVs: 252 SpA / 4 SpD / 252 Spe  
+Timid Nature  
+IVs: 0 Atk  
+- Dark Pulse  
+- Ice Beam  
+- Sludge Bomb  
+- Trick
+
+Primarina @ Heavy-Duty Boots  
+Ability: Torrent  
+Tera Type: Steel  
+EVs: 76 HP / 252 SpA / 180 Spe  
+Modest Nature  
+- Moonblast  
+- Surf  
+- Encore  
+- Flip Turn  
+
+Zapdos @ Heavy-Duty Boots  
+Ability: Static  
+Tera Type: Grass  
+EVs: 248 HP / 76 Def / 184 Spe  
+Timid Nature  
+IVs: 0 Atk  
+- Hurricane  
+- Weather Ball  
+- Volt Switch  
+- Roost  
+
+Great Tusk @ Rocky Helmet  
+Ability: Protosynthesis  
+Tera Type: Ice  
+EVs: 204 Atk / 52 SpD / 252 Spe  
+Jolly Nature  
+- Headlong Rush  
+- Ice Spinner  
+- Rapid Spin  
+- Stealth Rock
