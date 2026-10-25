@@ -287,7 +287,7 @@ def run(manifest_path):
     folder = Path(manifest['folder'])
     status = folder/'status.json'
     verify(manifest)
-    while blockers := other_evaluations():
+    while manifest.get('wait_for_existing_evaluations', True) and (blockers := other_evaluations()):
         write(status, {'state': 'waiting_for_existing_evaluations', 'blockers': blockers, 'planned':len(manifest['games'])})
         time.sleep(30)
     verify(manifest)
