@@ -1,5 +1,5 @@
 {
-  "active_manifest": "latest-20-game-manifest.json",
+  "active_manifest": "latest-20-game-immediate-v2-manifest.json",
   "planned_scored_games": 20,
   "smoke_games_excluded_from_score": 2,
   "superseded": [
@@ -7,6 +7,15 @@
       "manifest": "latest-v1-manifest.json",
       "planned_games": 400,
       "status": "superseded before any battle began at user request"
+    },
+    {
+      "manifest": "latest-20-game-manifest.json",
+      "status": "Waiting policy superseded by explicit user instruction before any battle"
+    },
+    {
+      "manifest": "latest-20-game-immediate-manifest.json",
+      "status": "Private-server infrastructure setup failed before any battle; logs preserved locally"
     }
-  ]
+  ],
+  "start_policy": "Immediate start explicitly requested by user; other evaluations remain running and unchanged"
 }

@@ -87,6 +87,13 @@ whenever you log an entry.
 
 ## Log (newest first)
 
+### 2026-10-25 07:18 — eval — Start the 20-game Foul Play benchmark immediately at user request — @kenar
+- **Where:** `Kenar-foulplay-eval`; merged to main: not yet
+- **Did:** User explicitly revoked the wait-for-other-evaluations policy. Stopped only the waiting benchmark supervisor and restarted with immediate launch; other jobs remain unchanged. The 20-game schedule, team/side assignments and both bots' settings remain unchanged.
+- **Setup correction:** First launch exposed local guest-authentication configuration and Unix REPL socket path limits before any played battle. Preserved the failed setup logs, enabled guest authentication only on the isolated loopback server and disabled its REPL sockets; froze a replacement infrastructure manifest before scored games.
+- **Evidence:** `evaluation/foulplay-benchmark/latest-20-game-immediate-v2-manifest.json` and local `runs/foulplay-latest-v1/status.json`.
+- **Status:** private server running; smoke phase started; scored results pending. Concurrent machine load is now explicitly permitted by the user.
+
 ### 2026-10-25 07:14 — eval — Reduce queued Foul Play benchmark to 20 games at user request — @kenar
 - **Where:** `Kenar-foulplay-eval`; merged to main: not yet
 - **Did:** Stopped only our waiting 400-game supervisor before any battle began. Preserved that frozen plan as superseded/unrun and launched a new 20-game plan, 10 games per side. Two separate smoke games remain excluded from the score. Candidate, own team_6, opponent pool, compute settings and wait-for-existing-evaluations policy are unchanged.
