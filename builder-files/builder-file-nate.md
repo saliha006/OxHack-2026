@@ -1,5 +1,5 @@
 # Nate: Data layer (set candidates + priors, team pool, training sets, charts, data card)
-**GitHub:** `aldrichbanas07` · **Branch:** any branch with `nate` in its name (now `Data-stuff-(Nate)`) · **Tool:** Claude Code · **Brief last updated:** 2026-10-24 21:10 UTC by saliha
+**GitHub:** `aldrichbanas07` · **Branch:** any branch with `nate` in its name (now `nate-data`: renamed from `Data-stuff-(Nate)` on 2026-10-25 01:20 UTC by saliha, same commits. One-time fix in your clone: `git fetch --prune && git branch -m "Data-stuff-(Nate)" nate-data && git branch -u origin/nate-data`. Never push to the old name; that would recreate it) · **Tool:** Claude Code · **Brief last updated:** 2026-10-24 21:10 UTC by saliha
 **Spec:** the PRD (`OxHack-2026-PRD.md`) and `design-decision/*.md`. A bare § means the PRD; CLAUDE.md and this brief's own sections are always named.
 
 ## 0. How the agent reads this brief (every task)

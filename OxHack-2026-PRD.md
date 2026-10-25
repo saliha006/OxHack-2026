@@ -23,6 +23,7 @@
 - 2026-10-24: selector stays argmax-EV for v1 (built and tested); a maximin LP is a flagged option (§7.4). (saliha, delegated to a reviewing agent)
 - 2026-10-24: target tracks are **HRT "Best Use of Data for Predictions & Decision Making"** (main) and **Best Handmade** (also); TIME is optional but applies to Handmade (event doc §3). (saliha)
 - 2026-10-24: the doc owner is saliha; the working branch is `sali`; `.claude/`, `Research-Context/` and `.env*` never go to GitHub. (saliha)
+- 2026-10-25: belief floors contradicted sets: a failed speed/damage replay keeps 3% of a set's weight instead of zero; reveals stay a hard zero, but if nothing fits, the old guesses are kept at the floor. (derrick)
 
 **Pending** (not decided yet):
 - **Decision-layer plan, research pass 10** (`design-decision/strategy-research-pass10.md`): belief crash fixes + floor, dual-path featurizer, calibrated logistic value behind a flag (training proposed to nate), then the opponent model; depth-2, pool and LP as default-off stretch. derrick's call.
