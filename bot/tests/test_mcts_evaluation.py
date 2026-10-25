@@ -210,3 +210,12 @@ def test_priors_derived_from_evaluation_teams_cannot_be_declared_heldout(tmp_pat
         harness.main(["--runs", str(tmp_path), "run", "--pairings", "mcts-current", "--games", "2",
                       "--teams", "bot/teams/standin-gen9ou.txt", "--priors-from-teams", "--team-role", "held-out"])
     assert error.value.code == 2
+
+
+def test_the_deeper_arm_spends_the_same_search_time_as_mcts8_and_the_new_pairings_play_the_search_bot():
+    deeper, current = harness.arm_config("mcts4x300", 3.0), harness.arm_config("mcts8", 3.0)
+    assert (deeper["mcts_worlds"], deeper["search_ms"]) == (4, 300)
+    assert deeper["mcts_worlds"] * deeper["search_ms"] == current["mcts_worlds"] * current["search_ms"]
+    for name in ("mcts-headline", "mcts-foulplay-high", "mcts-deeper-foulplay-high", "mcts-deeper"):
+        assert harness.arm_config(harness.PAIRINGS[name][0], 3.0)["backend"] == "mcts"
+    assert harness.PAIRINGS["mcts-foulplay-high"][1] == "fphigh"

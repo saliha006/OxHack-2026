@@ -111,6 +111,8 @@ MCTS_ARM_OPTIONS = {
     "mcts1long": {"mcts_worlds": 1, "search_ms": 1200},
     "mcts8active": {"mcts_worlds": 8, "search_ms": 150, "sampling": "active"},
     "mcts8frozen": {"mcts_worlds": 8, "search_ms": 150, "frozen_beliefs": True},
+    # Same 1.2 s as mcts8, so the 3 s turn budget is untouched: fewer, deeper trees per turn.
+    "mcts4x300": {"mcts_worlds": 4, "search_ms": 300},
 }
 for arm_name, arm_options in MCTS_ARM_OPTIONS.items():
     ARMS[arm_name] = lambda priors, budget, options=arm_options: Agent(
@@ -124,6 +126,11 @@ MCTS_PAIRINGS = {
     "mcts-bench": ("mcts8", "mcts8active", 200),
     "mcts-inference": ("mcts8", "mcts8frozen", 200),
     "mcts-foulplay": ("mcts8", "fpmid", 100),
+    # `headline` and `full~*` measure the one-ply arm; these measure the bot the demo actually runs.
+    "mcts-headline": ("mcts8", "simpleheuristics", 200),
+    "mcts-foulplay-high": ("mcts8", "fphigh", 60),
+    "mcts-deeper-foulplay-high": ("mcts4x300", "fphigh", 60),
+    "mcts-deeper": ("mcts4x300", "mcts8", 80),
 }
 # Mix levels are deliberately uneven, so strength doesn't step up by a fixed amount; mb46 overlaps the sh levels.
 BASELINES = {"simpleheuristics": SimpleHeuristicsPlayer, "maxbasepower": MaxBasePowerPlayer, "random": RandomPlayer,
