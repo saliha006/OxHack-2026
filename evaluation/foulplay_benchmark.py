@@ -6,7 +6,7 @@ stopped or modified. All scheduled outcomes and errors are retained.
 import argparse
 import asyncio
 from collections import Counter, defaultdict
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
 import hashlib
 import json
 import os
@@ -173,6 +173,8 @@ def game(manifest, spec):
                          server_configuration=ServerConfiguration(uri, f'http://127.0.0.1:{port}/action.php?'),
                          battle_format='gen9ou', team=Path(manifest['own_team']['path']).read_text().strip(),
                          start_timer_on_battle_start=True)
+    # An external challenger sends only once. It must not race our login.
+    asyncio.run(player.ps_client.wait_for_login(wait_for=30))
     # Reuse completion/readiness handling without altering the general harness or its port.
     opponent = FoulPlay.__new__(FoulPlay)
     opponent.username = 'fp' + secrets.token_hex(5)
@@ -196,8 +198,23 @@ def game(manifest, spec):
     try:
         if spec['side']=='p1':
             opponent.wait_ready()
-        battle, metrics = asyncio.run(_foul_game(player, opponent, accepting=spec['side']=='p2',
-                                                timeout=manifest['game_timeout_seconds']))[0]
+        async def play_with_startup_deadline():
+            task = asyncio.create_task(_foul_game(player, opponent, accepting=spec['side']=='p2',
+                                                  timeout=manifest['game_timeout_seconds']))
+            try:
+                deadline = time.monotonic() + manifest.get('startup_timeout_seconds', 45)
+                while not player.battles:
+                    if task.done():
+                        return await task
+                    if time.monotonic() > deadline:
+                        raise TimeoutError('Challenge did not start a battle within the startup deadline')
+                    await asyncio.sleep(.05)
+                return await task
+            finally:
+                if not task.done():
+                    task.cancel()
+                    await asyncio.gather(task, return_exceptions=True)
+        battle, metrics = asyncio.run(play_with_startup_deadline())[0]
         assert battle.turn > 0, 'No played turns'
         assert battle.player_role == spec['side'], 'Side assignment mismatch'
         return {**spec, 'winner': 'tie' if battle.won is None else 'a' if battle.won else 'b',
@@ -314,10 +331,12 @@ def run(manifest_path):
         else:
             raise TimeoutError('Private Showdown startup timed out')
         write(status,{'state':'smoke','planned':len(manifest['games'])})
-        smoke=[]
-        for spec in manifest['smoke']:
-            smoke.append(launch_one(manifest_path,spec))
-            write(folder/'smoke.json',smoke)
+        smoke=read(folder/'smoke.json') if manifest.get('reuse_verified_smoke') else []
+        if not smoke:
+            for spec in manifest['smoke']:
+                smoke.append(launch_one(manifest_path,spec))
+                write(folder/'smoke.json',smoke)
+        assert len(smoke) == len(manifest['smoke'])
         if any(not r.get('completion_verified') or
                (r.get('metrics') or {}).get('fallbacks',0) or
                (r.get('metrics') or {}).get('rejected_choices',0) for r in smoke):
@@ -327,11 +346,23 @@ def run(manifest_path):
             rows=[json.loads(line) for line in result_file.read_text().splitlines()]
         done={r['game'] for r in rows}
         pending=[s for s in manifest['games'] if s['game'] not in done]
+        write(status,{'state':'running',**summarize(rows,len(manifest['games']))})
         with ThreadPoolExecutor(max_workers=manifest['concurrency']) as pool:
-            # Submit only one wave: a failing game must not queue the whole benchmark.
-            for offset in range(0,len(pending),manifest['concurrency']):
-                jobs=[pool.submit(launch_one,manifest_path,spec) for spec in pending[offset:offset+manifest['concurrency']]]
-                for future in as_completed(jobs):
+            # Keep the fixed concurrency filled as each game finishes, rather
+            # than waiting for the slowest member of a whole wave.
+            iterator=iter(pending)
+            jobs=set()
+            def fill_slots():
+                while len(jobs)<manifest['concurrency']:
+                    spec=next(iterator,None)
+                    if spec is None:
+                        break
+                    jobs.add(pool.submit(launch_one,manifest_path,spec))
+            fill_slots()
+            while jobs:
+                completed,_=wait(jobs,return_when=FIRST_COMPLETED)
+                for future in completed:
+                    jobs.remove(future)
                     row=future.result()
                     rows.append(row)
                     with result_file.open('a') as handle:
@@ -341,6 +372,7 @@ def run(manifest_path):
                     write(status,{'state':'running',**summary})
                     if not row.get('completion_verified'):
                         raise RuntimeError(row['error'])
+                fill_slots()
         write(status,{'state':'complete',**summarize(rows,len(manifest['games']))})
     except BaseException as error:
         write(status,{'state':'failed','error':str(error),'completed':len(rows),'planned':len(manifest['games'])})

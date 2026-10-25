@@ -74,3 +74,31 @@ def test_live_player_does_not_import_a_trailing_blank_as_a_seventh_pokemon(tmp_p
         benchmark.game({'folder': str(tmp_path), 'port': 8127, 'config': {},
                         'own_team': {'path': str(own)}},
                        {'game': 0, 'sampler_seed': 42})
+
+
+def test_external_challenge_process_starts_only_after_our_login(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+    import bot.player
+    import evaluation.foulplay_benchmark as benchmark
+
+    events = []
+    class Client:
+        async def wait_for_login(self, **kwargs):
+            events.append('login_confirmed')
+
+    monkeypatch.setattr(benchmark, 'verify', lambda manifest: None)
+    monkeypatch.setattr(bot.player, 'AgentPlayer', lambda **kwargs: SimpleNamespace(ps_client=Client()))
+    class Captured(Exception):
+        pass
+    def capture_spawn(*args, **kwargs):
+        assert events == ['login_confirmed']
+        raise Captured
+    monkeypatch.setattr(benchmark.subprocess, 'Popen', capture_spawn)
+    own = tmp_path/'own.txt'
+    own.write_text('Pikachu\n- Thunderbolt\n')
+    with pytest.raises(Captured):
+        benchmark.game({'folder': str(tmp_path), 'port': 8127, 'config': {},
+                        'own_team': {'path': str(own)}, 'foul_play_search_ms_per_world': 600,
+                        'opponents': [{'path': str(own)}]},
+                       {'game': 0, 'sampler_seed': 42, 'opponent_team': 0,
+                        'side': 'p2', 'foul_play_seed': 44})
