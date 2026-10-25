@@ -38,8 +38,8 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
-| 2026-10-25 08:40 | @saliha | @nate | ⚠️ conflict | New `data/pipeline/joint_sets.py` + `data/set_candidates_joint.json` (observed complete sets blended into usage candidates, opt-in) in your `data/`; nothing of yours changed. Yes/no on keeping it there | 2026-10-25 08:40 |
-| 2026-10-25 08:10 | @saliha | @kenar @derrick @nate | 📨 waiting on | **Eval slice by 09:30 UTC** on `main`: `git pull && uv sync`, local server running, then @kenar `uv run python -m bot.eval run --pairings mcts-foulplay-high mcts-deeper-foulplay-high --games 30 --seed 101 --machine kenar --shards 6` (stop v2 panels first) · @derrick `... --pairings mcts-deeper --games 50 --seed 102 --machine derrick --shards 3` · @nate `... --pairings mcts-headline --games 50 --seed 103 --machine nate --shards 3`. Own seed each (same seed replays the same games). Stop at 09:30, send `runs/eval/<machine>-*.jsonl` to @saliha; she runs `bot.eval report` | 2026-10-25 08:10 |
+| 2026-10-25 08:18 | @saliha | @nate | ⚠️ conflict | New `data/pipeline/joint_sets.py` + `data/set_candidates_joint.json` (observed complete sets blended into usage candidates, opt-in) in your `data/`; nothing of yours changed. Yes/no on keeping it there | 2026-10-25 08:18 |
+| 2026-10-25 08:20 | @saliha | @kenar @derrick @nate | 📨 waiting on | **Eval slice, start now, stop 09:45 UTC** on `main` (`git pull && uv sync`, local server up). @kenar (has Foul Play): `uv run python -m bot.eval run --pairings mcts-foulplay-hard mcts-joint-foulplay-hard --games 30 --seed 101 --machine kenar --shards 3` (stop v2 panels first; one fphard game uses ~5 cores) · @derrick: `... --pairings mcts-joint --games 60 --seed 102 --machine derrick --shards 3` · @nate: `... --pairings mcts-deeper --games 60 --seed 103 --machine nate --shards 3`. Own seed each. Send `runs/eval/<machine>-*.jsonl` to @saliha at 09:45; she runs `bot.eval report`. Replaces the 08:10 row | 2026-10-25 08:20 |
 | 2026-10-25 06:41 | @derrick | @saliha | 📨 waiting on | PRD NOW: add "decision layer = Kenar's `Kenar-coherent-sets` (MCTS default, coherent priors opt-in); derrick's backtest, `choose_public` and the 1825-cutoff proposal withdrawn"; take "Backtesting frontend" out of Pending. Replaces my 03:30 row | 2026-10-25 06:41 |
 | 2026-10-25 03:00 | @nate | @derrick | ⚠️ conflict | **Training data for your model is in Tiger `turns`**: 489,840 turns from 20,000 games, each `state` identical to `states_from_log`; spec, access with your read-only login, splits and baselines in `contracts/turns.md`. Bar to beat on test: HP-heuristic log loss **0.6407**, Brier **0.2246**. Also: `belief.py` `_rebuild` drops status moves on Choice items, but only Assault Vest bars them (Choice Scarf + Trick); a species missing from the set file entirely (e.g. `urshifu`) still raises KeyError in `Belief.__init__`; `predictions.md` A1 credits the set file to saliha | 2026-10-25 03:00 |
 | 2026-10-25 03:00 | @nate | @saliha | ⚠️ conflict | `data/set_candidates.json` is on `main`, so `--priors data/set_candidates.json` (your default) now runs real priors: 243 species + 78 forme aliases (`keldeoresolute → keldeo`, `zamazentacrowned → zamazenta`), which answers the forme row from the data side. Your parser skips old HP strings like `20/100y` (one fact lost per such line) | 2026-10-25 03:00 |
@@ -88,7 +88,7 @@ whenever you log an entry.
 
 ## Log (newest first)
 
-### 2026-10-25 08:40 — feat — Joint-set priors from observed complete sets, as an eval arm — @saliha
+### 2026-10-25 08:18 — feat — Joint-set priors from observed complete sets, as an eval arm — @saliha
 - **Where:** `sali` · merged to `main`: yes
 - **Did:** `data/pipeline/joint_sets.py` blends Foul Play's gen9ou `pokemon_full_sets.json` (4,738 observed complete sets: Tera, ability, item, nature, EVs, moves together, with counts) into our usage candidates: 75% observed / 25% usage (Foul Play's own split), count-weighted, top 30 per species. Output `data/set_candidates_joint.json`: 438 species (our 321 + 117 only the observed sets know, each with a usage block built from those sets, so their games no longer crash belief). New arm `mcts8joint` = mcts8 on that file; pairings `mcts-joint-foulplay-hard` (vs fphard, 60) and `mcts-joint` (vs mcts8, 80). One live game on it: won in 31 turns, 0/34 fallbacks, think p99 2.1 s. **Default priors unchanged**; nothing uses the file unless asked (`--priors data/set_candidates_joint.json` or the arm).
 - **Touched:** new `data/pipeline/joint_sets.py`, new `data/set_candidates_joint.json`, `bot/eval.py` (per-arm priors), tests
@@ -111,7 +111,7 @@ whenever you log an entry.
 - **Touched:** `bot/eval.py` (`MCTS_ARM_OPTIONS`, `MCTS_PAIRINGS`), `bot/tests/test_mcts_evaluation.py`
 - **Brief task:** none
 - **⚠️ Conflicts:** @kenar: new arm and pairings sit in your `MCTS_ARM_OPTIONS`/`MCTS_PAIRINGS`; no default or existing pairing changed
-- **📨 Needs:** @kenar @derrick @nate: run your eval slice (board row 08:10) and send `runs/eval/<machine>-*.jsonl` to @saliha by 09:30
+- **📨 Needs:** @kenar @derrick @nate: run your eval slice (board row 08:20) and send `runs/eval/<machine>-*.jsonl` to @saliha by 09:45
 - **Status:** open
 
 ### 2026-10-25 08:00 — feat — Live demo shows what the search is weighing, expecting and guessing — @saliha
