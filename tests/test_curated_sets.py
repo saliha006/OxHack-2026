@@ -90,3 +90,21 @@ def test_alternative_limit_is_checked_before_expansion():
     doc=document();doc['dex']['Gholdengo']['Bulky']['moves']=[['Shadow Ball']*100]*4
     bank=import_bank(doc,prior())
     assert not bank['records'] and 'too many alternatives' in bank['rejected'][0]['reason']
+
+
+def test_live_belief_update_keeps_the_surviving_role_coherent():
+    from bot.parser import Parser
+    from decision.belief import Belief
+    from tests.test_reveal_evidence import START
+    old=prior();mixed,_=mix(old,import_bank(document(),old),.5)
+    parser=Parser('p2')
+    for line in START.splitlines(): parser.feed(line)
+    belief=Belief(mixed,parser.snapshot(),inference_mode='revelations')
+    assert len(belief.candidates[0])==2
+    parser.feed('|move|p1a: Gold|Nasty Plot|p2a: Dozo')
+    belief.update(parser.snapshot())
+    assert len(belief.candidates[0])==1
+    candidate,weight=belief.candidates[0][0]
+    assert weight==1 and candidate.item=='airballoon'
+    assert candidate.nature=='bold' and candidate.evs==(252,0,196,0,0,60)
+    assert candidate.ivs==(31,0,31,31,31,31)
