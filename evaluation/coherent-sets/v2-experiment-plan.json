@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "phase": "selected and frozen before fresh evaluation outcomes",
+  "baseline_commit": "a8613b9",
+  "baseline_priors": "data/set_candidates.json",
+  "first_mixture_priors": "data/curated-v1/priors.json",
+  "candidate": {
+    "path": "data/curated-v2/priors.json",
+    "sha256": "211d30993b4dbc346dc0bea52901d7fb4ebca6b23301fa748e776c8948516ed8",
+    "parameters": {
+      "maximum_curated_mass": 0.25,
+      "maximum_marginal_shift": 0.075
+    },
+    "mean_effective_mass_covered_species": 0.12223933230150606
+  },
+  "team_reservation": "evaluation/coherent-sets/v2-screening-teams/teams.json",
+  "team_reservation_sha256": "dc7048aeccf4f59f6c583638dfb37f90cc01241b09926e75883fd8d4c388331d",
+  "teams": 10,
+  "excluded_rosters_at_reservation": 222,
+  "source_of_exclusions": "recorded reservation_source_files and excluded_rosters in teams.json",
+  "seed": 2026102521,
+  "games_per_comparison": 60,
+  "schedule_design": {
+    "games": 60,
+    "seed": 2026102521,
+    "kind": "four-game blocks: both simulator sides and both bot/team assignments",
+    "equal_team_exposure": true,
+    "source_and_prior_manifest": "not frozen yet; requires selected candidate"
+  },
+  "primary_comparison": "selected revised prior versus frozen current MCTS with existing usage prior",
+  "secondary_comparison": "required direct60-game comparison vsfirstmixture, samefixedcandidate andreservedschedule",
+  "compute": {
+    "backend": "mcts",
+    "mcts_worlds": 8,
+    "search_ms": 150,
+    "engine_threads": 1,
+    "budget_seconds": 3,
+    "sampling": "whole team",
+    "selection": "unchanged deterministic root policy"
+  },
+  "stopping_rule": {
+    "games": 60,
+    "max_turns": 600,
+    "voids": "record explicitly; never silently omit or relabel draws",
+    "no_outcome_stopping": true
+  },
+  "fit_rule": "Do not tune the candidate with these new reserved team pastes or game outcomes. Old v1 battles are development history.",
+  "promotion": "Offline prediction gain alone is insufficient. Record playing results, uncertainty, reliability and failures. Keep default unchanged unless evidence supports a separately documented promotion.",
+  "separation": "No edits to original OxHack-2026 checkout or other-chat source; no cross-chat messages sent.",
+  "limits": "Not an independent external set holdout. Component sets are known, and overlap with source-wide usage cannot be excluded.",
+  "isolated_worktree": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-v2",
+  "branch": "Kenar-coherent-v2"
+}

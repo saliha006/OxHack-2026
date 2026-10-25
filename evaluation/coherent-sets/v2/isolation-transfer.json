@@ -1,0 +1,65 @@
+{
+  "reason": "New user-owned filtering chat edits old checkout; preserve it and freeze original extractor for mixture-only experiment",
+  "base_commit": "50d9a43",
+  "worktree": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-v2",
+  "copied_own_files": [
+    {
+      "path": "data/pipeline/calibrate_curated_sets.py",
+      "sha256": "5dd7673858f56f9f6277a1b4b438f97aed24bb243eae2bbd24e4eef69ec30a0e"
+    },
+    {
+      "path": "tests/test_calibrated_curated.py",
+      "sha256": "3cf4f755eee2984b437b69a076fe0da156705716f409a4e05c3aef47a8b9d0ea"
+    },
+    {
+      "path": "analysis/coherent_forensics.py",
+      "sha256": "0b769bdd8bafb53f1121f3a5f66694ab8ec086f54cf793b7ed753ec1f73286a0"
+    },
+    {
+      "path": "tests/test_coherent_forensics.py",
+      "sha256": "1e89f5f5989618541029c3050b6d702445e7fd8676338ac785d7c7d2fe804ee1"
+    },
+    {
+      "path": "analysis/coherent_prediction_diagnosis.py",
+      "sha256": "4fbe72e74837d2ee4e2841143ca7e70a20fe448cea14536533bbd1c886aa207c"
+    },
+    {
+      "path": "tests/test_coherent_prediction_diagnosis.py",
+      "sha256": "5b3f6adac9e74199efc4723849d3a871dac7815e352483dfebb72f3395f71b31"
+    },
+    {
+      "path": "evaluation/reserve_coherent_v2_teams.py",
+      "sha256": "7ee4d7bce02c5947a9fdbb0032c968e5df403c613ae7e3f06a0e179e0d8bf08e"
+    },
+    {
+      "path": "tests/test_coherent_v2_reservations.py",
+      "sha256": "12047979fdcdfdfed685588c43f7de794de1f9fd80cf152f170a1638b9901369"
+    },
+    {
+      "path": "docs/coherent-sets-v2-results.md",
+      "sha256": "09f6949928de18ab0704252067f4850b03bf2a361a7cd1edfad4993be84073e5"
+    },
+    {
+      "path": "evaluation/coherent-sets/v2-diagnosis-battles.json",
+      "sha256": "5db0ed1ea06ed0d682c28e16f8cf5557dfc2660399ef687af940b369c986c0f4"
+    },
+    {
+      "path": "evaluation/coherent-sets/v2-diagnosis-predictions.json",
+      "sha256": "776e86c279168bb98dff2a06e732f53304944a9187fbaf6c20d8a49b27a52892"
+    },
+    {
+      "path": "evaluation/coherent-sets/v2-train-selection-plan.json",
+      "sha256": "23eed5c628bea234070c287fa884d4badb840de4c51225dfddabd9e957fcaac0"
+    },
+    {
+      "path": "evaluation/coherent-sets/v2-train-selection-results.json",
+      "sha256": "d3d9ad0056ad26b77c62cc1299ce8bcaa864c5faccbcd00ad935e23e4df8e867"
+    },
+    {
+      "path": "evaluation/coherent-sets/v2-experiment-plan.json",
+      "sha256": "8ceab2965079b730ba43d8264c5549bf9bc651b724775093cbcedd77d1755ba3"
+    }
+  ],
+  "extractor_sha256": "46e5ad3306e64985f38c60a3894761a440250388ac7de77a59a6221198519afe",
+  "foreign_extractor_patch_imported": false
+}

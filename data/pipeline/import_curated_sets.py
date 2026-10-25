@@ -113,7 +113,7 @@ def validate(bank, simulator):
         'validator_sha256': hashlib.sha256(validator.read_bytes()).hexdigest(), 'invalid_variants': len(errors)}
 
 
-def mix(priors, bank, fraction=.5):
+def mix(priors, bank, fraction=.5, *, role_weights=None, species_fractions=None):
     if not 0 <= fraction < 1:
         raise ValueError('curated fraction must be in [0,1); retain a nonzero broad fallback')
     if fraction == 0:
@@ -125,6 +125,11 @@ def mix(priors, bank, fraction=.5):
     for species, records in grouped.items():
         if species not in priors['species']:
             continue  # broad fallback is mandatory; report bank-only species separately
+        local_fraction = (species_fractions or {}).get(species, fraction)
+        if not math.isfinite(local_fraction) or not 0 <= local_fraction <= fraction:
+            raise ValueError('species fraction must be finite and no larger than the global cap')
+        if local_fraction == 0:
+            continue
         # Prefer curated dex roles; stats are supplemental only where dex has no role.
         section = 'dex' if any(r['section']=='dex' for r in records) else 'stats'
         records = [r for r in records if r['section']==section]
@@ -140,11 +145,16 @@ def mix(priors, bank, fraction=.5):
             distinct_roles.setdefault(signature, role_records)
         curated = defaultdict(float)
         variants, origins = {}, defaultdict(list)
-        for role_records in distinct_roles.values():
+        role_mass = {signature: (role_weights or {}).get(species, {}).get(records[0]['role'], 1.)
+                     for signature, records in distinct_roles.items()}
+        if any(not math.isfinite(w) or w <= 0 for w in role_mass.values()):
+            raise ValueError('role weights must be positive and finite')
+        total_role_mass = sum(role_mass.values())
+        for signature, role_records in distinct_roles.items():
             total = sum(r['variant_weight'] for r in role_records)
             for record in role_records:
                 ident = key(record['candidate'])
-                curated[ident] += record['variant_weight']/total/len(distinct_roles)
+                curated[ident] += record['variant_weight']/total*role_mass[signature]/total_role_mass
                 variants[ident] = record['candidate']
                 origins[ident].append(record['id'])
         weighted = defaultdict(float)
@@ -155,9 +165,9 @@ def mix(priors, bank, fraction=.5):
         for candidate in old:
             ident = key(candidate)
             variants.setdefault(ident, candidate)
-            weighted[ident] += (1-fraction)*candidate['weight']/old_mass
+            weighted[ident] += (1-local_fraction)*candidate['weight']/old_mass
         for ident, weight in curated.items():
-            weighted[ident] += fraction*weight
+            weighted[ident] += local_fraction*weight
         candidates = []
         details = []
         for ident, weight in sorted(weighted.items(), key=lambda item: (-item[1], item[0])):
@@ -166,9 +176,11 @@ def mix(priors, bank, fraction=.5):
             candidates.append(copy.deepcopy(variants[ident]) | {'weight': weight})
             details.append({'candidate_sha256': hashlib.sha256(ident.encode()).hexdigest(),
                             'curated_ids': origins.get(ident, []), 'weight': weight,
-                            'curated_component_mass': fraction*curated.get(ident, 0)})
+                            'curated_component_mass': local_fraction*curated.get(ident, 0)})
         output['species'][species]['sets'] = candidates
         provenance[species] = {'section': section, 'roles': len(distinct_roles), 'candidates': details}
+        if species_fractions is not None:
+            provenance[species]['effective_curated_fraction'] = local_fraction
     # The usage builder aliases in-battle forms; keep their augmented bank coherent too.
     for alias, base in forme_aliases(set(grouped)).items():
         if base in provenance and alias in output['species'] and alias not in provenance:

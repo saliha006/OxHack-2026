@@ -1,0 +1,952 @@
+{
+  "scope": "fresh-midbattle-beliefs PUBLIC-position diagnostic; not historical persistent replay, oracle, counterfactual outcome, or strength evaluation",
+  "exact_call_count": 9,
+  "configuration": {
+    "backend": "mcts",
+    "budget": 3.0,
+    "mcts_worlds": 8,
+    "search_ms": 150,
+    "engine_threads": 1,
+    "sampling": "team",
+    "belief_mode": "reliable",
+    "lead_policy": "types"
+  },
+  "seeds": [
+    2026102526,
+    2026102527,
+    2026102528
+  ],
+  "order": "seed-major; broad, v1, revised sequentially; no concurrent native calls",
+  "native_randomness": "Sampler seeds are repeatable; native MCTS results are stochastic.",
+  "position": "evaluation/coherent-sets/v2-diagnosis-cinderace-position.json",
+  "position_sha256": "195f7366377ee2c1b99ccb6cbb25dcef4ee7330f26936ce633f09161128d2bd9",
+  "source": {
+    "source_sha256": "9ff82f4a761d0e09005871c173457dc59103c76bf61cdc0e6ddf5cd7d796d0a7",
+    "files": {
+      "bot/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bot/demo.py": "805887cc72795b5ef2e3f1cdff65e4f90041adb8b8985876da752660084e9761",
+      "bot/eval.py": "41fbf2833152278ad3ebdcd55661ab901ffb1bcaae1f36afa696165e35c56c46",
+      "bot/parser.py": "d36ee9a18ce1b2e6229aa3df0aa5730685e693d2e3f6aaa1c836be3a9799ba8a",
+      "bot/player.py": "58b40502da95795076179ec0bc0fafd6381f0cb8c48fe2dae230d6d20db61527",
+      "bot/smoke.py": "3e12e0fad384b7ac2372ebadcc2c0043b6aa32986e91fa03d6babc13b706ac05",
+      "bot/tests/test_demo.py": "3dbf7a7aded4ae0fe5acd379c5c1266be3ddbaa5474bdd7202da7af224d5813b",
+      "bot/tests/test_eval.py": "22639e87ef7441b129e55c983ccdffceb7fbdf01ec33b7b74dfcc4923d60c246",
+      "bot/tests/test_eval_completion.py": "1d5c6c2a2f09cf8ac671c83ee47dfc6f9bb99a02a4d741798c9f70893411b8c2",
+      "bot/tests/test_eval_schedule.py": "9e79a2b18b3fd64f56bba829a1da124763adf41d4ea319f8470812b827ff644f",
+      "bot/tests/test_foul_play_eval.py": "424c537d4545552e83f8cca4111a9ba9b3ae140f6f282c22292a1242ef8f8d7b",
+      "bot/tests/test_mcts_evaluation.py": "1e901e5a6daa36fbf6dc6d0847d827a536d7f5fdfa99b7996aec40ad07b75ade",
+      "bot/tests/test_parser.py": "8ad6602ec4832452890d1c36eec4360902a87a95c83de1ad33e6b42d3d93f7f0",
+      "bot/tests/test_player.py": "44ed9e927f60e6b913161ad807579adf343e1ae4c744d53b6f109d87d5c90c27",
+      "bot/tests/test_smoke.py": "ec3a95e454be0019b407475a74d58e19a75e25e1774a5b56fab48523275fd6c5",
+      "contracts/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "contracts/battle_state.py": "377e82a448b3c67e8b79bdf46c62b1d9363dd8af57e51afa511f8d5f804f2d89",
+      "contracts/set_candidates.py": "c648021a530d4b3240684073ca3c642243be05f85911a7eb0a9eb6bdee0cf49a",
+      "decision/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "decision/actions.py": "78233b1a0dea5a10e991908600317355b19f0b54d3c6fbbccbc88d5ddc028620",
+      "decision/adapter.py": "34773e44b090785272f3807fe7c179c9ca4b34e80706d177b3fb003b94b44068",
+      "decision/agent.py": "58a1dba4e66179ea92212d84eba417ee77c1a875088fef460731a17038e55ea6",
+      "decision/belief.py": "71f32eb7121031409e35c85f7a97a5a84edc67bd236ef9259e636c0cbd419327",
+      "decision/data/moves.json": "26909a321a7e4528d14a7dffd24173aa03a6845776cf41c39cc3d76f8e14616b",
+      "decision/data/pokedex.json": "e74d0364b230001fc086cefb4259e051f1d16a4730eb89f7d6336a88a0d9a47e",
+      "decision/data/typechart.json": "26270c6fa9e25ba43ba9d6fd0da115fcf96eee42eae8b0bd9660bd015dc483b2",
+      "decision/lead.py": "1af618a2450672e75abae9af55b2035d64e29e3b8f420629fdd29a4f75f7c5f3",
+      "decision/lead_model.py": "94ea1a26720e663bfa71e2a1f741a215888262710a297c7d59d29f286884ff2c",
+      "decision/opponent.py": "902a458fa0d2a97519a3a86527f2cfd3ae13f8a390fd61e62b8eda1d602643a7",
+      "decision/search.py": "a6e1a2f14c4bbdc62ca7701791196ea4e1398a8be9ed28702abd3d4503682218",
+      "decision/search_policy.py": "ac52f71753b08ea2932003fb05a11cde6cc6f4ad671c0bfa6407e938d1ea9650",
+      "decision/selector.py": "36de03df3385670f46af23ae7cc01f2077b51b70bc7a47e0fae86aad92f1267c",
+      "decision/sets.py": "5e345d60634414d723dbe1de4b0adc4459abcb542dfad0920095a7b6c4650c53",
+      "decision/simulate.py": "96e077923f6ef720a66fddbc496dab4c197c8cda386a7c0f1b5af7eee03d18a3",
+      "decision/state.py": "e97dd27902014dd3fc432dae5ca66da75887b1d9d5dabe2666dc82b3863bf28b",
+      "decision/value.py": "d25c43b6bc8e360043cf19e4c0c331aed04a692ffdc7da8b848a6fc2a705ef29"
+    }
+  },
+  "engine": {
+    "version": "0.0.48",
+    "binaries": {
+      "poke_engine.cpython-313-x86_64-linux-gnu.so": "fbffd2a1c9c48eab99def9187f9030c578174a30b49d54faad159be859846ef3"
+    }
+  },
+  "prior_inputs": {
+    "broad": {
+      "path": "data/set_candidates.json",
+      "sha256": "47b31bf7282d6578ed44d7b28f9a63e9284eddc72882856de426f7c1bfc8c7f3"
+    },
+    "v1": {
+      "path": "data/curated-v1/priors.json",
+      "sha256": "109cfa0c07f08b4effeca7f3172e3032f1a8f979610d5bdc4c9f4432d0bca13d"
+    },
+    "revised": {
+      "path": "data/curated-v2/priors.json",
+      "sha256": "211d30993b4dbc346dc0bea52901d7fb4ebca6b23301fa748e776c8948516ed8"
+    }
+  },
+  "calls": [
+    {
+      "arm": "broad",
+      "seed": 2026102526,
+      "choice": "move 1",
+      "support": {
+        "move 1": 0.42478944805194807,
+        "move 1 terastallize": 0.05290868506493507,
+        "move 2": 0.05253054653679654,
+        "move 2 terastallize": 0.016668073593073592,
+        "move 3": 0.025497429653679654,
+        "move 3 terastallize": 0.011422997835497835,
+        "move 4": 0.044174783549783554,
+        "move 4 terastallize": 0.017571185064935064,
+        "switch 2": 0.053001433982683976,
+        "switch 3": 0.056691531385281387,
+        "switch 4": 0.05631496212121212,
+        "switch 5": 0.10912564935064936,
+        "switch 6": 0.0793032738095238
+      },
+      "active_opponent_species": "gholdengo",
+      "scarf_posterior_mass": 0.5913916856889059,
+      "scarf_worlds": 7,
+      "sampled_worlds": 8,
+      "decision_ms": 2180.221497954335,
+      "call_and_close_ms": 2213.646417018026,
+      "fallback": null,
+      "failures": [],
+      "requested_worlds": 8,
+      "completed_worlds": 8,
+      "usable_worlds": 8,
+      "trace": "runs/coherent-evaluation/v2-position-diagnostic/broad-2026102526.json",
+      "trace_sha256": "718d488d4c585cfa1bd453f19d7e92b70665cbfa55e097e3e00296991f50ae0e",
+      "fast_branch": {
+        "our_speed": 370,
+        "sampled_fast_worlds": 7,
+        "per_world": [
+          {
+            "index": 0,
+            "item": "airballoon",
+            "hypothesized_speed": 293,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 1,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 2,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 3,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 4,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 5,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 6,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 7,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          }
+        ],
+        "speed_model_scope": "base stats plus Choice Scarf; saved position has no speed stages/weather/status modifiers"
+      }
+    },
+    {
+      "arm": "v1",
+      "seed": 2026102526,
+      "choice": "move 1",
+      "support": {
+        "move 1": 0.4432964549339549,
+        "move 1 terastallize": 0.062455142773892774,
+        "move 2": 0.05404445901320901,
+        "move 2 terastallize": 0.01577609751359751,
+        "move 3": 0.02256756021756022,
+        "move 3 terastallize": 0.010990078671328672,
+        "move 4": 0.042934610528360534,
+        "move 4 terastallize": 0.01645584693084693,
+        "switch 2": 0.04789073912198912,
+        "switch 3": 0.053890598290598286,
+        "switch 4": 0.05406447163947164,
+        "switch 5": 0.10076190753690754,
+        "switch 6": 0.07487203282828282
+      },
+      "active_opponent_species": "gholdengo",
+      "scarf_posterior_mass": 0.4727086790656615,
+      "scarf_worlds": 6,
+      "sampled_worlds": 8,
+      "decision_ms": 1924.6121040196158,
+      "call_and_close_ms": 1983.668269996997,
+      "fallback": null,
+      "failures": [],
+      "requested_worlds": 8,
+      "completed_worlds": 8,
+      "usable_worlds": 8,
+      "trace": "runs/coherent-evaluation/v2-position-diagnostic/v1-2026102526.json",
+      "trace_sha256": "59d6e204991148c99c38267af0e9d7ec48dbb7a0b100d9004fa0ac8227da8211",
+      "fast_branch": {
+        "our_speed": 370,
+        "sampled_fast_worlds": 6,
+        "per_world": [
+          {
+            "index": 0,
+            "item": "airballoon",
+            "hypothesized_speed": 219,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 1,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 2,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 3,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 4,
+            "item": "airballoon",
+            "hypothesized_speed": 293,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 5,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 6,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 7,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          }
+        ],
+        "speed_model_scope": "base stats plus Choice Scarf; saved position has no speed stages/weather/status modifiers"
+      }
+    },
+    {
+      "arm": "revised",
+      "seed": 2026102526,
+      "choice": "move 1",
+      "support": {
+        "move 1": 0.4287916666666667,
+        "move 1 terastallize": 0.07330625,
+        "move 2": 0.06485208333333334,
+        "move 2 terastallize": 0.016593749999999997,
+        "move 3": 0.02352708333333333,
+        "move 3 terastallize": 0.010610416666666666,
+        "move 4": 0.05034166666666666,
+        "move 4 terastallize": 0.017145833333333332,
+        "switch 2": 0.049527083333333326,
+        "switch 3": 0.05778124999999999,
+        "switch 4": 0.050008333333333335,
+        "switch 5": 0.08472708333333333,
+        "switch 6": 0.0727875
+      },
+      "active_opponent_species": "gholdengo",
+      "scarf_posterior_mass": 0.5522441678161374,
+      "scarf_worlds": 4,
+      "sampled_worlds": 8,
+      "decision_ms": 2032.7889479813166,
+      "call_and_close_ms": 2066.033879003953,
+      "fallback": null,
+      "failures": [],
+      "requested_worlds": 8,
+      "completed_worlds": 8,
+      "usable_worlds": 8,
+      "trace": "runs/coherent-evaluation/v2-position-diagnostic/revised-2026102526.json",
+      "trace_sha256": "735d7f00b44346b393125da0c2e9a66fcb06a4fda24fb23b2184c3838ebe49ba",
+      "fast_branch": {
+        "our_speed": 370,
+        "sampled_fast_worlds": 3,
+        "per_world": [
+          {
+            "index": 0,
+            "item": "airballoon",
+            "hypothesized_speed": 219,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 1,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 2,
+            "item": "airballoon",
+            "hypothesized_speed": 219,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 3,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 4,
+            "item": "choicescarf",
+            "hypothesized_speed": 331.5,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 5,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 6,
+            "item": "shucaberry",
+            "hypothesized_speed": 293,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 7,
+            "item": "shucaberry",
+            "hypothesized_speed": 293,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          }
+        ],
+        "speed_model_scope": "base stats plus Choice Scarf; saved position has no speed stages/weather/status modifiers"
+      }
+    },
+    {
+      "arm": "broad",
+      "seed": 2026102527,
+      "choice": "move 1",
+      "support": {
+        "move 1": 0.4763475378787879,
+        "move 1 terastallize": 0.06272159090909091,
+        "move 2": 0.062440340909090924,
+        "move 2 terastallize": 0.014883522727272726,
+        "move 3": 0.02148390151515152,
+        "move 3 terastallize": 0.009820075757575757,
+        "move 4": 0.045198863636363634,
+        "move 4 terastallize": 0.015721590909090907,
+        "switch 2": 0.044744318181818184,
+        "switch 3": 0.05254924242424242,
+        "switch 4": 0.04585511363636363,
+        "switch 5": 0.07938068181818182,
+        "switch 6": 0.0688532196969697
+      },
+      "active_opponent_species": "gholdengo",
+      "scarf_posterior_mass": 0.5913916856889059,
+      "scarf_worlds": 4,
+      "sampled_worlds": 8,
+      "decision_ms": 1954.3819140526466,
+      "call_and_close_ms": 1989.7226589964703,
+      "fallback": null,
+      "failures": [],
+      "requested_worlds": 8,
+      "completed_worlds": 8,
+      "usable_worlds": 8,
+      "trace": "runs/coherent-evaluation/v2-position-diagnostic/broad-2026102527.json",
+      "trace_sha256": "e34e4bf580be4b1cb849f077eaec3a9f621416d726eabb2b9d8866d55bdf7ff9",
+      "fast_branch": {
+        "our_speed": 370,
+        "sampled_fast_worlds": 4,
+        "per_world": [
+          {
+            "index": 0,
+            "item": "airballoon",
+            "hypothesized_speed": 293,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 1,
+            "item": "airballoon",
+            "hypothesized_speed": 221,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 2,
+            "item": "airballoon",
+            "hypothesized_speed": 293,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 3,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 4,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 5,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 6,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 7,
+            "item": "airballoon",
+            "hypothesized_speed": 293,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          }
+        ],
+        "speed_model_scope": "base stats plus Choice Scarf; saved position has no speed stages/weather/status modifiers"
+      }
+    },
+    {
+      "arm": "v1",
+      "seed": 2026102527,
+      "choice": "move 1",
+      "support": {
+        "move 1": 0.3928574585137085,
+        "move 1 terastallize": 0.06363418109668109,
+        "move 2": 0.06401158008658009,
+        "move 2 terastallize": 0.01760493326118326,
+        "move 3": 0.025770193001443006,
+        "move 3 terastallize": 0.012501388888888888,
+        "move 4": 0.05107096861471862,
+        "move 4 terastallize": 0.018243813131313135,
+        "switch 2": 0.0548162968975469,
+        "switch 3": 0.06346395202020202,
+        "switch 4": 0.05641486291486291,
+        "switch 5": 0.10254193722943723,
+        "switch 6": 0.07706843434343436
+      },
+      "active_opponent_species": "gholdengo",
+      "scarf_posterior_mass": 0.4727086790656615,
+      "scarf_worlds": 5,
+      "sampled_worlds": 8,
+      "decision_ms": 2012.12506898446,
+      "call_and_close_ms": 2048.4747940208763,
+      "fallback": null,
+      "failures": [],
+      "requested_worlds": 8,
+      "completed_worlds": 8,
+      "usable_worlds": 8,
+      "trace": "runs/coherent-evaluation/v2-position-diagnostic/v1-2026102527.json",
+      "trace_sha256": "2d17261e2bdc301f89fed8dbd2e9842fda054bb50f128b28e3f72e470bca444c",
+      "fast_branch": {
+        "our_speed": 370,
+        "sampled_fast_worlds": 5,
+        "per_world": [
+          {
+            "index": 0,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 1,
+            "item": "airballoon",
+            "hypothesized_speed": 293,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 2,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 3,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 4,
+            "item": "airballoon",
+            "hypothesized_speed": 219,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 5,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 6,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 7,
+            "item": "airballoon",
+            "hypothesized_speed": 293,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          }
+        ],
+        "speed_model_scope": "base stats plus Choice Scarf; saved position has no speed stages/weather/status modifiers"
+      }
+    },
+    {
+      "arm": "revised",
+      "seed": 2026102527,
+      "choice": "move 1",
+      "support": {
+        "move 1": 0.41022872544122546,
+        "move 1 terastallize": 0.05826301198801199,
+        "move 2": 0.06396565934065934,
+        "move 2 terastallize": 0.017417037129537127,
+        "move 3": 0.02384785214785215,
+        "move 3 terastallize": 0.012566833166833168,
+        "move 4": 0.04876625041625041,
+        "move 4 terastallize": 0.018678450715950715,
+        "switch 2": 0.053288457375957374,
+        "switch 3": 0.056848880286380285,
+        "switch 4": 0.055485701798201795,
+        "switch 5": 0.09918541042291043,
+        "switch 6": 0.08145772977022978
+      },
+      "active_opponent_species": "gholdengo",
+      "scarf_posterior_mass": 0.5522441678161374,
+      "scarf_worlds": 6,
+      "sampled_worlds": 8,
+      "decision_ms": 2007.5776480371132,
+      "call_and_close_ms": 2064.295633987058,
+      "fallback": null,
+      "failures": [],
+      "requested_worlds": 8,
+      "completed_worlds": 8,
+      "usable_worlds": 8,
+      "trace": "runs/coherent-evaluation/v2-position-diagnostic/revised-2026102527.json",
+      "trace_sha256": "93fb3b6ecb5cf00d906d09924b4e674600c4c52b8aaf83206dd1d6629c00ffef",
+      "fast_branch": {
+        "our_speed": 370,
+        "sampled_fast_worlds": 6,
+        "per_world": [
+          {
+            "index": 0,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 1,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 2,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 3,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 4,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 5,
+            "item": "airballoon",
+            "hypothesized_speed": 293,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 6,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 7,
+            "item": "airballoon",
+            "hypothesized_speed": 293,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          }
+        ],
+        "speed_model_scope": "base stats plus Choice Scarf; saved position has no speed stages/weather/status modifiers"
+      }
+    },
+    {
+      "arm": "broad",
+      "seed": 2026102528,
+      "choice": "move 1",
+      "support": {
+        "move 1": 0.517280812937063,
+        "move 1 terastallize": 0.06266775932400932,
+        "move 2": 0.053944128787878784,
+        "move 2 terastallize": 0.014038097319347319,
+        "move 3": 0.01644966491841492,
+        "move 3 terastallize": 0.008822188228438228,
+        "move 4": 0.039742132867132865,
+        "move 4 terastallize": 0.018321168414918414,
+        "switch 2": 0.040468677156177156,
+        "switch 3": 0.04365085955710955,
+        "switch 4": 0.042904428904428915,
+        "switch 5": 0.07881286421911421,
+        "switch 6": 0.06289721736596737
+      },
+      "active_opponent_species": "gholdengo",
+      "scarf_posterior_mass": 0.5913916856889059,
+      "scarf_worlds": 6,
+      "sampled_worlds": 8,
+      "decision_ms": 1945.6218410050496,
+      "call_and_close_ms": 1986.792134004645,
+      "fallback": null,
+      "failures": [],
+      "requested_worlds": 8,
+      "completed_worlds": 8,
+      "usable_worlds": 8,
+      "trace": "runs/coherent-evaluation/v2-position-diagnostic/broad-2026102528.json",
+      "trace_sha256": "99002c0568a046ff739e6e3b0479193ae374fd660e480fe2bf81cf7be99aa3fb",
+      "fast_branch": {
+        "our_speed": 370,
+        "sampled_fast_worlds": 5,
+        "per_world": [
+          {
+            "index": 0,
+            "item": "choicescarf",
+            "hypothesized_speed": 331.5,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 1,
+            "item": "airballoon",
+            "hypothesized_speed": 293,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 2,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 3,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 4,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 5,
+            "item": "airballoon",
+            "hypothesized_speed": 293,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 6,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 7,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          }
+        ],
+        "speed_model_scope": "base stats plus Choice Scarf; saved position has no speed stages/weather/status modifiers"
+      }
+    },
+    {
+      "arm": "v1",
+      "seed": 2026102528,
+      "choice": "move 1",
+      "support": {
+        "move 1": 0.467789932983683,
+        "move 1 terastallize": 0.06725015817515817,
+        "move 2": 0.06109306943056943,
+        "move 2 terastallize": 0.016297181984681983,
+        "move 3": 0.02166088911088911,
+        "move 3 terastallize": 0.010366903929403929,
+        "move 4": 0.04525118423243423,
+        "move 4 terastallize": 0.016981947219447218,
+        "switch 2": 0.04765934898434898,
+        "switch 3": 0.0514639319014319,
+        "switch 4": 0.04819539418914419,
+        "switch 5": 0.08123750624375624,
+        "switch 6": 0.06475255161505163
+      },
+      "active_opponent_species": "gholdengo",
+      "scarf_posterior_mass": 0.4727086790656615,
+      "scarf_worlds": 4,
+      "sampled_worlds": 8,
+      "decision_ms": 1917.8077899850905,
+      "call_and_close_ms": 1953.9079379756004,
+      "fallback": null,
+      "failures": [],
+      "requested_worlds": 8,
+      "completed_worlds": 8,
+      "usable_worlds": 8,
+      "trace": "runs/coherent-evaluation/v2-position-diagnostic/v1-2026102528.json",
+      "trace_sha256": "30121396a35dccece18b0070be50133968a6e27c4d3ced05d0a791d8b691b8cd",
+      "fast_branch": {
+        "our_speed": 370,
+        "sampled_fast_worlds": 4,
+        "per_world": [
+          {
+            "index": 0,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 1,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 2,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 3,
+            "item": "airballoon",
+            "hypothesized_speed": 219,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 4,
+            "item": "airballoon",
+            "hypothesized_speed": 293,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 5,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 6,
+            "item": "airballoon",
+            "hypothesized_speed": 293,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 7,
+            "item": "airballoon",
+            "hypothesized_speed": 293,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          }
+        ],
+        "speed_model_scope": "base stats plus Choice Scarf; saved position has no speed stages/weather/status modifiers"
+      }
+    },
+    {
+      "arm": "revised",
+      "seed": 2026102528,
+      "choice": "move 1",
+      "support": {
+        "move 1": 0.46819651875901874,
+        "move 1 terastallize": 0.0621083152958153,
+        "move 2": 0.06205533008658009,
+        "move 2 terastallize": 0.016134965728715728,
+        "move 3": 0.020656069624819622,
+        "move 3 terastallize": 0.010329094516594514,
+        "move 4": 0.04579856601731602,
+        "move 4 terastallize": 0.017546266233766233,
+        "switch 2": 0.048315611471861475,
+        "switch 3": 0.05232444985569985,
+        "switch 4": 0.04771820887445888,
+        "switch 5": 0.07833942099567098,
+        "switch 6": 0.07047718253968255
+      },
+      "active_opponent_species": "gholdengo",
+      "scarf_posterior_mass": 0.5522441678161374,
+      "scarf_worlds": 4,
+      "sampled_worlds": 8,
+      "decision_ms": 2120.8765099872835,
+      "call_and_close_ms": 2165.326581976842,
+      "fallback": null,
+      "failures": [],
+      "requested_worlds": 8,
+      "completed_worlds": 8,
+      "usable_worlds": 8,
+      "trace": "runs/coherent-evaluation/v2-position-diagnostic/revised-2026102528.json",
+      "trace_sha256": "4817e37c3d93338671a379d15cffc8e345bedc926bc704100e4b534252923edf",
+      "fast_branch": {
+        "our_speed": 370,
+        "sampled_fast_worlds": 4,
+        "per_world": [
+          {
+            "index": 0,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 1,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 2,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 3,
+            "item": "airballoon",
+            "hypothesized_speed": 293,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 4,
+            "item": "airballoon",
+            "hypothesized_speed": 293,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 5,
+            "item": "choicescarf",
+            "hypothesized_speed": 439.5,
+            "faster_than_us": true,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 6,
+            "item": "airballoon",
+            "hypothesized_speed": 293,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          },
+          {
+            "index": 7,
+            "item": "airballoon",
+            "hypothesized_speed": 293,
+            "faster_than_us": false,
+            "native_visit_winner": "pyroball"
+          }
+        ],
+        "speed_model_scope": "base stats plus Choice Scarf; saved position has no speed stages/weather/status modifiers"
+      }
+    }
+  ],
+  "interpretation": "Changing posterior or choice does not establish a better action; these outcomes must not be used to retune the frozen candidate.",
+  "posthoc_trace_readout": "All nine pooled choices and all sampled faster-world native visit winners remain Pyro Ball. Revised probabilities change without changing this action; this is not evidence that revised mixture fixes the historical KO."
+}

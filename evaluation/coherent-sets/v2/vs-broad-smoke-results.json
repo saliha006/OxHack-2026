@@ -1,0 +1,157 @@
+{
+  "planned": 4,
+  "recorded": 4,
+  "wins": 3,
+  "losses": 1,
+  "draws": 0,
+  "voids": 0,
+  "score_rate": 0.75,
+  "wilson_95": [
+    0.3006360524426366,
+    0.9544139373553637
+  ],
+  "candidate_team_cluster_95": [
+    0.5,
+    1.0
+  ],
+  "cluster_limit": "Resamples candidate teams; shared opposing teams still create dependence, and ten clusters remain sparse.",
+  "wall_seconds_sum": 368.1075884178863,
+  "arms": {
+    "a": {
+      "decisions": 124,
+      "fallbacks": 0,
+      "rejected_choices": 0,
+      "requested_worlds": 960,
+      "completed_worlds": 955,
+      "failed_worlds": 0,
+      "usable_worlds": 955,
+      "cpu_seconds": 148.733088,
+      "native_visits": 14174000,
+      "state_preparation_ms": 5441.303884377703,
+      "worker_wall_ms": 171516.84191060485,
+      "recoveries": 3,
+      "belief_history_reset": 0,
+      "worker_restart_required": 0,
+      "replay_not_recorded": 0,
+      "actual_search_ms": 159512.2465341119,
+      "p50_ms": 1412.9727364925202,
+      "p95_ms": 1567.2612568247132,
+      "p99_ms": 2556.6456843033666,
+      "max_ms": 2694.9408830259927,
+      "over_3000_ms": 0,
+      "fallback_reasons": {},
+      "measured_battle_perspectives": 4,
+      "unavailable_battle_perspectives": 0
+    },
+    "b": {
+      "decisions": 125,
+      "fallbacks": 0,
+      "rejected_choices": 0,
+      "requested_worlds": 968,
+      "completed_worlds": 958,
+      "failed_worlds": 0,
+      "usable_worlds": 958,
+      "cpu_seconds": 148.451776,
+      "native_visits": 15911000,
+      "state_preparation_ms": 5837.499407993164,
+      "worker_wall_ms": 171460.54613991873,
+      "recoveries": 10,
+      "belief_history_reset": 0,
+      "worker_restart_required": 0,
+      "replay_not_recorded": 0,
+      "actual_search_ms": 158491.4674985339,
+      "p50_ms": 1414.3445049994625,
+      "p95_ms": 1584.2232208000496,
+      "p99_ms": 2495.075488735456,
+      "max_ms": 2691.2713490310125,
+      "over_3000_ms": 0,
+      "fallback_reasons": {},
+      "measured_battle_perspectives": 4,
+      "unavailable_battle_perspectives": 0
+    }
+  },
+  "side_breakdown": {
+    "p1": {
+      "a": 2
+    },
+    "p2": {
+      "b": 1,
+      "a": 1
+    }
+  },
+  "team_breakdown": {
+    "0": {
+      "style": "offense"
+    },
+    "1": {
+      "style": "offense"
+    },
+    "2": {
+      "style": "offense"
+    },
+    "3": {
+      "style": "sun offense",
+      "a": 1,
+      "b": 1
+    },
+    "4": {
+      "style": "balance"
+    },
+    "5": {
+      "style": "balance"
+    },
+    "6": {
+      "style": "balance",
+      "a": 2
+    },
+    "7": {
+      "style": "rain offense"
+    },
+    "8": {
+      "style": "semistall"
+    },
+    "9": {
+      "style": "semistall"
+    }
+  },
+  "manifest_sha256": "725e2a0e21e021e28a7a0e4767f6f2481651366a92ca92daf77a078dfe55ca4f",
+  "phase": "smoke",
+  "status": "complete",
+  "original_raw_run": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-v2/runs/coherent-v2/vs-broad-smoke",
+  "source_sha256": {
+    "a": "9ff82f4a761d0e09005871c173457dc59103c76bf61cdc0e6ddf5cd7d796d0a7",
+    "b": "638144619909a5859e8a561cd74ecb590fc705770241de0a98d326a7e77eb93c"
+  },
+  "effective_configs": {
+    "a": {
+      "backend": "mcts",
+      "budget": 3.0,
+      "mcts_worlds": 8,
+      "search_ms": 150,
+      "engine_threads": 1,
+      "sampling": "team",
+      "frozen_beliefs": false,
+      "seed": 2026
+    },
+    "b": {
+      "backend": "mcts",
+      "budget": 3.0,
+      "mcts_worlds": 8,
+      "search_ms": 150,
+      "engine_threads": 1,
+      "sampling": "team",
+      "frozen_beliefs": false,
+      "seed": 2026
+    }
+  },
+  "cpu_scope": "Bot Python process plus reaped native SearchWorker descendants, including startup/preparation. Simulator/coordinator CPU is excluded. Actual native search milliseconds are wall time, not CPU.",
+  "uncertainty": "Intervals use whole games. Candidate-team bootstrap acknowledges sparse clusters; shared opposing teams create additional dependence. Native MCTS is not deterministic despite repeatable simulator/sampling seeds.",
+  "team_provenance": {
+    "kind": "new synthetic roster combinations of known regression component sets",
+    "holdout_limit": "Not an independent external set holdout. Component sets are known, and overlap with source-wide usage cannot be excluded.",
+    "selection": "fixed before candidate selection and all v2 game outcomes; no outcome scores read by this planner",
+    "fit_rule": "Do not fit mixture weights, candidate rules, or priors from these reserved team files.",
+    "freshness": "disjoint from explicit rosters in the checked reservation snapshot; later reservations in the other chat are outside this snapshot",
+    "rules": "pinned local Gen9 OU TeamValidator"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "frozen_at": "2026-10-25T06:31:05.437934+00:00",
+  "data": "train100 only from runs/reveals/tiger-200.jsonl; test100 not evaluated",
+  "candidate_paths": [
+    "runs/curated-v2-dev-15-050/priors.json",
+    "runs/curated-v2-dev-15-075/priors.json",
+    "runs/curated-v2-dev-25-050/priors.json",
+    "runs/curated-v2-dev-25-075/priors.json"
+  ],
+  "selection_rule": "require posterior support >= broad baseline; find best posterior mean logloss; select lowest mean effective curated fraction among candidates within one paired whole-battle SE of best loss",
+  "tie_break": "lower global cap, then lower marginal-drift cap, then candidate name",
+  "paired_se": "ratio-estimator cluster SE: sqrt(B/(B-1)*sum_b[n_b*(d_b-delta)]^2)/N; labels weighted equally, resampling unit whole battle",
+  "guardrail": "EV/nature/item/move/Tera marginal drift caps fixed before scores; never relax to optimize EV-blind likelihood"
+}

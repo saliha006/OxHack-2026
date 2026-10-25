@@ -1,0 +1,10 @@
+{
+  "old_battles": 200,
+  "fresh_battles": 200,
+  "identity_overlap": 0,
+  "selection": "MD5 seed coherent-v2-frozen-evaluation; old battle IDs/timestamps excluded before log analysis",
+  "new_input_sha256": "012737fb1eec82f83093cafa5adcd4c06bba3828f1cb6f778fa630c83a80b10f",
+  "candidate_frozen_sha256": "211d30993b4dbc346dc0bea52901d7fb4ebca6b23301fa748e776c8948516ed8",
+  "role": "Fresh retrospective prediction check after selection, no tuning on new outcomes",
+  "source_time_limit": "Pinned sources postdate some historical games; retrospective, not prospective deployment evidence"
+}

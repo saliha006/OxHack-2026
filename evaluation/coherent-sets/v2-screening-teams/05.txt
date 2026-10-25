@@ -1,0 +1,61 @@
+Ting-Lu @ Leftovers  
+Ability: Vessel of Ruin  
+Tera Type: Ghost  
+EVs: 244 HP / 12 Def / 252 SpD  
+Careful Nature  
+- Stealth Rock  
+- Earthquake  
+- Ruination  
+- Spikes
+
+Skarmory @ Rocky Helmet
+Ability: Sturdy  
+Tera Type: Dragon  
+EVs: 248 HP / 252 Def / 8 SpD  
+Impish Nature  
+- Whirlwind  
+- Brave Bird  
+- Spikes  
+- Roost  
+
+Darkrai @ Choice Scarf  
+Ability: Bad Dreams  
+Tera Type: Poison  
+EVs: 252 SpA / 4 SpD / 252 Spe  
+Timid Nature  
+IVs: 0 Atk  
+- Dark Pulse  
+- Ice Beam  
+- Sludge Bomb  
+- Trick
+
+Primarina @ Heavy-Duty Boots  
+Ability: Torrent  
+Tera Type: Steel  
+EVs: 76 HP / 252 SpA / 180 Spe  
+Modest Nature  
+- Moonblast  
+- Surf  
+- Encore  
+- Flip Turn  
+
+Pecharunt @ Heavy-Duty Boots
+Ability: Poison Puppeteer  
+Tera Type: Dark  
+EVs: 252 HP / 196 Def / 60 Spe  
+Bold Nature  
+IVs: 0 Atk  
+- Parting Shot  
+- Foul Play  
+- Malignant Chain  
+- Recover  
+
+Great Tusk @ Rocky Helmet  
+Ability: Protosynthesis  
+Tera Type: Ice  
+EVs: 204 Atk / 52 SpD / 252 Spe  
+Jolly Nature  
+- Headlong Rush  
+- Ice Spinner  
+- Rapid Spin  
+- Stealth Rock

@@ -1,0 +1,24 @@
+{
+  "status": "frozen development protocol before revised candidate evaluation",
+  "baseline": "a8613b9",
+  "prior_v1": "data/curated-v1/priors.json",
+  "development_sources": [
+    "existing usage marginals",
+    "first100train games in runs/reveals/tiger-200.jsonl",
+    "old60game screening for failure diagnosis only"
+  ],
+  "non_tuning_sources": [
+    "old100Tiger testgames",
+    "new reserved battle teams",
+    "fresh battle outcomes"
+  ],
+  "questions": [
+    "Does v1 distort helditem/nature/statprofiles relative to frequencyprior?",
+    "Does broad next-revelation score hide poor dangerous-move/stat coverage?",
+    "Does hard-filtering reduce support despite evidence-compatible fallback?"
+  ],
+  "candidate_family": "usage-supported coherent roleweights with conservative cap on totalcuratedmass and per-species observable/statprofile drift; broadfallbackneverremoved",
+  "selection": "choose general prior-calibration rule and globalparameters using usage + train-only development; no species-specific patch from evaluation teams; freeze beforefreshmatches",
+  "evaluation": "same8x150ms1thread3s; four-game balanced60games over ten freshsyntheticrosters; compare revised vsoriginalbaseline first, then directv1 if justified/needed; reportalloutcomes and no defaultpromotionfrominconclusive screen",
+  "uncertainty": "Old25-35 confidence interval includes50%; may be sampling noise. Diagnosticmechanisms require controlled evidence beforecausalclaims."
+}

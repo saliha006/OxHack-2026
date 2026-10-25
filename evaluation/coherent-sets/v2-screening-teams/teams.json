@@ -1,0 +1,3443 @@
+{
+  "schema": 1,
+  "reserved_at": "2026-10-25T06:21:32.972324+00:00",
+  "teams": [
+    {
+      "id": "coherent-v2-screening-01",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-v2/evaluation/coherent-sets/v2-screening-teams/01.txt",
+      "style": "offense",
+      "roster": [
+        "Darkrai",
+        "Gholdengo",
+        "Zamazenta",
+        "Tornadus-Therian",
+        "Great Tusk",
+        "Primarina"
+      ],
+      "sha256": "d2a2e3ce1a51657df39bfb91ecb80e0230d9423e29f5b00c96a15362ccc4d285",
+      "component_sources": [
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_8.txt"
+      ],
+      "design_rationale": "Multiple fast or priority attackers, setup/wallbreaking pressure, and Great Tusk hazard removal.",
+      "validation_errors": null
+    },
+    {
+      "id": "coherent-v2-screening-02",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-v2/evaluation/coherent-sets/v2-screening-teams/02.txt",
+      "style": "offense",
+      "roster": [
+        "Weavile",
+        "Darkrai",
+        "Dragonite",
+        "Iron Crown",
+        "Great Tusk",
+        "Ogerpon-Wellspring"
+      ],
+      "sha256": "e3e91aee5bd847f4f17e4c59ff86e7b659467437d1fb2c330767d7d72d42e272",
+      "component_sources": [
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_6.txt"
+      ],
+      "design_rationale": "Multiple fast or priority attackers, setup/wallbreaking pressure, and Great Tusk hazard removal.",
+      "validation_errors": null
+    },
+    {
+      "id": "coherent-v2-screening-03",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-v2/evaluation/coherent-sets/v2-screening-teams/03.txt",
+      "style": "offense",
+      "roster": [
+        "Lokix",
+        "Latios",
+        "Zamazenta",
+        "Gholdengo",
+        "Cinderace",
+        "Great Tusk"
+      ],
+      "sha256": "e4fd35fe64ae8a41f3021991a0c6ca0684d863428c4e0b6b82007d118937efc6",
+      "component_sources": [
+        "bot/teams/standin/team_12.txt",
+        "bot/teams/standin/team_12.txt",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_9.txt",
+        "bot/teams/standin/team_13.txt"
+      ],
+      "design_rationale": "Multiple fast or priority attackers, setup/wallbreaking pressure, and Great Tusk hazard removal.",
+      "validation_errors": null
+    },
+    {
+      "id": "coherent-v2-screening-04",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-v2/evaluation/coherent-sets/v2-screening-teams/04.txt",
+      "style": "sun offense",
+      "roster": [
+        "Torkoal",
+        "Walking Wake",
+        "Hydrapple",
+        "Iron Crown",
+        "Cinderace",
+        "Great Tusk"
+      ],
+      "sha256": "e5de2233096f36efc55920af622236b88fd44925e87f59135fae3eb2cc00f3f3",
+      "component_sources": [
+        "existing hand-constructed weather component from evaluation/mcts_improvements/reserve_teams.py",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_9.txt",
+        "bot/teams/standin/team_13.txt"
+      ],
+      "design_rationale": "Drought plus Heat Rock supports Walking Wake and Protosynthesis attackers; hazard removal supports the setter. Team viability is a design hypothesis, not a competitive result.",
+      "validation_errors": null
+    },
+    {
+      "id": "coherent-v2-screening-05",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-v2/evaluation/coherent-sets/v2-screening-teams/05.txt",
+      "style": "balance",
+      "roster": [
+        "Ting-Lu",
+        "Skarmory",
+        "Darkrai",
+        "Primarina",
+        "Pecharunt",
+        "Great Tusk"
+      ],
+      "sha256": "02997881435feee55029b0112008d2eb26bc13913e5093631bea2a00e7a5265b",
+      "component_sources": [
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_8.txt",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_13.txt"
+      ],
+      "design_rationale": "Defensive pivots/checks accompany hazard support and an offensive progress maker; no claim of tournament quality.",
+      "validation_errors": null
+    },
+    {
+      "id": "coherent-v2-screening-06",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-v2/evaluation/coherent-sets/v2-screening-teams/06.txt",
+      "style": "balance",
+      "roster": [
+        "Garganacl",
+        "Gliscor",
+        "Moltres",
+        "Gholdengo",
+        "Walking Wake",
+        "Alomomola"
+      ],
+      "sha256": "84c7a77c8f29cb987fc69043d95505983e58c46c746eb70f045ad83ebafc3978",
+      "component_sources": [
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_13.txt"
+      ],
+      "design_rationale": "Defensive pivots/checks accompany hazard support and an offensive progress maker; no claim of tournament quality.",
+      "validation_errors": null
+    },
+    {
+      "id": "coherent-v2-screening-07",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-v2/evaluation/coherent-sets/v2-screening-teams/07.txt",
+      "style": "balance",
+      "roster": [
+        "Tinkaton",
+        "Slowking-Galar",
+        "Hydrapple",
+        "Tornadus-Therian",
+        "Kyurem",
+        "Zamazenta"
+      ],
+      "sha256": "c07a1f2d2a6c4e83ae8eb61265466125352cf2b7e94e62da5e75e38959655200",
+      "component_sources": [
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_9.txt",
+        "bot/teams/standin/team_11.txt"
+      ],
+      "design_rationale": "Defensive pivots/checks accompany hazard support and an offensive progress maker; no claim of tournament quality.",
+      "validation_errors": null
+    },
+    {
+      "id": "coherent-v2-screening-08",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-v2/evaluation/coherent-sets/v2-screening-teams/08.txt",
+      "style": "rain offense",
+      "roster": [
+        "Pelipper",
+        "Barraskewda",
+        "Tornadus-Therian",
+        "Gholdengo",
+        "Iron Treads",
+        "Primarina"
+      ],
+      "sha256": "f255813edab5586c499d703501640bcffaeb0afddc7e6d8187fd7e35b2163216",
+      "component_sources": [
+        "existing hand-constructed weather component from evaluation/mcts_improvements/reserve_teams.py",
+        "existing hand-constructed weather component from evaluation/mcts_improvements/reserve_teams.py",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_8.txt"
+      ],
+      "design_rationale": "Drizzle plus Damp Rock enables Swift Swim and accurate Hurricane; pivots, special attackers and Great Tusk hazard removal complement the physical rain attacker. Team viability remains unmeasured.",
+      "validation_errors": null
+    },
+    {
+      "id": "coherent-v2-screening-09",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-v2/evaluation/coherent-sets/v2-screening-teams/09.txt",
+      "style": "semistall",
+      "roster": [
+        "Blissey",
+        "Dondozo",
+        "Corviknight",
+        "Gliscor",
+        "Toxapex",
+        "Darkrai"
+      ],
+      "sha256": "04ad087de1341dc09f8d9c83b639c3c5cc452304f42611c43fe6a6048ba0fcfb",
+      "component_sources": [
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_6.txt"
+      ],
+      "design_rationale": "Recovery-heavy defensive core plus an offensive progress maker; long-battle censoring is reported explicitly.",
+      "validation_errors": null
+    },
+    {
+      "id": "coherent-v2-screening-10",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-v2/evaluation/coherent-sets/v2-screening-teams/10.txt",
+      "style": "semistall",
+      "roster": [
+        "Toxapex",
+        "Weezing-Galar",
+        "Iron Treads",
+        "Clefable",
+        "Tornadus-Therian",
+        "Weavile"
+      ],
+      "sha256": "1ad3dc02373597713d7d21e9b9795fc17aed0048ab06042c943903e684420495",
+      "component_sources": [
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_10.txt"
+      ],
+      "design_rationale": "Recovery-heavy defensive core plus an offensive progress maker; long-battle censoring is reported explicitly.",
+      "validation_errors": null
+    }
+  ],
+  "provenance": {
+    "kind": "new synthetic roster combinations of known regression component sets",
+    "holdout_limit": "Not an independent external set holdout. Component sets are known, and overlap with source-wide usage cannot be excluded.",
+    "selection": "fixed before candidate selection and all v2 game outcomes; no outcome scores read by this planner",
+    "fit_rule": "Do not fit mixture weights, candidate rules, or priors from these reserved team files.",
+    "freshness": "disjoint from explicit rosters in the checked reservation snapshot; later reservations in the other chat are outside this snapshot",
+    "rules": "pinned local Gen9 OU TeamValidator"
+  },
+  "checked_prior_rosters": 222,
+  "excluded_rosters": [
+    [
+      "Alomomola",
+      "Blissey",
+      "Corviknight",
+      "Darkrai",
+      "Dondozo",
+      "Gliscor"
+    ],
+    [
+      "Alomomola",
+      "Blissey",
+      "Corviknight",
+      "Darkrai",
+      "Dondozo",
+      "Ting-Lu"
+    ],
+    [
+      "Alomomola",
+      "Blissey",
+      "Corviknight",
+      "Darkrai",
+      "Dondozo",
+      "Tinkaton"
+    ],
+    [
+      "Alomomola",
+      "Blissey",
+      "Corviknight",
+      "Dondozo",
+      "Dragonite",
+      "Garganacl"
+    ],
+    [
+      "Alomomola",
+      "Blissey",
+      "Corviknight",
+      "Dondozo",
+      "Dragonite",
+      "Gliscor"
+    ],
+    [
+      "Alomomola",
+      "Blissey",
+      "Corviknight",
+      "Dondozo",
+      "Dragonite",
+      "Ting-Lu"
+    ],
+    [
+      "Alomomola",
+      "Blissey",
+      "Corviknight",
+      "Dondozo",
+      "Garganacl",
+      "Latios"
+    ],
+    [
+      "Alomomola",
+      "Blissey",
+      "Corviknight",
+      "Dondozo",
+      "Garganacl",
+      "Weavile"
+    ],
+    [
+      "Alomomola",
+      "Blissey",
+      "Corviknight",
+      "Dondozo",
+      "Gliscor",
+      "Iron Crown"
+    ],
+    [
+      "Alomomola",
+      "Blissey",
+      "Corviknight",
+      "Dondozo",
+      "Gliscor",
+      "Weavile"
+    ],
+    [
+      "Alomomola",
+      "Blissey",
+      "Corviknight",
+      "Dondozo",
+      "Gliscor",
+      "Zamazenta"
+    ],
+    [
+      "Alomomola",
+      "Blissey",
+      "Corviknight",
+      "Dondozo",
+      "Latios",
+      "Ting-Lu"
+    ],
+    [
+      "Alomomola",
+      "Blissey",
+      "Corviknight",
+      "Dondozo",
+      "Latios",
+      "Tinkaton"
+    ],
+    [
+      "Alomomola",
+      "Blissey",
+      "Corviknight",
+      "Dondozo",
+      "Lokix",
+      "Ting-Lu"
+    ],
+    [
+      "Alomomola",
+      "Blissey",
+      "Corviknight",
+      "Dondozo",
+      "Lokix",
+      "Tinkaton"
+    ],
+    [
+      "Alomomola",
+      "Blissey",
+      "Corviknight",
+      "Dondozo",
+      "Ting-Lu",
+      "Weavile"
+    ],
+    [
+      "Alomomola",
+      "Blissey",
+      "Corviknight",
+      "Dondozo",
+      "Ting-Lu",
+      "Zamazenta"
+    ],
+    [
+      "Alomomola",
+      "Blissey",
+      "Corviknight",
+      "Dondozo",
+      "Tinkaton",
+      "Zamazenta"
+    ],
+    [
+      "Alomomola",
+      "Blissey",
+      "Darkrai",
+      "Dondozo",
+      "Ting-Lu",
+      "Weezing-Galar"
+    ],
+    [
+      "Alomomola",
+      "Blissey",
+      "Darkrai",
+      "Dondozo",
+      "Tinkaton",
+      "Weezing-Galar"
+    ],
+    [
+      "Alomomola",
+      "Blissey",
+      "Dondozo",
+      "Garganacl",
+      "Lokix",
+      "Toxapex"
+    ],
+    [
+      "Alomomola",
+      "Blissey",
+      "Dondozo",
+      "Iron Treads",
+      "Toxapex",
+      "Weezing-Galar"
+    ],
+    [
+      "Alomomola",
+      "Corviknight",
+      "Dragonite",
+      "Garganacl",
+      "Gholdengo",
+      "Gliscor"
+    ],
+    [
+      "Alomomola",
+      "Corviknight",
+      "Gholdengo",
+      "Gliscor",
+      "Latios",
+      "Ting-Lu"
+    ],
+    [
+      "Alomomola",
+      "Corviknight",
+      "Gholdengo",
+      "Gliscor",
+      "Tinkaton",
+      "Zamazenta"
+    ],
+    [
+      "Alomomola",
+      "Darkrai",
+      "Garganacl",
+      "Gholdengo",
+      "Gliscor",
+      "Moltres"
+    ],
+    [
+      "Alomomola",
+      "Darkrai",
+      "Gholdengo",
+      "Gliscor",
+      "Moltres",
+      "Tinkaton"
+    ],
+    [
+      "Alomomola",
+      "Dragonite",
+      "Garganacl",
+      "Gholdengo",
+      "Gliscor",
+      "Moltres"
+    ],
+    [
+      "Alomomola",
+      "Dragonite",
+      "Gholdengo",
+      "Gliscor",
+      "Iron Treads",
+      "Moltres"
+    ],
+    [
+      "Alomomola",
+      "Dragonite",
+      "Gholdengo",
+      "Gliscor",
+      "Moltres",
+      "Tinkaton"
+    ],
+    [
+      "Alomomola",
+      "Garganacl",
+      "Gholdengo",
+      "Gliscor",
+      "Kyurem",
+      "Moltres"
+    ],
+    [
+      "Alomomola",
+      "Garganacl",
+      "Gholdengo",
+      "Gliscor",
+      "Latios",
+      "Moltres"
+    ],
+    [
+      "Alomomola",
+      "Garganacl",
+      "Gholdengo",
+      "Gliscor",
+      "Moltres",
+      "Weavile"
+    ],
+    [
+      "Alomomola",
+      "Garganacl",
+      "Gholdengo",
+      "Gliscor",
+      "Moltres",
+      "Zamazenta"
+    ],
+    [
+      "Alomomola",
+      "Gholdengo",
+      "Gliscor",
+      "Iron Treads",
+      "Latios",
+      "Moltres"
+    ],
+    [
+      "Alomomola",
+      "Gholdengo",
+      "Gliscor",
+      "Iron Treads",
+      "Latios",
+      "Skarmory"
+    ],
+    [
+      "Alomomola",
+      "Gholdengo",
+      "Gliscor",
+      "Iron Treads",
+      "Moltres",
+      "Weavile"
+    ],
+    [
+      "Alomomola",
+      "Gholdengo",
+      "Gliscor",
+      "Iron Treads",
+      "Moltres",
+      "Zamazenta"
+    ],
+    [
+      "Alomomola",
+      "Gholdengo",
+      "Gliscor",
+      "Latios",
+      "Moltres",
+      "Ting-Lu"
+    ],
+    [
+      "Alomomola",
+      "Gholdengo",
+      "Gliscor",
+      "Latios",
+      "Moltres",
+      "Tinkaton"
+    ],
+    [
+      "Alomomola",
+      "Gholdengo",
+      "Gliscor",
+      "Moltres",
+      "Ting-Lu",
+      "Weavile"
+    ],
+    [
+      "Alomomola",
+      "Gholdengo",
+      "Gliscor",
+      "Moltres",
+      "Ting-Lu",
+      "Zamazenta"
+    ],
+    [
+      "Alomomola",
+      "Gholdengo",
+      "Gliscor",
+      "Moltres",
+      "Tinkaton",
+      "Weavile"
+    ],
+    [
+      "Alomomola",
+      "Gholdengo",
+      "Ting-Lu",
+      "Tornadus-Therian",
+      "Weezing-Galar",
+      "Zamazenta"
+    ],
+    [
+      "Alomomola",
+      "Gliscor",
+      "Great Tusk",
+      "Iron Crown",
+      "Pecharunt",
+      "Weavile"
+    ],
+    [
+      "Barraskewda",
+      "Darkrai",
+      "Great Tusk",
+      "Hydrapple",
+      "Latios",
+      "Pelipper"
+    ],
+    [
+      "Barraskewda",
+      "Darkrai",
+      "Great Tusk",
+      "Hydrapple",
+      "Pelipper",
+      "Zapdos"
+    ],
+    [
+      "Barraskewda",
+      "Darkrai",
+      "Great Tusk",
+      "Kyurem",
+      "Pelipper",
+      "Zapdos"
+    ],
+    [
+      "Barraskewda",
+      "Darkrai",
+      "Great Tusk",
+      "Ogerpon-Wellspring",
+      "Pelipper",
+      "Zapdos"
+    ],
+    [
+      "Barraskewda",
+      "Darkrai",
+      "Great Tusk",
+      "Pelipper",
+      "Walking Wake",
+      "Zapdos"
+    ],
+    [
+      "Barraskewda",
+      "Gholdengo",
+      "Great Tusk",
+      "Hydrapple",
+      "Pelipper",
+      "Primarina"
+    ],
+    [
+      "Barraskewda",
+      "Gholdengo",
+      "Great Tusk",
+      "Kyurem",
+      "Pelipper",
+      "Tornadus-Therian"
+    ],
+    [
+      "Barraskewda",
+      "Gholdengo",
+      "Great Tusk",
+      "Kyurem",
+      "Pelipper",
+      "Zapdos"
+    ],
+    [
+      "Barraskewda",
+      "Gholdengo",
+      "Great Tusk",
+      "Ogerpon-Wellspring",
+      "Pelipper",
+      "Zapdos"
+    ],
+    [
+      "Barraskewda",
+      "Gholdengo",
+      "Great Tusk",
+      "Pelipper",
+      "Primarina",
+      "Zapdos"
+    ],
+    [
+      "Barraskewda",
+      "Gholdengo",
+      "Great Tusk",
+      "Pelipper",
+      "Walking Wake",
+      "Zapdos"
+    ],
+    [
+      "Barraskewda",
+      "Gholdengo",
+      "Iron Crown",
+      "Pelipper",
+      "Primarina",
+      "Zapdos"
+    ],
+    [
+      "Barraskewda",
+      "Great Tusk",
+      "Hydrapple",
+      "Iron Crown",
+      "Pelipper",
+      "Zapdos"
+    ],
+    [
+      "Barraskewda",
+      "Great Tusk",
+      "Hydrapple",
+      "Latios",
+      "Pelipper",
+      "Zapdos"
+    ],
+    [
+      "Barraskewda",
+      "Great Tusk",
+      "Iron Crown",
+      "Kyurem",
+      "Pelipper",
+      "Tornadus-Therian"
+    ],
+    [
+      "Barraskewda",
+      "Great Tusk",
+      "Iron Crown",
+      "Kyurem",
+      "Pelipper",
+      "Zapdos"
+    ],
+    [
+      "Barraskewda",
+      "Great Tusk",
+      "Iron Crown",
+      "Ogerpon-Wellspring",
+      "Pelipper",
+      "Zapdos"
+    ],
+    [
+      "Barraskewda",
+      "Great Tusk",
+      "Iron Crown",
+      "Pelipper",
+      "Walking Wake",
+      "Zapdos"
+    ],
+    [
+      "Barraskewda",
+      "Great Tusk",
+      "Kyurem",
+      "Latios",
+      "Pelipper",
+      "Zapdos"
+    ],
+    [
+      "Barraskewda",
+      "Great Tusk",
+      "Latios",
+      "Ogerpon-Wellspring",
+      "Pelipper",
+      "Zapdos"
+    ],
+    [
+      "Barraskewda",
+      "Great Tusk",
+      "Latios",
+      "Pelipper",
+      "Walking Wake",
+      "Zapdos"
+    ],
+    [
+      "Blissey",
+      "Darkrai",
+      "Iron Treads",
+      "Moltres",
+      "Toxapex",
+      "Weezing-Galar"
+    ],
+    [
+      "Blissey",
+      "Dragonite",
+      "Iron Treads",
+      "Moltres",
+      "Skarmory",
+      "Toxapex"
+    ],
+    [
+      "Blissey",
+      "Iron Treads",
+      "Lokix",
+      "Moltres",
+      "Toxapex",
+      "Weezing-Galar"
+    ],
+    [
+      "Blissey",
+      "Iron Treads",
+      "Moltres",
+      "Pecharunt",
+      "Toxapex",
+      "Weavile"
+    ],
+    [
+      "Cinderace",
+      "Corviknight",
+      "Darkrai",
+      "Kyurem",
+      "Slowking-Galar",
+      "Ting-Lu"
+    ],
+    [
+      "Cinderace",
+      "Darkrai",
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Weavile"
+    ],
+    [
+      "Cinderace",
+      "Darkrai",
+      "Dragonite",
+      "Great Tusk",
+      "Iron Crown",
+      "Weavile"
+    ],
+    [
+      "Cinderace",
+      "Darkrai",
+      "Dragonite",
+      "Great Tusk",
+      "Kyurem",
+      "Weavile"
+    ],
+    [
+      "Cinderace",
+      "Darkrai",
+      "Dragonite",
+      "Great Tusk",
+      "Latios",
+      "Weavile"
+    ],
+    [
+      "Cinderace",
+      "Darkrai",
+      "Dragonite",
+      "Great Tusk",
+      "Primarina",
+      "Weavile"
+    ],
+    [
+      "Cinderace",
+      "Darkrai",
+      "Gholdengo",
+      "Great Tusk",
+      "Latios",
+      "Zamazenta"
+    ],
+    [
+      "Cinderace",
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Primarina",
+      "Weavile"
+    ],
+    [
+      "Cinderace",
+      "Dragonite",
+      "Great Tusk",
+      "Hydrapple",
+      "Torkoal",
+      "Walking Wake"
+    ],
+    [
+      "Cinderace",
+      "Dragonite",
+      "Great Tusk",
+      "Iron Crown",
+      "Latios",
+      "Weavile"
+    ],
+    [
+      "Cinderace",
+      "Dragonite",
+      "Great Tusk",
+      "Iron Crown",
+      "Walking Wake",
+      "Weavile"
+    ],
+    [
+      "Cinderace",
+      "Dragonite",
+      "Hydrapple",
+      "Iron Crown",
+      "Pecharunt",
+      "Tinkaton"
+    ],
+    [
+      "Cinderace",
+      "Dragonite",
+      "Hydrapple",
+      "Iron Crown",
+      "Slowking-Galar",
+      "Tinkaton"
+    ],
+    [
+      "Cinderace",
+      "Dragonite",
+      "Hydrapple",
+      "Kyurem",
+      "Slowking-Galar",
+      "Tinkaton"
+    ],
+    [
+      "Cinderace",
+      "Dragonite",
+      "Hydrapple",
+      "Latios",
+      "Slowking-Galar",
+      "Tinkaton"
+    ],
+    [
+      "Cinderace",
+      "Dragonite",
+      "Hydrapple",
+      "Slowking-Galar",
+      "Tinkaton",
+      "Walking Wake"
+    ],
+    [
+      "Cinderace",
+      "Gholdengo",
+      "Great Tusk",
+      "Iron Crown",
+      "Ogerpon-Wellspring",
+      "Zamazenta"
+    ],
+    [
+      "Cinderace",
+      "Gholdengo",
+      "Great Tusk",
+      "Iron Crown",
+      "Primarina",
+      "Zamazenta"
+    ],
+    [
+      "Cinderace",
+      "Gholdengo",
+      "Great Tusk",
+      "Kyurem",
+      "Latios",
+      "Zamazenta"
+    ],
+    [
+      "Cinderace",
+      "Gholdengo",
+      "Great Tusk",
+      "Latios",
+      "Ogerpon-Wellspring",
+      "Zamazenta"
+    ],
+    [
+      "Cinderace",
+      "Gholdengo",
+      "Great Tusk",
+      "Latios",
+      "Primarina",
+      "Zamazenta"
+    ],
+    [
+      "Cinderace",
+      "Gholdengo",
+      "Great Tusk",
+      "Latios",
+      "Walking Wake",
+      "Zamazenta"
+    ],
+    [
+      "Cinderace",
+      "Great Tusk",
+      "Hydrapple",
+      "Lokix",
+      "Torkoal",
+      "Walking Wake"
+    ],
+    [
+      "Cinderace",
+      "Great Tusk",
+      "Hydrapple",
+      "Torkoal",
+      "Walking Wake",
+      "Weavile"
+    ],
+    [
+      "Cinderace",
+      "Great Tusk",
+      "Hydrapple",
+      "Torkoal",
+      "Walking Wake",
+      "Zamazenta"
+    ],
+    [
+      "Cinderace",
+      "Great Tusk",
+      "Iron Crown",
+      "Torkoal",
+      "Walking Wake",
+      "Weavile"
+    ],
+    [
+      "Cinderace",
+      "Great Tusk",
+      "Iron Crown",
+      "Torkoal",
+      "Walking Wake",
+      "Zamazenta"
+    ],
+    [
+      "Cinderace",
+      "Hydrapple",
+      "Iron Crown",
+      "Pecharunt",
+      "Tinkaton",
+      "Weavile"
+    ],
+    [
+      "Cinderace",
+      "Hydrapple",
+      "Iron Crown",
+      "Slowking-Galar",
+      "Tinkaton",
+      "Weavile"
+    ],
+    [
+      "Cinderace",
+      "Hydrapple",
+      "Iron Crown",
+      "Slowking-Galar",
+      "Tinkaton",
+      "Zamazenta"
+    ],
+    [
+      "Cinderace",
+      "Hydrapple",
+      "Kyurem",
+      "Lokix",
+      "Slowking-Galar",
+      "Tinkaton"
+    ],
+    [
+      "Cinderace",
+      "Hydrapple",
+      "Kyurem",
+      "Slowking-Galar",
+      "Tinkaton",
+      "Zamazenta"
+    ],
+    [
+      "Cinderace",
+      "Hydrapple",
+      "Latios",
+      "Lokix",
+      "Slowking-Galar",
+      "Tinkaton"
+    ],
+    [
+      "Cinderace",
+      "Hydrapple",
+      "Latios",
+      "Slowking-Galar",
+      "Tinkaton",
+      "Weavile"
+    ],
+    [
+      "Cinderace",
+      "Hydrapple",
+      "Latios",
+      "Slowking-Galar",
+      "Tinkaton",
+      "Zamazenta"
+    ],
+    [
+      "Cinderace",
+      "Hydrapple",
+      "Lokix",
+      "Primarina",
+      "Slowking-Galar",
+      "Tinkaton"
+    ],
+    [
+      "Cinderace",
+      "Hydrapple",
+      "Lokix",
+      "Slowking-Galar",
+      "Tinkaton",
+      "Walking Wake"
+    ],
+    [
+      "Cinderace",
+      "Hydrapple",
+      "Pecharunt",
+      "Tinkaton",
+      "Walking Wake",
+      "Weavile"
+    ],
+    [
+      "Cinderace",
+      "Hydrapple",
+      "Primarina",
+      "Slowking-Galar",
+      "Tinkaton",
+      "Weavile"
+    ],
+    [
+      "Cinderace",
+      "Hydrapple",
+      "Primarina",
+      "Slowking-Galar",
+      "Tinkaton",
+      "Zamazenta"
+    ],
+    [
+      "Cinderace",
+      "Hydrapple",
+      "Primarina",
+      "Tinkaton",
+      "Zamazenta",
+      "Zapdos"
+    ],
+    [
+      "Cinderace",
+      "Hydrapple",
+      "Slowking-Galar",
+      "Tinkaton",
+      "Walking Wake",
+      "Zamazenta"
+    ],
+    [
+      "Clefable",
+      "Corviknight",
+      "Dragonite",
+      "Gliscor",
+      "Ting-Lu",
+      "Weavile"
+    ],
+    [
+      "Clefable",
+      "Darkrai",
+      "Iron Treads",
+      "Pecharunt",
+      "Toxapex",
+      "Weezing-Galar"
+    ],
+    [
+      "Clefable",
+      "Dragonite",
+      "Iron Treads",
+      "Moltres",
+      "Toxapex",
+      "Weezing-Galar"
+    ],
+    [
+      "Clefable",
+      "Iron Treads",
+      "Latios",
+      "Moltres",
+      "Toxapex",
+      "Weezing-Galar"
+    ],
+    [
+      "Clefable",
+      "Iron Treads",
+      "Lokix",
+      "Moltres",
+      "Toxapex",
+      "Weezing-Galar"
+    ],
+    [
+      "Clefable",
+      "Iron Treads",
+      "Moltres",
+      "Skarmory",
+      "Toxapex",
+      "Weavile"
+    ],
+    [
+      "Clefable",
+      "Iron Treads",
+      "Moltres",
+      "Toxapex",
+      "Weavile",
+      "Weezing-Galar"
+    ],
+    [
+      "Clefable",
+      "Iron Treads",
+      "Moltres",
+      "Toxapex",
+      "Weezing-Galar",
+      "Zamazenta"
+    ],
+    [
+      "Clefable",
+      "Iron Treads",
+      "Pecharunt",
+      "Toxapex",
+      "Weavile",
+      "Weezing-Galar"
+    ],
+    [
+      "Clefable",
+      "Latios",
+      "Pecharunt",
+      "Primarina",
+      "Skarmory",
+      "Ting-Lu"
+    ],
+    [
+      "Clefable",
+      "Latios",
+      "Pecharunt",
+      "Skarmory",
+      "Ting-Lu",
+      "Walking Wake"
+    ],
+    [
+      "Clefable",
+      "Pecharunt",
+      "Skarmory",
+      "Ting-Lu",
+      "Walking Wake",
+      "Zamazenta"
+    ],
+    [
+      "Corviknight",
+      "Darkrai",
+      "Garganacl",
+      "Gliscor",
+      "Great Tusk",
+      "Primarina"
+    ],
+    [
+      "Corviknight",
+      "Darkrai",
+      "Garganacl",
+      "Great Tusk",
+      "Primarina",
+      "Slowking-Galar"
+    ],
+    [
+      "Corviknight",
+      "Darkrai",
+      "Garganacl",
+      "Great Tusk",
+      "Primarina",
+      "Zapdos"
+    ],
+    [
+      "Corviknight",
+      "Darkrai",
+      "Gliscor",
+      "Great Tusk",
+      "Iron Treads",
+      "Primarina"
+    ],
+    [
+      "Corviknight",
+      "Darkrai",
+      "Gliscor",
+      "Great Tusk",
+      "Primarina",
+      "Ting-Lu"
+    ],
+    [
+      "Corviknight",
+      "Darkrai",
+      "Gliscor",
+      "Great Tusk",
+      "Primarina",
+      "Tinkaton"
+    ],
+    [
+      "Corviknight",
+      "Darkrai",
+      "Great Tusk",
+      "Iron Treads",
+      "Moltres",
+      "Primarina"
+    ],
+    [
+      "Corviknight",
+      "Darkrai",
+      "Great Tusk",
+      "Iron Treads",
+      "Primarina",
+      "Slowking-Galar"
+    ],
+    [
+      "Corviknight",
+      "Darkrai",
+      "Great Tusk",
+      "Iron Treads",
+      "Primarina",
+      "Zapdos"
+    ],
+    [
+      "Corviknight",
+      "Darkrai",
+      "Great Tusk",
+      "Moltres",
+      "Primarina",
+      "Ting-Lu"
+    ],
+    [
+      "Corviknight",
+      "Darkrai",
+      "Great Tusk",
+      "Moltres",
+      "Primarina",
+      "Tinkaton"
+    ],
+    [
+      "Corviknight",
+      "Darkrai",
+      "Great Tusk",
+      "Ogerpon-Wellspring",
+      "Pecharunt",
+      "Ting-Lu"
+    ],
+    [
+      "Corviknight",
+      "Darkrai",
+      "Great Tusk",
+      "Pecharunt",
+      "Primarina",
+      "Ting-Lu"
+    ],
+    [
+      "Corviknight",
+      "Darkrai",
+      "Great Tusk",
+      "Primarina",
+      "Slowking-Galar",
+      "Tinkaton"
+    ],
+    [
+      "Corviknight",
+      "Darkrai",
+      "Great Tusk",
+      "Primarina",
+      "Ting-Lu",
+      "Zapdos"
+    ],
+    [
+      "Corviknight",
+      "Darkrai",
+      "Great Tusk",
+      "Primarina",
+      "Tinkaton",
+      "Zapdos"
+    ],
+    [
+      "Corviknight",
+      "Dragonite",
+      "Iron Treads",
+      "Moltres",
+      "Pecharunt",
+      "Toxapex"
+    ],
+    [
+      "Corviknight",
+      "Great Tusk",
+      "Iron Crown",
+      "Pecharunt",
+      "Primarina",
+      "Ting-Lu"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Garganacl",
+      "Great Tusk",
+      "Moltres",
+      "Ogerpon-Wellspring"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Iron Crown",
+      "Lokix"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Iron Crown",
+      "Ogerpon-Wellspring"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Iron Crown",
+      "Weavile"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Iron Crown",
+      "Zamazenta"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Kyurem",
+      "Lokix"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Kyurem",
+      "Ogerpon-Wellspring"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Kyurem",
+      "Weavile"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Kyurem",
+      "Zamazenta"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Latios",
+      "Lokix"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Latios",
+      "Ogerpon-Wellspring"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Latios",
+      "Weavile"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Latios",
+      "Zamazenta"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Lokix",
+      "Walking Wake"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Moltres",
+      "Weavile"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Ogerpon-Wellspring",
+      "Walking Wake"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Primarina",
+      "Zamazenta"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Walking Wake",
+      "Weavile"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Weavile",
+      "Zapdos"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Great Tusk",
+      "Iron Crown",
+      "Moltres",
+      "Weavile"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Great Tusk",
+      "Iron Crown",
+      "Slowking-Galar",
+      "Weavile"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Great Tusk",
+      "Iron Crown",
+      "Weavile",
+      "Zapdos"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Great Tusk",
+      "Kyurem",
+      "Moltres",
+      "Weavile"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Great Tusk",
+      "Kyurem",
+      "Slowking-Galar",
+      "Weavile"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Great Tusk",
+      "Kyurem",
+      "Weavile",
+      "Zapdos"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Great Tusk",
+      "Latios",
+      "Slowking-Galar",
+      "Weavile"
+    ],
+    [
+      "Darkrai",
+      "Dragonite",
+      "Great Tusk",
+      "Latios",
+      "Weavile",
+      "Zapdos"
+    ],
+    [
+      "Darkrai",
+      "Garganacl",
+      "Gliscor",
+      "Great Tusk",
+      "Primarina",
+      "Skarmory"
+    ],
+    [
+      "Darkrai",
+      "Gholdengo",
+      "Gliscor",
+      "Primarina",
+      "Ting-Lu",
+      "Zapdos"
+    ],
+    [
+      "Darkrai",
+      "Gholdengo",
+      "Great Tusk",
+      "Latios",
+      "Lokix",
+      "Zamazenta"
+    ],
+    [
+      "Darkrai",
+      "Gholdengo",
+      "Great Tusk",
+      "Latios",
+      "Weavile",
+      "Zamazenta"
+    ],
+    [
+      "Darkrai",
+      "Gholdengo",
+      "Great Tusk",
+      "Lokix",
+      "Primarina",
+      "Zamazenta"
+    ],
+    [
+      "Darkrai",
+      "Gholdengo",
+      "Great Tusk",
+      "Primarina",
+      "Weavile",
+      "Zamazenta"
+    ],
+    [
+      "Darkrai",
+      "Great Tusk",
+      "Pecharunt",
+      "Primarina",
+      "Ting-Lu",
+      "Weezing-Galar"
+    ],
+    [
+      "Darkrai",
+      "Great Tusk",
+      "Pecharunt",
+      "Primarina",
+      "Ting-Lu",
+      "Zapdos"
+    ],
+    [
+      "Darkrai",
+      "Great Tusk",
+      "Pecharunt",
+      "Primarina",
+      "Tinkaton",
+      "Zapdos"
+    ],
+    [
+      "Darkrai",
+      "Iron Treads",
+      "Moltres",
+      "Pecharunt",
+      "Toxapex",
+      "Weezing-Galar"
+    ],
+    [
+      "Darkrai",
+      "Iron Treads",
+      "Moltres",
+      "Slowking-Galar",
+      "Toxapex",
+      "Weezing-Galar"
+    ],
+    [
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Kyurem",
+      "Lokix",
+      "Zamazenta"
+    ],
+    [
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Kyurem",
+      "Primarina",
+      "Zamazenta"
+    ],
+    [
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Latios",
+      "Lokix",
+      "Weavile"
+    ],
+    [
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Latios",
+      "Moltres",
+      "Weavile"
+    ],
+    [
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Latios",
+      "Primarina",
+      "Zamazenta"
+    ],
+    [
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Latios",
+      "Walking Wake",
+      "Zamazenta"
+    ],
+    [
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Latios",
+      "Weavile",
+      "Zamazenta"
+    ],
+    [
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Lokix",
+      "Ogerpon-Wellspring",
+      "Walking Wake"
+    ],
+    [
+      "Dragonite",
+      "Gholdengo",
+      "Great Tusk",
+      "Ogerpon-Wellspring",
+      "Primarina",
+      "Zamazenta"
+    ],
+    [
+      "Dragonite",
+      "Great Tusk",
+      "Hydrapple",
+      "Lokix",
+      "Torkoal",
+      "Walking Wake"
+    ],
+    [
+      "Dragonite",
+      "Great Tusk",
+      "Hydrapple",
+      "Torkoal",
+      "Walking Wake",
+      "Zamazenta"
+    ],
+    [
+      "Dragonite",
+      "Great Tusk",
+      "Kyurem",
+      "Primarina",
+      "Slowking-Galar",
+      "Weavile"
+    ],
+    [
+      "Dragonite",
+      "Iron Treads",
+      "Moltres",
+      "Pecharunt",
+      "Toxapex",
+      "Weezing-Galar"
+    ],
+    [
+      "Dragonite",
+      "Iron Treads",
+      "Moltres",
+      "Slowking-Galar",
+      "Toxapex",
+      "Weezing-Galar"
+    ],
+    [
+      "Gholdengo",
+      "Great Tusk",
+      "Iron Crown",
+      "Lokix",
+      "Ogerpon-Wellspring",
+      "Zamazenta"
+    ],
+    [
+      "Gholdengo",
+      "Great Tusk",
+      "Kyurem",
+      "Latios",
+      "Weavile",
+      "Zamazenta"
+    ],
+    [
+      "Gholdengo",
+      "Great Tusk",
+      "Latios",
+      "Lokix",
+      "Ogerpon-Wellspring",
+      "Zamazenta"
+    ],
+    [
+      "Gholdengo",
+      "Great Tusk",
+      "Latios",
+      "Lokix",
+      "Primarina",
+      "Zamazenta"
+    ],
+    [
+      "Gholdengo",
+      "Great Tusk",
+      "Latios",
+      "Lokix",
+      "Walking Wake",
+      "Zamazenta"
+    ],
+    [
+      "Gholdengo",
+      "Great Tusk",
+      "Latios",
+      "Ogerpon-Wellspring",
+      "Weavile",
+      "Zamazenta"
+    ],
+    [
+      "Gholdengo",
+      "Great Tusk",
+      "Latios",
+      "Primarina",
+      "Weavile",
+      "Zamazenta"
+    ],
+    [
+      "Gliscor",
+      "Latios",
+      "Lokix",
+      "Pecharunt",
+      "Ting-Lu",
+      "Zamazenta"
+    ],
+    [
+      "Great Tusk",
+      "Hydrapple",
+      "Iron Crown",
+      "Lokix",
+      "Torkoal",
+      "Walking Wake"
+    ],
+    [
+      "Great Tusk",
+      "Hydrapple",
+      "Iron Crown",
+      "Ogerpon-Wellspring",
+      "Torkoal",
+      "Walking Wake"
+    ],
+    [
+      "Great Tusk",
+      "Hydrapple",
+      "Iron Crown",
+      "Torkoal",
+      "Walking Wake",
+      "Weavile"
+    ],
+    [
+      "Great Tusk",
+      "Hydrapple",
+      "Iron Crown",
+      "Torkoal",
+      "Walking Wake",
+      "Zamazenta"
+    ],
+    [
+      "Great Tusk",
+      "Hydrapple",
+      "Lokix",
+      "Moltres",
+      "Torkoal",
+      "Walking Wake"
+    ],
+    [
+      "Great Tusk",
+      "Hydrapple",
+      "Lokix",
+      "Tinkaton",
+      "Torkoal",
+      "Walking Wake"
+    ],
+    [
+      "Great Tusk",
+      "Hydrapple",
+      "Moltres",
+      "Ogerpon-Wellspring",
+      "Torkoal",
+      "Walking Wake"
+    ],
+    [
+      "Great Tusk",
+      "Hydrapple",
+      "Moltres",
+      "Torkoal",
+      "Walking Wake",
+      "Weavile"
+    ],
+    [
+      "Great Tusk",
+      "Hydrapple",
+      "Moltres",
+      "Torkoal",
+      "Walking Wake",
+      "Zamazenta"
+    ],
+    [
+      "Great Tusk",
+      "Hydrapple",
+      "Tinkaton",
+      "Torkoal",
+      "Walking Wake",
+      "Weavile"
+    ],
+    [
+      "Great Tusk",
+      "Hydrapple",
+      "Tinkaton",
+      "Torkoal",
+      "Walking Wake",
+      "Zamazenta"
+    ],
+    [
+      "Great Tusk",
+      "Hydrapple",
+      "Tinkaton",
+      "Walking Wake",
+      "Zamazenta",
+      "Zapdos"
+    ],
+    [
+      "Great Tusk",
+      "Kyurem",
+      "Lokix",
+      "Tinkaton",
+      "Torkoal",
+      "Walking Wake"
+    ],
+    [
+      "Great Tusk",
+      "Kyurem",
+      "Moltres",
+      "Torkoal",
+      "Walking Wake",
+      "Zamazenta"
+    ],
+    [
+      "Great Tusk",
+      "Kyurem",
+      "Tinkaton",
+      "Walking Wake",
+      "Zamazenta",
+      "Zapdos"
+    ],
+    [
+      "Hydrapple",
+      "Slowking-Galar",
+      "Ting-Lu",
+      "Tinkaton",
+      "Zamazenta",
+      "Zapdos"
+    ],
+    [
+      "Iron Treads",
+      "Lokix",
+      "Moltres",
+      "Pecharunt",
+      "Toxapex",
+      "Weezing-Galar"
+    ],
+    [
+      "Iron Treads",
+      "Moltres",
+      "Pecharunt",
+      "Toxapex",
+      "Weezing-Galar",
+      "Zamazenta"
+    ],
+    [
+      "Iron Treads",
+      "Moltres",
+      "Slowking-Galar",
+      "Toxapex",
+      "Weavile",
+      "Weezing-Galar"
+    ],
+    [
+      "Iron Treads",
+      "Moltres",
+      "Slowking-Galar",
+      "Toxapex",
+      "Weezing-Galar",
+      "Zamazenta"
+    ]
+  ],
+  "reservation_source_files": [
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/coherent-sets/screening-teams-v1/teams.json",
+      "sha256": "32fe69092ca229d5509f832f0f2e2d80abf88f29de3aeb5d1c6775b1ef999c21",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/coherent-sets/screening-teams-v2/teams.json",
+      "sha256": "1cbfda7c2d0521b0616caa961d4c894224398f78673baaae6205f18c73d9b66c",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/coherent-sets/screening-v1-manifest.json",
+      "sha256": "f7af6abcac95fa61b811730aefc07bbd7c2abd49255f1893a03ad58bbfbb8106",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/coherent-sets/screening-v2-manifest.json",
+      "sha256": "1f62c66c6dbbfffcd85d071a0317b3de6cd4a73d65224e6624b0f0aade1d43ab",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/coherent-sets/smoke-v2-manifest.json",
+      "sha256": "ffb54c0b763d6ec656c6fd47bbb13a7a841dd99d3c62656503d918e3f7302c5b",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/cumulative-reservations-v1/confirmation/teams.json",
+      "sha256": "e774bc92ecdba8e04b3fcbbfec7f7281714019059220d6eb80a02fd964187e61",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/cumulative-reservations-v1/screening/teams.json",
+      "sha256": "204a82adeb0a2b56a8c6ca0288efcf02b24e60662834aecf25f2a50796458292",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/teams.json",
+      "sha256": "10b5689ec0131e8091dba7dd18156a21cddd6b193e1a8ffce9e24c8e83badd80",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/teams.json",
+      "sha256": "9a8f3f91ccba58fc8bc349ed86983692872f5ce76f1b222f78a384e2219a64b2",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/future-reservations-v1/stage3-confirmation/teams.json",
+      "sha256": "d88a136c6d8c9f4e2e0996c7a8f827380f68e0c90a31f8f227204aa14b90137a",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/future-reservations-v1/stage3-screening/teams.json",
+      "sha256": "83af39dfbe3c04020616cef6e8f22bdaabf39ad957be218afbb1b8ab1f45e3f8",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/future-reservations-v1/stage4-adaptive-confirmation/teams.json",
+      "sha256": "f1d8d48827c1f0d961ac29a470c2d3dc1d71b6c8fba86972c59ed13029436dc5",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/future-reservations-v1/stage4-adaptive-screening/teams.json",
+      "sha256": "0a51e10410edc8ef4d6621884efe5a05f8920c6145d2395653a002d01d587302",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/future-reservations-v1/stage4-fixed-confirmation/teams.json",
+      "sha256": "e455c1ab43403801e8fd64c2d3eb15d2e69cc02e38c60ab057cff67e8824396c",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/future-reservations-v1/stage4-fixed-screening/teams.json",
+      "sha256": "2277d9797b2664160257b7259bec0a44efbcaee651f3c9b747d347672d7c2126",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/future-reservations-v1/stage5-guard-confirmation/teams.json",
+      "sha256": "2ff8098c5bbd8a089a2aebfbac3d4a076a30e53e36abffeabd3df54b2a1494a9",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/future-reservations-v1/stage5-guard-screening/teams.json",
+      "sha256": "e095a9e76d61d9f274edb145679d29b58ee28fb3a6d5489ed7c3fa1e19225f43",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/future-reservations-v1/stage6-mixing-confirmation/teams.json",
+      "sha256": "063bbb801f7d911df441adfad9cd7370f6917bbb63060360cb2304b28f33b773",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/future-reservations-v1/stage6-mixing-screening/teams.json",
+      "sha256": "31c0181a0cf64d7539ba1480cea7d8c241ea8b27c3b27ca1413a24a05e4c8951",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/stage1-confirmation-manifest.json",
+      "sha256": "0c2154e954c57621cd38b2d747ef9bcecc626a8162b3976465a8f7ba28254c69",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/stage1-confirmation-v2-manifest.json",
+      "sha256": "43813496f39636a086ada73cf3d15707e3024edf53c0c3e9ab6c3a30889b2392",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/stage1-screening-manifest.json",
+      "sha256": "b750c566730f16242c60cb14e85f2b762cb3633a08fdc11fe3becf1e8712d78a",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/stage2-incumbent-confirmation-manifest.json",
+      "sha256": "49a454f92ff24b0c73e436fa83f28dd55e340ca4506bee61b12df7d3bdf23c95",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/stage2-incumbent-confirmation-v2-manifest.json",
+      "sha256": "991f2e09ed4480f88fba896e8022fcc7b2a2f9b52d8886becec735261653edab",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/stage2-incumbent-screening-manifest.json",
+      "sha256": "26fe1a549e1fbab856968fb925a7b378831428a83e3b1eacfa3a41574cc41f05",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/stage2-original-confirmation-manifest.json",
+      "sha256": "417af844c7fad2b7a0a73b78a64eb2c5ebc5867b4101d14765a8a698b407fec8",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/stage2-original-confirmation-v2-manifest.json",
+      "sha256": "0a2b364909abf55cb741291987a30c24727656f8407c6eb6984485f7096fd0f7",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/stage2-original-screening-manifest.json",
+      "sha256": "6486ec2e9fc406dd821e5f6a3653af46b684f0b500e99d377b7b9a154c5f2ecf",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/stage2-smoke-manifest.json",
+      "sha256": "91424e0fd3de421ea89db2b23a8227172549245f1789076530a2a3952f7fb88f",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/stage3-incumbent-screening-manifest.json",
+      "sha256": "50adc6759e53a6512d5e1c215c3a59cdf0c3224370f02a228eb31a2b6aa45ac1",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/stage3-original-screening-manifest.json",
+      "sha256": "6aef7109040ecb9975356a636ee53faa736fbd217ed3084e350c89060194796a",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/teams-confirmation-v1/teams.json",
+      "sha256": "9f102ca0d13faa32694df7dd7fe6dfb725e4e16b0f5332af5660128ff66cdf81",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/teams-confirmation-v2/teams.json",
+      "sha256": "46b4d27d7d60776723799daf9af1adc31352c88e2489bdd315040cd3335d9a85",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/teams-screening-v1/teams.json",
+      "sha256": "fe51527040128f66bb536acd9e06f610aeb7cfb240afcc3a0fed91070a39bc00",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/mcts-improvements/teams-screening-v2/teams.json",
+      "sha256": "bfb484255fb69dea9f75d4e9e75db0db3c21ffe1e95db8fcff81b7ca73ac7476",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/cumulative-reservations-v1/confirmation/teams.json",
+      "sha256": "e774bc92ecdba8e04b3fcbbfec7f7281714019059220d6eb80a02fd964187e61",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/cumulative-reservations-v1/screening/teams.json",
+      "sha256": "204a82adeb0a2b56a8c6ca0288efcf02b24e60662834aecf25f2a50796458292",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-confirmation/teams.json",
+      "sha256": "10b5689ec0131e8091dba7dd18156a21cddd6b193e1a8ffce9e24c8e83badd80",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage2-screening/teams.json",
+      "sha256": "9a8f3f91ccba58fc8bc349ed86983692872f5ce76f1b222f78a384e2219a64b2",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage3-confirmation/teams.json",
+      "sha256": "d88a136c6d8c9f4e2e0996c7a8f827380f68e0c90a31f8f227204aa14b90137a",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage3-screening/teams.json",
+      "sha256": "83af39dfbe3c04020616cef6e8f22bdaabf39ad957be218afbb1b8ab1f45e3f8",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage4-adaptive-confirmation/teams.json",
+      "sha256": "f1d8d48827c1f0d961ac29a470c2d3dc1d71b6c8fba86972c59ed13029436dc5",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage4-adaptive-screening/teams.json",
+      "sha256": "0a51e10410edc8ef4d6621884efe5a05f8920c6145d2395653a002d01d587302",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage4-fixed-confirmation/teams.json",
+      "sha256": "e455c1ab43403801e8fd64c2d3eb15d2e69cc02e38c60ab057cff67e8824396c",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage4-fixed-screening/teams.json",
+      "sha256": "2277d9797b2664160257b7259bec0a44efbcaee651f3c9b747d347672d7c2126",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage5-guard-confirmation/teams.json",
+      "sha256": "2ff8098c5bbd8a089a2aebfbac3d4a076a30e53e36abffeabd3df54b2a1494a9",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage5-guard-screening/teams.json",
+      "sha256": "e095a9e76d61d9f274edb145679d29b58ee28fb3a6d5489ed7c3fa1e19225f43",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage6-mixing-confirmation/teams.json",
+      "sha256": "063bbb801f7d911df441adfad9cd7370f6917bbb63060360cb2304b28f33b773",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/future-reservations-v1/stage6-mixing-screening/teams.json",
+      "sha256": "31c0181a0cf64d7539ba1480cea7d8c241ea8b27c3b27ca1413a24a05e4c8951",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage1-confirmation-manifest.json",
+      "sha256": "0c2154e954c57621cd38b2d747ef9bcecc626a8162b3976465a8f7ba28254c69",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage1-confirmation-v2-manifest.json",
+      "sha256": "43813496f39636a086ada73cf3d15707e3024edf53c0c3e9ab6c3a30889b2392",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage1-screening-manifest.json",
+      "sha256": "b750c566730f16242c60cb14e85f2b762cb3633a08fdc11fe3becf1e8712d78a",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage2-incumbent-confirmation-manifest.json",
+      "sha256": "49a454f92ff24b0c73e436fa83f28dd55e340ca4506bee61b12df7d3bdf23c95",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage2-incumbent-confirmation-v2-manifest.json",
+      "sha256": "991f2e09ed4480f88fba896e8022fcc7b2a2f9b52d8886becec735261653edab",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage2-incumbent-screening-manifest.json",
+      "sha256": "26fe1a549e1fbab856968fb925a7b378831428a83e3b1eacfa3a41574cc41f05",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage2-original-confirmation-manifest.json",
+      "sha256": "417af844c7fad2b7a0a73b78a64eb2c5ebc5867b4101d14765a8a698b407fec8",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage2-original-confirmation-v2-manifest.json",
+      "sha256": "0a2b364909abf55cb741291987a30c24727656f8407c6eb6984485f7096fd0f7",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage2-original-screening-manifest.json",
+      "sha256": "6486ec2e9fc406dd821e5f6a3653af46b684f0b500e99d377b7b9a154c5f2ecf",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage2-smoke-manifest.json",
+      "sha256": "91424e0fd3de421ea89db2b23a8227172549245f1789076530a2a3952f7fb88f",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage3-incumbent-screening-manifest.json",
+      "sha256": "50adc6759e53a6512d5e1c215c3a59cdf0c3224370f02a228eb31a2b6aa45ac1",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage3-incumbent-screening-v2-manifest.json",
+      "sha256": "e9d1b1951b72e7e3f752109edb2cf531143dc24e83541dc1fe0f18a18a608193",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage3-original-screening-manifest.json",
+      "sha256": "6aef7109040ecb9975356a636ee53faa736fbd217ed3084e350c89060194796a",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage3-original-screening-v2-manifest.json",
+      "sha256": "5a34fe5ddcddbdd688daf0ab19b4331a6a88b5b82d822d9c99d9b5799e5620b1",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage4-12x100-incumbent-screening-manifest.json",
+      "sha256": "7d7d37645d7e9296f28156c0433d7c3a7e773e4fcde404b7204fc3d598d25b85",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage4-12x100-original-screening-manifest.json",
+      "sha256": "ab2ebc8b42c406cae28a1026f4930f7e5412ec3381a77a40ce7bee9f709178ca",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage4-4x300-incumbent-screening-manifest.json",
+      "sha256": "c1709aff40af4c80f16898ea820f567ec99eecfdd0767ab2610d80bca8363f29",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage4-4x300-original-screening-manifest.json",
+      "sha256": "139ae700bf1bd0e9854214d2faa66421c236e9cdf9883224e1947ce409e3d9a6",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage6-incumbent-screening-manifest.json",
+      "sha256": "9bdf020e1ec30acdf7119650d6272430da5529f507b70b88afcde5a4395e3fa4",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage6-original-screening-manifest.json",
+      "sha256": "84c348272790e182a12345f87ebfa1cae9b0f70f2ae1a51cc5fd389510bae7f6",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage6-panel-deterministic-corrected_one_ply-manifest.json",
+      "sha256": "c4c87e5e2f631a9a97fc5537c899431e70296905586611c6d1a732c6b069273b",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage6-panel-deterministic-original_mcts-manifest.json",
+      "sha256": "4703368510a6c8d7a99908f3f528972cfb7eeba7e241f3a76f5ff76c63839579",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage6-panel-deterministic-public_frequency_counter-manifest.json",
+      "sha256": "600fff8c70c9804c0ff0b591d5b889259374cda7ccc9999b52326f6fa684ce73",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage6-panel-mixed-corrected_one_ply-manifest.json",
+      "sha256": "7f645d08c7181bec9df3e96d164a586feb9e3fc26054ff9b4118812dfd16db68",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage6-panel-mixed-original_mcts-manifest.json",
+      "sha256": "5fa706e3d77047ee28be2492e317a17fdbbcf7757ceb59671aa542e426a43a7f",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage6-panel-mixed-public_frequency_counter-manifest.json",
+      "sha256": "95f022161328c794c0138a87b5b78fa2b12fb3faef0d8667d3c3dbe18330d6e9",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage6-panel-reservations-v1/confirmation/teams.json",
+      "sha256": "c4e8f31ba4ed4e7ae6def0bdd12cecce639bf8f681ed11abec5bdf38e9b27baa",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/stage6-panel-reservations-v1/screening/teams.json",
+      "sha256": "f953d548fe5fbc2fbf2a8a47eddb4d57db02fd88eab8c338cefad9764a7d0687",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/teams-confirmation-v1/teams.json",
+      "sha256": "9f102ca0d13faa32694df7dd7fe6dfb725e4e16b0f5332af5660128ff66cdf81",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/teams-confirmation-v2/teams.json",
+      "sha256": "46b4d27d7d60776723799daf9af1adc31352c88e2489bdd315040cd3335d9a85",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/teams-screening-v1/teams.json",
+      "sha256": "fe51527040128f66bb536acd9e06f610aeb7cfb240afcc3a0fed91070a39bc00",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/teams-screening-v2/teams.json",
+      "sha256": "bfb484255fb69dea9f75d4e9e75db0db3c21ffe1e95db8fcff81b7ca73ac7476",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/tera-followup-incumbent-confirmation-manifest.json",
+      "sha256": "97dd5f93c9b4ca5d9f46665223e45d38985ef4157efcb93af90fcd47358ffcdf",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/tera-followup-incumbent-screening-manifest.json",
+      "sha256": "be50dd8fd8ef455b578c9951e9d90b954dadc22a953d18cb73433d781b9ce762",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/tera-followup-original-confirmation-manifest.json",
+      "sha256": "073034b2a8679aaea4033cc64e414f1133f48698dfab44268b51268f7bbd7d5a",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/tera-followup-original-screening-manifest.json",
+      "sha256": "a85ac755e86a306561d79fa50bca377fa65aba87d94dd5d722164d5cdfc1f3b0",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/tera-followup-reservations-v1/confirmation/teams.json",
+      "sha256": "23435fe2dc15a1f93c3d177004ad46b643fbb45f67a3e548ca5e2f4fa415e5db",
+      "rosters": 10
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-improvements/tera-followup-reservations-v1/screening/teams.json",
+      "sha256": "8c12cfe8048a2121504aedcaebe7a14ef38f2d20af6c53d6bee0fac7c183938c",
+      "rosters": 10
+    }
+  ],
+  "schedule_design": {
+    "games": 60,
+    "seed": 2026102521,
+    "kind": "four-game blocks: both simulator sides and both bot/team assignments",
+    "equal_team_exposure": true,
+    "source_and_prior_manifest": "not frozen yet; requires selected candidate"
+  },
+  "schedule": [
+    {
+      "game": 0,
+      "block": 0,
+      "assignment": 0,
+      "a_team": 3,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        33527,
+        17359,
+        46264,
+        23006
+      ],
+      "sampler_seed": 1781787355,
+      "mixed_policy_seed": 916329370
+    },
+    {
+      "game": 1,
+      "block": 0,
+      "assignment": 0,
+      "a_team": 3,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        33527,
+        17359,
+        46264,
+        23006
+      ],
+      "sampler_seed": 1781787355,
+      "mixed_policy_seed": 916329370
+    },
+    {
+      "game": 2,
+      "block": 0,
+      "assignment": 1,
+      "a_team": 6,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        33527,
+        17359,
+        46264,
+        23006
+      ],
+      "sampler_seed": 1781787355,
+      "mixed_policy_seed": 916329370
+    },
+    {
+      "game": 3,
+      "block": 0,
+      "assignment": 1,
+      "a_team": 6,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        33527,
+        17359,
+        46264,
+        23006
+      ],
+      "sampler_seed": 1781787355,
+      "mixed_policy_seed": 916329370
+    },
+    {
+      "game": 4,
+      "block": 1,
+      "assignment": 0,
+      "a_team": 4,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        34300,
+        32652,
+        7950,
+        20974
+      ],
+      "sampler_seed": 1068679317,
+      "mixed_policy_seed": 743046442
+    },
+    {
+      "game": 5,
+      "block": 1,
+      "assignment": 0,
+      "a_team": 4,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        34300,
+        32652,
+        7950,
+        20974
+      ],
+      "sampler_seed": 1068679317,
+      "mixed_policy_seed": 743046442
+    },
+    {
+      "game": 6,
+      "block": 1,
+      "assignment": 1,
+      "a_team": 5,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        34300,
+        32652,
+        7950,
+        20974
+      ],
+      "sampler_seed": 1068679317,
+      "mixed_policy_seed": 743046442
+    },
+    {
+      "game": 7,
+      "block": 1,
+      "assignment": 1,
+      "a_team": 5,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        34300,
+        32652,
+        7950,
+        20974
+      ],
+      "sampler_seed": 1068679317,
+      "mixed_policy_seed": 743046442
+    },
+    {
+      "game": 8,
+      "block": 2,
+      "assignment": 0,
+      "a_team": 0,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        33188,
+        8735,
+        63426,
+        19072
+      ],
+      "sampler_seed": 1233721616,
+      "mixed_policy_seed": 76888106
+    },
+    {
+      "game": 9,
+      "block": 2,
+      "assignment": 0,
+      "a_team": 0,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        33188,
+        8735,
+        63426,
+        19072
+      ],
+      "sampler_seed": 1233721616,
+      "mixed_policy_seed": 76888106
+    },
+    {
+      "game": 10,
+      "block": 2,
+      "assignment": 1,
+      "a_team": 8,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        33188,
+        8735,
+        63426,
+        19072
+      ],
+      "sampler_seed": 1233721616,
+      "mixed_policy_seed": 76888106
+    },
+    {
+      "game": 11,
+      "block": 2,
+      "assignment": 1,
+      "a_team": 8,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        33188,
+        8735,
+        63426,
+        19072
+      ],
+      "sampler_seed": 1233721616,
+      "mixed_policy_seed": 76888106
+    },
+    {
+      "game": 12,
+      "block": 3,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        49199,
+        65527,
+        3477,
+        25618
+      ],
+      "sampler_seed": 1065251292,
+      "mixed_policy_seed": 579160619
+    },
+    {
+      "game": 13,
+      "block": 3,
+      "assignment": 0,
+      "a_team": 1,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        49199,
+        65527,
+        3477,
+        25618
+      ],
+      "sampler_seed": 1065251292,
+      "mixed_policy_seed": 579160619
+    },
+    {
+      "game": 14,
+      "block": 3,
+      "assignment": 1,
+      "a_team": 2,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        49199,
+        65527,
+        3477,
+        25618
+      ],
+      "sampler_seed": 1065251292,
+      "mixed_policy_seed": 579160619
+    },
+    {
+      "game": 15,
+      "block": 3,
+      "assignment": 1,
+      "a_team": 2,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        49199,
+        65527,
+        3477,
+        25618
+      ],
+      "sampler_seed": 1065251292,
+      "mixed_policy_seed": 579160619
+    },
+    {
+      "game": 16,
+      "block": 4,
+      "assignment": 0,
+      "a_team": 7,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        8123,
+        35860,
+        58384,
+        26698
+      ],
+      "sampler_seed": 646696704,
+      "mixed_policy_seed": 982330222
+    },
+    {
+      "game": 17,
+      "block": 4,
+      "assignment": 0,
+      "a_team": 7,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        8123,
+        35860,
+        58384,
+        26698
+      ],
+      "sampler_seed": 646696704,
+      "mixed_policy_seed": 982330222
+    },
+    {
+      "game": 18,
+      "block": 4,
+      "assignment": 1,
+      "a_team": 9,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        8123,
+        35860,
+        58384,
+        26698
+      ],
+      "sampler_seed": 646696704,
+      "mixed_policy_seed": 982330222
+    },
+    {
+      "game": 19,
+      "block": 4,
+      "assignment": 1,
+      "a_team": 9,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        8123,
+        35860,
+        58384,
+        26698
+      ],
+      "sampler_seed": 646696704,
+      "mixed_policy_seed": 982330222
+    },
+    {
+      "game": 20,
+      "block": 5,
+      "assignment": 0,
+      "a_team": 8,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        45353,
+        25970,
+        18088,
+        20583
+      ],
+      "sampler_seed": 821768763,
+      "mixed_policy_seed": 141418371
+    },
+    {
+      "game": 21,
+      "block": 5,
+      "assignment": 0,
+      "a_team": 8,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        45353,
+        25970,
+        18088,
+        20583
+      ],
+      "sampler_seed": 821768763,
+      "mixed_policy_seed": 141418371
+    },
+    {
+      "game": 22,
+      "block": 5,
+      "assignment": 1,
+      "a_team": 5,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        45353,
+        25970,
+        18088,
+        20583
+      ],
+      "sampler_seed": 821768763,
+      "mixed_policy_seed": 141418371
+    },
+    {
+      "game": 23,
+      "block": 5,
+      "assignment": 1,
+      "a_team": 5,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        45353,
+        25970,
+        18088,
+        20583
+      ],
+      "sampler_seed": 821768763,
+      "mixed_policy_seed": 141418371
+    },
+    {
+      "game": 24,
+      "block": 6,
+      "assignment": 0,
+      "a_team": 6,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        59996,
+        32071,
+        17224,
+        29013
+      ],
+      "sampler_seed": 2112047781,
+      "mixed_policy_seed": 1049554743
+    },
+    {
+      "game": 25,
+      "block": 6,
+      "assignment": 0,
+      "a_team": 6,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        59996,
+        32071,
+        17224,
+        29013
+      ],
+      "sampler_seed": 2112047781,
+      "mixed_policy_seed": 1049554743
+    },
+    {
+      "game": 26,
+      "block": 6,
+      "assignment": 1,
+      "a_team": 1,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        59996,
+        32071,
+        17224,
+        29013
+      ],
+      "sampler_seed": 2112047781,
+      "mixed_policy_seed": 1049554743
+    },
+    {
+      "game": 27,
+      "block": 6,
+      "assignment": 1,
+      "a_team": 1,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        59996,
+        32071,
+        17224,
+        29013
+      ],
+      "sampler_seed": 2112047781,
+      "mixed_policy_seed": 1049554743
+    },
+    {
+      "game": 28,
+      "block": 7,
+      "assignment": 0,
+      "a_team": 4,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        64132,
+        63000,
+        2842,
+        20759
+      ],
+      "sampler_seed": 1189689107,
+      "mixed_policy_seed": 721233892
+    },
+    {
+      "game": 29,
+      "block": 7,
+      "assignment": 0,
+      "a_team": 4,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        64132,
+        63000,
+        2842,
+        20759
+      ],
+      "sampler_seed": 1189689107,
+      "mixed_policy_seed": 721233892
+    },
+    {
+      "game": 30,
+      "block": 7,
+      "assignment": 1,
+      "a_team": 7,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        64132,
+        63000,
+        2842,
+        20759
+      ],
+      "sampler_seed": 1189689107,
+      "mixed_policy_seed": 721233892
+    },
+    {
+      "game": 31,
+      "block": 7,
+      "assignment": 1,
+      "a_team": 7,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        64132,
+        63000,
+        2842,
+        20759
+      ],
+      "sampler_seed": 1189689107,
+      "mixed_policy_seed": 721233892
+    },
+    {
+      "game": 32,
+      "block": 8,
+      "assignment": 0,
+      "a_team": 2,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        553,
+        12951,
+        53510,
+        24620
+      ],
+      "sampler_seed": 1189728193,
+      "mixed_policy_seed": 1484139177
+    },
+    {
+      "game": 33,
+      "block": 8,
+      "assignment": 0,
+      "a_team": 2,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        553,
+        12951,
+        53510,
+        24620
+      ],
+      "sampler_seed": 1189728193,
+      "mixed_policy_seed": 1484139177
+    },
+    {
+      "game": 34,
+      "block": 8,
+      "assignment": 1,
+      "a_team": 0,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        553,
+        12951,
+        53510,
+        24620
+      ],
+      "sampler_seed": 1189728193,
+      "mixed_policy_seed": 1484139177
+    },
+    {
+      "game": 35,
+      "block": 8,
+      "assignment": 1,
+      "a_team": 0,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        553,
+        12951,
+        53510,
+        24620
+      ],
+      "sampler_seed": 1189728193,
+      "mixed_policy_seed": 1484139177
+    },
+    {
+      "game": 36,
+      "block": 9,
+      "assignment": 0,
+      "a_team": 9,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        28234,
+        50297,
+        25857,
+        9264
+      ],
+      "sampler_seed": 904281342,
+      "mixed_policy_seed": 1324120125
+    },
+    {
+      "game": 37,
+      "block": 9,
+      "assignment": 0,
+      "a_team": 9,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        28234,
+        50297,
+        25857,
+        9264
+      ],
+      "sampler_seed": 904281342,
+      "mixed_policy_seed": 1324120125
+    },
+    {
+      "game": 38,
+      "block": 9,
+      "assignment": 1,
+      "a_team": 3,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        28234,
+        50297,
+        25857,
+        9264
+      ],
+      "sampler_seed": 904281342,
+      "mixed_policy_seed": 1324120125
+    },
+    {
+      "game": 39,
+      "block": 9,
+      "assignment": 1,
+      "a_team": 3,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        28234,
+        50297,
+        25857,
+        9264
+      ],
+      "sampler_seed": 904281342,
+      "mixed_policy_seed": 1324120125
+    },
+    {
+      "game": 40,
+      "block": 10,
+      "assignment": 0,
+      "a_team": 5,
+      "b_team": 3,
+      "a_side": "p1",
+      "simulator_seed": [
+        57536,
+        38251,
+        56386,
+        62712
+      ],
+      "sampler_seed": 2015090003,
+      "mixed_policy_seed": 1647000746
+    },
+    {
+      "game": 41,
+      "block": 10,
+      "assignment": 0,
+      "a_team": 5,
+      "b_team": 3,
+      "a_side": "p2",
+      "simulator_seed": [
+        57536,
+        38251,
+        56386,
+        62712
+      ],
+      "sampler_seed": 2015090003,
+      "mixed_policy_seed": 1647000746
+    },
+    {
+      "game": 42,
+      "block": 10,
+      "assignment": 1,
+      "a_team": 3,
+      "b_team": 5,
+      "a_side": "p1",
+      "simulator_seed": [
+        57536,
+        38251,
+        56386,
+        62712
+      ],
+      "sampler_seed": 2015090003,
+      "mixed_policy_seed": 1647000746
+    },
+    {
+      "game": 43,
+      "block": 10,
+      "assignment": 1,
+      "a_team": 3,
+      "b_team": 5,
+      "a_side": "p2",
+      "simulator_seed": [
+        57536,
+        38251,
+        56386,
+        62712
+      ],
+      "sampler_seed": 2015090003,
+      "mixed_policy_seed": 1647000746
+    },
+    {
+      "game": 44,
+      "block": 11,
+      "assignment": 0,
+      "a_team": 2,
+      "b_team": 9,
+      "a_side": "p1",
+      "simulator_seed": [
+        34166,
+        55606,
+        6094,
+        32204
+      ],
+      "sampler_seed": 730323828,
+      "mixed_policy_seed": 817510126
+    },
+    {
+      "game": 45,
+      "block": 11,
+      "assignment": 0,
+      "a_team": 2,
+      "b_team": 9,
+      "a_side": "p2",
+      "simulator_seed": [
+        34166,
+        55606,
+        6094,
+        32204
+      ],
+      "sampler_seed": 730323828,
+      "mixed_policy_seed": 817510126
+    },
+    {
+      "game": 46,
+      "block": 11,
+      "assignment": 1,
+      "a_team": 9,
+      "b_team": 2,
+      "a_side": "p1",
+      "simulator_seed": [
+        34166,
+        55606,
+        6094,
+        32204
+      ],
+      "sampler_seed": 730323828,
+      "mixed_policy_seed": 817510126
+    },
+    {
+      "game": 47,
+      "block": 11,
+      "assignment": 1,
+      "a_team": 9,
+      "b_team": 2,
+      "a_side": "p2",
+      "simulator_seed": [
+        34166,
+        55606,
+        6094,
+        32204
+      ],
+      "sampler_seed": 730323828,
+      "mixed_policy_seed": 817510126
+    },
+    {
+      "game": 48,
+      "block": 12,
+      "assignment": 0,
+      "a_team": 0,
+      "b_team": 1,
+      "a_side": "p1",
+      "simulator_seed": [
+        40277,
+        33503,
+        32726,
+        22625
+      ],
+      "sampler_seed": 553580703,
+      "mixed_policy_seed": 52964447
+    },
+    {
+      "game": 49,
+      "block": 12,
+      "assignment": 0,
+      "a_team": 0,
+      "b_team": 1,
+      "a_side": "p2",
+      "simulator_seed": [
+        40277,
+        33503,
+        32726,
+        22625
+      ],
+      "sampler_seed": 553580703,
+      "mixed_policy_seed": 52964447
+    },
+    {
+      "game": 50,
+      "block": 12,
+      "assignment": 1,
+      "a_team": 1,
+      "b_team": 0,
+      "a_side": "p1",
+      "simulator_seed": [
+        40277,
+        33503,
+        32726,
+        22625
+      ],
+      "sampler_seed": 553580703,
+      "mixed_policy_seed": 52964447
+    },
+    {
+      "game": 51,
+      "block": 12,
+      "assignment": 1,
+      "a_team": 1,
+      "b_team": 0,
+      "a_side": "p2",
+      "simulator_seed": [
+        40277,
+        33503,
+        32726,
+        22625
+      ],
+      "sampler_seed": 553580703,
+      "mixed_policy_seed": 52964447
+    },
+    {
+      "game": 52,
+      "block": 13,
+      "assignment": 0,
+      "a_team": 8,
+      "b_team": 7,
+      "a_side": "p1",
+      "simulator_seed": [
+        11682,
+        38774,
+        37194,
+        28267
+      ],
+      "sampler_seed": 1999522202,
+      "mixed_policy_seed": 579816811
+    },
+    {
+      "game": 53,
+      "block": 13,
+      "assignment": 0,
+      "a_team": 8,
+      "b_team": 7,
+      "a_side": "p2",
+      "simulator_seed": [
+        11682,
+        38774,
+        37194,
+        28267
+      ],
+      "sampler_seed": 1999522202,
+      "mixed_policy_seed": 579816811
+    },
+    {
+      "game": 54,
+      "block": 13,
+      "assignment": 1,
+      "a_team": 7,
+      "b_team": 8,
+      "a_side": "p1",
+      "simulator_seed": [
+        11682,
+        38774,
+        37194,
+        28267
+      ],
+      "sampler_seed": 1999522202,
+      "mixed_policy_seed": 579816811
+    },
+    {
+      "game": 55,
+      "block": 13,
+      "assignment": 1,
+      "a_team": 7,
+      "b_team": 8,
+      "a_side": "p2",
+      "simulator_seed": [
+        11682,
+        38774,
+        37194,
+        28267
+      ],
+      "sampler_seed": 1999522202,
+      "mixed_policy_seed": 579816811
+    },
+    {
+      "game": 56,
+      "block": 14,
+      "assignment": 0,
+      "a_team": 4,
+      "b_team": 6,
+      "a_side": "p1",
+      "simulator_seed": [
+        32354,
+        25518,
+        36111,
+        41291
+      ],
+      "sampler_seed": 935058307,
+      "mixed_policy_seed": 1297734672
+    },
+    {
+      "game": 57,
+      "block": 14,
+      "assignment": 0,
+      "a_team": 4,
+      "b_team": 6,
+      "a_side": "p2",
+      "simulator_seed": [
+        32354,
+        25518,
+        36111,
+        41291
+      ],
+      "sampler_seed": 935058307,
+      "mixed_policy_seed": 1297734672
+    },
+    {
+      "game": 58,
+      "block": 14,
+      "assignment": 1,
+      "a_team": 6,
+      "b_team": 4,
+      "a_side": "p1",
+      "simulator_seed": [
+        32354,
+        25518,
+        36111,
+        41291
+      ],
+      "sampler_seed": 935058307,
+      "mixed_policy_seed": 1297734672
+    },
+    {
+      "game": 59,
+      "block": 14,
+      "assignment": 1,
+      "a_team": 6,
+      "b_team": 4,
+      "a_side": "p2",
+      "simulator_seed": [
+        32354,
+        25518,
+        36111,
+        41291
+      ],
+      "sampler_seed": 935058307,
+      "mixed_policy_seed": 1297734672
+    }
+  ],
+  "isolation_transfer": {
+    "original_manifest_sha256": "063b0b51f66d055d775c9ce9be1022306b9e40a9de73f02857ae15b3602ceba5",
+    "reason": "paths moved to separate v2 worktree before any new games; team contents and reserved schedule unchanged"
+  }
+}
