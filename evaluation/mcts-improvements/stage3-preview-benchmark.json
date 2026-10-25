@@ -1,0 +1,269 @@
+{
+  "purpose": "development preview latency/mechanism check; no strength result",
+  "input_role": "existing regression request; all opposing private/current revelations removed to represent preview",
+  "runs": [
+    {
+      "warmup": true,
+      "slot": 2,
+      "elapsed_ms": 79.41157498862594,
+      "cpu_ms": 78.05494499999999,
+      "pair_sets": 696,
+      "fallback": null
+    },
+    {
+      "warmup": false,
+      "slot": 2,
+      "elapsed_ms": 74.02965001529083,
+      "cpu_ms": 72.65344499999993,
+      "pair_sets": 696,
+      "fallback": null
+    },
+    {
+      "warmup": false,
+      "slot": 2,
+      "elapsed_ms": 59.97916398337111,
+      "cpu_ms": 59.16413300000001,
+      "pair_sets": 696,
+      "fallback": null
+    },
+    {
+      "warmup": false,
+      "slot": 2,
+      "elapsed_ms": 62.32150498544797,
+      "cpu_ms": 61.694048,
+      "pair_sets": 696,
+      "fallback": null
+    },
+    {
+      "warmup": false,
+      "slot": 2,
+      "elapsed_ms": 87.13714400073513,
+      "cpu_ms": 85.59573399999998,
+      "pair_sets": 696,
+      "fallback": null
+    },
+    {
+      "warmup": false,
+      "slot": 2,
+      "elapsed_ms": 90.33798897871748,
+      "cpu_ms": 88.870267,
+      "pair_sets": 696,
+      "fallback": null
+    },
+    {
+      "warmup": false,
+      "slot": 2,
+      "elapsed_ms": 87.90728397434577,
+      "cpu_ms": 86.73192500000005,
+      "pair_sets": 696,
+      "fallback": null
+    },
+    {
+      "warmup": false,
+      "slot": 2,
+      "elapsed_ms": 90.0917710387148,
+      "cpu_ms": 88.57141499999987,
+      "pair_sets": 696,
+      "fallback": null
+    },
+    {
+      "warmup": false,
+      "slot": 2,
+      "elapsed_ms": 87.39481202792376,
+      "cpu_ms": 85.87676499999985,
+      "pair_sets": 696,
+      "fallback": null
+    },
+    {
+      "warmup": false,
+      "slot": 2,
+      "elapsed_ms": 89.90344102494419,
+      "cpu_ms": 88.06616499999987,
+      "pair_sets": 696,
+      "fallback": null
+    },
+    {
+      "warmup": false,
+      "slot": 2,
+      "elapsed_ms": 87.46704598888755,
+      "cpu_ms": 85.84317900000005,
+      "pair_sets": 696,
+      "fallback": null
+    },
+    {
+      "warmup": false,
+      "slot": 2,
+      "elapsed_ms": 90.15865495894104,
+      "cpu_ms": 88.53030200000012,
+      "pair_sets": 696,
+      "fallback": null
+    },
+    {
+      "warmup": false,
+      "slot": 2,
+      "elapsed_ms": 86.47902100346982,
+      "cpu_ms": 85.03309199999998,
+      "pair_sets": 696,
+      "fallback": null
+    },
+    {
+      "warmup": false,
+      "slot": 2,
+      "elapsed_ms": 89.93350702803582,
+      "cpu_ms": 88.60825000000006,
+      "pair_sets": 696,
+      "fallback": null
+    },
+    {
+      "warmup": false,
+      "slot": 2,
+      "elapsed_ms": 83.44129903707653,
+      "cpu_ms": 80.61882399999986,
+      "pair_sets": 696,
+      "fallback": null
+    },
+    {
+      "warmup": false,
+      "slot": 2,
+      "elapsed_ms": 88.51287799188867,
+      "cpu_ms": 85.589409,
+      "pair_sets": 696,
+      "fallback": null
+    },
+    {
+      "warmup": false,
+      "slot": 2,
+      "elapsed_ms": 86.62838896270841,
+      "cpu_ms": 85.0381859999998,
+      "pair_sets": 696,
+      "fallback": null
+    },
+    {
+      "warmup": false,
+      "slot": 2,
+      "elapsed_ms": 91.0244730184786,
+      "cpu_ms": 89.19817800000018,
+      "pair_sets": 696,
+      "fallback": null
+    },
+    {
+      "warmup": false,
+      "slot": 2,
+      "elapsed_ms": 89.11064901622012,
+      "cpu_ms": 86.76212700000008,
+      "pair_sets": 696,
+      "fallback": null
+    },
+    {
+      "warmup": false,
+      "slot": 2,
+      "elapsed_ms": 87.51884201774374,
+      "cpu_ms": 86.06594500000008,
+      "pair_sets": 696,
+      "fallback": null
+    },
+    {
+      "warmup": false,
+      "slot": 2,
+      "elapsed_ms": 86.05642698239535,
+      "cpu_ms": 84.53796499999999,
+      "pair_sets": 696,
+      "fallback": null
+    }
+  ],
+  "latency_ms": {
+    "p50": 87.49294400331564,
+    "p95": 90.37231318070553,
+    "p99": 90.89404105092399,
+    "max": 91.0244730184786
+  },
+  "source_sha256": "94ea1a26720e663bfa71e2a1f741a215888262710a297c7d59d29f286884ff2c",
+  "prior_sha256": "47b31bf7282d6578ed44d7b28f9a63e9284eddc72882856de426f7c1bfc8c7f3",
+  "python": "3.13.13",
+  "selected_scores": [
+    {
+      "slot": 1,
+      "species": "kingambit",
+      "score": 0.04802351729387417,
+      "components": {
+        "offense": 0.3433429579911954,
+        "incoming": 0.545693007295718,
+        "tempo": 0.14845529933622437,
+        "fragility": 0.04334307535007737,
+        "hazard": 0.0,
+        "pivot": 0.0,
+        "taunt": 0.0
+      }
+    },
+    {
+      "slot": 2,
+      "species": "greattusk",
+      "score": 0.2743026075602932,
+      "components": {
+        "offense": 0.6244184940893314,
+        "incoming": 0.5472323892265876,
+        "tempo": -0.33333333333333337,
+        "fragility": 0.03046024151471653,
+        "hazard": 0.0,
+        "pivot": 0.0,
+        "taunt": 0.0
+      }
+    },
+    {
+      "slot": 3,
+      "species": "gholdengo",
+      "score": -0.22154133111746496,
+      "components": {
+        "offense": 0.2432169073115898,
+        "incoming": 0.7350797725546596,
+        "tempo": -0.33333333333333337,
+        "fragility": 0.06821454507997321,
+        "hazard": 0.0,
+        "pivot": 0.0,
+        "taunt": 0.0
+      }
+    },
+    {
+      "slot": 4,
+      "species": "dragapult",
+      "score": -0.02956561910795633,
+      "components": {
+        "offense": 0.5435302076135438,
+        "incoming": 0.877424872006793,
+        "tempo": -0.33333333333333337,
+        "fragility": 0.2206598612183652,
+        "hazard": 0.0,
+        "pivot": 0.26143018746242713,
+        "taunt": 0.0
+      }
+    },
+    {
+      "slot": 5,
+      "species": "corviknight",
+      "score": 0.1904586854140716,
+      "components": {
+        "offense": 0.39647047879128494,
+        "incoming": 0.3709864640392044,
+        "tempo": -0.33333333333333337,
+        "fragility": 0.0019684736394251384,
+        "hazard": 0.0,
+        "pivot": 0.6436883989362769,
+        "taunt": 0.0
+      }
+    },
+    {
+      "slot": 6,
+      "species": "ironvaliant",
+      "score": 0.10330188442747415,
+      "components": {
+        "offense": 0.5572837367179239,
+        "incoming": 0.6826221923900014,
+        "tempo": -0.33333333333333337,
+        "fragility": 0.12846548825316292,
+        "hazard": 0.0,
+        "pivot": 0.0,
+        "taunt": 0.0
+      }
+    }
+  ]
+}

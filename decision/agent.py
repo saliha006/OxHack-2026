@@ -26,13 +26,17 @@ class Agent:
                  clock: Callable[[], float] = time.monotonic, *, backend: str = "mcts",
                  mcts_worlds: int = 8, search_ms: int = 150, engine_threads: int = 1,
                  sampling: str = "team", frozen_beliefs: bool = False, seed: int = 2026,
-                 belief_mode: str = "reliable"):
+                 belief_mode: str = "reliable", lead_policy: str = "types", fixed_lead: int | None = None):
         if backend not in {"one_ply", "mcts"}:
             raise ValueError("backend must be one_ply or mcts")
         if sampling not in {"team", "active"}:
             raise ValueError("sampling must be team or active")
         if belief_mode not in {"legacy", "revelations", "reliable"}:
             raise ValueError("belief_mode must be legacy, revelations or reliable")
+        if lead_policy not in {"types", "moves_stats"}:
+            raise ValueError("lead_policy must be types or moves_stats")
+        if fixed_lead is not None and (not isinstance(fixed_lead, int) or not 1 <= fixed_lead <= 6):
+            raise ValueError("fixed_lead must be a party slot from one to six")
         if min(mcts_worlds, search_ms, engine_threads) < 1 or budget <= 0:
             raise ValueError("worlds, search time, threads and budget must be positive")
         self.priors = priors
@@ -45,7 +49,8 @@ class Agent:
         self.config = {"mcts_worlds": mcts_worlds, "search_ms": search_ms, "engine_threads": engine_threads,
                        "sampling": sampling, "frozen_beliefs": frozen_beliefs, "seed": seed,
                        "budget_seconds": budget, "return_reserve_seconds": min(0.3, budget * 0.1),
-                       "belief_mode": belief_mode, "randomisation": False, "learned_reranker": False}
+                       "belief_mode": belief_mode, "lead_policy": lead_policy, "fixed_lead": fixed_lead,
+                       "randomisation": False, "learned_reranker": False}
         self.worker = None
         self.last_trace: dict | None = None
 
@@ -91,7 +96,7 @@ class Agent:
 
         # Preview remains the established lead policy, with no search or native preparation.
         if request.get("teamPreview"):
-            return pick_lead(request, battle).to_choice()
+            return self._lead(request, battle)
         legal = our_actions(request)
         if not legal:
             self.last_trace["fallback_reason"] = "no_legal_actions"
@@ -159,6 +164,22 @@ class Agent:
             log.warning("chosen action retained; replay bookkeeping failed: %s", bookkeeping_error)
         return action.to_choice()
 
+    def _lead(self, request: dict, battle: BattleState) -> str:
+        if self.config["fixed_lead"] is not None:
+            slot = self.config["fixed_lead"]
+            if slot <= len(request["side"]["pokemon"]):
+                self.last_trace["lead"] = {"policy": "fixed", "chosen_slot": slot}
+                return Action("lead", slot).to_choice()
+        if self.config["lead_policy"] == "moves_stats":
+            from decision.lead_model import pick_lead_model
+            action, diagnostic = pick_lead_model(request, battle, self.priors)
+            diagnostic["historical_choice"] = pick_lead(request, battle).to_choice()
+            self.last_trace["lead"] = diagnostic
+            return action.to_choice()
+        action = pick_lead(request, battle)
+        self.last_trace["lead"] = {"policy": "types", "chosen_slot": action.slot}
+        return action.to_choice()
+
     def close(self) -> None:
         """Release the per-battle native worker, including after a cancelled game."""
         if self.worker is not None:
@@ -188,7 +209,7 @@ class Agent:
             self.last_trace["belief_candidates"] = self.belief.candidate_records()
             self.last_trace["belief_update"] = self.belief.last_diagnostics
         if request.get("teamPreview"):
-            return pick_lead(request, battle).to_choice()
+            return self._lead(request, battle)
         if request.get("forceSwitch"):
             action = self._best_switch_in(request, battle)
         else:
