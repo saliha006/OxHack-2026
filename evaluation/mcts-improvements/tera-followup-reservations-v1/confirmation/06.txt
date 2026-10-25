@@ -1,0 +1,61 @@
+Iron Treads @ Leftovers
+Ability: Quark Drive  
+Tera Type: Ghost  
+EVs: 252 HP / 244 SpD / 12 Spe  
+Careful Nature  
+- Earthquake  
+- Rapid Spin  
+- Stealth Rock  
+- Protect  
+
+Gliscor (F) @ Toxic Orb  
+Ability: Poison Heal  
+Tera Type: Normal  
+EVs: 244 HP / 168 SpD / 96 Spe  
+Careful Nature  
+- Swords Dance  
+- Facade  
+- Knock Off  
+- Protect  
+
+Skarmory @ Rocky Helmet
+Ability: Sturdy  
+Tera Type: Dragon  
+EVs: 248 HP / 252 Def / 8 SpD  
+Impish Nature  
+- Whirlwind  
+- Brave Bird  
+- Spikes  
+- Roost  
+
+Gholdengo @ Choice Scarf  
+Ability: Good as Gold  
+Tera Type: Steel  
+EVs: 4 Def / 252 SpA / 252 Spe  
+Timid Nature  
+IVs: 0 Atk  
+- Shadow Ball  
+- Make It Rain  
+- Trick  
+- Recover  
+
+Latios (M) @ Soul Dew  
+Ability: Levitate  
+Tera Type: Steel  
+EVs: 4 Def / 252 SpA / 252 Spe  
+Timid Nature  
+- Draco Meteor  
+- Psychic Noise  
+- Flip Turn  
+- Recover  
+
+Alomomola (F) @ Assault Vest  
+Ability: Regenerator  
+Tera Type: Poison  
+EVs: 216 HP / 40 Atk / 252 SpD  
+Sassy Nature  
+IVs: 0 Spe  
+- Flip Turn  
+- Play Rough  
+- Icy Wind  
+- Mirror Coat

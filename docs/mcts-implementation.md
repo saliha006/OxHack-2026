@@ -16,6 +16,16 @@ Each completed world is streamed immediately. Ordinary exceptions and PyO3 `Pani
 
 `decision/search_policy.py` normalises each usable world's root visits before pooling. Each sampled occurrence has equal mass, even if its draw probability or native iteration count differs. An explicit enumeration mode uses scenario weights instead. Engine names map to the request's move/party slots, then intersect with `our_actions(request)`. Surviving support is renormalised and the request's stable action order breaks ties. Unsupported/ambiguous choices and zero visits are diagnostic failures. The output is search support, with no calibration claim. Opponent visit distributions are retained separately; they do not reweight our search.
 
+`mix_root=False` preserves that deterministic default. Optional MCTS-only
+`mix_root=True` uses `decision/root_mixing.py` to sample a sufficiently mature,
+supported near-tied pair of legal non-Tera moves. Switch/Tera winners, diffuse
+roots and inadequate or failed mapping evidence retain the deterministic choice.
+Its persistent `mix_seed` RNG is separate from world sampling. `root_mixing`
+traces retain eligibility/decline reasons, probabilities, draw, seed and
+original/final action; worker replay records the final action. This heuristic is
+off pending controlled evaluation, with no equilibrium or exploitation-resistance
+claim. Fixed gates and verification are in the [staged record](mcts-improvement-log.md).
+
 `last_trace` contains requested, scheduled, completed, interrupted, failed and usable world counts; full sampled set records; native our/opponent root visits; pooled support; preparation, native search, worker wall and total timings; worker history reset; chosen action; mappings, recovery reasons and state approximations. Requested settings alone are not actual compute measurements. Battle logs retain exact requests and link decisions to subsequent observed root replies; forced replacements/pivot followups are separate and missing root actions remain unknown. Rejected choices invalidate the planned action used by next-turn belief replay.
 
 Belief hard revelations are never restored by the noisy evidence likelihood floor. Missing/empty priors, incompatible inferred rules and failed native replay use explicit recovery paths. The missing-species emergency set preserves known details and otherwise uses neutral DEX estimates and a recorded Tackle placeholder; it is not presented as a real OU set. Real priors cover 321 species/aliases from September 2026 OU at 1825 cutoff. Whole-team sampling remains independent between teammates.

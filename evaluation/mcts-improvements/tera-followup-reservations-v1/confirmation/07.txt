@@ -1,0 +1,61 @@
+Tinkaton @ Air Balloon  
+Ability: Mold Breaker  
+Tera Type: Water  
+EVs: 248 HP / 24 SpD / 236 Spe  
+Jolly Nature  
+- Gigaton Hammer  
+- Thunder Wave  
+- Encore  
+- Stealth Rock  
+
+Pecharunt @ Heavy-Duty Boots
+Ability: Poison Puppeteer  
+Tera Type: Dark  
+EVs: 252 HP / 196 Def / 60 Spe  
+Bold Nature  
+IVs: 0 Atk  
+- Parting Shot  
+- Foul Play  
+- Malignant Chain  
+- Recover  
+
+Hydrapple @ Heavy-Duty Boots  
+Ability: Regenerator  
+Tera Type: Steel  
+EVs: 248 HP / 176 Def / 16 SpA / 56 SpD / 12 Spe  
+Modest Nature  
+IVs: 0 Atk  
+- Draco Meteor  
+- Giga Drain  
+- Earth Power  
+- Nasty Plot  
+
+Cinderace @ Heavy-Duty Boots
+Ability: Blaze  
+Tera Type: Fire  
+EVs: 224 HP / 32 Atk / 252 Spe  
+Jolly Nature  
+- Pyro Ball  
+- U-turn  
+- Court Change  
+- Will-O-Wisp  
+
+Walking Wake @ Heavy-Duty Boots  
+Ability: Protosynthesis  
+Tera Type: Water  
+EVs: 12 Def / 244 SpA / 252 Spe  
+Timid Nature  
+- Surf  
+- Draco Meteor  
+- Knock Off  
+- Flip Turn
+
+Weavile (F) @ Heavy-Duty Boots  
+Ability: Pressure  
+Tera Type: Fire  
+EVs: 252 Atk / 4 SpD / 252 Spe  
+Jolly Nature  
+- Swords Dance  
+- Icicle Crash  
+- Knock Off  
+- Ice Shard
