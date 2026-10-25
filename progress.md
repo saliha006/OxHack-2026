@@ -88,6 +88,14 @@ whenever you log an entry.
 
 ## Log (newest first)
 
+### 2026-10-25 08:27 — feat — `mcts8t4` eval arm: four engine threads per world, Laplace's lever — @saliha
+- **Where:** `sali` · merged to `main`: yes
+- **Did:** The harness pinned every MCTS arm to one engine thread; arms can now set `engine_threads`. `mcts8t4` = 8 worlds × 150 ms × 4 threads, same turn time as mcts8 (Laplace ships 8 threads/world). poke-engine shares one tree across threads (pass 13A), so the gain is less than 4× and unmeasured. Pairings `mcts-threads-foulplay-hard` (vs fphard, 60) and `mcts-threads` (vs mcts8, 80). Fair only with the cores free: one shard per 8 cores. Demo already takes `--engine-threads`.
+- **Touched:** `bot/eval.py` (`MCTS_ARM_OPTIONS`, arm builder), `bot/tests/test_mcts_evaluation.py`
+- **Brief task:** none
+- **⚠️ Conflicts:** none
+- **📨 Needs:** none
+
 ### 2026-10-25 08:18 — feat — Joint-set priors from observed complete sets, as an eval arm — @saliha
 - **Where:** `sali` · merged to `main`: yes
 - **Did:** `data/pipeline/joint_sets.py` blends Foul Play's gen9ou `pokemon_full_sets.json` (4,738 observed complete sets: Tera, ability, item, nature, EVs, moves together, with counts) into our usage candidates: 75% observed / 25% usage (Foul Play's own split), count-weighted, top 30 per species. Output `data/set_candidates_joint.json`: 438 species (our 321 + 117 only the observed sets know, each with a usage block built from those sets, so their games no longer crash belief). New arm `mcts8joint` = mcts8 on that file; pairings `mcts-joint-foulplay-hard` (vs fphard, 60) and `mcts-joint` (vs mcts8, 80). One live game on it: won in 31 turns, 0/34 fallbacks, think p99 2.1 s. **Default priors unchanged**; nothing uses the file unless asked (`--priors data/set_candidates_joint.json` or the arm).

@@ -242,3 +242,12 @@ def test_the_joint_arm_loads_its_own_priors_and_records_them(monkeypatch):
     assert "kingambit" in joint["species"] and plain == {"run": "priors"}
     assert "priors" not in joint_kw and joint_kw["mcts_worlds"] == 8
     assert harness.arm_config("mcts8joint", 3.0)["priors"] == "data/set_candidates_joint.json"
+
+
+def test_the_threaded_arm_overrides_the_single_engine_thread_and_says_so(monkeypatch):
+    built = []
+    monkeypatch.setattr(harness, "Agent", lambda priors, **kw: built.append(kw))
+    harness.ARMS["mcts8t4"]({}, 3.0)
+    harness.ARMS["mcts8"]({}, 3.0)
+    assert [kw["engine_threads"] for kw in built] == [4, 1]
+    assert harness.arm_config("mcts8t4", 3.0)["engine_threads"] == 4
