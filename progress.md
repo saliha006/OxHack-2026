@@ -38,8 +38,9 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
+| 2026-10-25 00:32 | @saliha | @derrick | 🔀 scope proposal | **Decision-layer plan from research pass 10** (`design-decision/strategy-research-pass10.md` on `context`): 4 specialist agents + a cross-check, peer-reviewed + official source + our own measurements. Core ~4.5 h: (1) instrumentation, (2) the two `belief.py` crash fixes + a floor (these caused the 12.7% fallbacks), (3) dual-path featurizer, (5) logistic `LearnedValue` behind a flag with HP fallback; stretch: switch share + quantal opponent model, then pool/depth-2/LP default-off. All your call; key measured facts: one-ply dominance drops Swords Dance and the top-3 EVs on our test position are 0.503/0.501/0.497, so the HP value is the weak point | 2026-10-25 00:32 |
+| 2026-10-25 00:32 | @saliha | @nate | 📨 waiting on | Pass 10 proposes you train + calibrate the logistic win-probability model (step 4, 1.5–2 h, in parallel with derrick's featurizer) and count the real opponent switch rate from replays (0.3 h). Needs your 20k extract; if it isn't on disk by ~02:00 UTC the demo ships the HP value. Yes/no? | 2026-10-25 00:32 |
 | 2026-10-25 00:30 | @derrick | @nate | ⚠️ conflict | **Team-conditioned set priors (A6): yes, please build it after the demo.** Starting sets per opponent Pokémon from past games whose teams match theirs. Fallback: require all 5 teammates to match, then one fewer at a time until at least N games match (N is your call); at 0 it's the general priors. Belief needs it at team preview, so it's a function of their six, not a fixed file: agree the shape with @derrick first | 2026-10-25 00:30 |
-| 2026-10-25 00:30 | @derrick | @saliha | 📨 waiting on | Add to PRD → NOW: "2026-10-25: team-conditioned set priors (A6): yes, built by nate after the demo; fallback lowers the teammate match from 5 to 0 until N games match (N: nate's call). (derrick)" | 2026-10-25 00:30 |
 | 2026-10-24 23:27 | @saliha | @all | ⚠️ conflict | **Timeline moved up: demo ready 04:00–06:00 UTC**, presentation 06:00–09:00 (PRD §19). Whatever you want in the demo needs to be on `main` by 04:00 UTC: @nate set candidates + team pool, @derrick the two belief fixes. The eval rerun on real priors only happens if it can finish by ~05:30. @derrick: the backtesting frontend is still undecided; say if you want it and who builds it | 2026-10-24 23:27 |
 | 2026-10-24 20:52 | @saliha | @all | ⚠️ conflict | `context` now holds only `CLAUDE.md`, the PRD, `builder-files/` and `design-decision/` (was `design/`). Skills, the event doc and the research doc are local now. Sync with `git archive origin/context | tar -x`, then delete your old `design/` copy. Publish steps are in `CLAUDE.md` | 2026-10-24 20:52 |
 | 2026-10-24 20:36 | @saliha | @derrick | ⚠️ conflict | The parser is on `main`: `from bot.parser import Parser, states_from_log`. `Parser(us).feed(line)` per protocol line, `.snapshot()` per request. Unblocks your task 3 (build_state on a parser-made BattleState) | 2026-10-24 20:36 |
@@ -82,6 +83,15 @@ whenever you log an entry.
 ---
 
 ## Log (newest first)
+
+### 2026-10-25 00:32 — docs — Research pass 10: a decision-layer plan for derrick; A6 line added to PRD NOW — @saliha
+- **Where:** `context` @ `4f5e5c7` (`design-decision/strategy-research-pass10.md`, PRD NOW) · merged to `main`: n/a
+- **Did:** saliha asked for specialist research on the move-choice problem (our move × their move × hidden set × dice, collapsed to a matrix per turn). Four agents (search, belief, opponent model + value, speed) and a cross-check under the research protocol. Verdict: a one-ply expected-value agent with a learned leaf. Fix the belief crashes first, then a calibrated logistic value behind a flag; depth-2, process pool and LP are default-off stretch. Measured: poke-engine never releases the GIL (use processes); Python ~1.1–1.6 ms per cell; on our test position one-ply dominance drops Swords Dance and the top-3 EVs are within 0.006. Also added derrick's A6 decision to PRD → NOW (closes his row).
+- **Touched:** `design-decision/strategy-research-pass10.md`, PRD NOW
+- **Brief task:** none
+- **⚠️ Conflicts:** @derrick: proposal for your layer (Open board); @nate: proposed training hand-over
+- **📨 Needs:** @derrick: accept or change the plan; @nate: yes/no on step 4
+- **Status:** open
 
 ### 2026-10-25 00:30 — decision — Team-conditioned set priors (A6): yes, with a stepped fallback — @derrick
 - **Where:** `context` (`design-decision/predictions.md`) · merged to `main`: n/a
