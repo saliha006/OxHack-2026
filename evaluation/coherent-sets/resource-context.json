@@ -1,0 +1,14 @@
+{
+  "recorded_at": "2026-10-25T05:41:18.807500+00:00",
+  "platform": "Linux-7.2.7-arch1-1-x86_64-with-glibc2.44",
+  "cpu_count": 16,
+  "load_average": [
+    15.392578125,
+    12.85498046875,
+    11.30859375
+  ],
+  "study_concurrent_games": 4,
+  "host_context": "Another user chat is running independent MCTS evaluations in the original checkout. No processes or source there were modified by this experiment.",
+  "reliability_test_context": "Initial full suite468 passed before additional tests/harness changes. Later subsecond worker-start fixtures failed under load in candidate and unmodified a8613b9 baseline. Current non-timing suite451 passed. Preserve failure logs and recheck timing suite with reduced contention before any promotion.",
+  "comparison_scope": "candidate prior mixture vs unmodified a8613b9 state/belief pipeline; neither incorporates later concurrent policy changes"
+}

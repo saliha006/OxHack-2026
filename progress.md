@@ -90,6 +90,14 @@ whenever you log an entry.
 
 ## Log (newest first)
 
+### 2026-10-25 05:38 — feat — Isolated coherent-set prior and public-reveal extraction — @kenar
+- **Where:** `Kenar-coherent-sets`, separate checkout based on `a8613b9`; not merged to main or the active MCTS-policy branch.
+- **Did:** Imported pinned Showdown OU roles as validated coherent candidates, preserved IV overrides, retained broad usage fallback in an optional 50/50 mixture, and added chronological public-revelation extraction with conservative item/copy/identity exclusions. Existing default prior is unchanged. The comparison runner freezes independent prior files for each arm.
+- **Measured so far:** Bounded 200-game Tiger sample; retrospective 100-game test diagnostic favors the mixture on next-reveal loss/coverage. This is not a strength result. Frozen source/priors and side/team-balanced game manifests are under `evaluation/coherent-sets/`; measured status and limits stay current in `docs/coherent-sets-results.md`.
+- **Touched:** `data/pipeline/import_curated_sets.py`, `data/pipeline/reveal_evidence.py`, `data/pipeline/sample_replay_logs.py`, optional-IV candidate compatibility and isolated evaluation support. No writes to the original active checkout.
+- **Coordination:** Data-independent MCTS work continues separately; reconcile IV compatibility and evaluator prior-path support at integration. No new roster-conditioned learned prior or joint-team model yet.
+
+
 ### 2026-10-25 05:15 — feat — Add optional preview scoring from supplied moves and stats — @kenar
 - **Where:** `Kenar-mcts` · merged to `main`: not yet
 - **Did:** Added an explicit opening heuristic using our actual request moves/stats and public opposing priors, with traced damage, speed/priority, fragility and hazard/pivot/Taunt components. Preserved the type-only default and added a fixed-lead test option. The model is approximate and remains off pending controlled game evidence; a higher heuristic score is not a strength result.

@@ -1,0 +1,230 @@
+{
+  "teams": [
+    {
+      "id": "coherent-screening-01",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/coherent-sets/screening-teams-v1/01.txt",
+      "style": "offense",
+      "roster": [
+        "Darkrai",
+        "Gholdengo",
+        "Zamazenta",
+        "Weavile",
+        "Great Tusk",
+        "Primarina"
+      ],
+      "sha256": "fe40203b116dc17212e45a45e9b547df1337079b4af588b8c12055c0bf842d1e",
+      "component_sources": [
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_8.txt"
+      ]
+    },
+    {
+      "id": "coherent-screening-02",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/coherent-sets/screening-teams-v1/02.txt",
+      "style": "offense",
+      "roster": [
+        "Weavile",
+        "Darkrai",
+        "Dragonite",
+        "Latios",
+        "Great Tusk",
+        "Cinderace"
+      ],
+      "sha256": "0161030d3dbfac627102b8e8180e78e5f01fc5651d35756e961aa9273bebd215",
+      "component_sources": [
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_12.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_9.txt"
+      ]
+    },
+    {
+      "id": "coherent-screening-03",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/coherent-sets/screening-teams-v1/03.txt",
+      "style": "offense",
+      "roster": [
+        "Lokix",
+        "Iron Crown",
+        "Zamazenta",
+        "Gholdengo",
+        "Great Tusk",
+        "Ogerpon-Wellspring"
+      ],
+      "sha256": "c0b4cd47a88dc55e0cd07edeccd7b67f558648d4965f193d113c2fe4eb1e3bb8",
+      "component_sources": [
+        "bot/teams/standin/team_12.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_6.txt"
+      ]
+    },
+    {
+      "id": "coherent-screening-04",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/coherent-sets/screening-teams-v1/04.txt",
+      "style": "sun offense",
+      "roster": [
+        "Torkoal",
+        "Walking Wake",
+        "Hydrapple",
+        "Dragonite",
+        "Cinderace",
+        "Great Tusk"
+      ],
+      "sha256": "5bc9288b6dacb9b70f1e31ff4a77172dcc92e7e04ecf1294590c91720b027b56",
+      "component_sources": [
+        "existing hand-constructed weather component",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_9.txt",
+        "bot/teams/standin/team_13.txt"
+      ]
+    },
+    {
+      "id": "coherent-screening-05",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/coherent-sets/screening-teams-v1/05.txt",
+      "style": "balance",
+      "roster": [
+        "Ting-Lu",
+        "Corviknight",
+        "Iron Crown",
+        "Primarina",
+        "Pecharunt",
+        "Great Tusk"
+      ],
+      "sha256": "cab59b789d1bef08b29c0159d6190af53071f7c2e9a93f5602b9731f6f12b76c",
+      "component_sources": [
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_8.txt",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_13.txt"
+      ]
+    },
+    {
+      "id": "coherent-screening-06",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/coherent-sets/screening-teams-v1/06.txt",
+      "style": "balance",
+      "roster": [
+        "Garganacl",
+        "Gliscor",
+        "Moltres",
+        "Gholdengo",
+        "Kyurem",
+        "Alomomola"
+      ],
+      "sha256": "7794c89c9820deae771223f3a4fa2ad4d9854996629022397584e645f3a0894e",
+      "component_sources": [
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_6.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_9.txt",
+        "bot/teams/standin/team_13.txt"
+      ]
+    },
+    {
+      "id": "coherent-screening-07",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/coherent-sets/screening-teams-v1/07.txt",
+      "style": "balance",
+      "roster": [
+        "Tinkaton",
+        "Slowking-Galar",
+        "Hydrapple",
+        "Cinderace",
+        "Primarina",
+        "Zamazenta"
+      ],
+      "sha256": "1bef41729ad6832cf498ae82797bc0bd4c55d11770bee29e63b43f2126a7d979",
+      "component_sources": [
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_9.txt",
+        "bot/teams/standin/team_8.txt",
+        "bot/teams/standin/team_11.txt"
+      ]
+    },
+    {
+      "id": "coherent-screening-08",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/coherent-sets/screening-teams-v1/08.txt",
+      "style": "rain offense",
+      "roster": [
+        "Pelipper",
+        "Barraskewda",
+        "Zapdos",
+        "Gholdengo",
+        "Iron Crown",
+        "Primarina"
+      ],
+      "sha256": "412855b61868ae0a6abf76c7d31b96443fa43ac82c37ade01be14c3659bcfc34",
+      "component_sources": [
+        "existing hand-constructed weather component",
+        "existing hand-constructed weather component",
+        "bot/teams/standin/team_5.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_8.txt"
+      ]
+    },
+    {
+      "id": "coherent-screening-09",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/coherent-sets/screening-teams-v1/09.txt",
+      "style": "semistall",
+      "roster": [
+        "Blissey",
+        "Dondozo",
+        "Corviknight",
+        "Gliscor",
+        "Alomomola",
+        "Iron Crown"
+      ],
+      "sha256": "13f25651e1e3c03e29eb06cc6763520b40050498fa8fe3aba6b292e16f5a1a35",
+      "component_sources": [
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_13.txt",
+        "bot/teams/standin/team_13.txt"
+      ]
+    },
+    {
+      "id": "coherent-screening-10",
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-coherent-sets/evaluation/coherent-sets/screening-teams-v1/10.txt",
+      "style": "semistall",
+      "roster": [
+        "Toxapex",
+        "Weezing-Galar",
+        "Iron Treads",
+        "Clefable",
+        "Pecharunt",
+        "Weavile"
+      ],
+      "sha256": "3db56e40f0952949a1d869ab5e1e2129617c3ce1f72c41d145e42fff67bba7bf",
+      "component_sources": [
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_14.txt",
+        "bot/teams/standin/team_15.txt",
+        "bot/teams/standin/team_10.txt",
+        "bot/teams/standin/team_11.txt",
+        "bot/teams/standin/team_10.txt"
+      ]
+    }
+  ],
+  "provenance": {
+    "kind": "new synthetic rosters using known regression component sets",
+    "holdout_limit": "No independent external set holdout; roster combinations differ from frozen data-independent screening/confirmation pools. Source-wide usage overlap cannot be excluded.",
+    "reservation": "fixed before outcomes; no fitting on these team files",
+    "validator": "pinned local Gen9 OU TeamValidator"
+  }
+}

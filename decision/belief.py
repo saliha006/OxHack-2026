@@ -445,7 +445,8 @@ def _within(drop: tuple[int, int, bool], max_damage: int, maxhp: int) -> bool:
 
 def _to_set(c: CandidateSet) -> PokemonSet:
     return PokemonSet(moves=tuple(c["moves"]), item=c["item"] or "none", ability=c["ability"],
-                      tera_type=c["tera_type"], nature=c["spread"]["nature"], evs=tuple(c["spread"]["evs"]))
+                      tera_type=c["tera_type"], nature=c["spread"]["nature"], evs=tuple(c["spread"]["evs"]),
+                      ivs=tuple(c.get("ivs", [31] * 6)))
 
 
 def _fits(s: PokemonSet, mon: dict, rules: set[str]) -> bool:

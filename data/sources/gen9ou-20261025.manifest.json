@@ -1,0 +1,13 @@
+{
+  "url": "https://play.pokemonshowdown.com/data/sets/gen9ou.json",
+  "snapshot_date": "2026-10-25",
+  "sha256": "898612165656b5969ef7fbecd764faf8a623039a27eaa2f912c16881b3fba087",
+  "encoding": "normalized JSON snapshot of fetched response",
+  "role": "coherent per-species templates, not full-team exports or complete-set frequencies",
+  "citation": "Pokemon Showdown / Smogon set data",
+  "dex_species": 108,
+  "dex_roles": 203,
+  "stats_species": 75,
+  "overlap_species": 65,
+  "use": "offline importer; unknown stats-section Tera uses explicitly labelled usage fallback"
+}

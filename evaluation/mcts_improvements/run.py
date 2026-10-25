@@ -128,7 +128,7 @@ def freeze_arm(root, priors, config):
 
 
 def freeze_manifest(a_root, b_root, priors, teams, simulator, *, games=60, seed=2026102501,
-                    concurrency=4, a_config=None, b_config=None, max_turns=600, phase='screening'):
+                    concurrency=4, a_config=None, b_config=None, max_turns=600, phase='screening', b_priors=None):
     team_manifest_path = Path(teams).resolve()
     team_manifest = json.loads(team_manifest_path.read_text())
     records = team_manifest['teams']
@@ -149,7 +149,7 @@ def freeze_manifest(a_root, b_root, priors, teams, simulator, *, games=60, seed=
                 'team_provenance':team_manifest['provenance'],
                 'simulator':{'root':str(sim_root), 'commit':sim_git, 'effective_js_sha256':simulator_identity(sim_root)},
                 'a':freeze_arm(a_root,priors, DEFAULT_CONFIG | (a_config or {})),
-                'b':freeze_arm(b_root,priors, DEFAULT_CONFIG | (b_config or {})),
+                'b':freeze_arm(b_root,b_priors or priors, DEFAULT_CONFIG | (b_config or {})),
                 'schedule':balanced_schedule(len(records),games,seed),
                 'stopping_rule':{'games':games, 'max_turns':max_turns,
                     'censored_turn_limit':'void, never counted as a played draw or silently dropped',
@@ -345,6 +345,7 @@ def main():
         freeze.add_argument('--'+name,required=True,type=Path)
     freeze.add_argument('--a-config',default='{}')
     freeze.add_argument('--b-config',default='{}')
+    freeze.add_argument('--b-priors',type=Path,help='optional independent frozen prior for arm B')
     freeze.add_argument('--games',type=int,default=60)
     freeze.add_argument('--seed',type=int,default=2026102501)
     freeze.add_argument('--concurrency',type=int,default=4)
@@ -357,7 +358,7 @@ def main():
     if args.command=='freeze':
         manifest=freeze_manifest(args.a_root,args.b_root,args.priors,args.teams,args.simulator,
             games=args.games,seed=args.seed,concurrency=args.concurrency,a_config=json.loads(args.a_config),
-            b_config=json.loads(args.b_config),max_turns=args.max_turns,phase=args.phase)
+            b_config=json.loads(args.b_config),max_turns=args.max_turns,phase=args.phase,b_priors=args.b_priors)
         write_json(args.output,manifest)
         print(manifest['manifest_sha256'])
     else:
