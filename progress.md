@@ -38,6 +38,8 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
+| 2026-10-25 03:30 | @derrick | @all | 🔀 scope proposal | **Backtesting engine + dashboard: @derrick wants it and builds it** (answers @saliha's 23:27 row). The engine pipes data to the strat layer untouched, from our own run logs and Nate's Tiger `turns`; it lives in `backtest/`. Nothing on `main` yet. Object or ask here | 2026-10-25 03:30 |
+| 2026-10-25 03:30 | @derrick | @saliha | 📨 waiting on | Add Derrick's four backtest decisions (entry 2026-10-25 03:30) to PRD NOW and take "Backtesting frontend" out of Pending | 2026-10-25 03:30 |
 | 2026-10-25 03:00 | @nate | @derrick | ⚠️ conflict | **Training data for your model is in Tiger `turns`**: 489,840 turns from 20,000 games, each `state` identical to `states_from_log`; spec, access with your read-only login, splits and baselines in `contracts/turns.md`. Bar to beat on test: HP-heuristic log loss **0.6407**, Brier **0.2246**. Also: `belief.py` `_rebuild` drops status moves on Choice items, but only Assault Vest bars them (Choice Scarf + Trick); a species missing from the set file entirely (e.g. `urshifu`) still raises KeyError in `Belief.__init__`; `predictions.md` A1 credits the set file to saliha | 2026-10-25 03:00 |
 | 2026-10-25 03:00 | @nate | @saliha | ⚠️ conflict | `data/set_candidates.json` is on `main`, so `--priors data/set_candidates.json` (your default) now runs real priors: 243 species + 78 forme aliases (`keldeoresolute → keldeo`, `zamazentacrowned → zamazenta`), which answers the forme row from the data side. Your parser skips old HP strings like `20/100y` (one fact lost per such line) | 2026-10-25 03:00 |
 | 2026-10-25 00:32 | @saliha | @derrick | 🔀 scope proposal | **Decision-layer plan from research pass 10** (`design-decision/strategy-research-pass10.md` on `context`): 4 specialist agents + a cross-check, peer-reviewed + official source + our own measurements. Core ~4.5 h: (1) instrumentation, (2) the two `belief.py` crash fixes + a floor (these caused the 12.7% fallbacks), (3) dual-path featurizer, (5) logistic `LearnedValue` behind a flag with HP fallback; stretch: switch share + quantal opponent model, then pool/depth-2/LP default-off. All your call; key measured facts: one-ply dominance drops Swords Dance and the top-3 EVs on our test position are 0.503/0.501/0.497, so the HP value is the weak point | 2026-10-25 00:32 |
@@ -61,7 +63,7 @@ whenever you log an entry.
 |---|---|---|---|---|---|
 | Saliha | `saliha006` | Bot layer; doc owner | `sali` | `bot/`, `runs/` (git-ignored) | bot plays live games through `Agent.choose`; next: task 5 eval harness |
 | Nate | `aldrichbanas07` | Data layer | `nate-data` | `data/` (`data/pipeline/`, `data/tests/`, `data/set_candidates.json`; `data/raw/` and `data/clean/` git-ignored), `contracts/turns.md`, the Tiger service `oxhack-data` | set file and turns table done; next: team-conditioned priors (A6) after the demo |
-| Derrick | `RandomGeeb` | Decision layer | `derrick` | `decision/`, `tests/`, `contracts/battle_state.py` | feature 11 built on `derrick`; tasks 3–4 wait on the parser and set candidates |
+| Derrick | `RandomGeeb` | Decision layer | `derrick` | `decision/`, `tests/`, `contracts/battle_state.py` | lead and belief fixes on `main`; building the backtest engine on `derrick` (Tiger dump done) |
 | Kenar | `kxnar` | TBD | TBD | TBD | joined 2026-10-25; getting set up |
 
 **Shared** (anyone may edit; flag it in ⚠️ Conflicts): {{e.g. `contracts/*`, `fixtures/*`, compose files}}
@@ -82,6 +84,16 @@ whenever you log an entry.
 ---
 
 ## Log (newest first)
+
+### 2026-10-25 03:30 — decision — Backtest engine started: Tiger's turns on disk, and four decisions on how it takes data — @derrick
+- **Where:** `derrick` @ `78453b9` · merged to `main`: not yet
+- **Did:** `backtest/tiger.py` copies Tiger `turns` verbatim to `runs/tiger/turns.jsonl` (git-ignored; 489,840 rows, 3.05 GB) with `uv run --group data --env-file .env python -m backtest.tiger`. The pull takes ~5–7 min because the venue network caps at ~9–10 MB/s, shared by everything (measured: a second Tiger stream and a non-Tiger download both split it; client CPU 5%, server work ~60 s). Reading the file back takes ~20 s. 152 tests green on `derrick`.
+- **Decided:** (1) the engine never modifies or substitutes data: it only ingests it and pipes it to the strat layer; (2) `psycopg[binary]` (3.3.6) in a `data` dependency group, so the default install doesn't pull it in; (3) Tiger is pulled once to a local file, not streamed on every run; (4) Tiger rows feed both predictions and move choice, with our side's request built from set candidates (where and how is still open). All @derrick's.
+- **Touched:** `backtest/` (new), `tests/test_tiger.py`, `pyproject.toml`, `uv.lock`
+- **⚠️ Conflicts:** @nate: the dump reads every column of `turns` as it is today; say before a rebuild changes them. @saliha: none yet (the engine will read `bot.parser`, without changing it)
+- **📨 Needs:** @saliha: decisions (1)–(4) into PRD NOW (Open board row)
+- **Agreed by:** @derrick (owner per PRD Pending); the team hears via the 🔀 row To @all
+- **Status:** open
 
 ### 2026-10-25 03:00 — feat — Set file with forme aliases, all 2.5M replays in Tiger, and a 20k-game turn table — @nate
 - **Where:** `nate-data` @ `ad5ba10` · merged to `main`: yes (fast-forward)
