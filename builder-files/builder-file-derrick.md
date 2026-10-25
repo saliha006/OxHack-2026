@@ -1,3 +1,5 @@
+> **Current-status correction — 25 October 2026.** Current branch: replay-backtest CLI, Tiger dump and choose_public are implemented on derrick; main remains one-ply. Recorded agreement is not win rate. Earlier pass-9 task ordering is historical; consult current progress before taking work. See [current branch status](../CURRENT-STATUS.md) and [data/training context](../DATA-CONTEXT.md).
+
 # Derrick: Decision layer (state intake, belief over opponent sets, simulate, value, selector, fallback)
 **GitHub:** `RandomGeeb` · **Branch:** `derrick` · **Tool:** Claude Code · **Brief last updated:** 2026-10-24 21:10 UTC by saliha
 **Spec:** the PRD (`OxHack-2026-PRD.md`) and `design-decision/*.md`. A bare § means the PRD; CLAUDE.md and this brief's own sections are always named.

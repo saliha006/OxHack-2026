@@ -1,3 +1,5 @@
+> **Current-status correction — 25 October 2026.** Current implementation: main has the live bot, one-ply engine, real priors and Tiger pipeline; Kenar-mcts defaults to MCTS; Derrick has a replay-backtest CLI with no frontend; coherent priors remain opt-in. Earlier deadlines, pending storage choices and pass-9 task ordering below are historical, not the current task board. See [current branch status](CURRENT-STATUS.md) and [data/training context](DATA-CONTEXT.md).
+
 # OxHack-2026: Product Requirements Document
 *OxHack 26 · HRT: Best Use of Data for Predictions & Decision Making · repo: https://github.com/saliha006/OxHack-2026 · v3 · 2026-10-24*
 *Links: `CLAUDE.md` (how we work) · `builder-file-<name>.md` (who builds what, in build order) · the research doc (evidence; `[P9]` = pass 9) · `contracts/` (exact interfaces)*

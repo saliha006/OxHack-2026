@@ -1,3 +1,5 @@
+> **Current-status correction — 25 October 2026.** Live parser/player, demo, traces and evaluation harness are implemented. Main and Kenar branch search defaults differ. Earlier Rust/startup/smoke task ordering below is historical; consult live progress for assignments. See [current branch status](../CURRENT-STATUS.md) and [data/training context](../DATA-CONTEXT.md).
+
 # Saliha: Bot layer (Showdown connection, log parser to BattleState, request handling, eval harness, demo) + doc owner
 **GitHub:** `saliha006` · **Branch:** `sali` · **Tool:** Claude Code · **Brief last updated:** 2026-10-24 21:10 UTC by saliha
 **Spec:** the PRD (`OxHack-2026-PRD.md`) and `design-decision/*.md`. A bare § means the PRD; CLAUDE.md and this brief's own sections are always named.

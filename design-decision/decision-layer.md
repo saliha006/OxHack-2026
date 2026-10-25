@@ -1,3 +1,5 @@
+> **Current-status correction — 25 October 2026.** Implemented backend differs by branch: main/Derrick use one-ply; Kenar-mcts defaults to native MCTS. Real candidate loading, state reconstruction, deadline workers and branch-specific reliability fixes exist. Read current-status for defaults and measured results; the older decision design below is historical where it conflicts. See [current branch status](../CURRENT-STATUS.md) and [data/training context](../DATA-CONTEXT.md).
+
 # Decision layer
 
 > **DRAFT, not team-agreed.** Back to the map: [DESIGN.md](DESIGN.md).

@@ -1,3 +1,5 @@
+> **Historical feature design.** For implemented branch-specific behavior and current evidence, read [CURRENT-STATUS.md](../../CURRENT-STATUS.md) and [DATA-CONTEXT.md](../../DATA-CONTEXT.md) first.
+
 # Special requests
 
 > Back to: [decision-layer.md](../decision-layer.md#7-feature-checklist). Status: 🟡 built on `derrick`, not merged; *Done when* waits on the parser.

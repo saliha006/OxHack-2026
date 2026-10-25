@@ -1,87 +1,41 @@
-# Gen 9 OU battle agent: design overview
+# Gen 9 OU battle agent: implemented architecture
 
-> **DRAFT, not team-agreed.** The three-layer split is still Pending in the PRD → §0 NOW (owner saliha; needs Nate and
-> Derrick, CLAUDE.md §2c). Nothing here is a decision until it shows up in PRD → NOW → Decisions in force.
+Source audit: 25 October 2026. [CURRENT-STATUS.md](../CURRENT-STATUS.md) pins branch heads, defaults, measured results and local-only boundaries. This replaces the early three-layer draft; unimplemented research proposals remain proposals.
 
-A decision-making agent that plays Pokémon Showdown **Gen 9 OU** (`gen9ou`). Each turn it reads the battle log, works out
-what the opponent probably has and will do, simulates the options, and picks the move with the best expected outcome.
+| Layer/workstream | Implemented responsibility | Source/status |
+|---|---|---|
+| [Bot](bot-layer.md) | Showdown connection, public-state parser, live choices, traces, demo, evaluation | bot/, main and code branches |
+| [Data](data-layer.md) | HolidayOugi cleaning, Parquet/DuckDB, Tiger tables, marginal priors | data/pipeline/, main/data branches |
+| [Decision](decision-layer.md) | Belief, reconstruction, legal actions, simulation/search, choice | One-ply on main/Derrick; MCTS default on Kenar-mcts |
+| [Prediction](predictions.md) | Observed-state win model; belief/root-action scoring | prediction/, Kenar-mcts; separate from search |
+| [Replay backtest](backtesting.md) | Tiger JSONL → request-free choices → recorded-action agreement | backtest/, Derrick only; CLI/no frontend |
+| [Coherent priors](coherent-sets.md) | Validated role/usage mixture, IV-aware candidates, reveal and battle screening | Kenar-coherent-sets; opt-in after 25–35 screening |
 
-This file is the map. Each layer has its own doc:
+## Data flow
 
-| Layer | Doc | Owns | Question it answers |
-|---|---|---|---|
-| **Data** | [data-layer.md](data-layer.md) | Sources, ingestion, storage, offline priors, training sets | "What has happened in past games, and who played them?" |
-| **Decision** | [decision-layer.md](decision-layer.md) | Belief, opponent policy, simulate, value, action selector | "Given this state, what should we do?" |
-| **Bot** | [bot-layer.md](bot-layer.md) | Showdown connection, log parsing, state, sending choices | "What is the state right now, and how do we act on it?" |
-
----
-
-## 1. How the layers fit
-
-```
-             OFFLINE                                   ONLINE (per turn)
- ┌─────────────────────────────┐        ┌──────────────────────────────────────────┐
- │ DATA LAYER                  │        │ BOT LAYER                                │
- │ replays · ladder · chaos    │        │ Showdown socket → log lines → observe()  │
- │   → ClickHouse              │        │            │                 ▲           │
- │   → set candidates + priors ├──┐     │      BattleState          Choice         │
- │   → training sets ─┐        │  │     └────────────┼─────────────────┼───────────┘
- └────────────────────┼────────┘  │                  ▼                 │
-                      ▼           │     ┌──────────────────────────────┴───────────┐
-           Python training        └────►│ DECISION LAYER                           │
-           (opp policy, value) ────────►│ belief → oppPolicy → simulate → value    │
-             exported models            │        → action selector                 │
-                                        └──────────────────────────────────────────┘
+```text
+Historical replays → Parquet/DuckDB → Tiger + parser-produced turns
+Chaos statistics → weighted candidate JSON ──────────────┐
+                                                        ↓
+Showdown ↔ poke-env player → Parser → BattleState + request → Agent → legal choice
+                                                          ├ main: one-ply EV/HP
+                                                          └ Kenar: native MCTS/worlds
+Traces + recorded turns → offline prediction/diagnostics/evaluation reports
 ```
 
-- **Data → Decision** happens offline, through artifacts: set candidates + prior weights per species, and the trained
-  model files. The decision layer never queries ClickHouse in the middle of a turn.
-- **Bot ↔ Decision** happens online, through two types: `BattleState` in, `Choice` out. That seam lets each side be
-  built and tested on its own (replay a log into the decision layer; drive the bot with a random chooser).
+Online search reads offline candidate artifacts, not Tiger on every turn. No ClickHouse deployment is implemented. Native MCTS has no learned value plugged in.
 
-## 2. Seams (the contracts between layers)
+## Implemented seams
 
-Exact shapes go in `contracts/` once agreed. For now these are just their names and who produces them.
+| Seam | Actual interface | Caveat |
+|---|---|---|
+| Bot → decision | Agent(priors).choose(request, battle_state) → str or None | Branch-specific backends/defaults; wait returns None |
+| Parser → consumers | Parser(us).feed(line), snapshot(), states_from_log(log_lines, us) | Replay snapshots lack private requests/hidden sets |
+| Data → belief | SetCandidates.load(path), data/set_candidates.json | Implementation/tests are ahead of stale set-contract prose |
+| Decision → trace | agent.last_trace on MCTS; bot JSONL state/choice/timing/fallback | Native root support is not calibrated P(win); branch schemas differ |
+| Tiger → offline | contracts/turns.md; joins on id and started_at | Actions/post-turn/winner are labels, not serving features |
+| Replay → decision | Derrick choose_public(battle, our_sets) | Branch-only, fixed-trajectory action agreement |
 
-| Seam | Producer → consumer | What crosses | Status |
-|---|---|---|---|
-| `BattleState` | Bot → Decision | Actives, HP %, status, boosts, field, hazards, revealed info, request type | Drafted: `contracts/battle-state.md` |
-| `Choice` | Decision → Bot | `move N`, `move N terastallize`, `switch N`, team order | `agent.choose()` returns it as a string |
-| Set candidates + priors | Data → Decision | Per species: top 20–50 sets with weights, plus an "other" bucket from marginals | Drafted: `contracts/set-candidates.md` |
-| Model artifacts | Python training → Decision | Opponent policy, value model | 🟠 export format not decided |
-| Battle rows | Ingestion → ClickHouse | `battles` keyed on replay id; `players` from ladder snapshots | 🟠 schema not decided |
+## Completed and remaining
 
-## 3. Stack (as proposed)
-
-- **Python** throughout. The decision layer runs on `poke-engine` 0.0.48 (built, on `main`); it replaced the earlier TypeScript `@pkmn/sim` idea.
-- **Bot framework:** poke-env 0.16.1 on gen9ou, local server (decided 2026-10-24, research pass 8).
-- **Storage:** 🟠 pending (ClickHouse vs lighter files).
-
-The stack's home is PRD §12.
-
-## 4. Build order (by layer)
-
-| Stage | What | Layer | Done when |
-|---|---|---|---|
-| 1 | Log parser + state representation | Bot | Plays against a local Showdown server |
-| 2 | Simulator wrapper over `@pkmn/sim` / `@smogon/calc` for one-turn outcomes | Decision | Given state + both actions + a set, returns the next state |
-| 3 | Strategy layer with dumb models: uniform opp policy, HP-based value | Decision | Plays legal games end to end |
-| 4 | Belief layer: chaos priors + hard filter, then soft reweight | Decision (+ Data for priors) | Candidate sets narrow as info is revealed |
-| 5 | Trained opponent policy, then value model | Data → Decision | Beats the stage-3 bot over N games ({{N}}) |
-
-**Next up: stages 3–4.** The open questions are in [decision-layer.md §6](decision-layer.md#6-open-decisions).
-
-## 5. Scope for v1
-
-- **Learned:** opponent action distribution; state value / win probability.
-- **Computed, not learned:** hidden sets (lookup + Bayes), damage / KO chance, turn order.
-- **Left open in v1:** exact EVs/nature (assume a common spread), exact HP (use %), crits/secondaries (expected value),
-  per-player style, look-ahead beyond 1–2 turns, merging alts.
-- **Time-boxed fallback:** a heuristic value (HP + Pokémon remaining + rating prior), with all the learning effort on
-  the opponent action model.
-
-## 6. Open questions across layers
-
-- How does this bot relate to the PRD's lead idea (Momentum: win probability + coach-style replay review)? Is the value
-  model shared between them? Owner saliha.
-- Who owns which layer? (→ `progress.md` 👥 Team once agreed.)
+Parser, simulator, live handling, legacy strategy, real priors and ingestion are built. MCTS/prediction exist on Kenar branches; integration into main is not implied. No general strength gain has been established by the small studies. Roster-conditioned priors, learned search evaluation, adaptive allocation, maximin LP and coach review remain unimplemented or unverified. The old stage-3/4 TODOs and TypeScript simulator plan no longer describe the code.

@@ -1,9 +1,52 @@
 # Bot layer
 
-> **DRAFT, not team-agreed.** Back to the map: [DESIGN.md](DESIGN.md).
+> **Implementation audit: 25 October 2026.** Read [CURRENT-STATUS.md](../CURRENT-STATUS.md) for the exact branch
+> snapshot and measured evidence. Back to the map: [DESIGN.md](DESIGN.md).
 
 **Job:** connect to a Showdown server, turn the battle log into a structured `BattleState`, ask the decision layer for
-a `Choice`, and send it. It holds no strategy. **Stage 1** is done when it plays full games against a local Showdown server.
+a choice string, and send it. Strategy lives in the decision layer. Local complete-game play is implemented;
+the protocol discussion below is retained as a historical reference, not a claim that every listed mechanic is
+fully represented by our parser.
+
+
+## Current implementation (25 October 2026)
+
+The bot layer is shipped on `main` at `bbb95d6`, not a proposed skeleton:
+
+- **Connection and decisions:** `bot.player.AgentPlayer` uses **poke-env 0.16.1**, feeds raw protocol lines to our
+  `Parser`, and creates one decision `Agent` per battle. Each new request calls `agent.choose(request, snapshot)`.
+  It logs raw battle lines, JSONL decisions with public state and think time, and decision errors. Rejected
+  requests retry with a legal fallback, then `default`; outer message failures also have a default-choice path.
+- **Seams are implemented:** `contracts/battle_state.py` defines public state and last-turn events;
+  `decision.actions.Action.to_choice()` emits choices. A wait produces no choice. Parser output and the private
+  request remain separate inputs, rather than replacing the private request with a merged public-only state.
+- **Smoke and demo:** `bot.smoke` runs complete local games against RandomPlayer. `bot.demo live` streams decisions
+  to the terminal and prints a local Showdown spectator URL; `bot.demo replay` renders a saved JSONL trace offline.
+  This is a terminal/live-client demo, not a shipped coaching dashboard.
+- **Evaluation:** `bot.eval` supports seeded, sharded, resumable pairings, belief/uncertainty ablations,
+  Random/MaxBasePower/SimpleHeuristics baselines and optional separately installed Foul Play bots. Reports include
+  win rate, Wilson and team-bootstrap intervals, fallback rates and latency, plus internal Bradley–Terry ratings.
+  A scheduled pairing or fitted internal rating is not a measured public-ladder result.
+- **Defaults differ by branch:** `main` still uses legacy one-ply `Agent` with five belief scenarios, uniform
+  opponent replies and HP/alive value. Pushed `Kenar-mcts` at `2c02fc8` defaults its Agent, smoke and demo to MCTS
+  (8 hidden worlds ×150ms, one native thread, 3s Agent budget); legacy one-ply remains selectable and old evaluation
+  arms remain available. Further local MCTS corrections and opt-in policies are documented in CURRENT-STATUS.
+- **Demonstration has limits:** the legacy progress log records 10/10 RandomPlayer smoke wins with **12.7%**
+  fallbacks before later belief fixes. Treat that as a dated plumbing result, not present reliability or evidence
+  of strong-opponent performance. Team-derived exact priors are a smoke option and can reveal the answer in a
+  mirror match. Use the branch-specific evaluation artifacts for current measured comparisons.
+
+Pinned sources: [player/session integration](https://github.com/saliha006/OxHack-2026/blob/bbb95d60fb57a01497aae370d8ca922c275bb79d/bot/player.py),
+[parser](https://github.com/saliha006/OxHack-2026/blob/bbb95d60fb57a01497aae370d8ca922c275bb79d/bot/parser.py),
+[demo](https://github.com/saliha006/OxHack-2026/blob/bbb95d60fb57a01497aae370d8ca922c275bb79d/bot/demo.py),
+[evaluation](https://github.com/saliha006/OxHack-2026/blob/bbb95d60fb57a01497aae370d8ca922c275bb79d/bot/eval.py),
+[MCTS-default Agent](https://github.com/saliha006/OxHack-2026/blob/2c02fc8daa84f047ea2bddd7d0f36f6463fff1e2/decision/agent.py),
+[MCTS smoke flags](https://github.com/saliha006/OxHack-2026/blob/2c02fc8daa84f047ea2bddd7d0f36f6463fff1e2/bot/smoke.py).
+
+**Remaining scope:** independently validated team-pool/demo selection and any public-ladder deployment require
+separate evidence. The request-free Tiger replay backtest is on Derrick's branch and is a CLI; see
+[Backtesting](backtesting.md). Historical unchecked choices below are superseded where the current source answers
+them. Unimplemented product features stay pending.
 
 ---
 
@@ -198,10 +241,10 @@ gets its own `|request|` JSON and exact HP for its own team.
 | Group | Fields |
 |---|---|
 | Actives | Species / forme, HP %, status, boosts |
-| Field | Weather, terrain, hazards per side, screens, {{…}} |
-| Revealed info | Per opp Pokémon: moves, item, ability, Tera seen so far; implied-item hints (Choice lock, Boots, no Leftovers heal) |
+| Field | Weather, terrain, hazards per side, screens, field/side effects and observed durations |
+| Revealed info | Per Pokémon: observed moves, item, ability, Tera; decision-layer belief derives guarded item inferences from public events |
 | Players | Names, start Elo (`|player|` line) |
-| Request | Type (team preview / move / forced switch / wait) and legal options |
+| Request (separate input) | poke-env supplies the private request; decision/actions.py derives legal options |
 
 HP is a **percentage** in v1 (the opponent's exact HP is hidden anyway).
 
@@ -214,19 +257,23 @@ HP is a **percentage** in v1 (the opponent's exact HP is hidden anyway).
 | Forced switch | `switch N` | The opponent doesn't act |
 | Wait | Nothing | |
 
-## 4. Open decisions
+## 4. Historical skeleton choices: current resolution
 
-These match the "four bot-skeleton choices" pending in PRD → §0 NOW:
-- ✅ **Framework (2026-10-24):** poke-env 0.16.1 with our own parser over its raw lines; own websocket client is the fallback (research pass 8).
-- 🟠 **What the bot passes on:** the merged state only, or the state plus this turn's raw events? (Decision layer Q7.)
-- ✅ **Server:** local first; the public ladder is a stretch that needs bot registration.
-- ✅ **Format:** gen9ou. Random battles use role-based sets that don't match our gen9ou priors.
-- 🟠 **Bot ↔ decision contract:** the `BattleState` / `Choice` shapes ([DESIGN.md §2](DESIGN.md#2-seams-the-contracts-between-layers)).
-- ✅ **Our team:** one fixed validated team; opponents from a seeded pool (Nate's task 6).
+The earlier PRD skeleton checklist is superseded by source for the following items:
+
+- **Framework:** poke-env 0.16.1 plus our own parser over raw lines.
+- **State and events:** `Agent.choose(request, battle)` receives a public `BattleState`, including ordered
+  `last_turn` events, separately from the private request. The contract and adapter exist.
+- **Server and format:** local Showdown, gen9ou. Public-ladder deployment remains a separate scope item.
+- **Teams:** smoke/evaluation support the committed stand-in team(s), a team file/folder and optional priors
+  derived from those teams. A planned 60-team pool or final chosen demo team is not proven by those flags alone.
+- **Serving behavior:** record errors and fall back so a decision failure does not leave the battle unanswered;
+  MCTS branch workers add search isolation and trace fields described in CURRENT-STATUS.
 
 ## 5. Sources (ledger)
 
-> Copy to the research doc once its path is set (CLAUDE.md §10). No community pass yet.
+> Historical protocol research ledger, checked 24 October 2026. Upstream master links below are moving references;
+> current implementation claims are supported by the pinned repository sources above.
 
 | Source | Verdict | Supports |
 |---|---|---|

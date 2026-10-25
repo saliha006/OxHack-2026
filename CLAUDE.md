@@ -1,3 +1,5 @@
+> **Current-status correction — 25 October 2026.** Current branch/data authority: CURRENT-STATUS.md and DATA-CONTEXT.md. Kenar works on Kenar-mcts and Kenar-coherent-sets; role is MCTS/search, prediction and set-prior experiments. Data storage is Parquet/DuckDB plus Tiger/Postgres. Earlier startup/team/status and task-order text below is historical where superseded. See [current branch status](CURRENT-STATUS.md) and [data/training context](DATA-CONTEXT.md).
+
 # OxHack-2026 — Working Charter
 
 A Pokémon Showdown Gen 9 OU battle agent that turns usage stats and replays into predictions (the opponent's hidden sets, the chance of winning) and uses them to choose every move, with its win rate measured against standard baseline bots. *(Mirror of PRD §1; change both together.)*

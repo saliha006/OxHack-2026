@@ -1,3 +1,5 @@
+> **Current-status correction — 25 October 2026.** Real usage candidates and loader are built. Kenar-mcts has public-state prediction tools and completed small offline studies; those models are not integrated into search. Reliable belief and coherent-template variants exist on separate branches; results do not establish a prediction or strength gain. The old table below is retained as a historical research proposal, not current feature status. See [current branch status](../CURRENT-STATUS.md) and [data/training context](../DATA-CONTEXT.md).
+
 # Predictions
 
 > **DRAFT, not team-agreed** (Derrick, 2026-10-24). Back to [decision-layer.md](decision-layer.md).
