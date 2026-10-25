@@ -1,4 +1,5 @@
 from data.pipeline.reveal_evidence import extract
+import pytest
 
 START='''|poke|p1|Gholdengo, L100|
 |poke|p2|Dondozo, L100|
@@ -79,3 +80,13 @@ def test_transformed_history_stays_censored_after_switch():
 '''
     rows=list(extract(log,'fixture'))
     assert not next(r for r in rows if r['field']=='item')['native_set_evidence']
+
+
+def test_export_does_not_delete_another_exports_partial_file(tmp_path):
+    from data.pipeline.reveal_evidence import export_jsonl
+    source=tmp_path/'source.jsonl';source.write_text('')
+    output=tmp_path/'out.jsonl';part=tmp_path/'out.jsonl.part'
+    part.write_text('another active export')
+    with pytest.raises(FileExistsError): export_jsonl(source,output)
+    assert part.read_text()=='another active export'
+    assert not output.exists()

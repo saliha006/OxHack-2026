@@ -116,8 +116,10 @@ def export_jsonl(input_path, output):
     output.parent.mkdir(parents=True,exist_ok=True)
     part = output.with_name(output.name+'.part')
     counts, battles = Counter(), set()
+    created = False
     try:
         with input_path.open() as source, part.open('x') as sink:
+            created = True
             for line in source:
                 battle=json.loads(line)
                 ident=(battle['battle_id'],battle.get('started_at'))
@@ -130,7 +132,8 @@ def export_jsonl(input_path, output):
                     counts['native_set_evidence']+=record['native_set_evidence']
         part.rename(output)
     except BaseException:
-        part.unlink(missing_ok=True)
+        if created:
+            part.unlink(missing_ok=True)
         raise
     report = {'battles':len(battles),'counts':dict(counts),'input_sha256':file_sha256(input_path),
               'extractor_sha256':file_sha256(__file__), 'public_parser_sha256':file_sha256(public_parser.__file__),

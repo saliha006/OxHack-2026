@@ -64,12 +64,12 @@ def import_bank(document, priors):
                             raise ValueError('no Tera fallback for incomplete template')
                     else:
                         teras = choices(template.get('teraType', template.get('teratypes')))
-                    expanded = list(product(*[choices(m) for m in slots], choices(template['item']),
-                                            choices(template['ability']), choices(template['nature']), teras))
-                    if len(expanded) > 2048:
+                    axes = [*[choices(m) for m in slots], choices(template['item']),
+                            choices(template['ability']), choices(template['nature']), teras]
+                    if math.prod(map(len, axes)) > 2048:
                         raise ValueError('too many alternatives; avoid silent truncation')
                     valid = []
-                    for variant in expanded:
+                    for variant in product(*axes):
                         *moves, item, ability, nature, tera = map(to_id, variant)
                         if len(set(moves)) != len(moves):
                             continue
@@ -80,6 +80,7 @@ def import_bank(document, priors):
                         candidate = dict(weight=1., moves=moves, item='' if item in ('nothing','none') else item,
                                          ability=ability, tera_type=tera, spread={'nature': nature, 'evs': evs}, ivs=ivs)
                         valid.append(candidate)
+                    valid = list({key(candidate): candidate for candidate in valid}.values())
                     if not valid:
                         raise ValueError('no valid variants')
                     for i, candidate in enumerate(valid):

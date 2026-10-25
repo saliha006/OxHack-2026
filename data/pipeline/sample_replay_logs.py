@@ -14,8 +14,10 @@ def sample(env_file, output, per_split=100, seed='coherent-v1'):
     output.parent.mkdir(parents=True, exist_ok=True)
     part = output.with_name(output.name+'.part')
     selected, missing, hashes = [], [], []
+    created = False
     try:
         with connect(env_file, timeout_ms=120000) as conn, conn.cursor() as cur, part.open('x') as sink:
+            created = True
             for split in ('train','test'):
                 cur.execute('''SELECT battle_id, started_at FROM public.turns WHERE turn=1 AND split=%s
                     ORDER BY md5(battle_id || started_at::text || %s), battle_id, started_at LIMIT %s''',
@@ -38,7 +40,8 @@ def sample(env_file, output, per_split=100, seed='coherent-v1'):
             conn.rollback()
         part.rename(output)
     except BaseException:
-        part.unlink(missing_ok=True)
+        if created:
+            part.unlink(missing_ok=True)
         raise
     manifest={'source':'Tiger turns/battle_logs/battles','source_label':'public_ladder','human_status':'unverified',
               'read_only':True,'sample_seed':seed,'per_split_limit':per_split,'selected':selected,'missing':missing,

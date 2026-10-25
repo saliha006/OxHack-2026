@@ -77,3 +77,16 @@ def test_invalid_stats_are_rejected_and_reported():
     doc=document(); doc['dex']['Gholdengo']['Bulky']['evs']={'hp':252,'def':252,'spe':252}
     bank=import_bank(doc,prior())
     assert not bank['records'] and 'EV sum' in bank['rejected'][0]['reason']
+
+
+def test_duplicate_alternative_does_not_increase_its_mass():
+    doc=document();doc['dex']['Gholdengo']['Bulky']['item']=['Air Balloon','Air Balloon','Leftovers']
+    bank=import_bank(doc,prior())
+    assert len(bank['records'])==2
+    assert [r['variant_weight'] for r in bank['records']]==[.5,.5]
+
+
+def test_alternative_limit_is_checked_before_expansion():
+    doc=document();doc['dex']['Gholdengo']['Bulky']['moves']=[['Shadow Ball']*100]*4
+    bank=import_bank(doc,prior())
+    assert not bank['records'] and 'too many alternatives' in bank['rejected'][0]['reason']
