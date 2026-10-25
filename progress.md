@@ -77,12 +77,20 @@ whenever you log an entry.
 4. {{Access to the deploy target, data and secrets: where each lives. Never in git or chat}}
 
 ## 📊 Latest (volatile facts live only here)
-- **As of 2026-10-25 00:46:** `main` @ `4e9bcf1` · tests: 144 green, 100% coverage (`uv run pytest --cov=decision`) · smoke: 10/10 games vs RandomPlayer finished unattended, 10 won, think p50 ~65 ms / p99 ~300–700 ms, fallback rate 12.7% (all from the two `belief.py` bugs, Open board) · deploy: none yet
-- **On branches, not merged yet:** @derrick `derrick` @ `a50936e`: feature 11 (type-matchup lead), 144 tests green, 100% coverage
+- **As of 2026-10-25 00:58:** `main` @ `4e88dac` · tests: 148 green, 100% coverage (`uv run pytest --cov=decision`) · smoke: 10/10 games vs RandomPlayer finished unattended, 10 won, think p50 ~65 ms / p99 ~300–700 ms, fallback rate 12.7% (all from the two `belief.py` bugs, Open board) · deploy: none yet
+- **On branches, not merged yet:** none from @derrick
 
 ---
 
 ## Log (newest first)
+
+### 2026-10-25 00:58 — feat — Type-matchup lead is on main; all of derrick's code is now on main — @derrick
+- **Where:** `derrick` @ `a50936e` · merged to `main`: yes (cherry-picked as `4e88dac`; `derrick` and `main` share no history, so a merge was refused and would have brought the old doc commits along)
+- **Did:** Team preview now sends the lead with the best average STAB type edge against their six (`decision/lead.py`), as PRD → NOW records. `derrick` stops tracking the shared docs (main's ignore rules plus `design/`), so nothing doc-shaped can reach `main` from it. 148 tests, 100% coverage.
+- **Touched:** `decision/lead.py`, `decision/data/typechart.json`, `decision/agent.py`, `decision/actions.py`, `tests/test_lead.py`, `tests/test_agent.py`
+- **Brief task:** feature 11 (lead) → ✅ done
+- **⚠️ Conflicts:** @saliha: team preview no longer sends `team 123456`; the lead depends on their six, so eval/demo runs may lead differently than before
+- **📨 Needs:** none
 
 ### 2026-10-25 00:46 — fix — Belief no longer crashes on Ruination or an empty belief; contradicted sets are floored — @derrick
 - **Where:** `derrick` @ `e683a12`, `5a2b9d8`, `4e9bcf1` · merged to `main`: yes (cherry-picked: `b371346`, `03a3203`, `4e9bcf1`; the rest of `derrick` waits until its tracked docs are removed)
