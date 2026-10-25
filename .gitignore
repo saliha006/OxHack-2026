@@ -3,7 +3,6 @@
 !progress.md
 !README.md
 !contracts/*.md
-!docs/*.md
 .claude/
 scripts/
 builder-files/
