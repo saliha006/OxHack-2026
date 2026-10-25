@@ -48,7 +48,7 @@
 
 1. ⬜ **Turn-time profile** (0.5 h; old task 7): p50 / p99 of one `choose` on real states. It sets the eval think budget (1.0 s proposed) and whether the MCTS arm (task 10) is worth building.
    - *Done when:* the numbers are in `progress.md` → 📊 Latest.
-2. ⬜ **Belief floor** (0.5 h) `[🟠 your call]`
+2. ✅ **Belief floor** (0.5 h) `[🟠 your call]` — done: floor 0.03 on the replay, reveals stay hard with the floor as the empty fallback (`progress.md` ff18c93)
    - **Recommended [P9 D1]:** in `_explains_turn`, drop a set that can't explain a turn to a small floor `eps` (0.02–0.05) instead of zero, so a rounding miss or an unlisted set doesn't wipe out the belief. **Alternative:** keep the hard zero (simpler, but fragile).
    - *Done when:* a test shows a contradicted set keeps weight `eps` and recovers when later turns fit it.
 3. ⬜ **`build_state` on a parser-made `BattleState`** (old task 3; now unblocked: `from bot.parser import Parser, states_from_log` is on `main`).
