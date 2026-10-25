@@ -65,6 +65,7 @@ whenever you log an entry.
 | Saliha | `saliha006` | Bot layer; doc owner | `sali` | `bot/`, `runs/` (git-ignored) | bot plays live games through `Agent.choose`; next: task 5 eval harness |
 | Nate | `aldrichbanas07` | Data layer | any branch with `nate` in it (now `nate-data`) | `data/` {{paths tbd}} | brief task 1: set candidates (pass 9 order) |
 | Derrick | `RandomGeeb` | Decision layer | `derrick` | `decision/`, `tests/`, `contracts/battle_state.py` | feature 11 built on `derrick`; tasks 3–4 wait on the parser and set candidates |
+| Kenar | `kxnar` | TBD | TBD | TBD | joined 2026-10-25; getting set up |
 
 **Shared** (anyone may edit; flag it in ⚠️ Conflicts): {{e.g. `contracts/*`, `fixtures/*`, compose files}}
 
