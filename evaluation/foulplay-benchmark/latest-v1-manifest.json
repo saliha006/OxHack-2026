@@ -1,0 +1,3390 @@
+{
+  "schema": 1,
+  "root": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-foulplay-eval",
+  "folder": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-foulplay-eval/runs/foulplay-latest-v1",
+  "candidate_commit": "7bef2e7548e2c09992f2b92b8323adf739c8d913",
+  "source": {
+    "source_sha256": "c56ff324a45b40a3d1104289df2a1457cdb9243229d89a5b3b41b408f39342af",
+    "files": {
+      "bot/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bot/demo.py": "805887cc72795b5ef2e3f1cdff65e4f90041adb8b8985876da752660084e9761",
+      "bot/eval.py": "41fbf2833152278ad3ebdcd55661ab901ffb1bcaae1f36afa696165e35c56c46",
+      "bot/parser.py": "d36ee9a18ce1b2e6229aa3df0aa5730685e693d2e3f6aaa1c836be3a9799ba8a",
+      "bot/player.py": "58b40502da95795076179ec0bc0fafd6381f0cb8c48fe2dae230d6d20db61527",
+      "bot/smoke.py": "3e12e0fad384b7ac2372ebadcc2c0043b6aa32986e91fa03d6babc13b706ac05",
+      "bot/tests/test_demo.py": "3dbf7a7aded4ae0fe5acd379c5c1266be3ddbaa5474bdd7202da7af224d5813b",
+      "bot/tests/test_eval.py": "22639e87ef7441b129e55c983ccdffceb7fbdf01ec33b7b74dfcc4923d60c246",
+      "bot/tests/test_eval_completion.py": "1d5c6c2a2f09cf8ac671c83ee47dfc6f9bb99a02a4d741798c9f70893411b8c2",
+      "bot/tests/test_eval_schedule.py": "9e79a2b18b3fd64f56bba829a1da124763adf41d4ea319f8470812b827ff644f",
+      "bot/tests/test_foul_play_eval.py": "424c537d4545552e83f8cca4111a9ba9b3ae140f6f282c22292a1242ef8f8d7b",
+      "bot/tests/test_mcts_evaluation.py": "1e901e5a6daa36fbf6dc6d0847d827a536d7f5fdfa99b7996aec40ad07b75ade",
+      "bot/tests/test_parser.py": "8ad6602ec4832452890d1c36eec4360902a87a95c83de1ad33e6b42d3d93f7f0",
+      "bot/tests/test_player.py": "44ed9e927f60e6b913161ad807579adf343e1ae4c744d53b6f109d87d5c90c27",
+      "bot/tests/test_smoke.py": "ec3a95e454be0019b407475a74d58e19a75e25e1774a5b56fab48523275fd6c5",
+      "contracts/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "contracts/battle_state.py": "377e82a448b3c67e8b79bdf46c62b1d9363dd8af57e51afa511f8d5f804f2d89",
+      "contracts/set_candidates.py": "c648021a530d4b3240684073ca3c642243be05f85911a7eb0a9eb6bdee0cf49a",
+      "decision/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "decision/actions.py": "78233b1a0dea5a10e991908600317355b19f0b54d3c6fbbccbc88d5ddc028620",
+      "decision/adapter.py": "34773e44b090785272f3807fe7c179c9ca4b34e80706d177b3fb003b94b44068",
+      "decision/agent.py": "780b9112921fa2712027b1c0b5f78a8073b42e00cc337a00282f07d5af71c31e",
+      "decision/belief.py": "71f32eb7121031409e35c85f7a97a5a84edc67bd236ef9259e636c0cbd419327",
+      "decision/data/moves.json": "26909a321a7e4528d14a7dffd24173aa03a6845776cf41c39cc3d76f8e14616b",
+      "decision/data/pokedex.json": "e74d0364b230001fc086cefb4259e051f1d16a4730eb89f7d6336a88a0d9a47e",
+      "decision/data/typechart.json": "26270c6fa9e25ba43ba9d6fd0da115fcf96eee42eae8b0bd9660bd015dc483b2",
+      "decision/lead.py": "1af618a2450672e75abae9af55b2035d64e29e3b8f420629fdd29a4f75f7c5f3",
+      "decision/lead_model.py": "94ea1a26720e663bfa71e2a1f741a215888262710a297c7d59d29f286884ff2c",
+      "decision/opponent.py": "902a458fa0d2a97519a3a86527f2cfd3ae13f8a390fd61e62b8eda1d602643a7",
+      "decision/root_mixing.py": "2932d9ade680681f0707ceed14c0ed2785b74d70adb56e6bc00e5084e8eedb3b",
+      "decision/search.py": "a6e1a2f14c4bbdc62ca7701791196ea4e1398a8be9ed28702abd3d4503682218",
+      "decision/search_policy.py": "ac52f71753b08ea2932003fb05a11cde6cc6f4ad671c0bfa6407e938d1ea9650",
+      "decision/selector.py": "36de03df3385670f46af23ae7cc01f2077b51b70bc7a47e0fae86aad92f1267c",
+      "decision/sets.py": "5e345d60634414d723dbe1de4b0adc4459abcb542dfad0920095a7b6c4650c53",
+      "decision/simulate.py": "96e077923f6ef720a66fddbc496dab4c197c8cda386a7c0f1b5af7eee03d18a3",
+      "decision/state.py": "e97dd27902014dd3fc432dae5ca66da75887b1d9d5dabe2666dc82b3863bf28b",
+      "decision/value.py": "d25c43b6bc8e360043cf19e4c0c331aed04a692ffdc7da8b848a6fc2a705ef29"
+    }
+  },
+  "engine": {
+    "version": "0.0.48",
+    "binaries": {
+      "poke_engine.cpython-313-x86_64-linux-gnu.so": "fbffd2a1c9c48eab99def9187f9030c578174a30b49d54faad159be859846ef3"
+    }
+  },
+  "runner_sha256": "feb00dd79e67a0d5ea4c904a69df8850d06d2903e52096c6981146eaab02cea8",
+  "seed": 2026102527,
+  "own_team": {
+    "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-foulplay-eval/runs/foulplay-latest-v1/teams/own.txt",
+    "sha256": "385607ae7f3d1f71330244b49b4eb50e309d06d9b3f8b0dbe4b46decbb95c584",
+    "source": "bot/teams/standin/team_6.txt"
+  },
+  "opponents": [
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-foulplay-eval/runs/foulplay-latest-v1/teams/opponent-00.txt",
+      "sha256": "d3fd2023e76e22dfe109a77866df2be461b43bc58f491a6b578bb0af78d4d29b",
+      "source": "bot/teams/held-out/01-vert-dragonite-deoxys-ho.txt"
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-foulplay-eval/runs/foulplay-latest-v1/teams/opponent-01.txt",
+      "sha256": "5448297adfedf56cce589d3b711460a8552d4b91acda995f5192ca505532d8c5",
+      "source": "bot/teams/held-out/02-ewin-kyurem-cinderace-bo.txt"
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-foulplay-eval/runs/foulplay-latest-v1/teams/opponent-02.txt",
+      "sha256": "15f988851b6a49144892e2746799bac40934ea4798accd81d04b900719044a61",
+      "source": "bot/teams/held-out/03-ctc-darkrai-ogerpon-balance.txt"
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-foulplay-eval/runs/foulplay-latest-v1/teams/opponent-03.txt",
+      "sha256": "4200a5ea777188008040e7cac34db13809288c6893626aeff302cb56e289c589",
+      "source": "bot/teams/held-out/04-jb291-talonflame-mandibuzz-stall.txt"
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-foulplay-eval/runs/foulplay-latest-v1/teams/opponent-04.txt",
+      "sha256": "21bc1ea7db06300c5e09e1e5b879674ec724d620cf7e44a202d80a399af09f2c",
+      "source": "bot/teams/standin/team_10.txt"
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-foulplay-eval/runs/foulplay-latest-v1/teams/opponent-05.txt",
+      "sha256": "019d255db45ddb5a54aff175aaad33fa585be7b58696b12eb746ac0f6b28fc59",
+      "source": "bot/teams/standin/team_11.txt"
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-foulplay-eval/runs/foulplay-latest-v1/teams/opponent-06.txt",
+      "sha256": "b63fceeed8ce3f6995f2e09fa725ede1d960eb5e1bbf8c09e5c9fb8911fd3904",
+      "source": "bot/teams/standin/team_12.txt"
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-foulplay-eval/runs/foulplay-latest-v1/teams/opponent-07.txt",
+      "sha256": "6e6aa4e4a153be479ca19e71dae9079d36640bccf83648dbf9f0da07d4571752",
+      "source": "bot/teams/standin/team_13.txt"
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-foulplay-eval/runs/foulplay-latest-v1/teams/opponent-08.txt",
+      "sha256": "3b10427c967dff33dbc3c0c20248e708e823c554a851a56b2fbe6e49a27303cf",
+      "source": "bot/teams/standin/team_14.txt"
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-foulplay-eval/runs/foulplay-latest-v1/teams/opponent-09.txt",
+      "sha256": "8aaba793ebf4e492d13f8c454572d0b4635fedb533146672a31d359cee1b72f3",
+      "source": "bot/teams/standin/team_15.txt"
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-foulplay-eval/runs/foulplay-latest-v1/teams/opponent-10.txt",
+      "sha256": "56b0ff0140f9fbdd651dadc1acb17e94da645b0720a48f53d4c52cdafd9c468d",
+      "source": "bot/teams/standin/team_5.txt"
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-foulplay-eval/runs/foulplay-latest-v1/teams/opponent-11.txt",
+      "sha256": "00701ea70daf51547a1a1d3854fa7e8b84424c12873a21ae4cd54d812f8872e8",
+      "source": "bot/teams/standin/team_8.txt"
+    },
+    {
+      "path": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-foulplay-eval/runs/foulplay-latest-v1/teams/opponent-12.txt",
+      "sha256": "46f53728d3b4d4aab81e7b481f15911d0f89a1da4f16548d289902c1d9d07b4b",
+      "source": "bot/teams/standin/team_9.txt"
+    }
+  ],
+  "priors": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-foulplay-eval/runs/foulplay-latest-v1/priors.json",
+  "priors_sha256": "47b31bf7282d6578ed44d7b28f9a63e9284eddc72882856de426f7c1bfc8c7f3",
+  "config": {
+    "backend": "mcts",
+    "budget": 3.0,
+    "mcts_worlds": 8,
+    "search_ms": 150,
+    "engine_threads": 1,
+    "sampling": "team",
+    "belief_mode": "reliable",
+    "lead_policy": "types",
+    "mix_root": false
+  },
+  "foul_play_search_ms_per_world": 600,
+  "foul_play_world_policy": "Stock adaptive policy: 2 early/preview, 1 after >=3 known moves; 1 under time pressure",
+  "foul_play_threads": 1,
+  "foul_play_parallelism": 1,
+  "compute_matched": false,
+  "external_revisions": {
+    "foul_play": "8f541f80f91f960603673796559f796b10ccf0fb",
+    "showdown": "c0845f33d381402dfcb18ce324c20a94f18af075"
+  },
+  "foul_play_runtime": {
+    "packages": {
+      "poke-engine": "0.0.48",
+      "requests": "2.33.0",
+      "websockets": "14.1",
+      "python-dateutil": "2.8.0"
+    },
+    "native": {
+      "poke_engine.cpython-313-x86_64-linux-gnu.so": "fbffd2a1c9c48eab99def9187f9030c578174a30b49d54faad159be859846ef3"
+    }
+  },
+  "foul_play_tree_sha256": "0b38d4b58b5d8244a9eb09e4810c43adeae5841ebeb53fd38e39c22f54dbcc0c",
+  "showdown_tree_sha256": "be56236b9e92ac4ceeedf5bad6a8b9cc8760d01b694a23c588021195c3e1eff1",
+  "port": 8127,
+  "concurrency": 2,
+  "game_timeout_seconds": 1800,
+  "smoke": [
+    {
+      "game": -2,
+      "pair": -1,
+      "opponent_team": 0,
+      "side": "p1",
+      "sampler_seed": 2026102528,
+      "foul_play_seed": 2026102529
+    },
+    {
+      "game": -1,
+      "pair": -1,
+      "opponent_team": 0,
+      "side": "p2",
+      "sampler_seed": 2026102530,
+      "foul_play_seed": 2026102531
+    }
+  ],
+  "games": [
+    {
+      "game": 33,
+      "pair": 16,
+      "opponent_team": 9,
+      "side": "p2",
+      "sampler_seed": 928028898,
+      "foul_play_seed": 2055819311
+    },
+    {
+      "game": 331,
+      "pair": 165,
+      "opponent_team": 2,
+      "side": "p2",
+      "sampler_seed": 1875572439,
+      "foul_play_seed": 769635032
+    },
+    {
+      "game": 327,
+      "pair": 163,
+      "opponent_team": 3,
+      "side": "p2",
+      "sampler_seed": 568436425,
+      "foul_play_seed": 709838431
+    },
+    {
+      "game": 276,
+      "pair": 138,
+      "opponent_team": 1,
+      "side": "p1",
+      "sampler_seed": 1303271536,
+      "foul_play_seed": 1868507122
+    },
+    {
+      "game": 268,
+      "pair": 134,
+      "opponent_team": 7,
+      "side": "p1",
+      "sampler_seed": 106135980,
+      "foul_play_seed": 623142329
+    },
+    {
+      "game": 340,
+      "pair": 170,
+      "opponent_team": 2,
+      "side": "p1",
+      "sampler_seed": 2109495101,
+      "foul_play_seed": 11660746
+    },
+    {
+      "game": 0,
+      "pair": 0,
+      "opponent_team": 7,
+      "side": "p1",
+      "sampler_seed": 1555313844,
+      "foul_play_seed": 865896209
+    },
+    {
+      "game": 146,
+      "pair": 73,
+      "opponent_team": 9,
+      "side": "p1",
+      "sampler_seed": 883429962,
+      "foul_play_seed": 1540396493
+    },
+    {
+      "game": 173,
+      "pair": 86,
+      "opponent_team": 6,
+      "side": "p2",
+      "sampler_seed": 1571398198,
+      "foul_play_seed": 1608040125
+    },
+    {
+      "game": 186,
+      "pair": 93,
+      "opponent_team": 7,
+      "side": "p1",
+      "sampler_seed": 1785693453,
+      "foul_play_seed": 799657343
+    },
+    {
+      "game": 269,
+      "pair": 134,
+      "opponent_team": 7,
+      "side": "p2",
+      "sampler_seed": 2068099830,
+      "foul_play_seed": 250499548
+    },
+    {
+      "game": 113,
+      "pair": 56,
+      "opponent_team": 1,
+      "side": "p2",
+      "sampler_seed": 800519210,
+      "foul_play_seed": 763293189
+    },
+    {
+      "game": 379,
+      "pair": 189,
+      "opponent_team": 6,
+      "side": "p2",
+      "sampler_seed": 957883995,
+      "foul_play_seed": 421774459
+    },
+    {
+      "game": 386,
+      "pair": 193,
+      "opponent_team": 11,
+      "side": "p1",
+      "sampler_seed": 156452805,
+      "foul_play_seed": 229746746
+    },
+    {
+      "game": 12,
+      "pair": 6,
+      "opponent_team": 3,
+      "side": "p1",
+      "sampler_seed": 1053112038,
+      "foul_play_seed": 1689656952
+    },
+    {
+      "game": 253,
+      "pair": 126,
+      "opponent_team": 12,
+      "side": "p2",
+      "sampler_seed": 1932820802,
+      "foul_play_seed": 854126871
+    },
+    {
+      "game": 342,
+      "pair": 171,
+      "opponent_team": 5,
+      "side": "p1",
+      "sampler_seed": 1024959725,
+      "foul_play_seed": 1553066870
+    },
+    {
+      "game": 274,
+      "pair": 137,
+      "opponent_team": 2,
+      "side": "p1",
+      "sampler_seed": 1275227205,
+      "foul_play_seed": 855939431
+    },
+    {
+      "game": 351,
+      "pair": 175,
+      "opponent_team": 11,
+      "side": "p2",
+      "sampler_seed": 1255261522,
+      "foul_play_seed": 499605874
+    },
+    {
+      "game": 344,
+      "pair": 172,
+      "opponent_team": 4,
+      "side": "p1",
+      "sampler_seed": 261935762,
+      "foul_play_seed": 947491056
+    },
+    {
+      "game": 132,
+      "pair": 66,
+      "opponent_team": 6,
+      "side": "p1",
+      "sampler_seed": 788089215,
+      "foul_play_seed": 2093397883
+    },
+    {
+      "game": 256,
+      "pair": 128,
+      "opponent_team": 1,
+      "side": "p1",
+      "sampler_seed": 814407893,
+      "foul_play_seed": 1435063786
+    },
+    {
+      "game": 263,
+      "pair": 131,
+      "opponent_team": 5,
+      "side": "p2",
+      "sampler_seed": 926874463,
+      "foul_play_seed": 265568332
+    },
+    {
+      "game": 248,
+      "pair": 124,
+      "opponent_team": 11,
+      "side": "p1",
+      "sampler_seed": 754598377,
+      "foul_play_seed": 1122814789
+    },
+    {
+      "game": 330,
+      "pair": 165,
+      "opponent_team": 2,
+      "side": "p1",
+      "sampler_seed": 801135916,
+      "foul_play_seed": 917687113
+    },
+    {
+      "game": 61,
+      "pair": 30,
+      "opponent_team": 1,
+      "side": "p2",
+      "sampler_seed": 1853570242,
+      "foul_play_seed": 150344831
+    },
+    {
+      "game": 333,
+      "pair": 166,
+      "opponent_team": 5,
+      "side": "p2",
+      "sampler_seed": 1159777110,
+      "foul_play_seed": 478332795
+    },
+    {
+      "game": 176,
+      "pair": 88,
+      "opponent_team": 2,
+      "side": "p1",
+      "sampler_seed": 1957662866,
+      "foul_play_seed": 1941618201
+    },
+    {
+      "game": 292,
+      "pair": 146,
+      "opponent_team": 11,
+      "side": "p1",
+      "sampler_seed": 745202030,
+      "foul_play_seed": 1916461552
+    },
+    {
+      "game": 304,
+      "pair": 152,
+      "opponent_team": 9,
+      "side": "p1",
+      "sampler_seed": 564304339,
+      "foul_play_seed": 242507783
+    },
+    {
+      "game": 87,
+      "pair": 43,
+      "opponent_team": 3,
+      "side": "p2",
+      "sampler_seed": 1794176788,
+      "foul_play_seed": 636472473
+    },
+    {
+      "game": 311,
+      "pair": 155,
+      "opponent_team": 0,
+      "side": "p2",
+      "sampler_seed": 373194490,
+      "foul_play_seed": 2114782014
+    },
+    {
+      "game": 319,
+      "pair": 159,
+      "opponent_team": 4,
+      "side": "p2",
+      "sampler_seed": 1642624833,
+      "foul_play_seed": 184431281
+    },
+    {
+      "game": 393,
+      "pair": 196,
+      "opponent_team": 3,
+      "side": "p2",
+      "sampler_seed": 10045755,
+      "foul_play_seed": 301432667
+    },
+    {
+      "game": 129,
+      "pair": 64,
+      "opponent_team": 6,
+      "side": "p2",
+      "sampler_seed": 1806754815,
+      "foul_play_seed": 1583517158
+    },
+    {
+      "game": 266,
+      "pair": 133,
+      "opponent_team": 12,
+      "side": "p1",
+      "sampler_seed": 291194420,
+      "foul_play_seed": 1186600726
+    },
+    {
+      "game": 174,
+      "pair": 87,
+      "opponent_team": 5,
+      "side": "p1",
+      "sampler_seed": 1192764573,
+      "foul_play_seed": 1745465653
+    },
+    {
+      "game": 23,
+      "pair": 11,
+      "opponent_team": 0,
+      "side": "p2",
+      "sampler_seed": 34550943,
+      "foul_play_seed": 836212448
+    },
+    {
+      "game": 152,
+      "pair": 76,
+      "opponent_team": 1,
+      "side": "p1",
+      "sampler_seed": 1606833119,
+      "foul_play_seed": 1452877339
+    },
+    {
+      "game": 137,
+      "pair": 68,
+      "opponent_team": 8,
+      "side": "p2",
+      "sampler_seed": 1939044813,
+      "foul_play_seed": 1028608455
+    },
+    {
+      "game": 328,
+      "pair": 164,
+      "opponent_team": 10,
+      "side": "p1",
+      "sampler_seed": 908614909,
+      "foul_play_seed": 477084388
+    },
+    {
+      "game": 81,
+      "pair": 40,
+      "opponent_team": 0,
+      "side": "p2",
+      "sampler_seed": 544972057,
+      "foul_play_seed": 705919060
+    },
+    {
+      "game": 338,
+      "pair": 169,
+      "opponent_team": 9,
+      "side": "p1",
+      "sampler_seed": 1581810991,
+      "foul_play_seed": 921493658
+    },
+    {
+      "game": 89,
+      "pair": 44,
+      "opponent_team": 11,
+      "side": "p2",
+      "sampler_seed": 1041201315,
+      "foul_play_seed": 872025312
+    },
+    {
+      "game": 349,
+      "pair": 174,
+      "opponent_team": 3,
+      "side": "p2",
+      "sampler_seed": 1012873294,
+      "foul_play_seed": 2102677331
+    },
+    {
+      "game": 96,
+      "pair": 48,
+      "opponent_team": 10,
+      "side": "p1",
+      "sampler_seed": 1119617787,
+      "foul_play_seed": 1824369968
+    },
+    {
+      "game": 77,
+      "pair": 38,
+      "opponent_team": 5,
+      "side": "p2",
+      "sampler_seed": 79881810,
+      "foul_play_seed": 1425031490
+    },
+    {
+      "game": 199,
+      "pair": 99,
+      "opponent_team": 5,
+      "side": "p2",
+      "sampler_seed": 1245112900,
+      "foul_play_seed": 84907945
+    },
+    {
+      "game": 371,
+      "pair": 185,
+      "opponent_team": 7,
+      "side": "p2",
+      "sampler_seed": 993926275,
+      "foul_play_seed": 555320082
+    },
+    {
+      "game": 1,
+      "pair": 0,
+      "opponent_team": 7,
+      "side": "p2",
+      "sampler_seed": 35486233,
+      "foul_play_seed": 162515358
+    },
+    {
+      "game": 381,
+      "pair": 190,
+      "opponent_team": 2,
+      "side": "p2",
+      "sampler_seed": 728522197,
+      "foul_play_seed": 449954911
+    },
+    {
+      "game": 320,
+      "pair": 160,
+      "opponent_team": 11,
+      "side": "p1",
+      "sampler_seed": 1944604586,
+      "foul_play_seed": 1472678060
+    },
+    {
+      "game": 308,
+      "pair": 154,
+      "opponent_team": 6,
+      "side": "p1",
+      "sampler_seed": 315201092,
+      "foul_play_seed": 1101238908
+    },
+    {
+      "game": 20,
+      "pair": 10,
+      "opponent_team": 10,
+      "side": "p1",
+      "sampler_seed": 803045212,
+      "foul_play_seed": 1229507510
+    },
+    {
+      "game": 227,
+      "pair": 113,
+      "opponent_team": 8,
+      "side": "p2",
+      "sampler_seed": 1035762204,
+      "foul_play_seed": 1338674395
+    },
+    {
+      "game": 58,
+      "pair": 29,
+      "opponent_team": 9,
+      "side": "p1",
+      "sampler_seed": 1094998885,
+      "foul_play_seed": 1992095170
+    },
+    {
+      "game": 201,
+      "pair": 100,
+      "opponent_team": 9,
+      "side": "p2",
+      "sampler_seed": 1337323196,
+      "foul_play_seed": 966223826
+    },
+    {
+      "game": 52,
+      "pair": 26,
+      "opponent_team": 2,
+      "side": "p1",
+      "sampler_seed": 520021137,
+      "foul_play_seed": 53048820
+    },
+    {
+      "game": 310,
+      "pair": 155,
+      "opponent_team": 0,
+      "side": "p1",
+      "sampler_seed": 1768019300,
+      "foul_play_seed": 1295891426
+    },
+    {
+      "game": 51,
+      "pair": 25,
+      "opponent_team": 7,
+      "side": "p2",
+      "sampler_seed": 2119133942,
+      "foul_play_seed": 1044246288
+    },
+    {
+      "game": 62,
+      "pair": 31,
+      "opponent_team": 10,
+      "side": "p1",
+      "sampler_seed": 323461900,
+      "foul_play_seed": 1039995343
+    },
+    {
+      "game": 322,
+      "pair": 161,
+      "opponent_team": 0,
+      "side": "p1",
+      "sampler_seed": 922913309,
+      "foul_play_seed": 1468027007
+    },
+    {
+      "game": 170,
+      "pair": 85,
+      "opponent_team": 1,
+      "side": "p1",
+      "sampler_seed": 2036360754,
+      "foul_play_seed": 1774511239
+    },
+    {
+      "game": 368,
+      "pair": 184,
+      "opponent_team": 0,
+      "side": "p1",
+      "sampler_seed": 107079701,
+      "foul_play_seed": 374663475
+    },
+    {
+      "game": 293,
+      "pair": 146,
+      "opponent_team": 11,
+      "side": "p2",
+      "sampler_seed": 1004549336,
+      "foul_play_seed": 1292886653
+    },
+    {
+      "game": 156,
+      "pair": 78,
+      "opponent_team": 4,
+      "side": "p1",
+      "sampler_seed": 1797729176,
+      "foul_play_seed": 10594110
+    },
+    {
+      "game": 138,
+      "pair": 69,
+      "opponent_team": 7,
+      "side": "p1",
+      "sampler_seed": 1249805129,
+      "foul_play_seed": 397392201
+    },
+    {
+      "game": 291,
+      "pair": 145,
+      "opponent_team": 7,
+      "side": "p2",
+      "sampler_seed": 1474503355,
+      "foul_play_seed": 1979869090
+    },
+    {
+      "game": 250,
+      "pair": 125,
+      "opponent_team": 7,
+      "side": "p1",
+      "sampler_seed": 399490340,
+      "foul_play_seed": 1127665459
+    },
+    {
+      "game": 17,
+      "pair": 8,
+      "opponent_team": 6,
+      "side": "p2",
+      "sampler_seed": 1999442736,
+      "foul_play_seed": 388332562
+    },
+    {
+      "game": 135,
+      "pair": 67,
+      "opponent_team": 2,
+      "side": "p2",
+      "sampler_seed": 166938872,
+      "foul_play_seed": 2018211538
+    },
+    {
+      "game": 210,
+      "pair": 105,
+      "opponent_team": 3,
+      "side": "p1",
+      "sampler_seed": 550617317,
+      "foul_play_seed": 2021650563
+    },
+    {
+      "game": 378,
+      "pair": 189,
+      "opponent_team": 6,
+      "side": "p1",
+      "sampler_seed": 1485290867,
+      "foul_play_seed": 550913995
+    },
+    {
+      "game": 332,
+      "pair": 166,
+      "opponent_team": 5,
+      "side": "p1",
+      "sampler_seed": 611422600,
+      "foul_play_seed": 1938357472
+    },
+    {
+      "game": 168,
+      "pair": 84,
+      "opponent_team": 9,
+      "side": "p1",
+      "sampler_seed": 1117068458,
+      "foul_play_seed": 127149128
+    },
+    {
+      "game": 365,
+      "pair": 182,
+      "opponent_team": 5,
+      "side": "p2",
+      "sampler_seed": 1313886274,
+      "foul_play_seed": 14754493
+    },
+    {
+      "game": 226,
+      "pair": 113,
+      "opponent_team": 8,
+      "side": "p1",
+      "sampler_seed": 2045191653,
+      "foul_play_seed": 1774842506
+    },
+    {
+      "game": 124,
+      "pair": 62,
+      "opponent_team": 0,
+      "side": "p1",
+      "sampler_seed": 1695399458,
+      "foul_play_seed": 1816083496
+    },
+    {
+      "game": 314,
+      "pair": 157,
+      "opponent_team": 12,
+      "side": "p1",
+      "sampler_seed": 163497532,
+      "foul_play_seed": 822105423
+    },
+    {
+      "game": 307,
+      "pair": 153,
+      "opponent_team": 1,
+      "side": "p2",
+      "sampler_seed": 212423901,
+      "foul_play_seed": 330571170
+    },
+    {
+      "game": 70,
+      "pair": 35,
+      "opponent_team": 0,
+      "side": "p1",
+      "sampler_seed": 2056929029,
+      "foul_play_seed": 1795369791
+    },
+    {
+      "game": 372,
+      "pair": 186,
+      "opponent_team": 3,
+      "side": "p1",
+      "sampler_seed": 1887452342,
+      "foul_play_seed": 1441966870
+    },
+    {
+      "game": 245,
+      "pair": 122,
+      "opponent_team": 2,
+      "side": "p2",
+      "sampler_seed": 1805355450,
+      "foul_play_seed": 404937059
+    },
+    {
+      "game": 160,
+      "pair": 80,
+      "opponent_team": 3,
+      "side": "p1",
+      "sampler_seed": 907274953,
+      "foul_play_seed": 944081491
+    },
+    {
+      "game": 92,
+      "pair": 46,
+      "opponent_team": 2,
+      "side": "p1",
+      "sampler_seed": 1514342808,
+      "foul_play_seed": 2031591737
+    },
+    {
+      "game": 228,
+      "pair": 114,
+      "opponent_team": 2,
+      "side": "p1",
+      "sampler_seed": 1949804944,
+      "foul_play_seed": 1195178712
+    },
+    {
+      "game": 369,
+      "pair": 184,
+      "opponent_team": 0,
+      "side": "p2",
+      "sampler_seed": 1121549171,
+      "foul_play_seed": 1793008928
+    },
+    {
+      "game": 373,
+      "pair": 186,
+      "opponent_team": 3,
+      "side": "p2",
+      "sampler_seed": 864590148,
+      "foul_play_seed": 685092263
+    },
+    {
+      "game": 93,
+      "pair": 46,
+      "opponent_team": 2,
+      "side": "p2",
+      "sampler_seed": 1956250803,
+      "foul_play_seed": 1405222390
+    },
+    {
+      "game": 150,
+      "pair": 75,
+      "opponent_team": 10,
+      "side": "p1",
+      "sampler_seed": 83055887,
+      "foul_play_seed": 827243245
+    },
+    {
+      "game": 63,
+      "pair": 31,
+      "opponent_team": 10,
+      "side": "p2",
+      "sampler_seed": 329614710,
+      "foul_play_seed": 223012117
+    },
+    {
+      "game": 29,
+      "pair": 14,
+      "opponent_team": 11,
+      "side": "p2",
+      "sampler_seed": 587868385,
+      "foul_play_seed": 594563271
+    },
+    {
+      "game": 382,
+      "pair": 191,
+      "opponent_team": 9,
+      "side": "p1",
+      "sampler_seed": 1660633617,
+      "foul_play_seed": 1850881576
+    },
+    {
+      "game": 66,
+      "pair": 33,
+      "opponent_team": 11,
+      "side": "p1",
+      "sampler_seed": 393981497,
+      "foul_play_seed": 1845047658
+    },
+    {
+      "game": 34,
+      "pair": 17,
+      "opponent_team": 3,
+      "side": "p1",
+      "sampler_seed": 605991962,
+      "foul_play_seed": 1879336310
+    },
+    {
+      "game": 163,
+      "pair": 81,
+      "opponent_team": 12,
+      "side": "p2",
+      "sampler_seed": 75048802,
+      "foul_play_seed": 264280464
+    },
+    {
+      "game": 11,
+      "pair": 5,
+      "opponent_team": 8,
+      "side": "p2",
+      "sampler_seed": 2064351877,
+      "foul_play_seed": 2072080468
+    },
+    {
+      "game": 55,
+      "pair": 27,
+      "opponent_team": 12,
+      "side": "p2",
+      "sampler_seed": 213671528,
+      "foul_play_seed": 861058378
+    },
+    {
+      "game": 221,
+      "pair": 110,
+      "opponent_team": 6,
+      "side": "p2",
+      "sampler_seed": 668058687,
+      "foul_play_seed": 685596817
+    },
+    {
+      "game": 258,
+      "pair": 129,
+      "opponent_team": 10,
+      "side": "p1",
+      "sampler_seed": 287022185,
+      "foul_play_seed": 66686102
+    },
+    {
+      "game": 162,
+      "pair": 81,
+      "opponent_team": 12,
+      "side": "p1",
+      "sampler_seed": 1181302233,
+      "foul_play_seed": 564185631
+    },
+    {
+      "game": 193,
+      "pair": 96,
+      "opponent_team": 10,
+      "side": "p2",
+      "sampler_seed": 624152720,
+      "foul_play_seed": 1193540158
+    },
+    {
+      "game": 334,
+      "pair": 167,
+      "opponent_team": 9,
+      "side": "p1",
+      "sampler_seed": 1127754845,
+      "foul_play_seed": 913487549
+    },
+    {
+      "game": 83,
+      "pair": 41,
+      "opponent_team": 6,
+      "side": "p2",
+      "sampler_seed": 1929874978,
+      "foul_play_seed": 817887815
+    },
+    {
+      "game": 44,
+      "pair": 22,
+      "opponent_team": 10,
+      "side": "p1",
+      "sampler_seed": 748021575,
+      "foul_play_seed": 1333288281
+    },
+    {
+      "game": 290,
+      "pair": 145,
+      "opponent_team": 7,
+      "side": "p1",
+      "sampler_seed": 68205381,
+      "foul_play_seed": 482280878
+    },
+    {
+      "game": 71,
+      "pair": 35,
+      "opponent_team": 0,
+      "side": "p2",
+      "sampler_seed": 1014606010,
+      "foul_play_seed": 519881982
+    },
+    {
+      "game": 36,
+      "pair": 18,
+      "opponent_team": 4,
+      "side": "p1",
+      "sampler_seed": 2097458385,
+      "foul_play_seed": 1230074084
+    },
+    {
+      "game": 88,
+      "pair": 44,
+      "opponent_team": 11,
+      "side": "p1",
+      "sampler_seed": 769359169,
+      "foul_play_seed": 1466231441
+    },
+    {
+      "game": 35,
+      "pair": 17,
+      "opponent_team": 3,
+      "side": "p2",
+      "sampler_seed": 1201530740,
+      "foul_play_seed": 297557084
+    },
+    {
+      "game": 8,
+      "pair": 4,
+      "opponent_team": 4,
+      "side": "p1",
+      "sampler_seed": 570629587,
+      "foul_play_seed": 1207623213
+    },
+    {
+      "game": 42,
+      "pair": 21,
+      "opponent_team": 2,
+      "side": "p1",
+      "sampler_seed": 2020213527,
+      "foul_play_seed": 123328366
+    },
+    {
+      "game": 208,
+      "pair": 104,
+      "opponent_team": 12,
+      "side": "p1",
+      "sampler_seed": 1015161179,
+      "foul_play_seed": 1149798236
+    },
+    {
+      "game": 391,
+      "pair": 195,
+      "opponent_team": 6,
+      "side": "p2",
+      "sampler_seed": 340751074,
+      "foul_play_seed": 1024577654
+    },
+    {
+      "game": 383,
+      "pair": 191,
+      "opponent_team": 9,
+      "side": "p2",
+      "sampler_seed": 546876264,
+      "foul_play_seed": 1844622475
+    },
+    {
+      "game": 272,
+      "pair": 136,
+      "opponent_team": 3,
+      "side": "p1",
+      "sampler_seed": 596601243,
+      "foul_play_seed": 1834296535
+    },
+    {
+      "game": 206,
+      "pair": 103,
+      "opponent_team": 3,
+      "side": "p1",
+      "sampler_seed": 1776668380,
+      "foul_play_seed": 571775136
+    },
+    {
+      "game": 323,
+      "pair": 161,
+      "opponent_team": 0,
+      "side": "p2",
+      "sampler_seed": 1327935920,
+      "foul_play_seed": 86551445
+    },
+    {
+      "game": 84,
+      "pair": 42,
+      "opponent_team": 12,
+      "side": "p1",
+      "sampler_seed": 705917832,
+      "foul_play_seed": 1817774161
+    },
+    {
+      "game": 65,
+      "pair": 32,
+      "opponent_team": 4,
+      "side": "p2",
+      "sampler_seed": 1134376944,
+      "foul_play_seed": 196301427
+    },
+    {
+      "game": 215,
+      "pair": 107,
+      "opponent_team": 1,
+      "side": "p2",
+      "sampler_seed": 753656597,
+      "foul_play_seed": 718119961
+    },
+    {
+      "game": 181,
+      "pair": 90,
+      "opponent_team": 7,
+      "side": "p2",
+      "sampler_seed": 803774485,
+      "foul_play_seed": 149946336
+    },
+    {
+      "game": 60,
+      "pair": 30,
+      "opponent_team": 1,
+      "side": "p1",
+      "sampler_seed": 331672203,
+      "foul_play_seed": 2014673721
+    },
+    {
+      "game": 185,
+      "pair": 92,
+      "opponent_team": 0,
+      "side": "p2",
+      "sampler_seed": 986262437,
+      "foul_play_seed": 85688707
+    },
+    {
+      "game": 214,
+      "pair": 107,
+      "opponent_team": 1,
+      "side": "p1",
+      "sampler_seed": 1133350334,
+      "foul_play_seed": 1117038542
+    },
+    {
+      "game": 45,
+      "pair": 22,
+      "opponent_team": 10,
+      "side": "p2",
+      "sampler_seed": 1356660437,
+      "foul_play_seed": 1136346495
+    },
+    {
+      "game": 273,
+      "pair": 136,
+      "opponent_team": 3,
+      "side": "p2",
+      "sampler_seed": 53721340,
+      "foul_play_seed": 1249579352
+    },
+    {
+      "game": 362,
+      "pair": 181,
+      "opponent_team": 1,
+      "side": "p1",
+      "sampler_seed": 1767815846,
+      "foul_play_seed": 12175616
+    },
+    {
+      "game": 280,
+      "pair": 140,
+      "opponent_team": 6,
+      "side": "p1",
+      "sampler_seed": 1286426054,
+      "foul_play_seed": 2065553845
+    },
+    {
+      "game": 143,
+      "pair": 71,
+      "opponent_team": 0,
+      "side": "p2",
+      "sampler_seed": 928472077,
+      "foul_play_seed": 2046749019
+    },
+    {
+      "game": 231,
+      "pair": 115,
+      "opponent_team": 5,
+      "side": "p2",
+      "sampler_seed": 498808290,
+      "foul_play_seed": 857774362
+    },
+    {
+      "game": 130,
+      "pair": 65,
+      "opponent_team": 4,
+      "side": "p1",
+      "sampler_seed": 904343480,
+      "foul_play_seed": 2113522419
+    },
+    {
+      "game": 384,
+      "pair": 192,
+      "opponent_team": 8,
+      "side": "p1",
+      "sampler_seed": 954149384,
+      "foul_play_seed": 161602181
+    },
+    {
+      "game": 284,
+      "pair": 142,
+      "opponent_team": 4,
+      "side": "p1",
+      "sampler_seed": 1538850163,
+      "foul_play_seed": 1584591941
+    },
+    {
+      "game": 316,
+      "pair": 158,
+      "opponent_team": 7,
+      "side": "p1",
+      "sampler_seed": 1546943383,
+      "foul_play_seed": 384696787
+    },
+    {
+      "game": 289,
+      "pair": 144,
+      "opponent_team": 5,
+      "side": "p2",
+      "sampler_seed": 111764038,
+      "foul_play_seed": 601790852
+    },
+    {
+      "game": 325,
+      "pair": 162,
+      "opponent_team": 1,
+      "side": "p2",
+      "sampler_seed": 1030831340,
+      "foul_play_seed": 1648938135
+    },
+    {
+      "game": 100,
+      "pair": 50,
+      "opponent_team": 5,
+      "side": "p1",
+      "sampler_seed": 2061680275,
+      "foul_play_seed": 1771273220
+    },
+    {
+      "game": 131,
+      "pair": 65,
+      "opponent_team": 4,
+      "side": "p2",
+      "sampler_seed": 243787007,
+      "foul_play_seed": 887537991
+    },
+    {
+      "game": 336,
+      "pair": 168,
+      "opponent_team": 6,
+      "side": "p1",
+      "sampler_seed": 1723690062,
+      "foul_play_seed": 1617473623
+    },
+    {
+      "game": 53,
+      "pair": 26,
+      "opponent_team": 2,
+      "side": "p2",
+      "sampler_seed": 1155265453,
+      "foul_play_seed": 1933682309
+    },
+    {
+      "game": 279,
+      "pair": 139,
+      "opponent_team": 8,
+      "side": "p2",
+      "sampler_seed": 1671312711,
+      "foul_play_seed": 1035968893
+    },
+    {
+      "game": 158,
+      "pair": 79,
+      "opponent_team": 8,
+      "side": "p1",
+      "sampler_seed": 724838004,
+      "foul_play_seed": 442872715
+    },
+    {
+      "game": 183,
+      "pair": 91,
+      "opponent_team": 6,
+      "side": "p2",
+      "sampler_seed": 351603543,
+      "foul_play_seed": 1123683070
+    },
+    {
+      "game": 394,
+      "pair": 197,
+      "opponent_team": 10,
+      "side": "p1",
+      "sampler_seed": 957814238,
+      "foul_play_seed": 547668024
+    },
+    {
+      "game": 97,
+      "pair": 48,
+      "opponent_team": 10,
+      "side": "p2",
+      "sampler_seed": 723912193,
+      "foul_play_seed": 1748230354
+    },
+    {
+      "game": 102,
+      "pair": 51,
+      "opponent_team": 8,
+      "side": "p1",
+      "sampler_seed": 1496099198,
+      "foul_play_seed": 294408072
+    },
+    {
+      "game": 300,
+      "pair": 150,
+      "opponent_team": 3,
+      "side": "p1",
+      "sampler_seed": 1129153503,
+      "foul_play_seed": 1312852350
+    },
+    {
+      "game": 26,
+      "pair": 13,
+      "opponent_team": 0,
+      "side": "p1",
+      "sampler_seed": 760468746,
+      "foul_play_seed": 1189913254
+    },
+    {
+      "game": 335,
+      "pair": 167,
+      "opponent_team": 9,
+      "side": "p2",
+      "sampler_seed": 1555554524,
+      "foul_play_seed": 1608813757
+    },
+    {
+      "game": 24,
+      "pair": 12,
+      "opponent_team": 1,
+      "side": "p1",
+      "sampler_seed": 2080936680,
+      "foul_play_seed": 1355923042
+    },
+    {
+      "game": 38,
+      "pair": 19,
+      "opponent_team": 6,
+      "side": "p1",
+      "sampler_seed": 1684818130,
+      "foul_play_seed": 569697932
+    },
+    {
+      "game": 260,
+      "pair": 130,
+      "opponent_team": 9,
+      "side": "p1",
+      "sampler_seed": 1835410212,
+      "foul_play_seed": 716911875
+    },
+    {
+      "game": 282,
+      "pair": 141,
+      "opponent_team": 0,
+      "side": "p1",
+      "sampler_seed": 1577804144,
+      "foul_play_seed": 1149518948
+    },
+    {
+      "game": 126,
+      "pair": 63,
+      "opponent_team": 11,
+      "side": "p1",
+      "sampler_seed": 2105715490,
+      "foul_play_seed": 2134617776
+    },
+    {
+      "game": 283,
+      "pair": 141,
+      "opponent_team": 0,
+      "side": "p2",
+      "sampler_seed": 97701488,
+      "foul_play_seed": 1735514863
+    },
+    {
+      "game": 144,
+      "pair": 72,
+      "opponent_team": 11,
+      "side": "p1",
+      "sampler_seed": 566828374,
+      "foul_play_seed": 1288465501
+    },
+    {
+      "game": 120,
+      "pair": 60,
+      "opponent_team": 9,
+      "side": "p1",
+      "sampler_seed": 230034675,
+      "foul_play_seed": 347644400
+    },
+    {
+      "game": 275,
+      "pair": 137,
+      "opponent_team": 2,
+      "side": "p2",
+      "sampler_seed": 1234372355,
+      "foul_play_seed": 1345676241
+    },
+    {
+      "game": 230,
+      "pair": 115,
+      "opponent_team": 5,
+      "side": "p1",
+      "sampler_seed": 1925542526,
+      "foul_play_seed": 1870588105
+    },
+    {
+      "game": 67,
+      "pair": 33,
+      "opponent_team": 11,
+      "side": "p2",
+      "sampler_seed": 848994916,
+      "foul_play_seed": 1856585772
+    },
+    {
+      "game": 364,
+      "pair": 182,
+      "opponent_team": 5,
+      "side": "p1",
+      "sampler_seed": 1058971233,
+      "foul_play_seed": 1154482078
+    },
+    {
+      "game": 182,
+      "pair": 91,
+      "opponent_team": 6,
+      "side": "p1",
+      "sampler_seed": 1812021364,
+      "foul_play_seed": 1606957703
+    },
+    {
+      "game": 195,
+      "pair": 97,
+      "opponent_team": 11,
+      "side": "p2",
+      "sampler_seed": 833450199,
+      "foul_play_seed": 903286945
+    },
+    {
+      "game": 301,
+      "pair": 150,
+      "opponent_team": 3,
+      "side": "p2",
+      "sampler_seed": 1775920736,
+      "foul_play_seed": 244228337
+    },
+    {
+      "game": 72,
+      "pair": 36,
+      "opponent_team": 3,
+      "side": "p1",
+      "sampler_seed": 544072328,
+      "foul_play_seed": 872972366
+    },
+    {
+      "game": 15,
+      "pair": 7,
+      "opponent_team": 11,
+      "side": "p2",
+      "sampler_seed": 1976626482,
+      "foul_play_seed": 108815366
+    },
+    {
+      "game": 175,
+      "pair": 87,
+      "opponent_team": 5,
+      "side": "p2",
+      "sampler_seed": 1472218063,
+      "foul_play_seed": 768793521
+    },
+    {
+      "game": 178,
+      "pair": 89,
+      "opponent_team": 0,
+      "side": "p1",
+      "sampler_seed": 424099574,
+      "foul_play_seed": 100192789
+    },
+    {
+      "game": 90,
+      "pair": 45,
+      "opponent_team": 9,
+      "side": "p1",
+      "sampler_seed": 1019724605,
+      "foul_play_seed": 1901427925
+    },
+    {
+      "game": 86,
+      "pair": 43,
+      "opponent_team": 3,
+      "side": "p1",
+      "sampler_seed": 1247494847,
+      "foul_play_seed": 113816578
+    },
+    {
+      "game": 271,
+      "pair": 135,
+      "opponent_team": 11,
+      "side": "p2",
+      "sampler_seed": 838892628,
+      "foul_play_seed": 500779759
+    },
+    {
+      "game": 139,
+      "pair": 69,
+      "opponent_team": 7,
+      "side": "p2",
+      "sampler_seed": 66812592,
+      "foul_play_seed": 551347333
+    },
+    {
+      "game": 278,
+      "pair": 139,
+      "opponent_team": 8,
+      "side": "p1",
+      "sampler_seed": 27404755,
+      "foul_play_seed": 961605609
+    },
+    {
+      "game": 366,
+      "pair": 183,
+      "opponent_team": 10,
+      "side": "p1",
+      "sampler_seed": 1870666231,
+      "foul_play_seed": 766132455
+    },
+    {
+      "game": 298,
+      "pair": 149,
+      "opponent_team": 8,
+      "side": "p1",
+      "sampler_seed": 104090901,
+      "foul_play_seed": 165755127
+    },
+    {
+      "game": 46,
+      "pair": 23,
+      "opponent_team": 12,
+      "side": "p1",
+      "sampler_seed": 157336413,
+      "foul_play_seed": 2053211588
+    },
+    {
+      "game": 267,
+      "pair": 133,
+      "opponent_team": 12,
+      "side": "p2",
+      "sampler_seed": 836031451,
+      "foul_play_seed": 1149245701
+    },
+    {
+      "game": 5,
+      "pair": 2,
+      "opponent_team": 9,
+      "side": "p2",
+      "sampler_seed": 1856669519,
+      "foul_play_seed": 1746379728
+    },
+    {
+      "game": 98,
+      "pair": 49,
+      "opponent_team": 4,
+      "side": "p1",
+      "sampler_seed": 147376716,
+      "foul_play_seed": 1274563522
+    },
+    {
+      "game": 234,
+      "pair": 117,
+      "opponent_team": 3,
+      "side": "p1",
+      "sampler_seed": 1241088957,
+      "foul_play_seed": 96488331
+    },
+    {
+      "game": 262,
+      "pair": 131,
+      "opponent_team": 5,
+      "side": "p1",
+      "sampler_seed": 1774059114,
+      "foul_play_seed": 674402471
+    },
+    {
+      "game": 363,
+      "pair": 181,
+      "opponent_team": 1,
+      "side": "p2",
+      "sampler_seed": 1493563329,
+      "foul_play_seed": 1015176328
+    },
+    {
+      "game": 194,
+      "pair": 97,
+      "opponent_team": 11,
+      "side": "p1",
+      "sampler_seed": 916162681,
+      "foul_play_seed": 400661744
+    },
+    {
+      "game": 142,
+      "pair": 71,
+      "opponent_team": 0,
+      "side": "p1",
+      "sampler_seed": 91333618,
+      "foul_play_seed": 1615597384
+    },
+    {
+      "game": 232,
+      "pair": 116,
+      "opponent_team": 10,
+      "side": "p1",
+      "sampler_seed": 977229339,
+      "foul_play_seed": 1509127831
+    },
+    {
+      "game": 202,
+      "pair": 101,
+      "opponent_team": 2,
+      "side": "p1",
+      "sampler_seed": 1363616729,
+      "foul_play_seed": 542380161
+    },
+    {
+      "game": 2,
+      "pair": 1,
+      "opponent_team": 5,
+      "side": "p1",
+      "sampler_seed": 2049670027,
+      "foul_play_seed": 826897741
+    },
+    {
+      "game": 239,
+      "pair": 119,
+      "opponent_team": 0,
+      "side": "p2",
+      "sampler_seed": 1147955365,
+      "foul_play_seed": 659468822
+    },
+    {
+      "game": 247,
+      "pair": 123,
+      "opponent_team": 8,
+      "side": "p2",
+      "sampler_seed": 1465252939,
+      "foul_play_seed": 513837096
+    },
+    {
+      "game": 78,
+      "pair": 39,
+      "opponent_team": 1,
+      "side": "p1",
+      "sampler_seed": 348688590,
+      "foul_play_seed": 632214878
+    },
+    {
+      "game": 346,
+      "pair": 173,
+      "opponent_team": 12,
+      "side": "p1",
+      "sampler_seed": 1618561135,
+      "foul_play_seed": 890625761
+    },
+    {
+      "game": 43,
+      "pair": 21,
+      "opponent_team": 2,
+      "side": "p2",
+      "sampler_seed": 1812502376,
+      "foul_play_seed": 107549674
+    },
+    {
+      "game": 153,
+      "pair": 76,
+      "opponent_team": 1,
+      "side": "p2",
+      "sampler_seed": 2119787215,
+      "foul_play_seed": 879210348
+    },
+    {
+      "game": 257,
+      "pair": 128,
+      "opponent_team": 1,
+      "side": "p2",
+      "sampler_seed": 1322483139,
+      "foul_play_seed": 1894189172
+    },
+    {
+      "game": 64,
+      "pair": 32,
+      "opponent_team": 4,
+      "side": "p1",
+      "sampler_seed": 1442404810,
+      "foul_play_seed": 1679197095
+    },
+    {
+      "game": 255,
+      "pair": 127,
+      "opponent_team": 6,
+      "side": "p2",
+      "sampler_seed": 500911320,
+      "foul_play_seed": 1255854131
+    },
+    {
+      "game": 251,
+      "pair": 125,
+      "opponent_team": 7,
+      "side": "p2",
+      "sampler_seed": 1094669225,
+      "foul_play_seed": 1852799937
+    },
+    {
+      "game": 50,
+      "pair": 25,
+      "opponent_team": 7,
+      "side": "p1",
+      "sampler_seed": 761339307,
+      "foul_play_seed": 1032959168
+    },
+    {
+      "game": 94,
+      "pair": 47,
+      "opponent_team": 7,
+      "side": "p1",
+      "sampler_seed": 518128529,
+      "foul_play_seed": 646823942
+    },
+    {
+      "game": 122,
+      "pair": 61,
+      "opponent_team": 4,
+      "side": "p1",
+      "sampler_seed": 1852930348,
+      "foul_play_seed": 1796393009
+    },
+    {
+      "game": 309,
+      "pair": 154,
+      "opponent_team": 6,
+      "side": "p2",
+      "sampler_seed": 109546954,
+      "foul_play_seed": 1204288771
+    },
+    {
+      "game": 207,
+      "pair": 103,
+      "opponent_team": 3,
+      "side": "p2",
+      "sampler_seed": 1470995868,
+      "foul_play_seed": 2101251321
+    },
+    {
+      "game": 287,
+      "pair": 143,
+      "opponent_team": 12,
+      "side": "p2",
+      "sampler_seed": 662569250,
+      "foul_play_seed": 1275980082
+    },
+    {
+      "game": 25,
+      "pair": 12,
+      "opponent_team": 1,
+      "side": "p2",
+      "sampler_seed": 403776494,
+      "foul_play_seed": 153566606
+    },
+    {
+      "game": 4,
+      "pair": 2,
+      "opponent_team": 9,
+      "side": "p1",
+      "sampler_seed": 809411459,
+      "foul_play_seed": 263628593
+    },
+    {
+      "game": 244,
+      "pair": 122,
+      "opponent_team": 2,
+      "side": "p1",
+      "sampler_seed": 1608702297,
+      "foul_play_seed": 596263545
+    },
+    {
+      "game": 172,
+      "pair": 86,
+      "opponent_team": 6,
+      "side": "p1",
+      "sampler_seed": 1557474046,
+      "foul_play_seed": 1434908420
+    },
+    {
+      "game": 123,
+      "pair": 61,
+      "opponent_team": 4,
+      "side": "p2",
+      "sampler_seed": 472673396,
+      "foul_play_seed": 1456349579
+    },
+    {
+      "game": 167,
+      "pair": 83,
+      "opponent_team": 11,
+      "side": "p2",
+      "sampler_seed": 988239550,
+      "foul_play_seed": 427241510
+    },
+    {
+      "game": 190,
+      "pair": 95,
+      "opponent_team": 8,
+      "side": "p1",
+      "sampler_seed": 989848231,
+      "foul_play_seed": 8969883
+    },
+    {
+      "game": 48,
+      "pair": 24,
+      "opponent_team": 1,
+      "side": "p1",
+      "sampler_seed": 284867236,
+      "foul_play_seed": 192075868
+    },
+    {
+      "game": 337,
+      "pair": 168,
+      "opponent_team": 6,
+      "side": "p2",
+      "sampler_seed": 604947325,
+      "foul_play_seed": 290220017
+    },
+    {
+      "game": 321,
+      "pair": 160,
+      "opponent_team": 11,
+      "side": "p2",
+      "sampler_seed": 240239726,
+      "foul_play_seed": 533097889
+    },
+    {
+      "game": 313,
+      "pair": 156,
+      "opponent_team": 8,
+      "side": "p2",
+      "sampler_seed": 1272391650,
+      "foul_play_seed": 796516585
+    },
+    {
+      "game": 85,
+      "pair": 42,
+      "opponent_team": 12,
+      "side": "p2",
+      "sampler_seed": 732793124,
+      "foul_play_seed": 607924881
+    },
+    {
+      "game": 235,
+      "pair": 117,
+      "opponent_team": 3,
+      "side": "p2",
+      "sampler_seed": 1132468118,
+      "foul_play_seed": 1567809702
+    },
+    {
+      "game": 180,
+      "pair": 90,
+      "opponent_team": 7,
+      "side": "p1",
+      "sampler_seed": 166077195,
+      "foul_play_seed": 1574020718
+    },
+    {
+      "game": 374,
+      "pair": 187,
+      "opponent_team": 12,
+      "side": "p1",
+      "sampler_seed": 283337225,
+      "foul_play_seed": 1236197047
+    },
+    {
+      "game": 297,
+      "pair": 148,
+      "opponent_team": 2,
+      "side": "p2",
+      "sampler_seed": 287341747,
+      "foul_play_seed": 974955430
+    },
+    {
+      "game": 205,
+      "pair": 102,
+      "opponent_team": 12,
+      "side": "p2",
+      "sampler_seed": 2082055020,
+      "foul_play_seed": 1311224209
+    },
+    {
+      "game": 119,
+      "pair": 59,
+      "opponent_team": 12,
+      "side": "p2",
+      "sampler_seed": 2020038406,
+      "foul_play_seed": 918859287
+    },
+    {
+      "game": 157,
+      "pair": 78,
+      "opponent_team": 4,
+      "side": "p2",
+      "sampler_seed": 694136135,
+      "foul_play_seed": 864257675
+    },
+    {
+      "game": 285,
+      "pair": 142,
+      "opponent_team": 4,
+      "side": "p2",
+      "sampler_seed": 997765905,
+      "foul_play_seed": 1812056200
+    },
+    {
+      "game": 281,
+      "pair": 140,
+      "opponent_team": 6,
+      "side": "p2",
+      "sampler_seed": 531682343,
+      "foul_play_seed": 37535563
+    },
+    {
+      "game": 14,
+      "pair": 7,
+      "opponent_team": 11,
+      "side": "p1",
+      "sampler_seed": 77829027,
+      "foul_play_seed": 1363967704
+    },
+    {
+      "game": 148,
+      "pair": 74,
+      "opponent_team": 5,
+      "side": "p1",
+      "sampler_seed": 1661065579,
+      "foul_play_seed": 705137093
+    },
+    {
+      "game": 212,
+      "pair": 106,
+      "opponent_team": 7,
+      "side": "p1",
+      "sampler_seed": 1653886401,
+      "foul_play_seed": 340050176
+    },
+    {
+      "game": 303,
+      "pair": 151,
+      "opponent_team": 10,
+      "side": "p2",
+      "sampler_seed": 651515759,
+      "foul_play_seed": 331007052
+    },
+    {
+      "game": 133,
+      "pair": 66,
+      "opponent_team": 6,
+      "side": "p2",
+      "sampler_seed": 1665030478,
+      "foul_play_seed": 376644832
+    },
+    {
+      "game": 21,
+      "pair": 10,
+      "opponent_team": 10,
+      "side": "p2",
+      "sampler_seed": 1300944112,
+      "foul_play_seed": 485564719
+    },
+    {
+      "game": 110,
+      "pair": 55,
+      "opponent_team": 3,
+      "side": "p1",
+      "sampler_seed": 818133778,
+      "foul_play_seed": 729508353
+    },
+    {
+      "game": 165,
+      "pair": 82,
+      "opponent_team": 10,
+      "side": "p2",
+      "sampler_seed": 1479651520,
+      "foul_play_seed": 1637905361
+    },
+    {
+      "game": 312,
+      "pair": 156,
+      "opponent_team": 8,
+      "side": "p1",
+      "sampler_seed": 1409598917,
+      "foul_play_seed": 365356593
+    },
+    {
+      "game": 54,
+      "pair": 27,
+      "opponent_team": 12,
+      "side": "p1",
+      "sampler_seed": 903548335,
+      "foul_play_seed": 1788417219
+    },
+    {
+      "game": 389,
+      "pair": 194,
+      "opponent_team": 1,
+      "side": "p2",
+      "sampler_seed": 86878285,
+      "foul_play_seed": 1039511623
+    },
+    {
+      "game": 385,
+      "pair": 192,
+      "opponent_team": 8,
+      "side": "p2",
+      "sampler_seed": 1505818100,
+      "foul_play_seed": 80579664
+    },
+    {
+      "game": 360,
+      "pair": 180,
+      "opponent_team": 10,
+      "side": "p1",
+      "sampler_seed": 766025081,
+      "foul_play_seed": 1453900594
+    },
+    {
+      "game": 302,
+      "pair": 151,
+      "opponent_team": 10,
+      "side": "p1",
+      "sampler_seed": 248117622,
+      "foul_play_seed": 1453479538
+    },
+    {
+      "game": 375,
+      "pair": 187,
+      "opponent_team": 12,
+      "side": "p2",
+      "sampler_seed": 57423380,
+      "foul_play_seed": 1026613714
+    },
+    {
+      "game": 40,
+      "pair": 20,
+      "opponent_team": 8,
+      "side": "p1",
+      "sampler_seed": 2069418747,
+      "foul_play_seed": 667071615
+    },
+    {
+      "game": 155,
+      "pair": 77,
+      "opponent_team": 3,
+      "side": "p2",
+      "sampler_seed": 1005185082,
+      "foul_play_seed": 1415329655
+    },
+    {
+      "game": 187,
+      "pair": 93,
+      "opponent_team": 7,
+      "side": "p2",
+      "sampler_seed": 1210731811,
+      "foul_play_seed": 276807731
+    },
+    {
+      "game": 164,
+      "pair": 82,
+      "opponent_team": 10,
+      "side": "p1",
+      "sampler_seed": 904112966,
+      "foul_play_seed": 2145762
+    },
+    {
+      "game": 159,
+      "pair": 79,
+      "opponent_team": 8,
+      "side": "p2",
+      "sampler_seed": 1580892180,
+      "foul_play_seed": 200177569
+    },
+    {
+      "game": 134,
+      "pair": 67,
+      "opponent_team": 2,
+      "side": "p1",
+      "sampler_seed": 1656244892,
+      "foul_play_seed": 2078522819
+    },
+    {
+      "game": 18,
+      "pair": 9,
+      "opponent_team": 12,
+      "side": "p1",
+      "sampler_seed": 2088847413,
+      "foul_play_seed": 1908737164
+    },
+    {
+      "game": 80,
+      "pair": 40,
+      "opponent_team": 0,
+      "side": "p1",
+      "sampler_seed": 489989083,
+      "foul_play_seed": 1812949212
+    },
+    {
+      "game": 118,
+      "pair": 59,
+      "opponent_team": 12,
+      "side": "p1",
+      "sampler_seed": 1980202989,
+      "foul_play_seed": 1404805904
+    },
+    {
+      "game": 108,
+      "pair": 54,
+      "opponent_team": 8,
+      "side": "p1",
+      "sampler_seed": 317837860,
+      "foul_play_seed": 1995610955
+    },
+    {
+      "game": 47,
+      "pair": 23,
+      "opponent_team": 12,
+      "side": "p2",
+      "sampler_seed": 1207639539,
+      "foul_play_seed": 695939895
+    },
+    {
+      "game": 236,
+      "pair": 118,
+      "opponent_team": 9,
+      "side": "p1",
+      "sampler_seed": 1680812526,
+      "foul_play_seed": 365429942
+    },
+    {
+      "game": 242,
+      "pair": 121,
+      "opponent_team": 5,
+      "side": "p1",
+      "sampler_seed": 914890768,
+      "foul_play_seed": 1917582114
+    },
+    {
+      "game": 387,
+      "pair": 193,
+      "opponent_team": 11,
+      "side": "p2",
+      "sampler_seed": 1976672,
+      "foul_play_seed": 914661073
+    },
+    {
+      "game": 203,
+      "pair": 101,
+      "opponent_team": 2,
+      "side": "p2",
+      "sampler_seed": 841641650,
+      "foul_play_seed": 427123983
+    },
+    {
+      "game": 237,
+      "pair": 118,
+      "opponent_team": 9,
+      "side": "p2",
+      "sampler_seed": 698416706,
+      "foul_play_seed": 1136490286
+    },
+    {
+      "game": 265,
+      "pair": 132,
+      "opponent_team": 10,
+      "side": "p2",
+      "sampler_seed": 929685380,
+      "foul_play_seed": 1282628645
+    },
+    {
+      "game": 397,
+      "pair": 198,
+      "opponent_team": 4,
+      "side": "p2",
+      "sampler_seed": 478844348,
+      "foul_play_seed": 1610656525
+    },
+    {
+      "game": 259,
+      "pair": 129,
+      "opponent_team": 10,
+      "side": "p2",
+      "sampler_seed": 707830187,
+      "foul_play_seed": 1300625286
+    },
+    {
+      "game": 191,
+      "pair": 95,
+      "opponent_team": 8,
+      "side": "p2",
+      "sampler_seed": 1950360220,
+      "foul_play_seed": 1667756455
+    },
+    {
+      "game": 19,
+      "pair": 9,
+      "opponent_team": 12,
+      "side": "p2",
+      "sampler_seed": 1129498927,
+      "foul_play_seed": 134545868
+    },
+    {
+      "game": 27,
+      "pair": 13,
+      "opponent_team": 0,
+      "side": "p2",
+      "sampler_seed": 2015891945,
+      "foul_play_seed": 2092579970
+    },
+    {
+      "game": 348,
+      "pair": 174,
+      "opponent_team": 3,
+      "side": "p1",
+      "sampler_seed": 1104395666,
+      "foul_play_seed": 1516922763
+    },
+    {
+      "game": 241,
+      "pair": 120,
+      "opponent_team": 4,
+      "side": "p2",
+      "sampler_seed": 308637428,
+      "foul_play_seed": 1131777442
+    },
+    {
+      "game": 39,
+      "pair": 19,
+      "opponent_team": 6,
+      "side": "p2",
+      "sampler_seed": 1808876635,
+      "foul_play_seed": 1137595838
+    },
+    {
+      "game": 22,
+      "pair": 11,
+      "opponent_team": 0,
+      "side": "p1",
+      "sampler_seed": 1158831056,
+      "foul_play_seed": 1311977026
+    },
+    {
+      "game": 343,
+      "pair": 171,
+      "opponent_team": 5,
+      "side": "p2",
+      "sampler_seed": 30372792,
+      "foul_play_seed": 432716740
+    },
+    {
+      "game": 388,
+      "pair": 194,
+      "opponent_team": 1,
+      "side": "p1",
+      "sampler_seed": 17521263,
+      "foul_play_seed": 1385468088
+    },
+    {
+      "game": 225,
+      "pair": 112,
+      "opponent_team": 11,
+      "side": "p2",
+      "sampler_seed": 1613406462,
+      "foul_play_seed": 2001771977
+    },
+    {
+      "game": 254,
+      "pair": 127,
+      "opponent_team": 6,
+      "side": "p1",
+      "sampler_seed": 1720152184,
+      "foul_play_seed": 225540242
+    },
+    {
+      "game": 49,
+      "pair": 24,
+      "opponent_team": 1,
+      "side": "p2",
+      "sampler_seed": 496880871,
+      "foul_play_seed": 1794467402
+    },
+    {
+      "game": 116,
+      "pair": 58,
+      "opponent_team": 5,
+      "side": "p1",
+      "sampler_seed": 621082093,
+      "foul_play_seed": 13078317
+    },
+    {
+      "game": 117,
+      "pair": 58,
+      "opponent_team": 5,
+      "side": "p2",
+      "sampler_seed": 1593573717,
+      "foul_play_seed": 523332330
+    },
+    {
+      "game": 6,
+      "pair": 3,
+      "opponent_team": 2,
+      "side": "p1",
+      "sampler_seed": 682298739,
+      "foul_play_seed": 268001681
+    },
+    {
+      "game": 13,
+      "pair": 6,
+      "opponent_team": 3,
+      "side": "p2",
+      "sampler_seed": 835762926,
+      "foul_play_seed": 510642925
+    },
+    {
+      "game": 105,
+      "pair": 52,
+      "opponent_team": 2,
+      "side": "p2",
+      "sampler_seed": 1855378757,
+      "foul_play_seed": 1745012020
+    },
+    {
+      "game": 317,
+      "pair": 158,
+      "opponent_team": 7,
+      "side": "p2",
+      "sampler_seed": 1742995051,
+      "foul_play_seed": 1971983916
+    },
+    {
+      "game": 295,
+      "pair": 147,
+      "opponent_team": 4,
+      "side": "p2",
+      "sampler_seed": 1177749035,
+      "foul_play_seed": 1146545735
+    },
+    {
+      "game": 286,
+      "pair": 143,
+      "opponent_team": 12,
+      "side": "p1",
+      "sampler_seed": 1894430942,
+      "foul_play_seed": 688742600
+    },
+    {
+      "game": 82,
+      "pair": 41,
+      "opponent_team": 6,
+      "side": "p1",
+      "sampler_seed": 1243418710,
+      "foul_play_seed": 1014459907
+    },
+    {
+      "game": 261,
+      "pair": 130,
+      "opponent_team": 9,
+      "side": "p2",
+      "sampler_seed": 2075534559,
+      "foul_play_seed": 436939118
+    },
+    {
+      "game": 238,
+      "pair": 119,
+      "opponent_team": 0,
+      "side": "p1",
+      "sampler_seed": 1685062443,
+      "foul_play_seed": 1684878239
+    },
+    {
+      "game": 219,
+      "pair": 109,
+      "opponent_team": 9,
+      "side": "p2",
+      "sampler_seed": 1001735667,
+      "foul_play_seed": 1976969830
+    },
+    {
+      "game": 121,
+      "pair": 60,
+      "opponent_team": 9,
+      "side": "p2",
+      "sampler_seed": 1575081831,
+      "foul_play_seed": 831083100
+    },
+    {
+      "game": 154,
+      "pair": 77,
+      "opponent_team": 3,
+      "side": "p1",
+      "sampler_seed": 916262902,
+      "foul_play_seed": 265997695
+    },
+    {
+      "game": 114,
+      "pair": 57,
+      "opponent_team": 7,
+      "side": "p1",
+      "sampler_seed": 981011454,
+      "foul_play_seed": 1808436836
+    },
+    {
+      "game": 189,
+      "pair": 94,
+      "opponent_team": 4,
+      "side": "p2",
+      "sampler_seed": 748142297,
+      "foul_play_seed": 1230624797
+    },
+    {
+      "game": 211,
+      "pair": 105,
+      "opponent_team": 3,
+      "side": "p2",
+      "sampler_seed": 274054498,
+      "foul_play_seed": 363289734
+    },
+    {
+      "game": 171,
+      "pair": 85,
+      "opponent_team": 1,
+      "side": "p2",
+      "sampler_seed": 1307145849,
+      "foul_play_seed": 1027862569
+    },
+    {
+      "game": 147,
+      "pair": 73,
+      "opponent_team": 9,
+      "side": "p2",
+      "sampler_seed": 1974867836,
+      "foul_play_seed": 832626199
+    },
+    {
+      "game": 220,
+      "pair": 110,
+      "opponent_team": 6,
+      "side": "p1",
+      "sampler_seed": 335460773,
+      "foul_play_seed": 1704551415
+    },
+    {
+      "game": 380,
+      "pair": 190,
+      "opponent_team": 2,
+      "side": "p1",
+      "sampler_seed": 809592523,
+      "foul_play_seed": 2098036400
+    },
+    {
+      "game": 329,
+      "pair": 164,
+      "opponent_team": 10,
+      "side": "p2",
+      "sampler_seed": 1058614146,
+      "foul_play_seed": 20928276
+    },
+    {
+      "game": 140,
+      "pair": 70,
+      "opponent_team": 12,
+      "side": "p1",
+      "sampler_seed": 657825071,
+      "foul_play_seed": 461354442
+    },
+    {
+      "game": 79,
+      "pair": 39,
+      "opponent_team": 1,
+      "side": "p2",
+      "sampler_seed": 1652328401,
+      "foul_play_seed": 218848246
+    },
+    {
+      "game": 233,
+      "pair": 116,
+      "opponent_team": 10,
+      "side": "p2",
+      "sampler_seed": 1217269485,
+      "foul_play_seed": 2118536113
+    },
+    {
+      "game": 264,
+      "pair": 132,
+      "opponent_team": 10,
+      "side": "p1",
+      "sampler_seed": 852285115,
+      "foul_play_seed": 1285274015
+    },
+    {
+      "game": 169,
+      "pair": 84,
+      "opponent_team": 9,
+      "side": "p2",
+      "sampler_seed": 1029263926,
+      "foul_play_seed": 190557067
+    },
+    {
+      "game": 341,
+      "pair": 170,
+      "opponent_team": 2,
+      "side": "p2",
+      "sampler_seed": 1902918111,
+      "foul_play_seed": 411832083
+    },
+    {
+      "game": 353,
+      "pair": 176,
+      "opponent_team": 0,
+      "side": "p2",
+      "sampler_seed": 855113136,
+      "foul_play_seed": 1662955479
+    },
+    {
+      "game": 296,
+      "pair": 148,
+      "opponent_team": 2,
+      "side": "p1",
+      "sampler_seed": 403407337,
+      "foul_play_seed": 1913532246
+    },
+    {
+      "game": 345,
+      "pair": 172,
+      "opponent_team": 4,
+      "side": "p2",
+      "sampler_seed": 1010503610,
+      "foul_play_seed": 1723304216
+    },
+    {
+      "game": 243,
+      "pair": 121,
+      "opponent_team": 5,
+      "side": "p2",
+      "sampler_seed": 1004492849,
+      "foul_play_seed": 1689083713
+    },
+    {
+      "game": 7,
+      "pair": 3,
+      "opponent_team": 2,
+      "side": "p2",
+      "sampler_seed": 38621214,
+      "foul_play_seed": 1122835061
+    },
+    {
+      "game": 249,
+      "pair": 124,
+      "opponent_team": 11,
+      "side": "p2",
+      "sampler_seed": 1012917750,
+      "foul_play_seed": 1208535400
+    },
+    {
+      "game": 398,
+      "pair": 199,
+      "opponent_team": 12,
+      "side": "p1",
+      "sampler_seed": 649268302,
+      "foul_play_seed": 1480554455
+    },
+    {
+      "game": 376,
+      "pair": 188,
+      "opponent_team": 4,
+      "side": "p1",
+      "sampler_seed": 144276766,
+      "foul_play_seed": 1547132985
+    },
+    {
+      "game": 95,
+      "pair": 47,
+      "opponent_team": 7,
+      "side": "p2",
+      "sampler_seed": 1911859670,
+      "foul_play_seed": 227652357
+    },
+    {
+      "game": 294,
+      "pair": 147,
+      "opponent_team": 4,
+      "side": "p1",
+      "sampler_seed": 921308891,
+      "foul_play_seed": 1281868620
+    },
+    {
+      "game": 277,
+      "pair": 138,
+      "opponent_team": 1,
+      "side": "p2",
+      "sampler_seed": 1678322890,
+      "foul_play_seed": 1086220103
+    },
+    {
+      "game": 217,
+      "pair": 108,
+      "opponent_team": 4,
+      "side": "p2",
+      "sampler_seed": 211617695,
+      "foul_play_seed": 1323116371
+    },
+    {
+      "game": 347,
+      "pair": 173,
+      "opponent_team": 12,
+      "side": "p2",
+      "sampler_seed": 1078169232,
+      "foul_play_seed": 1230503456
+    },
+    {
+      "game": 396,
+      "pair": 198,
+      "opponent_team": 4,
+      "side": "p1",
+      "sampler_seed": 1014518624,
+      "foul_play_seed": 1616782569
+    },
+    {
+      "game": 361,
+      "pair": 180,
+      "opponent_team": 10,
+      "side": "p2",
+      "sampler_seed": 1385367922,
+      "foul_play_seed": 1960348350
+    },
+    {
+      "game": 299,
+      "pair": 149,
+      "opponent_team": 8,
+      "side": "p2",
+      "sampler_seed": 1282771563,
+      "foul_play_seed": 1957083426
+    },
+    {
+      "game": 31,
+      "pair": 15,
+      "opponent_team": 5,
+      "side": "p2",
+      "sampler_seed": 1796795399,
+      "foul_play_seed": 2014875227
+    },
+    {
+      "game": 166,
+      "pair": 83,
+      "opponent_team": 11,
+      "side": "p1",
+      "sampler_seed": 68518507,
+      "foul_play_seed": 1719628189
+    },
+    {
+      "game": 270,
+      "pair": 135,
+      "opponent_team": 11,
+      "side": "p1",
+      "sampler_seed": 810916362,
+      "foul_play_seed": 1222959727
+    },
+    {
+      "game": 357,
+      "pair": 178,
+      "opponent_team": 6,
+      "side": "p2",
+      "sampler_seed": 2049300011,
+      "foul_play_seed": 868922097
+    },
+    {
+      "game": 192,
+      "pair": 96,
+      "opponent_team": 10,
+      "side": "p1",
+      "sampler_seed": 259585695,
+      "foul_play_seed": 724500122
+    },
+    {
+      "game": 356,
+      "pair": 178,
+      "opponent_team": 6,
+      "side": "p1",
+      "sampler_seed": 1403358750,
+      "foul_play_seed": 127503025
+    },
+    {
+      "game": 75,
+      "pair": 37,
+      "opponent_team": 7,
+      "side": "p2",
+      "sampler_seed": 1800269215,
+      "foul_play_seed": 225003385
+    },
+    {
+      "game": 151,
+      "pair": 75,
+      "opponent_team": 10,
+      "side": "p2",
+      "sampler_seed": 622455039,
+      "foul_play_seed": 1151696429
+    },
+    {
+      "game": 41,
+      "pair": 20,
+      "opponent_team": 8,
+      "side": "p2",
+      "sampler_seed": 1175045790,
+      "foul_play_seed": 907971823
+    },
+    {
+      "game": 315,
+      "pair": 157,
+      "opponent_team": 12,
+      "side": "p2",
+      "sampler_seed": 1474334767,
+      "foul_play_seed": 452412595
+    },
+    {
+      "game": 252,
+      "pair": 126,
+      "opponent_team": 12,
+      "side": "p1",
+      "sampler_seed": 584748159,
+      "foul_play_seed": 1972469825
+    },
+    {
+      "game": 112,
+      "pair": 56,
+      "opponent_team": 1,
+      "side": "p1",
+      "sampler_seed": 1026881446,
+      "foul_play_seed": 747256616
+    },
+    {
+      "game": 111,
+      "pair": 55,
+      "opponent_team": 3,
+      "side": "p2",
+      "sampler_seed": 783745518,
+      "foul_play_seed": 778830519
+    },
+    {
+      "game": 222,
+      "pair": 111,
+      "opponent_team": 0,
+      "side": "p1",
+      "sampler_seed": 2128476737,
+      "foul_play_seed": 292182647
+    },
+    {
+      "game": 288,
+      "pair": 144,
+      "opponent_team": 5,
+      "side": "p1",
+      "sampler_seed": 49322650,
+      "foul_play_seed": 365982353
+    },
+    {
+      "game": 209,
+      "pair": 104,
+      "opponent_team": 12,
+      "side": "p2",
+      "sampler_seed": 668472012,
+      "foul_play_seed": 861167503
+    },
+    {
+      "game": 197,
+      "pair": 98,
+      "opponent_team": 1,
+      "side": "p2",
+      "sampler_seed": 708657485,
+      "foul_play_seed": 1178577949
+    },
+    {
+      "game": 350,
+      "pair": 175,
+      "opponent_team": 11,
+      "side": "p1",
+      "sampler_seed": 1513868435,
+      "foul_play_seed": 236184155
+    },
+    {
+      "game": 223,
+      "pair": 111,
+      "opponent_team": 0,
+      "side": "p2",
+      "sampler_seed": 965938845,
+      "foul_play_seed": 50565114
+    },
+    {
+      "game": 352,
+      "pair": 176,
+      "opponent_team": 0,
+      "side": "p1",
+      "sampler_seed": 877146485,
+      "foul_play_seed": 588450837
+    },
+    {
+      "game": 395,
+      "pair": 197,
+      "opponent_team": 10,
+      "side": "p2",
+      "sampler_seed": 1833938759,
+      "foul_play_seed": 1727943444
+    },
+    {
+      "game": 127,
+      "pair": 63,
+      "opponent_team": 11,
+      "side": "p2",
+      "sampler_seed": 1959137584,
+      "foul_play_seed": 1640246946
+    },
+    {
+      "game": 218,
+      "pair": 109,
+      "opponent_team": 9,
+      "side": "p1",
+      "sampler_seed": 6437327,
+      "foul_play_seed": 426859221
+    },
+    {
+      "game": 355,
+      "pair": 177,
+      "opponent_team": 7,
+      "side": "p2",
+      "sampler_seed": 54364235,
+      "foul_play_seed": 2069931777
+    },
+    {
+      "game": 392,
+      "pair": 196,
+      "opponent_team": 3,
+      "side": "p1",
+      "sampler_seed": 1172215172,
+      "foul_play_seed": 35757487
+    },
+    {
+      "game": 399,
+      "pair": 199,
+      "opponent_team": 12,
+      "side": "p2",
+      "sampler_seed": 1423210024,
+      "foul_play_seed": 848393597
+    },
+    {
+      "game": 229,
+      "pair": 114,
+      "opponent_team": 2,
+      "side": "p2",
+      "sampler_seed": 2107156568,
+      "foul_play_seed": 1276564556
+    },
+    {
+      "game": 99,
+      "pair": 49,
+      "opponent_team": 4,
+      "side": "p2",
+      "sampler_seed": 1648771006,
+      "foul_play_seed": 143970877
+    },
+    {
+      "game": 141,
+      "pair": 70,
+      "opponent_team": 12,
+      "side": "p2",
+      "sampler_seed": 81131056,
+      "foul_play_seed": 846882892
+    },
+    {
+      "game": 359,
+      "pair": 179,
+      "opponent_team": 8,
+      "side": "p2",
+      "sampler_seed": 642601038,
+      "foul_play_seed": 657872512
+    },
+    {
+      "game": 106,
+      "pair": 53,
+      "opponent_team": 10,
+      "side": "p1",
+      "sampler_seed": 348609459,
+      "foul_play_seed": 179735915
+    },
+    {
+      "game": 9,
+      "pair": 4,
+      "opponent_team": 4,
+      "side": "p2",
+      "sampler_seed": 1953918466,
+      "foul_play_seed": 2012416041
+    },
+    {
+      "game": 246,
+      "pair": 123,
+      "opponent_team": 8,
+      "side": "p1",
+      "sampler_seed": 665310674,
+      "foul_play_seed": 1429036795
+    },
+    {
+      "game": 204,
+      "pair": 102,
+      "opponent_team": 12,
+      "side": "p1",
+      "sampler_seed": 1133288999,
+      "foul_play_seed": 925191149
+    },
+    {
+      "game": 196,
+      "pair": 98,
+      "opponent_team": 1,
+      "side": "p1",
+      "sampler_seed": 160246719,
+      "foul_play_seed": 1308307349
+    },
+    {
+      "game": 145,
+      "pair": 72,
+      "opponent_team": 11,
+      "side": "p2",
+      "sampler_seed": 2035490958,
+      "foul_play_seed": 1287999936
+    },
+    {
+      "game": 354,
+      "pair": 177,
+      "opponent_team": 7,
+      "side": "p1",
+      "sampler_seed": 1732608895,
+      "foul_play_seed": 1948242844
+    },
+    {
+      "game": 390,
+      "pair": 195,
+      "opponent_team": 6,
+      "side": "p1",
+      "sampler_seed": 727330544,
+      "foul_play_seed": 222757210
+    },
+    {
+      "game": 104,
+      "pair": 52,
+      "opponent_team": 2,
+      "side": "p1",
+      "sampler_seed": 209081872,
+      "foul_play_seed": 1152520775
+    },
+    {
+      "game": 240,
+      "pair": 120,
+      "opponent_team": 4,
+      "side": "p1",
+      "sampler_seed": 217006633,
+      "foul_play_seed": 1410521623
+    },
+    {
+      "game": 200,
+      "pair": 100,
+      "opponent_team": 9,
+      "side": "p1",
+      "sampler_seed": 762751088,
+      "foul_play_seed": 2126832107
+    },
+    {
+      "game": 213,
+      "pair": 106,
+      "opponent_team": 7,
+      "side": "p2",
+      "sampler_seed": 175579486,
+      "foul_play_seed": 738446202
+    },
+    {
+      "game": 198,
+      "pair": 99,
+      "opponent_team": 5,
+      "side": "p1",
+      "sampler_seed": 1049775858,
+      "foul_play_seed": 1295634453
+    },
+    {
+      "game": 125,
+      "pair": 62,
+      "opponent_team": 0,
+      "side": "p2",
+      "sampler_seed": 820741454,
+      "foul_play_seed": 25447232
+    },
+    {
+      "game": 324,
+      "pair": 162,
+      "opponent_team": 1,
+      "side": "p1",
+      "sampler_seed": 879795209,
+      "foul_play_seed": 907729375
+    },
+    {
+      "game": 161,
+      "pair": 80,
+      "opponent_team": 3,
+      "side": "p2",
+      "sampler_seed": 203424502,
+      "foul_play_seed": 1699109691
+    },
+    {
+      "game": 377,
+      "pair": 188,
+      "opponent_team": 4,
+      "side": "p2",
+      "sampler_seed": 689221009,
+      "foul_play_seed": 1499880360
+    },
+    {
+      "game": 115,
+      "pair": 57,
+      "opponent_team": 7,
+      "side": "p2",
+      "sampler_seed": 434251225,
+      "foul_play_seed": 1215050556
+    },
+    {
+      "game": 370,
+      "pair": 185,
+      "opponent_team": 7,
+      "side": "p1",
+      "sampler_seed": 592815850,
+      "foul_play_seed": 1645952498
+    },
+    {
+      "game": 326,
+      "pair": 163,
+      "opponent_team": 3,
+      "side": "p1",
+      "sampler_seed": 2034054248,
+      "foul_play_seed": 1412648591
+    },
+    {
+      "game": 128,
+      "pair": 64,
+      "opponent_team": 6,
+      "side": "p1",
+      "sampler_seed": 1002759438,
+      "foul_play_seed": 1099891952
+    },
+    {
+      "game": 68,
+      "pair": 34,
+      "opponent_team": 6,
+      "side": "p1",
+      "sampler_seed": 1912490386,
+      "foul_play_seed": 1902400660
+    },
+    {
+      "game": 57,
+      "pair": 28,
+      "opponent_team": 8,
+      "side": "p2",
+      "sampler_seed": 1921034149,
+      "foul_play_seed": 987540927
+    },
+    {
+      "game": 3,
+      "pair": 1,
+      "opponent_team": 5,
+      "side": "p2",
+      "sampler_seed": 1049321364,
+      "foul_play_seed": 1076881487
+    },
+    {
+      "game": 367,
+      "pair": 183,
+      "opponent_team": 10,
+      "side": "p2",
+      "sampler_seed": 724334446,
+      "foul_play_seed": 1324955678
+    },
+    {
+      "game": 32,
+      "pair": 16,
+      "opponent_team": 9,
+      "side": "p1",
+      "sampler_seed": 359308834,
+      "foul_play_seed": 860301652
+    },
+    {
+      "game": 224,
+      "pair": 112,
+      "opponent_team": 11,
+      "side": "p1",
+      "sampler_seed": 1745518800,
+      "foul_play_seed": 2025604029
+    },
+    {
+      "game": 101,
+      "pair": 50,
+      "opponent_team": 5,
+      "side": "p2",
+      "sampler_seed": 582448943,
+      "foul_play_seed": 144981850
+    },
+    {
+      "game": 305,
+      "pair": 152,
+      "opponent_team": 9,
+      "side": "p2",
+      "sampler_seed": 374151102,
+      "foul_play_seed": 1880834490
+    },
+    {
+      "game": 30,
+      "pair": 15,
+      "opponent_team": 5,
+      "side": "p1",
+      "sampler_seed": 1697518573,
+      "foul_play_seed": 671070622
+    },
+    {
+      "game": 318,
+      "pair": 159,
+      "opponent_team": 4,
+      "side": "p1",
+      "sampler_seed": 1649971073,
+      "foul_play_seed": 883835142
+    },
+    {
+      "game": 184,
+      "pair": 92,
+      "opponent_team": 0,
+      "side": "p1",
+      "sampler_seed": 378087072,
+      "foul_play_seed": 2025287043
+    },
+    {
+      "game": 74,
+      "pair": 37,
+      "opponent_team": 7,
+      "side": "p1",
+      "sampler_seed": 1408333952,
+      "foul_play_seed": 1946138905
+    },
+    {
+      "game": 107,
+      "pair": 53,
+      "opponent_team": 10,
+      "side": "p2",
+      "sampler_seed": 125144744,
+      "foul_play_seed": 1307785719
+    },
+    {
+      "game": 149,
+      "pair": 74,
+      "opponent_team": 5,
+      "side": "p2",
+      "sampler_seed": 713568821,
+      "foul_play_seed": 1995533112
+    },
+    {
+      "game": 179,
+      "pair": 89,
+      "opponent_team": 0,
+      "side": "p2",
+      "sampler_seed": 1287162316,
+      "foul_play_seed": 1625113044
+    },
+    {
+      "game": 16,
+      "pair": 8,
+      "opponent_team": 6,
+      "side": "p1",
+      "sampler_seed": 898059792,
+      "foul_play_seed": 1859505034
+    },
+    {
+      "game": 103,
+      "pair": 51,
+      "opponent_team": 8,
+      "side": "p2",
+      "sampler_seed": 233696213,
+      "foul_play_seed": 1994222579
+    },
+    {
+      "game": 306,
+      "pair": 153,
+      "opponent_team": 1,
+      "side": "p1",
+      "sampler_seed": 1327111539,
+      "foul_play_seed": 1535574832
+    },
+    {
+      "game": 69,
+      "pair": 34,
+      "opponent_team": 6,
+      "side": "p2",
+      "sampler_seed": 921928116,
+      "foul_play_seed": 1678495446
+    },
+    {
+      "game": 73,
+      "pair": 36,
+      "opponent_team": 3,
+      "side": "p2",
+      "sampler_seed": 252456573,
+      "foul_play_seed": 913311788
+    },
+    {
+      "game": 10,
+      "pair": 5,
+      "opponent_team": 8,
+      "side": "p1",
+      "sampler_seed": 276436162,
+      "foul_play_seed": 345043559
+    },
+    {
+      "game": 177,
+      "pair": 88,
+      "opponent_team": 2,
+      "side": "p2",
+      "sampler_seed": 1400716129,
+      "foul_play_seed": 696582674
+    },
+    {
+      "game": 91,
+      "pair": 45,
+      "opponent_team": 9,
+      "side": "p2",
+      "sampler_seed": 1602567109,
+      "foul_play_seed": 1920076167
+    },
+    {
+      "game": 59,
+      "pair": 29,
+      "opponent_team": 9,
+      "side": "p2",
+      "sampler_seed": 289116941,
+      "foul_play_seed": 18811146
+    },
+    {
+      "game": 56,
+      "pair": 28,
+      "opponent_team": 8,
+      "side": "p1",
+      "sampler_seed": 577894775,
+      "foul_play_seed": 1667878034
+    },
+    {
+      "game": 37,
+      "pair": 18,
+      "opponent_team": 4,
+      "side": "p2",
+      "sampler_seed": 1379019984,
+      "foul_play_seed": 1714616588
+    },
+    {
+      "game": 358,
+      "pair": 179,
+      "opponent_team": 8,
+      "side": "p1",
+      "sampler_seed": 1539311368,
+      "foul_play_seed": 1072095781
+    },
+    {
+      "game": 339,
+      "pair": 169,
+      "opponent_team": 9,
+      "side": "p2",
+      "sampler_seed": 1579891874,
+      "foul_play_seed": 2014315922
+    },
+    {
+      "game": 28,
+      "pair": 14,
+      "opponent_team": 11,
+      "side": "p1",
+      "sampler_seed": 1955468787,
+      "foul_play_seed": 1227045850
+    },
+    {
+      "game": 216,
+      "pair": 108,
+      "opponent_team": 4,
+      "side": "p1",
+      "sampler_seed": 404942591,
+      "foul_play_seed": 1836347228
+    },
+    {
+      "game": 136,
+      "pair": 68,
+      "opponent_team": 8,
+      "side": "p1",
+      "sampler_seed": 1413144786,
+      "foul_play_seed": 1465415130
+    },
+    {
+      "game": 109,
+      "pair": 54,
+      "opponent_team": 8,
+      "side": "p2",
+      "sampler_seed": 1536401373,
+      "foul_play_seed": 593932818
+    },
+    {
+      "game": 76,
+      "pair": 38,
+      "opponent_team": 5,
+      "side": "p1",
+      "sampler_seed": 944853752,
+      "foul_play_seed": 410308747
+    },
+    {
+      "game": 188,
+      "pair": 94,
+      "opponent_team": 4,
+      "side": "p1",
+      "sampler_seed": 1256193139,
+      "foul_play_seed": 1279545256
+    }
+  ],
+  "stopping_rule": "All 400 scheduled games, no outcome-based early stopping. Stop on infrastructure errors; preserve them and require review before resuming.",
+  "inference_scope": "Fixed own team, familiar synthetic/component opponent pool; not ladder Elo or unseen-team generalization.",
+  "randomness": "Scheduling and Python sampler seeds frozen; native wall-budget search and live Showdown battle seeds are not deterministic.",
+  "uncertainty": "Wilson interval for wins; approximate score interval with half ties; score bootstrap over opponent-team clusters. Repeated teams limit independence."
+}
