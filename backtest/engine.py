@@ -133,7 +133,7 @@ def main(argv: list[str] | None = None) -> int:
     args.out.mkdir(parents=True, exist_ok=True)
     played, skipped = [], []
     # Written game by game, so a run cut short keeps every finished game.
-    with open(args.out / f"{name}.jsonl", "w", encoding="utf-8") as out:
+    with open(args.out / f"{name}.jsonl", "w", encoding="utf-8", buffering=1) as out:
         for n, game in enumerate(games, 1):
             if missing := missing_species(game, priors):
                 skipped.append(missing)
