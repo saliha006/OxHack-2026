@@ -231,3 +231,14 @@ def test_fphard_runs_foul_play_with_four_parallel_worlds_and_other_levels_keep_o
     assert harness.arm_config("fphard", 3.0)["world_policy"].startswith("8 early")
     assert harness.arm_config("fphigh", 3.0)["search_parallelism"] == 1
     assert harness.PAIRINGS["mcts-foulplay-hard"] == ("mcts8", "fphard", 60)
+
+
+def test_the_joint_arm_loads_its_own_priors_and_records_them(monkeypatch):
+    built = []
+    monkeypatch.setattr(harness, "Agent", lambda priors, **kw: built.append((priors, kw)))
+    harness.ARMS["mcts8joint"]({"run": "priors"}, 3.0)
+    harness.ARMS["mcts8"]({"run": "priors"}, 3.0)
+    (joint, joint_kw), (plain, _) = built
+    assert "kingambit" in joint["species"] and plain == {"run": "priors"}
+    assert "priors" not in joint_kw and joint_kw["mcts_worlds"] == 8
+    assert harness.arm_config("mcts8joint", 3.0)["priors"] == "data/set_candidates_joint.json"

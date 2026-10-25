@@ -7,6 +7,7 @@
 import argparse
 import asyncio
 import copy
+import functools
 import hashlib
 import json
 import logging
@@ -113,10 +114,20 @@ MCTS_ARM_OPTIONS = {
     "mcts8frozen": {"mcts_worlds": 8, "search_ms": 150, "frozen_beliefs": True},
     # Same 1.2 s as mcts8, so the 3 s turn budget is untouched: fewer, deeper trees per turn.
     "mcts4x300": {"mcts_worlds": 4, "search_ms": 300},
+    # Observed complete sets blended into the usage candidates (data/pipeline/joint_sets.py), Foul Play's prior.
+    "mcts8joint": {"mcts_worlds": 8, "search_ms": 150, "priors": "data/set_candidates_joint.json"},
 }
+
+
+@functools.cache
+def arm_priors(path: str) -> dict:
+    return json.loads(Path(path).read_text(encoding="utf-8"))
+
+
 for arm_name, arm_options in MCTS_ARM_OPTIONS.items():
     ARMS[arm_name] = lambda priors, budget, options=arm_options: Agent(
-        priors, budget=budget, backend="mcts", engine_threads=1, **options)
+        arm_priors(options["priors"]) if "priors" in options else priors, budget=budget, backend="mcts",
+        engine_threads=1, **{k: v for k, v in options.items() if k != "priors"})
 
 MCTS_PAIRINGS = {
     "mcts-current": ("mcts1", "full", 20),
@@ -133,6 +144,8 @@ MCTS_PAIRINGS = {
     "mcts-deeper": ("mcts4x300", "mcts8", 80),
     "mcts-foulplay-hard": ("mcts8", "fphard", 60),
     "mcts-deeper-foulplay-hard": ("mcts4x300", "fphard", 60),
+    "mcts-joint-foulplay-hard": ("mcts8joint", "fphard", 60),
+    "mcts-joint": ("mcts8joint", "mcts8", 80),
 }
 # Mix levels are deliberately uneven, so strength doesn't step up by a fixed amount; mb46 overlaps the sh levels.
 BASELINES = {"simpleheuristics": SimpleHeuristicsPlayer, "maxbasepower": MaxBasePowerPlayer, "random": RandomPlayer,
