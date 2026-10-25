@@ -12,6 +12,25 @@ from tests.test_belief import PRIORS
 from tests.turn2 import EXAMPLE, REQUEST, SETS
 
 
+def ready_worker(worker):
+    """Prime only process imports for tests of faults after a worker has started.
+
+    Requeue the real ready message: prior/job transmission and result handling
+    still happen inside the measured short decision budget. Explicit cold-start
+    and blocked-bootstrap tests below keep their original deadlines.
+    """
+    try:
+        worker._start()
+        event, message = worker.inbox.get(timeout=3)
+        assert event == 'message' and message['kind'] == 'ready'
+        assert not worker.initialised
+        worker.inbox.put((event, message))
+        return worker
+    except BaseException:
+        worker.close()
+        raise
+
+
 def stalled(connection, priors):
     connection.recv()
     time.sleep(30)
@@ -35,6 +54,8 @@ def crash(connection, priors):
 def test_stalled_native_or_preparation_worker_cannot_hold_parent(target, partial):
     agent = Agent(PRIORS, backend="mcts", budget=0.6)
     agent.worker = SearchWorker(PRIORS, target=target)
+    if partial:
+        ready_worker(agent.worker)
     before = time.monotonic()
     try:
         choice = agent.choose(REQUEST, copy.deepcopy(EXAMPLE))
@@ -53,7 +74,9 @@ def test_stalled_native_or_preparation_worker_cannot_hold_parent(target, partial
 
 
 def test_native_process_exit_returns_legal_fallback_and_restart_is_recorded():
-    agent = Agent(PRIORS, backend="mcts", budget=0.6)
+    # Exercise an actual child exit/restart under the production ceiling. A
+    # cold bootstrap timing out first would never reach the injected exit.
+    agent = Agent(PRIORS, backend="mcts", budget=3)
     agent.worker = SearchWorker(PRIORS, target=crash)
     try:
         for _ in range(2):
@@ -128,7 +151,7 @@ def result_then_second_world_stalls(connection, priors):
 
 def test_stalled_announced_world_is_failed_without_discarding_completed_world():
     agent = Agent(PRIORS, backend='mcts', budget=.6)
-    agent.worker = SearchWorker(PRIORS, target=result_then_second_world_stalls)
+    agent.worker = ready_worker(SearchWorker(PRIORS, target=result_then_second_world_stalls))
     try:
         assert agent.choose(REQUEST, copy.deepcopy(EXAMPLE)) == 'move 4'
         trace = agent.last_trace
@@ -155,7 +178,9 @@ def persistent_result(connection, priors):
 
 
 def test_history_reset_is_per_decision_and_cumulative_history_flag_stays_true():
-    agent = Agent(PRIORS, backend='mcts', budget=.6)
+    # This checks generation bookkeeping after real successful starts, rather
+    # than imposing a sub-production cold-import requirement on the fixture.
+    agent = Agent(PRIORS, backend='mcts', budget=3)
     agent.worker = SearchWorker(PRIORS, target=persistent_result)
     try:
         agent.choose(REQUEST, copy.deepcopy(EXAMPLE))
@@ -264,7 +289,7 @@ def result_then_partial_frame_stall(connection, priors):
 @pytest.mark.parametrize('target,partial', [(partial_frame_stall, False), (result_then_partial_frame_stall, True)])
 def test_partial_child_frame_cannot_block_parent_or_erase_previous_results(target, partial):
     agent = Agent(PRIORS, backend='mcts', budget=.6)
-    agent.worker = SearchWorker(PRIORS, target=target)
+    agent.worker = ready_worker(SearchWorker(PRIORS, target=target))
     before = time.monotonic()
     try:
         choice = agent.choose(REQUEST, copy.deepcopy(EXAMPLE))
@@ -293,7 +318,7 @@ def result_then_native_exit(connection, priors):
 
 
 def test_final_completed_world_is_drained_before_native_exit_error():
-    agent = Agent(PRIORS, backend='mcts', budget=.6)
+    agent = Agent(PRIORS, backend='mcts', budget=3)
     agent.worker = SearchWorker(PRIORS, target=result_then_native_exit)
     try:
         assert agent.choose(REQUEST, copy.deepcopy(EXAMPLE)) == 'move 4'
@@ -328,7 +353,7 @@ def test_process_start_failure_closes_bootstrap_pipes_and_allows_clean_restart()
         worker.close()  # safe even after a start that never assigned a pid
         worker.context = real_context
         worker.target = persistent_result
-        messages = list(worker.stream(REQUEST, copy.deepcopy(EXAMPLE), {}, time.monotonic() + .6))
+        messages = list(worker.stream(REQUEST, copy.deepcopy(EXAMPLE), {}, time.monotonic() + 3))
         assert messages[-1]['kind'] == 'done'
     finally:
         worker.close()

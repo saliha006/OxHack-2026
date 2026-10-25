@@ -1,0 +1,77 @@
+{
+  "scope": "Test-fixture investigation; no production process-supervision or deadline changes",
+  "initial_failure": "5 failed,48 passed in11.20s; all failures expected a result/announcement but received a legal fallback before one arrived; no elapsed-bound assertion failed. Mixing disabled in these tests.",
+  "component_comparison": "runs/mcts-improvements/stage6-deadline-component-comparison.json",
+  "identical_to_original_baseline": [
+    "SearchWorker class",
+    "_entry bootstrap",
+    "all5 injected stub targets",
+    "all5 original test bodies before fixture repair"
+  ],
+  "whole_file_difference": "The real worker has previously accepted belief_mode/diagnostic wiring; custom fault targets do not execute that worker body.",
+  "observed_runs": [
+    {
+      "scope": "baseline in earlier shared-load window",
+      "result": "5passed in3.01s"
+    },
+    {
+      "scope": "current in shared-load window",
+      "result": "2failed,3passed in3.65s"
+    },
+    {
+      "scope": "current after extra read-only jobs finished, background games continued",
+      "result": "5failed in3.31s"
+    },
+    {
+      "scope": "final baseline/current pair in same present shared-load window",
+      "baseline": "2failed,3passed in3.60s",
+      "current": "3failed,2passed in3.63s",
+      "one_min_loadavg_at_end": 16.11,
+      "logical_cpus": 16
+    }
+  ],
+  "readiness_probe_ms": {
+    "baseline": [
+      {
+        "ready_seen": 552.441720967181,
+        "first_world_seen": 554.976227984298
+      },
+      {
+        "ready_seen": 496.0921820020303,
+        "first_world_seen": 498.36455297190696
+      }
+    ],
+    "current": [
+      {
+        "ready_seen": 594.2880819784477,
+        "first_world_seen": 596.8332389602438
+      },
+      {
+        "ready_seen": 521.7655849992298,
+        "first_world_seen": 524.0933189634234
+      }
+    ]
+  },
+  "artificial_short_test_search_cutoff_ms": 540,
+  "probe_limit": "Two samples per version, with a longer observation allowance only; shared load varied. These do not reconstruct the initial failure environment or establish a causal current-vs-baseline import cost.",
+  "timeline_correction": "The initial failed run preceded the later fresh belief-scoring and mining jobs. Those jobs are not assigned as the initial cause.",
+  "diagnosis": "Both sources can take longer than the short fixture cutoff before the child can emit any completed world. This is a precondition problem for tests intended to check retention AFTER a world arrives; no evidence found of a newly introduced result-retention defect.",
+  "test_only_change": {
+    "file": "tests/test_search.py",
+    "post_start_cases": "Start child, wait bounded3s for its real ready message, then requeue it. Actual prior/job sends, streaming faults, existing.6s budget and original.9/.95s elapsed bounds remain in the measured decision.",
+    "cold_generation_cases": "Actual exit/restart, generation-history and clean-recovery success use the unchanged production3s ceiling; exact generation/result assertions remain. No prior elapsed assertion was loosened.",
+    "cold_coverage_preserved": "stalledFalse cold-Agent legal fallback; never-ready and blocked-prior bootstrap; blocked search-job send; ready consumed after cutoff; real native3s startup/reuse.",
+    "production": "No change to Agent or SearchWorker production code in this investigation; cold startup continues to count against the actual production3s budget."
+  },
+  "after_fixture_gate": "53passed in13.57s across root mixing, Agent configuration, search and search-policy tests",
+  "logs": {
+    "runs/mcts-improvements/stage6-integration-tests.txt": "1d86790272cf5519391b90c849a6b05dbdae1a8b1ebbc6ebf1e4b608d0b51b16",
+    "runs/mcts-improvements/stage6-deadline-baseline-under-load.txt": "dd4f8151ebc0cca62f855a8b8d34e22edd7b7315c3a1442b32c43eb8d55953f9",
+    "runs/mcts-improvements/stage6-deadline-current-under-load.txt": "2f8a8fb9c908b2eccb21d76231f6c0eacd82e254a462c748f112de2bfd4a025a",
+    "runs/mcts-improvements/stage6-deadline-current-after-readonly.txt": "b2a9a4313c5ff3b75faa7893376b737b7949788b859e850468d5c5a1585e7bca",
+    "runs/mcts-improvements/stage6-deadline-baseline-paired.txt": "c3f6859762c41b78dceedf524706fc766af3702197c6f965b2d6e6d472f755b3",
+    "runs/mcts-improvements/stage6-deadline-current-paired.txt": "094bf0a98e4de9f94cd614a00e9554893f8f420f771bc49ae397627ccc9fa889",
+    "runs/mcts-improvements/stage6-deadline-after-fixture-tests.txt": "f042202ad34ead111c232736b574baa75f4d7a0f22f663d0c805cc7ac007634b"
+  },
+  "followup": "Parent owns full-suite and new-source live smoke/latency verification; observed practical cold-start cost remains reported rather than dismissed."
+}
