@@ -40,7 +40,7 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 |---|---|---|---|---|---|
 | 2026-10-25 03:58 | @derrick | @nate | ⚠️ conflict | **Species missing from the set file kill whole Tiger games:** 6 of the first 10 games in `turns` died on a `KeyError` (`roaringmoon` ×3, `regirock`, `swanna`, `sylveon`). The 2025 games use Pokémon that aren't in the 2026-09 usage, and both `Belief` and `sets_from_game` look species up directly. Same bug as your `urshifu` report. No action yet: how to handle it is @derrick's open call (per-month set files would be one fix) | 2026-10-25 03:58 |
 | 2026-10-25 03:30 | @derrick | @all | 🔀 scope proposal | **Backtesting engine + dashboard: @derrick wants it and builds it** (answers @saliha's 23:27 row). The engine pipes data to the strat layer untouched, from our own run logs and Nate's Tiger `turns`; it lives in `backtest/`. Nothing on `main` yet. Object or ask here | 2026-10-25 03:30 |
-| 2026-10-25 03:30 | @derrick | @saliha | 📨 waiting on | Add Derrick's backtest decisions to PRD NOW (four in entry 2026-10-25 03:30, two in entry 2026-10-25 03:58) and take "Backtesting frontend" out of Pending | 2026-10-25 03:58 |
+| 2026-10-25 03:30 | @derrick | @saliha | 📨 waiting on | Add Derrick's backtest decisions to PRD NOW (entries 2026-10-25 03:30, 04:0x and 2026-10-25 04:15: data handling, request-free strat path, skip games with unlisted species, CLI only, no frontend) and take "Backtesting frontend" out of Pending | 2026-10-25 04:15 |
 | 2026-10-25 03:00 | @nate | @derrick | ⚠️ conflict | **Training data for your model is in Tiger `turns`**: 489,840 turns from 20,000 games, each `state` identical to `states_from_log`; spec, access with your read-only login, splits and baselines in `contracts/turns.md`. Bar to beat on test: HP-heuristic log loss **0.6407**, Brier **0.2246**. Also: `belief.py` `_rebuild` drops status moves on Choice items, but only Assault Vest bars them (Choice Scarf + Trick); a species missing from the set file entirely (e.g. `urshifu`) still raises KeyError in `Belief.__init__`; `predictions.md` A1 credits the set file to saliha | 2026-10-25 03:00 |
 | 2026-10-25 03:00 | @nate | @saliha | ⚠️ conflict | `data/set_candidates.json` is on `main`, so `--priors data/set_candidates.json` (your default) now runs real priors: 243 species + 78 forme aliases (`keldeoresolute → keldeo`, `zamazentacrowned → zamazenta`), which answers the forme row from the data side. Your parser skips old HP strings like `20/100y` (one fact lost per such line) | 2026-10-25 03:00 |
 | 2026-10-25 00:32 | @saliha | @derrick | 🔀 scope proposal | **Decision-layer plan from research pass 10** (`design-decision/strategy-research-pass10.md` on `context`): 4 specialist agents + a cross-check, peer-reviewed + official source + our own measurements. Core ~4.5 h: (1) instrumentation, (2) the two `belief.py` crash fixes + a floor (these caused the 12.7% fallbacks), (3) dual-path featurizer, (5) logistic `LearnedValue` behind a flag with HP fallback; stretch: switch share + quantal opponent model, then pool/depth-2/LP default-off. All your call; key measured facts: one-ply dominance drops Swords Dance and the top-3 EVs on our test position are 0.503/0.501/0.497, so the HP value is the weak point | 2026-10-25 00:32 |
@@ -64,7 +64,7 @@ whenever you log an entry.
 |---|---|---|---|---|---|
 | Saliha | `saliha006` | Bot layer; doc owner | `sali` | `bot/`, `runs/` (git-ignored) | bot plays live games through `Agent.choose`; next: task 5 eval harness |
 | Nate | `aldrichbanas07` | Data layer | `nate-data` | `data/` (`data/pipeline/`, `data/tests/`, `data/set_candidates.json`; `data/raw/` and `data/clean/` git-ignored), `contracts/turns.md`, the Tiger service `oxhack-data` | set file and turns table done; next: team-conditioned priors (A6) after the demo |
-| Derrick | `RandomGeeb` | Decision layer | `derrick` | `decision/`, `tests/`, `contracts/battle_state.py` | lead and belief fixes on `main`; on `derrick`: Tiger dump done, request-free `choose_public` runs on Tiger rows |
+| Derrick | `RandomGeeb` | Decision layer | `derrick` | `decision/`, `tests/`, `contracts/battle_state.py` | lead and belief fixes on `main`; on `derrick`: backtest CLI on Tiger games (first run: 29.9% same as p1); next: the NaN EV in `select` |
 | Kenar | `kxnar` | TBD | TBD | TBD | joined 2026-10-25; getting set up |
 
 **Shared** (anyone may edit; flag it in ⚠️ Conflicts): {{e.g. `contracts/*`, `fixtures/*`, compose files}}
@@ -79,12 +79,22 @@ whenever you log an entry.
 
 ## 📊 Latest (volatile facts live only here)
 - **As of 2026-10-25 00:58:** `main` @ `4e88dac` · tests: 148 green, 100% coverage (`uv run pytest --cov=decision`) · smoke: 10/10 games vs RandomPlayer finished unattended, 10 won, think p50 ~65 ms / p99 ~300–700 ms, fallback rate 12.7% (all from the two `belief.py` bugs, Open board) · deploy: none yet
+- **Backtest (`derrick` @ `9f86111`, 2026-10-25 04:15):** 200 test games sampled (seed 2026): 125 played, 75 skipped for a species missing from the set file. Same move or switch as p1 on 29.9% of 3,003 scorable turns (95% by game: 27.6–32.4%), 21.4% counting Tera too; 38% when p1 attacked, 3% when p1 switched (the strat switches on 4% of turns, the players on 24%). Think p50 163 ms, p99 475 ms, max 954 ms on the 3 s budget. 1 error in 3,310 turns: a NaN expected value crashes `select`.
 - **Data (Tiger `oxhack-data`, 2026-10-25 03:00):** `battles` 2,506,142 games · `battle_logs` 2,506,142 (uncompressed, 9.2 GB) · `turns` 489,840 rows from 20,000 games (15k train / 5k test) · HP-heuristic test log loss 0.6407, Brier 0.2246 · opponent switch rate 19.2% of acted turns
 - **On branches, not merged yet:** none from @derrick
 
 ---
 
 ## Log (newest first)
+
+### 2026-10-25 04:15 — feat — Backtest CLI on Tiger games, and its first results — @derrick
+- **Where:** `derrick` @ `9f86111` · merged to `main`: not yet
+- **Did:** `uv run python -m backtest.engine` plays a seeded sample of Tiger games turn by turn through `choose_public` and checks each choice against what p1 played. It skips games with a species missing from the set file (counted per species), records a strat error for its turn and goes on, and writes one JSONL per run plus a summary to `runs/backtest/`. No frontend. First run: 200 test games sampled (seed 2026): 125 played, 75 skipped for a species missing from the set file. Same move or switch as p1 on 29.9% of 3,003 scorable turns (95% by game: 27.6–32.4%), 21.4% counting Tera too; 38% when p1 attacked, 3% when p1 switched (the strat switches on 4% of turns, the players on 24%). Think p50 163 ms, p99 475 ms, max 954 ms on the 3 s budget. 1 error in 3,310 turns: a NaN expected value crashes `select`. That crash is in the shared selector, so live games can hit it too and fall back to the first legal option; the NaN comes from `simulate` or `value`, not traced yet. 172 tests green.
+- **Decided:** (1) games with a species missing from the set file are skipped and counted; (2) the backtest is a backend with a CLI, no frontend or dashboard. Both @derrick.
+- **Touched:** `backtest/engine.py` (new), `decision/adapter.py` (`replay_action`), `tests/test_engine.py`, `tests/test_adapter.py`
+- **⚠️ Conflicts:** none: new files, plus one new function in the adapter
+- **📨 Needs:** @saliha: decisions (1)–(2) into PRD NOW (Open board row)
+- **Status:** open
 
 ### 2026-10-25 03:58 — feat — The strat layer can play a Tiger turn without a request — @derrick
 - **Where:** `derrick` @ `9c42b11` · merged to `main`: not yet
