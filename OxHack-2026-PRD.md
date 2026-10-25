@@ -67,7 +67,7 @@
 - **Why now:** Gen 9 OU has a large public replay corpus (2.5M battles loaded into Tiger) and a fast Rust simulator with MCTS (`poke-engine`) and Gen 9 support. [Pass 2, P9 B4, P9 D2]
 - **Prior art:** Foul Play, Metamon, PokéChamp (ICML 2025), the PokeAgent Challenge (NeurIPS 2025). [Pass 1 K1–K3]
 
-**Claims we never make:** ⚠️ never claim a ladder Elo or "beats humans" (no ladder games are played) · never quote Foul Play's GXE figures as fact (self-reported only) · never say a flag (joint priors, threads, Tera gate) improves win rate unless our own head-to-head shows it with an interval · never call MCTS visit shares ("Weighing" percentages) win probabilities: they aren't calibrated · never say the win-probability model beats the HP heuristic (it doesn't yet) · never say the live battle view works without internet (the local client loads assets from pokemonshowdown.com) · never present the best of 10 teams' win rate as the bot's overall win rate.
+**Claims we never make:** ⚠️ never claim a ladder Elo or "beats humans" (no ladder games are played) · never quote Foul Play's GXE figures as fact (self-reported only) · never say a flag (observed-set priors, threads, Tera gate) improves win rate unless our own head-to-head shows it with an interval · never call MCTS visit shares ("Weighing" percentages) win probabilities: they aren't calibrated · never say the win-probability model beats the HP heuristic (it doesn't yet) · never say the live battle view works without internet (the local client loads assets from pokemonshowdown.com) · never present the best of 10 teams' win rate as the bot's overall win rate.
 
 ## 3. Users and decisions ★
 
@@ -83,7 +83,7 @@
 |---|---|
 | **Real / live** | Battles on a local Showdown server; set priors from Smogon chaos stats (gen9ou-1825, 2026-09); 2.5M public replays (HolidayOugi) in Tiger; Foul Play as a strong opponent in the eval |
 | **Simulated** (said on screen) | Opponents are bots (SimpleHeuristics in the demo, Foul Play and our own variants in the eval), not ladder players: the public ladder needs a registered bot |
-| **Built, opt-in** | `one_ply` backend; joint priors (`data/set_candidates_joint.json`); coherent/curated priors (`data/curated-v1/`); 4 engine threads; Tera gate; near-tie mixing; moves/stats lead; `prediction/` models; `evaluation/` and `analysis/` diagnostics |
+| **Built, opt-in** | `one_ply` backend; observed-set priors (`data/set_candidates_joint.json`); coherent/curated priors (`data/curated-v1/`); 4 engine threads; Tera gate; near-tie mixing; moves/stats lead; `prediction/` models; `evaluation/` and `analysis/` diagnostics |
 | **Next step (after the demo)** | Team-conditioned priors (A6, nate); `Kenar-coherent-v2`; a learned value that beats the HP heuristic; adaptive world allocation; more teams and opponents |
 | **Cut** | Public ladder run; maximin LP selector; coach review; backtesting frontend; browser side panel (replaced by battle-chat lines); ClickHouse; our own Rust hot path; LLM coaching text; voice |
 
@@ -153,7 +153,7 @@
 - **Rule:** every game puts the same team on both sides; adjacent games share a team and swap challenge direction, so it measures play, not teams. Wilson 95% plus a team bootstrap; internal Bradley-Terry Elo only.
 - **MCTS pairings (measure today's bot):** `mcts-headline` (`mcts8` vs SimpleHeuristics, the demo matchup); vs Foul Play `fphard` (parallelism 4, 900–1100 ms per decision, about ladder strength): `mcts-foulplay-hard`, `mcts-joint-foulplay-hard`, `mcts-threads-foulplay-hard`, `mcts-deeper-foulplay-hard`; head to head vs `mcts8`: `mcts-joint`, `mcts-threads`, `mcts-tera-gate`, `mcts-mix`, `mcts-deeper`.
 - **Legacy pairings** (`headline`, `full~*`, ablations, the Foul Play ladder): measure the **one-ply** bot, not the demo bot.
-- **Arms:** `mcts8` (default), `mcts8joint` (joint priors), `mcts8t4` (4 engine threads), `mcts8tera` (Tera gate, 2 wins), `mcts8mix` (near-tie mixing), `mcts4x300` (4 worlds × 300 ms).
+- **Arms:** `mcts8` (default), `mcts8joint` (observed-set priors), `mcts8t4` (4 engine threads), `mcts8tera` (Tera gate, 2 wins), `mcts8mix` (near-tie mixing), `mcts4x300` (4 worlds × 300 ms).
 - **Demo-flag rule:** §0.
 
 ### 7.6 Coach review
@@ -221,7 +221,7 @@ EVAL: bot/eval.py shards (seeded schedule) per machine ─► runs/eval/<machine
 | Showdown server | Runs battles; viewers watch in the web client | Local, Node ≥ 22.18, `--no-security` | Bot, browser | 1 core | platform |
 | Bot layer (`bot/`) | Connection, parser, trace, demo, eval harness | Local Python process per shard | Server, decision layer | 1 core per shard | saliha |
 | Decision layer (`decision/`) | Belief → worlds → MCTS → pooled choice | Worker process per `Agent` | Bot, set candidates | ≤3 s per turn (8 × 150 ms search) | kenar / derrick |
-| Data layer (`data/`) | Priors, Tiger tables, turns | Offline | Files + Postgres | — | nate (curated-v1 + reveal evidence: kenar; joint priors: saliha) |
+| Data layer (`data/`) | Priors, Tiger tables, turns | Offline | Files + Postgres | — | nate (curated-v1 + reveal evidence: kenar; observed-set priors: saliha) |
 | Prediction + diagnostics (`prediction/`, `evaluation/`, `analysis/`) | Win-probability model, belief and search studies | Offline | Tiger, `runs/` | — | kenar |
 
 **Contracts:** `contracts/battle-state.md` (+ `battle_state.py`), `contracts/set-candidates.md` (+ `set_candidates.py`), `contracts/turns.md`, `agent.choose(request, battle_state)`, and the trace line (§11).
@@ -307,7 +307,7 @@ EVAL: bot/eval.py shards (seeded schedule) per machine ─► runs/eval/<machine
 | Question | Evidence | Target / status |
 |---|---|---|
 | Does the agent beat the demo opponent? | `mcts-headline`: `mcts8` vs SimpleHeuristics, same team, Wilson 95% + team bootstrap | lower bound above 50%; numbers in 📊 Latest |
-| How does it do against a strong bot? | `mcts-foulplay-hard` (+ the joint and threads arms) vs Foul Play `fphard` | reported either way; research estimate 25–40% |
+| How does it do against a strong bot? | `mcts-foulplay-hard` (+ the observed-set and threads arms) vs Foul Play `fphard` | reported either way; research estimate 25–40% |
 | Do the opt-in flags help? | head to head vs `mcts8`: `mcts-joint`, `mcts-threads`, `mcts-tera-gate`, `mcts-mix`, `mcts-deeper` | a flag ships only with a Wilson lower bound above 50% (§0) |
 | Are the win probabilities honest? | `prediction/`: log loss, Brier, reliability on a chronological held-out split | better than the HP heuristic (not yet: 0.6600 vs 0.6348) |
 | Is the belief better than the prior? | next-reveal log loss vs the prior and vs hard-filter-only | below the prior (not yet: prior 2.71 vs posterior 3.08 in the pilot) |
@@ -371,6 +371,7 @@ EVAL: bot/eval.py shards (seeded schedule) per machine ─► runs/eval/<machine
 | Chaos stats | Smogon's monthly usage JSON per format and rating cut-off (we use 1825) |
 | Belief | Weights over each opponent Pokémon's possible sets, updated by what's revealed |
 | World | One complete guess of the opponent's six sets, sampled from the belief |
+| Observed-set priors | Complete sets seen on the ladder (Foul Play's counts) blended 75/25 with usage sets; code name `joint` (`mcts8joint`, `set_candidates_joint.json`) |
 | Visit share | The fraction of MCTS visits an action got at the root; our "Weighing" percentages. Not a win probability |
 | Request | The JSON Showdown sends when we must act; it lists our legal options |
 | Arm / pairing | A bot configuration (`mcts8`, `mcts8joint`, …) / a matchup of two arms in the eval |

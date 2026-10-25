@@ -8,6 +8,13 @@
 
 "Our agent plays Pokémon Showdown, a game with hidden information: you can't see the opponent's items, abilities or Tera types. Every turn it **predicts** what's hidden, using usage statistics from real players and what it has seen so far. It then **decides** by searching 8 different versions of the game that fit its prediction and picking the move that does best across all of them. We show both halves live in the battle chat, and we measured both: the decisions head to head against other bots with confidence intervals, the predictions against simple baselines on held-out games."
 
+**Talk track (4 minutes; matches PRD §18):**
+1. **0:00 Hook:** the pitch above, one sentence.
+2. **0:30 Live battle:** open the battle room. Point at one chat line and read it: what it played, what it's weighing, what it expects, what it guesses is hidden.
+3. **1:45 Decisions:** the eval table. Same team on both sides, Wilson intervals, vs SimpleHeuristics and vs Foul Play at ladder strength.
+4. **2:30 Predictions, honestly:** guess accuracy, belief scoring and the win-probability model against their baselines. Say plainly where we don't beat the baseline yet.
+5. **3:15 Limits and next steps:** bot opponents, one format, no ladder Elo; next is team-conditioned priors. Credit Foul Play and Laplace.
+
 ---
 
 ## 2. Using data to predict
@@ -40,8 +47,28 @@ No. They're **MCTS visit shares**: how much of its search time the bot spent on 
 **Q: Did you try better priors?**
 Yes, two, both opt-in:
 - **Coherent priors** (Kenar): Showdown's curated role sets mixed 50/50 with usage. Predictions improved slightly (next-reveal loss 4.05 → 3.71), but play didn't: 25 wins, 35 losses in a 60-game screen. So it stays off.
-- **Joint priors** (Saliha): complete sets actually observed from Foul Play, blended 75/25 with usage. Being tested today (`mcts8joint`).
+- **Observed-set priors** (Saliha; code name "joint"): complete sets actually observed from Foul Play, blended 75/25 with usage. Being tested today (`mcts8joint`).
 (PRD §9; `coherent-sets.md`)
+
+**Q: What are observed-set priors, and why did you build them?** *(code name: "joint", e.g. `mcts8joint`, `data/set_candidates_joint.json`)*
+- **The problem:** usage stats list each field separately (how often a Pokémon runs each move, item, Tera type and spread). Building a set by picking each field independently also builds sets **nobody actually brings**, like a Choice Scarf alongside a setup move. The belief then wastes weight on impossible sets.
+- **The data:** Foul Play publishes counts of **complete sets seen on the ladder** (`pokemon_full_sets.json` from data.foulplay.cc). Each entry keeps moves, item, ability, Tera type, nature and EVs together, exactly as a real player brought them.
+- **How we built it (`data/pipeline/joint_sets.py`):**
+  1. Parse every observed set.
+  2. Drop any without a Tera type or a full EV spread, because the simulator can't build those.
+  3. Weight each set by how often it was seen.
+  4. Blend **75% observed sets with 25% usage sets** (Foul Play's own split), so rare sets the ladder data missed still have a chance.
+  5. Keep up to 30 sets per species, in the same file format as the default priors, so the belief loads it with no code change.
+- **How we use it:**
+  - Opt-in for the demo: `--priors data/set_candidates_joint.json`.
+  - In the eval: the `mcts8joint` arm, head to head with today's bot and against Foul Play.
+- **Why count weights and not equal weights:** Kenar's earlier coherent mixture gave every template equal weight, which piled too much belief onto a few templates. Count weights follow how often players really bring each set.
+- **Result so far [10:00]:** 4–7 against Foul Play `fphard` on this laptop. No head-to-head win over today's bot yet, so by our rule it stays off. It's a better-shaped prior that isn't yet shown to win games.
+
+**Q: How is that different from the coherent priors?**
+- **Coherent priors:** Showdown's **curated** role sets (what experts recommend), mixed 50/50 with usage.
+- **Observed-set priors:** what players **actually brought** on the ladder, weighted by how often, mixed 75/25.
+Both fix the same problem (sets that don't hang together), from different data.
 
 **Q: What would improve prediction most?**
 **Team-conditioned priors (A6):** predict a Pokémon's set from the other five on its team, because teams are built around each other. Agreed by the team, built after the demo by Nate. Right now each Pokémon is guessed independently. (PRD §0)
@@ -88,7 +115,7 @@ We report a **Wilson 95% interval**, which behaves well at small samples, plus a
 (PRD §7.5)
 
 **Q: What are the results?** **[10:00]**
-- **vs Foul Play `fphard`** (this laptop): today's bot 2–2; joint priors 4–7. The research estimate before testing was 25–40%.
+- **vs Foul Play `fphard`** (this laptop): today's bot 2–2; observed-set priors 4–7. The research estimate before testing was 25–40%.
 - **4 engine threads vs today's bot:** 11–3 on Nate's laptop (Wilson 52.4–92.4%). That passes our bar, but only barely.
 - **Demo battles vs SimpleHeuristics:** won all 7 today, in 19–47 turns; the three with `team_6.txt` took 19–23. These are informal; the `mcts-headline` eval is the real number.
 - Fill the merged table from `progress.md` → 📊 Latest.
@@ -136,7 +163,7 @@ Written contracts at each seam (`BattleState`, set candidates, the Tiger turns t
 - **Replay pipeline:** 2.5M HolidayOugi replays → `clean_battles` (DuckDB) → `build_turns` (Parquet, built with the live bot's parser) → `load_tiger` (Postgres tables `battles`, `battle_logs`, `turns`). The `turns` table is specified in `contracts/turns.md`.
 - **Opt-in priors:**
   - `curated-v1`: Showdown's curated role sets mixed 50/50 with usage (Kenar).
-  - Joint priors: complete sets observed from Foul Play, blended 75/25 (Saliha).
+  - Observed-set priors: complete sets observed from Foul Play, blended 75/25 (Saliha).
 
 **Why**
 - Usage stats are the biggest public signal of what real players run, so they're the prior for every prediction. The 1825+ cutoff favours competent, standard sets.
@@ -178,7 +205,7 @@ Written contracts at each seam (`BattleState`, set candidates, the Tiger turns t
   - A worker process keeps the belief and samples **8 whole-team worlds**.
   - It runs **150 ms of native MCTS** in each world, then pools normalised visit shares across worlds.
   - It works under a supervised 3 s deadline.
-- **Opt-in experiments:** 4 engine threads, a Tera gate, near-tie mixing, deeper/fewer worlds, joint priors.
+- **Opt-in experiments:** 4 engine threads, a Tera gate, near-tie mixing, deeper/fewer worlds, observed-set priors.
 
 **Why**
 - One-ply beat SimpleHeuristics (about 72%) but lost to Foul Play (5–8%), so we needed lookahead.
@@ -241,7 +268,146 @@ Public, pseudonymised replays and public usage stats only. Nothing personal is s
 
 ---
 
-## 8. Limits and next steps
+## 8. Stats and quant deep-dive
+
+**Q: How many games do you need to trust a difference?**
+At 50%, a Wilson 95% interval is about ±10 points at 100 games and about ±5 points at 400. So 100 games can tell 50% from 70%, but not 50% from 55%. That's why we only act on a lower bound above 50%, and why small effects (threads, Tera gate) need longer runs than one morning gave us.
+
+**Q: You tested several variants. Couldn't one pass by chance?**
+Yes, and that's the multiple-comparisons risk. Each check is roughly a one-sided 2.5% test. With three candidate flags, the chance that at least one passes by luck is about 7%. We set the rule before the runs, and the one that passed (4 threads, lower bound 52.4%) passed only just, so we'd confirm it with a fresh run before calling it real.
+
+**Q: Did you stop runs when the numbers looked good?**
+No. Every slice had a fixed stop time (09:45 UTC) set in advance. One teammate stopped early because of a mix-up in instructions, and we resumed him to the planned time rather than keep a convenient stopping point. Stopping when the result looks good inflates false positives.
+
+**Q: Why Wilson and not the usual ± formula?**
+The normal approximation breaks at small samples and near 0% or 100%: it can give intervals below 0 or above 1. Wilson stays inside [0, 1] and has better coverage at the sample sizes we have. The team bootstrap adds a second view: it resamples teams, because some teams favour our bot more than others.
+
+**Q: Why log loss and Brier for the win-probability model?**
+- **Log loss** punishes confident wrong predictions hard, which is what you want from a probability you'd act on.
+- **Brier** is the mean squared error of the probabilities: less dominated by a few extreme misses.
+- **A reliability diagram** shows calibration directly: of the times we said 70%, did we win about 70%?
+Accuracy alone would hide all of this.
+
+**Q: Your 8 worlds get equal weight. Shouldn't likelier worlds count more?**
+They already do. Worlds are **sampled in proportion to the belief**, so likely sets show up in more worlds. Giving each sample equal weight is ordinary Monte Carlo averaging. Weighting them again by probability would double-count.
+
+**Q: What assumptions are you making that might be wrong?**
+- **Each opponent Pokémon is guessed independently.** Real teams are built around each other, so that's the biggest known gap; team-conditioned priors (A6) fix it.
+- **The metagame is stable over the month.** We use September's usage stats for October games. They need refreshing monthly.
+- **Usage stats represent our opponents.** True for ladder players. Bot opponents like SimpleHeuristics don't care.
+
+**Q: The game has simultaneous moves. How do you handle that game-theoretically?**
+Inside each world, the search explores **both** players' choices every turn, so the opponent's best replies are part of the search, not assumed. We don't compute a mixed-strategy equilibrium. A maximin LP was designed and cut: against fixed bots it can't beat taking the best average. Against adaptive humans, mixing would matter more. Near-tie mixing is built and opt-in.
+
+**Q: Why might the updated belief do worse than the prior?**
+We don't know yet; these are hypotheses, not findings:
+- The damage and speed replay may cut correct sets on noisy evidence; the 3% floor softens this but doesn't remove it.
+- Next-reveal scoring only tests what gets revealed, which may be the hardest-to-predict facts.
+The fix is to measure each inference rule separately. Kenar's `reliable` mode already skips the unstable cases.
+
+**Q: Is it reproducible?**
+Yes. World sampling uses a fixed seed (2026), every eval machine has its own schedule seed, and the eval manifest records the engine version, code hash, priors hash and team hashes for every results folder.
+
+**Q: How does this connect to trading?** *(say it as an analogy, not a claim)*
+The shape of the problem is the same:
+- **Hidden state:** we build a belief over it from public signals, starting from base rates and updating on evidence.
+- **Decisions robust to that uncertainty:** we optimise across several plausible scenarios, not one point estimate.
+- **A hard latency budget** with a safe fallback.
+- **Out-of-sample evaluation** with intervals and a decision rule fixed before looking.
+We'd never claim the bot itself says anything about markets.
+
+---
+
+## 9. Demo-time questions
+
+**Q: What am I looking at in the chat?**
+Each line is one decision:
+- `Turn N · <move> (think ms)`: what it played and how long it thought.
+- The HP of both active Pokémon and how many each side has left.
+- `Weighing:` our top options by share of search.
+- `Expects them:` what it thinks the opponent will do.
+- `Guessing their X:` its best guess of the hidden item and Tera type, with how many of the 8 worlds agree.
+
+**Q: Why did it just switch out?**
+Because across the 8 worlds, staying in did worse on average than switching. Read it off the `Weighing` line: the switch got the biggest share of search.
+
+**Q: What does "4/8 worlds" mean?**
+Search reported back from only 4 of the 8 worlds. Worlds that would have run past the deadline aren't started, so on a slow turn fewer finish. The decision still comes from the worlds that did finish.
+
+**Q: What if it loses this game?**
+Then it loses. One game is one sample, which is why we show the eval table. Against SimpleHeuristics it won every demo game today, but the honest number is the interval from the eval.
+
+**Q: Who is it playing?**
+SimpleHeuristics, poke-env's standard rule-based bot, with **the same team** on both sides. The team is pinned to `team_6.txt` for the demo (section 4 says why).
+
+**Q: Why does it pause between turns?**
+On purpose: a 1.5 s pace after each decision, so the audience can read the chat. Thinking itself takes about 1.4 s.
+
+---
+
+## 10. Engineering and teamwork
+
+**Q: How did four people build this in a weekend without stepping on each other?**
+- One owner per folder: bot (Saliha), data (Nate), decision (Derrick, then Kenar's MCTS).
+- Written contracts at every seam: `BattleState`, the set-candidates file, the Tiger `turns` table.
+- A shared progress board: anyone touching someone else's area posts a flag first.
+- Each person works on their own branch, merges one feature at a time, and logs it.
+
+**Q: How do you know the code works?**
+- Every layer has a pytest suite with coverage (counts in `progress.md` → 📊 Latest).
+- A smoke test plays full games and fails on too many fallbacks.
+- The eval checks that every game really completed.
+- The parser was tested on public replays: a known turn must equal a hand-checked example.
+
+**Q: What went wrong, and what did you learn?**
+- **Our first bot didn't search deep enough.** One-ply beat the easy bot but lost over 90% of games to Foul Play, and the switch to MCTS came from that measurement.
+- **Old eval labels hid which bot was measured.** The early `headline` numbers were the one-ply bot; we split the MCTS pairings out so nobody quotes the wrong number.
+- **Mixing code versions in one results file is easy.** The manifest guard caught it this morning, and we resumed only after checking the arms we were testing hadn't changed.
+- **Live chat for guests needed a small local server patch.** Without it, the judge sees nothing.
+
+**Q: What did each person own?**
+- **Saliha:** bot layer, eval harness, demo, docs.
+- **Derrick:** decision layer v1 and the belief floor.
+- **Nate:** priors, replay pipeline and Tiger.
+- **Kenar:** MCTS, prediction studies and the coherent priors.
+
+---
+
+## 11. Hard questions
+
+**Q: Isn't this just Foul Play?**
+We took Foul Play's core decision idea (MCTS over sampled worlds) and credit it. What's ours:
+- The belief is **explicit and shown live**.
+- The data pipeline and priors experiments: 2.5M replays, Tiger tables, coherent and observed-set priors.
+- The prediction measurement, against baselines on held-out games.
+- An eval that controls for team strength and reports intervals.
+- Laplace's ideas (more threads, the Tera gate) tested under a pre-set rule.
+
+**Q: Why should we believe any of your numbers?**
+- The same team plays both sides.
+- Every number has an interval.
+- The decision rule was fixed before the runs.
+- The negatives are reported, not dropped.
+- The code fingerprint is stored with every results folder.
+You can check any game: each has a raw log and a trace.
+
+**Q: What's the single most important number?**
+The win rate of today's bot against SimpleHeuristics in the same-team eval, with its Wilson interval (`mcts-headline`, in `progress.md` → 📊 Latest). Second: how it does against Foul Play at ladder strength.
+
+**Q: What surprised you?**
+- The usage-stats prior predicted reveals better than our updated belief.
+- Some teams finish games far faster than others with the same bot (median 24 turns for `team_6.txt` against 40+ for most).
+- Beating the easy bot told us nothing about strong ones: one-ply won about 72% against SimpleHeuristics and 5–8% against Foul Play.
+
+**Q: If you had to cut one thing, what?**
+The opt-in flags. Every one of them is an unproven experiment. The core (belief → sampled worlds → MCTS, with honest evaluation) is the project.
+
+**Q: Why not reinforcement learning or an LLM?**
+Neither fits a 25-hour hackathon and our question. RL needs far more compute and gives no explicit belief to show. An LLM can't play a simultaneous-move game within 3 s reliably, and it wouldn't give a measurable prediction. Search over a real simulator with an explicit belief is testable now.
+
+---
+
+## 12. Limits and next steps
 
 **Q: What doesn't it do?**
 - No ladder play: there's no registered bot account, so no Showdown Elo.
@@ -259,7 +425,7 @@ Public, pseudonymised replays and public usage stats only. Nothing personal is s
 
 ---
 
-## 9. Quick facts
+## 13. Quick facts
 
 | Fact | Value |
 |---|---|

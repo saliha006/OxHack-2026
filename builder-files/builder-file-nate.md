@@ -51,7 +51,7 @@
 
 1. 🟡 **Eval slice** (`mcts-threads`, seed 103): 14 games finished by 09:32 UTC, `mcts8t4` won 11 of 14 (Wilson 52.4–92.4%), backed up to `runs/backup-0900/`. Send `runs/eval/nate-0.jsonl` to saliha (resume the same line until 09:45 if she asks).
    - *Done when:* saliha has the file. It decides whether the demo turns on `--engine-threads 4` (PRD §0 rule).
-2. ⬜ **Answer the ⚠️ row on the Open board:** keep `data/pipeline/joint_sets.py` + `data/set_candidates_joint.json` (saliha's opt-in joint priors) in your `data/`, yes or no.
+2. ⬜ **Answer the ⚠️ row on the Open board:** keep `data/pipeline/joint_sets.py` + `data/set_candidates_joint.json` (saliha's opt-in observed-set priors) in your `data/`, yes or no.
 3. ⬜ **After the demo: team-conditioned set priors (A6)**, agreed by derrick (PRD §0 decisions). Nothing in the demo depends on it.
 
 ── Archived (superseded 2026-10-25 ~10:00 UTC — do NOT action) ──

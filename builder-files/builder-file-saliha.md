@@ -52,7 +52,7 @@
 3. ⬜ **Verify the browser view** with the chosen flags: the raw log has `|c|☆oxhack demo|` lines and no "must be registered to chat". *(Already true for today's demo battles 577–591.)*
 4. ⬜ **Rehearse twice by 10:20, freeze at 10:30.**
 5. ⬜ **10:30–12:00, docs only:** README (demo command, what the terminal and battle chat show, the honest win-rate table, credit to Foul Play and Laplace); `progress.md` entry + 📊 Latest; Devpost submission.
-6. ⬜ **Board rows waiting on others:** @kenar's yes/no on the opt-in Tera gate in his files; @nate's yes/no on the joint-priors files in `data/`.
+6. ⬜ **Board rows waiting on others:** @kenar's yes/no on the opt-in Tera gate in his files; @nate's yes/no on the observed-set priors files in `data/`.
 
 ── Archived (superseded 2026-10-25 ~10:00 UTC — do NOT action) ──
 
@@ -101,7 +101,7 @@
 - ✅ **Demo decisions in the battle chat + opt-in Tera gate flag** (`bot/demo.py`, `--tera-min-wins`): one chat line per decision so browser viewers see the search's view. Needs the local `pokemon-showdown/server/chat.ts` patch. On `main` @ `a466c0c`.
 - ✅ **Opt-in Tera gate + eval arms** (`mcts8tera`, `mcts8mix`; `decision/search_policy.gate_tera`, Kenar's path, ⚠️ row): on `main` @ `8f0a3f2`.
 - ✅ **Four-thread arm** (`mcts8t4`, `--engine-threads`): on `main` @ `1205e5c`.
-- ✅ **Joint-set priors** (`data/pipeline/joint_sets.py` → `data/set_candidates_joint.json`, arm `mcts8joint`; Nate's path, ⚠️ row): on `main` @ `698492b`.
+- ✅ **Observed-set priors** (code name "joint") (`data/pipeline/joint_sets.py` → `data/set_candidates_joint.json`, arm `mcts8joint`; Nate's path, ⚠️ row): on `main` @ `698492b`.
 - ✅ **fphard Foul Play level + MCTS eval pairings** (vs SimpleHeuristics, vs Foul Play, head-to-heads vs `mcts8`): on `main` @ `a935f71`, `ba1b455`.
 - ✅ **Live demo search view** (Weighing / Expects them / Guessing per turn): on `main` @ `b04c95f`.
 - ✅ **Task 7, demo mode** (`bot/demo.py`): live battle streamed turn by turn (choice in words, actives, think time, any agent fields generically) and offline replay of a saved trace. On `main` @ `ecbb278`.
