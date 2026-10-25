@@ -155,7 +155,14 @@ Written contracts at each seam (`BattleState`, set candidates, the Tiger turns t
 
 ---
 
-## 6. Layer by layer: what we built, and why
+## 6. Layer by layer: what we built, how it works, and why
+
+### One turn, start to finish
+1. **Showdown** sends protocol lines (what just happened), then a **request** (our legal options right now).
+2. **Bot layer:** our parser has already folded every line into a `BattleState`. The bot hands the request and the state to `agent.choose`.
+3. **Decision (strategy) layer:** the search worker updates its belief about the opponent's hidden sets, samples 8 complete opponent teams, searches each for 150 ms, pools the results and returns a choice such as `move 2`.
+4. **Bot layer:** sends `/choose move 2` to Showdown, writes the trace, prints the terminal block and posts the chat line.
+5. **Data layer** supplied the priors (step 3's starting belief) before the battle began. The **prediction** and **evaluation** layers work afterwards, from saved traces and results.
 
 ### Data layer *(Nate; opt-in priors from Kenar and Saliha)*
 **What we built**
@@ -164,6 +171,19 @@ Written contracts at each seam (`BattleState`, set candidates, the Tiger turns t
 - **Opt-in priors:**
   - `curated-v1`: Showdown's curated role sets mixed 50/50 with usage (Kenar).
   - Observed-set priors: complete sets observed from Foul Play, blended 75/25 (Saliha).
+
+**How it works, step by step**
+
+*Priors (once per stats month):*
+1. Take Smogon's chaos file for gen9ou-1825. For every species it says how often each move, item, ability, Tera type and EV spread is used.
+2. `build_set_candidates.py` builds candidate sets from the common options and weights each set by **multiplying the usage shares of its parts**. It keeps the top 30 per species and normalises the weights to sum to 1. Forme aliases point to their base entry (e.g. `keldeoresolute → keldeo`). The raw usage block is kept so the belief can rebuild sets if every candidate is ruled out.
+3. A contract test checks the file against `contracts/set-candidates.md` before anyone uses it.
+
+*Replays (once):*
+1. `clean_battles.py` cleans the raw replay Parquet files with DuckDB, one cleaned file per input, logs kept.
+2. `build_turns.py` runs every game through the **live bot's parser** (`states_from_log`) and writes one row per turn: the public board state, all 12 Pokémon with HP and status, the actions taken, and the winner.
+3. `load_tiger.py` loads `battles`, `battle_logs` and `turns` into Postgres. Rows join on battle ID **and** start time, so two games can't be mixed up.
+4. Split by time: 15,000 games from 2025-01-01 for training, 5,000 from 2026-05-19 for testing. Teammates read it with read-only logins.
 
 **Why**
 - Usage stats are the biggest public signal of what real players run, so they're the prior for every prediction. The 1825+ cutoff favours competent, standard sets.
@@ -183,6 +203,14 @@ Written contracts at each seam (`BattleState`, set candidates, the Tiger turns t
 - **Demo:** each decision is streamed to the terminal and posted as one line in the battle chat, paced at 1.5 s so a viewer can follow. Replay mode re-runs a saved trace offline.
 - **Smoke test:** fails a run if more than 5% of moves are fallbacks.
 
+**How it works, step by step** (one battle)
+1. `bot.demo live` creates two poke-env players on the local server, ours ("oxhack demo") and the opponent ("oxhack rival", SimpleHeuristics). Both get the same team, and ours sends the challenge.
+2. For every message from the server, our player first feeds each line to `Parser.feed`. The parser tracks HP, status, boosts, hazards, screens, revealed moves and items, and so on. Only then does poke-env handle the message.
+3. When a request arrives, the player takes `Parser.snapshot()` (the `BattleState`) and calls `agent.choose(request, state)`, blocking, inside the 3 s budget.
+4. It sends the answer as `/choose move 2`, or `/choose team 123456` at team preview. If Showdown rejects it, it resends the first legal option, then `default`.
+5. It writes the trace line, the raw log and the decision log. Then it calls the demo hook: print the terminal block, post one chat line to the battle room, wait 1.5 s.
+6. At the end it prints a summary: result, turns, fallbacks, and think time p50/p99.
+
 **Why**
 - poke-env gives us standard baseline bots and concurrent battles for free.
 - Parsing first means the state is up to date when we decide.
@@ -196,7 +224,7 @@ Written contracts at each seam (`BattleState`, set candidates, the Tiger turns t
 - Our own websocket client: a fallback plan we never needed.
 - A browser side panel: cut for time.
 
-### Decision layer *(Derrick built v1; Kenar built the MCTS that replaced it)*
+### Decision (strategy) layer *(Derrick built v1; Kenar built the MCTS that replaced it)*
 **What we built**
 - **v1, one-ply (Derrick):**
   - Belief → 5 likely scenarios → simulate one turn for every pair of moves in `poke-engine` → score with an HP/alive heuristic → best expected value.
@@ -206,6 +234,31 @@ Written contracts at each seam (`BattleState`, set candidates, the Tiger turns t
   - It runs **150 ms of native MCTS** in each world, then pools normalised visit shares across worlds.
   - It works under a supervised 3 s deadline.
 - **Opt-in experiments:** 4 engine threads, a Tera gate, near-tie mixing, deeper/fewer worlds, observed-set priors.
+
+**How it works, step by step** (one turn, MCTS)
+1. **Team preview:** no search. The type-matchup lead (`decision/lead.py`) picks our opening Pokémon from type matchups against the opponent's six.
+2. **Every other request:** `Agent.choose` hands the request and the `BattleState` to the battle's **search worker**. That's a separate process that lives for the whole battle and holds the belief.
+3. **Update the belief** with what just happened:
+   - **Hard filter:** drop any candidate set that contradicts a revealed move, item, ability or Tera type.
+   - **Item inference:**
+     - Took no Stealth Rock damage on the way in → Heavy-Duty Boots (or Magic Guard).
+     - Used a status move → not Assault Vest.
+     - Used two different moves since switching in → not a Choice item.
+     - Damaged but no Leftovers healing at the end of the turn → not Leftovers.
+   - **Replay check:** replay the last turn in poke-engine for each candidate set. Does it explain who moved first and how much damage was dealt? If not, its weight is multiplied by 0.03 rather than set to zero.
+   - **`reliable` mode** skips the replay check where it's unreliable: forced moves, item changes, ability suppression.
+   - **Nothing survives?** Rebuild from usage, then relax the inferred rules, then reconstruct a set from the revealed facts.
+4. **Sample 8 worlds:** for each of the opponent's six Pokémon, draw a set from its belief with a seeded random generator. That gives 8 complete opponent teams. Likely sets appear in more worlds.
+5. **Search each world:** build a poke-engine state (our side exactly as the request describes it, theirs from the world) and run **150 ms of MCTS**, which explores both players' choices turn by turn. Results stream back as each world finishes; a world that would run past the deadline isn't started.
+6. **Pool:** turn each world's root visit counts into shares, average them across worlds, and map the engine's move names onto the request's legal options. Pick the highest share; ties go to request order. These pooled shares are the "Weighing" line in the chat.
+7. *(Opt-in, off by default)*
+   - **Tera gate:** keep a Tera move only if it's the outright top choice in at least N worlds; otherwise play the best non-Tera option. Tera is once a game, so averaging shouldn't spend it on a move that's merely everyone's runner-up.
+   - **Near-tie mixing:** sample among almost-equal options.
+8. **Return** the choice. Any error → the first legal option. A stalled worker is killed and replaced. Both count as fallbacks.
+
+**Budget:** 3 s per decision, with 0.3 s held back to return the answer; typical think time is about 1.4 s.
+
+**The one-ply comparator (v1),** for contrast: take the top 5 sets for the opponent's active Pokémon, simulate one turn for every pair of moves, score each outcome by remaining Pokémon and HP, assume the opponent picks uniformly, and play the best average.
 
 **Why**
 - One-ply beat SimpleHeuristics (about 72%) but lost to Foul Play (5–8%), so we needed lookahead.
@@ -226,6 +279,19 @@ Written contracts at each seam (`BattleState`, set candidates, the Tiger turns t
   - Chronological splits grouped by battle, with "unseen player/team" controls.
 - **Scoring:** next-reveal log loss for the set belief; action scoring.
 
+**How it works, step by step**
+
+*Win-probability model (`python -m prediction train`):*
+1. Turn each game's turns into `BattleState`s with the same parser the bot uses.
+2. For each turn, compute **features as differences between the two sides' public board state**: Pokémon alive, total HP, active HP, statused Pokémon, Tera still available, revealed moves, stat boosts, hazards, screens, volatile effects (Substitute, Taunt, …), Wish and Future Sight. Add the turn number and Trick Room. The schema is shared by training and serving, so they can't drift apart.
+3. Split **chronologically, grouped by battle**: every turn of a game stays in one split, so the model can't see the end of a game it's tested on. "Unseen" controls hold out players and teams.
+4. Fit logistic regression on train, calibrate it with **Platt scaling** on validation, and score on test: log loss, Brier and a reliability diagram, against the HP heuristic and a constant.
+
+*Belief scoring (`python -m prediction score-beliefs`):*
+1. Replay games turn by turn through the belief.
+2. Just before each new reveal, record the probability the belief gave to what was then revealed.
+3. Average the log loss over reveals. Compare the prior, hard-filter-only and the full updated belief.
+
 **Why**
 - HRT asks whether predictions are honest, so we built the measurement first: held-out games, a baseline, calibration.
 - We kept it **out of the bot**, so a weak model can't cost games.
@@ -240,6 +306,15 @@ Written contracts at each seam (`BattleState`, set candidates, the Tiger turns t
   - A manifest that refuses to mix results from different code.
   - Wilson 95% intervals plus a team bootstrap, and an internal Bradley–Terry Elo.
 - **Opponents:** SimpleHeuristics, Foul Play at four strength levels (up to `fphard`), and our own variants head to head.
+
+**How it works, step by step**
+1. A **pairing** is two arms plus a planned game count, e.g. `mcts-headline` = `mcts8` vs SimpleHeuristics.
+2. `bot.eval run` lists the games not yet played, shuffles them with the machine's seed and splits them across shard processes.
+3. Each game's **team** comes from the seed. Both sides get that team, and adjacent games swap who challenges, which swaps sides.
+4. For a Foul Play opponent, it starts a Foul Play process with that game's team, a search time drawn from the level's band (900–1100 ms for `fphard`) and its parallelism.
+5. When the game ends, it checks the game really completed and appends one line: arms, team, side, winner, turns, compute settings, fallbacks, think times.
+6. `bot.eval report` merges every machine's files and, per pairing, prints wins/games, the Wilson 95% interval, a team bootstrap, the fallback rate, think-time p99 and Elo.
+7. Before any run, the **manifest** is compared with the folder's: different code, priors, teams or arms → it refuses to continue.
 
 **Why**
 - It measures play rather than team strength.
