@@ -1,6 +1,7 @@
 """Demo: a live battle with every decision streamed to the terminal, or a saved battle replayed offline.
 
     uv run python -m bot.demo live --priors-from-teams        # watch the printed URL in the Showdown client
+    uv run python -m bot.demo live --opponent human           # a person challenges "oxhack demo" (gen9ou) in the browser
     uv run python -m bot.demo replay runs/battle-gen9ou-12.jsonl
 """
 import argparse
@@ -22,6 +23,7 @@ from decision.agent import Agent
 
 # Trace fields this module renders itself; any other field (e.g. the agent's own predictions) is shown as it comes.
 OWN_FIELDS = {"turn", "kind", "choice", "label", "think_ms", "fallback", "state", "request", "decision_id"}
+HUMAN = "human"
 
 
 def active_text(side: dict) -> str:
@@ -131,9 +133,13 @@ def live(team: str, priors: dict, opponent: str, budget: float, pace: float, run
                        runs_dir=runs, on_decision=on_decision,
                        account_configuration=AccountConfiguration("oxhack demo", None), battle_format="gen9ou",
                        team=team, start_timer_on_battle_start=True)
-    rival = BASELINES[opponent](account_configuration=AccountConfiguration("oxhack rival", None),
-                                battle_format="gen9ou", team=team)
-    asyncio.run(ours.battle_against(rival, n_battles=1))
+    if opponent == HUMAN:
+        print('Waiting for a challenge: in the Showdown client, /challenge oxhack demo, gen9ou')
+        asyncio.run(ours.accept_challenges(None, 1))
+    else:
+        rival = BASELINES[opponent](account_configuration=AccountConfiguration("oxhack rival", None),
+                                    battle_format="gen9ou", team=team)
+        asyncio.run(ours.battle_against(rival, n_battles=1))
     summary = ours.summaries[-1]
     print(format_line({"kind": "end", **summary}))
     return summary
@@ -143,7 +149,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = parser.add_subparsers(dest="command", required=True)
     play = sub.add_parser("live")
-    play.add_argument("--opponent", default="simpleheuristics", choices=list(BASELINES))
+    play.add_argument("--opponent", default="simpleheuristics", choices=[*BASELINES, HUMAN])
     play.add_argument("--teams", default="bot/teams/standin", help="a team file or a folder; one is picked at random")
     play.add_argument("--priors", default="data/set_candidates.json")
     play.add_argument("--priors-from-teams", action="store_true",

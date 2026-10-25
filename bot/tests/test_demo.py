@@ -100,6 +100,31 @@ class FakeAgentPlayer:
         self.summaries.append({"won": True, "turns": 9, "decisions": 2, "fallbacks": 0,
                                "think_p50_ms": 50.0, "think_p99_ms": 90.0})
 
+    async def accept_challenges(self, opponent, n_challenges):
+        self.accepted = (opponent, n_challenges)
+        await self.battle_against(None, n_challenges)
+
+
+def test_live_against_a_person_waits_for_any_challenge_instead_of_making_a_rival(monkeypatch, capsys):
+    monkeypatch.setattr(demo, "AgentPlayer", FakeAgentPlayer)
+    monkeypatch.setattr(demo, "BASELINES", {})
+    monkeypatch.setattr(demo.time, "sleep", lambda _: None)
+    summary = demo.live("TEAM", {"species": {}}, demo.HUMAN, 3.0, 1.5, "runs")
+    out = capsys.readouterr().out
+    assert "/challenge oxhack demo, gen9ou" in out and "Game over: won in 9 turns" in out
+    assert FakeAgentPlayer.last.accepted == (None, 1) and summary["turns"] == 9
+    assert FakeAgentPlayer.last.kwargs["team"] == "TEAM"
+
+
+def test_main_accepts_a_person_as_the_opponent(tmp_path, monkeypatch):
+    calls = []
+    monkeypatch.setattr(demo, "live", lambda *args: calls.append(args))
+    (tmp_path / "team.txt").write_text("Kingambit @ Leftovers\n\n", encoding="utf-8")
+    (tmp_path / "priors.json").write_text('{"species": {}}', encoding="utf-8")
+    assert demo.main(["live", "--opponent", "human", "--teams", str(tmp_path / "team.txt"),
+                      "--priors", str(tmp_path / "priors.json")]) == 0
+    assert calls[0][2] == demo.HUMAN
+
 
 def test_live_prints_the_watch_url_once_then_every_turn_and_the_result(monkeypatch, capsys):
     monkeypatch.setattr(demo, "AgentPlayer", FakeAgentPlayer)
