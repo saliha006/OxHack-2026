@@ -171,7 +171,7 @@ def game(manifest, spec):
     player = AgentPlayer(make_agent=make_agent, runs_dir=folder,
                          account_configuration=AccountConfiguration(username, None),
                          server_configuration=ServerConfiguration(uri, f'http://127.0.0.1:{port}/action.php?'),
-                         battle_format='gen9ou', team=Path(manifest['own_team']['path']).read_text(),
+                         battle_format='gen9ou', team=Path(manifest['own_team']['path']).read_text().strip(),
                          start_timer_on_battle_start=True)
     # Reuse completion/readiness handling without altering the general harness or its port.
     opponent = FoulPlay.__new__(FoulPlay)

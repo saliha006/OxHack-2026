@@ -48,3 +48,29 @@ def test_completed_plan_and_empty_run_are_distinct():
     assert summarize([], 400)['win_rate'] is None
     row = {'completion_verified': True, 'winner': 'a', 'side': 'p1', 'opponent_team': 0}
     assert summarize([row], 1)['status'] == 'complete'
+
+
+def test_live_player_does_not_import_a_trailing_blank_as_a_seventh_pokemon(tmp_path, monkeypatch):
+    from pathlib import Path
+    from poke_env.teambuilder import Teambuilder
+    import bot.player
+    import evaluation.foulplay_benchmark as benchmark
+
+    team = Path('bot/teams/standin/team_6.txt').read_text().strip() + '\n\n'
+    own = tmp_path / 'own.txt'
+    own.write_text(team)
+    monkeypatch.setattr(benchmark, 'verify', lambda manifest: None)
+
+    class Captured(Exception):
+        pass
+
+    def capture_player(**kwargs):
+        assert len(Teambuilder.parse_showdown_team(kwargs['team'])) == 6
+        assert own.read_text() == team
+        raise Captured
+
+    monkeypatch.setattr(bot.player, 'AgentPlayer', capture_player)
+    with pytest.raises(Captured):
+        benchmark.game({'folder': str(tmp_path), 'port': 8127, 'config': {},
+                        'own_team': {'path': str(own)}},
+                       {'game': 0, 'sampler_seed': 42})
