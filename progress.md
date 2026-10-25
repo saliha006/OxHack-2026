@@ -87,6 +87,14 @@ whenever you log an entry.
 
 ## Log (newest first)
 
+### 2026-10-25 07:26 — fix — Recover stalled challenge and refill Foul Play evaluation slots — @kenar
+- **Where:** `Kenar-foulplay-eval`; merged to main: not yet
+- **Found:** One scheduled match remained at challenge startup with no battle; the wave scheduler then waited for it before starting further games. The other match completed in 52 turns / 122.28 seconds, a loss retained in the scored sample. Observed own-bot median decision time was about 1.36 seconds, so full battles still take minutes.
+- **Did:** Require own-client login before launching the external challenger, bound challenge startup to 45 seconds, and refill free slots as games finish while retaining concurrency two. Preserve all unplayed failed setup artifacts. Resume the exact 20-game schedule with both verified smoke games and completed loss intact; no replayed or discarded scored outcome, changed team, seed, bot policy or search budget.
+- **Validation:** 45 benchmark/harness tests pass, including the external-challenge login ordering regression. Active manifest v4 records the orchestration-only revision and retained results. Status now records running with 1/20 completed, 0 wins/1 loss at resume.
+- **Evidence:** `evaluation/foulplay-benchmark/latest-20-game-immediate-v4-manifest.json`; local `prebattle-challenge-stall/` and game 13 artifacts.
+- **Status:** resumed immediately; no strength inference from one game
+
 ### 2026-10-25 07:19 — fix — Trim team exports at live benchmark import — @kenar
 - **Where:** `Kenar-foulplay-eval`; merged to main: not yet
 - **Did:** Showdown's validator accepted the source export, but poke-env interpreted its trailing blank block as an empty seventh Pokémon. Trim whitespace only at the live team-import boundary; frozen team files remain byte-identical. Added a regression exercising the actual player-construction boundary. Preserved all rejected setup artifacts; no battle was played in those attempts.

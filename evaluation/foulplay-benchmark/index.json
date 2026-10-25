@@ -1,5 +1,5 @@
 {
-  "active_manifest": "latest-20-game-immediate-v3-manifest.json",
+  "active_manifest": "latest-20-game-immediate-v4-manifest.json",
   "planned_scored_games": 20,
   "smoke_games_excluded_from_score": 2,
   "superseded": [
@@ -19,6 +19,10 @@
     {
       "manifest": "latest-20-game-immediate-v2-manifest.json",
       "status": "Live team import rejected trailing whitespace as an empty seventh Pokemon; corrected before any played battle. Setup artifacts preserved."
+    },
+    {
+      "manifest": "latest-20-game-immediate-v3-manifest.json",
+      "status": "Continued with pre-battle login gate and non-batched slot refill; retained completed game 13 loss and both smoke games"
     }
   ],
   "start_policy": "Immediate start explicitly requested by user; other evaluations remain running and unchanged"
