@@ -1,6 +1,7 @@
 from poke_engine import Move, Pokemon, Side, SideConditions, State
 
 from contracts.battle_state import BattleState, PokemonState, SideState
+from decision.actions import Action
 from decision.opponent import usable_moves
 from decision.sets import PokemonSet, stats
 from decision.state import DEX, STATUS, our_side
@@ -36,6 +37,15 @@ def build_public_state(battle: BattleState, our_sets: list[PokemonSet], their_se
     us = battle["sides"][battle["us"]]
     them = battle["sides"]["p2" if battle["us"] == "p1" else "p1"]
     return _state(battle, _guessed_side(us, our_sets), _guessed_side(them, their_sets))
+
+
+def replay_action(action: Action, battle: BattleState, our_sets: list[PokemonSet]) -> str:
+    """A choose_public action as a replay logs one, "move:<id>" or "switch:<species>", to compare with what was played."""
+    us = battle["sides"][battle["us"]]
+    if action.kind == "switch":
+        return "switch:" + us["pokemon"][action.slot - 1]["species"]
+    side = _guessed_side(us, our_sets)
+    return "move:" + side.pokemon[int(side.active_index)].moves[action.slot - 1].id
 
 
 def _state(battle: BattleState, side_one: Side, side_two: Side) -> State:

@@ -3,7 +3,7 @@ import copy
 import pytest
 
 from decision.actions import Action
-from decision.adapter import build_public_state, build_state
+from decision.adapter import build_public_state, build_state, replay_action
 from decision.sets import stats
 from decision.simulate import simulate
 from tests.turn2 import EXAMPLE, OUR_SETS, REQUEST, SETS, guess
@@ -145,3 +145,9 @@ def test_public_state_guesses_our_side_from_the_battle_state(battle):
     # The Leftovers the BattleState shows beats the guess; no move is revealed yet, so all four are the guess's.
     assert kingambit.item == "leftovers"
     assert [m.id for m in kingambit.moves] == list(OUR_SETS[5].moves)
+
+
+def test_replay_action_names_moves_and_switches_as_the_log_does(battle):
+    assert replay_action(Action("move", 1), battle, OUR_SETS) == "move:kowtowcleave"
+    assert replay_action(Action("move", 2, tera=True), battle, OUR_SETS) == "move:suckerpunch"
+    assert replay_action(Action("switch", 4), battle, OUR_SETS) == "switch:cinderace"
