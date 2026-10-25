@@ -40,6 +40,16 @@ Then give one clear starting point and proceed.
 
 **"What's next" / "what's left"**: your brief's `▶ Current tasks` is the ranked list (PRD → NOW active tasks for the team view). Work the top open ⬜ item unless told otherwise; drive every 🟠 part through §1; mark it done in the brief and `progress.md` when it moves. Nothing active left → offer the parked ideas (§4).
 
+**"Start the demo" / "start a match" / "show the bot" / anything demo-related**: run this flow and hand the user a `/join` link. The demo is frozen at today's bot with the pinned team; change flags or team only on the user's say-so.
+1. **Server up?** `curl -s -o /dev/null -w '%{http_code}' http://localhost:8000/` → `200`. If not, start it in the background from `pokemon-showdown/`: `node pokemon-showdown start --no-security`. Battle chat needs the local `server/chat.ts` patch (`git -C pokemon-showdown diff --stat server/chat.ts` shows it); a server started before the patch needs a restart.
+2. **Nothing else heavy on the laptop.** No eval running during a live demo: both bots lose search time.
+3. **The user's own terminal (PowerShell), from the repo root:** `$env:PYTHONUTF8=1; uv run python -m bot.demo live --teams bot/teams/standin/team_6.txt`. It prints `Watch it live: http://localhost:8000/battle-gen9ou-N`.
+4. **When Claude starts it,** use a Monitor (one battle per run) and post each `NEW /join …` line to the user the moment it appears: `PYTHONUTF8=1 PYTHONUNBUFFERED=1 uv run python -m bot.demo live --teams bot/teams/standin/team_6.txt 2>&1 | grep --line-buffered -E "Watch it live|Game over|Traceback|Error" | sed -u -E 's#.*Watch it live: http://localhost:8000/(battle-gen9ou-[0-9]+).*#NEW /join \1#'`
+5. **The viewer** opens http://localhost:8000 (needs internet for the client's graphics) and types `/join battle-gen9ou-N` in the Lobby chat, or opens the printed URL. Each battle has its own room; the next game is a new number, so post a new link each time. The "battle started" line in the Lobby is only a notice.
+6. **Check and report:** `runs/battle-gen9ou-N.log` has `|c|☆oxhack demo|` lines and no "must be registered to chat". When it ends, post the `Game over: won in N turns · fallbacks · think p50/p99` line.
+7. **More games:** rerun step 3/4, or loop in PowerShell: `while ($true) { uv run python -m bot.demo live --teams bot/teams/standin/team_6.txt }`. **No Wi-Fi:** `uv run python -m bot.demo replay runs/battle-gen9ou-N.jsonl`.
+8. **Numbers rather than one game** = an eval, not a demo, and never during a live demo: `uv run python -m bot.eval run --pairings mcts-headline --games N --seed S --machine <name> --shards K`, then `uv run python -m bot.eval report` (MCTS rows only; `headline`/`full~*` are the old one-ply bot).
+
 ### 🔄 Context sync (session start, and before editing a shared doc)
 Never work from a stale plan. Plain git, no scripts. The synced commit is kept in `.git/context-synced`.
 1. `git fetch -q origin context`. If `git rev-parse origin/context` equals the stamp, you're current.
