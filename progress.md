@@ -38,7 +38,7 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
-| 2026-10-25 00:46 | @derrick | @saliha | 📨 waiting on | Add to PRD → NOW: "2026-10-25: belief floors contradicted sets: a failed speed/damage replay keeps 3% of a set's weight instead of zero; reveals stay a hard zero, but if nothing fits, the old guesses are kept at the floor. (derrick)" | 2026-10-25 00:46 |
+| 2026-10-25 02:19 | @saliha | @nate | ⚠️ conflict | **Your branch is now `nate-data`** (renamed from `Data-stuff-(Nate)`, same commits, `e93bff9`). One-time fix in your clone: `git fetch --prune && git branch -m "Data-stuff-(Nate)" nate-data && git branch -u origin/nate-data`. Don't push to the old name; that recreates it. Remove this row once done | 2026-10-25 02:19 |
 | 2026-10-25 00:32 | @saliha | @derrick | 🔀 scope proposal | **Decision-layer plan from research pass 10** (`design-decision/strategy-research-pass10.md` on `context`): 4 specialist agents + a cross-check, peer-reviewed + official source + our own measurements. Core ~4.5 h: (1) instrumentation, (2) the two `belief.py` crash fixes + a floor (these caused the 12.7% fallbacks), (3) dual-path featurizer, (5) logistic `LearnedValue` behind a flag with HP fallback; stretch: switch share + quantal opponent model, then pool/depth-2/LP default-off. All your call; key measured facts: one-ply dominance drops Swords Dance and the top-3 EVs on our test position are 0.503/0.501/0.497, so the HP value is the weak point | 2026-10-25 00:32 |
 | 2026-10-25 00:32 | @saliha | @nate | 📨 waiting on | Pass 10 proposes you train + calibrate the logistic win-probability model (step 4, 1.5–2 h, in parallel with derrick's featurizer) and count the real opponent switch rate from replays (0.3 h). Needs your 20k extract; if it isn't on disk by ~02:00 UTC the demo ships the HP value. Yes/no? | 2026-10-25 00:32 |
 | 2026-10-25 00:30 | @derrick | @nate | ⚠️ conflict | **Team-conditioned set priors (A6): yes, please build it after the demo.** Starting sets per opponent Pokémon from past games whose teams match theirs. Fallback: require all 5 teammates to match, then one fewer at a time until at least N games match (N is your call); at 0 it's the general priors. Belief needs it at team preview, so it's a function of their six, not a fixed file: agree the shape with @derrick first | 2026-10-25 00:30 |
@@ -63,7 +63,7 @@ whenever you log an entry.
 | Who | GitHub | Role | Branch | Owns (paths) | Now |
 |---|---|---|---|---|---|
 | Saliha | `saliha006` | Bot layer; doc owner | `sali` | `bot/`, `runs/` (git-ignored) | bot plays live games through `Agent.choose`; next: task 5 eval harness |
-| Nate | `aldrichbanas07` | Data layer | any branch with `nate` in it (now `Data-stuff-(Nate)`) | `data/` {{paths tbd}} | brief task 1: set candidates (pass 9 order) |
+| Nate | `aldrichbanas07` | Data layer | any branch with `nate` in it (now `nate-data`) | `data/` {{paths tbd}} | brief task 1: set candidates (pass 9 order) |
 | Derrick | `RandomGeeb` | Decision layer | `derrick` | `decision/`, `tests/`, `contracts/battle_state.py` | feature 11 built on `derrick`; tasks 3–4 wait on the parser and set candidates |
 
 **Shared** (anyone may edit; flag it in ⚠️ Conflicts): {{e.g. `contracts/*`, `fixtures/*`, compose files}}
@@ -83,6 +83,14 @@ whenever you log an entry.
 ---
 
 ## Log (newest first)
+
+### 2026-10-25 02:19 — chore — Branch tidy-up: Nate's branch renamed to nate-data; merged branches deleted — @saliha
+- **Where:** GitHub branches · `context` @ `ee0fb62` · merged to `main`: n/a
+- **Did:** Renamed `Data-stuff-(Nate)` to `nate-data` (pushed the same commit under the new name, checked it matched, then deleted the old name). Deleted saliha's merged feature branches (`eval-blind`, `eval-ladder`, `eval-foulplay`, `demo-mode`); `derrick-main` was already gone. saliha's work stays on `sali` from now on. Added derrick's belief-floor line to PRD → NOW (his wording) and closed his row; Nate's brief names the new branch.
+- **Touched:** branches only; `builder-files/builder-file-nate.md` line 2, `OxHack-2026-PRD.md` NOW (one added line)
+- **Brief task:** none
+- **⚠️ Conflicts:** @nate: your branch's upstream is gone until you re-point it (Open board row)
+- **📨 Needs:** none
 
 ### 2026-10-25 00:58 — feat — Type-matchup lead is on main; all of derrick's code is now on main — @derrick
 - **Where:** `derrick` @ `a50936e` · merged to `main`: yes (cherry-picked as `4e88dac`; `derrick` and `main` share no history, so a merge was refused and would have brought the old doc commits along)
