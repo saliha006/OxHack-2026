@@ -9,6 +9,7 @@ import json
 from collections import Counter
 from pathlib import Path
 
+import bot.parser as public_parser
 from bot.parser import Parser, parse_tags, to_id
 
 REVEAL_LINES = {'move','-item','-enditem','-ability','-terastallize','-damage','-heal','-status',
@@ -17,10 +18,16 @@ ITEM_CHANGES = {'trick','switcheroo','bestow','thief','covet'}
 ABILITY_CHANGES = {'skillswap','roleplay','entrainment','simplebeam','worryseed','doodle'}
 
 
+def file_sha256(path):
+    with Path(path).open('rb') as stream:
+        return hashlib.file_digest(stream, 'sha256').hexdigest()
+
+
 def extract(log, battle_id, *, started_at=None, split=None, include_state=False):
     parser = Parser('p1')
     log_hash = hashlib.sha256(log.encode()).hexdigest()
     seen, transformed, altered_items, altered_abilities, illusion_sides = set(), set(), set(), set(), set()
+    copied_slots = {}
     for offset, line in enumerate(log.splitlines()):
         parts = line.split('|')
         if len(parts) < 2:
@@ -39,12 +46,15 @@ def extract(log, battle_id, *, started_at=None, split=None, include_state=False)
                 owners[side] = (side, active)
         if kind == 'move' and len(args)>1:
             move = to_id(args[1])
+            if move in ('mimic','sketch') and args[0][:2] in owners:
+                copied_slots[owners[args[0][:2]]] = (move, offset)
             if move in ITEM_CHANGES:
                 altered_items.update(owners.values())  # before the exchange messages; failed exchanges are conservatively censored
             if move in ABILITY_CHANGES:
                 altered_abilities.update(owners.values())
-        if kind in ('switch','drag') and args:
-            transformed.discard(owners.get(args[0][:2]))
+        # Retain lifetime censoring after Transform: this parser keeps observed
+        # copied move/ability history after switching, so it is not a clean
+        # original-set conditioning state even once the transformation ends.
         if kind == '-transform' and args:
             transformed.add(owners.get(args[0][:2]))
         parser.feed(line)
@@ -73,6 +83,10 @@ def extract(log, battle_id, *, started_at=None, split=None, include_state=False)
                 reason = 'transformed_identity'
             if side in illusion_sides:
                 reason = 'possible_illusion_identity; side excluded conservatively'
+            # The public parser retains move history through switching. Censor subsequent
+            # original-set labels for this owner rather than condition on a copied slot.
+            if (side,slot) in copied_slots and copied_slots[(side,slot)][1] < offset:
+                native, reason = False, 'move_slot_may_have_been_copied'
             if field == 'item' and (side,slot) in altered_items:
                 native, reason = False, 'item_may_have_been_transferred'
             tags = parse_tags(args[2:])
@@ -118,9 +132,9 @@ def export_jsonl(input_path, output):
     except BaseException:
         part.unlink(missing_ok=True)
         raise
-    report = {'battles':len(battles),'counts':dict(counts),'input_sha256':hashlib.sha256(input_path.read_bytes()).hexdigest(),
-              'extractor_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-              'output_sha256':hashlib.sha256(output.read_bytes()).hexdigest()}
+    report = {'battles':len(battles),'counts':dict(counts),'input_sha256':file_sha256(input_path),
+              'extractor_sha256':file_sha256(__file__), 'public_parser_sha256':file_sha256(public_parser.__file__),
+              'output_sha256':file_sha256(output)}
     output.with_suffix('.manifest.json').write_text(json.dumps(report,indent=2)+'\n')
     return report
 

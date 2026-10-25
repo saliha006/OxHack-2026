@@ -61,3 +61,21 @@ def test_repeated_current_item_changes_keep_their_timing():
     rows=list(extract(log,'fixture'))
     assert [r['turn'] for r in rows if r['field']=='current_item']==[1,3]
     assert sum(r['native_set_evidence'] and r['field']=='item' for r in rows)==1
+
+
+def test_mimic_is_native_but_subsequent_copied_slot_is_not_a_label():
+    log=START+'|move|p2a: Dozo|Mimic|p1a: Gold\n|turn|2\n|move|p2a: Dozo|Shadow Ball|p1a: Gold\n'
+    rows=list(extract(log,'fixture'))
+    assert next(r for r in rows if r['value']=='mimic')['native_set_evidence']
+    copied=next(r for r in rows if r['value']=='shadowball')
+    assert not copied['native_set_evidence'] and copied['exclusion_reason']=='move_slot_may_have_been_copied'
+
+
+def test_transformed_history_stays_censored_after_switch():
+    log=START+'''|-transform|p2a: Dozo|p1a: Gold
+|move|p2a: Dozo|Shadow Ball|p1a: Gold
+|switch|p2a: Dozo|Dondozo, L100|100/100
+|-item|p2a: Dozo|Leftovers
+'''
+    rows=list(extract(log,'fixture'))
+    assert not next(r for r in rows if r['field']=='item')['native_set_evidence']

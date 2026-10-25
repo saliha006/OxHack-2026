@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 from itertools import product
 from pathlib import Path
 
-from data.pipeline.build_set_candidates import forme_aliases, to_id
+from data.pipeline.build_set_candidates import MOVES, forme_aliases, to_id
 from decision.sets import NATURES, STAT_ORDER
 from decision.state import DEX
 
@@ -73,6 +73,8 @@ def import_bank(document, priors):
                         *moves, item, ability, nature, tera = map(to_id, variant)
                         if len(set(moves)) != len(moves):
                             continue
+                        if set(moves)-set(MOVES):
+                            raise ValueError('move missing from pinned native move snapshot')
                         if nature not in set(NATURES) | NEUTRAL:
                             raise ValueError('unknown nature')
                         candidate = dict(weight=1., moves=moves, item='' if item in ('nothing','none') else item,
