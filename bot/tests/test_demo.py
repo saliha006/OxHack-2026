@@ -1,3 +1,4 @@
+import asyncio
 import json
 from types import SimpleNamespace
 
@@ -85,11 +86,17 @@ def test_replay_prints_every_line_and_pauses_only_after_decisions(tmp_path):
 
 class FakeAgentPlayer:
     def __init__(self, make_agent, runs_dir, on_decision, **kwargs):
-        self.on_decision, self.kwargs, self.summaries = on_decision, kwargs, []
+        self.on_decision, self.kwargs, self.summaries, self.chat = on_decision, kwargs, [], []
+
+        async def send_message(message, room):
+            self.chat.append((room, message))
+        self.ps_client = SimpleNamespace(send_message=send_message)
+        FakeAgentPlayer.last = self
 
     async def battle_against(self, rival, n_battles):
-        self.on_decision("battle-gen9ou-5", decision())
-        self.on_decision("battle-gen9ou-5", decision())
+        for line in (decision(), {"kind": "observation", "decision_id": "x"}, decision()):
+            self.on_decision("battle-gen9ou-5", line)
+            await asyncio.sleep(0)
         self.summaries.append({"won": True, "turns": 9, "decisions": 2, "fallbacks": 0,
                                "think_p50_ms": 50.0, "think_p99_ms": 90.0})
 
@@ -103,7 +110,8 @@ def test_live_prints_the_watch_url_once_then_every_turn_and_the_result(monkeypat
     out = capsys.readouterr().out
     assert out.count("http://localhost:8000/battle-gen9ou-5") == 1
     assert out.count("Kowtow Cleave") == 2 and "Game over: won in 9 turns" in out
-    assert naps == [1.5, 1.5] and summary["turns"] == 9
+    assert naps == [1.5, 1.5, 1.5] and summary["turns"] == 9
+    assert FakeAgentPlayer.last.chat == [("battle-gen9ou-5", "Turn   7 · Kowtow Cleave  (64 ms) | kingambit 80% tox (6 left)  vs  gholdengo 41% (4 left)")] * 2
 
 
 def test_main_replays_a_trace(tmp_path, monkeypatch):
@@ -125,3 +133,19 @@ def test_main_plays_live_with_a_team_from_the_pool_and_chosen_priors(tmp_path, m
     demo.main(["live", "--teams", str(team), "--priors-from-teams"])
     assert calls[0] == (team.read_text(encoding="utf-8").strip(), {"species": {}}, "random", 3.0, 0.0, "runs")
     assert "zapdos" in calls[1][1]["species"] and calls[1][2] == "simpleheuristics"
+
+
+def test_a_chat_line_joins_the_turn_into_one_message_within_showdowns_limit():
+    assert demo.chat_text(search()).startswith("Turn   7 · Kowtow Cleave  (64 ms) | kingambit 80% tox")
+    assert " | Weighing: Kowtow Cleave + Tera 50%" in demo.chat_text(search())
+    assert len(demo.chat_text(decision(a="y" * 400, b="y" * 400, c="y" * 400))) == 300
+
+
+def test_main_passes_the_tera_gate_through_to_live(tmp_path, monkeypatch):
+    calls = []
+    monkeypatch.setattr(demo, "live", lambda *args: calls.append(args))
+    team = tmp_path / "t.txt"
+    team.write_text("Zapdos @ Heavy-Duty Boots\nAbility: Static\nTera Type: Grass\nEVs: 4 HP\nTimid Nature\n- Roost\n\n",
+                    encoding="utf-8")
+    demo.main(["live", "--teams", str(team), "--priors-from-teams", "--engine-threads", "4", "--tera-min-wins", "2"])
+    assert calls[0][6:] == ("mcts", 8, 150, 4, 2)

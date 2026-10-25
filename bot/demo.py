@@ -101,20 +101,33 @@ def replay(path: Path, delay: float, out: Callable[[str], None] = print, sleep: 
             sleep(delay)
 
 
+def chat_text(line: dict) -> str:
+    # Showdown drops chat messages over 300 characters.
+    return " | ".join(part.strip() for part in format_line(line).splitlines())[:300]
+
+
 def live(team: str, priors: dict, opponent: str, budget: float, pace: float, runs: str,
-         backend: str = "mcts", worlds: int = 8, search_ms: int = 150, engine_threads: int = 1) -> dict:
+         backend: str = "mcts", worlds: int = 8, search_ms: int = 150, engine_threads: int = 1,
+         tera_min_wins: int = 0) -> dict:
     watched = set()
+    chats = set()  # the loop only keeps weak references to tasks
 
     def on_decision(tag: str, line: dict) -> None:
         if tag not in watched:
             watched.add(tag)
             print(f"Watch it live: http://localhost:8000/{tag}  (the Showdown client needs internet)")
         print(format_line(line))
+        if line.get("kind") not in ("observation", "retry"):
+            # The battle chat sits beside the field in the browser, so viewers see the search's view too.
+            task = asyncio.get_running_loop().create_task(ours.ps_client.send_message(chat_text(line), tag))
+            chats.add(task)
+            task.add_done_callback(chats.discard)
         # Slows our side down so a judge can follow each turn in the client.
         time.sleep(pace)
 
     ours = AgentPlayer(make_agent=lambda: Agent(priors, budget=budget, backend=backend, mcts_worlds=worlds,
-                                               search_ms=search_ms, engine_threads=engine_threads),
+                                               search_ms=search_ms, engine_threads=engine_threads,
+                                               tera_min_wins=tera_min_wins),
                        runs_dir=runs, on_decision=on_decision,
                        account_configuration=AccountConfiguration("oxhack demo", None), battle_format="gen9ou",
                        team=team, start_timer_on_battle_start=True)
@@ -140,6 +153,7 @@ def main(argv: list[str] | None = None) -> int:
     play.add_argument("--worlds", type=int, default=8)
     play.add_argument("--search-ms", type=int, default=150)
     play.add_argument("--engine-threads", type=int, default=1)
+    play.add_argument("--tera-min-wins", type=int, default=0, help="Tera only if it tops this many worlds (0 = off)")
     play.add_argument("--pace", type=float, default=1.5, help="seconds to wait after each of our decisions")
     play.add_argument("--runs", default="runs")
     again = sub.add_parser("replay")
@@ -152,8 +166,8 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     teams = load_teams(Path(args.teams))
     priors = priors_from_teams(teams) if args.priors_from_teams else json.loads(Path(args.priors).read_text(encoding="utf-8"))
-    options = () if (args.backend, args.worlds, args.search_ms, args.engine_threads) == ("mcts", 8, 150, 1) else (
-        args.backend, args.worlds, args.search_ms, args.engine_threads)
+    chosen = (args.backend, args.worlds, args.search_ms, args.engine_threads, args.tera_min_wins)
+    options = () if chosen == ("mcts", 8, 150, 1, 0) else chosen
     live(random.choice(teams), priors, args.opponent, args.budget, args.pace, args.runs, *options)
     return 0
 

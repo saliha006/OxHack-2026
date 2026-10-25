@@ -100,7 +100,7 @@ def gate_tera(action: Action, support: dict[str, float], request: dict, worlds: 
         distribution = {} if world.get("error") else _visits(world.get("our_visits", []))
         if distribution and map_choice(max(distribution, key=distribution.get), request) == action:
             wins += 1
-    record = {"tera_wins": wins, "min_wins": min_wins, "blocked": False}
+    record = {"top_in_worlds": wins, "min_wins": min_wins, "blocked": False}
     if not action.tera or wins >= min_wins:
         return action, record
     others = [a for a in our_actions(request) if not a.tera and support.get(a.to_choice(), 0) > 0]

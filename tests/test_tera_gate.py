@@ -28,13 +28,13 @@ def gate(worlds, min_wins):
 def test_a_tera_that_tops_no_world_falls_back_to_the_best_supported_plain_choice():
     pooled_pick, (action, record) = gate(RUNNER_UP, 1)
     assert pooled_pick == TERA_IRON_HEAD
-    assert action == Action("move", 4) and record == {"tera_wins": 0, "min_wins": 1, "blocked": True}
+    assert action == Action("move", 4) and record == {"top_in_worlds": 0, "min_wins": 1, "blocked": True}
 
 
 def test_a_tera_that_tops_enough_worlds_is_kept_and_errored_worlds_do_not_count():
     worlds = [world({"ironhead-tera": 60, "ironhead": 40})] * 2 + [world({}, error={"stage": "native_search"})]
     _, (action, record) = gate(worlds, 2)
-    assert action == TERA_IRON_HEAD and record["tera_wins"] == 2 and not record["blocked"]
+    assert action == TERA_IRON_HEAD and record["top_in_worlds"] == 2 and not record["blocked"]
     _, (action, record) = gate(worlds, 3)
     assert action == Action("move", 4) and record["blocked"]
 

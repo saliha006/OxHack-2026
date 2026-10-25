@@ -38,7 +38,7 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
-| 2026-10-25 08:40 | @saliha | @kenar | ⚠️ conflict | Opt-in Tera gate in your `decision/agent.py` + `search_policy.py` (`tera_min_wins`, default 0 = off; nothing changes unless set). Your tests pass. Say if you want it reverted | 2026-10-25 08:40 |
+| 2026-10-25 08:31 | @saliha | @kenar | ⚠️ conflict | Opt-in Tera gate in your `decision/agent.py` + `search_policy.py` (`tera_min_wins`, default 0 = off; nothing changes unless set). Your tests pass. Say if you want it reverted | 2026-10-25 08:31 |
 | 2026-10-25 08:18 | @saliha | @nate | ⚠️ conflict | New `data/pipeline/joint_sets.py` + `data/set_candidates_joint.json` (observed complete sets blended into usage candidates, opt-in) in your `data/`; nothing of yours changed. Yes/no on keeping it there | 2026-10-25 08:18 |
 | 2026-10-25 08:20 | @saliha | @kenar @derrick @nate | 📨 waiting on | **Eval slice, start now, stop 09:45 UTC** on `main` (`git pull && uv sync`, local server up). @kenar (has Foul Play): `uv run python -m bot.eval run --pairings mcts-foulplay-hard mcts-joint-foulplay-hard mcts-threads-foulplay-hard --games 25 --seed 101 --machine kenar --shards 2` (stop v2 panels first; one fphard game uses ~5 cores) · @derrick: `... --pairings mcts-joint --games 60 --seed 102 --machine derrick --shards 3` · @nate: `... --pairings mcts-threads --games 40 --seed 103 --machine nate --shards 1` (one game at a time: the 4-thread arm needs the cores). Own seed each. Send `runs/eval/<machine>-*.jsonl` to @saliha at 09:45; she runs `bot.eval report`. Replaces the 08:10 row | 2026-10-25 08:20 |
 | 2026-10-25 06:41 | @derrick | @saliha | 📨 waiting on | PRD NOW: add "decision layer = Kenar's `Kenar-coherent-sets` (MCTS default, coherent priors opt-in); derrick's backtest, `choose_public` and the 1825-cutoff proposal withdrawn"; take "Backtesting frontend" out of Pending. Replaces my 03:30 row | 2026-10-25 06:41 |
@@ -89,7 +89,15 @@ whenever you log an entry.
 
 ## Log (newest first)
 
-### 2026-10-25 08:40 — feat — Opt-in Tera gate (Laplace's rule) and near-tie mixing arm — @saliha
+### 2026-10-25 08:45 — feat — Demo posts its thinking to the battle chat and takes the Tera gate — @saliha
+- **Where:** `sali` · merged to `main`: yes
+- **Did:** `bot.demo live` now also sends each decision's lines (choice, actives, Weighing / Expects them / Guessing) as one battle-chat message (≤300 chars), so anyone watching `localhost:8000/<battle>` sees the search's view beside the field. New `--tera-min-wins` flag. Full-config live game (`--priors data/set_candidates_joint.json --engine-threads 4 --tera-min-wins 2`, with an eval running on the same laptop): won in 58 turns, 0/64 fallbacks, think p50 1593 ms, p99 2005 ms. Showdown refuses battle chat from unregistered users even with `--no-security`; the demo laptop's local server gets a one-line local patch (`server/chat.ts`: also allow when `Config.noguestsecurity`), not in this repo. Without it the chat lines are refused and the terminal view is unchanged. Gate record key renamed `tera_wins` → `top_in_worlds` (it counts the chosen move's world wins, Tera or not).
+- **Touched:** `bot/demo.py`, `bot/tests/test_demo.py`, `decision/search_policy.py`, `tests/test_tera_gate.py`
+- **Brief task:** none
+- **⚠️ Conflicts:** none
+- **📨 Needs:** none
+
+### 2026-10-25 08:31 — feat — Opt-in Tera gate (Laplace's rule) and near-tie mixing arm — @saliha
 - **Where:** `sali` · merged to `main`: yes
 - **Did:** `decision/search_policy.gate_tera`: Tera is played only when that exact Tera choice tops at least `tera_min_wins` worlds outright; otherwise the best-supported non-Tera choice is played (and recorded for belief replay), and a Tera with no supported alternative stands. Averaging can lift a Tera copy that is every world's runner-up; Tera is once a game (research pass 15: poke-engine charges a flat −75 for used Tera). `Agent(tera_min_wins=0)` = off, the default, so the demo and every existing arm are unchanged. Eval arms `mcts8tera` (k=2 of 8) and `mcts8mix` (existing `mix_root`), pairings `mcts-tera-gate` and `mcts-mix` vs mcts8. k=2 is our choice, not tuned.
 - **Touched:** `decision/search_policy.py` (new `gate_tera`), `decision/agent.py` (`tera_min_wins` option + 4-line hook after pooling), new `tests/test_tera_gate.py`, `bot/eval.py`
