@@ -26,6 +26,15 @@ def test_first_turn_starts_with_both_leads_out_and_full_teams():
     assert first["p1_alive"] == first["p2_alive"] == 6 and first["p1_hp_total"] == first["p2_hp_total"] == 6.0
 
 
+def test_each_pokemon_keeps_its_slot_and_the_slots_add_up_to_the_totals():
+    rows = fixture_rows()
+    for side in ("p1", "p2"):
+        assert len({tuple(r[f"{side}_mon{k}_species"] for k in range(1, 7)) for r in rows}) <= 2  # a hidden forme may resolve once
+        for r in rows:
+            hps = [r[f"{side}_mon{k}_hp"] for k in range(1, 7)]
+            assert sum(hps) / 100 == r[f"{side}_hp_total"] and sum(hp > 0 for hp in hps) == r[f"{side}_alive"]
+
+
 def test_actions_are_labelled_and_the_state_round_trips():
     rows = fixture_rows()
     actions = [r[f"{s}_action"] for r in rows for s in ("p1", "p2") if r[f"{s}_action"]]

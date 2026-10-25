@@ -26,6 +26,7 @@ TRAIN_FROM = "2025-01-01"
 TEST_SHARE = 0.25
 
 SIDES: tuple[SideId, SideId] = ("p1", "p2")
+TEAM_SIZE = 6
 BOOSTS = ("atk", "def", "spa", "spd", "spe")
 HAZARDS = ("stealthrock", "spikes", "toxicspikes", "stickyweb")
 SIDE_EFFECTS = ("reflect", "lightscreen", "auroraveil", "tailwind")
@@ -61,6 +62,11 @@ def side_columns(state: BattleState, side_id: SideId) -> dict:
         **{hazard: side["hazards"].get(hazard, 0) for hazard in HAZARDS},
         **{effect: effect in side["side_effects"] for effect in SIDE_EFFECTS},
         "substitute": "substitute" in side["volatiles"],
+        # Every Pokémon in team preview order, which holds for the whole game: mon3 is the same Pokémon every turn.
+        **{f"mon{k + 1}_{key}": mon and value(mon)
+           for k, mon in enumerate(team[:TEAM_SIZE] + [None] * (TEAM_SIZE - len(team)))
+           for key, value in (("species", lambda m: m["species"]), ("hp", lambda m: m["hp_percent"]),
+                              ("status", lambda m: m["status"] or None))},
     }
 
 
