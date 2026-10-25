@@ -1,0 +1,1082 @@
+{
+  "schema": 2,
+  "purpose": "historical development mechanism/compute study; no strength or fresh holdout claim",
+  "frozen_before_new_measurements": true,
+  "snapshot": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-tera-probe",
+  "source": {
+    "source_sha256": "0bd23daf0e4d173a8a9a3398793831d7d1cac100ba99bf238ab357f07b258a23",
+    "files": {
+      "bot/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bot/demo.py": "805887cc72795b5ef2e3f1cdff65e4f90041adb8b8985876da752660084e9761",
+      "bot/eval.py": "41fbf2833152278ad3ebdcd55661ab901ffb1bcaae1f36afa696165e35c56c46",
+      "bot/parser.py": "d36ee9a18ce1b2e6229aa3df0aa5730685e693d2e3f6aaa1c836be3a9799ba8a",
+      "bot/player.py": "58b40502da95795076179ec0bc0fafd6381f0cb8c48fe2dae230d6d20db61527",
+      "bot/smoke.py": "3e12e0fad384b7ac2372ebadcc2c0043b6aa32986e91fa03d6babc13b706ac05",
+      "bot/tests/test_demo.py": "3dbf7a7aded4ae0fe5acd379c5c1266be3ddbaa5474bdd7202da7af224d5813b",
+      "bot/tests/test_eval.py": "22639e87ef7441b129e55c983ccdffceb7fbdf01ec33b7b74dfcc4923d60c246",
+      "bot/tests/test_eval_completion.py": "1d5c6c2a2f09cf8ac671c83ee47dfc6f9bb99a02a4d741798c9f70893411b8c2",
+      "bot/tests/test_eval_schedule.py": "9e79a2b18b3fd64f56bba829a1da124763adf41d4ea319f8470812b827ff644f",
+      "bot/tests/test_foul_play_eval.py": "424c537d4545552e83f8cca4111a9ba9b3ae140f6f282c22292a1242ef8f8d7b",
+      "bot/tests/test_mcts_evaluation.py": "1e901e5a6daa36fbf6dc6d0847d827a536d7f5fdfa99b7996aec40ad07b75ade",
+      "bot/tests/test_parser.py": "8ad6602ec4832452890d1c36eec4360902a87a95c83de1ad33e6b42d3d93f7f0",
+      "bot/tests/test_player.py": "44ed9e927f60e6b913161ad807579adf343e1ae4c744d53b6f109d87d5c90c27",
+      "bot/tests/test_smoke.py": "ec3a95e454be0019b407475a74d58e19a75e25e1774a5b56fab48523275fd6c5",
+      "contracts/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "contracts/battle_state.py": "377e82a448b3c67e8b79bdf46c62b1d9363dd8af57e51afa511f8d5f804f2d89",
+      "contracts/set_candidates.py": "3ee151f9ab4ad4f6fd1c77e5ac62e888990e0cc85cf687d1fccbce42400e162a",
+      "decision/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "decision/actions.py": "78233b1a0dea5a10e991908600317355b19f0b54d3c6fbbccbc88d5ddc028620",
+      "decision/adapter.py": "34773e44b090785272f3807fe7c179c9ca4b34e80706d177b3fb003b94b44068",
+      "decision/agent.py": "db48ae4e3eac455f2cb1cc07212ab5dd105103dcd67714ad2c7baa59153cafc6",
+      "decision/belief.py": "752a057da7d8fb8bc9d2086e323f83fc191a8259c94e45a36d9a3ee64660da2e",
+      "decision/data/moves.json": "26909a321a7e4528d14a7dffd24173aa03a6845776cf41c39cc3d76f8e14616b",
+      "decision/data/pokedex.json": "e74d0364b230001fc086cefb4259e051f1d16a4730eb89f7d6336a88a0d9a47e",
+      "decision/data/typechart.json": "26270c6fa9e25ba43ba9d6fd0da115fcf96eee42eae8b0bd9660bd015dc483b2",
+      "decision/lead.py": "1af618a2450672e75abae9af55b2035d64e29e3b8f420629fdd29a4f75f7c5f3",
+      "decision/opponent.py": "902a458fa0d2a97519a3a86527f2cfd3ae13f8a390fd61e62b8eda1d602643a7",
+      "decision/search.py": "a6e1a2f14c4bbdc62ca7701791196ea4e1398a8be9ed28702abd3d4503682218",
+      "decision/search_policy.py": "ac52f71753b08ea2932003fb05a11cde6cc6f4ad671c0bfa6407e938d1ea9650",
+      "decision/selector.py": "36de03df3385670f46af23ae7cc01f2077b51b70bc7a47e0fae86aad92f1267c",
+      "decision/sets.py": "5e345d60634414d723dbe1de4b0adc4459abcb542dfad0920095a7b6c4650c53",
+      "decision/simulate.py": "96e077923f6ef720a66fddbc496dab4c197c8cda386a7c0f1b5af7eee03d18a3",
+      "decision/state.py": "e97dd27902014dd3fc432dae5ca66da75887b1d9d5dabe2666dc82b3863bf28b",
+      "decision/value.py": "d25c43b6bc8e360043cf19e4c0c331aed04a692ffdc7da8b848a6fc2a705ef29"
+    }
+  },
+  "engine": {
+    "version": "0.0.48",
+    "binaries": {
+      "poke_engine.cpython-313-x86_64-linux-gnu.so": "fbffd2a1c9c48eab99def9187f9030c578174a30b49d54faad159be859846ef3"
+    }
+  },
+  "priors": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage2-tera-probe/data/set_candidates.json",
+  "priors_sha256": "47b31bf7282d6578ed44d7b28f9a63e9284eddc72882856de426f7c1bfc8c7f3",
+  "runner_sha256": "e171eec04da8e867978442b4d4694ea0d75cda2e5628bf91fb36b798edb36c7d",
+  "identity_helper_sha256": "d91b6bbe10f406589e129c4d46628666f103322a8d0d26b198f16ace92340465",
+  "inputs": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/allocation-development-v1-inputs.json",
+  "inputs_sha256": "6d2072fa6c7b2c532666922f0dd31494f0b812d85182121d580cabf2635aa589",
+  "positions": [
+    {
+      "id": "battle-gen9ou-24-first",
+      "source": {
+        "file": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-comparison-final/players/ox624d8350/battle-gen9ou-24.jsonl",
+        "sha256": "ff0a090843cca786214a4baf8eeab231c9f302cbca2af3f71ef81de94af60c89",
+        "line": 3,
+        "battle_id": "battle-gen9ou-24",
+        "turn": 1,
+        "selection": "first",
+        "eligible_move_requests": 16
+      },
+      "input_sha256": "b357bcab492789f6174d2701b44079d3ff6ada5463120b045cefbb634d08de47"
+    },
+    {
+      "id": "battle-gen9ou-24-middle",
+      "source": {
+        "file": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-comparison-final/players/ox624d8350/battle-gen9ou-24.jsonl",
+        "sha256": "ff0a090843cca786214a4baf8eeab231c9f302cbca2af3f71ef81de94af60c89",
+        "line": 21,
+        "battle_id": "battle-gen9ou-24",
+        "turn": 9,
+        "selection": "middle",
+        "eligible_move_requests": 16
+      },
+      "input_sha256": "9eb70ad2d9c45711d606dc58560468e1b57a1f91d868cd7ea097ac08a9fba8f4"
+    },
+    {
+      "id": "battle-gen9ou-24-last",
+      "source": {
+        "file": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-comparison-final/players/ox624d8350/battle-gen9ou-24.jsonl",
+        "sha256": "ff0a090843cca786214a4baf8eeab231c9f302cbca2af3f71ef81de94af60c89",
+        "line": 37,
+        "battle_id": "battle-gen9ou-24",
+        "turn": 16,
+        "selection": "last",
+        "eligible_move_requests": 16
+      },
+      "input_sha256": "abc154a068d29bc6c8433f21322d3f32b23f8f95de10b91a2e330028e5328cbc"
+    },
+    {
+      "id": "battle-gen9ou-26-first",
+      "source": {
+        "file": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-comparison-final/players/oxb4db3c68/battle-gen9ou-26.jsonl",
+        "sha256": "1395bff6c8f6c8ed363ca5227a59ddc4535279823b5ae057384b225737997a84",
+        "line": 3,
+        "battle_id": "battle-gen9ou-26",
+        "turn": 1,
+        "selection": "first",
+        "eligible_move_requests": 44
+      },
+      "input_sha256": "040e93dc231609f323fc0feaf3bac6a5d83cac558cfd41026651d834840bec85"
+    },
+    {
+      "id": "battle-gen9ou-26-middle",
+      "source": {
+        "file": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-comparison-final/players/oxb4db3c68/battle-gen9ou-26.jsonl",
+        "sha256": "1395bff6c8f6c8ed363ca5227a59ddc4535279823b5ae057384b225737997a84",
+        "line": 57,
+        "battle_id": "battle-gen9ou-26",
+        "turn": 23,
+        "selection": "middle",
+        "eligible_move_requests": 44
+      },
+      "input_sha256": "b6a296246c4a2a4337e02833e2dfd9ec638191dba7a67e0aa6028b376398b477"
+    },
+    {
+      "id": "battle-gen9ou-26-last",
+      "source": {
+        "file": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-comparison-final/players/oxb4db3c68/battle-gen9ou-26.jsonl",
+        "sha256": "1395bff6c8f6c8ed363ca5227a59ddc4535279823b5ae057384b225737997a84",
+        "line": 109,
+        "battle_id": "battle-gen9ou-26",
+        "turn": 44,
+        "selection": "last",
+        "eligible_move_requests": 44
+      },
+      "input_sha256": "7eef7210137421158fedf42dc59c6e93c27523503a48375344883c063990a318"
+    }
+  ],
+  "schedule": [
+    {
+      "id": 0,
+      "position": "battle-gen9ou-24-first",
+      "repetition": 0,
+      "allocation": "4x300",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 4,
+        "search_ms": 300,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102540
+      }
+    },
+    {
+      "id": 1,
+      "position": "battle-gen9ou-24-first",
+      "repetition": 0,
+      "allocation": "8x150",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 8,
+        "search_ms": 150,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102540
+      }
+    },
+    {
+      "id": 2,
+      "position": "battle-gen9ou-24-first",
+      "repetition": 0,
+      "allocation": "12x100",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 12,
+        "search_ms": 100,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102540
+      }
+    },
+    {
+      "id": 3,
+      "position": "battle-gen9ou-24-middle",
+      "repetition": 0,
+      "allocation": "8x150",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 8,
+        "search_ms": 150,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102541
+      }
+    },
+    {
+      "id": 4,
+      "position": "battle-gen9ou-24-middle",
+      "repetition": 0,
+      "allocation": "12x100",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 12,
+        "search_ms": 100,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102541
+      }
+    },
+    {
+      "id": 5,
+      "position": "battle-gen9ou-24-middle",
+      "repetition": 0,
+      "allocation": "4x300",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 4,
+        "search_ms": 300,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102541
+      }
+    },
+    {
+      "id": 6,
+      "position": "battle-gen9ou-24-last",
+      "repetition": 0,
+      "allocation": "12x100",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 12,
+        "search_ms": 100,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102542
+      }
+    },
+    {
+      "id": 7,
+      "position": "battle-gen9ou-24-last",
+      "repetition": 0,
+      "allocation": "4x300",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 4,
+        "search_ms": 300,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102542
+      }
+    },
+    {
+      "id": 8,
+      "position": "battle-gen9ou-24-last",
+      "repetition": 0,
+      "allocation": "8x150",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 8,
+        "search_ms": 150,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102542
+      }
+    },
+    {
+      "id": 9,
+      "position": "battle-gen9ou-26-first",
+      "repetition": 0,
+      "allocation": "4x300",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 4,
+        "search_ms": 300,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102543
+      }
+    },
+    {
+      "id": 10,
+      "position": "battle-gen9ou-26-first",
+      "repetition": 0,
+      "allocation": "8x150",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 8,
+        "search_ms": 150,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102543
+      }
+    },
+    {
+      "id": 11,
+      "position": "battle-gen9ou-26-first",
+      "repetition": 0,
+      "allocation": "12x100",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 12,
+        "search_ms": 100,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102543
+      }
+    },
+    {
+      "id": 12,
+      "position": "battle-gen9ou-26-middle",
+      "repetition": 0,
+      "allocation": "8x150",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 8,
+        "search_ms": 150,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102544
+      }
+    },
+    {
+      "id": 13,
+      "position": "battle-gen9ou-26-middle",
+      "repetition": 0,
+      "allocation": "12x100",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 12,
+        "search_ms": 100,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102544
+      }
+    },
+    {
+      "id": 14,
+      "position": "battle-gen9ou-26-middle",
+      "repetition": 0,
+      "allocation": "4x300",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 4,
+        "search_ms": 300,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102544
+      }
+    },
+    {
+      "id": 15,
+      "position": "battle-gen9ou-26-last",
+      "repetition": 0,
+      "allocation": "12x100",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 12,
+        "search_ms": 100,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102545
+      }
+    },
+    {
+      "id": 16,
+      "position": "battle-gen9ou-26-last",
+      "repetition": 0,
+      "allocation": "4x300",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 4,
+        "search_ms": 300,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102545
+      }
+    },
+    {
+      "id": 17,
+      "position": "battle-gen9ou-26-last",
+      "repetition": 0,
+      "allocation": "8x150",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 8,
+        "search_ms": 150,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102545
+      }
+    },
+    {
+      "id": 18,
+      "position": "battle-gen9ou-24-first",
+      "repetition": 1,
+      "allocation": "8x150",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 8,
+        "search_ms": 150,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102540
+      }
+    },
+    {
+      "id": 19,
+      "position": "battle-gen9ou-24-first",
+      "repetition": 1,
+      "allocation": "12x100",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 12,
+        "search_ms": 100,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102540
+      }
+    },
+    {
+      "id": 20,
+      "position": "battle-gen9ou-24-first",
+      "repetition": 1,
+      "allocation": "4x300",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 4,
+        "search_ms": 300,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102540
+      }
+    },
+    {
+      "id": 21,
+      "position": "battle-gen9ou-24-middle",
+      "repetition": 1,
+      "allocation": "12x100",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 12,
+        "search_ms": 100,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102541
+      }
+    },
+    {
+      "id": 22,
+      "position": "battle-gen9ou-24-middle",
+      "repetition": 1,
+      "allocation": "4x300",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 4,
+        "search_ms": 300,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102541
+      }
+    },
+    {
+      "id": 23,
+      "position": "battle-gen9ou-24-middle",
+      "repetition": 1,
+      "allocation": "8x150",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 8,
+        "search_ms": 150,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102541
+      }
+    },
+    {
+      "id": 24,
+      "position": "battle-gen9ou-24-last",
+      "repetition": 1,
+      "allocation": "4x300",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 4,
+        "search_ms": 300,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102542
+      }
+    },
+    {
+      "id": 25,
+      "position": "battle-gen9ou-24-last",
+      "repetition": 1,
+      "allocation": "8x150",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 8,
+        "search_ms": 150,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102542
+      }
+    },
+    {
+      "id": 26,
+      "position": "battle-gen9ou-24-last",
+      "repetition": 1,
+      "allocation": "12x100",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 12,
+        "search_ms": 100,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102542
+      }
+    },
+    {
+      "id": 27,
+      "position": "battle-gen9ou-26-first",
+      "repetition": 1,
+      "allocation": "8x150",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 8,
+        "search_ms": 150,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102543
+      }
+    },
+    {
+      "id": 28,
+      "position": "battle-gen9ou-26-first",
+      "repetition": 1,
+      "allocation": "12x100",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 12,
+        "search_ms": 100,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102543
+      }
+    },
+    {
+      "id": 29,
+      "position": "battle-gen9ou-26-first",
+      "repetition": 1,
+      "allocation": "4x300",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 4,
+        "search_ms": 300,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102543
+      }
+    },
+    {
+      "id": 30,
+      "position": "battle-gen9ou-26-middle",
+      "repetition": 1,
+      "allocation": "12x100",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 12,
+        "search_ms": 100,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102544
+      }
+    },
+    {
+      "id": 31,
+      "position": "battle-gen9ou-26-middle",
+      "repetition": 1,
+      "allocation": "4x300",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 4,
+        "search_ms": 300,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102544
+      }
+    },
+    {
+      "id": 32,
+      "position": "battle-gen9ou-26-middle",
+      "repetition": 1,
+      "allocation": "8x150",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 8,
+        "search_ms": 150,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102544
+      }
+    },
+    {
+      "id": 33,
+      "position": "battle-gen9ou-26-last",
+      "repetition": 1,
+      "allocation": "4x300",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 4,
+        "search_ms": 300,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102545
+      }
+    },
+    {
+      "id": 34,
+      "position": "battle-gen9ou-26-last",
+      "repetition": 1,
+      "allocation": "8x150",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 8,
+        "search_ms": 150,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102545
+      }
+    },
+    {
+      "id": 35,
+      "position": "battle-gen9ou-26-last",
+      "repetition": 1,
+      "allocation": "12x100",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 12,
+        "search_ms": 100,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102545
+      }
+    },
+    {
+      "id": 36,
+      "position": "battle-gen9ou-24-first",
+      "repetition": 2,
+      "allocation": "12x100",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 12,
+        "search_ms": 100,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102540
+      }
+    },
+    {
+      "id": 37,
+      "position": "battle-gen9ou-24-first",
+      "repetition": 2,
+      "allocation": "4x300",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 4,
+        "search_ms": 300,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102540
+      }
+    },
+    {
+      "id": 38,
+      "position": "battle-gen9ou-24-first",
+      "repetition": 2,
+      "allocation": "8x150",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 8,
+        "search_ms": 150,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102540
+      }
+    },
+    {
+      "id": 39,
+      "position": "battle-gen9ou-24-middle",
+      "repetition": 2,
+      "allocation": "4x300",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 4,
+        "search_ms": 300,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102541
+      }
+    },
+    {
+      "id": 40,
+      "position": "battle-gen9ou-24-middle",
+      "repetition": 2,
+      "allocation": "8x150",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 8,
+        "search_ms": 150,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102541
+      }
+    },
+    {
+      "id": 41,
+      "position": "battle-gen9ou-24-middle",
+      "repetition": 2,
+      "allocation": "12x100",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 12,
+        "search_ms": 100,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102541
+      }
+    },
+    {
+      "id": 42,
+      "position": "battle-gen9ou-24-last",
+      "repetition": 2,
+      "allocation": "8x150",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 8,
+        "search_ms": 150,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102542
+      }
+    },
+    {
+      "id": 43,
+      "position": "battle-gen9ou-24-last",
+      "repetition": 2,
+      "allocation": "12x100",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 12,
+        "search_ms": 100,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102542
+      }
+    },
+    {
+      "id": 44,
+      "position": "battle-gen9ou-24-last",
+      "repetition": 2,
+      "allocation": "4x300",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 4,
+        "search_ms": 300,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102542
+      }
+    },
+    {
+      "id": 45,
+      "position": "battle-gen9ou-26-first",
+      "repetition": 2,
+      "allocation": "12x100",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 12,
+        "search_ms": 100,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102543
+      }
+    },
+    {
+      "id": 46,
+      "position": "battle-gen9ou-26-first",
+      "repetition": 2,
+      "allocation": "4x300",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 4,
+        "search_ms": 300,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102543
+      }
+    },
+    {
+      "id": 47,
+      "position": "battle-gen9ou-26-first",
+      "repetition": 2,
+      "allocation": "8x150",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 8,
+        "search_ms": 150,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102543
+      }
+    },
+    {
+      "id": 48,
+      "position": "battle-gen9ou-26-middle",
+      "repetition": 2,
+      "allocation": "4x300",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 4,
+        "search_ms": 300,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102544
+      }
+    },
+    {
+      "id": 49,
+      "position": "battle-gen9ou-26-middle",
+      "repetition": 2,
+      "allocation": "8x150",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 8,
+        "search_ms": 150,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102544
+      }
+    },
+    {
+      "id": 50,
+      "position": "battle-gen9ou-26-middle",
+      "repetition": 2,
+      "allocation": "12x100",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 12,
+        "search_ms": 100,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102544
+      }
+    },
+    {
+      "id": 51,
+      "position": "battle-gen9ou-26-last",
+      "repetition": 2,
+      "allocation": "8x150",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 8,
+        "search_ms": 150,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102545
+      }
+    },
+    {
+      "id": 52,
+      "position": "battle-gen9ou-26-last",
+      "repetition": 2,
+      "allocation": "12x100",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 12,
+        "search_ms": 100,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102545
+      }
+    },
+    {
+      "id": 53,
+      "position": "battle-gen9ou-26-last",
+      "repetition": 2,
+      "allocation": "4x300",
+      "config": {
+        "backend": "mcts",
+        "budget": 3.0,
+        "mcts_worlds": 4,
+        "search_ms": 300,
+        "engine_threads": 1,
+        "sampling": "team",
+        "frozen_beliefs": false,
+        "belief_mode": "reliable",
+        "seed": 2026102545
+      }
+    }
+  ],
+  "selection_rule": "first two development battle IDs in existing disjoint plan; first sorted perspective file; first/middle/last ordinary move request by index; no outcome filter",
+  "development_plan_sha256": "1ecc6d3d93d1b80accebcc903ba25296b8fd212d4cad2f647baadc043b423ac2",
+  "stopping_rule": "all 54 scheduled calls, including failed calls; no outcome-dependent stopping or resampling",
+  "equal_effort": "4x300,8x150,12x100 request1200 native ms each; one thread and3s decision ceiling; actual effort measured separately",
+  "sampling": "same world-sampling seed per position across configurations/repeats; native MCTS has no exposed deterministic RNG seed",
+  "state_limit": "historical snapshots lack later PP/upkeep metadata; identical supplied facts and fresh posteriors without accumulated soft history in every arm",
+  "cpu_scope": "Bot Python process plus reaped SearchWorker descendants between Agent construction and close; source validation/import and coordinator CPU excluded from this delta",
+  "tree_continuation": "installed stock wrapper accepts state/duration/iterations/threads; Rust mcts constructs a fresh state and returns root statistics, with no exported tree handle; no tree reuse claimed",
+  "load": "one additional sequential native search at a time while separately scheduled game batches may be running; per-call OS load recorded",
+  "environment": {
+    "python": "3.13.13",
+    "logical_cpus": 16,
+    "available_cpu_affinity": 16,
+    "loadavg": [
+      13.30712890625,
+      11.9677734375,
+      9.02490234375
+    ]
+  },
+  "descriptive_close_margin": 0.05,
+  "version": 2,
+  "predecessor_plan_sha256": "82ba075f33db7da666a54cbbd686de632245462be07d8fcba2b167a0e725eb0a",
+  "predecessor_plan": "evaluation/mcts-improvements/allocation-development-v1-plan.json",
+  "reason": "Exact scheduled repeat after the independently reproduced irreversible fainted-Tera fact repair; v1 results retained and qualified by576 discarded nativeTera roots. No allocation/adaptive behavior changed."
+}

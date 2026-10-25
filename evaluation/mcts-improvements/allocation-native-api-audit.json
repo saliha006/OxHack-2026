@@ -1,0 +1,19 @@
+{
+  "binding": "poke-engine==0.0.48",
+  "wrapper": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/.venv/lib/python3.13/site-packages/poke_engine/__init__.py",
+  "wrapper_sha256": "1c0ea75c3436415e1d97348437d86cfb5e8634bce721b26d701d53f5a0243244",
+  "signature": "(state: poke_engine.State, duration_ms: int = 1000, iterations: int = 0, threads: int = 1) -> poke_engine.MctsResult",
+  "result_fields": [
+    "side_one",
+    "side_two",
+    "total_visits"
+  ],
+  "rust_source": "/home/kenar/.cache/uv/sdists-v9/pypi/poke-engine/0.0.48/uSq9R1bMUzGYu9DM/src/poke-engine-py/src/lib.rs",
+  "rust_source_sha256": "a5923c2ff7277eb01168e58dcf6e3b26c386e33fc07f8299f0f9ef76a19d0aaa",
+  "rust_lines": [
+    929,
+    951
+  ],
+  "observation": "Rust mcts converts PyState to a fresh State, obtains root options and calls perform_mcts or shared-tree search; result is converted to root statistics. The public function accepts no tree handle and returns none. No continuation/reuse API exposed by this installed wrapper. Native-internal implementation changes are outside this study.",
+  "measurement_limit": "This allocation study measures fresh calls and per-world preparation. It does not measure a hypothetical continuation API or claim repeated calls reuse a tree."
+}
