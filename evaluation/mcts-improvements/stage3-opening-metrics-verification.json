@@ -1,0 +1,64 @@
+{
+  "scope": "Stage3 opening-metric infrastructure verification only; frozen before new Stage3 full-game scoring outcomes; no lead-weight tuning or production changes",
+  "plan_path": "evaluation/mcts-improvements/stage3-opening-metrics-plan.json",
+  "plan_sha256": "dce23c279e72020ea07a8011851fa3c9d996997d90b0947a99545b20dcfcf3ee",
+  "analysis_identity": {
+    "analysis/openings.py": "74a2b658b6f3bda68b597c1602f013ffd75c201017d86cb35b39b8ee5fd2360a",
+    "decision/lead.py": "1af618a2450672e75abae9af55b2035d64e29e3b8f420629fdd29a4f75f7c5f3",
+    "decision/actions.py": "78233b1a0dea5a10e991908600317355b19f0b54d3c6fbbccbc88d5ddc028620",
+    "decision/state.py": "e97dd27902014dd3fc432dae5ca66da75887b1d9d5dabe2666dc82b3863bf28b",
+    "decision/data/typechart.json": "26270c6fa9e25ba43ba9d6fd0da115fcf96eee42eae8b0bd9660bd015dc483b2",
+    "decision/data/pokedex.json": "e74d0364b230001fc086cefb4259e051f1d16a4730eb89f7d6336a88a0d9a47e"
+  },
+  "focused_tests": {
+    "command": ".venv/bin/python -m pytest tests/test_openings.py -q",
+    "result": "16 passed in 0.31s",
+    "raw": "runs/mcts-improvements/stage3-opening-metrics-tests.txt",
+    "test_sha256": "67a733c99ce017ef28b03cb575b6a27388cdbbcabebeb7c4445c98f179a4634b"
+  },
+  "historical_format_smoke": {
+    "selection": "Already completed Stage1 screening game 1, fixed first game; no new Stage3 scoring outcomes consumed",
+    "games": "runs/mcts-improvements/stage3-opening-metrics-smoke-v1/games.jsonl",
+    "summary": "runs/mcts-improvements/stage3-opening-metrics-smoke-v1/summary.json",
+    "raw": "runs/mcts-improvements/stage3-opening-metrics-smoke-v1/records.json",
+    "csv": "runs/mcts-improvements/stage3-opening-metrics-smoke-v1/records.csv",
+    "provenance": {
+      "games_sha256": "5246dc3625c7ae054714f6ea6262cf64b8cb1aedeb54a0a1d78adcc63656e7b5",
+      "manifest_sha256": "b750c566730f16242c60cb14e85f2b762cb3633a08fdc11fe3becf1e8712d78a",
+      "declared_manifest_id": "f42bd253dad922763fb349f0d10b601c24f516cfd8c30311e9d07d28e83cc1dc",
+      "plan_sha256": "dce23c279e72020ea07a8011851fa3c9d996997d90b0947a99545b20dcfcf3ee",
+      "analysis_identity": {
+        "analysis/openings.py": "74a2b658b6f3bda68b597c1602f013ffd75c201017d86cb35b39b8ee5fd2360a",
+        "decision/lead.py": "1af618a2450672e75abae9af55b2035d64e29e3b8f420629fdd29a4f75f7c5f3",
+        "decision/actions.py": "78233b1a0dea5a10e991908600317355b19f0b54d3c6fbbccbc88d5ddc028620",
+        "decision/state.py": "e97dd27902014dd3fc432dae5ca66da75887b1d9d5dabe2666dc82b3863bf28b",
+        "decision/data/typechart.json": "26270c6fa9e25ba43ba9d6fd0da115fcf96eee42eae8b0bd9660bd015dc483b2",
+        "decision/data/pokedex.json": "e74d0364b230001fc086cefb4259e051f1d16a4730eb89f7d6336a88a0d9a47e"
+      },
+      "games": 1,
+      "perspectives": 2
+    },
+    "perspectives": 2,
+    "available_actual_leads": 2,
+    "available_checkpoints": {
+      "4": {
+        "available": 2
+      },
+      "6": {
+        "available": 2
+      }
+    },
+    "sources": {
+      "a": "32ede7cb68279477331cea6d6a5dcb27c6991d75fa1640b8525eff1aa129ed1c",
+      "b": "5eaa172be19612c3ef49d11a59537a2794d587d26e75e2f0cc6f997946e84874"
+    }
+  },
+  "limitations": [
+    "Three/five resolved turns are observed as the first ordinary request at turn>=4/6; missing requests can overshoot and actual turn is retained.",
+    "Own faint metrics describe checkpoint state, not cumulative deaths across unobserved revival events.",
+    "No turn1 request means actual lead is unavailable even if preview selected lead exists.",
+    "Opponent HP/faints are last-observed public proxies with potentially stale bench HP.",
+    "No winner/end-state imputation; early finishes or missing future snapshots retain null metrics.",
+    "Both roles of the same battle are correlated; these are descriptive mechanisms, not causal lead quality or calibrated win probabilities."
+  ]
+}
