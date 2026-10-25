@@ -19,7 +19,8 @@ CLEAN = ROOT / "data" / "clean" / "battles"
 # The logs get their own table so queries over `battles` never read 9 KB of text per row.
 TABLES = {
     "battles": (
-        ["id", "source", "started_at", "uploaded_at", "p1", "p2", "p1_elo", "p2_elo", "winner", "turns", "rated"],
+        ["id", "source", "started_at", "uploaded_at", "p1", "p2", "p1_elo", "p2_elo", "p1_team", "p2_team", "p1_lead",
+         "p2_lead", "winner", "turns", "rated"],
         """
         CREATE TABLE IF NOT EXISTS battles (
             id             text        NOT NULL,
@@ -30,12 +31,19 @@ TABLES = {
             p2             text,
             p1_elo         integer,
             p2_elo         integer,
+            p1_team        text[],
+            p2_team        text[],
+            p1_lead        text,
+            p2_lead        text,
             winner         text,
             turns          integer     NOT NULL,
             rated          boolean     NOT NULL,
             PRIMARY KEY (id, started_at)
         );
         SELECT create_hypertable('battles', by_range('started_at', INTERVAL '1 month'), if_not_exists => true);
+        -- So "games where a side includes these Pokémon" (p1_team @> ARRAY[...]) doesn't scan every row.
+        CREATE INDEX IF NOT EXISTS battles_p1_team ON battles USING gin (p1_team);
+        CREATE INDEX IF NOT EXISTS battles_p2_team ON battles USING gin (p2_team);
         """),
     "battle_logs": (
         ["id", "started_at", "log"],

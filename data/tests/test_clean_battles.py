@@ -10,6 +10,13 @@ LOG = """|t:|1701538642
 |gen|9
 |tier|[Gen 9] OU
 |rated|
+|poke|p1|Kingambit, L50, F|
+|poke|p1|Zamazenta-*|
+|poke|p2|Great Tusk|
+|poke|p2|Dragapult, M|
+|start
+|switch|p1a: Gambit|Kingambit, F|100/100
+|switch|p2a: Great Tusk|Great Tusk|100/100
 |turn|1
 |turn|2
 |turn|8
@@ -41,6 +48,12 @@ def test_players_elo_winner_and_turns_come_from_the_log(run):
     assert battle["winner"] == "p2" and battle["turns"] == 8 and battle["rated"]
     assert battle["dataset_rating"] == 1084.0 and battle["source"] == "test"
     assert str(battle["started_at"]).startswith("2023-12-02 17:37:22")
+
+
+def test_teams_are_sorted_preview_species_and_leads_ignore_nicknames(run):
+    battle = run(row())["gen9ou-1"]
+    assert battle["p1_team"] == ["Kingambit", "Zamazenta-*"] and battle["p2_team"] == ["Dragapult", "Great Tusk"]
+    assert battle["p1_lead"] == "Kingambit" and battle["p2_lead"] == "Great Tusk"
 
 
 def test_ties_and_missing_elo(run):
