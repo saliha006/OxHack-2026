@@ -123,7 +123,9 @@ class Belief:
         # Multi-hit totals can't be checked until BattleState carries hit counts (parked: contract `hit_count`).
         multihit = lambda move: "multihit" in MOVES[move]
         we_first = observed != "them"
-        (our_max, our_crit), (their_max, their_crit) = calculate_damage(state, our_move, their_move, we_first)
+        # Each side gets [max, crit max], or a single value for fixed damage (Ruination), where a crit changes nothing.
+        ours, theirs = calculate_damage(state, our_move, their_move, we_first)
+        (our_max, our_crit), (their_max, their_crit) = (ours[0], ours[-1]), (theirs[0], theirs[-1])
         maxhp = state.side_two.pokemon[n].maxhp
         took = _hit_drop(events, start, self.them, n, us)
         if took is not None and not multihit(our_move.removesuffix("-tera")) and not _within(took, our_crit if took[2] else our_max, maxhp):

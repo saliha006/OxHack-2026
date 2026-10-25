@@ -84,6 +84,16 @@ def test_when_no_set_explains_the_turn_the_weights_stay_as_they_were():
     assert [round(w, 6) for _, w in belief.candidates[2]] == [0.5, 0.5]
 
 
+def test_a_fixed_damage_move_has_one_damage_value():
+    # Ruination always takes half the target's HP, so the engine gives one value instead of a (normal, crit) pair.
+    priors = copy.deepcopy(PRIORS)
+    priors["species"]["gholdengo"]["sets"] = [
+        cand(1.0, ["makeitrain", "ruination", "shadowball", "trick"], ability="goodasgold", tera="steel")]
+    belief = belief_after(priors, [event("move", 2, move="ruination", target="p1"), us("move", move="ironhead", target="p2"),
+                                   us("damage", hp_percent=50, source="move")])
+    assert [round(w, 6) for _, w in belief.candidates[2]] == [1.0]
+
+
 def test_without_our_choice_there_is_no_replay():
     priors, names = priors_with(**FAST_SLOW)
     battle = copy.deepcopy(EXAMPLE)
