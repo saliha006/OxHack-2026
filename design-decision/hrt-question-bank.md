@@ -128,7 +128,101 @@ Written contracts at each seam (`BattleState`, set candidates, the Tiger turns t
 
 ---
 
-## 6. Data
+## 6. Layer by layer: what we built, and why
+
+### Data layer *(Nate; opt-in priors from Kenar and Saliha)*
+**What we built**
+- **Priors:** Smogon chaos stats (gen9ou-1825, September 2026) → `data/set_candidates.json`: 243 species + 78 forme aliases, up to 30 weighted sets each.
+- **Replay pipeline:** 2.5M HolidayOugi replays → `clean_battles` (DuckDB) → `build_turns` (Parquet, built with the live bot's parser) → `load_tiger` (Postgres tables `battles`, `battle_logs`, `turns`). The `turns` table is specified in `contracts/turns.md`.
+- **Opt-in priors:**
+  - `curated-v1`: Showdown's curated role sets mixed 50/50 with usage (Kenar).
+  - Joint priors: complete sets observed from Foul Play, blended 75/25 (Saliha).
+
+**Why**
+- Usage stats are the biggest public signal of what real players run, so they're the prior for every prediction. The 1825+ cutoff favours competent, standard sets.
+- DuckDB + Parquet handle millions of rows on a laptop with no server. Postgres gives four laptops one shared, read-only copy.
+- Training states are built with the **same parser** the live bot uses, so the model never learns from a different picture than it plays with.
+- The split is by time (test games from 2026-05-19 on), so we test on later games than we trained on.
+
+**What we rejected**
+- ClickHouse: overkill at this size.
+- Scraping Showdown's API: load on public infrastructure.
+- Metamon's parsed replays: they back-fill hidden information from the end of the battle, which leaks the answer.
+
+### Bot layer *(Saliha)*
+**What we built**
+- **`AgentPlayer`,** a poke-env player. It feeds every raw protocol line to **our own parser** (`bot/parser.py` → `BattleState`) *before* handling the request, then calls `agent.choose(request, state)` once per decision, with one `Agent` per battle. A rejected choice is resent as the first legal option, then `default`.
+- **Per-battle records:** raw protocol (`.log`), one trace line per decision (`.jsonl`) and a decision log.
+- **Demo:** each decision is streamed to the terminal and posted as one line in the battle chat, paced at 1.5 s so a viewer can follow. Replay mode re-runs a saved trace offline.
+- **Smoke test:** fails a run if more than 5% of moves are fallbacks.
+
+**Why**
+- poke-env gives us standard baseline bots and concurrent battles for free.
+- Parsing first means the state is up to date when we decide.
+- Owning the parser lets the same `BattleState` serve live play and offline training data.
+- The traces make every decision auditable after the fact.
+- The battle chat puts the bot's reasoning beside the board, for the judge. It replaced a browser side panel we cut for time.
+- A local server needs no account and has no rate limits.
+
+**What we rejected**
+- A fresh process per turn: it would lose the belief between turns.
+- Our own websocket client: a fallback plan we never needed.
+- A browser side panel: cut for time.
+
+### Decision layer *(Derrick built v1; Kenar built the MCTS that replaced it)*
+**What we built**
+- **v1, one-ply (Derrick):**
+  - Belief → 5 likely scenarios → simulate one turn for every pair of moves in `poke-engine` → score with an HP/alive heuristic → best expected value.
+  - Plus a type-matchup lead at team preview, forced-switch handling, and the 3% belief floor.
+- **v2, MCTS (Kenar, the default since 07:01):**
+  - A worker process keeps the belief and samples **8 whole-team worlds**.
+  - It runs **150 ms of native MCTS** in each world, then pools normalised visit shares across worlds.
+  - It works under a supervised 3 s deadline.
+- **Opt-in experiments:** 4 engine threads, a Tera gate, near-tie mixing, deeper/fewer worlds, joint priors.
+
+**Why**
+- One-ply beat SimpleHeuristics (about 72%) but lost to Foul Play (5–8%), so we needed lookahead.
+- `poke-engine`'s native MCTS is fast and handles the real game rules.
+- Sampling worlds from the belief is how we turn the prediction into a decision that holds up when we don't know the opponent's sets.
+- The worker process makes the deadline enforceable.
+- Each experiment ships only if it beats the default head to head with a Wilson lower bound above 50%.
+
+**What we rejected**
+- A learned value inside search: native MCTS can't call it without a Rust fork, and our model doesn't beat the HP heuristic yet.
+- A maximin LP selector: no gain against fixed bots.
+- poke-engine's expectiminimax: its payoff matrix is NaN where pruned, so it can't feed the LP.
+
+### Prediction layer *(Kenar)*
+**What we built**
+- **`prediction/`:**
+  - A logistic win-probability model with Platt calibration on public-state features.
+  - Chronological splits grouped by battle, with "unseen player/team" controls.
+- **Scoring:** next-reveal log loss for the set belief; action scoring.
+
+**Why**
+- HRT asks whether predictions are honest, so we built the measurement first: held-out games, a baseline, calibration.
+- We kept it **out of the bot**, so a weak model can't cost games.
+
+**Result:** neither the model nor the updated belief beats its baseline yet, and we report that (section 2).
+
+### Evaluation layer *(Saliha)*
+**What we built**
+- **`bot/eval.py`:**
+  - Same team on both sides, with sides swapped.
+  - A seeded, shuffled schedule, sharded across laptops; reruns skip finished games.
+  - A manifest that refuses to mix results from different code.
+  - Wilson 95% intervals plus a team bootstrap, and an internal Bradley–Terry Elo.
+- **Opponents:** SimpleHeuristics, Foul Play at four strength levels (up to `fphard`), and our own variants head to head.
+
+**Why**
+- It measures play rather than team strength.
+- The intervals are honest about small samples.
+- Foul Play gives a strong, public reference point.
+- The pre-set flag rule stops us from shipping a lucky streak.
+
+---
+
+## 7. Data
 
 **Q: How much data, from where, and how did you split it?**
 - **Replays:** 2,506,142 public battles (HolidayOugi's Showdown replay dataset).
@@ -147,7 +241,7 @@ Public, pseudonymised replays and public usage stats only. Nothing personal is s
 
 ---
 
-## 7. Limits and next steps
+## 8. Limits and next steps
 
 **Q: What doesn't it do?**
 - No ladder play: there's no registered bot account, so no Showdown Elo.
@@ -165,7 +259,7 @@ Public, pseudonymised replays and public usage stats only. Nothing personal is s
 
 ---
 
-## 8. Quick facts
+## 9. Quick facts
 
 | Fact | Value |
 |---|---|
