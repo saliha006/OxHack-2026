@@ -1,0 +1,59 @@
+{
+  "purpose": "Actual spawned-native-worker import integrity only, no strength claim",
+  "root": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/baseline-2c02fc8",
+  "source_sha256": "5eaa172be19612c3ef49d11a59537a2794d587d26e75e2f0cc6f997946e84874",
+  "priors_sha256": "47b31bf7282d6578ed44d7b28f9a63e9284eddc72882856de426f7c1bfc8c7f3",
+  "position_sha256": "36bd97aa6722e8ad770a9796a63f052c8898d9475d24e5802dd6dcb10d3fd96b",
+  "engine": {
+    "version": "0.0.48",
+    "binaries": {
+      "poke_engine.cpython-313-x86_64-linux-gnu.so": "fbffd2a1c9c48eab99def9187f9030c578174a30b49d54faad159be859846ef3"
+    }
+  },
+  "config": {
+    "mcts_worlds": 1,
+    "search_ms": 20,
+    "engine_threads": 1,
+    "sampling": "team",
+    "frozen_beliefs": false,
+    "seed": 2026102599,
+    "belief_mode": "legacy"
+  },
+  "actual_child_imports": {
+    "kind": "native_import_provenance",
+    "pid": 799487,
+    "parent_pid": 799480,
+    "pipeline_files": {
+      "decision.search": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/baseline-2c02fc8/decision/search.py",
+      "decision.belief": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/baseline-2c02fc8/decision/belief.py",
+      "decision.adapter": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/baseline-2c02fc8/decision/adapter.py",
+      "decision.state": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/baseline-2c02fc8/decision/state.py"
+    },
+    "pipeline_sha256": {
+      "decision.search": "d1d36c46be7fc76db0c2dc4b56c4b11e2327ee3afb5faf0dedc4da013baeabef",
+      "decision.belief": "3474256b93567df34e4f7aa22aac471ac791a84d30848d26348492a31955b6b7",
+      "decision.adapter": "f34e39759b6efc446fc447898e3969c16f1c6644cac1fcd0f7c416eb0f47a423",
+      "decision.state": "bd924f33ad6ed8106918e318466b9a0a9ed2a9c5bf1ed4badd61889deab61078"
+    },
+    "poke_engine_package": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/.venv/lib/python3.13/site-packages/poke_engine/__init__.py",
+    "native_binaries": {
+      "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/.venv/lib/python3.13/site-packages/poke_engine/poke_engine.cpython-313-x86_64-linux-gnu.so": "fbffd2a1c9c48eab99def9187f9030c578174a30b49d54faad159be859846ef3"
+    },
+    "loaded_native_extensions": {
+      "poke_engine.poke_engine": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/.venv/lib/python3.13/site-packages/poke_engine/poke_engine.cpython-313-x86_64-linux-gnu.so"
+    },
+    "delegation": "Calls the selected snapshot decision.search._worker unchanged after recording imports."
+  },
+  "native_world": {
+    "total_visits": 2000,
+    "elapsed_ms": 27.641419030260295,
+    "preparation_ms": 1.4807599945925176,
+    "error": null
+  },
+  "elapsed_probe_ms": 692.4817640101537,
+  "verified": true,
+  "probe_sources": {
+    "native_import_probe.py": "67c1bdfdac7e934cc1fa9db14a8bb285954197294f31e360a53748e1e6aad4c3",
+    "native_import_probe_worker.py": "e694ecb16bb681566f0cb810d8aa2eba46a8f50d927047d4879e97af90559915"
+  }
+}

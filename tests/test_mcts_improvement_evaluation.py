@@ -156,3 +156,72 @@ def test_four_game_blocks_balance_sides_and_team_assignments(games):
         assert set(counts.values())=={games//10}
     for team in range(10):
         assert Counter(r['a_side'] for r in rows if r['a_team']==team)=={'p1':games//20,'p2':games//20}
+
+
+def test_runtime_audit_does_not_duplicate_events_or_skip_partial_records(tmp_path):
+    from evaluation.audit_mcts_runtime import audit
+    run=tmp_path/'run'
+    folder=run/'game-0000'/'a'
+    folder.mkdir(parents=True)
+    trace=folder/'battle.jsonl'
+    complete=json.dumps({'request':{},'decision_id':'one','fallback':True})+'\n'
+    partial=json.dumps({'request':{},'decision_id':'two','think_ms':3100})
+    trace.write_text(complete+partial)
+    cursors=tmp_path/'cursors.json'
+    first=audit([run],cursors)
+    assert [row['decision_id'] for row in first]==['one']
+    assert audit([run],cursors)==[]
+    with trace.open('a') as stream: stream.write('\n')
+    second=audit([run],cursors)
+    assert [row['decision_id'] for row in second]==['two']
+    assert second[0]['causes']==['over_3000_ms']
+    assert audit([run],cursors)==[]
+
+
+def test_root_rejection_metrics_separate_native_tera_and_server_retries(tmp_path):
+    from evaluation.mcts_root_rejections import root_rejections
+    trace=tmp_path/'trace.jsonl'
+    row={'request':{},'state':{'us':'p1','sides':{'p1':{'tera_used':True,'pokemon':[{'terastallized':True,'hp_percent':0}]}}},
+         'mapping_failures':[{'index':0,'choice':'surf-tera','reason':'not_legal'},
+                             {'index':1,'choice':'surf-tera','reason':'not_legal'}],
+         'worlds':[{'index':0,'our_visits':[{'choice':'surf','visits':100},{'choice':'surf-tera','visits':50}]},
+                   {'index':1,'our_visits':[{'choice':'surf','visits':200},{'choice':'surf-tera','visits':20}]}]}
+    trace.write_text(json.dumps(row)+'\n')
+    counts,reasons=root_rejections(trace)
+    assert counts['native_root_rejections']==2
+    assert counts['native_tera_root_rejection_decisions']==1
+    assert counts['native_tera_root_rejections_after_faint']==2
+    assert counts['decisions_after_confirmed_tera_user_fainted']==1
+    assert counts['native_rejected_root_visits']==70
+    assert counts['native_root_visits_for_rejection_metric']==370
+    assert reasons=={'not_legal':2}
+    assert 'rejected_choices' not in counts  # this existing metric counts server retries
+
+
+def test_root_rejection_reporting_marks_partial_and_malformed_trace_data(tmp_path):
+    from evaluation.mcts_root_rejections import root_rejections
+    trace=tmp_path/'damaged.jsonl'
+    valid={'request':{},'mapping_failures':[{'index':0,'choice':'surf-tera','reason':'not_legal'}]}
+    trace.write_text(json.dumps(valid)+'\n'+'broken complete record\n'+'{"request":')
+    counts,reasons=root_rejections(trace)
+    assert counts['native_root_rejections']==1
+    assert counts['root_rejection_metric_malformed_records']==1
+    assert counts['root_rejection_metric_incomplete_trace_tails']==1
+    assert reasons=={'not_legal':1}
+
+
+def test_mixing_diagnostic_counts_do_not_invent_eligibility_or_changes(tmp_path):
+    from evaluation.mcts_policy_metrics import policy_metrics
+    rows=[{'request':{},'config':{'mix_root':True}},
+          {'request':{},'config':{'mix_root':True},'root_mixing':{'sampled':False,'reason':'original_is_tera','candidate_choices':[],'eligible_choices':[]}},
+          {'request':{},'config':{'mix_root':True},'root_mixing':{'sampled':True,'selection_changed':False,'reason':'sampled_supported_pair','candidate_choices':['move 1','move 2'],'eligible_choices':['move 1','move 2']}},
+          {'request':{},'config':{'mix_root':True},'root_mixing':{'sampled':True,'selection_changed':True,'reason':'sampled_supported_pair','candidate_choices':['move 1','move 2'],'eligible_choices':['move 1','move 2']}}]
+    path=tmp_path/'trace.jsonl'
+    path.write_text(''.join(json.dumps(row)+'\n' for row in rows))
+    counts,reasons,forecasts=policy_metrics(path)
+    assert counts['mixing_enabled_decisions']==4
+    assert counts['mixing_evaluated_decisions']==3
+    assert counts['mixing_eligible_decisions']==counts['mixing_sampled_decisions']==2
+    assert counts['mixing_selection_changed_decisions']==1
+    assert reasons=={'original_is_tera':1,'sampled_supported_pair':2}
+    assert forecasts=={}
