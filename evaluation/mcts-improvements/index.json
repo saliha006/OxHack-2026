@@ -8,10 +8,11 @@
     "smoke_results": "evaluation/mcts-improvements/baseline-smoke-results.json"
   },
   "accepted_incumbent": {
-    "commit": "731fb91",
-    "snapshot": "runs/mcts-improvements/stage2-beliefs",
-    "source_sha256": "0728b716862b0c848480c3b08562bb745fd74c69874b948c52bf29b537895ed0",
-    "decision": "Accepted correctness-only by primary implementer: four demonstrated belief bugs fixed and regression gates passed. Strength remains unknown pending screening/confirmation."
+    "change_commit": "a8613b9",
+    "snapshot": "runs/mcts-improvements/stage2-tera-probe",
+    "source_sha256": "0bd23daf0e4d173a8a9a3398793831d7d1cac100ba99bf238ab357f07b258a23",
+    "snapshot_construction": "Pure Stage2 correctness snapshot plus only the confirmed Tera-state correction; inactive opt-in lead code excluded. Source hash identifies exact evaluated code.",
+    "decision": "Accepted correctness-only after primary implementer full-suite gate and clean isolated transport smoke. Strength remains unknown."
   },
   "stages": [
     {
@@ -22,7 +23,7 @@
       "previous_incumbent": "2c02fc8daa84f047ea2bddd7d0f36f6463fff1e2",
       "enabled": true,
       "promotion_decision": "accepted correctness-only, enabled; strength unknown until sufficient independent evidence",
-      "strength_verdict": "correctness improved; strength unknown (screening incomplete)",
+      "strength_verdict": "promising but inconclusive",
       "tests": {
         "focused": "114passed in0.84s after final live-simulator fixture; runs/mcts-improvements/stage1-after-tests.txt. Earlier113pass and old8fail reproduced are retained separately.",
         "suite": "404passed in17.17s; runs/mcts-improvements/stage1-full-tests.txt"
@@ -41,10 +42,12 @@
           "phase": "screening",
           "manifest": "evaluation/mcts-improvements/stage1-screening-manifest.json",
           "raw_output": "runs/mcts-improvements/stage1-screening-v1",
-          "status": "running",
+          "status": "complete",
           "planned_games": 60,
           "fresh_team_rosters": 10,
-          "comparison": "candidate vs original; predecessor is original so this single comparison covers both"
+          "comparison": "candidate vs original; predecessor is original so this single comparison covers both",
+          "results": "evaluation/mcts-improvements/stage1-screening-results.json",
+          "games": "evaluation/mcts-improvements/stage1-screening-games.jsonl"
         },
         {
           "id": "stage1-confirmation",
@@ -58,23 +61,46 @@
           "id": "stage1-confirmation-v2",
           "phase": "confirmation",
           "manifest": "evaluation/mcts-improvements/stage1-confirmation-v2-manifest.json",
-          "status": "frozen conditional, not started",
+          "status": "queued after mandatory stage screens; full 200 games authorized, no outcome stopping",
           "planned_games": 200,
           "selection_caveat": "Manifest frozen after initial screening outcomes existed; no numerical promising threshold is claimed preregistered before screening. Confirmation roster pool was reserved before any scored stage1 inspection.",
           "schedule_design": "four-game blocks balance simulator sides and bot/team assignments; 200 games, 10 teams, 20 games per team per bot role"
         }
-      ]
+      ],
+      "status": "60-game screening complete; correctness enabled; strength remains unproven",
+      "screening_result": {
+        "wins": 35,
+        "losses": 25,
+        "draws": 0,
+        "voids": 0,
+        "games": 60,
+        "wilson_95": [
+          0.45727854313239624,
+          0.6993591351212818
+        ],
+        "candidate_team_cluster_95": [
+          0.4166666666666667,
+          0.7666666666666667
+        ],
+        "interpretation": "Primary implementer selected promising but inconclusive after all 60 outcomes: positive 35/60 point estimate, both intervals include 50 percent, sparse synthetic clusters and ordered matchup assignment limit evidence. Both historical snapshots share the subsequently discovered fainted-Tera defect."
+      },
+      "confirmation_decision": {
+        "decision": "Queue all 200 games in the already frozen v2 confirmation plan after mandatory stage screening priorities, or when those gates block capacity. No outcome stopping.",
+        "timing": "Decision made after all 60 screening outcomes; no retrospective numerical promising-threshold preregistration is claimed.",
+        "scope": "Historical Stage1 state changes versus original, both with known fainted-Tera defect. This is not the current cumulative corrected bot.",
+        "manifest": "evaluation/mcts-improvements/stage1-confirmation-v2-manifest.json"
+      }
     },
     {
       "stage": 2,
       "name": "belief reliability",
-      "status": "transport smoke clean; original-baseline screening running, incumbent screening queued",
+      "status": "60-game original-baseline screen complete; predecessor comparison running",
       "candidate_source_sha256": "0728b716862b0c848480c3b08562bb745fd74c69874b948c52bf29b537895ed0",
       "previous_incumbent": "df1002c",
       "config": {
         "belief_mode": "reliable"
       },
-      "strength_verdict": "strength unknown; no scored games yet",
+      "strength_verdict": "strength unknown; original comparison positive but inconclusive, incremental comparison incomplete",
       "promotion_decision": "accepted correctness-only, enabled; strength unknown",
       "tests": {
         "focused": "73passed in2.46s; four demonstrated old bugs reproduced, reliable path passes",
@@ -94,18 +120,21 @@
           "id": "stage2-original-screening",
           "phase": "screening",
           "manifest": "evaluation/mcts-improvements/stage2-original-screening-manifest.json",
-          "status": "running",
+          "status": "complete",
           "planned_games": 60,
           "comparison": "candidate vs original",
-          "raw_output": "runs/mcts-improvements/stage2-original-screening-v1"
+          "raw_output": "runs/mcts-improvements/stage2-original-screening-v1",
+          "results": "evaluation/mcts-improvements/stage2-original-screening-results.json",
+          "games": "evaluation/mcts-improvements/stage2-original-screening-games.jsonl"
         },
         {
           "id": "stage2-incumbent-screening",
           "phase": "screening",
           "manifest": "evaluation/mcts-improvements/stage2-incumbent-screening-manifest.json",
-          "status": "frozen, queued for capacity",
+          "status": "running",
           "planned_games": 60,
-          "comparison": "candidate vs accepted stage1 incumbent; paired schedule with original comparison"
+          "comparison": "candidate vs accepted stage1 incumbent; paired schedule with original comparison",
+          "raw_output": "runs/mcts-improvements/stage2-incumbent-screening-v1"
         },
         {
           "id": "stage2-original-confirmation",
@@ -139,18 +168,32 @@
         }
       ],
       "candidate_commit": "731fb91",
-      "enabled": true
+      "enabled": true,
+      "original_screening_result": {
+        "wins": 35,
+        "losses": 25,
+        "draws": 0,
+        "voids": 0,
+        "wilson_95": [
+          0.45727854313239624,
+          0.6993591351212818
+        ],
+        "candidate_team_cluster_95": [
+          0.45,
+          0.7166666666666667
+        ]
+      }
     },
     {
       "stage": 3,
       "name": "opening leads",
-      "status": "transport smoke clean; both screening comparisons frozen and queued for capacity",
+      "status": "Tera-rebased opt-in lead candidate smoke clean; both four-game screening comparisons queued",
       "experimental_policy_enabled": false,
       "flag": {
         "lead_policy": "moves_stats"
       },
       "default_policy": "types",
-      "previous_incumbent": "731fb91",
+      "previous_incumbent": "a8613b9 correctness patch; pure snapshot source 0bd23daf...",
       "strength_verdict": "strength unknown; no scored Stage3 games",
       "tests": {
         "unit": "21 tests passed in 0.26 seconds",
@@ -172,7 +215,7 @@
           "id": "stage3-original-screening",
           "phase": "screening",
           "manifest": "evaluation/mcts-improvements/stage3-original-screening-manifest.json",
-          "status": "frozen, queued for capacity",
+          "status": "superseded unrun by Tera-rebased v2 source",
           "planned_games": 60,
           "comparison": "candidate vs original",
           "schedule_design": "four-game blocks, side and bot/team swaps"
@@ -181,20 +224,83 @@
           "id": "stage3-incumbent-screening",
           "phase": "screening",
           "manifest": "evaluation/mcts-improvements/stage3-incumbent-screening-manifest.json",
-          "status": "frozen, queued for capacity",
+          "status": "superseded unrun by Tera-rebased v2 source",
           "planned_games": 60,
           "comparison": "candidate vs previous accepted incumbent",
           "schedule_design": "same four-game schedule as original comparison"
+        },
+        {
+          "id": "stage3-tera-v2-smoke",
+          "phase": "smoke",
+          "manifest": "evaluation/mcts-improvements/stage3-tera-v2-smoke-manifest.json",
+          "raw_output": "runs/mcts-improvements/stage3-tera-v2-smoke-v1",
+          "status": "complete",
+          "strength_games": 0,
+          "results": "evaluation/mcts-improvements/stage3-tera-v2-smoke-results.json"
+        },
+        {
+          "id": "stage3-original-screening-v2",
+          "phase": "screening",
+          "manifest": "evaluation/mcts-improvements/stage3-original-screening-v2-manifest.json",
+          "status": "frozen, queued after Tera follow-up comparisons",
+          "planned_games": 60
+        },
+        {
+          "id": "stage3-incumbent-screening-v2",
+          "phase": "screening",
+          "manifest": "evaluation/mcts-improvements/stage3-incumbent-screening-v2-manifest.json",
+          "status": "frozen, queued after Tera follow-up comparisons",
+          "planned_games": 60
         }
       ],
       "candidate_commit": "d226956",
-      "candidate_source_sha256": "abbc7f19e232c50835503873ca55b0b6733d3c41592883f3b4f54ced3505b71f"
+      "candidate_source_sha256": "638144619909a5859e8a561cd74ecb590fc705770241de0a98d326a7e77eb93c"
     },
     {
       "stage": 4,
       "name": "equal-effort search allocation; separately bounded adaptivity if justified",
-      "status": "pending",
-      "experimental_policy_enabled": false
+      "status": "fixed-allocation development study in progress; four controlled screening comparisons frozen and queued",
+      "experimental_policy_enabled": false,
+      "previous_incumbent_source": "0bd23daf0e4d173a8a9a3398793831d7d1cac100ba99bf238ab357f07b258a23",
+      "default": {
+        "mcts_worlds": 8,
+        "search_ms": 150
+      },
+      "adaptive_decision": "No adaptive game study or promotion unless the fixed-allocation study justifies it.",
+      "experiments": [
+        {
+          "id": "stage4-4x300-original-screening",
+          "phase": "screening",
+          "manifest": "evaluation/mcts-improvements/stage4-4x300-original-screening-manifest.json",
+          "status": "frozen, queued after Stage3 comparisons, conditional on unchanged accepted settings",
+          "planned_games": 60,
+          "requested_total_native_ms": 1200
+        },
+        {
+          "id": "stage4-4x300-incumbent-screening",
+          "phase": "screening",
+          "manifest": "evaluation/mcts-improvements/stage4-4x300-incumbent-screening-manifest.json",
+          "status": "frozen, queued after Stage3 comparisons, conditional on unchanged accepted settings",
+          "planned_games": 60,
+          "requested_total_native_ms": 1200
+        },
+        {
+          "id": "stage4-12x100-original-screening",
+          "phase": "screening",
+          "manifest": "evaluation/mcts-improvements/stage4-12x100-original-screening-manifest.json",
+          "status": "frozen, queued after Stage3 comparisons, conditional on unchanged accepted settings",
+          "planned_games": 60,
+          "requested_total_native_ms": 1200
+        },
+        {
+          "id": "stage4-12x100-incumbent-screening",
+          "phase": "screening",
+          "manifest": "evaluation/mcts-improvements/stage4-12x100-incumbent-screening-manifest.json",
+          "status": "frozen, queued after Stage3 comparisons, conditional on unchanged accepted settings",
+          "planned_games": 60,
+          "requested_total_native_ms": 1200
+        }
+      ]
     },
     {
       "stage": 5,
@@ -223,5 +329,97 @@
   "final_cumulative_reservations": {
     "screening": "evaluation/mcts-improvements/cumulative-reservations-v1/screening/teams.json",
     "confirmation": "evaluation/mcts-improvements/cumulative-reservations-v1/confirmation/teams.json"
+  },
+  "resource_context": "evaluation/mcts-improvements/resource-context.json",
+  "state_followups": [
+    {
+      "id": "state-tera-followup",
+      "problem": "Confirmed Tera user fainted, request reports empty terastallized; reconstruction can lose the irreversible flag and native search offers another Tera. Caller legality filters prevent a server-illegal action but root search effort/support are affected.",
+      "status": "accepted correctness-only; original-baseline screening running, predecessor screening queued",
+      "previous_incumbent": "731fb91",
+      "comparators": [
+        "original baseline",
+        "accepted Stage2 correctness incumbent"
+      ],
+      "screening_teams": "evaluation/mcts-improvements/tera-followup-reservations-v1/screening/teams.json",
+      "confirmation_teams": "evaluation/mcts-improvements/tera-followup-reservations-v1/confirmation/teams.json",
+      "schedule_design": "four-game blocks; source-specific manifests pending",
+      "interpretation": "Earlier immutable screens remain valid for their actual snapshots and initial scope; they do not demonstrate this newly discovered defect is absent.",
+      "change_commit": "a8613b9",
+      "source_sha256": "0bd23daf0e4d173a8a9a3398793831d7d1cac100ba99bf238ab357f07b258a23",
+      "enabled": true,
+      "tests": {
+        "native_fixture": "Two real request frames: unsupported Tera roots 8 to 0, mapping rejections 8 to 0; 225.35 ms measured native time for 200 ms requested",
+        "focused": "64 tests passed in 0.92 seconds",
+        "suite": "468 tests passed in 23.25 seconds; primary implementer verified"
+      },
+      "experiments": [
+        {
+          "id": "tera-followup-smoke",
+          "phase": "smoke",
+          "manifest": "evaluation/mcts-improvements/tera-followup-smoke-manifest.json",
+          "results": "evaluation/mcts-improvements/tera-followup-smoke-results.json",
+          "status": "complete",
+          "strength_games": 0
+        },
+        {
+          "id": "tera-followup-original-screening",
+          "phase": "screening",
+          "manifest": "evaluation/mcts-improvements/tera-followup-original-screening-manifest.json",
+          "status": "running",
+          "planned_games": 60,
+          "raw_output": "runs/mcts-improvements/tera-followup-original-screening-v1"
+        },
+        {
+          "id": "tera-followup-original-confirmation",
+          "phase": "confirmation",
+          "manifest": "evaluation/mcts-improvements/tera-followup-original-confirmation-manifest.json",
+          "status": "frozen conditional, not started",
+          "planned_games": 200
+        },
+        {
+          "id": "tera-followup-incumbent-screening",
+          "phase": "screening",
+          "manifest": "evaluation/mcts-improvements/tera-followup-incumbent-screening-manifest.json",
+          "status": "frozen, queued after Stage2 incumbent",
+          "planned_games": 60
+        },
+        {
+          "id": "tera-followup-incumbent-confirmation",
+          "phase": "confirmation",
+          "manifest": "evaluation/mcts-improvements/tera-followup-incumbent-confirmation-manifest.json",
+          "status": "frozen conditional, not started",
+          "planned_games": 200
+        }
+      ]
+    }
+  ],
+  "native_root_rejection_reporting": {
+    "scope": "Native per-world root options rejected during mapping/legality filtering are separate from server-rejected choices. Frozen original harness preserved; external publisher/audit now report counts, affected decisions, rejected visits and confirmed-Tera-faint exposure from raw traces.",
+    "source": "evaluation/mcts_root_rejections.py",
+    "audit": "evaluation/audit_mcts_runtime.py",
+    "discovery_status": "Running screens include Tera root rejections despite zero server retries; final counts pending."
+  },
+  "screening_queue_priority": [
+    "Stage2 incumbent",
+    "Tera follow-up original",
+    "Tera follow-up incumbent",
+    "Stage3 v2 original",
+    "Stage3 v2 incumbent",
+    "Stage4 fixed-allocation comparisons",
+    "Stage1 historical confirmation v2, 200 games, after mandatory screens or spare capacity while gates block"
+  ],
+  "native_import_provenance": {
+    "status": "verified for original baseline, Stage1 state candidate, Stage2 belief candidate, accepted corrected incumbent, and Tera-rebased lead candidate",
+    "artifacts": [
+      "evaluation/mcts-improvements/native-imports-baseline.json",
+      "evaluation/mcts-improvements/native-imports-stage1.json",
+      "evaluation/mcts-improvements/native-imports-stage2.json",
+      "evaluation/mcts-improvements/native-imports-corrected.json",
+      "evaluation/mcts-improvements/native-imports-leads-v2.json"
+    ],
+    "method": "Importable helper target records actual spawned native-child decision.search/belief/adapter/state module paths and file hashes plus loaded poke-engine extension paths/binary hash, then delegates unchanged snapshot worker. Main probe requires one completed native world and verifies all pipeline paths under the selected root.",
+    "purpose": "One requested 20 ms world per source on a development position; integrity evidence only, no strength or latency benchmark.",
+    "scope_limit": "These are explicit development probes of the same spawn/import mechanism. Game worker main-process pipeline paths are recorded per game; individual native-grandchild paths were not separately logged during already frozen game runs."
   }
 }

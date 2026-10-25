@@ -1,0 +1,144 @@
+{
+  "planned": 2,
+  "recorded": 2,
+  "wins": 0,
+  "losses": 0,
+  "draws": 0,
+  "voids": 2,
+  "score_rate": null,
+  "wilson_95": [
+    0,
+    1
+  ],
+  "candidate_team_cluster_95": [
+    0,
+    1
+  ],
+  "cluster_limit": "Resamples candidate teams; shared opposing teams still create dependence, and ten clusters remain sparse.",
+  "wall_seconds_sum": 44.88749836204806,
+  "arms": {
+    "a": {
+      "decisions": 15,
+      "fallbacks": 0,
+      "rejected_choices": 0,
+      "requested_worlds": 104,
+      "completed_worlds": 104,
+      "failed_worlds": 0,
+      "usable_worlds": 104,
+      "cpu_seconds": 20.651557,
+      "native_visits": 1190000,
+      "state_preparation_ms": 435.88473222916946,
+      "worker_wall_ms": 19312.073662993498,
+      "recoveries": 0,
+      "belief_history_reset": 0,
+      "worker_restart_required": 0,
+      "replay_not_recorded": 0,
+      "actual_search_ms": 17668.406877142843,
+      "p50_ms": 1406.7326800432056,
+      "p95_ms": 1918.0432383785956,
+      "p99_ms": 1975.9210292785428,
+      "max_ms": 1990.3904770035297,
+      "over_3000_ms": 0,
+      "fallback_reasons": {},
+      "measured_battle_perspectives": 2,
+      "unavailable_battle_perspectives": 0,
+      "native_root_rejections": 0,
+      "native_root_rejection_decisions": 0,
+      "decisions_after_confirmed_tera": 0,
+      "decisions_after_confirmed_tera_user_fainted": 0,
+      "native_tera_root_rejections": 0,
+      "native_tera_root_rejection_decisions": 0,
+      "native_tera_root_rejections_after_faint": 0,
+      "native_root_visits_for_rejection_metric": 1190000,
+      "native_root_rejection_reasons": {},
+      "root_rejection_metric_unavailable_perspectives": 0,
+      "native_rejected_root_visit_fraction": 0.0
+    },
+    "b": {
+      "decisions": 15,
+      "fallbacks": 0,
+      "rejected_choices": 0,
+      "requested_worlds": 104,
+      "completed_worlds": 104,
+      "failed_worlds": 0,
+      "usable_worlds": 104,
+      "cpu_seconds": 20.209047,
+      "native_visits": 1267000,
+      "state_preparation_ms": 420.7916380255483,
+      "worker_wall_ms": 19175.260148127563,
+      "recoveries": 0,
+      "belief_history_reset": 0,
+      "worker_restart_required": 0,
+      "replay_not_recorded": 0,
+      "actual_search_ms": 17635.30115201138,
+      "p50_ms": 1402.9009719961323,
+      "p95_ms": 1875.1210262125824,
+      "p99_ms": 1890.780325216474,
+      "max_ms": 1894.695149967447,
+      "over_3000_ms": 0,
+      "fallback_reasons": {},
+      "measured_battle_perspectives": 2,
+      "unavailable_battle_perspectives": 0,
+      "native_root_rejections": 0,
+      "native_root_rejection_decisions": 0,
+      "decisions_after_confirmed_tera": 0,
+      "decisions_after_confirmed_tera_user_fainted": 0,
+      "native_tera_root_rejections": 0,
+      "native_tera_root_rejection_decisions": 0,
+      "native_tera_root_rejections_after_faint": 0,
+      "native_root_visits_for_rejection_metric": 1267000,
+      "native_root_rejection_reasons": {},
+      "root_rejection_metric_unavailable_perspectives": 0,
+      "native_rejected_root_visit_fraction": 0.0
+    }
+  },
+  "side_breakdown": {
+    "p1": {},
+    "p2": {}
+  },
+  "team_breakdown": {
+    "0": {
+      "style": "regression smoke"
+    },
+    "1": {
+      "style": "regression smoke"
+    }
+  },
+  "manifest_sha256": "562a140685d35e7ba8796c9e2b2ccf4c9071dbff32d45687ea705b226f5a5f56",
+  "phase": "smoke",
+  "status": "complete",
+  "original_raw_run": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/tera-followup-smoke-v1",
+  "source_sha256": {
+    "a": "0bd23daf0e4d173a8a9a3398793831d7d1cac100ba99bf238ab357f07b258a23",
+    "b": "5eaa172be19612c3ef49d11a59537a2794d587d26e75e2f0cc6f997946e84874"
+  },
+  "effective_configs": {
+    "a": {
+      "backend": "mcts",
+      "budget": 3.0,
+      "mcts_worlds": 8,
+      "search_ms": 150,
+      "engine_threads": 1,
+      "sampling": "team",
+      "frozen_beliefs": false,
+      "seed": 2026,
+      "belief_mode": "reliable"
+    },
+    "b": {
+      "backend": "mcts",
+      "budget": 3.0,
+      "mcts_worlds": 8,
+      "search_ms": 150,
+      "engine_threads": 1,
+      "sampling": "team",
+      "frozen_beliefs": false,
+      "seed": 2026
+    }
+  },
+  "cpu_scope": "Bot Python process plus reaped native SearchWorker descendants, including startup/preparation. Simulator/coordinator CPU is excluded. Actual native search milliseconds are wall time, not CPU.",
+  "uncertainty": "Intervals use whole games. Candidate-team bootstrap acknowledges sparse clusters; shared opposing teams create additional dependence. Native MCTS is not deterministic despite repeatable simulator/sampling seeds.",
+  "team_provenance": {
+    "kind": "existing regression only; no strength interpretation"
+  },
+  "rejection_metric_scope": "Native root rejections count per-world supported options filtered during mapping/legality checks, separately from server-rejected choices. Visit counts are diagnostic exposure, not a CPU measurement or a playing-strength result."
+}

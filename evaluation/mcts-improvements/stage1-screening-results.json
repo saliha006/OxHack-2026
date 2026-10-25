@@ -1,0 +1,204 @@
+{
+  "planned": 60,
+  "recorded": 60,
+  "wins": 35,
+  "losses": 25,
+  "draws": 0,
+  "voids": 0,
+  "score_rate": 0.5833333333333334,
+  "wilson_95": [
+    0.45727854313239624,
+    0.6993591351212818
+  ],
+  "candidate_team_cluster_95": [
+    0.4166666666666667,
+    0.7666666666666667
+  ],
+  "cluster_limit": "Resamples candidate teams; shared opposing teams still create dependence, and ten clusters remain sparse.",
+  "wall_seconds_sum": 7815.8692229928565,
+  "arms": {
+    "a": {
+      "decisions": 2847,
+      "fallbacks": 0,
+      "rejected_choices": 0,
+      "requested_worlds": 22296,
+      "completed_worlds": 22296,
+      "failed_worlds": 0,
+      "usable_worlds": 22296,
+      "cpu_seconds": 3773.979532,
+      "native_visits": 482873000,
+      "state_preparation_ms": 84821.17489213124,
+      "worker_wall_ms": 3774938.8995709014,
+      "recoveries": 176,
+      "belief_history_reset": 0,
+      "worker_restart_required": 0,
+      "replay_not_recorded": 0,
+      "actual_search_ms": 3641672.5482910406,
+      "p50_ms": 1366.5862660272978,
+      "p95_ms": 1433.2845892582554,
+      "p99_ms": 1807.2530474688392,
+      "max_ms": 1992.4064640072174,
+      "over_3000_ms": 0,
+      "fallback_reasons": {},
+      "measured_battle_perspectives": 60,
+      "unavailable_battle_perspectives": 0,
+      "native_root_rejections": 7752,
+      "native_root_rejection_decisions": 256,
+      "decisions_after_confirmed_tera": 946,
+      "decisions_after_confirmed_tera_user_fainted": 309,
+      "native_tera_root_rejections": 7752,
+      "native_tera_root_rejection_decisions": 256,
+      "native_tera_root_rejections_after_faint": 7752,
+      "native_root_visits_for_rejection_metric": 482873000,
+      "native_rejected_root_visits": 23296331,
+      "native_rejected_tera_root_visits": 23296331,
+      "native_rejected_tera_root_visits_after_faint": 23296331,
+      "native_root_rejection_reasons": {
+        "not_legal": 7752
+      },
+      "root_rejection_metric_unavailable_perspectives": 0,
+      "native_rejected_root_visit_fraction": 0.04824525496352043
+    },
+    "b": {
+      "decisions": 2873,
+      "fallbacks": 0,
+      "rejected_choices": 0,
+      "requested_worlds": 22504,
+      "completed_worlds": 22504,
+      "failed_worlds": 0,
+      "usable_worlds": 22504,
+      "cpu_seconds": 3774.049836,
+      "native_visits": 462583000,
+      "state_preparation_ms": 81129.98468952719,
+      "worker_wall_ms": 3778566.20051706,
+      "recoveries": 175,
+      "belief_history_reset": 0,
+      "worker_restart_required": 0,
+      "replay_not_recorded": 0,
+      "actual_search_ms": 3648848.148996476,
+      "p50_ms": 1365.8499229932204,
+      "p95_ms": 1426.7642664141022,
+      "p99_ms": 1799.1485523735173,
+      "max_ms": 1998.5120410565287,
+      "over_3000_ms": 0,
+      "fallback_reasons": {},
+      "measured_battle_perspectives": 60,
+      "unavailable_battle_perspectives": 0,
+      "native_root_rejections": 9720,
+      "native_root_rejection_decisions": 345,
+      "decisions_after_confirmed_tera": 778,
+      "decisions_after_confirmed_tera_user_fainted": 423,
+      "native_tera_root_rejections": 9720,
+      "native_tera_root_rejection_decisions": 345,
+      "native_tera_root_rejections_after_faint": 9720,
+      "native_root_visits_for_rejection_metric": 462583000,
+      "native_rejected_root_visits": 34110132,
+      "native_rejected_tera_root_visits": 34110132,
+      "native_rejected_tera_root_visits_after_faint": 34110132,
+      "native_root_rejection_reasons": {
+        "not_legal": 9720
+      },
+      "root_rejection_metric_unavailable_perspectives": 0,
+      "native_rejected_root_visit_fraction": 0.07373840370268687
+    }
+  },
+  "side_breakdown": {
+    "p1": {
+      "a": 18,
+      "b": 12
+    },
+    "p2": {
+      "a": 17,
+      "b": 13
+    }
+  },
+  "team_breakdown": {
+    "0": {
+      "style": "offense",
+      "a": 2,
+      "b": 4
+    },
+    "1": {
+      "style": "offense",
+      "a": 3,
+      "b": 3
+    },
+    "2": {
+      "style": "offense",
+      "a": 4,
+      "b": 2
+    },
+    "3": {
+      "style": "sun offense",
+      "b": 5,
+      "a": 1
+    },
+    "4": {
+      "style": "balance",
+      "a": 2,
+      "b": 4
+    },
+    "5": {
+      "style": "balance",
+      "a": 5,
+      "b": 1
+    },
+    "6": {
+      "style": "balance",
+      "a": 4,
+      "b": 2
+    },
+    "7": {
+      "style": "rain offense",
+      "b": 4,
+      "a": 2
+    },
+    "8": {
+      "style": "semistall",
+      "a": 6
+    },
+    "9": {
+      "style": "semistall",
+      "a": 6
+    }
+  },
+  "manifest_sha256": "f42bd253dad922763fb349f0d10b601c24f516cfd8c30311e9d07d28e83cc1dc",
+  "phase": "screening",
+  "status": "complete",
+  "original_raw_run": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-improvements/stage1-screening-v1",
+  "source_sha256": {
+    "a": "32ede7cb68279477331cea6d6a5dcb27c6991d75fa1640b8525eff1aa129ed1c",
+    "b": "5eaa172be19612c3ef49d11a59537a2794d587d26e75e2f0cc6f997946e84874"
+  },
+  "effective_configs": {
+    "a": {
+      "backend": "mcts",
+      "budget": 3.0,
+      "mcts_worlds": 8,
+      "search_ms": 150,
+      "engine_threads": 1,
+      "sampling": "team",
+      "frozen_beliefs": false,
+      "seed": 2026
+    },
+    "b": {
+      "backend": "mcts",
+      "budget": 3.0,
+      "mcts_worlds": 8,
+      "search_ms": 150,
+      "engine_threads": 1,
+      "sampling": "team",
+      "frozen_beliefs": false,
+      "seed": 2026
+    }
+  },
+  "cpu_scope": "Bot Python process plus reaped native SearchWorker descendants, including startup/preparation. Simulator/coordinator CPU is excluded. Actual native search milliseconds are wall time, not CPU.",
+  "uncertainty": "Intervals use whole games. Candidate-team bootstrap acknowledges sparse clusters; shared opposing teams create additional dependence. Native MCTS is not deterministic despite repeatable simulator/sampling seeds.",
+  "team_provenance": {
+    "kind": "synthetic new roster combinations from existing regression sets plus three hand-constructed weather components",
+    "reservation": "selected and validated before this stage outcome inspection; unchanged throughout screening",
+    "holdout_limit": "Not an independent external set holdout. Components and species have appeared in regression; these exact six-species rosters are new combinations. No evaluation paste is used to fit priors. Confirmation roster combinations differ from screening, but share component sets.",
+    "rules": "local pinned Showdown gen9ou TeamValidator"
+  },
+  "rejection_metric_scope": "Native root rejections count per-world supported options filtered during mapping/legality checks, separately from server-rejected choices. Visit counts are diagnostic exposure, not a CPU measurement or a playing-strength result."
+}

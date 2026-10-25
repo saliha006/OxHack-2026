@@ -1,0 +1,37 @@
+{
+  "stage": 6,
+  "policy": "seeded_supported_pair_v1",
+  "scope": "Optional heuristic mixing; off by default pending independent comparisons. Not an equilibrium strategy or calibrated win model.",
+  "frozen_before_stochastic_tests_or_new_games": true,
+  "config": {
+    "eligible_count": 2,
+    "min_usable_worlds": 4,
+    "min_root_visits": 1000,
+    "min_support": 0.25,
+    "max_absolute_gap": 0.03,
+    "min_relative_support": 0.9,
+    "min_combined_mass": 0.65,
+    "min_world_share": 0.05,
+    "min_world_support_fraction": 0.5,
+    "min_supporting_worlds": 2
+  },
+  "configuration_sha256": "804b203c83dafcc4e7aafc96497c97d609541404a77a858bf0dac55cd0bb4d5a",
+  "source_incumbent": "runs/mcts-improvements/stage2-tera-probe",
+  "source_incumbent_sha256": "0bd23daf0e4d173a8a9a3398793831d7d1cac100ba99bf238ab357f07b258a23",
+  "eligibility": "Original authoritative legal winner must be nonTera move. Exactly two legal nonTera nonvetoed moves meet pooled support floor, absolute and relative closeness, combined mass and perworld maturity. More than two pooled-near candidates declines rather than truncates.",
+  "maturity": "Exclude error/zero-root-visit worlds. Count support>=.05 within each normalised native world equally, independent of iteration count; each choice needs at least half usable worlds and at least2. Sum positive native OUR root visits from usable worlds for the1000 gate.",
+  "failure_policy": "Preserve authoritative deterministic choice on inadequate evidence, fallback, original switch/Tera, any pooled or derived mapping failures, unsupported choices or veto exclusions. Never sample Tera/switch.",
+  "randomness": "One draw only after every eligibility gate passes, from a separately provided persistent Random instance/mix_seed. Stable request move order; probabilities proportional to pooled support. Native MCTS remains unseeded. Seed alone does not reproduce changing native supports.",
+  "parameter_provenance": "Conservative fixed development gates specified before new scoring outcomes; no weights or thresholds fitted to reserved teams. Counts/shares are support checks, not proof choices are good.",
+  "planned_tests": [
+    "mature2-waytieeligible",
+    "uniform3or4-wayrootrejected",
+    "lowvisitsandworldcountrejected",
+    "legalityandTeraswitchdeterminism",
+    "errorworldretention",
+    "equalworldmaturitynotvisitweighting",
+    "vetoedalternativepreservedeterministicchoice",
+    "separateRandomrepeatandone-drawonly"
+  ],
+  "promotion": "Parent owns frozen source comparisons versus original/incumbent and relevant opponent panel; inconclusive policy stays disabled."
+}

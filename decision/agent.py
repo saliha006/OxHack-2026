@@ -3,6 +3,7 @@ import logging
 import math
 import time
 from collections.abc import Callable
+from random import Random
 
 from contracts.battle_state import BattleState
 from contracts.set_candidates import SetCandidates
@@ -26,7 +27,8 @@ class Agent:
                  clock: Callable[[], float] = time.monotonic, *, backend: str = "mcts",
                  mcts_worlds: int = 8, search_ms: int = 150, engine_threads: int = 1,
                  sampling: str = "team", frozen_beliefs: bool = False, seed: int = 2026,
-                 belief_mode: str = "reliable", lead_policy: str = "types", fixed_lead: int | None = None):
+                 belief_mode: str = "reliable", lead_policy: str = "types", fixed_lead: int | None = None,
+                 mix_root: bool = False, mix_seed: int | None = None):
         if backend not in {"one_ply", "mcts"}:
             raise ValueError("backend must be one_ply or mcts")
         if sampling not in {"team", "active"}:
@@ -37,6 +39,10 @@ class Agent:
             raise ValueError("lead_policy must be types or moves_stats")
         if fixed_lead is not None and (not isinstance(fixed_lead, int) or not 1 <= fixed_lead <= 6):
             raise ValueError("fixed_lead must be a party slot from one to six")
+        if not isinstance(mix_root, bool) or mix_root and backend != "mcts":
+            raise ValueError("root mixing is a boolean MCTS-only option")
+        if mix_seed is not None and (not isinstance(mix_seed, int) or isinstance(mix_seed, bool)):
+            raise ValueError("mix_seed must be an integer")
         if min(mcts_worlds, search_ms, engine_threads) < 1 or budget <= 0:
             raise ValueError("worlds, search time, threads and budget must be positive")
         self.priors = priors
@@ -46,11 +52,19 @@ class Agent:
         self.deadline = math.inf  # set per decision by choose()
         self.belief: Belief | None = None
         self.backend = backend
+        self.mix_rng = None
+        mixing_policy = None
+        if mix_root:
+            from decision.root_mixing import CONFIG
+            mix_seed = mix_seed if mix_seed is not None else int(seed) ^ 0x4D4958
+            self.mix_rng = Random(mix_seed)  # independent of the worker's hidden-world sampler
+            mixing_policy = CONFIG.copy()
         self.config = {"mcts_worlds": mcts_worlds, "search_ms": search_ms, "engine_threads": engine_threads,
                        "sampling": sampling, "frozen_beliefs": frozen_beliefs, "seed": seed,
                        "budget_seconds": budget, "return_reserve_seconds": min(0.3, budget * 0.1),
                        "belief_mode": belief_mode, "lead_policy": lead_policy, "fixed_lead": fixed_lead,
-                       "randomisation": False, "learned_reranker": False}
+                       "randomisation": mix_root, "mix_root": mix_root, "mix_seed": mix_seed,
+                       "mixing_policy": mixing_policy, "learned_reranker": False}
         self.worker = None
         self.last_trace: dict | None = None
 
@@ -151,6 +165,11 @@ class Agent:
             action = fallback
             self.last_trace["fallback_reason"] = ("worker_failure" if self.last_trace["failures"]
                                                    else "no_supported_legal_action")
+        elif self.config["mix_root"]:
+            from decision.root_mixing import mix_near_ties
+            action, mixing = mix_near_ties(action, pooled, request, self.last_trace["worlds"],
+                                          self.mix_rng, self.config["mix_seed"])
+            self.last_trace["root_mixing"] = mixing
         bookkeeping_deadline = min(started + self.budget, time.monotonic() + 0.05)
         bookkeeping_started = time.monotonic()
         bookkeeping_error = self.worker.chose(request, action, deadline=bookkeeping_deadline) if prepared else None

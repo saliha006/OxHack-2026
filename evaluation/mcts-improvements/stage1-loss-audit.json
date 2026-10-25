@@ -1,0 +1,444 @@
+{
+  "interpretation": "Descriptive investigation leads; no causal or strength claim. Repeated turns are not independent games.",
+  "missingness": "Final transition without next decision excluded; no unseen final-turn negative imputed.",
+  "by_outcome": {
+    "win": {
+      "perspectives": 60,
+      "counts": {
+        "attack_chip_erased": 136,
+        "switch_return_cycle": 2,
+        "boosted_foe_faint": 8,
+        "tera_then_faint": 2,
+        "setup_at_cap": 7
+      },
+      "opportunities": {
+        "setup_at_cap": 150,
+        "switch_return_cycle": 355,
+        "attack_chip_erased": 1412,
+        "hazard_at_cap": 29,
+        "tera_then_faint": 42,
+        "boosted_foe_faint": 228
+      },
+      "rates": {
+        "setup_at_cap": 0.04666666666666667,
+        "switch_return_cycle": 0.005633802816901409,
+        "attack_chip_erased": 0.09631728045325778,
+        "hazard_at_cap": 0.0,
+        "tera_then_faint": 0.047619047619047616,
+        "boosted_foe_faint": 0.03508771929824561
+      }
+    },
+    "loss": {
+      "perspectives": 60,
+      "counts": {
+        "attack_chip_erased": 167,
+        "boosted_foe_faint": 32,
+        "tera_then_faint": 1,
+        "switch_return_cycle": 9,
+        "hazard_at_cap": 3
+      },
+      "opportunities": {
+        "attack_chip_erased": 1460,
+        "switch_return_cycle": 326,
+        "tera_then_faint": 41,
+        "setup_at_cap": 117,
+        "boosted_foe_faint": 560,
+        "hazard_at_cap": 48
+      },
+      "rates": {
+        "attack_chip_erased": 0.11438356164383562,
+        "switch_return_cycle": 0.027607361963190184,
+        "tera_then_faint": 0.024390243902439025,
+        "setup_at_cap": 0.0,
+        "boosted_foe_faint": 0.05714285714285714,
+        "hazard_at_cap": 0.0625
+      }
+    }
+  },
+  "unavailable": [],
+  "input": "evaluation/mcts-improvements/stage1-screening-games.jsonl",
+  "scope": "Complete60gameinitial-state-fix comparison, both perspectives; before later Tera repair/reliable beliefs. Descriptivedevelopment diagnostics, not independent-turn evidence or current-agent failure rates.",
+  "raw_report": "runs/mcts-improvements/stage1-loss-signatures.json",
+  "examples": [
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-mcts-0:3",
+      "turn": 2,
+      "choice": "move 2",
+      "move": "icespinner"
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-mcts-0:5",
+      "turn": 4,
+      "choice": "move 2",
+      "move": "icespinner"
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-mcts-0:6",
+      "turn": 5,
+      "choice": "move 2",
+      "move": "icespinner"
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-mcts-0:9",
+      "turn": 8,
+      "choice": "move 2",
+      "move": "icespinner"
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "loss",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-mcts-0:10",
+      "turn": 9,
+      "choice": "move 2",
+      "move": "icespinner"
+    },
+    {
+      "battle": null,
+      "role": "a",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-mcts-2:38",
+      "turn": 34,
+      "choice": "move 3",
+      "move": "knockoff"
+    },
+    {
+      "battle": null,
+      "role": "a",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-mcts-2:39",
+      "turn": 35,
+      "choice": "move 3",
+      "move": "knockoff"
+    },
+    {
+      "battle": null,
+      "role": "a",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-mcts-2:40",
+      "turn": 36,
+      "choice": "move 3",
+      "move": "knockoff"
+    },
+    {
+      "battle": null,
+      "role": "a",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-mcts-2:41",
+      "turn": 37,
+      "choice": "move 3",
+      "move": "knockoff"
+    },
+    {
+      "battle": null,
+      "role": "a",
+      "outcome": "win",
+      "signature": "attack_chip_erased",
+      "decision_id": "battle-mcts-2:42",
+      "turn": 38,
+      "choice": "move 3",
+      "move": "knockoff"
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "loss",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-mcts-4:70",
+      "turn": 57,
+      "choice": "move 4",
+      "move": "chillyreception"
+    },
+    {
+      "battle": null,
+      "role": "a",
+      "outcome": "win",
+      "signature": "switch_return_cycle",
+      "decision_id": "battle-mcts-5:46",
+      "turn": 41,
+      "choice": "switch 3",
+      "move": null
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "loss",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-mcts-7:8",
+      "turn": 6,
+      "choice": "move 1",
+      "move": "dracometeor"
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "win",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-mcts-8:13",
+      "turn": 10,
+      "choice": "move 1",
+      "move": "shadowball"
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "win",
+      "signature": "tera_then_faint",
+      "decision_id": "battle-mcts-8:20",
+      "turn": 15,
+      "choice": "move 1 terastallize",
+      "move": "headlongrush"
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "win",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-mcts-9:13",
+      "turn": 10,
+      "choice": "move 1",
+      "move": "shadowball"
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "win",
+      "signature": "tera_then_faint",
+      "decision_id": "battle-mcts-9:20",
+      "turn": 15,
+      "choice": "move 1 terastallize",
+      "move": "headlongrush"
+    },
+    {
+      "battle": null,
+      "role": "a",
+      "outcome": "loss",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-mcts-10:38",
+      "turn": 33,
+      "choice": "move 2",
+      "move": "weatherball"
+    },
+    {
+      "battle": null,
+      "role": "a",
+      "outcome": "loss",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-mcts-11:38",
+      "turn": 33,
+      "choice": "move 2",
+      "move": "weatherball"
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "loss",
+      "signature": "tera_then_faint",
+      "decision_id": "battle-mcts-14:11",
+      "turn": 9,
+      "choice": "move 2 terastallize",
+      "move": "makeitrain"
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "loss",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-mcts-14:11",
+      "turn": 9,
+      "choice": "move 2 terastallize",
+      "move": "makeitrain"
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "loss",
+      "signature": "switch_return_cycle",
+      "decision_id": "battle-mcts-14:28",
+      "turn": 23,
+      "choice": "switch 4",
+      "move": null
+    },
+    {
+      "battle": null,
+      "role": "a",
+      "outcome": "win",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-mcts-15:24",
+      "turn": 23,
+      "choice": "move 1",
+      "move": "extremespeed"
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "loss",
+      "signature": "hazard_at_cap",
+      "decision_id": "battle-mcts-19:28",
+      "turn": 25,
+      "choice": "move 4",
+      "move": "stealthrock"
+    },
+    {
+      "battle": null,
+      "role": "a",
+      "outcome": "loss",
+      "signature": "hazard_at_cap",
+      "decision_id": "battle-mcts-21:37",
+      "turn": 32,
+      "choice": "move 4",
+      "move": "stealthrock"
+    },
+    {
+      "battle": null,
+      "role": "a",
+      "outcome": "loss",
+      "signature": "hazard_at_cap",
+      "decision_id": "battle-mcts-21:39",
+      "turn": 34,
+      "choice": "move 4",
+      "move": "stealthrock"
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "loss",
+      "signature": "switch_return_cycle",
+      "decision_id": "battle-mcts-24:41",
+      "turn": 37,
+      "choice": "switch 3",
+      "move": null
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "loss",
+      "signature": "switch_return_cycle",
+      "decision_id": "battle-mcts-24:45",
+      "turn": 41,
+      "choice": "switch 4",
+      "move": null
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "loss",
+      "signature": "switch_return_cycle",
+      "decision_id": "battle-mcts-24:47",
+      "turn": 43,
+      "choice": "switch 4",
+      "move": null
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "loss",
+      "signature": "switch_return_cycle",
+      "decision_id": "battle-mcts-24:48",
+      "turn": 44,
+      "choice": "switch 4",
+      "move": null
+    },
+    {
+      "battle": null,
+      "role": "a",
+      "outcome": "win",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-mcts-25:62",
+      "turn": 58,
+      "choice": "move 2",
+      "move": "icebeam"
+    },
+    {
+      "battle": null,
+      "role": "a",
+      "outcome": "win",
+      "signature": "boosted_foe_faint",
+      "decision_id": "battle-mcts-25:65",
+      "turn": 60,
+      "choice": "move 2",
+      "move": "bodypress"
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "win",
+      "signature": "setup_at_cap",
+      "decision_id": "battle-mcts-58:95",
+      "turn": 93,
+      "choice": "move 1",
+      "move": "irondefense"
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "win",
+      "signature": "setup_at_cap",
+      "decision_id": "battle-mcts-58:96",
+      "turn": 94,
+      "choice": "move 1",
+      "move": "irondefense"
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "win",
+      "signature": "setup_at_cap",
+      "decision_id": "battle-mcts-58:97",
+      "turn": 95,
+      "choice": "move 1",
+      "move": "irondefense"
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "win",
+      "signature": "setup_at_cap",
+      "decision_id": "battle-mcts-58:99",
+      "turn": 97,
+      "choice": "move 1",
+      "move": "irondefense"
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "win",
+      "signature": "setup_at_cap",
+      "decision_id": "battle-mcts-58:100",
+      "turn": 98,
+      "choice": "move 1",
+      "move": "irondefense"
+    },
+    {
+      "battle": null,
+      "role": "b",
+      "outcome": "win",
+      "signature": "switch_return_cycle",
+      "decision_id": "battle-mcts-58:112",
+      "turn": 110,
+      "choice": "switch 2",
+      "move": null
+    }
+  ]
+}

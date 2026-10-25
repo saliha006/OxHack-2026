@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "frozen_utc": "2026-10-25T06:21:37.210332+00:00",
+  "scope": "Stage3 observed opening mechanisms; freeze before full-game scoring outcomes; no lead-weight tuning",
+  "analysis_identity": {
+    "analysis/openings.py": "74a2b658b6f3bda68b597c1602f013ffd75c201017d86cb35b39b8ee5fd2360a",
+    "decision/lead.py": "1af618a2450672e75abae9af55b2035d64e29e3b8f420629fdd29a4f75f7c5f3",
+    "decision/actions.py": "78233b1a0dea5a10e991908600317355b19f0b54d3c6fbbccbc88d5ddc028620",
+    "decision/state.py": "e97dd27902014dd3fc432dae5ca66da75887b1d9d5dabe2666dc82b3863bf28b",
+    "decision/data/typechart.json": "26270c6fa9e25ba43ba9d6fd0da115fcf96eee42eae8b0bd9660bd015dc483b2",
+    "decision/data/pokedex.json": "e74d0364b230001fc086cefb4259e051f1d16a4730eb89f7d6336a88a0d9a47e"
+  },
+  "roles_per_game": [
+    "a",
+    "b"
+  ],
+  "checkpoint_request_turns": [
+    4,
+    6
+  ],
+  "checkpoint_rule": "First recorded ordinary move request at turn>=4/6 (target after3/5resolved turns). Keep actual turn and overshoot; forced switches/wait/preview are excluded.",
+  "lead_rule": "Selected preview choice plus independently turn1-confirmed actual lead; resolve private ident across party reorder. Historical choice from preview trace, otherwise original unchanged pure types function on preview only.",
+  "own_hp_rule": "Sum exact private current HP and sum current/max fractions across the complete request party; fainted0 is exact even when maxHP omitted. Never use own public bench HP.",
+  "faint_rule": "Current fainted state at checkpoint, not an imputed cumulative count through unseen revival events.",
+  "opponent_rule": "Last-observed public faint count/HP fraction proxy, explicitly estimated and possibly stale on bench.",
+  "tera_rule": "Confirmed public spent-Tera/resource or private transformed flags observed only up to the checkpoint; no future snapshot leakage.",
+  "missingness": "Missing trace/future states and verified early finishes have null checkpoint metrics; never fill from winner or terminal state. Report all counts, void/censored records and both roles.",
+  "breakdowns": [
+    "role",
+    "role+side",
+    "role+ownstyle",
+    "role+ownteam",
+    "role+ownstyle+opponentstyle"
+  ],
+  "provenance": "Hash games, manifest, traces, analysis code and original type-scoring code/data. Store per-perspective JSON/CSV and disagreement components. No opponent private team files are read.",
+  "claims": "Descriptive mechanisms only; no causal blunder, calibrated win-probability or general strength claim."
+}

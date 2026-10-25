@@ -1,0 +1,22 @@
+{
+  "stage": 6,
+  "policy": "seeded_supported_pair_v1",
+  "status": "implemented optional/off by default; strength evaluation pending",
+  "module_sha256": "2932d9ade680681f0707ceed14c0ed2785b74d70adb56e6bc00e5084e8eedb3b",
+  "configuration_sha256": "804b203c83dafcc4e7aafc96497c97d609541404a77a858bf0dac55cd0bb4d5a",
+  "frozen_plan_sha256": "b7aba0a8134bb56ae4da18b3e2bf5f66c53952c907a7f34aa96e2f1d9809307c",
+  "helper_tests": "18passed in0.30s",
+  "helper_plus_parent_integration": "23passed in0.29s",
+  "raw_tests": [
+    "runs/mcts-improvements/stage6-mixing-tests.txt",
+    "runs/mcts-improvements/stage6-mixing-integration-tests.txt"
+  ],
+  "integration_verified": "Parent wiring records the final mixed action in worker replay bookkeeping; preview deterministic; sampler seed separate; mixing off by default and explicitly MCTS-only.",
+  "scope": "Tests use synthetic root visits. No native/game strength improvement or exploitation-resistance claim. No thresholds fitted to scoring teams. Parent owns source freeze, full suite and controlled comparisons.",
+  "runtime_files_owned": [
+    "decision/root_mixing.py"
+  ],
+  "tests_owned": [
+    "tests/test_root_mixing.py"
+  ]
+}

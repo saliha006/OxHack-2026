@@ -1,0 +1,251 @@
+{
+  "scope": "Historical development guard evidence audit, no strength claim or runtime guard implementation",
+  "source_sha256": "0bd23daf0e4d173a8a9a3398793831d7d1cac100ba99bf238ab357f07b258a23",
+  "cycle_cases": [
+    {
+      "battle": "battle-gen9ou-40",
+      "role": "a",
+      "trace": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-comparison-final/players/ox23e0e1a1/battle-gen9ou-40.jsonl",
+      "trace_sha256": "f6741591315167a332c39c659285ba830cec47b92ee0607523cacb18e17bd50c",
+      "line": 47,
+      "decision_id": "battle-gen9ou-40:24",
+      "roots": [
+        {
+          "turn": 17,
+          "choice": "switch 4",
+          "our_active": "zamazenta",
+          "our_hp_percent_sum": 166,
+          "foe_active": "deoxysspeed",
+          "foe_active_hp_percent": 100
+        },
+        {
+          "turn": 18,
+          "choice": "switch 4",
+          "our_active": "deoxysspeed",
+          "our_hp_percent_sum": 166,
+          "foe_active": "zamazenta",
+          "foe_active_hp_percent": 59
+        },
+        {
+          "turn": 19,
+          "choice": "switch 4",
+          "our_active": "zamazenta",
+          "our_hp_percent_sum": 134,
+          "foe_active": "zamazenta",
+          "foe_active_hp_percent": 49
+        }
+      ],
+      "recorded_world_count": 8,
+      "opponent_stable": false,
+      "near_supported_nontera_moves": {},
+      "potentially_eligible": false
+    },
+    {
+      "battle": "battle-gen9ou-47",
+      "role": "a",
+      "trace": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-comparison-final/players/ox99933744/battle-gen9ou-47.jsonl",
+      "trace_sha256": "2e7bbc9a827c17f84b63d450fbc03f7d7f86ecd546c280aec7d0fbfc4049fe0e",
+      "line": 47,
+      "decision_id": "battle-gen9ou-47:24",
+      "roots": [
+        {
+          "turn": 17,
+          "choice": "switch 2",
+          "our_active": "kyurem",
+          "our_hp_percent_sum": 200,
+          "foe_active": "greattusk",
+          "foe_active_hp_percent": 87
+        },
+        {
+          "turn": 18,
+          "choice": "switch 2",
+          "our_active": "slowkinggalar",
+          "our_hp_percent_sum": 186,
+          "foe_active": "greattusk",
+          "foe_active_hp_percent": 93
+        },
+        {
+          "turn": 19,
+          "choice": "switch 2",
+          "our_active": "kyurem",
+          "our_hp_percent_sum": 127,
+          "foe_active": "greattusk",
+          "foe_active_hp_percent": 99
+        }
+      ],
+      "recorded_world_count": 1,
+      "opponent_stable": true,
+      "near_supported_nontera_moves": {},
+      "potentially_eligible": false
+    },
+    {
+      "battle": "battle-gen9ou-44",
+      "role": "b",
+      "trace": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/runs/mcts-comparison-final/players/oxb4db3c68/battle-gen9ou-44.jsonl",
+      "trace_sha256": "ab6a9b5d5cdeb4e14bda2eff2b70f5782d692aa428f4bfd6be58b7ef3bbb1efe",
+      "line": 135,
+      "decision_id": "battle-gen9ou-44:68",
+      "roots": [
+        {
+          "turn": 55,
+          "choice": "switch 6",
+          "our_active": "greattusk",
+          "our_hp_percent_sum": 135,
+          "foe_active": "greattusk",
+          "foe_active_hp_percent": 100
+        },
+        {
+          "turn": 56,
+          "choice": "switch 6",
+          "our_active": "slowkinggalar",
+          "our_hp_percent_sum": 139,
+          "foe_active": "greattusk",
+          "foe_active_hp_percent": 100
+        },
+        {
+          "turn": 57,
+          "choice": "switch 6",
+          "our_active": "greattusk",
+          "our_hp_percent_sum": 100,
+          "foe_active": "greattusk",
+          "foe_active_hp_percent": 100
+        }
+      ],
+      "recorded_world_count": 8,
+      "opponent_stable": true,
+      "near_supported_nontera_moves": {
+        "move 1": 0.1942861713963553,
+        "move 2": 0.1921964277529822,
+        "move 3": 0.19891342447331042,
+        "move 4": 0.19427147790057972
+      },
+      "potentially_eligible": true
+    }
+  ],
+  "counterfactuals": {},
+  "recorded_choice": "switch 6",
+  "recorded_support": {
+    "move 1": 0.1942861713963553,
+    "move 2": 0.1921964277529822,
+    "move 3": 0.19891342447331042,
+    "move 4": 0.19427147790057972,
+    "switch 6": 0.2203324984767724
+  },
+  "search_repeats": [
+    {
+      "repetition": 0,
+      "wall_ms": 206.35914203012362,
+      "cpu_ms": 166.21499999999978,
+      "completed_worlds": 0,
+      "native_ms": 0,
+      "failures": [
+        {
+          "kind": "failure",
+          "error": {
+            "stage": "worker_exit",
+            "type": "EOFError",
+            "message": ""
+          }
+        }
+      ],
+      "pooled": {
+        "search_support": {},
+        "opponent_support": {},
+        "usable_worlds": 0,
+        "mapping_failures": [],
+        "unusable_worlds": [],
+        "aggregation": "sampled",
+        "choice": null
+      }
+    },
+    {
+      "repetition": 1,
+      "wall_ms": 173.03228395758197,
+      "cpu_ms": 166.4380000000003,
+      "completed_worlds": 0,
+      "native_ms": 0,
+      "failures": [
+        {
+          "kind": "failure",
+          "error": {
+            "stage": "worker_exit",
+            "type": "EOFError",
+            "message": ""
+          }
+        }
+      ],
+      "pooled": {
+        "search_support": {},
+        "opponent_support": {},
+        "usable_worlds": 0,
+        "mapping_failures": [],
+        "unusable_worlds": [],
+        "aggregation": "sampled",
+        "choice": null
+      }
+    },
+    {
+      "repetition": 2,
+      "wall_ms": 171.99798399815336,
+      "cpu_ms": 162.22899999999996,
+      "completed_worlds": 0,
+      "native_ms": 0,
+      "failures": [
+        {
+          "kind": "failure",
+          "error": {
+            "stage": "worker_exit",
+            "type": "EOFError",
+            "message": ""
+          }
+        }
+      ],
+      "pooled": {
+        "search_support": {},
+        "opponent_support": {},
+        "usable_worlds": 0,
+        "mapping_failures": [],
+        "unusable_worlds": [],
+        "aggregation": "sampled",
+        "choice": null
+      }
+    }
+  ],
+  "counterfactual_batch": {
+    "mode": "counterfactuals",
+    "wall_ms": 174.76240801624954,
+    "cpu_ms": 167.87400000000008,
+    "completed": 0,
+    "messages": [
+      {
+        "kind": "failure",
+        "error": {
+          "stage": "worker_exit",
+          "type": "EOFError",
+          "message": ""
+        }
+      }
+    ]
+  },
+  "counterexamples": null,
+  "counterexample_batch": {
+    "mode": "counterexamples",
+    "wall_ms": 182.18618602259085,
+    "cpu_ms": 171.81100000000038,
+    "completed": 0,
+    "messages": [
+      {
+        "kind": "failure",
+        "error": {
+          "stage": "worker_exit",
+          "type": "EOFError",
+          "message": ""
+        }
+      }
+    ]
+  },
+  "raw_sha256": "462bd5c576a61948aaa6951261eac23608d1d065204b74bd5e690b794d736587",
+  "plan_sha256": "f38034ce3d80dc1596ce5cd135c7f6864ef0db7b2ab662ded6bfb3eaffdcc9f3",
+  "runtime_guard_enabled": false,
+  "interpretation_limit": "Native conditional successor model given recorded modal reply and sampled hypotheses; modal/root supports are not calibrated win probabilities. Historical loss and pilot outcomes known. No fresh holdout, no causal or general strength proof. Native continuations unavailable; every search starts a new tree."
+}

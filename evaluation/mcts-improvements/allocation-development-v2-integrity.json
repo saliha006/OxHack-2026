@@ -1,0 +1,402 @@
+{
+  "scope": "Corrected-source repeat of the exact frozen historical development allocation schedule; no strength claim",
+  "planned_calls": 54,
+  "recorded_calls": 54,
+  "effective_identities_match": true,
+  "loaded_module_boundaries_checked": true,
+  "source_sha256": "0bd23daf0e4d173a8a9a3398793831d7d1cac100ba99bf238ab357f07b258a23",
+  "totals": {
+    "requested_worlds": 432,
+    "scheduled_worlds": 432,
+    "completed_worlds": 432,
+    "usable_worlds": 432,
+    "failed_worlds": 0,
+    "interrupted_worlds": 0,
+    "mapping_rejections": 0,
+    "native_or_worker_failures": 0,
+    "illegal_choices": 0,
+    "fallbacks": 0,
+    "native_root_options": 3888,
+    "native_tera_options": 864
+  },
+  "mapping_discard_details": [],
+  "mapping_rejections_are": "native root options discarded by legality filtering; not simulator/server rejected final choices",
+  "sampling_prefix_checks": [
+    {
+      "position": "battle-gen9ou-24-first",
+      "world_prefix": 4,
+      "calls": 9,
+      "identical": true,
+      "sha256s": [
+        "b40a97d3ed11fa8d609e508ce1c86e5ca56514faeac1ef04c555b1de9ef7cd7c"
+      ]
+    },
+    {
+      "position": "battle-gen9ou-24-first",
+      "world_prefix": 8,
+      "calls": 6,
+      "identical": true,
+      "sha256s": [
+        "e32ec6c8e1c4dc82a2020519f6c35991437f29664874a64580d33cc0bcf07d0c"
+      ]
+    },
+    {
+      "position": "battle-gen9ou-24-middle",
+      "world_prefix": 4,
+      "calls": 9,
+      "identical": true,
+      "sha256s": [
+        "b5af528c16d0f0fa47d765d38f6838189344c86abb3fec8945f430dfb5452eac"
+      ]
+    },
+    {
+      "position": "battle-gen9ou-24-middle",
+      "world_prefix": 8,
+      "calls": 6,
+      "identical": true,
+      "sha256s": [
+        "66eb73728acb279311b85ab544768981866f51017b36655317e891414b26dc6e"
+      ]
+    },
+    {
+      "position": "battle-gen9ou-24-last",
+      "world_prefix": 4,
+      "calls": 9,
+      "identical": true,
+      "sha256s": [
+        "3b6d1d590f2d2658804362b6d0e4734d20802682c3711b117946778b97cbadc6"
+      ]
+    },
+    {
+      "position": "battle-gen9ou-24-last",
+      "world_prefix": 8,
+      "calls": 6,
+      "identical": true,
+      "sha256s": [
+        "5fe23f401b5f3cd32173ff0e9880c4f722ea3f4172e264478db205815fd6ec22"
+      ]
+    },
+    {
+      "position": "battle-gen9ou-26-first",
+      "world_prefix": 4,
+      "calls": 9,
+      "identical": true,
+      "sha256s": [
+        "03c5a446f900b0812a9bb675b5cc09e6c63153e6951adbd22a147aa8e932d025"
+      ]
+    },
+    {
+      "position": "battle-gen9ou-26-first",
+      "world_prefix": 8,
+      "calls": 6,
+      "identical": true,
+      "sha256s": [
+        "80275d758d90cc22e5f4b079c6548c1582b6934852a29b6a868a888527c0ce90"
+      ]
+    },
+    {
+      "position": "battle-gen9ou-26-middle",
+      "world_prefix": 4,
+      "calls": 9,
+      "identical": true,
+      "sha256s": [
+        "38d958cca2557478b649a955fa435dbc00f89853d7f0889c6eeab9256763bda7"
+      ]
+    },
+    {
+      "position": "battle-gen9ou-26-middle",
+      "world_prefix": 8,
+      "calls": 6,
+      "identical": true,
+      "sha256s": [
+        "4fc655597e245065ffc81242dec7b283e2bbbf261ebe81cc33cd3bca50ab8a23"
+      ]
+    },
+    {
+      "position": "battle-gen9ou-26-last",
+      "world_prefix": 4,
+      "calls": 9,
+      "identical": true,
+      "sha256s": [
+        "497f24fe4eee0095b7c8de8e71f09a195dce66201bcdfe9e950b892f89ecc812"
+      ]
+    },
+    {
+      "position": "battle-gen9ou-26-last",
+      "world_prefix": 8,
+      "calls": 6,
+      "identical": true,
+      "sha256s": [
+        "6a131741294d3eedcc79d25194e3ab638d131cb0e0a4bcb08e871c054d54d0be"
+      ]
+    }
+  ],
+  "all_sampling_prefixes_identical": true,
+  "same_worlds_as_v1_for_every_scheduled_call": true,
+  "position_rows": [
+    {
+      "position": "battle-gen9ou-24-first",
+      "allocation": "4x300",
+      "choices": {
+        "move 1": 3
+      },
+      "native_elapsed_ms": 1328.0418236584712,
+      "latency_ms": 1829.2019276608091,
+      "preparation_ms": 11.227212011969337,
+      "cpu_ms": 1787.7256666666667,
+      "visits": 115000,
+      "world_winner_disagreement": 0.0,
+      "pooled_top_two_margin": 0.5941424802859693
+    },
+    {
+      "position": "battle-gen9ou-24-first",
+      "allocation": "8x150",
+      "choices": {
+        "move 1": 3
+      },
+      "native_elapsed_ms": 1336.4612217022416,
+      "latency_ms": 1895.5012026514548,
+      "preparation_ms": 17.361491976771504,
+      "cpu_ms": 1869.8353333333334,
+      "visits": 129000,
+      "world_winner_disagreement": 0.0,
+      "pooled_top_two_margin": 0.4681523785621987
+    },
+    {
+      "position": "battle-gen9ou-24-first",
+      "allocation": "12x100",
+      "choices": {
+        "move 1": 3
+      },
+      "native_elapsed_ms": 1359.4475600790854,
+      "latency_ms": 1873.181795681982,
+      "preparation_ms": 22.991766047198325,
+      "cpu_ms": 1836.0413333333331,
+      "visits": 120000,
+      "world_winner_disagreement": 0.0,
+      "pooled_top_two_margin": 0.4152325379867047
+    },
+    {
+      "position": "battle-gen9ou-24-middle",
+      "allocation": "4x300",
+      "choices": {
+        "move 4": 3
+      },
+      "native_elapsed_ms": 1336.3362886593677,
+      "latency_ms": 1856.79518301428,
+      "preparation_ms": 12.11773701167355,
+      "cpu_ms": 1804.5140000000001,
+      "visits": 102333.33333333333,
+      "world_winner_disagreement": 0.0,
+      "pooled_top_two_margin": 0.04759609435743057
+    },
+    {
+      "position": "battle-gen9ou-24-middle",
+      "allocation": "8x150",
+      "choices": {
+        "move 4": 3
+      },
+      "native_elapsed_ms": 1350.6811146701996,
+      "latency_ms": 1858.2808390104522,
+      "preparation_ms": 16.464937691732,
+      "cpu_ms": 1815.4576666666667,
+      "visits": 106666.66666666667,
+      "world_winner_disagreement": 0.08333333333333333,
+      "pooled_top_two_margin": 0.02598052815240316
+    },
+    {
+      "position": "battle-gen9ou-24-middle",
+      "allocation": "12x100",
+      "choices": {
+        "move 4": 3
+      },
+      "native_elapsed_ms": 1374.1378832880098,
+      "latency_ms": 1891.663498012349,
+      "preparation_ms": 21.577032768012334,
+      "cpu_ms": 1871.6456666666666,
+      "visits": 114000,
+      "world_winner_disagreement": 0.055555555555555546,
+      "pooled_top_two_margin": 0.036170691037357726
+    },
+    {
+      "position": "battle-gen9ou-24-last",
+      "allocation": "4x300",
+      "choices": {
+        "move 3": 3
+      },
+      "native_elapsed_ms": 1204.6762506749171,
+      "latency_ms": 1771.7978656680014,
+      "preparation_ms": 15.303427023657909,
+      "cpu_ms": 1674.8796666666667,
+      "visits": 1903666.6666666667,
+      "world_winner_disagreement": 0.0,
+      "pooled_top_two_margin": 0.9961323352967033
+    },
+    {
+      "position": "battle-gen9ou-24-last",
+      "allocation": "8x150",
+      "choices": {
+        "move 3": 3
+      },
+      "native_elapsed_ms": 1208.0614784111579,
+      "latency_ms": 1742.4394180028078,
+      "preparation_ms": 17.053350146549445,
+      "cpu_ms": 1723.9646666666667,
+      "visits": 2048333.3333333333,
+      "world_winner_disagreement": 0.0,
+      "pooled_top_two_margin": 0.9961830547384555
+    },
+    {
+      "position": "battle-gen9ou-24-last",
+      "allocation": "12x100",
+      "choices": {
+        "move 3": 3
+      },
+      "native_elapsed_ms": 1211.5622960069838,
+      "latency_ms": 1788.8566193481286,
+      "preparation_ms": 22.112544373764347,
+      "cpu_ms": 1751.703,
+      "visits": 2095000,
+      "world_winner_disagreement": 0.0,
+      "pooled_top_two_margin": 0.9933440504764152
+    },
+    {
+      "position": "battle-gen9ou-26-first",
+      "allocation": "4x300",
+      "choices": {
+        "move 2": 3
+      },
+      "native_elapsed_ms": 1334.9836813285947,
+      "latency_ms": 1802.9710906557739,
+      "preparation_ms": 12.1322976386485,
+      "cpu_ms": 1790.9389999999999,
+      "visits": 117333.33333333333,
+      "world_winner_disagreement": 0.0,
+      "pooled_top_two_margin": 0.08846995202946142
+    },
+    {
+      "position": "battle-gen9ou-26-first",
+      "allocation": "8x150",
+      "choices": {
+        "move 2": 3
+      },
+      "native_elapsed_ms": 1362.9928772958617,
+      "latency_ms": 1918.23395700582,
+      "preparation_ms": 18.983562321712572,
+      "cpu_ms": 1857.4436666666666,
+      "visits": 110666.66666666667,
+      "world_winner_disagreement": 0.2916666666666667,
+      "pooled_top_two_margin": 0.09538391800193269
+    },
+    {
+      "position": "battle-gen9ou-26-first",
+      "allocation": "12x100",
+      "choices": {
+        "move 2": 3
+      },
+      "native_elapsed_ms": 1363.949622027576,
+      "latency_ms": 1887.8568270010874,
+      "preparation_ms": 22.049648706646014,
+      "cpu_ms": 1863.4686666666666,
+      "visits": 119000,
+      "world_winner_disagreement": 0.08333333333333333,
+      "pooled_top_two_margin": 0.12724346132262804
+    },
+    {
+      "position": "battle-gen9ou-26-middle",
+      "allocation": "4x300",
+      "choices": {
+        "move 4": 3
+      },
+      "native_elapsed_ms": 1342.5475406305243,
+      "latency_ms": 1961.3718703233947,
+      "preparation_ms": 13.354647070324669,
+      "cpu_ms": 1890.0083333333332,
+      "visits": 115333.33333333333,
+      "world_winner_disagreement": 0.0,
+      "pooled_top_two_margin": 0.21514968698944356
+    },
+    {
+      "position": "battle-gen9ou-26-middle",
+      "allocation": "8x150",
+      "choices": {
+        "move 4": 3
+      },
+      "native_elapsed_ms": 1349.7207500040531,
+      "latency_ms": 1953.8258783286437,
+      "preparation_ms": 19.16186697781086,
+      "cpu_ms": 1903.5833333333333,
+      "visits": 129333.33333333333,
+      "world_winner_disagreement": 0.0,
+      "pooled_top_two_margin": 0.15059294155527708
+    },
+    {
+      "position": "battle-gen9ou-26-middle",
+      "allocation": "12x100",
+      "choices": {
+        "move 4": 3
+      },
+      "native_elapsed_ms": 1354.0369829861447,
+      "latency_ms": 1914.6119123324752,
+      "preparation_ms": 22.413384654403973,
+      "cpu_ms": 1883.18,
+      "visits": 138666.66666666666,
+      "world_winner_disagreement": 0.16666666666666663,
+      "pooled_top_two_margin": 0.07645093980093978
+    },
+    {
+      "position": "battle-gen9ou-26-last",
+      "allocation": "4x300",
+      "choices": {
+        "move 3": 3
+      },
+      "native_elapsed_ms": 1249.7186567052267,
+      "latency_ms": 1796.058841321307,
+      "preparation_ms": 12.733569970199218,
+      "cpu_ms": 1772.51,
+      "visits": 759333.3333333334,
+      "world_winner_disagreement": 0.0,
+      "pooled_top_two_margin": 0.03920222483846114
+    },
+    {
+      "position": "battle-gen9ou-26-last",
+      "allocation": "8x150",
+      "choices": {
+        "move 3": 3
+      },
+      "native_elapsed_ms": 1268.6264010262676,
+      "latency_ms": 1812.4459940202844,
+      "preparation_ms": 17.651940366098035,
+      "cpu_ms": 1790.8646666666666,
+      "visits": 676333.3333333334,
+      "world_winner_disagreement": 0.0,
+      "pooled_top_two_margin": 0.04232687529081677
+    },
+    {
+      "position": "battle-gen9ou-26-last",
+      "allocation": "12x100",
+      "choices": {
+        "move 3": 3
+      },
+      "native_elapsed_ms": 1269.4734947290272,
+      "latency_ms": 1773.0843133370702,
+      "preparation_ms": 18.755214793297153,
+      "cpu_ms": 1761.168,
+      "visits": 725666.6666666666,
+      "world_winner_disagreement": 0.02777777777777779,
+      "pooled_top_two_margin": 0.042529738753281705
+    }
+  ],
+  "loadavg_one_min_range": [
+    12.6708984375,
+    13.98974609375
+  ],
+  "native_requested_total_ms": 64800,
+  "cpu_total_seconds": 97.946798,
+  "native_elapsed_total_seconds": 70.81636777165113,
+  "coordinator_wall_seconds": 136.4599494258291,
+  "status": "development measurement completed; no allocation/adaptive promotion",
+  "raw_sha256": "e39047d59eb4ae39df7d347601c4cd70ba9e7650241a5800c64954dd719d2900",
+  "plan_sha256": "cbbd059d81e29e8c08402ef3e75a6925ef19541cb987c7e1a07ee362ce15906e",
+  "results_sha256": "0700b341fb043bb9af4e86d7d603dfe08dc8c868de8b43cc5c3bfbb3b8e13720"
+}
