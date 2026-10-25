@@ -85,3 +85,25 @@ def pool_results(worlds: list[dict], request: dict, *, mode: str = "sampled") ->
             "opponent_support": {choice: share / mass for choice, share in opponent.items()} if mass else {},
             "usable_worlds": usable, "mapping_failures": mapping_failures, "unusable_worlds": unusable,
             "aggregation": mode}
+
+
+def gate_tera(action: Action, support: dict[str, float], request: dict, worlds: list[dict],
+              min_wins: int) -> tuple[Action, dict]:
+    """Spend Tera only when that exact Tera choice tops at least `min_wins` worlds outright (Laplace's rule).
+
+    Tera is spent once a game, and averaging can lift a Tera copy that is every world's runner-up over each
+    world's actual pick. A blocked Tera falls back to the best-supported non-Tera choice; with none supported,
+    the Tera choice stands rather than a blind one.
+    """
+    wins = 0
+    for world in worlds:
+        distribution = {} if world.get("error") else _visits(world.get("our_visits", []))
+        if distribution and map_choice(max(distribution, key=distribution.get), request) == action:
+            wins += 1
+    record = {"tera_wins": wins, "min_wins": min_wins, "blocked": False}
+    if not action.tera or wins >= min_wins:
+        return action, record
+    others = [a for a in our_actions(request) if not a.tera and support.get(a.to_choice(), 0) > 0]
+    if not others:
+        return action, record
+    return max(others, key=lambda a: support[a.to_choice()]), {**record, "blocked": True}

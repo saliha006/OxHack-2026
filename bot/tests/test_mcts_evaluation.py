@@ -251,3 +251,12 @@ def test_the_threaded_arm_overrides_the_single_engine_thread_and_says_so(monkeyp
     harness.ARMS["mcts8"]({}, 3.0)
     assert [kw["engine_threads"] for kw in built] == [4, 1]
     assert harness.arm_config("mcts8t4", 3.0)["engine_threads"] == 4
+
+
+def test_the_tera_gate_and_mixing_arms_pass_their_switch_to_the_agent(monkeypatch):
+    built = []
+    monkeypatch.setattr(harness, "Agent", lambda priors, **kw: built.append(kw))
+    harness.ARMS["mcts8tera"]({}, 3.0)
+    harness.ARMS["mcts8mix"]({}, 3.0)
+    assert built[0]["tera_min_wins"] == 2 and built[1]["mix_root"] is True
+    assert harness.PAIRINGS["mcts-tera-gate"] == ("mcts8tera", "mcts8", 80)

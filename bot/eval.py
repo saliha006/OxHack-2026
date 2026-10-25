@@ -119,6 +119,10 @@ MCTS_ARM_OPTIONS = {
     # Laplace ships 8 engine threads per world. poke-engine shares one tree across them, so expect less than 4x the
     # iterations, but the turn time is unchanged. Only fair when a game has the cores to itself (one shard per 8 cores).
     "mcts8t4": {"mcts_worlds": 8, "search_ms": 150, "engine_threads": 4},
+    # Laplace's Tera rule: Tera only when it tops at least two of the eight worlds outright.
+    "mcts8tera": {"mcts_worlds": 8, "search_ms": 150, "tera_min_wins": 2},
+    # Both Laplace and Foul Play sample among near-tied moves rather than always taking the top one.
+    "mcts8mix": {"mcts_worlds": 8, "search_ms": 150, "mix_root": True},
 }
 
 
@@ -151,6 +155,8 @@ MCTS_PAIRINGS = {
     "mcts-joint": ("mcts8joint", "mcts8", 80),
     "mcts-threads-foulplay-hard": ("mcts8t4", "fphard", 60),
     "mcts-threads": ("mcts8t4", "mcts8", 80),
+    "mcts-tera-gate": ("mcts8tera", "mcts8", 80),
+    "mcts-mix": ("mcts8mix", "mcts8", 80),
 }
 # Mix levels are deliberately uneven, so strength doesn't step up by a fixed amount; mb46 overlaps the sh levels.
 BASELINES = {"simpleheuristics": SimpleHeuristicsPlayer, "maxbasepower": MaxBasePowerPlayer, "random": RandomPlayer,

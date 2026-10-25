@@ -28,7 +28,7 @@ class Agent:
                  mcts_worlds: int = 8, search_ms: int = 150, engine_threads: int = 1,
                  sampling: str = "team", frozen_beliefs: bool = False, seed: int = 2026,
                  belief_mode: str = "reliable", lead_policy: str = "types", fixed_lead: int | None = None,
-                 mix_root: bool = False, mix_seed: int | None = None):
+                 mix_root: bool = False, mix_seed: int | None = None, tera_min_wins: int = 0):
         if backend not in {"one_ply", "mcts"}:
             raise ValueError("backend must be one_ply or mcts")
         if sampling not in {"team", "active"}:
@@ -43,6 +43,9 @@ class Agent:
             raise ValueError("root mixing is a boolean MCTS-only option")
         if mix_seed is not None and (not isinstance(mix_seed, int) or isinstance(mix_seed, bool)):
             raise ValueError("mix_seed must be an integer")
+        if (not isinstance(tera_min_wins, int) or isinstance(tera_min_wins, bool) or tera_min_wins < 0
+                or tera_min_wins and backend != "mcts"):
+            raise ValueError("tera_min_wins is a non-negative MCTS-only world count (0 = off)")
         if min(mcts_worlds, search_ms, engine_threads) < 1 or budget <= 0:
             raise ValueError("worlds, search time, threads and budget must be positive")
         self.priors = priors
@@ -64,7 +67,7 @@ class Agent:
                        "budget_seconds": budget, "return_reserve_seconds": min(0.3, budget * 0.1),
                        "belief_mode": belief_mode, "lead_policy": lead_policy, "fixed_lead": fixed_lead,
                        "randomisation": mix_root, "mix_root": mix_root, "mix_seed": mix_seed,
-                       "mixing_policy": mixing_policy, "learned_reranker": False}
+                       "mixing_policy": mixing_policy, "learned_reranker": False, "tera_min_wins": tera_min_wins}
         self.worker = None
         self.last_trace: dict | None = None
 
@@ -161,6 +164,10 @@ class Agent:
         pooled = pool_results(self.last_trace["worlds"], request)
         action = pooled.pop("action")
         self.last_trace.update(pooled)
+        if action is not None and self.config["tera_min_wins"]:
+            from decision.search_policy import gate_tera
+            action, self.last_trace["tera_gate"] = gate_tera(action, pooled["search_support"], request,
+                                                             self.last_trace["worlds"], self.config["tera_min_wins"])
         if action is None:
             action = fallback
             self.last_trace["fallback_reason"] = ("worker_failure" if self.last_trace["failures"]
