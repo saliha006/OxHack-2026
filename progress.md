@@ -38,6 +38,8 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
+| 2026-10-25 00:30 | @derrick | @nate | ⚠️ conflict | **Team-conditioned set priors (A6): yes, please build it after the demo.** Starting sets per opponent Pokémon from past games whose teams match theirs. Fallback: require all 5 teammates to match, then one fewer at a time until at least N games match (N is your call); at 0 it's the general priors. Belief needs it at team preview, so it's a function of their six, not a fixed file: agree the shape with @derrick first | 2026-10-25 00:30 |
+| 2026-10-25 00:30 | @derrick | @saliha | 📨 waiting on | Add to PRD → NOW: "2026-10-25: team-conditioned set priors (A6): yes, built by nate after the demo; fallback lowers the teammate match from 5 to 0 until N games match (N: nate's call). (derrick)" | 2026-10-25 00:30 |
 | 2026-10-24 23:27 | @saliha | @all | ⚠️ conflict | **Timeline moved up: demo ready 04:00–06:00 UTC**, presentation 06:00–09:00 (PRD §19). Whatever you want in the demo needs to be on `main` by 04:00 UTC: @nate set candidates + team pool, @derrick the two belief fixes. The eval rerun on real priors only happens if it can finish by ~05:30. @derrick: the backtesting frontend is still undecided; say if you want it and who builds it | 2026-10-24 23:27 |
 | 2026-10-24 20:52 | @saliha | @all | ⚠️ conflict | `context` now holds only `CLAUDE.md`, the PRD, `builder-files/` and `design-decision/` (was `design/`). Skills, the event doc and the research doc are local now. Sync with `git archive origin/context | tar -x`, then delete your old `design/` copy. Publish steps are in `CLAUDE.md` | 2026-10-24 20:52 |
 | 2026-10-24 20:36 | @saliha | @derrick | ⚠️ conflict | The parser is on `main`: `from bot.parser import Parser, states_from_log`. `Parser(us).feed(line)` per protocol line, `.snapshot()` per request. Unblocks your task 3 (build_state on a parser-made BattleState) | 2026-10-24 20:36 |
@@ -80,6 +82,16 @@ whenever you log an entry.
 ---
 
 ## Log (newest first)
+
+### 2026-10-25 00:30 — decision — Team-conditioned set priors (A6): yes, with a stepped fallback — @derrick
+- **Where:** `context` (`design-decision/predictions.md`) · merged to `main`: n/a
+- **Did:** Said yes to nate's proposal: starting set guesses for each opponent Pokémon come from past games whose teams match theirs, which beats the general usage file. Fallback: require all 5 teammates to match, then one fewer at a time until at least N games match; at 0 it's the general priors.
+- **Touched:** `design-decision/predictions.md` (A6)
+- **Brief task:** none
+- **⚠️ Conflicts:** @nate: you build it (data layer), after the demo. Belief reads it at team preview, so the hand-off is a function of their six; agree the shape with @derrick before building
+- **📨 Needs:** @saliha: the PRD → NOW line (board row) · @nate: pick N
+- **Agreed by:** @derrick (decision-layer choices are his, PRD → NOW); proposed by @nate
+- **Status:** open
 
 ### 2026-10-24 23:49 — feat — Demo mode: live battle streamed turn by turn, or replayed offline — @saliha
 - **Where:** `demo-mode` → `main` @ `ecbb278` · merged to `main`: yes
