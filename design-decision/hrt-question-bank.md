@@ -475,6 +475,24 @@ First, `fphard` isn't a separate system: it's Foul Play at the strongest setting
 - Foul Play's edge is **raw compute**: about 3–6× more search per turn than ours.
 - Laplace's levers (more threads, the Tera gate) are things we **tested** as opt-in arms under a rule set before the runs, rather than adopted on faith. The thread lever is the only one that has cleared the bar so far, barely.
 
+**Q: So which parts are yours, and where do the borrowed ideas sit?**
+One decision, in order. Everything here is our code; the tag says where the **idea** came from.
+
+| Step | What happens | Idea from | Why it's there |
+|---|---|---|---|
+| 1. Read the game | Parser turns Showdown's protocol into `BattleState` | **ours** | One state for live play and training data |
+| 2. Starting guess | Priors from our Smogon pipeline; optional observed-set blend | **ours**; blend uses Foul Play's **published data** | Usage stats are the best public signal of what players run |
+| 3. Update the guess | Hard filter, item inference, damage/speed replay with a 3% floor, `reliable` guards, recovery chain | **ours** | Narrow the hidden sets without wiping out the right answer |
+| 4. Sample worlds | Draw 8 complete opponent teams from the belief | **Foul Play** (the idea) | Decide against several plausible teams, not one guess |
+| 5. Search | 150 ms of poke-engine MCTS per world | **Foul Play** (the idea); `poke-engine` library | Look many turns ahead in each world |
+| 6. Combine | Average the normalised visit shares across worlds; top move | **Foul Play** (averaging); our own pooling and legal-action mapping | Monte Carlo estimate of the best move under the belief |
+| 7. Optional levers | 4 engine threads; Tera gate; near-tie mixing | **Laplace** (threads, Tera gate); Laplace and Foul Play (mixing) | Each tested head to head, off unless it clears our rule |
+| 8. Stay on time | Worker process, hard 3 s deadline, kill and replace, fallback | **ours** | Never lose a game to a timeout |
+| 9. Show it | Trace + terminal block + battle-chat line per decision | **ours** | Judges see the belief and the reasoning live |
+| 10. Prove it | Same-team eval, Wilson + bootstrap, manifest guard, prediction scoring | **ours**; Foul Play is the **opponent** | Numbers we can defend |
+
+**In one line:** the frame "sample worlds, search each, average" is Foul Play's idea. What goes into it (the belief and its data), what keeps it safe (deadline and fallbacks), what it shows (the chat), and how we know it works (the eval) are ours. Laplace's two levers are experiments we run under our own rule.
+
 **Q: Did you use anything from them directly?**
 - **No code.**
 - **Data:** our opt-in observed-set priors read Foul Play's **published** counts of sets seen on the ladder, the way we read Smogon's usage stats.
