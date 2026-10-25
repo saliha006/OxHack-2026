@@ -1,4 +1,4 @@
-"""Loads cleaned battles from data/clean/battles/ into Tiger: one row per game in `battles`, its log in `battle_logs`.
+"""Loads cleaned data into Tiger: one row per game in `battles`, its log in `battle_logs`, one row per turn in `turns`.
 
 battle_logs stays uncompressed: storage is cheap on the credits, and reading one log is ~0.02 ms on the server against
 ~12 ms compressed.
@@ -63,10 +63,29 @@ TABLES = {
 # Rows per COPY batch; a log row is ~9 KB, so this keeps memory to tens of MB.
 BATCH = 2_000
 
+PG_TYPES = {"VARCHAR": "text", "BIGINT": "bigint", "INTEGER": "integer", "DOUBLE": "double precision",
+            "BOOLEAN": "boolean", "TIMESTAMP WITH TIME ZONE": "timestamptz"}
 
-def load(conn: psycopg.Connection, path: Path, table: str) -> int:
-    """Copies one cleaned file into a table, skipping ids already there; returns the rows added."""
-    columns = TABLES[table][0]
+
+def turns_table(path: Path) -> tuple[list[str], str]:
+    """The turns table's columns and DDL, read off a file from build_turns.py (its ~70 columns change as it grows).
+
+    `state` is jsonb so SQL can reach into it (state->'sides'->'p2'->'boosts'). Chunked by the game's start time, so
+    a game's turns share a chunk.
+    """
+    described = duckdb.sql(f"DESCRIBE SELECT * FROM read_parquet('{path.as_posix()}')").fetchall()
+    columns = [name for name, *_ in described]
+    definitions = ",\n".join(
+        f"{name} {'jsonb' if name == 'state' else PG_TYPES.get(kind, 'text')}"
+        f"{' NOT NULL' if name in ('battle_id', 'turn', 'started_at') else ''}" for name, kind, *_ in described)
+    return columns, f"""
+        CREATE TABLE IF NOT EXISTS turns ({definitions}, PRIMARY KEY (battle_id, turn, started_at));
+        SELECT create_hypertable('turns', by_range('started_at', INTERVAL '1 month'), if_not_exists => true);
+        """
+
+
+def load(conn: psycopg.Connection, path: Path, table: str, columns: list[str]) -> int:
+    """Copies one cleaned file into a table, skipping rows already there; returns the rows added."""
     duck = duckdb.connect()
     duck.execute("SET TimeZone = 'UTC'")
     rows = duck.execute(f"SELECT {', '.join(columns)} FROM read_parquet('{path.as_posix()}')")
@@ -85,16 +104,21 @@ def load(conn: psycopg.Connection, path: Path, table: str) -> int:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("files", nargs="*", type=Path, help="cleaned parquet files (default: all of data/clean/battles)")
-    parser.add_argument("--table", choices=TABLES, default="battles")
+    parser.add_argument("files", nargs="*", type=Path,
+                        help="parquet files (default: all of data/clean/battles; required for turns)")
+    parser.add_argument("--table", choices=[*TABLES, "turns"], default="battles")
     args = parser.parse_args()
+    if args.table == "turns" and not args.files:
+        parser.error("--table turns needs the turns file(s) to load")
+    files = args.files or sorted(CLEAN.glob("*.parquet"))
+    columns, ddl = turns_table(files[0]) if args.table == "turns" else TABLES[args.table]
     load_dotenv(ROOT / ".env")
     with psycopg.connect(os.environ["TIMESCALE_SERVICE_URL"]) as conn:
-        conn.execute(TABLES[args.table][1])
+        conn.execute(ddl)
         conn.commit()
-        for path in args.files or sorted(CLEAN.glob("*.parquet")):
+        for path in files:
             start = time.monotonic()
-            added = load(conn, path, args.table)
+            added = load(conn, path, args.table, columns)
             print(f"{path.name}: {added} rows added to {args.table} in {time.monotonic() - start:.0f}s", flush=True)
 
 
