@@ -9,6 +9,7 @@
 ## 0. NOW ★ *(the part every agent reads at session start)*
 
 **Decisions in force** (newest first; one line each, full ADR in the vault Log):
+- 2026-10-25: team-conditioned set priors (A6): yes, built by nate after the demo; the fallback lowers the teammate match from 5 to 0 until N games match (N: nate's call); belief reads it at team preview as a function of the opponent's six. (derrick, proposed by nate)
 - 2026-10-24: Elo ladder = option B: our bots + random-move mixes at uneven rates + Foul Play at three uneven search-time bands on top; blind (shuffled schedule, anonymous names, random opponent think time, random team per game); Bradley-Terry Elo (Random = 1000) with ±1–3 neighbour report. Internal ladder Elo only, never a Showdown Elo. (saliha)
 - 2026-10-24: eval mix = B+ (same-team matches with alternating sides; headline vs SimpleHeuristics; data-ladder and uncertainty ablations), built in `bot/eval.py`. (saliha)
 - 2026-10-24: dependencies are added by whoever needs them, with a ⚠️ row to derrick (`pyproject.toml` is his): saliha adds `poke-env==0.16.1` now; `scikit-learn` and `matplotlib` arrive with the tasks that need them. (saliha)
@@ -24,6 +25,7 @@
 - 2026-10-24: the doc owner is saliha; the working branch is `sali`; `.claude/`, `Research-Context/` and `.env*` never go to GitHub. (saliha)
 
 **Pending** (not decided yet):
+- **Decision-layer plan, research pass 10** (`design-decision/strategy-research-pass10.md`): belief crash fixes + floor, dual-path featurizer, calibrated logistic value behind a flag (training proposed to nate), then the opponent model; depth-2, pool and LP as default-off stretch. derrick's call.
 - **The pass 9 build plan** (two research agents + an adversarial critic, peer-reviewed and official sources, checked against the code): every brief's `▶ Current tasks` now follows it. Derrick and Nate accept each item or pick a different route (Open board rows). Proposed hand-overs to even the load (belief scoring, model figures and charts to nate; terminal stream and coach to saliha) need derrick's and nate's yes.
 - Data storage: plain Parquet + DuckDB recommended over ClickHouse [P9 B4]: nate's call, with saliha and derrick.
 - Learned value model replacing the HP heuristic: derrick's call (logistic first, §7.3).
