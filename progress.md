@@ -89,7 +89,7 @@ whenever you log an entry.
 
 ## Log (newest first)
 
-### 2026-10-25 08:45 — feat — Demo posts its thinking to the battle chat and takes the Tera gate — @saliha
+### 2026-10-25 08:36 — feat — Demo posts its thinking to the battle chat and takes the Tera gate — @saliha
 - **Where:** `sali` · merged to `main`: yes
 - **Did:** `bot.demo live` now also sends each decision's lines (choice, actives, Weighing / Expects them / Guessing) as one battle-chat message (≤300 chars), so anyone watching `localhost:8000/<battle>` sees the search's view beside the field. New `--tera-min-wins` flag. Full-config live game (`--priors data/set_candidates_joint.json --engine-threads 4 --tera-min-wins 2`, with an eval running on the same laptop): won in 58 turns, 0/64 fallbacks, think p50 1593 ms, p99 2005 ms. Showdown refuses battle chat from unregistered users even with `--no-security`; the demo laptop's local server gets a one-line local patch (`server/chat.ts`: also allow when `Config.noguestsecurity`), not in this repo. Without it the chat lines are refused and the terminal view is unchanged. Gate record key renamed `tera_wins` → `top_in_worlds` (it counts the chosen move's world wins, Tera or not).
 - **Touched:** `bot/demo.py`, `bot/tests/test_demo.py`, `decision/search_policy.py`, `tests/test_tera_gate.py`
@@ -106,7 +106,7 @@ whenever you log an entry.
 - **📨 Needs:** none
 - **Status:** open
 
-### 2026-10-25 08:27 — feat — `mcts8t4` eval arm: four engine threads per world, Laplace's lever — @saliha
+### 2026-10-25 08:20 — feat — `mcts8t4` eval arm: four engine threads per world, Laplace's lever — @saliha
 - **Where:** `sali` · merged to `main`: yes
 - **Did:** The harness pinned every MCTS arm to one engine thread; arms can now set `engine_threads`. `mcts8t4` = 8 worlds × 150 ms × 4 threads, same turn time as mcts8 (Laplace ships 8 threads/world). poke-engine shares one tree across threads (pass 13A), so the gain is less than 4× and unmeasured. Pairings `mcts-threads-foulplay-hard` (vs fphard, 60) and `mcts-threads` (vs mcts8, 80). Fair only with the cores free: one shard per 8 cores. Demo already takes `--engine-threads`.
 - **Touched:** `bot/eval.py` (`MCTS_ARM_OPTIONS`, arm builder), `bot/tests/test_mcts_evaluation.py`
