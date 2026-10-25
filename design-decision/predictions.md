@@ -22,7 +22,7 @@ outcome → value.
 | A3 | **Their speed**, from who moved first | Replay last turn in poke-engine with each candidate; drop it if the engine can't produce the observed order | Turn order in the log | 🟡 a pass/fail filter, not a weighting | See A5 |
 | A4 | **Their attack / bulk**, from damage | Same replay, checked against the engine's damage range for both hits | HP % change in the log | 🟡 a pass/fail filter. Multi-hit moves are skipped until `BattleState` carries hit counts (parked: contract `hit_count`) | See A5 |
 | A5 | **Graded likelihood** instead of pass/fail | Bayes: weight each set by how likely it makes the observed roll / order, not just whether it's possible | Same as A3–A4 | ⬜ in the design ([decision-layer §3](decision-layer.md#3-belief-set-prediction)) | Needs the damage-roll distribution from the engine |
-| A6 | **Sets from their teammates** (e.g. a rain setter makes Swift Swim sets likelier) | Reweight each species' prior given the other five at team preview | Chaos `teammates` field; replays for joint teams | 🟡 / ⬜ data-layer §5a weights priors by teammates in general. Conditioning on *this* team isn't planned | 💡 the per-team part |
+| A6 | **Sets from their teammates** (e.g. a rain setter makes Swift Swim sets likelier) | Starting sets per opponent Pokémon from past games whose teams match theirs. Fallback: all 5 teammates must match, then one fewer at a time until at least N games match; at 0 it's A1's general priors | Replays with both teams visible (2.47M games) | ⬜ **agreed 2026-10-25** (derrick; proposed by nate) | @nate builds it after the demo and picks N. Hand-off is a function of their six at team preview: shape TBC between nate and derrick |
 | A7 | **Benched Pokémon's sets** | Each benched Pokémon is fixed at its single best guess; only the active gets k = 5 sets | A1 | ✅ (a cost choice, so the search stays at k scenarios) | Revisit if switch-ins keep surprising us |
 | A8 | **Behaviour hints** (they switched out of X, so they fear it) | Reweight sets or the policy from their choices | Replays | ⬜ named in decision-layer §3, no design | Probably folds into B2 |
 
@@ -48,7 +48,7 @@ outcome → value.
 
 | # | Prediction | How | Data | Status | Next step |
 |---|---|---|---|---|---|
-| D1 | **Best lead** | Code: the lead whose best STAB hit beats theirs by the most, averaged over their six | Showdown typechart + pokedex (static) | ⚠️ built on `derrick`, but the 2026-10-24 decision says **v1 sends a fixed hand-picked order** and type matchup comes later | Team call: keep the built matchup lead, or switch to the fixed order as decided |
+| D1 | **Best lead** | Code: the lead whose best STAB hit beats theirs by the most, averaged over their six | Showdown typechart + pokedex (static) | ✅ built; PRD → NOW confirms the type-matchup lead | Could use B4 if that's agreed |
 | D2 | **Best switch-in** after a faint | Run the move-turn search as if each bench Pokémon were in, keep the best | Same as the main search | ✅ matches the 2026-10-24 decision (reuse the loop, opponent's only option `None`) | Score by post-switch value once C2 is trained |
 | D3 | **Pruning our options** | Tera only on the top few moves by damage; always keep switches and one or two status moves | C1 | ⬜ decided 2026-10-24: only if p99 turn time nears the 3 s budget | Measure p50/p99 first |
 
@@ -67,6 +67,5 @@ outcome → value.
 2. **B2, trained opponent policy.** Replaces the uniform ⅓ that sits under every set we guess; B3 and B5 come with it.
 3. **A5, graded likelihood.** Turns the existing replay check into proper weights; no new data.
 4. **C2, trained value.** Biggest effect on what the leaves score, but it needs the most training data.
-5. **D1, resolve the lead mismatch.** A team call, not a build task.
 
-Not agreed, raise with the team first: A6 per-team conditioning, B4 lead prediction, E1 player habits.
+Not agreed, raise with the team first: B4 lead prediction, E1 player habits.
