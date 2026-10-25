@@ -87,6 +87,12 @@ whenever you log an entry.
 
 ## Log (newest first)
 
+### 2026-10-25 07:14 — eval — Reduce queued Foul Play benchmark to 20 games at user request — @kenar
+- **Where:** `Kenar-foulplay-eval`; merged to main: not yet
+- **Did:** Stopped only our waiting 400-game supervisor before any battle began. Preserved that frozen plan as superseded/unrun and launched a new 20-game plan, 10 games per side. Two separate smoke games remain excluded from the score. Candidate, own team_6, opponent pool, compute settings and wait-for-existing-evaluations policy are unchanged.
+- **Evidence:** `evaluation/foulplay-benchmark/latest-20-game-manifest.json` and `index.json`; local status confirms 20 planned games and waiting for the same two external runners. This is an exploratory small sample, not the precision promised by 400 games.
+- **Status:** queued automatically; zero benchmark games played at schedule change
+
 ### 2026-10-25 07:11 — eval — Prepare a fixed 400-game latest-bot versus Foul Play benchmark — @kenar
 - **Where:** `Kenar-foulplay-eval`, isolated from merge/evaluation checkouts; merged to main: not yet
 - **Did:** Added a dedicated fixed-own-team external benchmark. Latest corrected MCTS keeps team_6 and its conservative defaults; Foul Play uses 13 distinct other team exports after deduplication at 600 ms per sampled world, one thread/parallel worker. Pin both code/data/runtime versions; these are not equal-compute or ladder claims.

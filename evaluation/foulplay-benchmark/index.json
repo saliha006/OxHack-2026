@@ -1,0 +1,12 @@
+{
+  "active_manifest": "latest-20-game-manifest.json",
+  "planned_scored_games": 20,
+  "smoke_games_excluded_from_score": 2,
+  "superseded": [
+    {
+      "manifest": "latest-v1-manifest.json",
+      "planned_games": 400,
+      "status": "superseded before any battle began at user request"
+    }
+  ]
+}
