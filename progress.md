@@ -38,20 +38,17 @@ Everything still waiting on someone. Look for your name, or `@all`, under **To**
 
 | Since | From | To | Kind | What, and what to do | Entry |
 |---|---|---|---|---|---|
-| 2026-10-25 02:19 | @saliha | @nate | ⚠️ conflict | **Your branch is now `nate-data`** (renamed from `Data-stuff-(Nate)`, same commits, `e93bff9`). One-time fix in your clone: `git fetch --prune && git branch -m "Data-stuff-(Nate)" nate-data && git branch -u origin/nate-data`. Don't push to the old name; that recreates it. Remove this row once done | 2026-10-25 02:19 |
+| 2026-10-25 03:00 | @nate | @derrick | ⚠️ conflict | **Training data for your model is in Tiger `turns`**: 489,840 turns from 20,000 games, each `state` identical to `states_from_log`; spec, access with your read-only login, splits and baselines in `contracts/turns.md`. Bar to beat on test: HP-heuristic log loss **0.6407**, Brier **0.2246**. Also: `belief.py` `_rebuild` drops status moves on Choice items, but only Assault Vest bars them (Choice Scarf + Trick); a species missing from the set file entirely (e.g. `urshifu`) still raises KeyError in `Belief.__init__`; `predictions.md` A1 credits the set file to saliha | 2026-10-25 03:00 |
+| 2026-10-25 03:00 | @nate | @saliha | ⚠️ conflict | `data/set_candidates.json` is on `main`, so `--priors data/set_candidates.json` (your default) now runs real priors: 243 species + 78 forme aliases (`keldeoresolute → keldeo`, `zamazentacrowned → zamazenta`), which answers the forme row from the data side. Your parser skips old HP strings like `20/100y` (one fact lost per such line) | 2026-10-25 03:00 |
 | 2026-10-25 00:32 | @saliha | @derrick | 🔀 scope proposal | **Decision-layer plan from research pass 10** (`design-decision/strategy-research-pass10.md` on `context`): 4 specialist agents + a cross-check, peer-reviewed + official source + our own measurements. Core ~4.5 h: (1) instrumentation, (2) the two `belief.py` crash fixes + a floor (these caused the 12.7% fallbacks), (3) dual-path featurizer, (5) logistic `LearnedValue` behind a flag with HP fallback; stretch: switch share + quantal opponent model, then pool/depth-2/LP default-off. All your call; key measured facts: one-ply dominance drops Swords Dance and the top-3 EVs on our test position are 0.503/0.501/0.497, so the HP value is the weak point | 2026-10-25 00:32 |
-| 2026-10-25 00:32 | @saliha | @nate | 📨 waiting on | Pass 10 proposes you train + calibrate the logistic win-probability model (step 4, 1.5–2 h, in parallel with derrick's featurizer) and count the real opponent switch rate from replays (0.3 h). Needs your 20k extract; if it isn't on disk by ~02:00 UTC the demo ships the HP value. Yes/no? | 2026-10-25 00:32 |
 | 2026-10-25 00:30 | @derrick | @nate | ⚠️ conflict | **Team-conditioned set priors (A6): yes, please build it after the demo.** Starting sets per opponent Pokémon from past games whose teams match theirs. Fallback: require all 5 teammates to match, then one fewer at a time until at least N games match (N is your call); at 0 it's the general priors. Belief needs it at team preview, so it's a function of their six, not a fixed file: agree the shape with @derrick first | 2026-10-25 00:30 |
 | 2026-10-24 23:27 | @saliha | @all | ⚠️ conflict | **Timeline moved up: demo ready 04:00–06:00 UTC**, presentation 06:00–09:00 (PRD §19). Whatever you want in the demo needs to be on `main` by 04:00 UTC: @nate set candidates + team pool, @derrick the two belief fixes. The eval rerun on real priors only happens if it can finish by ~05:30. @derrick: the backtesting frontend is still undecided; say if you want it and who builds it | 2026-10-24 23:27 |
 | 2026-10-24 20:52 | @saliha | @all | ⚠️ conflict | `context` now holds only `CLAUDE.md`, the PRD, `builder-files/` and `design-decision/` (was `design/`). Skills, the event doc and the research doc are local now. Sync with `git archive origin/context | tar -x`, then delete your old `design/` copy. Publish steps are in `CLAUDE.md` | 2026-10-24 20:52 |
 | 2026-10-24 20:36 | @saliha | @derrick | ⚠️ conflict | The parser is on `main`: `from bot.parser import Parser, states_from_log`. `Parser(us).feed(line)` per protocol line, `.snapshot()` per request. Unblocks your task 3 (build_state on a parser-made BattleState) | 2026-10-24 20:36 |
-| 2026-10-24 20:36 | @saliha | @nate | ⚠️ conflict | The parser is on `main`: `states_from_log(log_lines, us)` gives one `BattleState` per turn of a saved replay, for your (state, winner) pairs | 2026-10-24 20:36 |
 | 2026-10-24 22:49 | @saliha | @derrick @nate | ⚠️ conflict | Forme mismatch at the BattleState ↔ set-candidates seam: a Keldeo with Secret Sword shows in battle as `keldeoresolute`, but team files (and likely chaos stats) key it `keldeo`, so `Belief.__init__` raises `KeyError` and that game falls back on every turn. Same risk for other battle-only formes. Needs one agreed rule: map battle-only formes to the base species (where? parser, belief lookup, or the set file's keys) | 2026-10-24 22:49 |
 | 2026-10-24 21:47 | @saliha | @derrick | ⚠️ conflict | I added `poke-env==0.16.1` to your `pyproject.toml` (and `uv.lock`). `scikit-learn` and `matplotlib` come with the tasks that need them. The bot is live: `uv run python -m bot.smoke --games 10` | 2026-10-24 21:47 |
 | 2026-10-24 21:15 | @saliha | @derrick | 🔀 scope proposal | Your brief is reordered by the pass 9 build plan (two research passes + a critique: peer-reviewed papers, official source, practitioner consensus, our code and the PRD). Every "Recommended" line is advice: accept it or pick your own route (decision-layer calls are yours). Key finding: poke-engine's built-in MCTS hard-wires its Rust eval, so the learned value + LP stay in our Python loop. Also yes/no on handing task 8 (belief scoring) to nate and the coach to saliha: you're at ~13 h | 2026-10-24 21:15 |
-| 2026-10-24 21:15 | @saliha | @nate | 🔀 scope proposal | Your brief is reordered by the pass 9 build plan (research-backed; accept each item or pick your own route). Order: set candidates first (no priors, no agent; on `main` by 01:00 UTC), ladder = one `curl`, team pool from `jakegrigsby/metamon-teams`, then a ~100k-game Parquet + DuckDB extract with the first 20k to derrick by 01:00 UTC. Your branch is any branch with `nate` in its name | 2026-10-24 21:15 |
 | 2026-10-24 19:16 | @saliha | @all | ⚠️ conflict | `scripts/` and every skill except `debug` and `no-slop` are gone from `context`. Keep your local copies (they stay git-ignored); `sync`/`publish` won't update from `context` any more | 2026-10-24 19:16 |
-| 2026-10-24 18:14 | @derrick | @nate | ⚠️ conflict | `contracts/set-candidates.md` (on `derrick`) defines the set file your data layer would build for belief: 30 weighted sets per species + trimmed usage, chaos 1825 / 2026-09. Next: yes/no on the shape and on `data/set_candidates.json` as its path | 2026-10-24 18:14 |
 
 **Kinds:** ⚠️ conflict (my change touches your work) · 📨 waiting on (I'm blocked until you do X) · 🔀 scope proposal (needs
 the whole team's yes, CLAUDE.md §2c) · ❓ question for a teammate (project-wide unknowns go in the PRD §21).
@@ -63,7 +60,7 @@ whenever you log an entry.
 | Who | GitHub | Role | Branch | Owns (paths) | Now |
 |---|---|---|---|---|---|
 | Saliha | `saliha006` | Bot layer; doc owner | `sali` | `bot/`, `runs/` (git-ignored) | bot plays live games through `Agent.choose`; next: task 5 eval harness |
-| Nate | `aldrichbanas07` | Data layer | any branch with `nate` in it (now `nate-data`) | `data/` {{paths tbd}} | brief task 1: set candidates (pass 9 order) |
+| Nate | `aldrichbanas07` | Data layer | `nate-data` | `data/` (`data/pipeline/`, `data/tests/`, `data/set_candidates.json`; `data/raw/` and `data/clean/` git-ignored), `contracts/turns.md`, the Tiger service `oxhack-data` | set file and turns table done; next: team-conditioned priors (A6) after the demo |
 | Derrick | `RandomGeeb` | Decision layer | `derrick` | `decision/`, `tests/`, `contracts/battle_state.py` | feature 11 built on `derrick`; tasks 3–4 wait on the parser and set candidates |
 | Kenar | `kxnar` | TBD | TBD | TBD | joined 2026-10-25; getting set up |
 
@@ -79,11 +76,21 @@ whenever you log an entry.
 
 ## 📊 Latest (volatile facts live only here)
 - **As of 2026-10-25 00:58:** `main` @ `4e88dac` · tests: 148 green, 100% coverage (`uv run pytest --cov=decision`) · smoke: 10/10 games vs RandomPlayer finished unattended, 10 won, think p50 ~65 ms / p99 ~300–700 ms, fallback rate 12.7% (all from the two `belief.py` bugs, Open board) · deploy: none yet
+- **Data (Tiger `oxhack-data`, 2026-10-25 03:00):** `battles` 2,506,142 games · `battle_logs` 2,506,142 (uncompressed, 9.2 GB) · `turns` 489,840 rows from 20,000 games (15k train / 5k test) · HP-heuristic test log loss 0.6407, Brier 0.2246 · opponent switch rate 19.2% of acted turns
 - **On branches, not merged yet:** none from @derrick
 
 ---
 
 ## Log (newest first)
+
+### 2026-10-25 03:00 — feat — Set file with forme aliases, all 2.5M replays in Tiger, and a 20k-game turn table — @nate
+- **Where:** `nate-data` @ `ad5ba10` · merged to `main`: yes (fast-forward)
+- **Did:** (1) `data/set_candidates.json` from chaos 2026-09 gen9ou-1825: 243 species, ≤30 sets each, every item keeps its usage share, Choice items keep status moves (only Assault Vest bars them), plus 78 forme aliases from Showdown's pokedex. (2) Data frozen at 2026-10-24 12:00 BST. All HolidayOugi gen9ou replays (2,506,142 games, 2022-11 → 2026-10-05) cleaned to local Parquet with DuckDB and loaded into Tiger Cloud (TimescaleDB, on the MLH credits): `battles` (players, pre-game Elo from `|player|`, winner, turns, rated, teams, leads) and `battle_logs`; read-only logins for derrick and saliha, sent privately. (3) `turns`: one row per turn from saliha's Parser (identical to `states_from_log`), 20,000 games, 15k train (2025-01 → 2026-05-18) and 5k test (2026-05-19 →); no game in two splits, 1,909 test games share no player or team with train; spec in `contracts/turns.md`. (4) Answers: derrick's contract row, yes to the shape and to `data/set_candidates.json`; pass 10 step 4, derrick trains the model from `turns`, and the measured switch rate is 19.2%; pass 9, tasks 1–2 done, storage is local Parquet + DuckDB with Tiger for sharing, the extract comes from HolidayOugi (raw names, to 2026-10-05) instead of Metamon.
+- **Touched:** `data/pipeline/*`, `data/tests/*`, `data/set_candidates.json`, `contracts/turns.md` (new), `.gitignore` (`data/raw/`, `data/clean/`)
+- **Brief task:** 1 ✅ (after the 01:00 target) · 2 ✅ (snapshot saved locally) · 4 🟡 (20k extract + leakage check; no validation split or learning curve yet) · 3 ⬜ (team pool not started)
+- **⚠️ Conflicts:** @derrick: your model's data is Tiger `turns` (`contracts/turns.md`), plus the Choice-item rule, the missing-species KeyError and the A1 wording (Open board row). @saliha: real priors are on `main` and the forme aliases answer your row from the data side (Open board row)
+- **📨 Needs:** none
+- **Status:** open (the ⚠️ rows to derrick and saliha)
 
 ### 2026-10-25 02:19 — chore — Branch tidy-up: Nate's branch renamed to nate-data; merged branches deleted — @saliha
 - **Where:** GitHub branches · `context` @ `ee0fb62` · merged to `main`: n/a
@@ -117,7 +124,7 @@ whenever you log an entry.
 - **Brief task:** none
 - **⚠️ Conflicts:** @derrick: proposal for your layer (Open board); @nate: proposed training hand-over
 - **📨 Needs:** @derrick: accept or change the plan; @nate: yes/no on step 4
-- **Status:** open
+- **Status:** open (derrick's plan) · nate's part resolved by @nate 2026-10-25 03:00
 
 ### 2026-10-25 00:30 — decision — Team-conditioned set priors (A6): yes, with a stepped fallback — @derrick
 - **Where:** `context` (`design-decision/predictions.md`) · merged to `main`: n/a
@@ -188,7 +195,7 @@ whenever you log an entry.
 - **⚠️ Conflicts:** @derrick, @nate: your task lists are renumbered and reordered (old tasks archived at the bottom of each brief, nothing deleted)
 - **📨 Needs:** @derrick: three dependency OKs; yes/no on the hand-overs. @nate: confirm your branch; set candidates first
 - **Agreed by:** saliha (proposer); derrick and nate to accept or change their items (Open board rows)
-- **Status:** open
+- **Status:** open · nate's items answered by @nate 2026-10-25 03:00
 
 ### 2026-10-24 20:52 — docs — One project folder; context trimmed to the plan docs — @saliha
 - **Where:** `context` @ `1a96e99` · `main` @ `ab7b121` (`.gitignore`) · merged to `main`: yes
@@ -206,7 +213,7 @@ whenever you log an entry.
 - **Brief task:** saliha task 3 ✅
 - **⚠️ Conflicts:** @derrick, @nate: new shared entry point (Open board rows). No contract field changed meaning
 - **📨 Needs:** none
-- **Status:** open (the notes to @derrick, @nate)
+- **Status:** open (the note to @derrick) · nate's note resolved by @nate 2026-10-25 03:00
 
 ### 2026-10-24 20:15 — decision — Bot runs on poke-env, gen9ou, local server; all three briefs get the demo plan — @saliha
 - **Where:** `context` @ `538549d` · merged to `main`: n/a (docs branch)
@@ -298,7 +305,7 @@ whenever you log an entry.
 - **Brief task:** 4 in builder-file-derrick.md → 🟡 part (logic only; the set file is @nate's)
 - **⚠️ Conflicts:** @nate: this defines the shape of your set-candidates output (`data/`), please review before building it
 - **📨 Needs:** @nate: yes/no on the contract and the file path (proposed `data/set_candidates.json`). @saliha: publish the 02-05 decision notes from `origin/derrick` (`design/decision/02..05-*.md`)
-- **Status:** open
+- **Status:** resolved by @nate 2026-10-25 03:00
 
 ### 2026-10-24 18:00 — docs — Research merged, builder briefs filled, Derrick's docs published — @saliha
 - **Where:** `context` @ `1163870` (docs only) · merged to `main`: n/a
