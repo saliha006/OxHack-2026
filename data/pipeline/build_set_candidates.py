@@ -14,6 +14,8 @@ OUT = ROOT / "data" / "set_candidates.json"
 
 # The decision layer's snapshot of Showdown's moves.json: it looks up every move we emit, so sets only use moves it knows.
 MOVES = json.loads((ROOT / "decision" / "data" / "moves.json").read_text(encoding="utf-8"))
+# Its snapshot of Showdown's pokedex.json, which names each forme's parent species.
+POKEDEX = json.loads((ROOT / "decision" / "data" / "pokedex.json").read_text(encoding="utf-8"))
 
 MAX_SETS = 30
 # How deep each category goes when sets are combined: the top moves (4 per set), items, abilities, Tera types, spreads.
@@ -106,12 +108,49 @@ def species_entry(name: str, counts: dict) -> Species:
                     spreads=[(sp, round(s, 4)) for sp, s in spreads[:USAGE_OTHER]]))
 
 
+def parent(species_id: str) -> str | None:
+    """The species a forme borrows its sets from, or None.
+
+    In-battle formes (battleOnly, changesFrom: Zamazenta-Crowned, Keldeo-Resolute) are the same Pokémon. A plain
+    baseSpecies link counts only when the types match (Maushold-Four, Greninja-Bond), so regional formes like
+    Slowking-Galar never borrow another Pokémon's sets.
+    """
+    entry = POKEDEX.get(species_id, {})
+    for field in ("battleOnly", "changesFrom", "baseSpecies"):
+        value = entry.get(field)
+        value = to_id(value[0] if isinstance(value, list) else value) if value else None
+        if value and value != species_id:
+            if field == "baseSpecies" and entry.get("types") != POKEDEX.get(value, {}).get("types"):
+                return None
+            return value
+    return None
+
+
+def forme_aliases(known: set[str]) -> dict[str, str]:
+    """Every pokedex forme missing from `known` whose parents lead to a species in it, mapped to that species.
+
+    Battle shows the real forme (`keldeoresolute`) where chaos stats and team preview use the base one (`keldeo`),
+    so belief would otherwise hit a KeyError and fall back for the whole game.
+    """
+    aliases = {}
+    for forme in POKEDEX.keys() - known:
+        seen, current = {forme}, parent(forme)
+        while current and current not in known and current not in seen:
+            seen.add(current)
+            current = parent(current)
+        if current in known:
+            aliases[forme] = current
+    return aliases
+
+
 def build(chaos: dict, month: str) -> SetCandidates:
     info = chaos["info"]
+    species = {to_id(name): species_entry(name, counts) for name, counts in chaos["data"].items()}
+    species |= {forme: species[base] for forme, base in forme_aliases(set(species)).items()}
     return SetCandidates(
         source={"format": info["metagame"], "month": month, "cutoff": info["cutoff"],
                 "battles": info["number of battles"]},
-        species={to_id(name): species_entry(name, counts) for name, counts in chaos["data"].items()})
+        species=species)
 
 
 def main() -> None:
@@ -122,8 +161,8 @@ def main() -> None:
     args = parser.parse_args()
     result = build(json.loads(args.chaos.read_text(encoding="utf-8")), args.month)
     args.out.write_text(json.dumps(result, indent=1), encoding="utf-8")
-    sets = sum(len(s["sets"]) for s in result["species"].values())
-    print(f"{args.out}: {len(result['species'])} species, {sets} sets")
+    aliases = forme_aliases(set(to_id(name) for name in json.loads(args.chaos.read_text(encoding="utf-8"))["data"]))
+    print(f"{args.out}: {len(result['species']) - len(aliases)} species + {len(aliases)} forme aliases")
 
 
 if __name__ == "__main__":

@@ -4,7 +4,8 @@ import math
 import pytest
 
 from contracts.set_candidates import CandidateSet, SetCandidates, Species, Spread, Usage
-from data.pipeline.build_set_candidates import CHAOS, MAX_SETS, MOVES, build, item_slots, parse_spread, to_id
+from data.pipeline.build_set_candidates import (
+    CHAOS, MAX_SETS, MOVES, build, forme_aliases, item_slots, parse_spread, to_id)
 
 # A cut-down chaos entry: six moves (one status), a Choice item, Assault Vest, an empty move slot and "nothing" as an item.
 CHAOS_SAMPLE = {
@@ -103,6 +104,19 @@ def test_each_item_keeps_its_usage_share():
         assert math.isclose(sum(s["weight"] for s in species["sets"] if s["item"] == item), share)
 
 
+def test_battle_formes_borrow_their_base_species_sets():
+    aliases = forme_aliases({"keldeo", "zamazenta", "maushold", "greninja", "ogerponwellspring", "slowking"})
+    assert aliases["keldeoresolute"] == "keldeo"
+    assert aliases["zamazentacrowned"] == "zamazenta"
+    assert aliases["mausholdfour"] == "maushold"
+    assert aliases["greninjaash"] == "greninja"  # via Greninja-Bond
+    assert aliases["ogerponwellspringtera"] == "ogerponwellspring"
+
+
+def test_regional_formes_never_borrow_another_pokemons_sets():
+    assert "slowkinggalar" not in forme_aliases({"slowking"})
+
+
 def test_unknown_move_fails_loudly():
     bad = json.loads(json.dumps(CHAOS_SAMPLE))
     bad["data"]["Samurott-Hisui"]["Moves"]["notamove"] = 1.0
@@ -115,4 +129,5 @@ def test_real_chaos_file_covers_every_species():
     chaos = json.loads(CHAOS.read_text(encoding="utf-8"))
     result = build(chaos, "2026-09")
     assert_contract_shape(result)
-    assert set(result["species"]) == {to_id(name) for name in chaos["data"]}
+    assert {to_id(name) for name in chaos["data"]} <= set(result["species"])
+    assert result["species"]["keldeoresolute"] == result["species"]["keldeo"]
