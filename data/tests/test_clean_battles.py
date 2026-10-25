@@ -1,6 +1,7 @@
 import duckdb
 import pytest
 
+from data.pipeline import clean_battles
 from data.pipeline.clean_battles import clean
 
 LOG = """|t:|1701538642
@@ -27,6 +28,20 @@ LOG = """|t:|1701538642
 def row(id="gen9ou-1", log=LOG, uploadtime=1701538800, formatid="gen9ou", rating=1084.0):
     return {"id": id, "format": "[Gen 9] OU", "players": ["a", "b"], "log": log, "uploadtime": uploadtime,
             "views": 3, "formatid": formatid, "rating": rating}
+
+
+def write_raw(path, *rows):
+    duckdb.sql("SELECT * FROM (SELECT unnest($rows, recursive := true))", params={"rows": list(rows)}).write_parquet(
+        path.as_posix())
+
+
+def test_main_cleans_several_files_in_one_run(tmp_path, monkeypatch):
+    write_raw(tmp_path / "a.parquet", row(id="gen9ou-1"))
+    write_raw(tmp_path / "b.parquet", row(id="gen9ou-2"))
+    monkeypatch.setattr(clean_battles, "OUT", tmp_path / "out")
+    monkeypatch.setattr("sys.argv", ["clean_battles", str(tmp_path / "a.parquet"), str(tmp_path / "b.parquet")])
+    clean_battles.main()
+    assert sorted(p.name for p in (tmp_path / "out").iterdir()) == ["a.parquet", "b.parquet"]
 
 
 @pytest.fixture

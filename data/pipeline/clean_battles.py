@@ -76,9 +76,10 @@ def main() -> None:
     for path in args.files or sorted(RAW.glob("*.parquet")):
         out = OUT / path.name
         clean(con, path, args.source).write_parquet(out.as_posix(), compression="zstd")
-        rows, no_elo, no_winner = con.execute(
+        # Read the whole result: an execute() result left half-read blocks the next file's write.
+        [(rows, no_elo, no_winner)] = con.sql(
             f"SELECT count(*), count(*) FILTER (WHERE p1_elo IS NULL OR p2_elo IS NULL), count(*) FILTER (WHERE winner IS NULL)"
-            f" FROM '{out.as_posix()}'").fetchone()
+            f" FROM '{out.as_posix()}'").fetchall()
         print(f"{out.name}: {rows} battles, {no_elo} missing an Elo, {no_winner} with no winner")
 
 
