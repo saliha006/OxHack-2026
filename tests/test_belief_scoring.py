@@ -2,6 +2,7 @@ import copy
 
 from evaluation.belief_reliability import score_transitions, summarize
 from tests.test_belief import PRIORS
+from tests.test_belief import event
 from tests.turn2 import EXAMPLE, REQUEST
 
 
@@ -26,3 +27,15 @@ def test_unobserved_final_transition_has_no_invented_labels():
     rows, _ = score_transitions([{"state": copy.deepcopy(EXAMPLE), "request": REQUEST, "choice": "default"}],
                                 PRIORS, battle_id="fixture", role="a")
     assert rows == []
+
+
+def test_item_acquired_by_trick_is_not_scored_as_the_previous_item():
+    first = copy.deepcopy(EXAMPLE)
+    second = copy.deepcopy(first)
+    second["turn"] += 1
+    second["sides"]["p2"]["pokemon"][2]["item"] = "choicescarf"
+    second["last_turn"] = [event("move", 2, move="trick", target="p1")]
+    decisions = [{"state": state, "request": REQUEST, "choice": "default"} for state in (first, second)]
+    rows, diagnostics = score_transitions(decisions, PRIORS, battle_id="fixture", role="a")
+    assert not any(row["kind"] == "item" for row in rows)
+    assert diagnostics["label_filter"]["intervening_item_change_move"] == 1

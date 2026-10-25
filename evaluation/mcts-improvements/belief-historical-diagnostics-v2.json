@@ -1,0 +1,2428 @@
+{
+  "subsets": {
+    "development": {
+      "revelations": 293,
+      "games": 12,
+      "log_loss": {
+        "original_prior": 2.631532383542937,
+        "revelations_only": 2.8567435762766453,
+        "legacy_hard_inference": 2.9030881967508346,
+        "reliable_hard_inference": 2.856543299557693,
+        "reliable_soft_updates": 2.856543299557693
+      },
+      "zero_support_revelations": {
+        "original_prior": 35,
+        "revelations_only": 41,
+        "legacy_hard_inference": 42,
+        "reliable_hard_inference": 41,
+        "reliable_soft_updates": 41
+      },
+      "candidate_coverage": {
+        "original_prior": 0.8805460750853242,
+        "revelations_only": 0.8600682593856656,
+        "legacy_hard_inference": 0.856655290102389,
+        "reliable_hard_inference": 0.8600682593856656,
+        "reliable_soft_updates": 0.8600682593856656
+      },
+      "by_kind": {
+        "move": {
+          "original_prior": {
+            "n": 192,
+            "log_loss": 2.3884391033926766
+          },
+          "revelations_only": {
+            "n": 192,
+            "log_loss": 2.6696153324135423
+          },
+          "legacy_hard_inference": {
+            "n": 192,
+            "log_loss": 2.6700890455019657
+          },
+          "reliable_hard_inference": {
+            "n": 192,
+            "log_loss": 2.6693097017955574
+          },
+          "reliable_soft_updates": {
+            "n": 192,
+            "log_loss": 2.6693097017955574
+          }
+        },
+        "item": {
+          "original_prior": {
+            "n": 33,
+            "log_loss": 7.305352405695723
+          },
+          "revelations_only": {
+            "n": 33,
+            "log_loss": 7.3085454465353346
+          },
+          "legacy_hard_inference": {
+            "n": 33,
+            "log_loss": 7.717224532140082
+          },
+          "reliable_hard_inference": {
+            "n": 33,
+            "log_loss": 7.3085454465353346
+          },
+          "reliable_soft_updates": {
+            "n": 33,
+            "log_loss": 7.3085454465353346
+          }
+        },
+        "ability": {
+          "original_prior": {
+            "n": 46,
+            "log_loss": 9.99998500182355e-07
+          },
+          "revelations_only": {
+            "n": 46,
+            "log_loss": 9.99998500182355e-07
+          },
+          "legacy_hard_inference": {
+            "n": 46,
+            "log_loss": 9.99998500182355e-07
+          },
+          "reliable_hard_inference": {
+            "n": 46,
+            "log_loss": 9.99998500182355e-07
+          },
+          "reliable_soft_updates": {
+            "n": 46,
+            "log_loss": 9.99998500182355e-07
+          }
+        },
+        "tera_type": {
+          "original_prior": {
+            "n": 22,
+            "log_loss": 3.2446365972180313
+          },
+          "revelations_only": {
+            "n": 22,
+            "log_loss": 3.785349013184543
+          },
+          "legacy_hard_inference": {
+            "n": 22,
+            "log_loss": 3.785422243230155
+          },
+          "reliable_hard_inference": {
+            "n": 22,
+            "log_loss": 3.785349013184543
+          },
+          "reliable_soft_updates": {
+            "n": 22,
+            "log_loss": 3.785349013184543
+          }
+        }
+      },
+      "per_game": {
+        "battle-gen9ou-42": {
+          "original_prior": 2.5168857478655515,
+          "revelations_only": 2.5093972469267674,
+          "legacy_hard_inference": 2.5093972469267674,
+          "reliable_hard_inference": 2.5093972469267674,
+          "reliable_soft_updates": 2.5093972469267674
+        },
+        "battle-gen9ou-36": {
+          "original_prior": 3.3290343162909526,
+          "revelations_only": 4.62419203655348,
+          "legacy_hard_inference": 4.624247966571355,
+          "reliable_hard_inference": 4.62419203655348,
+          "reliable_soft_updates": 4.62419203655348
+        },
+        "battle-gen9ou-38": {
+          "original_prior": 2.2402479836789784,
+          "revelations_only": 2.581915017625371,
+          "legacy_hard_inference": 2.581915017625371,
+          "reliable_hard_inference": 2.581915017625371,
+          "reliable_soft_updates": 2.581915017625371
+        },
+        "battle-gen9ou-32": {
+          "original_prior": 1.7267673672735606,
+          "revelations_only": 2.2090589240162317,
+          "legacy_hard_inference": 2.2093182984497957,
+          "reliable_hard_inference": 2.206507572770447,
+          "reliable_soft_updates": 2.206507572770447
+        },
+        "battle-gen9ou-34": {
+          "original_prior": 1.7374160958736609,
+          "revelations_only": 1.7392774145698298,
+          "legacy_hard_inference": 1.7392774145698298,
+          "reliable_hard_inference": 1.7392774145698298,
+          "reliable_soft_updates": 1.7392774145698298
+        },
+        "battle-gen9ou-46": {
+          "original_prior": 1.1338334140190969,
+          "revelations_only": 1.125640426005107,
+          "legacy_hard_inference": 1.1280337689998285,
+          "reliable_hard_inference": 1.125640426005107,
+          "reliable_soft_updates": 1.125640426005107
+        },
+        "battle-gen9ou-40": {
+          "original_prior": 2.4766357255843268,
+          "revelations_only": 2.472286616766646,
+          "legacy_hard_inference": 2.472286616766646,
+          "reliable_hard_inference": 2.472286616766646,
+          "reliable_soft_updates": 2.472286616766646
+        },
+        "battle-gen9ou-28": {
+          "original_prior": 2.9049678211404752,
+          "revelations_only": 2.8903318173488928,
+          "legacy_hard_inference": 2.891196156937984,
+          "reliable_hard_inference": 2.8903318173488928,
+          "reliable_soft_updates": 2.8903318173488928
+        },
+        "battle-gen9ou-30": {
+          "original_prior": 2.5938078911059073,
+          "revelations_only": 2.570242657174384,
+          "legacy_hard_inference": 2.570242657174384,
+          "reliable_hard_inference": 2.570242657174384,
+          "reliable_soft_updates": 2.570242657174384
+        },
+        "battle-gen9ou-24": {
+          "original_prior": 3.798382594487794,
+          "revelations_only": 3.79146895217881,
+          "legacy_hard_inference": 3.79146895217881,
+          "reliable_hard_inference": 3.79146895217881,
+          "reliable_soft_updates": 3.79146895217881
+        },
+        "battle-gen9ou-26": {
+          "original_prior": 2.921468578413779,
+          "revelations_only": 2.911659288507467,
+          "legacy_hard_inference": 3.377210529190106,
+          "reliable_hard_inference": 2.911659288507467,
+          "reliable_soft_updates": 2.911659288507467
+        },
+        "battle-gen9ou-44": {
+          "original_prior": 2.8937896127779883,
+          "revelations_only": 2.8712336073363725,
+          "legacy_hard_inference": 2.871974469443737,
+          "reliable_hard_inference": 2.8712336073363725,
+          "reliable_soft_updates": 2.8712336073363725
+        }
+      }
+    },
+    "scoring": {
+      "revelations": 312,
+      "games": 12,
+      "log_loss": {
+        "original_prior": 2.795532883171458,
+        "revelations_only": 3.155784051573572,
+        "legacy_hard_inference": 3.196836440073809,
+        "reliable_hard_inference": 3.1553703219623017,
+        "reliable_soft_updates": 3.1553703219623017
+      },
+      "zero_support_revelations": {
+        "original_prior": 42,
+        "revelations_only": 52,
+        "legacy_hard_inference": 53,
+        "reliable_hard_inference": 52,
+        "reliable_soft_updates": 52
+      },
+      "candidate_coverage": {
+        "original_prior": 0.8653846153846154,
+        "revelations_only": 0.8333333333333334,
+        "legacy_hard_inference": 0.8301282051282051,
+        "reliable_hard_inference": 0.8333333333333334,
+        "reliable_soft_updates": 0.8333333333333334
+      },
+      "by_kind": {
+        "move": {
+          "original_prior": {
+            "n": 193,
+            "log_loss": 2.960485869898511
+          },
+          "revelations_only": {
+            "n": 193,
+            "log_loss": 3.3576479131864825
+          },
+          "legacy_hard_inference": {
+            "n": 193,
+            "log_loss": 3.357451808047293
+          },
+          "reliable_hard_inference": {
+            "n": 193,
+            "log_loss": 3.3573342223173257
+          },
+          "reliable_soft_updates": {
+            "n": 193,
+            "log_loss": 3.3573342223173257
+          }
+        },
+        "ability": {
+          "original_prior": {
+            "n": 58,
+            "log_loss": 9.99998500182355e-07
+          },
+          "revelations_only": {
+            "n": 58,
+            "log_loss": 9.99998500182355e-07
+          },
+          "legacy_hard_inference": {
+            "n": 58,
+            "log_loss": 9.99998500182355e-07
+          },
+          "reliable_hard_inference": {
+            "n": 58,
+            "log_loss": 9.99998500182355e-07
+          },
+          "reliable_soft_updates": {
+            "n": 58,
+            "log_loss": 9.99998500182355e-07
+          }
+        },
+        "tera_type": {
+          "original_prior": {
+            "n": 21,
+            "log_loss": 2.2291103894493602
+          },
+          "revelations_only": {
+            "n": 21,
+            "log_loss": 3.9241197226979785
+          },
+          "legacy_hard_inference": {
+            "n": 21,
+            "log_loss": 3.920919417845347
+          },
+          "reliable_hard_inference": {
+            "n": 21,
+            "log_loss": 3.920855851223267
+          },
+          "reliable_soft_updates": {
+            "n": 21,
+            "log_loss": 3.920855851223267
+          }
+        },
+        "item": {
+          "original_prior": {
+            "n": 40,
+            "log_loss": 6.350527762018315
+          },
+          "revelations_only": {
+            "n": 40,
+            "log_loss": 6.354300116734819
+          },
+          "legacy_hard_inference": {
+            "n": 40,
+            "log_loss": 6.677135114380893
+          },
+          "reliable_hard_inference": {
+            "n": 40,
+            "log_loss": 6.354300116734819
+          },
+          "reliable_soft_updates": {
+            "n": 40,
+            "log_loss": 6.354300116734819
+          }
+        }
+      },
+      "per_game": {
+        "battle-gen9ou-37": {
+          "original_prior": 2.0363868704750003,
+          "revelations_only": 2.0233821002363173,
+          "legacy_hard_inference": 2.0246416364871824,
+          "reliable_hard_inference": 2.0233821002363173,
+          "reliable_soft_updates": 2.0233821002363173
+        },
+        "battle-gen9ou-33": {
+          "original_prior": 2.2134595393790812,
+          "revelations_only": 2.2026881879297555,
+          "legacy_hard_inference": 2.200402870272684,
+          "reliable_hard_inference": 2.198654324219874,
+          "reliable_soft_updates": 2.198654324219874
+        },
+        "battle-gen9ou-31": {
+          "original_prior": 4.327502417419503,
+          "revelations_only": 5.039856033988353,
+          "legacy_hard_inference": 4.998126517844577,
+          "reliable_hard_inference": 5.039856033988353,
+          "reliable_soft_updates": 5.039856033988353
+        },
+        "battle-gen9ou-43": {
+          "original_prior": 2.0329064456545622,
+          "revelations_only": 2.0332228102526018,
+          "legacy_hard_inference": 3.1590439486805244,
+          "reliable_hard_inference": 2.0332228102526018,
+          "reliable_soft_updates": 2.0332228102526018
+        },
+        "battle-gen9ou-45": {
+          "original_prior": 3.397367343757225,
+          "revelations_only": 3.829124989223278,
+          "legacy_hard_inference": 3.8292024307864883,
+          "reliable_hard_inference": 3.829124989223278,
+          "reliable_soft_updates": 3.829124989223278
+        },
+        "battle-gen9ou-41": {
+          "original_prior": 3.7966528785007023,
+          "revelations_only": 4.987786336835664,
+          "legacy_hard_inference": 4.987786336835664,
+          "reliable_hard_inference": 4.987786336835664,
+          "reliable_soft_updates": 4.987786336835664
+        },
+        "battle-gen9ou-39": {
+          "original_prior": 2.6291679147160805,
+          "revelations_only": 2.5998657987961913,
+          "legacy_hard_inference": 2.5998657987961913,
+          "reliable_hard_inference": 2.5998657987961913,
+          "reliable_soft_updates": 2.5998657987961913
+        },
+        "battle-gen9ou-29": {
+          "original_prior": 2.3215474523169743,
+          "revelations_only": 2.850406736705997,
+          "legacy_hard_inference": 2.850406736705997,
+          "reliable_hard_inference": 2.850406736705997,
+          "reliable_soft_updates": 2.850406736705997
+        },
+        "battle-gen9ou-35": {
+          "original_prior": 3.5934633520651555,
+          "revelations_only": 4.730059775544494,
+          "legacy_hard_inference": 4.730059775544494,
+          "reliable_hard_inference": 4.730059775544494,
+          "reliable_soft_updates": 4.730059775544494
+        },
+        "battle-gen9ou-47": {
+          "original_prior": 2.2933393018998767,
+          "revelations_only": 2.255457290114481,
+          "legacy_hard_inference": 2.255457290114481,
+          "reliable_hard_inference": 2.255457290114481,
+          "reliable_soft_updates": 2.255457290114481
+        },
+        "battle-gen9ou-25": {
+          "original_prior": 2.449921964487006,
+          "revelations_only": 2.433297612326797,
+          "legacy_hard_inference": 2.433297612326797,
+          "reliable_hard_inference": 2.433297612326797,
+          "reliable_soft_updates": 2.433297612326797
+        },
+        "battle-gen9ou-27": {
+          "original_prior": 2.5908203406300734,
+          "revelations_only": 2.919319192151616,
+          "legacy_hard_inference": 2.919378412110382,
+          "reliable_hard_inference": 2.919319192151616,
+          "reliable_soft_updates": 2.919319192151616
+        }
+      }
+    }
+  },
+  "smoothing_alpha": 1e-06,
+  "smoothing": "Add alpha to the union of pre-reveal supported categories plus one reserved OTHER category.",
+  "assumptions": "Uniform next new move within each candidate's unrevealed moves; only subsequently revealed facts are labels. Item/ability labels after explicit changing moves are excluded from static-set scoring; uncommon unmarked transformations can still confound labels. No full-set truth supplied, no full-set accuracy claim. Final unseen transition excluded.",
+  "parameter_selection": "Likelihood floor remains 0.03; no fitting or tuning on scoring positions.",
+  "unavailable": [
+    {
+      "battle": "battle-gen9ou-31",
+      "role": "b"
+    },
+    {
+      "battle": "battle-gen9ou-40",
+      "role": "b"
+    },
+    {
+      "battle": "battle-gen9ou-28",
+      "role": "b"
+    },
+    {
+      "battle": "battle-gen9ou-43",
+      "role": "b"
+    }
+  ],
+  "diagnostics": [
+    {
+      "battle": "battle-gen9ou-42",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 102,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 4
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 99,
+          "inferred_exclusions": 3,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 102,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 5,
+          "skipped:item_period_changed_or_first_revealed": 4
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 102,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 12,
+          "skipped:no_completed_upkeep_observed": 5,
+          "skipped:incomplete_or_unknown_turn_interval": 12,
+          "skipped:item_period_changed_or_first_revealed": 4
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-42",
+      "role": "b",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 51,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 2
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 48,
+          "inferred_exclusions": 3,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 51,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 10,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:confirmed_current_item_overrides_inference": 1
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 51,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 16,
+          "skipped:no_completed_upkeep_observed": 10,
+          "skipped:incomplete_or_unknown_turn_interval": 16,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:confirmed_current_item_overrides_inference": 1
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-36",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 129,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 5
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 138,
+          "inferred_exclusions": 12,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 129,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 18,
+          "skipped:item_period_changed_or_first_revealed": 5,
+          "skipped:confirmed_current_item_overrides_inference": 16
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 129,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 27,
+          "skipped:no_completed_upkeep_observed": 18,
+          "skipped:incomplete_or_unknown_turn_interval": 27,
+          "skipped:item_period_changed_or_first_revealed": 5,
+          "skipped:confirmed_current_item_overrides_inference": 16
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-36",
+      "role": "b",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 127,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 4
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 124,
+          "inferred_exclusions": 3,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 127,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 21,
+          "skipped:item_period_changed_or_first_revealed": 4,
+          "skipped:confirmed_current_item_overrides_inference": 10
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 127,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 26,
+          "skipped:no_completed_upkeep_observed": 21,
+          "skipped:incomplete_or_unknown_turn_interval": 26,
+          "skipped:item_period_changed_or_first_revealed": 4,
+          "skipped:confirmed_current_item_overrides_inference": 10
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-37",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 67,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 1
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 63,
+          "inferred_exclusions": 13,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 67,
+          "inferred_exclusions": 8,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 32,
+          "skipped:item_period_changed_or_first_revealed": 1
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 67,
+          "inferred_exclusions": 8,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 35,
+          "skipped:incomplete_or_unknown_turn_interval": 35,
+          "skipped:no_completed_upkeep_observed": 32,
+          "skipped:item_period_changed_or_first_revealed": 1
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-37",
+      "role": "b",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 70,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 2
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 70,
+          "inferred_exclusions": 51,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 70,
+          "inferred_exclusions": 3,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:no_completed_upkeep_observed": 28,
+          "skipped:confirmed_current_item_overrides_inference": 10
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 70,
+          "inferred_exclusions": 3,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 40,
+          "skipped:incomplete_or_unknown_turn_interval": 40,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:no_completed_upkeep_observed": 28,
+          "skipped:confirmed_current_item_overrides_inference": 10
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-38",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 69,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 1
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 69,
+          "inferred_exclusions": 16,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 69,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 19,
+          "skipped:item_period_changed_or_first_revealed": 1
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 69,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 36,
+          "skipped:incomplete_or_unknown_turn_interval": 36,
+          "skipped:no_completed_upkeep_observed": 19,
+          "skipped:item_period_changed_or_first_revealed": 1
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-38",
+      "role": "b",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 60,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 2
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 60,
+          "inferred_exclusions": 13,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 60,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:no_completed_upkeep_observed": 22
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 60,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 37,
+          "skipped:incomplete_or_unknown_turn_interval": 37,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:no_completed_upkeep_observed": 22
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-33",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 111,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 5
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 108,
+          "inferred_exclusions": 3,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 111,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 14,
+          "skipped:item_period_changed_or_first_revealed": 5,
+          "skipped:confirmed_current_item_overrides_inference": 30
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 111,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 20,
+          "skipped:no_completed_upkeep_observed": 14,
+          "skipped:incomplete_or_unknown_turn_interval": 20,
+          "skipped:item_period_changed_or_first_revealed": 5,
+          "skipped:confirmed_current_item_overrides_inference": 30
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-33",
+      "role": "b",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 73,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 4
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 61,
+          "inferred_exclusions": 23,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 63,
+          "inferred_exclusions": 13,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 16,
+          "skipped:item_period_changed_or_first_revealed": 4,
+          "skipped:confirmed_current_item_overrides_inference": 3
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 63,
+          "inferred_exclusions": 13,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 21,
+          "skipped:no_completed_upkeep_observed": 16,
+          "skipped:incomplete_or_unknown_turn_interval": 21,
+          "skipped:item_period_changed_or_first_revealed": 4,
+          "skipped:confirmed_current_item_overrides_inference": 3
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-32",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 85,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 5
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 82,
+          "inferred_exclusions": 16,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 85,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 11,
+          "skipped:item_period_changed_or_first_revealed": 5,
+          "skipped:confirmed_current_item_overrides_inference": 12
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 85,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 15,
+          "skipped:no_completed_upkeep_observed": 11,
+          "skipped:incomplete_or_unknown_turn_interval": 15,
+          "skipped:item_period_changed_or_first_revealed": 5,
+          "skipped:confirmed_current_item_overrides_inference": 12
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-32",
+      "role": "b",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 52,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 2
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 53,
+          "inferred_exclusions": 14,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 49,
+          "inferred_exclusions": 10,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 13,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:confirmed_current_item_overrides_inference": 3
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 49,
+          "inferred_exclusions": 10,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 18,
+          "skipped:no_completed_upkeep_observed": 13,
+          "skipped:incomplete_or_unknown_turn_interval": 18,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:confirmed_current_item_overrides_inference": 3
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-34",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 57,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 1
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 57,
+          "inferred_exclusions": 10,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 57,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 28,
+          "skipped:item_period_changed_or_first_revealed": 1
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 57,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 47,
+          "skipped:incomplete_or_unknown_turn_interval": 47,
+          "skipped:no_completed_upkeep_observed": 28,
+          "skipped:item_period_changed_or_first_revealed": 1
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-34",
+      "role": "b",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 58,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 58,
+          "inferred_exclusions": 16,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 58,
+          "inferred_exclusions": 15,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 41
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 58,
+          "inferred_exclusions": 15,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 47,
+          "skipped:incomplete_or_unknown_turn_interval": 47,
+          "skipped:no_completed_upkeep_observed": 41
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-46",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 27,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 27,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 27,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 3
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 27,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 16,
+          "skipped:incomplete_or_unknown_turn_interval": 16,
+          "skipped:no_completed_upkeep_observed": 3
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-46",
+      "role": "b",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 25,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 25,
+          "inferred_exclusions": 6,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 25,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 16
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 25,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 19,
+          "skipped:incomplete_or_unknown_turn_interval": 19,
+          "skipped:no_completed_upkeep_observed": 16
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-31",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 156,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 6
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 140,
+          "inferred_exclusions": 16,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 156,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 15,
+          "skipped:item_period_changed_or_first_revealed": 6,
+          "skipped:confirmed_current_item_overrides_inference": 9
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 156,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 20,
+          "skipped:incomplete_or_unknown_turn_interval": 20,
+          "skipped:no_completed_upkeep_observed": 15,
+          "skipped:item_period_changed_or_first_revealed": 6,
+          "skipped:confirmed_current_item_overrides_inference": 9
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-40",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 109,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 5
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 106,
+          "inferred_exclusions": 3,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 109,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 16,
+          "skipped:item_period_changed_or_first_revealed": 5,
+          "skipped:confirmed_current_item_overrides_inference": 16
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 109,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 27,
+          "skipped:no_completed_upkeep_observed": 16,
+          "skipped:incomplete_or_unknown_turn_interval": 27,
+          "skipped:item_period_changed_or_first_revealed": 5,
+          "skipped:confirmed_current_item_overrides_inference": 16
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-28",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 97,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 2
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 94,
+          "inferred_exclusions": 26,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 94,
+          "inferred_exclusions": 8,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:no_completed_upkeep_observed": 25,
+          "skipped:confirmed_current_item_overrides_inference": 10
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 94,
+          "inferred_exclusions": 8,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 31,
+          "skipped:incomplete_or_unknown_turn_interval": 31,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:no_completed_upkeep_observed": 25,
+          "skipped:confirmed_current_item_overrides_inference": 10
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-43",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 51,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 1
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 51,
+          "inferred_exclusions": 28,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 51,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 21,
+          "skipped:item_period_changed_or_first_revealed": 1
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 51,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 31,
+          "skipped:no_completed_upkeep_observed": 21,
+          "skipped:incomplete_or_unknown_turn_interval": 31,
+          "skipped:item_period_changed_or_first_revealed": 1
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-45",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 66,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 3
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 66,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 66,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 3,
+          "skipped:no_completed_upkeep_observed": 17,
+          "skipped:confirmed_current_item_overrides_inference": 12
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 66,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 21,
+          "skipped:item_period_changed_or_first_revealed": 3,
+          "skipped:incomplete_or_unknown_turn_interval": 21,
+          "skipped:no_completed_upkeep_observed": 17,
+          "skipped:confirmed_current_item_overrides_inference": 12
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-45",
+      "role": "b",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 95,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 5
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 113,
+          "inferred_exclusions": 16,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 95,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 11,
+          "skipped:item_period_changed_or_first_revealed": 5,
+          "skipped:confirmed_current_item_overrides_inference": 9
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 95,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 19,
+          "skipped:no_completed_upkeep_observed": 11,
+          "skipped:incomplete_or_unknown_turn_interval": 19,
+          "skipped:item_period_changed_or_first_revealed": 5,
+          "skipped:confirmed_current_item_overrides_inference": 9
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-41",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 149,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 6
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 146,
+          "inferred_exclusions": 3,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 149,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 17,
+          "skipped:item_period_changed_or_first_revealed": 6,
+          "skipped:confirmed_current_item_overrides_inference": 11
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 149,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 22,
+          "skipped:no_completed_upkeep_observed": 17,
+          "skipped:incomplete_or_unknown_turn_interval": 22,
+          "skipped:item_period_changed_or_first_revealed": 6,
+          "skipped:confirmed_current_item_overrides_inference": 11
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-41",
+      "role": "b",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 102,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 4
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 99,
+          "inferred_exclusions": 3,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 102,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 16,
+          "skipped:item_period_changed_or_first_revealed": 4,
+          "skipped:confirmed_current_item_overrides_inference": 23
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 102,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 23,
+          "skipped:no_completed_upkeep_observed": 16,
+          "skipped:incomplete_or_unknown_turn_interval": 23,
+          "skipped:item_period_changed_or_first_revealed": 4,
+          "skipped:confirmed_current_item_overrides_inference": 23
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-30",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 90,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 2
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 90,
+          "inferred_exclusions": 11,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 90,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:no_completed_upkeep_observed": 18
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 90,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 31,
+          "skipped:incomplete_or_unknown_turn_interval": 31,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:no_completed_upkeep_observed": 18
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-30",
+      "role": "b",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 44,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 1
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 44,
+          "inferred_exclusions": 14,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 44,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 25,
+          "skipped:item_period_changed_or_first_revealed": 1,
+          "skipped:confirmed_current_item_overrides_inference": 2
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 44,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 30,
+          "skipped:incomplete_or_unknown_turn_interval": 30,
+          "skipped:no_completed_upkeep_observed": 25,
+          "skipped:item_period_changed_or_first_revealed": 1,
+          "skipped:confirmed_current_item_overrides_inference": 2
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-39",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 57,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 2
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 57,
+          "inferred_exclusions": 8,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 57,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:no_completed_upkeep_observed": 12
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 57,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 21,
+          "skipped:incomplete_or_unknown_turn_interval": 21,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:no_completed_upkeep_observed": 12
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-39",
+      "role": "b",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 49,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 1
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 49,
+          "inferred_exclusions": 8,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 49,
+          "inferred_exclusions": 3,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 8,
+          "skipped:item_period_changed_or_first_revealed": 1,
+          "skipped:confirmed_current_item_overrides_inference": 11
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 49,
+          "inferred_exclusions": 3,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 23,
+          "skipped:incomplete_or_unknown_turn_interval": 23,
+          "skipped:no_completed_upkeep_observed": 8,
+          "skipped:item_period_changed_or_first_revealed": 1,
+          "skipped:confirmed_current_item_overrides_inference": 11
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-29",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 40,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 2
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 41,
+          "inferred_exclusions": 10,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 40,
+          "inferred_exclusions": 10,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:no_completed_upkeep_observed": 8,
+          "skipped:confirmed_current_item_overrides_inference": 6
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 40,
+          "inferred_exclusions": 10,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 18,
+          "skipped:incomplete_or_unknown_turn_interval": 18,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:no_completed_upkeep_observed": 8,
+          "skipped:confirmed_current_item_overrides_inference": 6
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-29",
+      "role": "b",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 86,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 4
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 86,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 86,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 4,
+          "skipped:no_completed_upkeep_observed": 5
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 86,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 16,
+          "skipped:incomplete_or_unknown_turn_interval": 16,
+          "skipped:item_period_changed_or_first_revealed": 4,
+          "skipped:no_completed_upkeep_observed": 5
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-35",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 99,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 4
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 96,
+          "inferred_exclusions": 3,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 99,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 15,
+          "skipped:item_period_changed_or_first_revealed": 4,
+          "skipped:confirmed_current_item_overrides_inference": 21
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 99,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 22,
+          "skipped:no_completed_upkeep_observed": 15,
+          "skipped:incomplete_or_unknown_turn_interval": 22,
+          "skipped:item_period_changed_or_first_revealed": 4,
+          "skipped:confirmed_current_item_overrides_inference": 21
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-35",
+      "role": "b",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 151,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 5
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 148,
+          "inferred_exclusions": 3,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 151,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 16,
+          "skipped:item_period_changed_or_first_revealed": 5,
+          "skipped:confirmed_current_item_overrides_inference": 9
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 151,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 21,
+          "skipped:no_completed_upkeep_observed": 16,
+          "skipped:incomplete_or_unknown_turn_interval": 21,
+          "skipped:item_period_changed_or_first_revealed": 5,
+          "skipped:confirmed_current_item_overrides_inference": 9
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-47",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 67,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 2
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 67,
+          "inferred_exclusions": 18,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 67,
+          "inferred_exclusions": 3,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:no_completed_upkeep_observed": 13,
+          "skipped:confirmed_current_item_overrides_inference": 19
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 67,
+          "inferred_exclusions": 3,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 24,
+          "skipped:incomplete_or_unknown_turn_interval": 24,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:no_completed_upkeep_observed": 13,
+          "skipped:confirmed_current_item_overrides_inference": 19
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-47",
+      "role": "b",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 54,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 1
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 54,
+          "inferred_exclusions": 14,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 54,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 12,
+          "skipped:item_period_changed_or_first_revealed": 1,
+          "skipped:confirmed_current_item_overrides_inference": 4
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 54,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 21,
+          "skipped:incomplete_or_unknown_turn_interval": 21,
+          "skipped:no_completed_upkeep_observed": 12,
+          "skipped:item_period_changed_or_first_revealed": 1,
+          "skipped:confirmed_current_item_overrides_inference": 4
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-25",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 94,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 2
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 94,
+          "inferred_exclusions": 19,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 94,
+          "inferred_exclusions": 8,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:no_completed_upkeep_observed": 50,
+          "skipped:confirmed_current_item_overrides_inference": 44
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 94,
+          "inferred_exclusions": 8,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 65,
+          "skipped:incomplete_or_unknown_turn_interval": 65,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:no_completed_upkeep_observed": 50,
+          "skipped:confirmed_current_item_overrides_inference": 44
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-25",
+      "role": "b",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 93,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 1
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 93,
+          "inferred_exclusions": 16,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 93,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 58,
+          "skipped:item_period_changed_or_first_revealed": 1,
+          "skipped:confirmed_current_item_overrides_inference": 46
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 93,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 67,
+          "skipped:incomplete_or_unknown_turn_interval": 67,
+          "skipped:no_completed_upkeep_observed": 58,
+          "skipped:item_period_changed_or_first_revealed": 1,
+          "skipped:confirmed_current_item_overrides_inference": 46
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-24",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 113,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 4
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 101,
+          "inferred_exclusions": 18,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 98,
+          "inferred_exclusions": 15,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 17,
+          "skipped:item_period_changed_or_first_revealed": 4,
+          "skipped:confirmed_current_item_overrides_inference": 19
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 98,
+          "inferred_exclusions": 15,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 20,
+          "skipped:incomplete_or_unknown_turn_interval": 20,
+          "skipped:no_completed_upkeep_observed": 17,
+          "skipped:item_period_changed_or_first_revealed": 4,
+          "skipped:confirmed_current_item_overrides_inference": 19
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-24",
+      "role": "b",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 119,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 4
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 119,
+          "inferred_exclusions": 3,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 119,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 13,
+          "skipped:item_period_changed_or_first_revealed": 4,
+          "skipped:confirmed_current_item_overrides_inference": 9
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 119,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 17,
+          "skipped:no_completed_upkeep_observed": 13,
+          "skipped:incomplete_or_unknown_turn_interval": 17,
+          "skipped:item_period_changed_or_first_revealed": 4,
+          "skipped:confirmed_current_item_overrides_inference": 9
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-27",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 100,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 4
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 82,
+          "inferred_exclusions": 23,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 85,
+          "inferred_exclusions": 15,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 14,
+          "skipped:item_period_changed_or_first_revealed": 4,
+          "skipped:confirmed_current_item_overrides_inference": 27
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 85,
+          "inferred_exclusions": 15,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 25,
+          "skipped:incomplete_or_unknown_turn_interval": 25,
+          "skipped:no_completed_upkeep_observed": 14,
+          "skipped:item_period_changed_or_first_revealed": 4,
+          "skipped:confirmed_current_item_overrides_inference": 27
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-27",
+      "role": "b",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 115,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 6
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 121,
+          "inferred_exclusions": 3,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 115,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 17,
+          "skipped:item_period_changed_or_first_revealed": 6,
+          "skipped:confirmed_current_item_overrides_inference": 14
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 115,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 24,
+          "skipped:no_completed_upkeep_observed": 17,
+          "skipped:incomplete_or_unknown_turn_interval": 24,
+          "skipped:item_period_changed_or_first_revealed": 6,
+          "skipped:confirmed_current_item_overrides_inference": 14
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-26",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 89,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 2
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 87,
+          "inferred_exclusions": 23,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 89,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 47,
+          "skipped:item_period_changed_or_first_revealed": 2
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 89,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 53,
+          "skipped:incomplete_or_unknown_turn_interval": 53,
+          "skipped:no_completed_upkeep_observed": 47,
+          "skipped:item_period_changed_or_first_revealed": 2
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-26",
+      "role": "b",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 66,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 1
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 66,
+          "inferred_exclusions": 13,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 66,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 33,
+          "skipped:item_period_changed_or_first_revealed": 1
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 66,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 53,
+          "skipped:incomplete_or_unknown_turn_interval": 53,
+          "skipped:no_completed_upkeep_observed": 33,
+          "skipped:item_period_changed_or_first_revealed": 1
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-44",
+      "role": "a",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 86,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 2
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 86,
+          "inferred_exclusions": 42,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 86,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:no_completed_upkeep_observed": 53
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 86,
+          "inferred_exclusions": 5,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 68,
+          "skipped:item_period_changed_or_first_revealed": 2,
+          "skipped:no_completed_upkeep_observed": 53,
+          "skipped:incomplete_or_unknown_turn_interval": 68
+        }
+      }
+    },
+    {
+      "battle": "battle-gen9ou-44",
+      "role": "b",
+      "counts": {
+        "revelations_only": {
+          "confirmed_exclusions": 77,
+          "inferred_exclusions": 0,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "legacy_hard_inference": {
+          "confirmed_exclusions": 77,
+          "inferred_exclusions": 16,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0
+        },
+        "reliable_hard_inference": {
+          "confirmed_exclusions": 77,
+          "inferred_exclusions": 11,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 0,
+          "skipped:no_completed_upkeep_observed": 48
+        },
+        "reliable_soft_updates": {
+          "confirmed_exclusions": 77,
+          "inferred_exclusions": 11,
+          "soft_replayed": 0,
+          "soft_floored": 0,
+          "soft_failed": 0,
+          "soft_skipped": 68,
+          "skipped:incomplete_or_unknown_turn_interval": 68,
+          "skipped:no_completed_upkeep_observed": 48
+        }
+      }
+    }
+  ],
+  "observation_metadata": {
+    "decisions": 1357,
+    "completion_metadata_present": 0
+  },
+  "inputs": {
+    "games": "/home/kenar/Documents/ChatGPT/oxhack 2026/OxHack-2026/evaluation/mcts-pilot-20261025/games.jsonl",
+    "prior_sha256": "47b31bf7282d6578ed44d7b28f9a63e9284eddc72882856de426f7c1bfc8c7f3",
+    "scorer_sha256": "2e2c15436b160f4fe1d5574cb6ee58234e3d8a785afff4a0c7f5a96bdf96034a",
+    "runtime_source_sha256": "0728b716862b0c848480c3b08562bb745fd74c69874b948c52bf29b537895ed0",
+    "engine": {
+      "version": "0.0.48",
+      "binaries": {
+        "poke_engine.cpython-313-x86_64-linux-gnu.so": "fbffd2a1c9c48eab99def9187f9030c578174a30b49d54faad159be859846ef3"
+      }
+    },
+    "plan_sha256": "1ecc6d3d93d1b80accebcc903ba25296b8fd212d4cad2f647baadc043b423ac2"
+  },
+  "scope": "Retrospective pilot diagnostic. Battle-disjoint development and scoring subsets assigned by sorted battle ID before ablation calculation; historical pooled outcomes and aggregate scores already known, so no claim of fresh holdout. No floor or strength tuning. Fresh stage2 battles will be scored separately."
+}

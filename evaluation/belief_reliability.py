@@ -21,6 +21,8 @@ from evaluation.mcts_improvements.identity import source_identity, engine_identi
 MODES = {"revelations_only": "revelations", "legacy_hard_inference": "legacy",
          "reliable_hard_inference": "reliable", "reliable_soft_updates": "reliable"}
 ALPHA = 1e-6
+ITEM_CHANGERS = {"trick", "switcheroo", "thief", "covet", "bestow", "fling", "recycle", "knockoff", "corrosivegas"}
+ABILITY_CHANGERS = {"skillswap", "roleplay", "entrainment", "worryseed", "simplebeam", "doodle"}
 
 
 def records(belief):
@@ -53,6 +55,14 @@ def score_transitions(decisions, priors, *, battle_id, role, subset="scoring"):
         if pending is not None:
             before, predictions = pending
             for slot, kind, revealed, known in _next_reveals(before, state, them):
+                intervening_moves = {event.get("move") for event in state.get("last_turn", [])
+                                     if event["type"] == "move"}
+                changers = ITEM_CHANGERS if kind == "item" else ABILITY_CHANGERS if kind == "ability" else set()
+                if intervening_moves & changers:
+                    # The distributions describe the preceding set. An item
+                    # acquired by Trick is not a label for its earlier item.
+                    diagnostics["label_filter"]["intervening_" + kind + "_change_move"] += 1
+                    continue
                 output.append({"battle_id": battle_id, "role": role, "subset": subset,
                                "predicted_at_turn": before["turn"], "revealed_by_turn": state["turn"],
                                "kind": kind, "revealed": revealed, "known_moves": known,
@@ -106,7 +116,7 @@ def summarize(rows):
                                        for game, arms in per_game.items()}}
     return {"subsets": result, "smoothing_alpha": ALPHA,
             "smoothing": "Add alpha to the union of pre-reveal supported categories plus one reserved OTHER category.",
-            "assumptions": "Uniform next new move within each candidate's unrevealed moves; only subsequently revealed facts are labels. No full-set truth supplied, no full-set accuracy claim. Final unseen transition excluded.",
+            "assumptions": "Uniform next new move within each candidate's unrevealed moves; only subsequently revealed facts are labels. Item/ability labels after explicit changing moves are excluded from static-set scoring; uncommon unmarked transformations can still confound labels. No full-set truth supplied, no full-set accuracy claim. Final unseen transition excluded.",
             "parameter_selection": "Likelihood floor remains 0.03; no fitting or tuning on scoring positions."}
 
 
