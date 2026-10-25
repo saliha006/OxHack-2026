@@ -87,6 +87,14 @@ whenever you log an entry.
 
 ## Log (newest first)
 
+### 2026-10-25 07:28 — fix — Validate Foul Play's own team conversion and resume retained outcomes — @kenar
+- **Where:** `Kenar-foulplay-eval`; merged to main: not yet
+- **Diagnosis:** Login gating alone did not cure the stalled slot. Reproducing Foul Play's actual packed export showed that a trailing whitespace-only block in team_13 became an empty seventh Pokémon, rejected by Showdown. The original source-team validator had not exercised the external converter.
+- **Did:** Normalize only the per-game serving copy supplied to Foul Play; original frozen exports remain unchanged. Verified all 13 exported teams through the actual pinned Foul Play converter plus Showdown Gen9 OU TeamValidator (six Pokémon each, zero validation errors). Keep login/startup guards and refill-at-completion scheduling.
+- **Results retained:** Game 13 loss (52 turns, 122.28 s) and game 6 loss (28 turns, 81.26 s). Their valid outcomes and both smokes remain intact; the failed prebattle error row also remains visible. Resume the identical remaining schedule; no outcome-based stopping, policy/budget change or replay of scored matches.
+- **Validation:** 45 benchmark/harness tests pass, including both serving-copy whitespace normalization and login ordering. Active manifest v5 includes import checks and exact retained outcomes.
+- **Status:** resumed with 2/20 scored games complete, 0 wins/2 losses; too early for a strength conclusion
+
 ### 2026-10-25 07:26 — fix — Recover stalled challenge and refill Foul Play evaluation slots — @kenar
 - **Where:** `Kenar-foulplay-eval`; merged to main: not yet
 - **Found:** One scheduled match remained at challenge startup with no battle; the wave scheduler then waited for it before starting further games. The other match completed in 52 turns / 122.28 seconds, a loss retained in the scored sample. Observed own-bot median decision time was about 1.36 seconds, so full battles still take minutes.

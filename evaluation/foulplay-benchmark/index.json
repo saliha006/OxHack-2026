@@ -1,5 +1,5 @@
 {
-  "active_manifest": "latest-20-game-immediate-v4-manifest.json",
+  "active_manifest": "latest-20-game-immediate-v5-manifest.json",
   "planned_scored_games": 20,
   "smoke_games_excluded_from_score": 2,
   "superseded": [
@@ -23,6 +23,10 @@
     {
       "manifest": "latest-20-game-immediate-v3-manifest.json",
       "status": "Continued with pre-battle login gate and non-batched slot refill; retained completed game 13 loss and both smoke games"
+    },
+    {
+      "manifest": "latest-20-game-immediate-v4-manifest.json",
+      "status": "The startup guard exposed actual Foul Play export parser rejecting a whitespace-only seventh Pokemon. All 13 external imports now validated; retain completed games 13 and 6 (both losses) and the failed prebattle row."
     }
   ],
   "start_policy": "Immediate start explicitly requested by user; other evaluations remain running and unchanged"
