@@ -3,7 +3,7 @@ import math
 
 import pytest
 
-from decision.belief import Belief
+from decision.belief import Belief, sets_from_game
 from tests.turn2 import EXAMPLE
 
 SPREAD = {"nature": "serious", "evs": [84] * 6}
@@ -208,3 +208,61 @@ def test_revealed_ability_filters_and_survives_a_rebuild(battle):
     battle["sides"]["p2"]["pokemon"][0]["ability"] = "innerfocus"  # no Dragonite candidate has it
     belief.update(battle)
     assert {s.ability for s, _ in belief.candidates[0]} == {"innerfocus"}
+
+
+KINGAMBIT = {
+    "sets": [
+        cand(0.6, ["kowtowcleave", "suckerpunch", "ironhead", "swordsdance"], item="blackglasses",
+             ability="supremeoverlord", tera="dark"),
+        cand(0.4, ["kowtowcleave", "suckerpunch", "lowkick", "swordsdance"], item="leftovers",
+             ability="supremeoverlord", tera="flying"),
+    ],
+    "usage": usage(["kowtowcleave", "suckerpunch", "ironhead", "swordsdance", "lowkick"], ["blackglasses", "leftovers"],
+                   teras=("dark", "flying"), ability="supremeoverlord"),
+}
+OUR_PRIORS = {**PRIORS, "species": {**PRIORS["species"], "kingambit": KINGAMBIT,
+                                    **{s: filler(s) for s in ("meowscarada", "ragingbolt", "hatterene", "cinderace",
+                                                              "landorustherian")}}}
+
+
+def game_of(battle, *kingambit_turns):
+    """One BattleState per turn, with our Kingambit (p1 slot 6) showing what each turn reveals."""
+    game = []
+    for fields in kingambit_turns:
+        state = copy.deepcopy(battle)
+        state["sides"]["p1"]["pokemon"][5].update(fields)
+        game.append(state)
+    return game
+
+
+def test_our_moves_and_tera_come_from_the_whole_game(battle):
+    game = game_of(battle, {}, {"revealed_moves": ["lowkick"]},
+                   {"revealed_moves": ["lowkick", "kowtowcleave"], "tera_type": "flying"})
+    kingambit = sets_from_game(game, OUR_PRIORS)[5]
+    # Only the lighter set runs Low Kick and Tera Flying; what was seen leads the move list.
+    assert kingambit.moves == ("lowkick", "kowtowcleave", "suckerpunch", "swordsdance")
+    assert (kingambit.item, kingambit.tera_type) == ("leftovers", "flying")
+
+
+def test_items_shown_in_the_game_dont_pick_our_set(battle):
+    # The BattleState shows Leftovers, but items can change hands, so the heavier Black Glasses set still wins.
+    assert sets_from_game([battle], OUR_PRIORS)[5].item == "blackglasses"
+
+
+def test_no_listed_set_fits_so_ours_is_rebuilt_from_usage(battle):
+    favours_low_kick = copy.deepcopy(KINGAMBIT)
+    favours_low_kick["usage"]["moves"]["lowkick"] = 1.0
+    priors = {**OUR_PRIORS, "species": {**OUR_PRIORS["species"], "kingambit": favours_low_kick}}
+    kingambit = sets_from_game(game_of(battle, {"revealed_moves": ["ironhead"], "tera_type": "flying"}), priors)[5]
+    # Iron Head with Tera Flying is in neither listed set; the rebuild leads with what was seen, then the most used.
+    assert kingambit.moves[:2] == ("ironhead", "lowkick")
+    assert kingambit.tera_type == "flying"
+
+
+def test_nothing_rebuilds_so_what_was_seen_is_forced_onto_the_heaviest_set(battle):
+    scarf_only = {"sets": [cand(1.0, ["tackle"], item="choicescarf")], "usage": usage(["tackle"], ["choicescarf"])}
+    priors = {**OUR_PRIORS, "species": {**OUR_PRIORS["species"], "kingambit": scarf_only}}
+    # A status move can't sit with a Choice item, so the usage rebuild has nothing to offer.
+    kingambit = sets_from_game(game_of(battle, {"revealed_moves": ["swordsdance"]}), priors)[5]
+    assert kingambit.moves == ("swordsdance", "tackle")
+    assert kingambit.item == "choicescarf"

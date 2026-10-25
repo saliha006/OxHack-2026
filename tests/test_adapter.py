@@ -3,10 +3,10 @@ import copy
 import pytest
 
 from decision.actions import Action
-from decision.adapter import build_state
+from decision.adapter import build_public_state, build_state
 from decision.sets import stats
 from decision.simulate import simulate
-from tests.turn2 import EXAMPLE, REQUEST, SETS, guess
+from tests.turn2 import EXAMPLE, OUR_SETS, REQUEST, SETS, guess
 
 
 @pytest.fixture
@@ -126,3 +126,22 @@ def test_built_state_can_be_simulated(battle):
 def test_a_missing_set_is_an_error(battle):
     with pytest.raises(ValueError):
         build_state(REQUEST, battle, SETS[:5])
+
+
+def summary(side):
+    return side.active_index, [(p.id, p.hp, p.maxhp, p.item, p.ability, [m.id for m in p.moves]) for p in side.pokemon]
+
+
+def test_public_state_builds_their_side_exactly_as_build_state_does(battle):
+    assert summary(build_public_state(battle, OUR_SETS, SETS).side_two) == summary(build_state(REQUEST, battle, SETS).side_two)
+
+
+def test_public_state_guesses_our_side_from_the_battle_state(battle):
+    side = build_public_state(battle, OUR_SETS, SETS).side_one
+    kingambit = side.pokemon[5]
+    maxhp = stats("kingambit", 100, OUR_SETS[5])[0]
+    assert side.active_index == "5"
+    assert (kingambit.hp, kingambit.maxhp) == (round(0.66 * maxhp), maxhp)
+    # The Leftovers the BattleState shows beats the guess; no move is revealed yet, so all four are the guess's.
+    assert kingambit.item == "leftovers"
+    assert [m.id for m in kingambit.moves] == list(OUR_SETS[5].moves)

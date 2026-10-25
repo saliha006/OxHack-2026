@@ -2,11 +2,15 @@ import copy
 import json
 from pathlib import Path
 
+import pytest
+
 from decision.actions import our_actions
+from decision.adapter import build_public_state
 from decision.agent import Agent, _as_move_request
 from decision.belief import Belief
+from decision.opponent import public_actions
 from tests.test_belief import PRIORS
-from tests.turn2 import EXAMPLE, REQUEST
+from tests.turn2 import EXAMPLE, OUR_SETS, REQUEST
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
@@ -120,3 +124,26 @@ def test_after_an_error_the_next_turn_is_not_replayed(monkeypatch):
     agent.choose(REQUEST, copy.deepcopy(EXAMPLE))
     # The failed turn's choice wasn't recorded, so belief won't replay a turn it never planned.
     assert agent.belief.last_choice is None
+
+
+def test_public_choice_is_one_of_our_public_options():
+    battle = copy.deepcopy(EXAMPLE)
+    agent = Agent(PRIORS)
+    action = agent.choose_public(battle, OUR_SETS)
+    state = build_public_state(battle, OUR_SETS, agent.belief.scenarios(1)[0][1])
+    assert action in public_actions(state, battle, "p1")
+    # No request, so there's nothing for belief to replay next turn.
+    assert agent.belief.last_request is None
+
+
+def test_public_choice_finishes_off_a_nearly_fainted_opponent():
+    battle = copy.deepcopy(EXAMPLE)
+    battle["sides"]["p2"]["pokemon"][2]["hp_percent"] = 3
+    action = Agent(PRIORS).choose_public(battle, OUR_SETS)
+    # Any attack KOs; Swords Dance (move 4 in OUR_SETS) or a switch would leave it alive.
+    assert action.kind == "move" and action.slot != 4
+
+
+def test_public_choice_raises_instead_of_falling_back():
+    with pytest.raises(KeyError):
+        Agent({"species": {}}).choose_public(copy.deepcopy(EXAMPLE), OUR_SETS)

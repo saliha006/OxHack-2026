@@ -4,7 +4,7 @@ from pathlib import Path
 
 from poke_engine import State
 
-from contracts.battle_state import BattleState, SideState
+from contracts.battle_state import BattleState, SideId, SideState
 from decision.actions import Action
 
 # Showdown's moves.json (play.pokemonshowdown.com/data), snapshot of 2026-10-24; only `category` is read, for Taunt.
@@ -18,8 +18,13 @@ def opp_actions(state: State, battle: BattleState) -> list[Action]:
 
     Their moves are the ones build_state filled in: revealed first, then the guessed set's.
     """
-    side = state.side_two
-    seen = battle["sides"]["p2" if battle["us"] == "p1" else "p1"]
+    return public_actions(state, battle, "p2" if battle["us"] == "p1" else "p1")
+
+
+def public_actions(state: State, battle: BattleState, player: SideId) -> list[Action]:
+    """A side's options as a spectator sees them, in the built state's slot order: for either side of a replay."""
+    side = state.side_one if player == battle["us"] else state.side_two
+    seen = battle["sides"][player]
     active = int(side.active_index)
     mon = side.pokemon[active]
     moves = usable_moves([move.id for move in mon.moves], mon.item, seen)
@@ -27,7 +32,7 @@ def opp_actions(state: State, battle: BattleState) -> list[Action]:
     actions = [Action("move", n) for n in moves]
     if not seen["tera_used"]:
         actions += [Action("move", n, tera=True) for n in moves]
-    # We can't see whether they're trapped, so every living benched Pokémon is a switch option.
+    # A spectator can't tell who is trapped, so every living benched Pokémon is a switch option.
     actions += [Action("switch", n) for n, p in enumerate(side.pokemon, 1) if n - 1 != active and p.hp > 0]
     return actions
 

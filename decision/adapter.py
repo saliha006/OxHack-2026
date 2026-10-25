@@ -23,15 +23,26 @@ def build_state(request: dict, battle: BattleState, sets: list[PokemonSet]) -> S
     index). The opponent's team keeps BattleState's team-preview order, which `sets` must follow.
     """
     us = battle["us"]
-    them = "p2" if us == "p1" else "p1"
-    field = battle["field"]
     ours = our_side(request)
-    seen = battle["sides"][them]
-    theirs = [_opponent(mon, guess, seen if n == seen["active"] else None)
-              for n, (mon, guess) in enumerate(zip(seen["pokemon"], sets, strict=True))]
+    seen = battle["sides"]["p2" if us == "p1" else "p1"]
+    return _state(battle, _side(battle["sides"][us], ours.pokemon, int(ours.active_index)), _guessed_side(seen, sets))
+
+
+def build_public_state(battle: BattleState, our_sets: list[PokemonSet], their_sets: list[PokemonSet]) -> State:
+    """The poke-engine State for a replay turn, which has no request: both sides as a spectator sees them.
+
+    Our side is guessed the same way as theirs, so both teams keep team-preview order and Action slots index it.
+    """
+    us = battle["sides"][battle["us"]]
+    them = battle["sides"]["p2" if battle["us"] == "p1" else "p1"]
+    return _state(battle, _guessed_side(us, our_sets), _guessed_side(them, their_sets))
+
+
+def _state(battle: BattleState, side_one: Side, side_two: Side) -> State:
+    field = battle["field"]
     return State(
-        side_one=_side(battle["sides"][us], ours.pokemon, int(ours.active_index)),
-        side_two=_side(seen, theirs, seen["active"]),
+        side_one=side_one,
+        side_two=side_two,
         weather=WEATHER.get(field["weather"], "none"),
         weather_turns_remaining=_left(WEATHER_TURNS, field["weather_turns"]) if field["weather"] else 0,
         terrain=field["terrain"] or "none",
@@ -82,7 +93,13 @@ def _side(seen: SideState, pokemon: list[Pokemon], active: int) -> Side:
     )
 
 
-def _opponent(mon: PokemonState, guess: PokemonSet, active_side: SideState | None) -> Pokemon:
+def _guessed_side(seen: SideState, sets: list[PokemonSet]) -> Side:
+    team = [_guessed(mon, guess, seen if n == seen["active"] else None)
+            for n, (mon, guess) in enumerate(zip(seen["pokemon"], sets, strict=True))]
+    return _side(seen, team, seen["active"])
+
+
+def _guessed(mon: PokemonState, guess: PokemonSet, active_side: SideState | None) -> Pokemon:
     if mon["hp_percent"] == 0:
         return Pokemon.create_fainted()
     species, level = mon["species"], mon["level"]

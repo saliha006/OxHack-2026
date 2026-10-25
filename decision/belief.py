@@ -1,3 +1,4 @@
+from dataclasses import replace
 from itertools import product
 
 from poke_engine import State, calculate_damage, generate_instructions
@@ -143,6 +144,31 @@ class Belief:
         top = sorted(self.candidates[active], key=lambda sw: -sw[1])[:k]
         total = sum(w for _, w in top)
         return [(w / total, best[:active] + [s] + best[active + 1:]) for s, w in top]
+
+
+def sets_from_game(game: list[BattleState], priors: SetCandidates) -> list[PokemonSet]:
+    """One guess per Pokémon on our side of a replay, in team-preview order, for build_public_state.
+
+    The log hides our sets too, but the player knew them, so moves and Tera type come from the whole game: neither
+    can change mid-battle. Items and abilities can (Trick, Knock Off, Skill Swap), so the guess ignores later
+    reveals of those, and build_public_state reads each turn's from its BattleState (Derrick, 2026-10-25).
+    """
+    us = game[0]["us"]
+    guesses = []
+    for n, mon in enumerate(game[0]["sides"][us]["pokemon"]):
+        seen = [battle["sides"][us]["pokemon"][n] for battle in game]
+        moves = list(dict.fromkeys(m for s in seen for m in s["revealed_moves"]))[:4]
+        tera = next((s["tera_type"] for s in seen if s["tera_type"]), None)
+        known = {**mon, "revealed_moves": moves, "tera_type": tera, "item": None, "ability": None}
+        species = priors["species"][mon["species"]]
+        candidates = [(_to_set(c), c["weight"]) for c in species["sets"]]
+        fitting = [(s, w) for s, w in candidates if _fits(s, known, set())]
+        fitting = fitting or [(s, w) for s, w in _rebuild(species["usage"], known) if _fits(s, known, set())]
+        best = max(fitting or candidates, key=lambda sw: sw[1])[0]
+        # A set that fits already holds these; the last resort above may not, and what was seen beats the guess.
+        guesses.append(replace(best, moves=tuple((moves + [m for m in best.moves if m not in moves])[:4]),
+                               tera_type=tera or best.tera_type))
+    return guesses
 
 
 def _their_action(state: State, events: list[Event], them: str, n: int) -> Action | None:

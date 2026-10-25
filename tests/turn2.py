@@ -21,3 +21,15 @@ SETS = [
     guess("hydrosteam", "dracometeor", "flamethrower", "flipturn", item="boosterenergy", ability="protosynthesis"),
     guess("ruination", "spikes", "whirlwind", "earthquake", item="leftovers", ability="vesselofruin"),
 ]
+
+# One guess per slot on our own side, for replays (meowscarada, ragingbolt, hatterene, cinderace, landorustherian,
+# kingambit). Kingambit's item is guessed wrong on purpose: the BattleState shows Leftovers.
+OUR_SETS = [
+    guess("flowertrick", "knockoff", "uturn", "suckerpunch", item="choiceband", ability="protean", tera="grass"),
+    guess("thunderclap", "dracometeor", "thunderbolt", "calmmind", item="boosterenergy", ability="protosynthesis"),
+    guess("psychic", "dazzlinggleam", "calmmind", "mysticalfire", ability="magicbounce", tera="fairy"),
+    guess("pyroball", "uturn", "courtchange", "suckerpunch", item="heavydutyboots", ability="libero", tera="fire"),
+    guess("earthquake", "uturn", "stealthrock", "stoneedge", item="rockyhelmet", ability="intimidate", tera="water"),
+    guess("kowtowcleave", "suckerpunch", "ironhead", "swordsdance", item="blackglasses", ability="supremeoverlord",
+          tera="dark"),
+]

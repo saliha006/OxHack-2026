@@ -3,15 +3,19 @@ import logging
 import math
 import time
 from collections.abc import Callable
+from functools import partial
+
+from poke_engine import State
 
 from contracts.battle_state import BattleState
 from contracts.set_candidates import SetCandidates
 from decision.actions import Action, our_actions
-from decision.adapter import build_state
+from decision.adapter import build_public_state, build_state
 from decision.belief import Belief
 from decision.lead import pick_lead
-from decision.opponent import opp_actions, uniform_policy
+from decision.opponent import opp_actions, public_actions, uniform_policy
 from decision.selector import expected_value, select
+from decision.sets import PokemonSet
 from decision.simulate import simulate
 from decision.value import value
 
@@ -62,16 +66,37 @@ class Agent:
         self.belief.chose(request, action)
         return action.to_choice()
 
+    def choose_public(self, battle: BattleState, our_sets: list[PokemonSet]) -> Action:
+        """A move turn of a replay, which has no request: our side is guessed like theirs, from `sets_from_game`.
+
+        The action's slots index team-preview order, not Showdown's. Unlike choose(), errors propagate, so a backtest
+        records them instead of scoring a fallback as a decision.
+        """
+        self.deadline = self.clock() + self.budget
+        if self.belief is None:
+            self.belief = Belief(self.priors, battle)
+        # belief.chose is never called: its turn replay rebuilds our side from the request, so on a replay belief
+        # runs on reveals alone.
+        self.belief.update(battle)
+        build = partial(build_public_state, battle, our_sets)
+        # Our options don't depend on their sets, so any guess at theirs will do to list them.
+        _, best_guess = self.belief.scenarios(1)[0]
+        action, _ = self._best(public_actions(build(best_guess), battle, battle["us"]), build, battle)
+        return action
+
     def _evaluate(self, request: dict, battle: BattleState) -> tuple[Action, float]:
         """The best action for a move request and its expected value, over belief's scenarios and their replies."""
-        ours = our_actions(request)
+        return self._best(our_actions(request), partial(build_state, request, battle), battle)
+
+    def _best(self, ours: list[Action], build: Callable[[list[PokemonSet]], State],
+              battle: BattleState) -> tuple[Action, float]:
         scores = {a: {} for a in ours}
         set_probs, opp_probs = {}, {}
         for i, (p, sets) in enumerate(self.belief.scenarios(self.k)):
             # Scenarios come most likely first, so stopping early keeps the ones that matter most.
             if set_probs and self.clock() > self.deadline:
                 break
-            state = build_state(request, battle, sets)
+            state = build(sets)
             theirs = opp_actions(state, battle)
             set_probs[i], opp_probs[i] = p, uniform_policy(theirs)
             for a in ours:

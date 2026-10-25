@@ -4,10 +4,10 @@ import math
 import pytest
 
 from decision.actions import Action
-from decision.adapter import build_state
-from decision.opponent import opp_actions, uniform_policy
+from decision.adapter import build_public_state, build_state
+from decision.opponent import opp_actions, public_actions, uniform_policy
 from decision.simulate import simulate
-from tests.turn2 import EXAMPLE, REQUEST, SETS
+from tests.turn2 import EXAMPLE, OUR_SETS, REQUEST, SETS
 
 # Bob's living bench, in preview order (slot 3 is the active Gholdengo).
 BENCH = [Action("switch", n) for n in (1, 2, 4, 5, 6)]
@@ -136,3 +136,10 @@ def test_encored_state_can_be_simulated(battle):
     state = build_state(REQUEST, battle, SETS)
     assert state.side_two.last_used_move == "move:1"
     assert simulate(state, Action("move", 4), Action("move", 2))
+
+
+def test_public_actions_list_our_side_from_the_battle_state(battle):
+    state = build_public_state(battle, OUR_SETS, SETS)
+    moves = [Action("move", n) for n in range(1, 5)]
+    tera = [Action("move", n, tera=True) for n in range(1, 5)]
+    assert public_actions(state, battle, "p1") == moves + tera + [Action("switch", n) for n in range(1, 6)]
