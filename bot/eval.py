@@ -131,6 +131,8 @@ MCTS_PAIRINGS = {
     "mcts-foulplay-high": ("mcts8", "fphigh", 60),
     "mcts-deeper-foulplay-high": ("mcts4x300", "fphigh", 60),
     "mcts-deeper": ("mcts4x300", "mcts8", 80),
+    "mcts-foulplay-hard": ("mcts8", "fphard", 60),
+    "mcts-deeper-foulplay-hard": ("mcts4x300", "fphard", 60),
 }
 # Mix levels are deliberately uneven, so strength doesn't step up by a fixed amount; mb46 overlaps the sh levels.
 BASELINES = {"simpleheuristics": SimpleHeuristicsPlayer, "maxbasepower": MaxBasePowerPlayer, "random": RandomPlayer,
@@ -171,7 +173,10 @@ PAIRINGS |= MCTS_PAIRINGS
 
 FOUL_PLAY = Path(__file__).parent.parent / "foul-play"
 # Search-time bands in ms, deliberately uneven; each Foul Play process draws its own time inside its band.
-FOUL_PLAY_LEVELS = {"fplow": (40, 80), "fpmid": (150, 260), "fphigh": (450, 700)}
+FOUL_PLAY_LEVELS = {"fplow": (40, 80), "fpmid": (150, 260), "fphigh": (450, 700), "fphard": (900, 1100)}
+# Foul Play's parallelism is its world count (doubled until it has seen three of the active's moves). fphard is
+# close to how it plays the ladder: four worlds at once, each searched ~7x longer than one of our eight.
+FOUL_PLAY_PARALLELISM = {"fphard": 4}
 for level in FOUL_PLAY_LEVELS:
     PAIRINGS[f"full~{level}"] = ("full", level, 50)
     PAIRINGS[f"prior~{level}"] = ("prior", level, 20)
@@ -181,7 +186,7 @@ class FoulPlay:
     """A Foul Play bot in its own process, accepting our challenges and playing its team list in our game order."""
 
     def __init__(self, search_ms: int, team_paths: list[Path], runs: Path, username: str,
-                 *, challenge_user: str | None = None):
+                 *, challenge_user: str | None = None, parallelism: int = 1):
         self.username = username
         self.search_ms = search_ms
         self.challenge_user = challenge_user
@@ -195,7 +200,7 @@ class FoulPlay:
              "--ps-username", username, "--bot-mode", "challenge_user" if challenge_user else "accept_challenge",
              "--pokemon-format", "gen9ou",
              "--team-list", str(team_list.resolve()), "--search-time-ms", str(search_ms),
-             "--search-threads", "1", "--search-parallelism", "1",
+             "--search-threads", "1", "--search-parallelism", str(parallelism),
              "--run-count", str(len(team_paths)), "--log-level", "INFO"]
         if challenge_user:
             args += ["--user-to-challenge", challenge_user]
@@ -393,9 +398,10 @@ def arm_config(name: str, budget: float) -> dict:
     if name in ARMS:
         return {"backend": "one_ply", "budget_seconds": budget, "arm": name}
     if name in FOUL_PLAY_LEVELS:
+        parallelism = FOUL_PLAY_PARALLELISM.get(name, 1)
         return {"backend": "foul_play", "search_ms_band": FOUL_PLAY_LEVELS[name],
-                "engine_threads": 1, "search_parallelism": 1, "source_commit": repository_revision(FOUL_PLAY),
-                "world_policy": "2 early/preview, 1 after >=3 opposing moves; stock source decides",
+                "engine_threads": 1, "search_parallelism": parallelism, "source_commit": repository_revision(FOUL_PLAY),
+                "world_policy": f"{2 * parallelism} early/preview, {parallelism} after >=3 opposing moves; stock source decides",
                 "compute_matched": False}
     return {"backend": name}
 
@@ -432,7 +438,8 @@ def start_foul_play(games: list[tuple[str, int]], teams: list[str], folder: Path
         mine = [(p, g) for p, g in games if PAIRINGS[p][1] == level and p not in MCTS_PAIRINGS]
         if mine:
             paths = [team_files / f"team_{team_index(seed, p, g, len(teams))}.txt" for p, g in mine]
-            players["b", level] = FoulPlay(rng.randint(low, high), paths, folder, "ox" + secrets.token_hex(4))
+            players["b", level] = FoulPlay(rng.randint(low, high), paths, folder, "ox" + secrets.token_hex(4),
+                                           parallelism=FOUL_PLAY_PARALLELISM.get(level, 1))
     return players
 
 
@@ -460,7 +467,8 @@ def play_game(pairing: str, g: int, players: dict, teams: list[str], priors: dic
         # Each adjacent pair uses the same team and per-world search setting on opposite sides.
         search_ms = game_rng(seed, pairing, g // 2).randint(low, high)
         b = FoulPlay(search_ms, [team_path], folder, "ox" + secrets.token_hex(4),
-                     challenge_user=a.username if g % 2 else None)
+                     challenge_user=a.username if g % 2 else None,
+                     parallelism=FOUL_PLAY_PARALLELISM.get(b_name, 1))
     else:
         b = players["b", b_name]
     if isinstance(b, FoulPlay):

@@ -87,6 +87,14 @@ whenever you log an entry.
 
 ## Log (newest first)
 
+### 2026-10-25 08:16 — feat — `fphard`: Foul Play at ladder strength in the eval — @saliha
+- **Where:** `sali` · merged to `main`: yes
+- **Did:** New Foul Play level `fphard`: 900–1100 ms per world, `--search-parallelism 4`, so it searches 8 worlds early and 4 later (its own `search_params`), roughly 3–7× our 8 × 150 ms per turn. `fphigh` stays 1 world. Pairings `mcts-foulplay-hard` (mcts8 vs fphard, 60) and `mcts-deeper-foulplay-hard` (mcts4x300 vs fphard, 60). One fphard game uses ~4 cores: run at most 1–2 shards on an 8-core laptop, 3 on 16 cores.
+- **Touched:** `bot/eval.py` (`FOUL_PLAY_LEVELS`, `FOUL_PLAY_PARALLELISM`, `FoulPlay(parallelism=)`), eval tests
+- **Brief task:** none
+- **⚠️ Conflicts:** none
+- **📨 Needs:** none
+
 ### 2026-10-25 08:10 — feat — Eval pairings that measure the MCTS bot, plus a 4×300 ms arm — @saliha
 - **Where:** `sali` @ `ba1b455` · merged to `main`: yes
 - **Did:** `headline` and every `full~*` pairing play the **one-ply** arm (`ARMS["full"]`), not the MCTS bot the demo runs. Adds `mcts-headline` (mcts8 vs SimpleHeuristics, 200), `mcts-foulplay-high` (mcts8 vs Foul Play `fphigh`, 60), `mcts-deeper-foulplay-high` (`mcts4x300` vs `fphigh`, 60) and `mcts-deeper` (`mcts4x300` vs mcts8, 80). `mcts4x300` = 4 worlds × 300 ms, the same 1.2 s as mcts8, so the 3 s budget is untouched (research passes 13A/18: Foul Play `fphigh` searches 1 world 450–700 ms, 3–4× our per-tree depth). Planned counts are smoke-sized: 60 games resolve only ~25-point gaps.

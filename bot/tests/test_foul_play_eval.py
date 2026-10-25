@@ -61,7 +61,7 @@ def test_foul_play_game_detects_process_failure(tmp_path):
 def test_mcts_foul_play_pair_swaps_challenger_and_retains_same_compute(tmp_path, monkeypatch):
     started, challenged = [], []
     class Foul:
-        def __init__(self, ms, paths, runs, username, *, challenge_user=None):
+        def __init__(self, ms, paths, runs, username, *, challenge_user=None, parallelism=1):
             self.search_ms, self.username, self.challenge_user = ms, username, challenge_user
             self.process = SimpleNamespace(poll=lambda: None)
             self.log = runs / f'{username}.log'

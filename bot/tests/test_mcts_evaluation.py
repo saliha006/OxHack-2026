@@ -219,3 +219,15 @@ def test_the_deeper_arm_spends_the_same_search_time_as_mcts8_and_the_new_pairing
     for name in ("mcts-headline", "mcts-foulplay-high", "mcts-deeper-foulplay-high", "mcts-deeper"):
         assert harness.arm_config(harness.PAIRINGS[name][0], 3.0)["backend"] == "mcts"
     assert harness.PAIRINGS["mcts-foulplay-high"][1] == "fphigh"
+
+
+def test_fphard_runs_foul_play_with_four_parallel_worlds_and_other_levels_keep_one(tmp_path, monkeypatch):
+    launched = []
+    monkeypatch.setattr(harness.subprocess, "Popen", lambda args, **kw: launched.append(args) or SimpleNamespace())
+    monkeypatch.setattr(harness, "repository_revision", lambda path: "abc")
+    harness.FoulPlay(1000, [tmp_path / "t.txt"], tmp_path, "oxhard", parallelism=harness.FOUL_PLAY_PARALLELISM["fphard"])
+    harness.FoulPlay(500, [tmp_path / "t.txt"], tmp_path, "oxhigh")
+    assert [args[args.index("--search-parallelism") + 1] for args in launched] == ["4", "1"]
+    assert harness.arm_config("fphard", 3.0)["world_policy"].startswith("8 early")
+    assert harness.arm_config("fphigh", 3.0)["search_parallelism"] == 1
+    assert harness.PAIRINGS["mcts-foulplay-hard"] == ("mcts8", "fphard", 60)

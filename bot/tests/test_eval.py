@@ -426,7 +426,7 @@ def test_foul_play_that_exits_or_stalls_raises_instead_of_hanging_the_shard(tmp_
 
 def test_a_shard_starts_one_foul_play_per_level_it_meets_with_teams_in_its_game_order(tmp_path, monkeypatch):
     made = []
-    monkeypatch.setattr(harness, "FoulPlay", lambda ms, paths, folder, name: made.append((ms, paths, name)) or name)
+    monkeypatch.setattr(harness, "FoulPlay", lambda ms, paths, folder, name, parallelism: made.append((ms, paths, name)) or name)
     games = [("full~fpmid", 3), ("headline", 0), ("prior~fpmid", 1), ("full~fphigh", 0)]
     players = harness.start_foul_play(games, ["T0", "T1", "T2"], tmp_path, random.Random(5), seed=8)
     assert set(players) == {("b", "fpmid"), ("b", "fphigh")}
