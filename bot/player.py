@@ -28,7 +28,7 @@ class _ErrorCounter(logging.Handler):
         self.count += 1
 
 
-def _label(request: dict, choice: str | None) -> str | None:
+def label(request: dict, choice: str | None) -> str | None:
     """A choice in words, from the request it answers: "move 2 terastallize" -> "Iron Head + Tera"."""
     kind, _, rest = (choice or "").partition(" ")
     try:
@@ -125,7 +125,7 @@ class BattleSession:
             self.world_counts[key] += agent_trace.get(key, 0)
         self.search_ms.append(float(agent_trace.get("search_ms", 0)))
         self.answered = (rqid, 0)
-        line = {"turn": state["turn"], "kind": _kind(request), "choice": choice, "label": _label(request, choice),
+        line = {"turn": state["turn"], "kind": _kind(request), "choice": choice, "label": label(request, choice),
                 "think_ms": round(elapsed, 1), "fallback": fell_back, "state": state, "request": request}
         line.update(agent_trace)
         line["decision_id"] = f"{self.tag}:{self.decisions}"

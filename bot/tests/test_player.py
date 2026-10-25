@@ -246,8 +246,8 @@ def test_a_finished_battle_closes_its_session_and_keeps_the_summary(tmp_path, mo
     ("move 2", "Kowtow Cleave"), ("move 1 terastallize", "Swords Dance + Tera"), ("switch 3", "switch to Gholdengo"),
     ("team 213456", "lead with Great Tusk"), ("default", None), ("move 9", None), (None, None)])
 def test_a_choice_is_labelled_in_words_from_its_request(choice, words):
-    from bot.player import _label
-    assert _label(request("move_request"), choice) == words
+    from bot.player import label
+    assert label(request("move_request"), choice) == words
 
 
 def test_each_decision_is_handed_to_the_callback_with_its_battle_tag(tmp_path):

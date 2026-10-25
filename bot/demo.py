@@ -9,13 +9,14 @@ import json
 import random
 import sys
 import time
+from collections import Counter
 from collections.abc import Callable
 from pathlib import Path
 
 from poke_env import AccountConfiguration
 
 from bot.eval import BASELINES, load_teams
-from bot.player import AgentPlayer
+from bot.player import AgentPlayer, label
 from bot.smoke import priors_from_teams
 from decision.agent import Agent
 
@@ -62,8 +63,34 @@ def format_line(line: dict) -> str:
     lines = [f"Turn {state['turn']:>3} · {line.get('label') or line['choice']}  ({line['think_ms']:.0f} ms{flags})",
              f"    {active_text(state['sides'][us])} ({remaining(state['sides'][us])} left)  vs  "
              f"{active_text(state['sides'][them])} ({remaining(state['sides'][them])} left)"]
-    lines += [f"    {key}: {show(value)}" for key, value in line.items() if key not in OWN_FIELDS]
+    if "search_support" in line:
+        lines += thinking(line, state["sides"][them])
+    else:
+        lines += [f"    {key}: {show(value)}" for key, value in line.items() if key not in OWN_FIELDS]
     return "\n".join(lines)
+
+
+def top(shares: dict, name: Callable[[str], str], n: int = 3) -> str:
+    best = sorted(shares.items(), key=lambda kv: -kv[1])[:n]
+    return " · ".join(f"{name(choice)} {share:.0%}" for choice, share in best) or "-"
+
+
+def thinking(line: dict, their_side: dict) -> list[str]:
+    """The search's view in words; the raw trace (every world's visits) stays in the .jsonl for replay."""
+    request = line.get("request") or {}
+    worlds = f"{line['usable_worlds']}/{line['requested_worlds']} worlds"
+    lines = [f"    Weighing: {top(line['search_support'], lambda c: label(request, c) or c)}  ({worlds})",
+             f"    Expects them: {top(line['opponent_support'], lambda c: c.replace('-tera', ' + Tera'))}"]
+    if their_side.get("active") is not None:
+        species = their_side["pokemon"][their_side["active"]]["species"]
+        guesses = [mon for world in line.get("sampled_worlds", []) for mon in world if mon.get("species") == species]
+        if guesses:
+            item, n = Counter(mon.get("item") for mon in guesses).most_common(1)[0]
+            tera, m = Counter(mon.get("tera_type") for mon in guesses).most_common(1)[0]
+            lines.append(f"    Guessing their {species}: {item} ({n}/{len(guesses)} worlds) · Tera {tera} ({m}/{len(guesses)})")
+    if line.get("fallback_reason"):
+        lines.append(f"    Fallback: {line['fallback_reason']}")
+    return lines
 
 
 def replay(path: Path, delay: float, out: Callable[[str], None] = print, sleep: Callable[[float], None] = time.sleep):

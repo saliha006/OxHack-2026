@@ -38,6 +38,30 @@ def test_fields_the_agent_adds_are_shown_whatever_their_shape():
     assert "    blob: " + "y" * 97 + "..." in text
 
 
+def search(**extra):
+    request = {"active": [{"moves": [{"move": "Sucker Punch"}, {"move": "Kowtow Cleave"}]}],
+               "side": {"pokemon": [{"details": "Kingambit, L100"}, {"details": "Dragonite, L100, M"}]}}
+    scarf = {"species": "gholdengo", "item": "choicescarf", "tera_type": "steel"}
+    worlds = [[scarf]] * 3 + [[{**scarf, "item": "airballoon"}], [{"species": "x", "item": "leftovers"}]]
+    fields = {"request": request, "usable_worlds": 8, "requested_worlds": 8, "sampled_worlds": worlds,
+              "search_support": {"move 2 terastallize": 0.5, "move 1": 0.3, "switch 2": 0.15, "move 2": 0.05},
+              "opponent_support": {"shadowball-tera": 0.6, "nastyplot": 0.4},
+              "config": {"mcts_worlds": 8}, "worlds": [{"our_visits": [1] * 50}], "fallback_reason": None}
+    return decision(**{**fields, **extra})
+
+
+def test_a_search_decision_shows_its_options_their_reply_and_the_guessed_set_not_the_raw_trace():
+    assert demo.format_line(search()).splitlines()[2:] == [
+        "    Weighing: Kowtow Cleave + Tera 50% · Sucker Punch 30% · switch to Dragonite 15%  (8/8 worlds)",
+        "    Expects them: shadowball + Tera 60% · nastyplot 40%",
+        "    Guessing their gholdengo: choicescarf (3/4 worlds) · Tera steel (4/4)"]
+
+
+def test_a_search_decision_with_no_guess_for_their_active_or_no_support_still_renders():
+    text = demo.format_line(search(sampled_worlds=[], search_support={}, opponent_support={}, fallback_reason="worker_failure"))
+    assert text.splitlines()[2:] == ["    Weighing: -  (8/8 worlds)", "    Expects them: -", "    Fallback: worker_failure"]
+
+
 @pytest.mark.parametrize("won, word", [(True, "won"), (False, "lost"), (None, "tied")])
 def test_the_end_line_gives_the_result_and_the_numbers(won, word):
     end = {"kind": "end", "won": won, "turns": 30, "decisions": 33, "fallbacks": 2, "think_p50_ms": 60.0, "think_p99_ms": 400.0}
