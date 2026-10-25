@@ -64,6 +64,7 @@ def test_each_arm_builds_the_agent_it_names():
     assert type(full) is Agent and (full.k, full.budget) == (5, 1.0)
     assert (prior.belief_cls, flat.belief_cls) == (FrozenBelief, FlatBelief)
     assert k1.k == 1
+    assert all(a.backend == "one_ply" for a in (full, prior, flat, k1))
 
 
 def test_players_get_random_names_and_only_the_opponent_side_is_jittered(tmp_path):

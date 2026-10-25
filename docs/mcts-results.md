@@ -1,5 +1,7 @@
 # Measured MCTS baseline and prediction results
 
+> **25 October user decision:** MCTS is now the default development backend (8 worlds, 150 ms/world, one thread). The evaluation arms explicitly retain one-ply for fair comparisons. Earlier default recommendations and measurements below are historical; the promotion is a user choice, not a new strength result.
+
 The default backend remains **`one_ply`**. The alternative backend is legal and deadline-contained in the tested cases, but this small comparison does not establish greater playing strength. The learned prediction model also remains experimental and is not used by search.
 
 ## Source and protocol

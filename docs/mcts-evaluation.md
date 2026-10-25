@@ -1,6 +1,8 @@
 # MCTS evaluation
 
-The default decision backend remains `one_ply`. The initial game comparison is an integration gate. It cannot establish a strength improvement. Visit shares in traces are **search support**, not calibrated win probabilities. Training or calibrating a prediction model is a separate experiment.
+> **25 October user decision:** MCTS is now the default development backend (8 worlds, 150 ms/world, one thread). The evaluation arms explicitly retain one-ply for fair comparisons. Earlier default recommendations and measurements below are historical; the promotion is a user choice, not a new strength result.
+
+The default development backend is now `mcts` by user decision. The historical `full`/`prior`/`flat`/`k1` evaluation arms explicitly use `one_ply`, so new comparisons retain the old opponent. The initial game comparison is an integration gate. It cannot establish a strength improvement. Visit shares in traces are **search support**, not calibrated win probabilities. Training or calibrating a prediction model is a separate experiment.
 
 ## Integration
 

@@ -23,7 +23,7 @@ class Agent:
     """One battle's decision maker: a Showdown request plus a BattleState in, a choice string out."""
 
     def __init__(self, priors: SetCandidates, k: int = 5, budget: float = 3.0,
-                 clock: Callable[[], float] = time.monotonic, *, backend: str = "one_ply",
+                 clock: Callable[[], float] = time.monotonic, *, backend: str = "mcts",
                  mcts_worlds: int = 8, search_ms: int = 150, engine_threads: int = 1,
                  sampling: str = "team", frozen_beliefs: bool = False, seed: int = 2026):
         if backend not in {"one_ply", "mcts"}:

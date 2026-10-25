@@ -1,6 +1,6 @@
 # MCTS implementation and operating limits
 
-`Agent(priors)` keeps `one_ply` as the default. Use `Agent(priors, backend="mcts")` for eight independently sampled full-team worlds, 150 ms native search per world, one engine thread, and a three-second decision ceiling. `Agent.choose(request, battle)` is unchanged. Team preview still uses `pick_lead`; replacement requests use verified native replacement search.
+`Agent(priors)` uses MCTS by default following the user's 25 October decision. Use `Agent(priors, backend="one_ply")` for the retained legacy comparison. The default searches eight independently sampled full-team worlds, 150 ms native search per world, one engine thread, and a three-second decision ceiling. `Agent.choose(request, battle)` is unchanged. Team preview still uses `pick_lead`; replacement requests use verified native replacement search.
 
 `decision/search.py` wraps stock `poke-engine==0.0.48`, converts root visits/scores to Python records, and runs one persistent spawned worker per battle. Belief construction/update (including native evidence replay), state conversion and sequential native searches all execute in the child. The parent prepares its first legal fallback before search and starts its wall-clock deadline before preparation. It stops the worker at 2.7 seconds for a three-second budget, reserving 300 ms for mapping/return. Smaller budgets reserve ten percent. No one-ply evaluator is called on the MCTS failure path.
 
@@ -14,4 +14,4 @@ Belief hard revelations are never restored by the noisy evidence likelihood floo
 
 The frozen-belief MCTS ablation keeps the same persistent hard filtering and inferred item rules but disables soft damage/speed replay. This isolates the value of those noisy likelihood updates. Neither learned evaluation nor opponent visit weighting is added to search. See the adapter audit for remaining native mechanics, hidden PP and duration limitations, and the evaluation document for measured results and reproducible configurations.
 
-The prediction workstream is separate: its model supplies observed-state predictions and evaluation output. Loading it into the MCTS search or changing the default backend requires its own measured comparison.
+The prediction workstream is separate: its model supplies observed-state predictions and evaluation output. Loading a learned model into MCTS search remains a separate experiment requiring its own measured comparison.

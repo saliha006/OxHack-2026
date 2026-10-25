@@ -50,7 +50,7 @@ def priors_from_teams(teams: list[str]) -> dict:
 
 
 def run(games: int, team: str, priors: dict, budget: float, runs_dir: str,
-        backend: str = "one_ply", worlds: int = 1, search_ms: int = 150, engine_threads: int = 1) -> list[dict]:
+        backend: str = "mcts", worlds: int = 8, search_ms: int = 150, engine_threads: int = 1) -> list[dict]:
     agent_player = AgentPlayer(
         make_agent=lambda: Agent(priors, budget=budget, backend=backend, mcts_worlds=worlds,
                                  search_ms=search_ms, engine_threads=engine_threads),
@@ -74,8 +74,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--priors", default="data/set_candidates.json")
     parser.add_argument("--priors-from-team", action="store_true", help="test only: priors = the team's exact sets")
     parser.add_argument("--budget", type=float, default=3.0, help="decision deadline per turn, seconds")
-    parser.add_argument("--backend", choices=("one_ply", "mcts"), default="one_ply")
-    parser.add_argument("--worlds", type=int, default=1, help="sampled hidden teams per MCTS decision")
+    parser.add_argument("--backend", choices=("one_ply", "mcts"), default="mcts")
+    parser.add_argument("--worlds", type=int, default=8, help="sampled hidden teams per MCTS decision")
     parser.add_argument("--search-ms", type=int, default=150, help="native search budget per world")
     parser.add_argument("--engine-threads", type=int, default=1)
     parser.add_argument("--max-fallback", type=float, default=0.05, help="fail above this share of decisions")

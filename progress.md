@@ -77,6 +77,7 @@ whenever you log an entry.
 4. {{Access to the deploy target, data and secrets: where each lives. Never in git or chat}}
 
 ## 📊 Latest (volatile facts live only here)
+- **User default decision, 2026-10-25 04:30 Europe/London:** `mcts` (8 ×150 ms worlds, one thread) is the default on `Kenar-mcts`; `one_ply` remains the explicit legacy evaluation arm. Previous pilot evidence and its uncertainty remain unchanged.
 - **Kenar-mcts baseline, 2026-10-25 04:20 Europe/London:** implementation/prediction tools and 24-game pilot complete on this branch; `one_ply` remains default. Final combined suite: 402 passed, one credential-dependent Tiger integration skipped; subsequent scoring fixes: 20 prediction tests passed. Final hardening smoke: 424/424 worlds usable, zero fallbacks/bookkeeping errors, max decision 1,977 ms. Detailed historical measurements and source hashes: `docs/mcts-results.md`; live explanation: `docs/mcts-live-walkthrough.md`. Larger confirmatory comparison remains configured, not run.
 - **As of 2026-10-25 00:58:** `main` @ `4e88dac` · tests: 148 green, 100% coverage (`uv run pytest --cov=decision`) · smoke: 10/10 games vs RandomPlayer finished unattended, 10 won, think p50 ~65 ms / p99 ~300–700 ms, fallback rate 12.7% (all from the two `belief.py` bugs, Open board) · deploy: none yet
 - **Data (Tiger `oxhack-data`, 2026-10-25 03:00):** `battles` 2,506,142 games · `battle_logs` 2,506,142 (uncompressed, 9.2 GB) · `turns` 489,840 rows from 20,000 games (15k train / 5k test) · HP-heuristic test log loss 0.6407, Brier 0.2246 · opponent switch rate 19.2% of acted turns
@@ -85,6 +86,16 @@ whenever you log an entry.
 ---
 
 ## Log (newest first)
+
+### 2026-10-25 04:30 — decision — MCTS becomes development default by user request; assess larger replay corpus — @kenar
+- **Where:** `Kenar-mcts` · merged to `main`: not yet
+- **Did:** User selected MCTS as the direction to improve. `Agent`, demo and smoke default to eight MCTS worlds; historical one-ply evaluation arms now select their backend explicitly. This promotion records the user's choice, not a new statistically established strength result. Assessed HolidayOugi's replay corpus against existing project ingest/turn contracts; source revision and recommended inference/prediction experiments are in `docs/holidayougi-assessment.md`. No large download or new dataset training was performed.
+- **Touched:** decision default, bot CLI defaults, pinned comparison arms, regression fixtures and current documentation
+- **Brief task:** user's follow-up → default promotion and dataset assessment
+- **⚠️ Conflicts:** retained comparisons explicitly use one-ply, so switching the application default cannot silently change their opponent
+- **📨 Needs:** reuse the team's existing turn export for the next data experiment; current assessment did not verify Tiger access
+- **Agreed by:** user, 25 October 2026
+- **Status:** verified — 379 decision/bot tests passed; default CLI live smoke won in 15 turns with 0/18 fallbacks, 136/136 native worlds usable and no rejected choices. `evaluation/mcts-default-smoke-20261025.json` records the exact no-backend-flag command.
 
 ### 2026-10-25 04:03 — feat — Alternative deadline-isolated MCTS and separate prediction evaluation — @kenar
 - **Where:** `Kenar-mcts` · base `main` @ `81c8f1c` · merged to `main`: not yet

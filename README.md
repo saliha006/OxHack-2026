@@ -41,7 +41,7 @@ Secrets stay in a local `.env`; it is never committed.
 ## Alternative MCTS backend
 
 `Agent(priors, backend="mcts")` searches independently sampled hidden teams with
-stock Gen 9/Tera `poke-engine`. The existing `one_ply` backend remains the default.
+stock Gen 9/Tera `poke-engine`. MCTS is the default by user decision; use `backend="one_ply"` for the retained comparison backend.
 Search runs in a persistent isolated worker with a parent-enforced deadline and
 streams completed worlds before pooling their normalised visits as search support.
 

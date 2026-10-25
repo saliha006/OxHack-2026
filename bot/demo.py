@@ -75,7 +75,7 @@ def replay(path: Path, delay: float, out: Callable[[str], None] = print, sleep: 
 
 
 def live(team: str, priors: dict, opponent: str, budget: float, pace: float, runs: str,
-         backend: str = "one_ply", worlds: int = 1, search_ms: int = 150, engine_threads: int = 1) -> dict:
+         backend: str = "mcts", worlds: int = 8, search_ms: int = 150, engine_threads: int = 1) -> dict:
     watched = set()
 
     def on_decision(tag: str, line: dict) -> None:
@@ -109,8 +109,8 @@ def main(argv: list[str] | None = None) -> int:
     play.add_argument("--priors-from-teams", action="store_true",
                       help="stand-in: priors = every set across the teams, weighted by how often it appears")
     play.add_argument("--budget", type=float, default=3.0)
-    play.add_argument("--backend", choices=("one_ply", "mcts"), default="one_ply")
-    play.add_argument("--worlds", type=int, default=1)
+    play.add_argument("--backend", choices=("one_ply", "mcts"), default="mcts")
+    play.add_argument("--worlds", type=int, default=8)
     play.add_argument("--search-ms", type=int, default=150)
     play.add_argument("--engine-threads", type=int, default=1)
     play.add_argument("--pace", type=float, default=1.5, help="seconds to wait after each of our decisions")
@@ -125,7 +125,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     teams = load_teams(Path(args.teams))
     priors = priors_from_teams(teams) if args.priors_from_teams else json.loads(Path(args.priors).read_text(encoding="utf-8"))
-    options = () if (args.backend, args.worlds, args.search_ms, args.engine_threads) == ("one_ply", 1, 150, 1) else (
+    options = () if (args.backend, args.worlds, args.search_ms, args.engine_threads) == ("mcts", 8, 150, 1) else (
         args.backend, args.worlds, args.search_ms, args.engine_threads)
     live(random.choice(teams), priors, args.opponent, args.budget, args.pace, args.runs, *options)
     return 0

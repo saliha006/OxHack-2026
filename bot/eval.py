@@ -59,6 +59,7 @@ class AblatedAgent(Agent):
     """An Agent whose belief is one of the ablations; Agent only builds a plain Belief when it has none yet."""
 
     def __init__(self, priors, belief_cls, **kwargs):
+        kwargs.setdefault("backend", "one_ply")
         super().__init__(priors, **kwargs)
         self.belief_cls = belief_cls
 
@@ -99,10 +100,10 @@ def _mixed(base, eps: float):
 
 
 ARMS = {
-    "full": lambda priors, budget: Agent(priors, budget=budget),
+    "full": lambda priors, budget: Agent(priors, budget=budget, backend="one_ply"),
     "prior": lambda priors, budget: AblatedAgent(priors, FrozenBelief, budget=budget),
     "flat": lambda priors, budget: AblatedAgent(priors, FlatBelief, budget=budget),
-    "k1": lambda priors, budget: Agent(priors, k=1, budget=budget),
+    "k1": lambda priors, budget: Agent(priors, k=1, budget=budget, backend="one_ply"),
 }
 MCTS_ARM_OPTIONS = {
     "mcts1": {"mcts_worlds": 1, "search_ms": 150},

@@ -68,7 +68,7 @@ def test_native_process_exit_returns_legal_fallback_and_restart_is_recorded():
 
 
 def test_native_result_maps_to_a_legal_choice_and_worker_is_reused():
-    agent = Agent(PRIORS, backend="mcts", mcts_worlds=1, search_ms=20)
+    agent = Agent(PRIORS, mcts_worlds=1, search_ms=20)
     try:
         first = agent.choose(REQUEST, copy.deepcopy(EXAMPLE))
         assert first in {a.to_choice() for a in our_actions(REQUEST)}
