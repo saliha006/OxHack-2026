@@ -48,6 +48,9 @@ def test_completed_plan_and_empty_run_are_distinct():
     assert summarize([], 400)['win_rate'] is None
     row = {'completion_verified': True, 'winner': 'a', 'side': 'p1', 'opponent_team': 0}
     assert summarize([row], 1)['status'] == 'complete'
+    recovered = summarize([{'completion_verified': False, 'error': 'prebattle setup'}, row], 1)
+    assert recovered['status'] == 'complete_with_setup_failures'
+    assert recovered['errors'] == 1 and recovered['completed'] == 1
 
 
 def test_live_player_does_not_import_a_trailing_blank_as_a_seventh_pokemon(tmp_path, monkeypatch):
@@ -92,10 +95,12 @@ def test_external_challenge_process_starts_only_after_our_login(tmp_path, monkey
         pass
     def capture_spawn(*args, **kwargs):
         assert events == ['login_confirmed']
+        assert (tmp_path/'games/0/foul-play-team.txt').read_text() == 'Pikachu\n- Thunderbolt\n'
+        assert own.read_text().endswith('\n\n \n')
         raise Captured
     monkeypatch.setattr(benchmark.subprocess, 'Popen', capture_spawn)
     own = tmp_path/'own.txt'
-    own.write_text('Pikachu\n- Thunderbolt\n')
+    own.write_text('Pikachu\n- Thunderbolt\n\n \n')
     with pytest.raises(Captured):
         benchmark.game({'folder': str(tmp_path), 'port': 8127, 'config': {},
                         'own_team': {'path': str(own)}, 'foul_play_search_ms_per_world': 600,

@@ -183,7 +183,11 @@ def game(manifest, spec):
     opponent.log = folder / 'foul-play.log'
     opponent.output = opponent.log.open('w')
     team_list = folder/'foul-play.teams.txt'
-    team_list.write_text(manifest['opponents'][spec['opponent_team']]['path']+'\n')
+    # Foul Play also treats whitespace-only trailing blocks as empty Pokémon.
+    # Preserve the frozen source export and normalize only its serving copy.
+    opponent_export = folder/'foul-play-team.txt'
+    opponent_export.write_text(Path(manifest['opponents'][spec['opponent_team']]['path']).read_text().strip()+'\n')
+    team_list.write_text(str(opponent_export)+'\n')
     wrapper = "import random,runpy,sys;random.seed(int(sys.argv.pop(1)));sys.argv[0]='run.py';runpy.run_path('run.py',run_name='__main__')"
     args = [str(fp_root/'.venv/bin/python'), '-c', wrapper, str(spec['foul_play_seed']),
             '--websocket-uri', uri, '--ps-username', opponent.username,
@@ -260,7 +264,7 @@ def summarize(rows, planned):
             'sides': dict(Counter(r['side'] for r in valid)),
             'fallbacks': sum((r.get('metrics') or {}).get('fallbacks',0) for r in valid),
             'rejected_choices': sum((r.get('metrics') or {}).get('rejected_choices',0) for r in valid),
-            'status': 'complete' if n == planned and len(rows)==n else 'incomplete',
+            'status': ('complete_with_setup_failures' if len(rows)>n else 'complete') if n == planned else 'incomplete',
             'interpretation': 'This fixed-team matchup and compute configuration only; no ladder or equal-compute claim.'}
 
 
@@ -344,7 +348,7 @@ def run(manifest_path):
         result_file=folder/'games.jsonl'
         if result_file.exists():
             rows=[json.loads(line) for line in result_file.read_text().splitlines()]
-        done={r['game'] for r in rows}
+        done={r['game'] for r in rows if r.get('completion_verified')}
         pending=[s for s in manifest['games'] if s['game'] not in done]
         write(status,{'state':'running',**summarize(rows,len(manifest['games']))})
         with ThreadPoolExecutor(max_workers=manifest['concurrency']) as pool:
