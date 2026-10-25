@@ -22,7 +22,8 @@ CHAOS_SAMPLE = {
 
 
 def keys(typed_dict):
-    return set(typed_dict.__annotations__)
+    # Usage-derived candidates omit optional IV overrides from curated sets.
+    return set(typed_dict.__required_keys__)
 
 
 def assert_contract_shape(data):

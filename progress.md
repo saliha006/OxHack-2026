@@ -77,6 +77,7 @@ whenever you log an entry.
 4. {{Access to the deploy target, data and secrets: where each lives. Never in git or chat}}
 
 ## 📊 Latest (volatile facts live only here)
+- **Merge candidate:** reconciled MCTS/coherent source; 551 tests pass, one expected local-download skip, native-worker probe passes. Main remains unmerged pending bot-owner approval; experimental defaults unchanged.
 - **As of 2026-10-25 00:58:** `main` @ `4e88dac` · tests: 148 green, 100% coverage (`uv run pytest --cov=decision`) · smoke: 10/10 games vs RandomPlayer finished unattended, 10 won, think p50 ~65 ms / p99 ~300–700 ms, fallback rate 12.7% (all from the two `belief.py` bugs, Open board) · deploy: none yet
 - **Backtest (`derrick` @ `9f86111`):** dropped 2026-10-25 06:41, branch kept as an archive; its numbers stay in Log entries 04:15 and 04:55.
 - **Data (Tiger `oxhack-data`, 2026-10-25 03:00):** `battles` 2,506,142 games · `battle_logs` 2,506,142 (uncompressed, 9.2 GB) · `turns` 489,840 rows from 20,000 games (15k train / 5k test) · HP-heuristic test log loss 0.6407, Brier 0.2246 · opponent switch rate 19.2% of acted turns
@@ -85,6 +86,17 @@ whenever you log an entry.
 ---
 
 ## Log (newest first)
+
+### 2026-10-25 06:58 — fix — Reconcile MCTS and coherent-set branches for main review — @kenar
+- **Where:** reconciled `Kenar-coherent-sets` candidate, based on `50d9a43` + committed MCTS `aecf217` + main handoff `adc8a0b`; merged to `main`: not yet
+- **Did:** Reconciled branch histories and current main without editing evaluation checkouts. Preserved MCTS state/Tera/reliable-belief fixes and optional IV conversion. Included the missing offline policy-metrics helper needed by committed reporting code; corrected the builder contract test to distinguish optional IVs from required fields.
+- **Defaults:** broad `data/set_candidates.json` unchanged; MCTS 8 × 150 ms, one native thread, three-second ceiling, reliable beliefs and type-based leads. Coherent priors, move/stat leads and root mixing stay opt-in; no learned policy/value or cycle veto enabled. Uncommitted experiments remain outside the candidate.
+- **Validation:** 551 tests passed, one local-chaos-download test skipped; isolated native-worker import/search probe passed. Original 91 bot/decision source files across the three evaluation checkouts were hash-verified unchanged. No new battle evaluation, queue/process changes or Tiger work.
+- **Evidence:** `evaluation/integration-mcts-coherent-20261025.json`; detailed docs retained on the reconciled coherent branch and omitted from the separate main PR candidate, per the handoff.
+- **Touched:** decision/bot integration, contracts/data compatibility, offline evaluation tools/tests, README and progress history
+- **⚠️ Conflicts:** @saliha: bot changes still require your approval under the 06:41 handoff
+- **📨 Needs:** @saliha: approve bot edits before main merge; existing evaluation worktrees deliberately retain their original local branch heads
+- **Status:** prepared for review; no main merge or experimental promotion
 
 ### 2026-10-25 06:41 — decision — Kenar's branch becomes the decision layer; derrick's unmerged work dropped — @derrick
 - **Where:** `Kenar-coherent-sets` @ `50d9a43` is the source of truth · `derrick` @ `9f86111` kept as an archive, not merged · merged to `main`: not yet
