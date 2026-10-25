@@ -17,6 +17,34 @@
 
 ---
 
+## 1b. The whole system in plain words *(read this first if you're new, or if you've missed the last few hours of changes)*
+
+Pokémon Showdown hides most of the opponent's team: you see the six Pokémon, but not their items, abilities, exact moves or Tera types. Our agent plays it the way a good player does: guess what's hidden, then pick moves that still work if the guess is a bit off. Three parts do that, built by different people and joined by small written contracts.
+
+The **data layer** works before any battle. It turns Smogon's monthly usage statistics into a list of likely builds ("sets") for every Pokémon in the format (243 species, up to 30 weighted sets each), and loads 2.5 million public replays into a shared Postgres database, cut into 489,840 turn-by-turn positions for training and testing prediction models.
+
+The **bot layer** is the connection to the game. Every message from the Showdown server goes through our own parser, which keeps an exact picture of the battle (HP, status, boosts, hazards, every move and item revealed). When the server asks for a move, the bot hands that picture and the legal options to the strategy layer. It then sends the answer back, logs everything, and posts the reasoning to the battle chat.
+
+The **strategy layer** decides:
+1. It keeps a **belief** about each opposing Pokémon's hidden set. That belief starts from the data layer's usage statistics and is updated every turn:
+   - Reveals rule sets out.
+   - Clues narrow them, e.g. no Stealth Rock damage on entry means Heavy-Duty Boots.
+   - Replaying the last turn down-weights any set that can't explain what happened.
+2. It draws **eight complete guesses** of the opponent's team from that belief.
+3. It runs 150 ms of tree search in each guess with the `poke-engine` simulator.
+4. It plays the move that was favoured most across all eight.
+This runs in its own process under a hard three-second deadline, so a slow turn can never lose a game on time.
+
+Around that, two offline layers keep us honest. **Prediction** scores the belief and a win-probability model on games they never saw. **Evaluation** plays hundreds of same-team games against other bots, and reports every win rate with an interval.
+
+The changes since the start, in one line each:
+- The first strategy layer looked one turn ahead and lost to strong bots, so Kenar's tree search replaced it this morning.
+- The demo now shows its reasoning in the battle chat.
+- The eval now measures the tree-search bot against Foul Play at ladder strength.
+- The demo pins `team_6.txt`.
+
+---
+
 ## 2. Using data to predict
 
 **Q: What exactly are you predicting?**
@@ -84,7 +112,7 @@ Both fix the same problem (sets that don't hang together), from different data.
 It all happens inside a 3-second budget. (PRD §7.1)
 
 **Q: Why search over several sampled worlds instead of one best guess?**
-A single guess is overconfident: if the opponent has a Choice Scarf and we assumed Leftovers, the plan fails. Searching across 8 plausible worlds picks moves that are robust to what we don't know. This is the approach that made Foul Play strong; we adapted it. (PRD §7.1, Appendix B)
+A single guess is overconfident: if the opponent has a Choice Scarf and we assumed Leftovers, the plan fails. Searching across 8 plausible worlds picks moves that hold up whatever the hidden sets turn out to be. This is the approach that made Foul Play strong; we adapted it. (PRD §7.1, Appendix B)
 
 **Q: Why 8 worlds × 150 ms?**
 It fits the 3 s turn budget with a safety margin: median ~1.4 s per decision, slowest ~2.0–2.5 s in today's demos **[10:00]**. Fewer, deeper worlds (4 × 300 ms) is an arm we built to test that trade-off. (PRD §7.5, §13)
@@ -386,7 +414,7 @@ Yes. World sampling uses a fixed seed (2026), every eval machine has its own sch
 **Q: How does this connect to trading?** *(say it as an analogy, not a claim)*
 The shape of the problem is the same:
 - **Hidden state:** we build a belief over it from public signals, starting from base rates and updating on evidence.
-- **Decisions robust to that uncertainty:** we optimise across several plausible scenarios, not one point estimate.
+- **Decisions that hold up under that uncertainty:** we optimise across several plausible scenarios, not one point estimate.
 - **A hard latency budget** with a safe fallback.
 - **Out-of-sample evaluation** with intervals and a decision rule fixed before looking.
 We'd never claim the bot itself says anything about markets.
