@@ -9,6 +9,7 @@ dependencies = [
 
 [dependency-groups]
 dev = ["pytest", "pytest-cov"]
+data = ["psycopg[binary]"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
